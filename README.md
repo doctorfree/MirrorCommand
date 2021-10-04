@@ -57,6 +57,7 @@ a remote system with SSH access to your MagicMirror.
 
 Here is the current output of "mirror -u" which displays a usage message.
 
+<pre>
 Usage: mirror <command> [args]
 Where <command> can be one of the following:
 	info [temp|mem|disk|usb|net|wireless|screen], list <active|installed|configs>, rotate [right|left|normal], artists_dir, models_dir, photogs_dir, select, restart, screen [on|off|info|status], start, stop, status [all], dev, getb, setb <num>, ac <artist>, ar <artist>, jc <idol>, jr <idol>, mc <model>, mr <model>, pc <photographer>, pr <photographer>, wh <dir>, whrm <dir>
@@ -97,6 +98,7 @@ Examples:
 	mirror wh foobar		# Creates and activates a slideshow config with pics in foobar
 	mirror whrm foobar		# Deactivate and remove slideshow in foobar
 	mirror -u		# Display this usage message
+</pre>
 
 ## Contents
 
