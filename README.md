@@ -58,8 +58,11 @@ properly, the project is primarily command line control of MagicMirror.
 ## Installation
 
 Clone the MirrorCommandLine repository:
+
 <code>git clone ssh://gitlab.com/doctorfree/MirrorCommandLine.git</code>
+
 or
+
 <code>git clone https://gitlab.com/doctorfree/MirrorCommandLine.git</code>
 
 Edit the main MagicMirror management script, [**mirror**](mirror.sh), setting
