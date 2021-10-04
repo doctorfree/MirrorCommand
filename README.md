@@ -19,13 +19,22 @@ MagicMirror commands. Currently the command line MagicMirror control scripts
 include support for:
 - Specifying the MagicMirror configuration file to activate
 - Starting, stopping, and restarting the MagicMirror
-- Display of various system info (temp, mem, disk, usb, net, wireless, screen)
+- Display of various system info
+    - Temperature
+	- Memory
+	- Disk
+	- Usb
+	- Network
+	- Wireless
+	- Screen
 - List active/installed MagicMirror modules
 - List available MagicMirror configuration files
 - Rotate the MagicMirror screen
 - Get or set the brightness level
 - Get MagicMirror status
 - Auto generation of new MagicMirror configuration files
+- Interactive mode via menu dialogs
+    - Invoked with no arguments the mirror command displays a command menu.
 
 ## History
 
@@ -47,6 +56,8 @@ than I do talking to Siri. While voice control is still supported if configured
 properly, the project is primarily command line control of MagicMirror.
 
 ## Installation
+
+TBD
 
 ## Usage
 
