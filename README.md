@@ -66,14 +66,20 @@ or
 <code>git clone https://gitlab.com/doctorfree/MirrorCommandLine.git</code>
 
 Edit the main MagicMirror management script, [**mirror**](mirror.sh), setting
-the IP address of your MagicMirror, port for your MMM-Remote-Control module,
-and MMM-Remote-Control API Key. Defaults for these are:
+the location of your MagicMirror installation, the IP address of your
+MagicMirror, port for your MMM-Remote-Control module, MMM-Remote-Control API
+Key, and configuration subdirectories.
+
+Defaults for these are:
+
+- MM="${HOME}/MagicMirror"
 - IP="10.0.1.85"
 - PORT="8080"
 - apikey="MMM-Remote-Control_API_Key"
+- CONF_SUBDIRS="Artists JAV Models Photographers"
 
-If you have not configured an API key for MagicMirror remote control then leave
-the apikey setting blank.
+If you have not configured an API key for MagicMirror remote control then
+set the apikey to blank ( <code>apikey=</code> ).
 
 After configuring the mirror.sh script appropriately, copy it to a location in
 your execution path on the MagicMirror system. For example:
