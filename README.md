@@ -57,7 +57,90 @@ properly, the project is primarily command line control of MagicMirror.
 
 ## Installation
 
-TBD
+Clone the MirrorCommandLine repository:
+<code>git clone ssh://gitlab.com/doctorfree/MirrorCommandLine.git</code>
+or
+<code>git clone https://gitlab.com/doctorfree/MirrorCommandLine.git</code>
+
+Edit the main MagicMirror management script, [**mirror**](mirror.sh), setting
+the IP address of your MagicMirror, port for your MMM-Remote-Control module,
+and MMM-Remote-Control API Key. Defaults for these are:
+- IP="10.0.1.85"
+- PORT="8080"
+- apikey="MMM-Remote-Control_API_Key"
+
+If you have not configured an API key for MagicMirror remote control then leave
+the apikey setting blank.
+
+After configuring the mirror.sh script appropriately, copy it to a location in
+your execution path on the MagicMirror system. For example:
+
+<code>sudo cp mirror.sh /usr/local/bin/mirror</code>
+
+Ensure the mirror script is executable:
+
+<code>sudo chmod 755 /usr/local/bin/mirror</code>
+
+If you wish to execute mirror commands remotely then install the convenience
+script [**mm**](mm.sh) on a system with SSH access to your MagicMirror. This
+script can be used to remotely execute the main mirror script.
+
+There are several supporting scripts that can be installed to enhance command
+line capabilites. These are optional and may be ignored or installed later.
+Some of the more useful supporting scripts include:
+
+- [**backgrounds**](backgrounds.sh)
+  Manipulate desktop wallpapers
+- [**camsnap**](camsnap.sh)
+  Snap a photo with your MagicMirror webcam
+- [**chkconfig**](chkconfig.sh)
+  Check your MagicMirror configuration files
+- [**chkinst**](chkinst.sh)
+  Check your Mirror Command Line installation
+- [**chktemp**](chktemp.sh)
+  Check your MagicMirror Raspberry Pi temperature
+- [**get_temps**](get_temps.sh)
+  Get your MagicMirror Raspberry Pi temperature
+- [**gethue**](gethue.sh)
+  Get your Hue Hub properties
+- [**getquote**](getquote.sh)
+  Get a stock symbol quote
+- [**mmapiactions**](mmapiactions.sh)
+  Get the MMM-Remote-Control API actions
+- [**mmgetb**](mmgetb.sh)
+  Get the MagicMirror screen brightness level
+- [**mmsetb**](mmsetb.sh)
+  Set the MagicMirror screen brightness level
+- [**pcmanslideshow**](pcmanslideshow.sh)
+  Display a slide show on your desktop using pcmanfm
+- [**rand_back**](rand_back.sh)
+  Select a random desktop wallpaper
+- [**reboot**](reboot.sh)
+  Reboot the Raspberry Pi - useful to perform additional actions before reboot and can be executed as a normal user using sudo
+- [**rmlandscape**](rmlandscape.sh)
+  Remove photos in a folder that are in landscape mode
+- [**sdbackup**](sdbackup.sh)
+  Backup an SD card
+- [**sderase**](sderase.sh)
+  Erase an SD card
+- [**sdrestore**](sdrestore.sh)
+  Restore an SD card from a previous backup
+- [**sdwrite**](sdwrite.sh)
+  Write an image to an SD card
+- [**shutdown**](shutdown.sh)
+  Shutdown the Raspberry Pi - useful to perform additional actions before shutdown and can be executed as a normal user using sudo
+- [**vncview**](vncview.sh)
+  Remote script to start a VNC server on your MagicMirror and a VNC viewer on your desktop
+- [**wireless_conf**](wireless_conf.sh)
+  Configure wireless using WPA Supplicant
+- [**wireless_dot_sample**](wireless_dot_sample)
+  Sample $HOME/.wireless to assist in wireless configuration
+
+Many sample MagicMirror configuration files are provided in the [**config**](config)
+subdirectory. Copy those of interest to your MagicMirror/config folder and modify
+as needed.
+
+My custom.css is provided in the css subdirectory. Copy and modify as needed.
 
 ## Usage
 
