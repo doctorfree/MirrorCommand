@@ -1,0 +1,10 @@
+dot-wireless-home.txt
+hide_keys.sh
+show_keys.sh
+config/config-face.js
+config/config-instagram.js
+config/config-sample.js
+config/config-crypto.js
+modules/MMM-AssistantMk2/deviceInstance.json
+modules/MMM-AssistantMk2/profiles/default.json
+modules/MMM-Hotword/trainer/trainer-withtoken.sh
