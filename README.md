@@ -119,7 +119,7 @@ Some of the more useful supporting scripts include:
 - [**rand_back**](rand_back.sh)
   Select a random desktop wallpaper
 - [**reboot**](reboot.sh)
-  Reboot the Raspberry Pi - useful to perform additional actions before reboot and can be executed as a normal user using sudo
+  Perform additional actions before reboot, executed as a normal user using sudo
 - [**rmlandscape**](rmlandscape.sh)
   Remove photos in a folder that are in landscape mode
 - [**sdbackup**](sdbackup.sh)
@@ -131,7 +131,7 @@ Some of the more useful supporting scripts include:
 - [**sdwrite**](sdwrite.sh)
   Write an image to an SD card
 - [**shutdown**](shutdown.sh)
-  Shutdown the Raspberry Pi - useful to perform additional actions before shutdown and can be executed as a normal user using sudo
+  Perform additional actions before shutdown, executed as a normal user using sudo
 - [**vncview**](vncview.sh)
   Remote script to start a VNC server on your MagicMirror and a VNC viewer on your desktop
 - [**wireless_conf**](wireless_conf.sh)
