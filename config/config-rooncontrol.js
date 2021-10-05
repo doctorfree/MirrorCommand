@@ -23,7 +23,7 @@ var config = {
         "10.0.1.81", // Roon Core
         "10.0.1.82", // Mac Pro
         "10.0.1.94", // Ropieee
-        "10.0.1.67", // Raspberry Pi MagicMirror
+        "10.0.1.85", // Raspberry Pi MagicMirror
         "10.0.1.85", // Raspberry Pi MagicMirror
         "10.0.1.69", // iPad Air
         "10.0.1.76", // iPhone Max Xs

@@ -26,7 +26,7 @@ var config = {
         "127.0.0.1",
         "10.0.1.44", // Mac Mini
         "10.0.1.51", // Mac Pro
-        "10.0.1.67", // Raspberry Pi MagicMirror
+        "10.0.1.85", // Raspberry Pi MagicMirror
         "10.0.1.69", // iPad Air
         "10.0.1.76", // iPhone Max Xs
         "::ffff:127.0.0.1",
