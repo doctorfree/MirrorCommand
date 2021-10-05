@@ -1,0 +1,21 @@
+#!/bin/bash
+
+ART="/mnt/transcend/Pictures/MagicMirror/Photographers"
+
+[ -d ${ART} ] || {
+    echo "$ART does not exist or is not a directory. Exiting."
+    exit 1
+}
+cd ${ART}
+for i in ../../Wallhaven/Photographers/*
+do
+    [ -d "$i" ] || continue
+    j=`basename "$i"`
+    [ -d "$j" ] && {
+        echo "$j exists. skipping."
+        continue
+    }
+    echo "Creating $j"
+    mkdir $j
+    updphotographerlinks $j
+done

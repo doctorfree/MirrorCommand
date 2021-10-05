@@ -41,8 +41,10 @@ include support for:
 This project began as an attempt to control my MagicMirror with Siri voice
 commands. I was able to get Siri voice control of a MagicMirror working with
 simple SSH shortcuts that execute Bash scripts on my mirror's Raspberry Pi.
-People don’t seem to know about Apple’s SSH shortcuts. They can be used to
-execute commands on systems that allow SSH access.
+Apple’s SSH shortcuts are a powerful tool for command line control. They can
+be used to execute commands on systems that allow SSH access and they can
+be configured to activate via voice commands. SSH shortcuts enable voice
+control of anything that can be done at the command line.
 
 I created shortcuts on my iPhone which use the “Run script over SSH”
 option for Apple Scripting shortcuts. The shortcuts execute the appropriate
@@ -205,22 +207,55 @@ Examples:
 
 ## Contents
 
-[**chkconfig**](chkconfig.sh) - Validate active MagicMirror configuration file syntax
-
-[**chkinst**](chkinst.sh) - Check if currently installed MagicMirror scripts are up to date
-
-[**chktemp**](chktemp.sh) - Check and report the Raspberry Pi temperature
-
-[**crontab-nexmo**](crontab-nexmo.in) - Crontab entries I use
-
-[**mirror**](mirror.sh) - Main MagicMirror management script
-
-[**mmapiactions**](mmapiactions.sh) - deprecated
-
-[**mmgetb**](mmgetb.sh) - Get the MagicMirror brightness level
-
-[**mmsetb**](mmsetb.sh) - Set the MagicMirror brightness level
-
-[**mm**](mm.sh) - Convenience script to remotely execute the main mirror script
-
-[**rand_back**](rand_back.sh) - Set desktop wallpaper with random pic
+- [**backgrounds**](backgrounds.sh)
+  Manipulate desktop wallpapers
+- [**bin**](bin)
+  Simple convenience scripts, mostly to manage my image folders
+- [**camsnap**](camsnap.sh)
+  Snap a photo with your MagicMirror webcam
+- [**chkconfig**](chkconfig.sh)
+  Validate active/installed MagicMirror configuration file syntax
+- [**chkinst**](chkinst.sh)
+  Check if currently installed MagicMirror scripts are up to date
+- [**chktemp**](chktemp.sh)
+  Check and report the Raspberry Pi temperature
+- [**get_temps**](get_temps.sh)
+  Get your MagicMirror Raspberry Pi temperature
+- [**gethue**](gethue.sh)
+  Get your Hue Hub properties
+- [**getquote**](getquote.sh)
+  Get a stock symbol quote
+- [**mirror**](mirror.sh)
+  Main MagicMirror management script
+- [**mmapiactions**](mmapiactions.sh)
+  Get the MMM-Remote-Control API actions
+- [**mmgetb**](mmgetb.sh)
+  Get the MagicMirror screen brightness level
+- [**mmsetb**](mmsetb.sh)
+  Set the MagicMirror screen brightness level
+- [**mm**](mm.sh)
+  Convenience script to remotely execute the main mirror script
+- [**pcmanslideshow**](pcmanslideshow.sh)
+  Display a slide show on your desktop using pcmanfm
+- [**rand_back**](rand_back.sh)
+  Select a random desktop wallpaper
+- [**reboot**](reboot.sh)
+  Perform additional actions before reboot, executed as a normal user using sudo
+- [**rmlandscape**](rmlandscape.sh)
+  Remove photos in a folder that are in landscape mode
+- [**sdbackup**](sdbackup.sh)
+  Backup an SD card
+- [**sderase**](sderase.sh)
+  Erase an SD card
+- [**sdrestore**](sdrestore.sh)
+  Restore an SD card from a previous backup
+- [**sdwrite**](sdwrite.sh)
+  Write an image to an SD card
+- [**shutdown**](shutdown.sh)
+  Perform additional actions before shutdown, executed as a normal user using sudo
+- [**vncview**](vncview.sh)
+  Remote script to start a VNC server on your MagicMirror and a VNC viewer on your desktop
+- [**wireless_conf**](wireless_conf.sh)
+  Configure wireless using WPA Supplicant
+- [**wireless_dot_sample**](wireless_dot_sample)
+  Sample $HOME/.wireless to assist in wireless configuration

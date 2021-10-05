@@ -1,0 +1,15 @@
+#!/bin/bash
+
+MNT="/mnt/transcend/Pictures/MagicMirror/Photographers"
+PDIR=$HOME/Pictures/Photographers
+
+cd $PDIR
+
+for i in $MNT/*
+do
+    [ "$i" == "$MNT/*" ] && continue
+    [ -d $i ] || continue
+    b=`basename $i`
+    echo "Copying $i to $PDIR/$b"
+    cp -r -L $i $b
+done

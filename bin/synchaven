@@ -1,0 +1,13 @@
+#!/bin/bash
+
+HST="doctorwhen@10.0.1.57"
+WORK="/Volumes/Seagate_8TB/Pictures/Work"
+SRCE="${WORK}/Wallhaven"
+DEST="/mnt/transcend/Pictures"
+
+[ -d "${DEST}" ] || {
+    echo "$DEST does not exist or is not a directory. Exiting."
+    exit 1
+}
+ 
+rsync -a -H --delete "${HST}:${SRCE}" "${DEST}"

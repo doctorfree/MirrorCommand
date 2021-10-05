@@ -1,0 +1,13 @@
+#!/bin/bash
+
+HST="doctorwhen@10.0.1.57"
+WORK="/Users/doctorwhen/Pictures/Work"
+SRCE="${WORK}/MagicMirror"
+DEST="/mnt/transcend/Pictures"
+
+[ -d "${DEST}" ] || {
+    echo "$DEST does not exist or is not a directory. Exiting."
+    exit 1
+}
+ 
+rsync -a -H -L --exclude 'Unused' --delete "${HST}:${SRCE}" "${DEST}"

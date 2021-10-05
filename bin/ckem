@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd $HOME/Pictures
+
+while read i
+do
+    [ -f $i ] || echo $i
+done < $HOME/Pictures/rmlist.txt
