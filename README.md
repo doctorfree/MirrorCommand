@@ -6,6 +6,7 @@ Scripts to manage my MagicMirror (see https://magicmirror.builders/)
 1. [Overview](#overview)
 1. [History](#history)
 1. [Installation](#installation)
+1. [Remote Access](#remote_access)
 1. [Usage](#usage)
 1. [Contents](#contents)
 
@@ -152,6 +153,34 @@ subdirectory. Copy those of interest to your MagicMirror/config folder and modif
 as needed.
 
 My custom.css is provided in the css subdirectory. Copy and modify as needed.
+
+## Remote Access
+
+In order to remotely access the MagicMirror command line it is necessary to
+setup SSH and associated SSH keys. That configuration is outside the scope
+of this document. There are a number of guides on configuring SSH access on
+a variety of systems. To get started with SSH configuration on a Raspberry Pi,
+see https://www.raspberrypi.org/documentation/computers/remote-access.html
+
+Once SSH access is configured, the [**mm**](mm.sh) script can be installed on
+remote systems and used to remotely execute the mirror script on the system
+hosting MagicMirror. All arguments provided to <code>mm</code> are simply
+passed along to the <code>mirror</code> script.
+
+Alternately, the <code>mirror</code> script can be executed directly by a
+user logging in to the MagicMirror system in a Shell environment (e.g. a
+terminal window). This can be accomplished remotely in a terminal window
+on the remote system by executing the ssh command. For example, using iTerm2
+on a Mac OS X system, execute the command:
+
+<code>ssh -l pi IP_ADDRESS</code>
+
+where IP_ADDRESS is the IP address of the MagicMirror system. Once logged into
+the MagicMirror system, the <code>mirror</code> command can be executed at a
+shell command prompt:
+<pre>
+pi@raspberrypi:~ $ mirror
+</pre>
 
 ## Usage
 
