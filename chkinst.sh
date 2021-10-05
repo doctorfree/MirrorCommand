@@ -64,14 +64,13 @@ differ() {
     if [ -f "$2" ]
     then
         echo "$1 differs from installed version $2"
+        [ "$DIFF" ] && {
+            diff "$1" "$2"
+            echo ""
+        }
     else
         [ "${FORCE}" ] || echo "No installed version of $1 as $2"
-        DIFF=
     fi
-    [ "$DIFF" ] && {
-        diff "$1" "$2"
-        echo ""
-    }
     [ "$UPD" ] && {
         REFORCE=
         FOUND=
