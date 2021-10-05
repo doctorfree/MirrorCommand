@@ -6,7 +6,7 @@ Scripts to manage my MagicMirror (see https://magicmirror.builders/)
 1. [Overview](#overview)
 1. [History](#history)
 1. [Installation](#installation)
-1. [Remote Access](#remote_access)
+1. [Remote Access](#remote-access)
 1. [Usage](#usage)
 1. [Contents](#contents)
 
