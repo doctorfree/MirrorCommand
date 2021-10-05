@@ -26,14 +26,18 @@ mirror=
 [ -d ${HOME}/MagicMirror ] && mirror=1
 
 # Root directory of your subfolders of image files to use as backgrounds/slideshows
+# Modify these image folder settings to reflect your image folder layout
 if [ "$mirror" ]
 then
+    # MagicMirror image folders
     LIN_TOP=/mnt/transcend/Pictures
     PRE_TOP=$HOME/Pictures/Backgrounds
 else
+    # Linux Desktop image folders
     LIN_TOP=/u/pictures
     PRE_TOP=$HOME/Pictures/Work/Backgrounds
 fi
+# Mac OS X image folders
 MAC_TOP="/Volumes/Seagate_8TB/Pictures/Work"
 NFS_TOP=/u/pictures/Work
 #
