@@ -1,0 +1,18 @@
+#!/bin/bash
+
+ART="/mnt/transcend/Pictures/MagicMirror/Playboy"
+
+[ -d ${ART} ] || {
+    echo "$ART does not exist or is not a directory. Exiting."
+    exit 1
+}
+cd ${ART}
+for i in $*
+do
+    [ -d $i ] && {
+        echo "$i exists. skipping."
+        continue
+    }
+    mkdir $i
+    updplayboylinks $i
+done

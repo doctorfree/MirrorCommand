@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd /mnt/transcend/Pictures/MagicMirror
+
+while read i
+do
+    j=`echo $i | sed -e "s/Artists\//Artists-ALL\//" -e "s/Models\//Models-ALL\//" -e "s/Photographers\//Photographers-ALL\//"`
+    [ -f $j ] || echo $j
+done < $HOME/Pictures/rmlist.txt

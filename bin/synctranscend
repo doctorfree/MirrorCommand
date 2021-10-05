@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "Syncing Wallhaven"
+synchaven
+echo "Syncing MagicMirror"
+syncmagic
+echo "Syncing KindGirls"
+synckind
+echo "Syncing JAV Idols"
+syncjav
+echo "Syncing Elite Babes"
+syncelite

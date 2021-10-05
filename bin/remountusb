@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DEV="/dev/sda1"
+MNT="/mnt/transcend"
+
+sudo umount ${MNT}
+sudo fsck -y ${DEV}
+sudo mount -o rw ${DEV} ${MNT}

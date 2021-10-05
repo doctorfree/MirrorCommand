@@ -722,9 +722,9 @@ set_config() {
         setconf ${mode}
         return
     else
-        # for sub in ${subdir} Artists Models Photographers JAV
-        find . -type d | while read sub
+        for sub in __none__ ${subdir} ${CONF_SUBDIRS}
         do
+            [ "${sub}" == "__none__" ] && continue
             [ -f ${sub}/config-${mode}.js ] && {
                 setconf ${mode} ${sub}
                 return
@@ -733,8 +733,9 @@ set_config() {
     fi
     # Try to find something that matches the first part of the specified name
     # for sub in ${subdir} Artists Models Photographers JAV
-    find . -type d | while read sub
+    for sub in __none__ ${subdir} ${CONF_SUBDIRS}
     do
+        [ "${sub}" == "__none__" ] && continue
         for confname in ${sub}/config-${mode}*.js
         do
             [ "${confname}" == "${sub}/config-${mode}*.js" ] && continue

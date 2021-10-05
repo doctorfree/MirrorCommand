@@ -1,0 +1,10 @@
+#!/bin/bash
+
+NEW=/mnt/transcend/Pictures/transfer
+
+cd $HOME/Pictures
+find Artists Fractals Models Photographers -type f | while read i
+do
+    [ -f ${NEW}/$i ] && continue
+    echo "rm -f $i"
+done
