@@ -163,9 +163,9 @@ a remote system with SSH access to your MagicMirror.
 Here is the current output of "mirror -u" which displays a usage message.
 
 <pre>
-Usage: mirror <command> [args]
-Where <command> can be one of the following:
-	info [temp|mem|disk|usb|net|wireless|screen], list <active|installed|configs>, rotate [right|left|normal], artists_dir, models_dir, photogs_dir, select, restart, screen [on|off|info|status], start, stop, status [all], dev, getb, setb <num>, ac <artist>, ar <artist>, jc <idol>, jr <idol>, mc <model>, mr <model>, pc <photographer>, pr <photographer>, wh <dir>, whrm <dir>
+Usage: mirror [command] [args]
+Where [command] can be one of the following:
+	info [temp|mem|disk|usb|net|wireless|screen], list [active|installed|configs], rotate [right|left|normal], artists_dir, models_dir, photogs_dir, select, restart, screen [on|off|info|status], start, stop, status [all], dev, getb, setb [num], ac [artist], ar [artist], jc [idol], jr [idol], mc [model], mr [model], pc [photographer], pr [photographer], wh [dir], whrm [dir]
 
 or specify a config file to use with one of:
 	 all Artists blank calendar coronavirus covidmap crypto default face
@@ -175,15 +175,15 @@ or specify a config file to use with one of:
 	 volumio water weather youtube
 
 or any other config file you have created in /home/pi/MagicMirror/config of the form:
-	config-<name>.js
+	config-[name].js
 
 A config filename argument will be resolved into a config filename of the form:
 	config-$argument.js
 
 Arguments can also be specified as follows:
-	-a <artist>, -A <artist>, -b <brightness>, -B, -c <config>, -d, -i <info>,
-	-I, -l <list>, -r <rotate>, -s <screen>, -S, -m <model>, -M <model>,
-	-p <photographer>, -P <photographer>, -w <dir>, -W <dir>, -u
+	-a [artist], -A [artist], -b [brightness], -B, -c [config], -d, -i [info],
+	-I, -l [list], -r [rotate], -s [screen], -S, -m [model], -M [model],
+	-p [photographer], -P [photographer], -w [dir], -W [dir], -u
 
 Examples:
 	mirror		# Invoked with no arguments the mirror command displays a command menu
