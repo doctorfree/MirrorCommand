@@ -18,8 +18,7 @@ var config = {
         "10.0.1.44", // Mac Mini
         "10.0.1.51", // Mac Pro
         "10.0.1.82", // Mac Pro
-        "10.0.1.85", // Raspberry Pi Ropieee
-        "10.0.1.80", // Raspberry Pi Ropieee
+        "10.0.1.80", // Raspberry Pi 400
         "10.0.1.86", // Raspberry Pi MagicMirror
         "10.0.1.85", // Raspberry Pi MagicMirror
         "10.0.1.69", // iPad Air
@@ -50,7 +49,7 @@ var config = {
             module: 'MMM-iFrame',
             position: 'fullscreen_below',
             config: {
-                url: [ "http://10.0.1.80/playback" ],
+                url: [ "http://10.0.1.85/playback" ],
                 updateInterval: 30 * 60 * 1000, // rotate URLs every 30 minutes
                 width: "1080", // width of iframe
                 height: "1920", // height of iframe
