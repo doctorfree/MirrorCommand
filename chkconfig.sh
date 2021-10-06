@@ -11,10 +11,14 @@ if [ "$1" == "all" ]
 then
     current=`ls -l config.js | awk ' { print $11 } '`
     echo "Saving $current MagicMirror configuration"
-    for config in config-*.js
+    for config in config-*.js */config-*.js
     do
         [ "$config" == "config-*.js" ] && {
-            echo "No MagicMirror configuration files config-*.js found in $CONFDIR"
+            echo "No MagicMirror configuration files found in $CONFDIR"
+            continue
+        }
+        [ "$config" == "*/config-*.js" ] && {
+            echo "No MagicMirror configuration files found in $CONFDIR subdirs"
             continue
         }
         rm -f config.js
