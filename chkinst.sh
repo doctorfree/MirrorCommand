@@ -64,12 +64,16 @@ differ() {
     if [ -f "$2" ]
     then
         echo "$1 differs from installed version $2"
+        UPTODATE=
         [ "$DIFF" ] && {
             diff "$1" "$2"
             echo ""
         }
     else
-        [ "${FORCE}" ] || echo "No installed version of $1 as $2"
+        [ "${FORCE}" ] || {
+            echo "No installed version of $1 as $2"
+            UPTODATE=
+        }
     fi
     [ "$UPD" ] && {
         REFORCE=
@@ -82,6 +86,7 @@ differ() {
             }
         done
         [ "$FOUND" ] && {
+            UPTODATE=
             echo "Looks like you need to update one of your customized files."
             echo "$1 is on your list of files to prompt before installing."
             [ "$FORCE" ] && {
@@ -126,6 +131,7 @@ DIFF=
 TELL=
 UPD=
 FORCE=
+UPTODATE=1
 # List of installed files which differ from those in my git repo due to
 # tailoring for my own use. These will not get force installed without first
 # prompting you if you really want to.
@@ -158,7 +164,7 @@ while getopts adfinuw: flag; do
 done
 shift $(( OPTIND - 1 ))
 
-for i in * config/* css/custom.css tests/configs/check_config.js
+for i in * bin/* config/* config/*/* css/custom.css
 do
     # Skip directories
     [ -d "$i" ] && continue
@@ -168,9 +174,9 @@ do
     # Scripts can be either commands or startup configuration files in $HOME 
     inst=
     case "$i" in
-        asoundrc)
-            inst="$HOME/.$i"
-            ;;
+    #   asoundrc)
+    #       inst="$HOME/.$i"
+    #       ;;
         bash_aliases|bash_profile|bashrc|dircolors|vimrc)
             if [ -f "$HOME/.$i" ]
             then
@@ -182,7 +188,7 @@ do
         duplicity_exclude.txt)
             inst="$HOME/$i"
             ;;
-        css/custom.css|tests/configs/check_config.js|config/*)
+        css/custom.css|config/*)
             inst="$HOME/MagicMirror/$i"
             ;;
         crontab*|files_with_secrets.txt|README*|wireless_dot_sample)
@@ -217,7 +223,6 @@ do
     # This functionality is mostly for me, the maintainer and distributor.
     #
     case "$i" in
-        # I have heavily modified Bash startup files for work.
         bash_aliases)
             check "$i" "$inst" 121
             ;;
@@ -251,26 +256,56 @@ do
         send_sms.sh)
             check "$i" "$inst" 12
             ;;
+        config/config-all.js)
+            check "$i" "$inst" 54
+            ;;
         config/config-calendar.js)
-            check "$i" "$inst" 12
+            check "$i" "$inst" 28
+            ;;
+        config/config-coronavirus.js)
+            check "$i" "$inst" 24
             ;;
         config/config-default.js)
-            check "$i" "$inst" 96
+            check "$i" "$inst" 38
             ;;
         config/config-iframe.js)
-            check "$i" "$inst" 88
+            check "$i" "$inst" 44
             ;;
-        config/config-noback.js)
-            check "$i" "$inst" 92
+        config/config-normal.js)
+            check "$i" "$inst" 42
             ;;
-        config/config-plex.js)
-            check "$i" "$inst" 24
+        config/config-rooncontrol.js)
+            check "$i" "$inst" 18
+            ;;
+        config/config-roon.js)
+            check "$i" "$inst" 34
             ;;
         config/config-server.js)
-            check "$i" "$inst" 98
+            check "$i" "$inst" 48
+            ;;
+        config/config-stocks.js)
+            check "$i" "$inst" 26
+            ;;
+        config/config-test.js)
+            check "$i" "$inst" 4
+            ;;
+        config/config-traffic.js)
+            check "$i" "$inst" 24
+            ;;
+        config/config-volumio.js)
+            check "$i" "$inst" 16
             ;;
         config/config-weather.js)
-            check "$i" "$inst" 24
+            check "$i" "$inst" 28
+            ;;
+        config/config-youtube.js)
+            check "$i" "$inst" 14
+            ;;
+        config/config.js.sample)
+            cmp -s "$i" "$inst" || differ "$i" "$inst"
+            ;;
+        config/*)
+            check "$i" "$inst" 20
             ;;
         IFTTT/ifttt.sh)
             check "$i" "$inst" 4
@@ -289,3 +324,5 @@ do
             ;;
     esac
 done
+
+[ "$UPTODATE" ] && echo "It looks like your system is up to date!"

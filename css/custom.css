@@ -1,3 +1,7 @@
+.mmm-hue-lights .module-content {
+    margin-top: 250px;
+}
+
 .mmm-hue-lights .grid {
     width: auto;
     display: flex;
@@ -16,6 +20,10 @@
 .calendar .medium {
   font-size: 25px;
   line-height: 30px;
+}
+
+.MMM-Solar .module-content {
+  margin-top: 10px;
 }
 
 .MMM-DarkSkyForecast .module-content {
