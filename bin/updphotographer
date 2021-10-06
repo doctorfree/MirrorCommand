@@ -1,14 +1,18 @@
 #!/bin/bash
 
-ART_DIR="/mnt/transcend/Pictures/MagicMirror/Photographers"
+MNT_PT="/mnt/transcend/Pictures"
+PHO_DIR="${MNT_PT}/MagicMirror/Photographers"
+RMLIST="$HOME/Pictures/rmlist.txt"
 
-[ -d ${ART_DIR} ] || {
-    echo "$ART_DIR does not exist or is not a directory. Exiting."
+# Use an associative array to map photographer names across sites
+declare -A photographer_sites
+
+[ -d ${PHO_DIR} ] || {
+    echo "$PHO_DIR does not exist or is not a directory. Exiting."
     exit 1
 }
-cd ${ART_DIR}
-#TOP="/Volumes/Seagate_8TB/Pictures/Work/Wallhaven"
-TOP="../../Wallhaven"
+cd ${PHO_DIR}
+TOP="${MNT_PT}/Wallhaven"
 MOD="${TOP}/Models"
 ART="${TOP}/Artists"
 JAV="${TOP}/JAV_Idol"
@@ -16,8 +20,8 @@ PHO="${TOP}/Photographers"
 PLA="${MOD}/Playboy"
 PEN="${MOD}/Penthouse"
 DRO="${MOD}/Photodromm"
-KIND="../../KindGirls"
-HER=`pwd`
+KIND="${MNT_PT}/KindGirls"
+ELITE="${MNT_PT}/Elite_Babes"
 
 isportrait() {
     port=0
@@ -50,7 +54,6 @@ isportrait() {
     exit 1
 }
 
-# Update any existing plain files to symlinks if possible
 for folder in $*
 do
     [ "$folder" == "*" ] && continue
@@ -60,54 +63,106 @@ do
     for img in *
     do
         [ "$img" == "*" ] && continue
-        [ -L $img ] && continue
-        for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP
-        do
-            [ -f ../$MDIR/$folder/$img ] && {
+        if [ -d "$img" ]
+        then
+            for subimg in $img/*
+            do
+                [ "$subimg" == "$img/*" ] && continue
+                [ -L $subimg ] && rm -f $subimg
+                grep $subimg $RMLIST > /dev/null && {
+                    rm -f $subimg
+                    continue
+                }
+                for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
+                do
+                    [ -f $MDIR/$folder/$subimg ] && {
+                        rm -f $subimg
+                        cp $MDIR/$folder/$subimg $subimg
+                        break
+                    }
+                done
+              done
+        else
+            [ -L $img ] && rm -f $img
+            grep $img $RMLIST > /dev/null && {
                 rm -f $img
-                ln -s ../$MDIR/$folder/$img .
-                break
+                continue
             }
-        done
+            for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
+            do
+                [ -f $MDIR/$folder/$img ] && {
+                    rm -f $img
+                    cp $MDIR/$folder/$img .
+                    break
+                }
+            done
+        fi
     done
-    cd ..
+    cd ${PHO_DIR}
 done
 
-# Identify any newly added files and create symlinks
+# Identify any newly added files and copy them
 for folder in $*
 do
     [ "$folder" == "*" ] && continue
     [ "$folder" == "Unused" ] && continue
     [ -d $folder ] || continue
-    for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP
+    case $folder in
+        Jenya)
+            photographer_sites[$ELITE]="Eugenia_Diordiychuk"
+            ;;
+        Natalia_Andreeva)
+            photographer_sites[$ELITE]="Delilah_G"
+            photographer_sites[$KIND]="Natalia_A"
+            ;;
+        *)
+            ;;
+    esac
+    for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
     do
-      [ -d $MDIR/$folder ] && {
-        echo "Checking $MDIR/$folder for newly added files"
-        cd $MDIR/$folder
+      chkfolder=$folder
+      [ "${photographer_sites[$MDIR]}" ] && {
+              chkfolder="${photographer_sites[$MDIR]}"
+      }
+      [ -d $MDIR/$chkfolder ] && {
+        echo "Checking $MDIR/$chkfolder for newly added files"
+        cd $MDIR/$chkfolder
         for img in *
         do
             [ "$img" == "*" ] && continue
-            [ -L $HER/$folder/$img ] && continue
-            if isportrait $img
+            [ "$img" == "downloaded.txt" ] && continue
+            [ "$img" == "SUMS.txt" ] && continue
+            [ "$img" == "Description.txt" ] && continue
+            if [ -d "$img" ]
             then
-                ln -s ../$MDIR/$folder/$img $HER/$folder/$img
+                [ -d ${PHO_DIR}/$folder/$img ] || mkdir -p ${PHO_DIR}/$folder/$img
+                for subimg in $img/*
+                do
+                    [ "$subimg" == "$img/*" ] && continue
+                    [ -L ${PHO_DIR}/$folder/$subimg ] && rm -f ${PHO_DIR}/$folder/$subimg
+                    grep $subimg $RMLIST > /dev/null && {
+                        rm -f $subimg
+                        continue
+                    }
+                    if isportrait $subimg
+                    then
+                        cp $MDIR/$chkfolder/$subimg ${PHO_DIR}/$folder/$subimg
+                    fi
+                done
+            else
+                [ -L ${PHO_DIR}/$folder/$img ] && rm -f ${PHO_DIR}/$folder/$img
+                grep $img $RMLIST > /dev/null && {
+                    rm -f $img
+                    continue
+                }
+                if isportrait $img
+                then
+                    cp $MDIR/$chkfolder/$img ${PHO_DIR}/$folder/$img
+                fi
             fi
         done
-        cd $HER
+        cd ${PHO_DIR}
       }
     done
-#   [ -d $KIND/$folder ] && {
-#       echo "Checking $KIND/$folder for newly added files"
-#       cd $KIND/$folder
-#       for img in *
-#       do
-#           [ "$img" == "*" ] && continue
-#           [ -L $HER/$folder/$img ] && continue
-#           if isportrait $img
-#           then
-#               ln -s $KIND/$folder/$img $HER/$folder/$img
-#           fi
-#       done
-#   }
-    cd $HER
+    cd ${PHO_DIR}
 done

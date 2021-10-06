@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd $HOME/Pictures
+cd /mnt/transcend/Pictures/Wallhaven
 
 while read i
 do

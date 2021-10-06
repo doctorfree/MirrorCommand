@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd $HOME/Pictures
+
+while read img
+do
+    rm -f $img
+done < rmlist.txt
