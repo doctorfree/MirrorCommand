@@ -1,3 +1,8 @@
+.MMM-Videoplayer video {
+    width: 1080px;
+    height: 1920px;
+}
+
 .mmm-hue-lights .module-content {
     margin-top: 250px;
 }
