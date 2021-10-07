@@ -159,16 +159,16 @@ list_mods() {
         then
           if [ "${apikey}" ]
           then
-            curl -X GET http://${IP}:${PORT}/api/modules?apiKey=${apikey} 2> /dev/null | jq .
+            curl -X GET http://${IP}:${PORT}/api/module?apiKey=${apikey} 2> /dev/null | jq .
           else
-            curl -X GET http://${IP}:${PORT}/api/modules 2> /dev/null | jq .
+            curl -X GET http://${IP}:${PORT}/api/module 2> /dev/null | jq .
           fi
         else
           if [ "${apikey}" ]
           then
-            curl -X GET http://${IP}:${PORT}/api/modules?apiKey=${apikey}
+            curl -X GET http://${IP}:${PORT}/api/module?apiKey=${apikey}
           else
-            curl -X GET http://${IP}:${PORT}/api/modules
+            curl -X GET http://${IP}:${PORT}/api/module
           fi
           echo ""
         fi
@@ -180,16 +180,16 @@ list_mods() {
             then
               if [ "${apikey}" ]
               then
-                curl -X GET http://${IP}:${PORT}/api/modules/installed?apiKey=${apikey} 2> /dev/null | jq .
+                curl -X GET http://${IP}:${PORT}/api/module/installed?apiKey=${apikey} 2> /dev/null | jq .
               else
-                curl -X GET http://${IP}:${PORT}/api/modules/installed 2> /dev/null | jq .
+                curl -X GET http://${IP}:${PORT}/api/module/installed 2> /dev/null | jq .
               fi
             else
               if [ "${apikey}" ]
               then
-                curl -X GET http://${IP}:${PORT}/api/modules/installed?apiKey=${apikey}
+                curl -X GET http://${IP}:${PORT}/api/module/installed?apiKey=${apikey}
               else
-                curl -X GET http://${IP}:${PORT}/api/modules/installed
+                curl -X GET http://${IP}:${PORT}/api/module/installed
               fi
               echo ""
             fi
@@ -308,6 +308,48 @@ set_brightness() {
         printf "\nBrightness setting $1 out of range or not a number"
         printf "\nValid brightness values are integer values [0-200]\n"
         setb_usage
+    fi
+}
+
+hide_video() {
+    printf "\n${BOLD}Hide MagicMirror Video${NORMAL}\n"
+    if [ "$usejq" ]
+    then
+      if [ "${apikey}" ]
+      then
+        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/hide?apiKey=${apikey} 2> /dev/null | jq .
+      else
+        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/hide 2> /dev/null | jq .
+      fi
+    else
+      if [ "${apikey}" ]
+      then
+        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/hide?apiKey=${apikey}
+      else
+        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/hide
+      fi
+      echo ""
+    fi
+}
+
+show_video() {
+    printf "\n${BOLD}Show MagicMirror Video${NORMAL}\n"
+    if [ "$usejq" ]
+    then
+      if [ "${apikey}" ]
+      then
+        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/show?apiKey=${apikey} 2> /dev/null | jq .
+      else
+        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/show 2> /dev/null | jq .
+      fi
+    else
+      if [ "${apikey}" ]
+      then
+        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/show?apiKey=${apikey}
+      else
+        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/show
+      fi
+      echo ""
     fi
 }
 
@@ -677,7 +719,7 @@ usage() {
     printf "\n\tinfo [temp|mem|disk|usb|net|wireless|screen],"
     printf " list <active|installed|configs>, rotate [right|left|normal], artists_dir,"
     printf " models_dir, photogs_dir, select, restart, screen [on|off|info|status],"
-    printf " playvideo, pausevideo, nextvideo, replayvideo,"
+    printf " playvideo, pausevideo, nextvideo, replayvideo, hidevideo, showvideo,"
     printf " start, stop, status [all], dev, getb, setb <num>, ac <artist>, ar <artist>,"
     printf " jc <idol>, jr <idol>, mc <model>, mr <model>, pc <photographer>,"
     printf " pr <photographer>, wh <dir>, whrm <dir>"
@@ -691,6 +733,7 @@ usage() {
     printf "\n\nArguments can also be specified as follows:"
     printf "\n\t-a <artist>, -A <artist>, -b <brightness>, -B, -c <config>, -d, -i <info>,"
     printf "\n\t-V, -N, -R (toggle video play, play next video, replay video),"
+    printf "\n\t-H, -h (Hide video, Show video),"
     printf "\n\t-I, -l <list>, -r <rotate>, -s <screen>, -S, -m <model>, -M <model>,"
     printf "\n\t-p <photographer>, -P <photographer>, -w <dir>, -W <dir>, -u"
     printf "\n\n${BOLD}Examples:${NORMAL}"
@@ -1040,7 +1083,7 @@ get_info_type() {
 # stop
 # status [all]
 
-while getopts a:A:b:Bc:di:Ij:J:l:m:M:Np:P:r:Rs:SVw:W:u flag; do
+while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:SVw:W:u flag; do
     case $flag in
         a)
           artist_create ${OPTARG}
@@ -1059,6 +1102,12 @@ while getopts a:A:b:Bc:di:Ij:J:l:m:M:Np:P:r:Rs:SVw:W:u flag; do
           ;;
         d)
           start_dev
+          ;;
+        h)
+          show_video
+          ;;
+        H)
+          hide_video
           ;;
         I)
             INFO="all"
@@ -1481,6 +1530,16 @@ shift $(( OPTIND - 1 ))
 
 [ "$1" == "setb" ] && {
     set_brightness $2
+    exit 0
+}
+
+[ "$1" == "hidevideo" ] || [ "$1" == "videohide" ] && {
+    hide_video
+    exit 0
+}
+
+[ "$1" == "showvideo" ] || [ "$1" == "videoshow" ] && {
+    show_video
     exit 0
 }
 
