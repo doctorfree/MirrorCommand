@@ -972,7 +972,7 @@ get_info_type() {
   while true
   do
     PS3="${BOLD}Please enter your MagicMirror command choice (numeric or text): ${NORMAL}"
-    options=("dev" "list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "restart" "screen off" "screen on" "start" "stop" "status" "status all" "get brightness" "set brightness" "system info" "quit")
+    options=("dev" "list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "restart" "screen off" "screen on" "start" "stop" "status" "status all" "get brightness" "set brightness" "video playback" "system info" "quit")
     select opt in "${options[@]}"
     do
         case "$opt,$REPLY" in
@@ -1065,6 +1065,11 @@ get_info_type() {
                 ;;
             "restart",*|*,"restart")
                 mirror restart
+                break
+                ;;
+            "video playback",*|*,"video playback")
+                printf "======================================================\n\n"
+                mirror videoplayback
                 break
                 ;;
             "quit",*|*,"quit")
@@ -1461,6 +1466,56 @@ shift $(( OPTIND - 1 ))
                 fi
                 ;;
         esac
+    done
+    exit 0
+}
+
+[ "$1" == "videoplayback" ] && {
+    PS3="${BOLD}Please enter your MagicMirror video playback choice (numeric or text): ${NORMAL}"
+    options=("Play video" "Pause video" "Replay video" "Next video" "Hide video" "Show video" "Main menu")
+    select opt in "${options[@]}"
+    do
+        case "$opt,$REPLY" in
+            "Main menu",*|*,"Main menu"|"Quit",*|*,"Quit"|"quit",*|*,"quit")
+                printf "\nReturning to main menu\n"
+                exit 0
+                ;;
+            "Play video",*|*,"Play video")
+                printf "======================================================\n\n"
+                toggle_videoplay
+                #break
+                ;;
+            "Pause video",*|*,"Pause video")
+                printf "======================================================\n\n"
+                toggle_videoplay
+                #break
+                ;;
+            "Replay video",*|*,"Replay video")
+                printf "======================================================\n\n"
+                replay_video
+                #break
+                ;;
+            "Next video",*|*,"Next video")
+                printf "======================================================\n\n"
+                next_video
+                #break
+                ;;
+            "Hide video",*|*,"Hide video")
+                printf "======================================================\n\n"
+                hide_video
+                #break
+                ;;
+            "Show video",*|*,"Show video")
+                printf "======================================================\n\n"
+                show_video
+                #break
+                ;;
+            *)
+                printf "\nInvalid entry. Please try again"
+                printf "\nEnter either a number or text of one of the menu entries\n"
+                ;;
+        esac
+        REPLY=
     done
     exit 0
 }
