@@ -38,6 +38,8 @@ include support for:
     - Start/Stop video play
 	- Replay video
 	- Play next video
+	- Hide video playback module
+	- Show video playback module
 - Get MagicMirror status
 - Auto generation of new MagicMirror configuration files
 - Interactive mode via menu dialogs
@@ -201,8 +203,8 @@ Here is the current output of "mirror -u" which displays a usage message.
 Usage: mirror [command] [args]
 Where [command] can be one of the following:
 	info [temp|mem|disk|usb|net|wireless|screen], list [active|installed|configs],
-	rotate [right|left|normal], artists_dir, models_dir, photogs_dir, select,
-	restart, screen [on|off|info|status], playvideo, pausevideo, nextvideo,
+	rotate [right|left|normal], artists_dir, models_dir, photogs_dir, select, restart,
+	screen [on|off|info|status], playvideo, pausevideo, nextvideo, hidevideo, showvideo,
 	replayvideo, start, stop, status [all], dev, getb, setb [num], ac [artist],
 	ar [artist], jc [idol], jr [idol], mc [model], mr [model], pc [photographer],
 	pr [photographer], wh [dir], whrm [dir]
@@ -223,6 +225,7 @@ A config filename argument will be resolved into a config filename of the form:
 Arguments can also be specified as follows:
 	-a [artist], -A [artist], -b [brightness], -B, -c [config], -d, -i [info],
 	-V, -N, -R (toggle video play, play next video, replay video),
+	-H, -h (hide video, show video),
 	-I, -l [list], -r [rotate], -s [screen], -S, -m [model], -M [model],
 	-p [photographer], -P [photographer], -w [dir], -W [dir], -u
 
