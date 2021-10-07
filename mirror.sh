@@ -311,6 +311,69 @@ set_brightness() {
     fi
 }
 
+next_video() {
+    printf "\n${BOLD}Play Next MagicMirror Video${NORMAL}\n"
+    if [ "$usejq" ]
+    then
+      if [ "${apikey}" ]
+      then
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/NEXT?apiKey=${apikey} 2> /dev/null | jq .
+      else
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/NEXT 2> /dev/null | jq .
+      fi
+    else
+      if [ "${apikey}" ]
+      then
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/NEXT?apiKey=${apikey}
+      else
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/NEXT
+      fi
+      echo ""
+    fi
+}
+
+replay_video() {
+    printf "\n${BOLD}Replay MagicMirror Video${NORMAL}\n"
+    if [ "$usejq" ]
+    then
+      if [ "${apikey}" ]
+      then
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/REPLAY?apiKey=${apikey} 2> /dev/null | jq .
+      else
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/REPLAY 2> /dev/null | jq .
+      fi
+    else
+      if [ "${apikey}" ]
+      then
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/REPLAY?apiKey=${apikey}
+      else
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/REPLAY
+      fi
+      echo ""
+    fi
+}
+
+toggle_videoplay() {
+    printf "\n${BOLD}Toggle MagicMirror Video Play/Pause${NORMAL}\n"
+    if [ "$usejq" ]
+    then
+      if [ "${apikey}" ]
+      then
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/TOGGLE?apiKey=${apikey} 2> /dev/null | jq .
+      else
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/TOGGLE 2> /dev/null | jq .
+      fi
+    else
+      if [ "${apikey}" ]
+      then
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/TOGGLE?apiKey=${apikey}
+      else
+        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/TOGGLE
+      fi
+      echo ""
+    fi
+}
+
 model_create() {
     [ "$1" ] || {
         printf "\nFolder argument required to specify Slideshow dir.\n"
@@ -614,6 +677,7 @@ usage() {
     printf "\n\tinfo [temp|mem|disk|usb|net|wireless|screen],"
     printf " list <active|installed|configs>, rotate [right|left|normal], artists_dir,"
     printf " models_dir, photogs_dir, select, restart, screen [on|off|info|status],"
+    printf " playvideo, pausevideo, nextvideo, replayvideo,"
     printf " start, stop, status [all], dev, getb, setb <num>, ac <artist>, ar <artist>,"
     printf " jc <idol>, jr <idol>, mc <model>, mr <model>, pc <photographer>,"
     printf " pr <photographer>, wh <dir>, whrm <dir>"
@@ -626,6 +690,7 @@ usage() {
     printf "\n\tconfig-\$argument.js"
     printf "\n\nArguments can also be specified as follows:"
     printf "\n\t-a <artist>, -A <artist>, -b <brightness>, -B, -c <config>, -d, -i <info>,"
+    printf "\n\t-V, -N, -R (toggle video play, play next video, replay video),"
     printf "\n\t-I, -l <list>, -r <rotate>, -s <screen>, -S, -m <model>, -M <model>,"
     printf "\n\t-p <photographer>, -P <photographer>, -w <dir>, -W <dir>, -u"
     printf "\n\n${BOLD}Examples:${NORMAL}"
@@ -975,7 +1040,7 @@ get_info_type() {
 # stop
 # status [all]
 
-while getopts a:A:b:Bc:di:Ij:J:l:m:M:p:P:r:s:Sw:W:u flag; do
+while getopts a:A:b:Bc:di:Ij:J:l:m:M:Np:P:r:Rs:SVw:W:u flag; do
     case $flag in
         a)
           artist_create ${OPTARG}
@@ -1032,11 +1097,17 @@ while getopts a:A:b:Bc:di:Ij:J:l:m:M:p:P:r:s:Sw:W:u flag; do
         M)
           model_remove ${OPTARG}
           ;;
+        N)
+          next_video
+          ;;
         p)
           photo_create ${OPTARG}
           ;;
         P)
           photo_remove ${OPTARG}
+          ;;
+        R)
+          replay_video
           ;;
         r)
           rotate_screen ${OPTARG}
@@ -1046,6 +1117,9 @@ while getopts a:A:b:Bc:di:Ij:J:l:m:M:p:P:r:s:Sw:W:u flag; do
           ;;
         s)
           screen_control ${OPTARG}
+          ;;
+        V)
+          toggle_videoplay
           ;;
         w)
           wh_create ${OPTARG}
@@ -1407,6 +1481,22 @@ shift $(( OPTIND - 1 ))
 
 [ "$1" == "setb" ] && {
     set_brightness $2
+    exit 0
+}
+
+[ "$1" == "nextvideo" ] || [ "$1" == "videonext" ] && {
+    next_video
+    exit 0
+}
+
+[ "$1" == "replayvideo" ] || [ "$1" == "videoreplay" ] || [ "$1" == "replay" ] && {
+    replay_video
+    exit 0
+}
+
+[ "$1" == "videopause" ] || [ "$1" == "videoplay" ] ||
+[ "$1" == "pausevideo" ] || [ "$1" == "playvideo" ] && {
+    toggle_videoplay
     exit 0
 }
 
