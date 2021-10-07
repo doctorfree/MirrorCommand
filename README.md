@@ -1,5 +1,7 @@
 # MirrorCommandLine
-Scripts to manage my MagicMirror (see https://magicmirror.builders/)
+MagicMirror is an open source modular smart mirror platform
+(see https://magicmirror.builders/). This repository maintains an extensive
+set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 
 ## Table of contents
 
@@ -66,7 +68,7 @@ Clone the MirrorCommandLine repository:
 
 or
 
-<code>git clone https://gitlab.com/doctorfree/MirrorCommandLine.git</code>
+<code>git clone `https://gitlab.com/doctorfree/MirrorCommandLine.git`</code>
 
 Edit the main MagicMirror management script, [**mirror**](mirror.sh), setting
 the location of your MagicMirror installation, the IP address of your
