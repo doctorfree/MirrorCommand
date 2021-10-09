@@ -91,26 +91,28 @@ var config = {
             }
         },
         {
-            module: "currentweather",
-            position: "top_right",
-            config: {
-                location: "Santa Cruz",
-                locationID: "5393052",
-                units: "imperial",
-                appid: "xx_OpenWeather-App-ID_xxxxxxxxxx"
-            }
-        },
+		    module: "weather",
+		    position: "top_right",
+		    config: {
+             type: 'current',
+             location: "Santa Cruz,United States",
+             locationID: "5393052",
+             units: "imperial",
+             apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+		    }
+	    },
         {
-            module: "weatherforecast",
+            module: "weather",
             position: "top_right",
             header: "Weather Forecast",
             config: {
-                location: "Santa Cruz",
+			    type: 'forecast',
+                location: "Santa Cruz,United States",
                 locationID: "5393052",
                 units: "imperial",
                 showRainAmount: "true",
                 colored: "true",
-                appid: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+                apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
             }
         },
         {
@@ -479,7 +481,7 @@ var config = {
                         ["MMM-RAIN-RADAR", "MMM-DarkSkyForecast", "MMM-DateOnly"],
                     ],
                 fixed:
-                    ["alert", "clock", "currentweather", "weatherforecast",
+                    ["alert", "clock", "weather",
                      "updatenotification", "MMM-Remote-Control"],
                 rotationTime: 300000, // rotate page every 5 minutes = 5 * 60 * 1000
             }

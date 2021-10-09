@@ -88,26 +88,28 @@ var config = {
             }
         },
         {
-            module: "currentweather",
-            position: "top_right",
-            config: {
-                location: "Santa Cruz",
-                locationID: "5393052",
-                units: "imperial",
-                appid: "xx_OpenWeather-App-ID_xxxxxxxxxx"
-            }
-        },
+		    module: "weather",
+		    position: "top_right",
+		    config: {
+             type: 'current',
+             location: "Santa Cruz,United States",
+             locationID: "5393052",
+             units: "imperial",
+             apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+		    }
+	    },
         {
-            module: "weatherforecast",
+            module: "weather",
             position: "top_right",
             header: "Weather Forecast",
             config: {
-                location: "Santa Cruz",
+			    type: 'forecast',
+                location: "Santa Cruz,United States",
                 locationID: "5393052",
                 units: "imperial",
                 showRainAmount: "true",
                 colored: "true",
-                appid: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+                apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
             }
         },
         {
@@ -127,10 +129,6 @@ var config = {
                         title: "Mercury News",
                         url: "https://www.mercurynews.com/feed"
                     },
-                    {
-                        title: "NBC Bay Area",
-                        url: "https://www.nbcbayarea.com/news/top-stories/?rss=y",
-                    }
                 ],
                 showSourceTitle: true,
                 showPublishDate: true,

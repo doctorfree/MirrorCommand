@@ -66,10 +66,6 @@ var config = {
                         title: "Mercury News",
                         url: "https://www.mercurynews.com/feed"
                     },
-                    {
-                        title: "NBC Bay Area",
-                        url: "https://www.nbcbayarea.com/news/top-stories/?rss=y",
-                    }
                 ],
                 showSourceTitle: true,
                 showPublishDate: true,

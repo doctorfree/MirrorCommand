@@ -49,7 +49,7 @@ var config = {
             module: 'MMM-iFrame',
             position: 'fullscreen_below',
             config: {
-                url: [ "http://10.0.1.85/playback" ],
+                url: [ "http://10.0.1.80/playback" ],
                 updateInterval: 30 * 60 * 1000, // rotate URLs every 30 minutes
                 width: "1080", // width of iframe
                 height: "1920", // height of iframe

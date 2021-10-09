@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFDIR="$HOME/src/Scripts/MagicMirror/config"
+CONFDIR="$HOME/src/MirrorCommandLine/config"
 
 cd "${CONFDIR}"
 echo "Hiding keys in $CONFDIR"

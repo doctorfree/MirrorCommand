@@ -110,33 +110,31 @@ var config = {
 				]
 			}
 		},
-		{
-			module: "currentweather",
-			position: "bottom_left",
-			config: {
-				location: "Santa Cruz",
-                // ID from http://bulk.openweathermap.org/sample/city.list.json.gz
-                // unzip the gz file and find your city
-				locationID: "5393052",
-                units: "imperial",
-				appid: "xx_OpenWeather-App-ID_xxxxxxxxxx"
-			}
-		},
-		{
-			module: "weatherforecast",
-			position: "bottom_right",
-			header: "Weather Forecast",
-			config: {
-				location: "Santa Cruz",
-                // ID from http://bulk.openweathermap.org/sample/city.list.json.gz
-                // unzip the gz file and find your city
-				locationID: "5393052",
+        {
+		    module: "weather",
+		    position: "top_right",
+		    config: {
+             type: 'current',
+             location: "Santa Cruz,United States",
+             locationID: "5393052",
+             units: "imperial",
+             apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+		    }
+	    },
+        {
+            module: "weather",
+            position: "top_right",
+            header: "Weather Forecast",
+            config: {
+			    type: 'forecast',
+                location: "Santa Cruz,United States",
+                locationID: "5393052",
                 units: "imperial",
                 showRainAmount: "true",
                 colored: "true",
-				appid: "xx_OpenWeather-App-ID_xxxxxxxxxx"
-			}
-		},
+                apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+            }
+        },
         // {
         //     module: 'MMM-TelegramBot',
         //     config: {
