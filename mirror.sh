@@ -216,8 +216,8 @@ list_mods() {
 }
 
 rotate_screen() {
-    [ "$1" == "left" ] || [ "$1" == "normal" ] || [ "$1" == "right" ] || {
-        printf "\nUsage: rotate option takes an argument of 'left', 'right', or 'normal'"
+    [ "$1" == "inverted" ] || [ "$1" == "left" ] || [ "$1" == "normal" ] || [ "$1" == "right" ] || {
+        printf "\nUsage: rotate option takes an argument of 'left', 'right', 'inverted', or 'normal'"
         printf "\n Exiting.\n"
         usage
     }
@@ -717,8 +717,8 @@ usage() {
     printf "\nWhere <command> can be one of the following:"
 
     printf "\n\tinfo [temp|mem|disk|usb|net|wireless|screen],"
-    printf " list <active|installed|configs>, rotate [right|left|normal], artists_dir,"
-    printf " models_dir, photogs_dir, select, restart, screen [on|off|info|status],"
+    printf " list <active|installed|configs>, rotate [right|left|normal|inverted],"
+    printf " artists_dir, models_dir, photogs_dir, select, restart, screen [on|off|info|status],"
     printf " playvideo, pausevideo, nextvideo, replayvideo, hidevideo, showvideo,"
     printf " start, stop, status [all], dev, getb, setb <num>, ac <artist>, ar <artist>,"
     printf " jc <idol>, jr <idol>, mc <model>, mr <model>, pc <photographer>,"
@@ -746,7 +746,7 @@ usage() {
     printf "\n\tmirror info\t\t# Displays all MagicMirror system information"
     printf "\n\tmirror info screen\t\t# Displays MagicMirror screen information"
     printf "\n\tmirror dev\t\t# Restarts the mirror in developer mode"
-    printf "\n\tmirror rotate left/right/normal\t\t# rotates the screen left, right, or normal"
+    printf "\n\tmirror rotate left/right/normal/inverted\t\t# rotates the screen left, right, inverted, or normal"
     printf "\n\tmirror screen on\t\t#  Turns the Display ON"
     printf "\n\tmirror screen off\t\t# Turns the Display OFF"
     printf "\n\tmirror status [all]\t\t# Displays MagicMirror status, checks config syntax"
@@ -804,6 +804,19 @@ setconf() {
         exit 1
     }
     [ -L config-$$.js ] && rm -f config-$$.js
+    rotation=`xrandr | grep connected | awk ' { print $5 } '`
+    if [ "${conf}" == "tantra" ] || [ "${conf}" == "iframe" ]
+    then
+        [ "$rotation" == "normal" ] || {
+            printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
+            xrandr --output HDMI-1 --rotate normal
+        }
+    else
+        [ "$rotation" == "right" ] || {
+            printf "\n${BOLD}Rotating screen display right ${NORMAL}\n"
+            xrandr --output HDMI-1 --rotate right
+        }
+    fi
     pm2 restart MagicMirror --update-env
 }
 
@@ -972,7 +985,7 @@ get_info_type() {
   while true
   do
     PS3="${BOLD}Please enter your MagicMirror command choice (numeric or text): ${NORMAL}"
-    options=("dev" "list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "restart" "screen off" "screen on" "start" "stop" "status" "status all" "get brightness" "set brightness" "video playback" "system info" "quit")
+    options=("dev" "list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "rotate inverted" "restart" "screen off" "screen on" "start" "stop" "status" "status all" "get brightness" "set brightness" "video playback" "system info" "quit")
     select opt in "${options[@]}"
     do
         case "$opt,$REPLY" in
