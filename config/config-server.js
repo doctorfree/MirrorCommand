@@ -235,9 +235,9 @@ var config = {
             position: 'bottom_bar',
             config: {
               apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
-              crypto: 'BATUSDT,ADAUSDT,ETHUSDT,POLYBNB,ZRXUSDT,MCOUSDT', // crypto symbols
+              crypto: 'FILUSDT,ADAUSDT',
               separator: '&nbsp;&nbsp;•&nbsp;&nbsp;', // separator between stocks
-              stocks: 'CGC,AAPL,GOOG,ACB', // stock symbols
+              stocks: 'CND,ETHO,MIGFX,MSEGX,TRBCX,CGC,AAPL,JOBY', // stock symbols
               updateInterval: 1000000 // update interval in milliseconds (16:40)
             }
         },

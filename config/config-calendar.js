@@ -80,7 +80,7 @@ var config = {
 		{
 			module: "calendar",
 			header: "Calendar Events",
-			position: "fullscreen_below",
+			position: "middle_center",
 			config: {
                 colored: true,
                 maximumNumberOfDays: 28,
@@ -112,7 +112,7 @@ var config = {
 		},
         {
 		    module: "weather",
-		    position: "top_right",
+		    position: "bottom_left",
 		    config: {
              type: 'current',
              location: "Santa Cruz,United States",
@@ -123,7 +123,7 @@ var config = {
 	    },
         {
             module: "weather",
-            position: "top_right",
+            position: "bottom_right",
             header: "Weather Forecast",
             config: {
 			    type: 'forecast',

@@ -69,14 +69,14 @@ var config = {
 	    },
         {
             module: 'MMM-GoogleMapsTraffic',
-            position: 'top_center',
+            position: 'middle_center',
             config: {
                 key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
                 lat: 36.970019,
                 lng: -122.042212,
-                height: '900px',
-                width: '800px',
-                styledMapType: "transparent",
+                height: '1240px',
+                width: '1080px',
+                styledMapType: "standard",
                 disableDefaultUI: true,
                 backgroundColor: 'hsla(0, 0%, 0%, 0)',
                 markers: [
@@ -87,6 +87,24 @@ var config = {
                     },
                 ],
             },
+        },
+        {
+            module: "clock",
+			position: "bottom_center",
+            config: {
+                dateFormat: "dddd, LLL",
+                displayType: "analog",
+                analogFace: "face-009",
+                analogSize: "200px",
+                displaySeconds: "true",
+                secondsColor: "#BAA3DC",
+                timeFormat: "12",
+                showPeriod: "true",
+                showDate: "true",
+                clockBold: "false",
+                analogPlacement: "top",
+                analogShowDate: "top",
+            }
         },
         // {
         //     module: 'MMM-TelegramBot',

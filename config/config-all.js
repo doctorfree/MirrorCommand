@@ -74,7 +74,7 @@ var config = {
         },
         {
             module: "clock",
-            position: "top_center",
+            position: "upper_third",
             config: {
                 dateFormat: "dddd, LLL",
                 displayType: "analog",
@@ -89,6 +89,27 @@ var config = {
                 analogPlacement: "top",
                 analogShowDate: "top",
             }
+        },
+        {
+            module: 'MMM-GoogleMapsTraffic',
+            position: 'middle_center',
+            config: {
+                key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
+                lat: 36.970019,
+                lng: -122.042212,
+                height: '1240px',
+                width: '1080px',
+                styledMapType: "standard",
+                disableDefaultUI: true,
+                backgroundColor: 'hsla(0, 0%, 0%, 0)',
+                markers: [
+                    {
+                        lat: 36.970019,
+                        lng: -122.042212,
+                        fillColor: '#9966ff'
+                    },
+                ],
+            },
         },
         {
 		    module: "weather",
@@ -213,13 +234,31 @@ var config = {
         //     }
         // },
         {
+            module: 'MMM-CoinMarketCap',
+            position: "middle_center",
+            header: "Cryptocurrencies",
+            config: {
+                apiKey: 'xxxxx_CoinMarket-API-Key_xxxxxxxxx',
+                currencies: ['ADA', 'FIL', 'The Graph', 'AGIX', 'HNT', 'ICP', 'ETH' ],
+                view: 'graphWithChanges',
+                columns: [ 'logo', 'name', 'priceWithChanges', 'graph' ],
+                fontSize: 'medium',
+                percentChangeColored: true,
+                logoColored: true,
+                graphRange: 7,
+                graphSize: 'medium',
+                graphColored: true,
+                conversion: 'USD',
+            }
+        },
+        {
             module: 'MMM-stocks',
             position: 'bottom_bar',
             config: {
               apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
-              crypto: 'BATUSDT,ADAUSDT,ETHUSDT,POLYBNB,ZRXUSDT,MCOUSDT', // crypto symbols
+              crypto: 'FILUSDT,ADAUSDT',
               separator: '&nbsp;&nbsp;•&nbsp;&nbsp;', // separator between stocks
-              stocks: 'CGC,AAPL,HEXO,ACB,TLRY', // stock symbols
+              stocks: 'CND,ETHO,MIGFX,MSEGX,TRBCX,CGC,AAPL,JOBY', // stock symbols
               updateInterval: 1000000 // update interval in milliseconds (16:40)
             }
         },
@@ -228,7 +267,21 @@ var config = {
             position: "middle_center",
             config: {
                 bridgeIp: "10.0.1.20",
+                displayType: "grid",
+                minimalGrid: false,
+                updateInterval: 180000,
                 user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
+            }
+        },
+        {
+            module: 'MMM-iFrame',
+            position: 'fullscreen_below',
+            config: {
+                url: [ "http://10.0.1.81:9100/display/" ],
+                updateInterval: 30 * 60 * 1000, // rotate URLs every 30 minutes
+                width: "1080", // width of iframe
+                height: "756", // height of iframe
+                frameWidth: "1080"
             }
         },
         {
@@ -354,41 +407,64 @@ var config = {
         //       customCommands: [],
         //     }
         // },
+        // {
+        //     module: 'MMM-iFrame',
+        //     position: 'fullscreen_below',
+        //     config: {
+        //         url: [
+        //               "https://ncov2019.live/map",
+        //               "https://healthweather.us/",
+        //               "https://ncov2019.live/tweets",
+        //               "https://windy.app/coronavirus_map",
+        //              ],
+        //         updateInterval: 3 * 60 * 1000,  // rotate URLs every 3 minutes
+        //         width: "1080", // width of iframe
+        //         height: "1920", // height of iframe
+        //         frameWidth: "1080"
+        //     }
+        // },
         {
-            module: 'MMM-iFrame',
-            position: 'fullscreen_below',
-            config: {
-                url: [
-                      "https://ncov2019.live/map",
-                      "https://healthweather.us/",
-                      "https://ncov2019.live/tweets",
-                      "https://windy.app/coronavirus_map",
-                     ],
-                updateInterval: 3 * 60 * 1000,  // rotate URLs every 3 minutes
-                width: "1080", // width of iframe
-                height: "1920", // height of iframe
-                frameWidth: "1080"
-            }
+            module: 'MMM-COVID19-SPARKLINE',
+              position: "middle_center",
+              config : {
+                worldStats: true,
+                sparklines: true,
+                sparklineWidth: 100,
+                sparklineHeight: 55,
+                sparklineDays: 50,
+                sparklineDeltavsDaily: true,
+                sortby: "confirmed",
+                columns: ["confirmed", "deaths", "recovered"],
+                countries: ["US", "Mexico", "Brazil", "Canada", "Italy", "Germany", "China"],
+                updateInterval: 1000 * 60 * 60 * 3,  //3 hours
+                infoRowClass: "medium",
+                headerRowClass: "small",
+                fadeSpeed: 1000,
+                showDelta: true,
+                showDeltaPlotNDays: 7,
+                sparklineDeathScale: -4,
+                showDelimiter: true
+              }
         },
-        {
-            module: "MMM-COVID-19",
-            header: "Coronavirus Daily Update",
-            position: "top_bar",
-            config: {
-              debug:false,
-              scanInterval: 1000 * 60 * 60 * 12,
-              rotateInterval: 1000 * 5, // 0 means no rotate
-              pinned: ["World", "US Total", "California, US", "Mexico"],
-              myPosition: {
-                  latitude: 36.970019,
-                  longitude: -122.042212,
-                  metric: "mile"
-              },
-              reportTimeFormat: "YYYY.MM.DD hh a",
-              drawGraph: true,
-              logTerritory: false
-            }
-        },
+        // {
+        //     module: "MMM-COVID-19",
+        //     header: "Coronavirus Daily Update",
+        //     position: "top_bar",
+        //     config: {
+        //       debug:false,
+        //       scanInterval: 1000 * 60 * 60 * 12,
+        //       rotateInterval: 1000 * 5, // 0 means no rotate
+        //       pinned: ["World", "US Total", "California, US", "Mexico"],
+        //       myPosition: {
+        //           latitude: 36.970019,
+        //           longitude: -122.042212,
+        //           metric: "mile"
+        //       },
+        //       reportTimeFormat: "YYYY.MM.DD hh a",
+        //       drawGraph: true,
+        //       logTerritory: false
+        //     }
+        // },
         // {
         //     module: "MMM-News",
         //     position: "top_center",
@@ -473,10 +549,13 @@ var config = {
             config: {
                 modules:
                     [
+                        ["MMM-iFrame", "MMM-SystemStats", "MMM-Tools",
+                         "MMM-Solar", "mmm-hue-lights", "MMM-NetworkScanner"],
                         ["calendar", "newsfeed", "MMM-SystemStats", "MMM-Tools",
                          "MMM-Solar", "mmm-hue-lights", "MMM-NetworkScanner"],
-                        ["MMM-COVID-19", "newsfeed", "MMM-DateOnly"],
-                        ["MMM-iFrame", "MMM-stocks", "MMM-DateOnly",
+                        ["MMM-COVID19-SPARKLINE", "newsfeed", "MMM-DateOnly"],
+                        ["MMM-GoogleMapsTraffic", "newsfeed", "MMM-DateOnly"],
+                        ["MMM-CoinMarketCap", "MMM-stocks", "MMM-DateOnly",
                          "newsfeed"],
                         ["MMM-RAIN-RADAR", "MMM-DarkSkyForecast", "MMM-DateOnly"],
                     ],

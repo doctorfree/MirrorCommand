@@ -60,54 +60,28 @@ var config = {
             }
         },
         {
-            module: 'MMM-iFrame',
-            position: 'fullscreen_below',
-            config: {
-                url: [
-                      "https://ncov2019.live/map",
-                      "https://healthweather.us/",
-                      "https://ncov2019.live/tweets",
-                     ],
-                updateInterval: 0.5 * 60 * 1000, // rotate URLs every 30 seconds
-                width: "1080", // width of iframe
-                height: "1920", // height of iframe
-                frameWidth: "1080"
-            }
+            module: 'MMM-COVID19-SPARKLINE',
+              position: "middle_center",
+              config : {
+                worldStats: true,
+                sparklines: true,
+                sparklineWidth: 100,
+                sparklineHeight: 55,
+                sparklineDays: 50,
+                sparklineDeltavsDaily: true,
+                sortby: "confirmed",
+                columns: ["confirmed", "deaths", "recovered"],
+                countries: ["US", "Mexico", "Brazil", "Canada", "Italy", "Germany", "China"],
+                updateInterval: 1000 * 60 * 60 * 3,  //3 hours
+                infoRowClass: "medium",
+                headerRowClass: "small",
+                fadeSpeed: 1000,
+                showDelta: true,
+                showDeltaPlotNDays: 7,
+                sparklineDeathScale: -4,
+                showDelimiter: true
+              }
         },
-//      {
-//          module: "MMM-Volume",
-//          position: "top_left", // It is meaningless. but you should set.
-//          config: {
-//            usePresetScript: "ALSA", // "ALSA" is supported by default.
-//            volumeOnStart: 50,
-//          }
-//      },
-        // {
-        //     module: 'MMM-TelegramBot',
-        //     config: {
-        //       telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-              // This is NOT the username of bot.
-        //       allowedUser : ['Your-Telegram-Username'],
-        //       adminChatId : Your-Telegram-Chat-ID,
-        //       useWelcomeMessage: true,
-        //       verbose: false,
-        //       favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
-        //       screenshotScript: "scrot",
-        //       detailOption: {},
-        //       customCommands: [],
-        //     }
-        // },
-        // {
-        //     module: "MMM-GoogleAssistant",
-        //     position: "top_right",
-        //     config: {
-        //         maxWidth: "100%",
-        //         header: "",
-        //     publishKey: 'xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx',
-        //     subscribeKey: 'xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx',
-        //     updateDelay: 500
-        //     }
-        // },
 	]
 };
 

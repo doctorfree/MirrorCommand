@@ -49,10 +49,10 @@ var config = {
 		{
 			module: "alert",
 		},
-		{
-			module: "updatenotification",
-			position: "top_bar"
-		},
+		// {
+		// 	module: "updatenotification",
+		// 	position: "top_bar"
+		// },
         {
             module: 'MMM-Remote-Control',
             config: {
@@ -66,6 +66,7 @@ var config = {
               videolist: ["/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_0.mp4", "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_1.mp4", "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_2.mp4", "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_3.mp4"],
               random: true,
               autoplay: true, // If set to true, sound (muted by default) has to be muted, otherwise the video will not auto play.
+              muted: false,
               notification: "VIDEOPLAYER1", // Unique notification string for this player (to be able to play and pause from another modules).
             }
          },

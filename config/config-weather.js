@@ -68,6 +68,31 @@ var config = {
 		    }
 	    },
         {
+		    module: "weather",
+		    position: "top_right",
+		    config: {
+             type: 'current',
+             location: "Santa Cruz,United States",
+             locationID: "5393052",
+             units: "imperial",
+             apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+		    }
+	    },
+        {
+            module: "weather",
+            position: "top_right",
+            header: "Weather Forecast",
+            config: {
+			    type: 'forecast',
+                location: "Santa Cruz,United States",
+                locationID: "5393052",
+                units: "imperial",
+                showRainAmount: "true",
+                colored: "true",
+                apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+            }
+        },
+        {
             module: 'MMM-RAIN-RADAR',
             position: 'top_left',
             disabled: false,
@@ -97,6 +122,21 @@ var config = {
                 updateInterval: 60 * 60 * 1000,
             }
         },
+        // {
+		//     module: "weather",
+		//     position: "top_right",
+		//     config: {
+        //      type: 'current',
+        //      location: "Santa Cruz,United States",
+        //      locationID: "5393052",
+        //      units: "imperial",
+        //      apiBase: 'https://cors-anywhere.herokuapp.com/https://api.darksky.net',
+        //      weatherEndpoint: '/forecast',
+        //      apikey: "xxx_Dark-Sky-API-Key_xxxxxxxxxxx",
+		//      lat: "36.970019",
+		//      lon: "-122.042212",
+		//     }
+	    // },
 		{
             module: "MMM-DarkSkyForecast",
             header: "Dark Sky Weather Forecast",
@@ -137,7 +177,7 @@ var config = {
                 lng: -122.042212,
                 height: '600px',
                 width: '600px',
-                styledMapType: "transparent",
+                styledMapType: "standard",
                 disableDefaultUI: true,
                 backgroundColor: 'hsla(0, 0%, 0%, 0)',
                 markers: [

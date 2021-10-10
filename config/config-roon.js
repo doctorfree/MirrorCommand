@@ -215,17 +215,17 @@ var config = {
                 ],
             },
         },
-//      {
-//          module: 'MMM-stocks',
-//          position: 'bottom_bar',
-//          config: {
-//            apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
-//            crypto: 'FILUSDT,ADAUSDT,ETHUSDT,GRTUSDT,ZRXUSDT,AGIUSDT,XLMUSDT',
-//            separator: '&nbsp;&nbsp;•&nbsp;&nbsp;', // separator between stocks
-//            stocks: 'CGC,AAPL,HEXO,ACB,TLRY', // stock symbols
-//            updateInterval: 1000000 // update interval in milliseconds (16:40)
-//          }
-//      },
+        {
+            module: 'MMM-stocks',
+            position: 'bottom_bar',
+            config: {
+              apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
+              crypto: 'FILUSDT,ADAUSDT',
+              separator: '&nbsp;&nbsp;•&nbsp;&nbsp;', // separator between stocks
+              stocks: 'CND,ETHO,MIGFX,MSEGX,TRBCX,CGC,AAPL,JOBY', // stock symbols
+              updateInterval: 1000000 // update interval in milliseconds (16:40)
+            }
+        },
 //      {
 //          module: 'MMM-TelegramBot',
 //          config: {

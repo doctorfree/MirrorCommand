@@ -78,30 +78,30 @@ var config = {
             position: 'lower_third',
             config: {
               apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
-              crypto: 'BATUSDT,ADAUSDT,ETHUSDT,POLYBNB,ZRXUSDT,MCOUSDT', // crypto symbols
+              crypto: 'FILUSDT,ADAUSDT',
               separator: '&nbsp;&nbsp;•&nbsp;&nbsp;', // separator between stocks
-              stocks: 'CGC,AAPL,HEXO,ACB,TLRY', // stock symbols
+              stocks: 'CND,ETHO,MIGFX,MSEGX,TRBCX,CGC,AAPL,JOBY', // stock symbols
               updateInterval: 1000000 // update interval in milliseconds (16:40)
             }
         },
-        {
-            module: "MMM-AVStock",
-            position: "middle_center", //"bottom_bar" is better for `mode:ticker`
-            config: {
-                apiKey : "xx_AVStock-API_x", // https://www.alphavantage.co/
-                timeFormat: "YYYY-MM-DD HH:mm:ss",
-                symbols : ["AAPL", "HEXO", "TLRY", "CGC", "ACB"],
-                alias: ["Apple", "Hexo", "Tilray", "Canopy", "Aurora"],
-                tickerDuration: 60, // Ticker will be cycled once per this second.
-                chartDays: 90, //For `mode:series`, how much daily data will be taken. (max. 90)
-                poolInterval : 1000*15, // (Changed in ver 1.1.0) - Only For Premium Account
-                mode : "series", // "table", "ticker", "series"
-                decimals: 4,
-                candleSticks : true, //show candle sticks if mode is Series
-                coloredCandles : true, //colored bars: red and green for negative and positive candles
-                premiumAccount: false,
-            }
-        },
+        // {
+        //     module: "MMM-AVStock",
+        //     position: "middle_center", //"bottom_bar" is better for `mode:ticker`
+        //     config: {
+        //         apiKey : "xx_AVStock-API_x", // https://www.alphavantage.co/
+        //         timeFormat: "YYYY-MM-DD HH:mm:ss",
+        //         symbols : ["AAPL", "HEXO", "TLRY", "CGC", "ACB"],
+        //         alias: ["Apple", "Hexo", "Tilray", "Canopy", "Aurora"],
+        //         tickerDuration: 60, // Ticker will be cycled once per this second.
+        //         chartDays: 90, //For `mode:series`, how much daily data will be taken. (max. 90)
+        //         poolInterval : 1000*15, // (Changed in ver 1.1.0) - Only For Premium Account
+        //         mode : "series", // "table", "ticker", "series"
+        //         decimals: 4,
+        //         candleSticks : true, //show candle sticks if mode is Series
+        //         coloredCandles : true, //colored bars: red and green for negative and positive candles
+        //         premiumAccount: false,
+        //     }
+        // },
         // {
         //     module: 'MMM-TelegramBot',
         //     config: {
