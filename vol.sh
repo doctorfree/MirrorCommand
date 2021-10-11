@@ -2,12 +2,13 @@
 #
 # Volume control script copied from https://dronkert.nl/rpi/vol.html
 # Modified to accept card number, mode, and mute/restore arguments
+# - No need to calculate percentage, use ##% format to specify a percentage
 #
 # Usage:
 # vol       Outputs the current volume as a number between 0 and 100
-# vol +     Turn up the volume by $ADJ
-# vol -     Turn down the volume by $ADJ
-# vol 85    Set the volume to 85
+# vol +     Turn up the volume by $ADJ percent
+# vol -     Turn down the volume by $ADJ percent
+# vol 85    Set the volume to 85%
 # vol -c 2 ...    Get/Set volume on card number 2
 # vol -q    Quiet mode
 # vol -m    Mute volume
@@ -24,7 +25,7 @@ declare -i ADJ=5    # Volume adjustment step size
 usage ()
 {
 	echo "Usage: `basename $0` [-c cardnumber] [-m] [-q] [-u] [ - | + | N ]" >&2
-	echo "  where N is a whole number between $LO and $HI, inclusive." >&2
+	echo "  where N is a whole number percentage between $LO and $HI, inclusive." >&2
 	exit 1
 }
 
@@ -111,11 +112,11 @@ if [ ! -z "$ARG" ]; then
 	fi
 
 	if [[ "$PCT" != "$OLD" ]]; then
-		(( ABS = PCT * LEN / 100 ))
-		(( VAL = MIN + ABS ))
-		$EXE -q cset numid=$CARD -- $VAL
+#		(( ABS = PCT * LEN / 100 ))
+#		(( VAL = MIN + ABS ))
+		$EXE -q cset numid=$CARD -- ${PCT}%
 	fi
 fi
 
-[ "${VERB}" ] && echo $PCT
+[ "${VERB}" ] && echo "Volume set to $PCT%"
 exit 0
