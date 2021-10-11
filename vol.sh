@@ -14,13 +14,17 @@
 # vol -m    Mute volume
 # vol -r    Restore volume to previous level setting
 
-MIX=amixer
+MIXER=amixer
+# Set this to the card number you wish to control by default
+# Use 'aplay -l' to get a listing of the supported cards
+# Use 'vol -c # ..." to specify an alternate card on the command line
 CARD=1
 MUTE=
 VERB=1
+# Adjust these to your preference
 declare -i LO=0     # Minimum volume; try 10 to avoid complete silence
 declare -i HI=100   # Maximum volume; try 95 to avoid distortion
-declare -i ADJ=5    # Volume adjustment step size
+declare -i ADJ=3    # Volume adjustment step size
 
 usage ()
 {
@@ -29,9 +33,9 @@ usage ()
 	exit 1
 }
 
-EXE=$(which $MIX)
+EXE=$(which $MIXER)
 if [ -z "$EXE" ]; then
-	echo "Error: $MIX not found. Try \"sudo apt-get install alsa-utils\" first." >&2
+	echo "Error: $MIXER not found. Try \"sudo apt-get install alsa-utils\" first." >&2
 	exit 2
 fi
 
@@ -86,7 +90,7 @@ declare -i MAX=$(echo $GET | /bin/grep -E -o -e ',max=[^,]+' | /bin/grep -E -o -
 declare -i VAL=$(echo $GET | /bin/grep -E -o -e ': values=[0-9+-]+' | /bin/grep -E -o -e '[0-9-]+')
 
 if (( MIN >= MAX || VAL < MIN || VAL > MAX )); then
-	echo "Error: could not get the right values from $MIX output." >&2
+	echo "Error: could not get the right values from $MIXER output." >&2
 	exit 3
 fi
 
