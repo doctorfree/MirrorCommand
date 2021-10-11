@@ -311,6 +311,22 @@ set_brightness() {
     fi
 }
 
+set_volume() {
+    [ "$1" ] || {
+        printf "\nNumeric argument required to specify Mirror volume.\n"
+        vol_usage
+    }
+    havevol=`type -p vol`
+    if [ "$havevol" ]
+    then
+        echo "Setting MagicMirror volume to $1 percent"
+        vol -q $1
+    else
+        echo "Cannot locate vol script."
+        echo "Install vol.sh from the MirrorCommandLine repository."
+    fi
+}
+
 hide_video() {
     printf "\n${BOLD}Hide MagicMirror Video${NORMAL}\n"
     if [ "$usejq" ]
@@ -720,9 +736,9 @@ usage() {
     printf " list <active|installed|configs>, rotate [right|left|normal|inverted],"
     printf " artists_dir, models_dir, photogs_dir, select, restart, screen [on|off|info|status],"
     printf " playvideo, pausevideo, nextvideo, replayvideo, hidevideo, showvideo,"
-    printf " start, stop, status [all], dev, getb, setb <num>, ac <artist>, ar <artist>,"
-    printf " jc <idol>, jr <idol>, mc <model>, mr <model>, pc <photographer>,"
-    printf " pr <photographer>, wh <dir>, whrm <dir>"
+    printf " start, stop, status [all], dev, getb, setb <num>, vol <num>, ac <artist>,"
+    printf " ar <artist>, jc <idol>, jr <idol>, mc <model>, mr <model>,"
+    printf " pc <photographer>, pr <photographer>, wh <dir>, whrm <dir>"
 
     printf "\n\nor specify a config file to use with one of:"
     printf "\n\t${CONFS}"
@@ -752,6 +768,7 @@ usage() {
     printf "\n\tmirror status [all]\t\t# Displays MagicMirror status, checks config syntax"
     printf "\n\tmirror getb\t\t# Displays current MagicMirror brightness level"
     printf "\n\tmirror setb 150\t\t# Sets MagicMirror brightness level to 150"
+    printf "\n\tmirror vol 50\t\t# Sets MagicMirror volume level to 50"
     printf "\n\tmirror wh foobar\t\t# Creates and activates a slideshow config with pics in foobar"
     printf "\n\tmirror whrm foobar\t\t# Deactivate and remove slideshow in foobar"
     printf "\n\tmirror -u\t\t# Display this usage message\n"
@@ -768,6 +785,12 @@ list_usage() {
 setb_usage() {
     printf "\n${BOLD}Setb Usage:${NORMAL} mirror setb [number]"
     printf "\nWhere 'number' is an integer value in the range 0-200\n"
+    usage
+}
+
+vol_usage() {
+    printf "\n${BOLD}Volume Usage:${NORMAL} mirror vol [number]"
+    printf "\nWhere 'number' is an integer value in the range 0-100\n"
     usage
 }
 
@@ -805,7 +828,7 @@ setconf() {
     }
     [ -L config-$$.js ] && rm -f config-$$.js
     rotation=`xrandr | grep connected | awk ' { print $5 } '`
-    if [ "${conf}" == "tantra" ] || [ "${conf}" == "iframe" ]
+    if [ "${conf}" == "tantra" ] || [ "${conf}" == "iframe" ] || [ "${conf}" == "candy" ]
     then
         [ "$rotation" == "normal" ] || {
             printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
@@ -1102,7 +1125,7 @@ get_info_type() {
 # stop
 # status [all]
 
-while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:SVw:W:u flag; do
+while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:u flag; do
     case $flag in
         a)
           artist_create ${OPTARG}
@@ -1185,6 +1208,9 @@ while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:SVw:W:u flag; do
           ;;
         s)
           screen_control ${OPTARG}
+          ;;
+        v)
+          set_volume ${OPTARG}
           ;;
         V)
           toggle_videoplay
@@ -1599,6 +1625,11 @@ shift $(( OPTIND - 1 ))
 
 [ "$1" == "setb" ] && {
     set_brightness $2
+    exit 0
+}
+
+[ "$1" == "vol" ] && {
+    set_volume $2
     exit 0
 }
 
