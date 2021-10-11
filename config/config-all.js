@@ -469,39 +469,6 @@ var config = {
         //       logTerritory: false
         //     }
         // },
-        // {
-        //     module: "MMM-News",
-        //     position: "top_center",
-        //     config: {
-        //       apiKey : "xxxxxxx_newsapi.org_xxxxxxxxxxx",
-        //       type: "vertical",
-        //       touchable: false,
-        //       telegramBotOrderOpenDetail : true,
-        //       query : [
-        //         {
-        //           sources: "abc-news, bbc-news, cnn, google-news",
-        //         },
-        //         {
-        //           country: "us",
-        //           category: "general",
-        //         },
-        //         {
-        //           country: "uk",
-        //           category: "general",
-        //         },
-        //         {
-        //           country: "us",
-        //           category: "health",
-        //           q : "coronavirus"
-        //         },
-        //         {
-        //           country: "uk",
-        //           category: "health",
-        //           q : "coronavirus"
-        //         }
-        //       ],
-        //     }
-        // },
         {
             module: 'MMM-RAIN-RADAR',
             position: 'top_center',
