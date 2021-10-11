@@ -914,6 +914,7 @@ system_info() {
     [ "$INFO" == "all" ] || [ "$INFO" == "screen" ] && {
         printf "${BOLD}Screen dimensions and resolution:${NORMAL}\n"
         xrandr | grep Screen
+        xrandr | grep connected
         xdpyinfo | grep dimensions
         xdpyinfo | grep resolution
         display_status
