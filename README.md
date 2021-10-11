@@ -151,6 +151,8 @@ Some of the more useful supporting scripts include:
   Perform additional actions before shutdown, executed as a normal user using sudo
 - [**vncview**](vncview.sh)
   Remote script to start a VNC server on your MagicMirror and a VNC viewer on your desktop
+- [**vol**](vol.sh)
+  Script to control volume level of MagicMirror audio output
 - [**wireless_conf**](wireless_conf.sh)
   Configure wireless using WPA Supplicant
 - [**wireless_dot_sample**](wireless_dot_sample)
@@ -299,6 +301,8 @@ Examples:
   Perform additional actions before shutdown, executed as a normal user using sudo
 - [**vncview**](vncview.sh)
   Remote script to start a VNC server on your MagicMirror and a VNC viewer on your desktop
+- [**vol**](vol.sh)
+  Script to control volume level of MagicMirror audio output
 - [**wireless_conf**](wireless_conf.sh)
   Configure wireless using WPA Supplicant
 - [**wireless_dot_sample**](wireless_dot_sample)
