@@ -13,17 +13,21 @@ var config = {
     address: "0.0.0.0",
     port: 8080,
     ipWhitelist: [
+        "0.0.0.0",
         "127.0.0.1",
-        "10.0.1.44", // Mac Mini
+        "10.0.1.88", // Mac Mini
         "10.0.1.51", // Mac Pro
+        "10.0.1.57", // Mac Pro
+        "10.0.8.130", // Mac Pro over Tunnelblick
+        "10.0.1.81", // Roon Core
+        "10.0.1.82", // Mac Pro
+        "10.0.1.94", // Ropieee
         "10.0.1.85", // Raspberry Pi MagicMirror
+        "10.0.1.80", // Raspberry Pi 400
         "10.0.1.69", // iPad Air
         "10.0.1.76", // iPhone Max Xs
         "::ffff:127.0.0.1",
         "::1",
-    //  "::ffff:10.0.1.0/26",
-    //  "::ffff:10.0.1.64/27",
-    //  "::ffff:10.0.1.96/30"
     ],
 
     language: "en",

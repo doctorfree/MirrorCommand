@@ -22,18 +22,22 @@ var config = {
 	// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
 	// or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
 	// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
-	ipWhitelist: [
+    ipWhitelist: [
+        "0.0.0.0",
         "127.0.0.1",
-        "10.0.1.44", // Mac Mini
+        "10.0.1.88", // Mac Mini
         "10.0.1.51", // Mac Pro
+        "10.0.1.57", // Mac Pro
+        "10.0.8.130", // Mac Pro over Tunnelblick
+        "10.0.1.81", // Roon Core
+        "10.0.1.82", // Mac Pro
+        "10.0.1.94", // Ropieee
         "10.0.1.85", // Raspberry Pi MagicMirror
+        "10.0.1.80", // Raspberry Pi 400
         "10.0.1.69", // iPad Air
         "10.0.1.76", // iPhone Max Xs
         "::ffff:127.0.0.1",
         "::1",
-    //  "::ffff:10.0.1.0/26",
-    //  "::ffff:10.0.1.64/27",
-    //  "::ffff:10.0.1.96/30"
     ],
 
 	language: "en",

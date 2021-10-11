@@ -15,12 +15,15 @@ var config = {
     ipWhitelist: [
         "0.0.0.0",
         "127.0.0.1",
-        "10.0.1.44", // Mac Mini
+        "10.0.1.88", // Mac Mini
         "10.0.1.51", // Mac Pro
+        "10.0.1.57", // Mac Pro
+        "10.0.8.130", // Mac Pro over Tunnelblick
+        "10.0.1.81", // Roon Core
         "10.0.1.82", // Mac Pro
-        "10.0.1.80", // Raspberry Pi 400
-        "10.0.1.86", // Raspberry Pi MagicMirror
+        "10.0.1.94", // Ropieee
         "10.0.1.85", // Raspberry Pi MagicMirror
+        "10.0.1.80", // Raspberry Pi 400
         "10.0.1.69", // iPad Air
         "10.0.1.76", // iPhone Max Xs
         "::ffff:127.0.0.1",
