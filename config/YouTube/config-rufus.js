@@ -70,7 +70,7 @@ var config = {
               modestbranding: true,
               width: "100%",
               height: "800px",
-              referrer: "http://ronrecord.com",
+              referrer: "http://your.domain.com",
             }
         },
         {

@@ -62,7 +62,7 @@ var config = {
               modestbranding: true,
               width: "1080px",
               height: "800px",
-              referrer: "http://ronrecord.com",
+              referrer: "http://your.domain.com",
             }
         },
         {
@@ -71,10 +71,12 @@ var config = {
             config: {
                 url: [
                       "https://en.wikipedia.org/wiki/K-pop",
-                      "https://en.wikipedia.org/wiki/J-pop",
-                      "https://www.nytimes.com/2021/08/11/t-magazine/asian-women-pop-music.html",
+                      "https://en.wikipedia.org/wiki/BoA",
+                      "https://en.wikipedia.org/wiki/Girls%27_Generation",
+                      "https://en.wikipedia.org/wiki/AOA_(group)",
+                      "https://en.wikipedia.org/wiki/F(x)_(musical_group)",
                      ],
-                updateInterval: 5 * 60 * 1000, // rotate URLs every 5 minutes
+                updateInterval: 4 * 60 * 1000, // rotate URLs every 4 minutes
                 width: "1080", // width of iframe
                 height: "1000", // height of iframe
                 frameWidth: "1080"
