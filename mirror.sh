@@ -250,6 +250,21 @@ screen_control() {
     fi
 }
 
+screen_shot() {
+    SCREEN_SHOT_DIR=$HOME/Pictures/ScreenShots
+    [ -d ${SCREEN_SHOT_DIR} ] || mkdir -p ${SCREEN_SHOT_DIR}
+    havescrot=`type -p scrot`
+    if [ "$havescrot" ]
+    then
+        printf "\n${BOLD}Saving PNG format screenshot in ${SCREEN_SHOT_DIR}${NORMAL}\n"
+        scrot -e 'mv $f ~/Pictures/ScreenShots'
+    else
+        printf "\n${BOLD}Could not locate scrot command in $PATH${NORMAL}\n"
+        printf "\n${BOLD}Install scrot with 'sudo apt-get install scrot'${NORMAL}\n"
+    fi
+    printf "\n${BOLD}Done${NORMAL}\n"
+}
+
 start_dev() {
     printf "\n${BOLD}Starting MagicMirror in developer mode${NORMAL}\n"
     cd "${MM}"
@@ -828,18 +843,20 @@ setconf() {
     }
     [ -L config-$$.js ] && rm -f config-$$.js
     rotation=`xrandr | grep connected | awk ' { print $5 } '`
-    if [ "${conf}" == "tantra" ] || [ "${conf}" == "iframe" ] || [ "${conf}" == "candy" ]
-    then
-        [ "$rotation" == "normal" ] || {
-            printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
-            xrandr --output HDMI-1 --rotate normal
-        }
-    else
-        [ "$rotation" == "right" ] || {
-            printf "\n${BOLD}Rotating screen display right ${NORMAL}\n"
-            xrandr --output HDMI-1 --rotate right
-        }
-    fi
+    case ${conf} in
+        tantra|iframe|candy|fractalplaylist)
+            [ "$rotation" == "normal" ] || {
+                printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
+                xrandr --output HDMI-1 --rotate normal
+            }
+            ;;
+        *)
+            [ "$rotation" == "right" ] || {
+                printf "\n${BOLD}Rotating screen display right ${NORMAL}\n"
+                xrandr --output HDMI-1 --rotate right
+            }
+            ;;
+    esac
     pm2 restart MagicMirror --update-env
 }
 
@@ -1009,11 +1026,11 @@ get_info_type() {
   while true
   do
     PS3="${BOLD}Please enter your MagicMirror command choice (numeric or text): ${NORMAL}"
-    options=("dev" "list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "rotate inverted" "restart" "screen off" "screen on" "start" "stop" "status" "status all" "get brightness" "set brightness" "video playback" "system info" "quit")
+    options=("list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "rotate inverted" "restart" "screen off" "screen on" "screenshot" "start" "stop" "status" "status all" "get brightness" "set brightness" "video playback" "system info" "debug mode" "quit")
     select opt in "${options[@]}"
     do
         case "$opt,$REPLY" in
-            "dev",*|*,"dev")
+            "debug mode",*|*,"debug mode")
                 mirror dev
                 break
                 ;;
@@ -1076,6 +1093,10 @@ get_info_type() {
                 mirror ${opt}
                 break
                 ;;
+            "screenshot",*|*,"screenshot")
+                screen_shot
+                break
+                ;;
             "system info",*|*,"system info")
                 get_info_type
                 break
@@ -1121,11 +1142,12 @@ get_info_type() {
 # TODO: getopt processing for these remaining commands
 # select
 # restart
+# screenshot
 # start
 # stop
 # status [all]
 
-while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:u flag; do
+while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
     case $flag in
         a)
           artist_create ${OPTARG}
@@ -1220,6 +1242,9 @@ while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:u flag; do
           ;;
         W)
           wh_remove ${OPTARG}
+          ;;
+        Z)
+          screen_shot
           ;;
         u)
             usage
@@ -1585,6 +1610,11 @@ shift $(( OPTIND - 1 ))
 
 [ "$1" == "rotate" ] && {
     rotate_screen $2
+    exit 0
+}
+
+[ "$1" == "screenshot" ] && {
+    screen_shot
     exit 0
 }
 
