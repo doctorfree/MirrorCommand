@@ -64,27 +64,27 @@ var config = {
             }
         },
         {
-            module: "MMM-COVID-19",
-            header: "Coronavirus Daily Update",
-            position: "bottom_bar",
-            config: {
-              debug:false,
-//            scanInterval: 1000 * 60 * 60 * 3,
-              scanInterval: 1000 * 60 * 60 * 12,
-              rotateInterval: 1000 * 5, // 0 means no rotate
-//            pinned: ["Mainland China", null],
-//            pinned: ["Others", "Diamond Princess cruise ship"],
-//            pinned: ["US", "Santa Clara, CA"],
-              pinned: ["World", "US Total", "California, US"],
-              myPosition: {
-                  latitude: 36.970019,
-                  longitude: -122.042212,
-                  metric: "mile"
-              },
-              reportTimeFormat: "YYYY.MM.DD hh a",
-              drawGraph: true,
-              logTerritory: false
-            }
+            module: 'MMM-COVID19-SPARKLINE',
+              position: "middle_center",
+              config : {
+                worldStats: true,
+                sparklines: true,
+                sparklineWidth: 100,
+                sparklineHeight: 55,
+                sparklineDays: 50,
+                sparklineDeltavsDaily: true,
+                sortby: "confirmed",
+                columns: ["confirmed", "deaths", "recovered"],
+                countries: ["US", "Mexico", "Brazil", "Canada", "Italy", "Germany", "China"],
+                updateInterval: 1000 * 60 * 60 * 3,  //3 hours
+                infoRowClass: "medium",
+                headerRowClass: "small",
+                fadeSpeed: 1000,
+                showDelta: true,
+                showDeltaPlotNDays: 7,
+                sparklineDeathScale: -4,
+                showDelimiter: true
+              }
         },
         {
             module: "newsfeed",

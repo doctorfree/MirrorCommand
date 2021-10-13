@@ -5,7 +5,7 @@ CONFDIR="$HOME/src/Scripts/MagicMirror/config"
 cd "${CONFDIR}"
 echo "Showing keys in $CONFDIR"
 ../show_keys.sh
-for i in Artists JAV Models Photographers Templates
+for i in Artists JAV Models Photographers Templates YouTube
 do
     [ -d $i ] && {
         cd $i

@@ -38,37 +38,12 @@ var config = {
         {
             module: "alert",
         },
-        // {
-        //     module: "updatenotification",
-        //     position: "top_bar"
-        // },
         {
             module: 'MMM-Remote-Control',
             config: {
                 apiKey: 'xxx_Remote-Control-API-Key_xxxxx'
             }
         },
-        // {
-        //     module: "mmm-hue-lights",
-        //     position: "bottom_bar",
-        //     config: {
-        //         bridgeIp: "10.0.1.20",
-        //         displayType: "grid",
-        //         minimalGrid: false,
-        //         updateInterval: 180000,
-        //         user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
-        //     }
-        // },
-        // {
-        //     module: 'MMM-Solar',
-        //     position: "top_bar",
-        //     config: {
-        //         apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
-        //         userId: "Solar-USER-ID",
-        //         systemId: "Solar-System-ID",
-        //         basicHeader: "true",
-        //     }
-        // },
         {
             module: 'MMM-iFrame',
             position: 'fullscreen_below',
@@ -81,21 +56,50 @@ var config = {
                       "https://www.youtube.com/embed/zfgE_Bxears?autoplay=1&amp;controls=0",
                      ],
                      // "https://www.youtube.com/embed/95FxKgcgjN0?autoplay=1&amp;controls=0",
-                updateInterval: 10 * 60 * 1000, // rotate URLs every 10 minutes
+                updateInterval: 5 * 60 * 1000, // rotate URLs every 5 minutes
                 width: "1920", // width of iframe
                 height: "1080", // height of iframe
                 frameWidth: "1920"
             }
         },
-        // {
-        //     module: "MMM-Volume",
-        //     position: "bottom_center", // It is meaningless. but you should set.
-        //     config: {
-        //       usePresetScript: "ALSA", // "ALSA" is supported by default.
-        //       volumeOnStart: 50,
-        //     }
-        // },
-    ]
+		{
+			module: "updatenotification",
+			position: "top_bar"
+		},
+        {
+            module: 'MMM-BackgroundSlideshow',
+            position: 'fullscreen_below',
+            //classes: 'scheduler',
+            config: {
+                imagePaths: [
+                    'modules/MMM-BackgroundSlideshow/pics/fractals/',
+                ],
+                slideshowSpeed: 15000, // 15 seconds
+                transitionImages: true,
+                randomizeImageOrder: true,
+                recursiveSubDirectories: true,
+                resizeImages: true,
+                maxWidth: 1080,
+                maxHeight: 1920,
+                transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
+            }
+        },
+        {
+            module: 'MMM-pages',
+            // module: 'MMM-iFrame',
+            // module: 'MMM-BackgroundSlideshow'
+            config: {
+                modules:
+                    [
+                        ["MMM-iFrame"],
+                        ["MMM-BackgroundSlideshow"],
+                    ],
+                fixed:
+                    ["alert", "updatenotification", "MMM-Remote-Control"],
+                rotationTime: 1200000, // rotate page every 20 minutes = 20 * 60 * 1000
+            }
+        },
+	]
 };
 
 /*************** DO NOT EDIT THE LINE BELOW ***************/
