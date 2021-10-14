@@ -168,15 +168,14 @@ for i in * bin/* config/* config/*/* css/custom.css
 do
     # Skip directories
     [ -d "$i" ] && continue
-    # Strip any .sh suffix and Utils, IFTTT, or Wallpapers/ prefix
-    k=`echo $i | sed -e "s/\.sh$//" -e "s/Wallpapers\///" -e "s/Utils\///"`
-    j=`echo $k | sed -e "s/IFTTT\///"`
+    # Strip any .sh suffix
+    j=`echo $i | sed -e "s/\.sh$//"`
     # Scripts can be either commands or startup configuration files in $HOME 
     inst=
     case "$i" in
-    #   asoundrc)
-    #       inst="$HOME/.$i"
-    #       ;;
+        asoundrc)
+            inst="$HOME/.$i"
+            ;;
         bash_aliases|bash_profile|bashrc|dircolors|vimrc)
             if [ -f "$HOME/.$i" ]
             then
@@ -241,35 +240,26 @@ do
         getquote.sh)
             check "$i" "$inst" 8
             ;;
-        mirror.sh)
-            check "$i" "$inst" 4
-            ;;
-        mmapiactions.sh)
-            check "$i" "$inst" 4
-            ;;
-        mmgetb.sh)
-            check "$i" "$inst" 4
-            ;;
-        mmsetb.sh)
+        mirror.sh|mmapiactions.sh|mmgetb.sh|mmsetb.sh|config/config-candy.js|config/config-covid.js|config/config-coronavirus.js|config/config-test.js)
             check "$i" "$inst" 4
             ;;
         send_sms.sh)
             check "$i" "$inst" 12
             ;;
         config/config-all.js)
-            check "$i" "$inst" 54
+            check "$i" "$inst" 58
             ;;
         config/config-calendar.js)
             check "$i" "$inst" 28
             ;;
-        config/config-coronavirus.js)
-            check "$i" "$inst" 24
+        config/config-crypto.js)
+            check "$i" "$inst" 30
             ;;
         config/config-default.js)
-            check "$i" "$inst" 38
+            check "$i" "$inst" 46
             ;;
         config/config-iframe.js)
-            check "$i" "$inst" 44
+            check "$i" "$inst" 16
             ;;
         config/config-normal.js)
             check "$i" "$inst" 42
@@ -286,35 +276,26 @@ do
         config/config-stocks.js)
             check "$i" "$inst" 26
             ;;
-        config/config-test.js)
-            check "$i" "$inst" 4
-            ;;
         config/config-traffic.js)
             check "$i" "$inst" 24
             ;;
         config/config-volumio.js)
-            check "$i" "$inst" 16
+            check "$i" "$inst" 12
             ;;
         config/config-weather.js)
-            check "$i" "$inst" 28
+            check "$i" "$inst" 40
             ;;
-        config/config-youtube.js)
-            check "$i" "$inst" 14
+        config/config-YouTube.js)
+            check "$i" "$inst" 8
             ;;
         config/config.js.sample)
             cmp -s "$i" "$inst" || differ "$i" "$inst"
             ;;
+        config/YouTube/config-*.js)
+            check "$i" "$inst" 8
+            ;;
         config/*)
             check "$i" "$inst" 20
-            ;;
-        IFTTT/ifttt.sh)
-            check "$i" "$inst" 4
-            ;;
-        Wallpapers/wh.sh)
-            check "$i" "$inst" 8
-            ;;
-        Wallpapers/wb.sh)
-            check "$i" "$inst" 8
             ;;
         mkreadme.sh|mkwmv.sh)
             check "$i" "$inst" 12
