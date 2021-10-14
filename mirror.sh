@@ -1222,6 +1222,9 @@ select_youtube() {
             "babymetal")
                 TUBS="${TUBS} Babymetal"
                 ;;
+            "bowie")
+                TUBS="${TUBS} David_Bowie"
+                ;;
             "deeppurple")
                 TUBS="${TUBS} Deep_Purple"
                 ;;
@@ -1273,6 +1276,9 @@ select_youtube() {
                 ;;
             "Babymetal",*|*,"Babymetal")
                 setconf babymetal YouTube
+                ;;
+            "David_Bowie",*|*,"David_Bowie")
+                setconf bowie YouTube
                 ;;
             "Deep_Purple",*|*,"Deep_Purple")
                 setconf deeppurple YouTube
