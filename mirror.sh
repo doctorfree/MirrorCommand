@@ -749,7 +749,7 @@ usage() {
 
     printf "\n\tinfo [temp|mem|disk|usb|net|wireless|screen],"
     printf " list <active|installed|configs>, rotate [right|left|normal|inverted],"
-    printf " artists_dir, models_dir, photogs_dir, select, restart, screen [on|off|info|status],"
+    printf " artists_dir, models_dir, photogs_dir, youtube, select, restart, screen [on|off|info|status],"
     printf " playvideo, pausevideo, nextvideo, replayvideo, hidevideo, showvideo,"
     printf " start, stop, status [all], dev, getb, setb <num>, vol <num>, ac <artist>,"
     printf " ar <artist>, jc <idol>, jr <idol>, mc <model>, mr <model>,"
@@ -1253,6 +1253,99 @@ while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
 done
 shift $(( OPTIND - 1 ))
 
+[ "$1" == "youtube" ] && {
+  if [ -d "${CONFDIR}/YouTube" ]
+  then
+    cd "${CONFDIR}/YouTube"
+    for i in config-*.js
+    do
+        [ "$i" == "config-*.js" ] && continue
+        j=`echo $i | sed -e "s/config-//" -e "s/.js//"`
+        case "$j" in
+            "dualipa")
+                TUBS="${TUBS} Dua_Lipa"
+                ;;
+            "fractalplaylist")
+                TUBS="${TUBS} Fractals"
+                ;;
+            "kpop")
+                TUBS="${TUBS} K-Pop"
+                ;;
+            "qotsa")
+                TUBS="${TUBS} QOTSA"
+                ;;
+            "rufus")
+                TUBS="${TUBS} Rufus_Wainwright"
+                ;;
+            "tvthemes")
+                TUBS="${TUBS} TV_Themes"
+                ;;
+            "zhu")
+                TUBS="${TUBS} ZHU"
+                ;;
+            *)
+                TUBS="${TUBS} $j"
+                ;;
+        esac
+    done
+
+    cd "${CONFDIR}"
+    PS3="${BOLD}Enter your MagicMirror YouTube choice (numeric or text): ${NORMAL}"
+    options=(${TUBS} quit)
+    select opt in "${options[@]}"
+    do
+        case "$opt,$REPLY" in
+            "quit",*|*,"quit")
+                printf "\nExiting\n"
+                exit 0
+                ;;
+            "Dua_Lipa",*|*,"Dua_Lipa")
+                setconf dualipa YouTube
+                ;;
+            "Fractals",*|*,"Fractals")
+                setconf fractalplaylist YouTube
+                ;;
+            "K-Pop",*|*,"K-Pop")
+                setconf kpop YouTube
+                ;;
+            "QOTSA",*|*,"QOTSA")
+                setconf qotsa YouTube
+                ;;
+            "Rufus_Wainwright",*|*,"Rufus_Wainwright")
+                setconf rufus YouTube
+                ;;
+            "TV_Themes",*|*,"TV_Themes")
+                setconf tvthemes YouTube
+                ;;
+            "ZHU",*|*,"ZHU")
+                setconf zhu YouTube
+                ;;
+            *)
+                if [ -f YouTube/config-${opt}.js ]
+                then
+                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
+                    setconf ${opt} YouTube
+                    break
+                else
+                    if [ -f YouTube/config-${REPLY}.js ]
+                    then
+                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
+                        setconf ${REPLY} YouTube
+                        break
+                    else
+                        printf "\nInvalid entry. Please try again"
+                        printf "\nEnter either a number or text of one of the menu entries\n"
+                    fi
+                fi
+                ;;
+        esac
+    done
+    exit 0
+  else
+    echo "${CONFDIR}/YouTube does not exist or is not a directory. Skipping."
+  fi
+}
+
 [ "$1" == "artists_dir" ] && {
   if [ -d "${SLISDIR}/Artists" ]
   then
@@ -1510,6 +1603,11 @@ shift $(( OPTIND - 1 ))
             "Photographers",*|*,"Photographers")
                 printf "======================================================\n\n"
                 mirror photogs_dir
+                break
+                ;;
+            "YouTube",*|*,"YouTube")
+                printf "======================================================\n\n"
+                mirror youtube
                 break
                 ;;
             *)
