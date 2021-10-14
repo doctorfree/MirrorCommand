@@ -48,7 +48,7 @@ export DISPLAY=:0
 CONFDIR="${MM}/config"
 # MagicMirror configuration files organized into subdirectories listed here
 CONF_SUBDIRS="Artists JAV Models Photographers YouTube"
-#
+MMCFMSG="MagicMirror configuration file"
 SLISDIR="${MM}/modules/MMM-BackgroundSlideshow/pics"
 ARTISTDIR="Pictures/Artists-ALL"
 JAVDIR="Pictures/JAV-ALL"
@@ -87,7 +87,7 @@ check_config() {
         for config in config-*.js
         do
             [ "$config" == "config-*.js" ] && {
-                echo "No MagicMirror configuration files config-*.js found in $CONFDIR"
+                echo "No ${MMCFMSG}s config-*.js found in $CONFDIR"
                 continue
             }
             rm -f config.js
@@ -197,7 +197,7 @@ list_mods() {
         else
             if [ "$1" == "configs" ]
             then
-                printf "\n${BOLD}Listing MagicMirror configuration files:${NORMAL}\n\n"
+                printf "\n${BOLD}Listing ${MMCFMSG}s:${NORMAL}\n\n"
                 ls config-*.js
                 for confdir in __none__ ${CONF_SUBDIRS}
                 do
@@ -1057,13 +1057,13 @@ select_configuration() {
             *)
                 if [ -f config-${opt}.js ]
                 then
-                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
+                    printf "\nInstalling config-${opt}.js ${MMCFMSG}\n"
                     setconf ${opt}
                     break
                 else
                     if [ -f config-${REPLY}.js ]
                     then
-                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
+                        printf "\nInstalling config-${REPLY}.js ${MMCFMSG}\n"
                         setconf ${REPLY}
                         break
                     else
@@ -1172,7 +1172,7 @@ select_subdir() {
             "ALL",*|*,"ALL")
                 if [ -f config-${SUBDIR}.js ]
                 then
-                    printf "\nInstalling config-${SUBDIR}.js MagicMirror configuration file\n"
+                    printf "\nInstalling config-${SUBDIR}.js ${MMCFMSG}\n"
                     setconf ${SUBDIR}
                     break
                 else
@@ -1184,13 +1184,13 @@ select_subdir() {
             *)
                 if [ -f ${SUBDIR}/config-${opt}.js ]
                 then
-                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
+                    printf "\nInstalling config-${opt}.js ${MMCFMSG}\n"
                     setconf ${opt} ${SUBDIR}
                     break
                 else
                     if [ -f ${SUBDIR}/config-${REPLY}.js ]
                     then
-                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
+                        printf "\nInstalling config-${REPLY}.js ${MMCFMSG}\n"
                         setconf ${REPLY} ${SUBDIR}
                         break
                     else
@@ -1276,53 +1276,65 @@ select_youtube() {
                 ;;
             "Babymetal",*|*,"Babymetal")
                 setconf babymetal YouTube
+                break
                 ;;
             "David_Bowie",*|*,"David_Bowie")
                 setconf bowie YouTube
+                break
                 ;;
             "Deep_Purple",*|*,"Deep_Purple")
                 setconf deeppurple YouTube
+                break
                 ;;
             "Dua_Lipa",*|*,"Dua_Lipa")
                 setconf dualipa YouTube
+                break
                 ;;
             "Fractals",*|*,"Fractals")
                 setconf fractalplaylist YouTube
+                break
                 ;;
             "K-Pop",*|*,"K-Pop")
                 setconf kpop YouTube
+                break
                 ;;
             "Organ_Performances",*|*,"Organ_Performances")
                 setconf organ YouTube
+                break
                 ;;
             "Queens_of_the_Stone_Age",*|*,"Queens_of_the_Stone_Age")
                 setconf qotsa YouTube
+                break
                 ;;
             "Rufus_Wainwright",*|*,"Rufus_Wainwright")
                 setconf rufus YouTube
+                break
                 ;;
             "TV_Opening_Themes",*|*,"TV_Opening_Themes")
                 setconf tvthemes YouTube
+                break
                 ;;
             "ZHU",*|*,"ZHU")
                 setconf zhu YouTube
+                break
                 ;;
             *)
                 if [ -f YouTube/config-${opt}.js ]
                 then
-                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
-                    setconf ${opt} YouTube
-                    break
+                  printf "\nInstalling config-${opt}.js ${MMCFMSG}\n"
+                  setconf ${opt} YouTube
+                  break
                 else
-                    if [ -f YouTube/config-${REPLY}.js ]
-                    then
-                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
-                        setconf ${REPLY} YouTube
-                        break
-                    else
-                        printf "\nInvalid entry. Please try again"
-                        printf "\nEnter either a number or text of one of the menu entries\n"
-                    fi
+                  if [ -f YouTube/config-${REPLY}.js ]
+                  then
+                    printf "\nInstalling config-${REPLY}.js ${MMCFMSG}\n"
+                    setconf ${REPLY} YouTube
+                    break
+                  else
+                    printf "\nInvalid entry. Please try again"
+                    printf "\nEnter either a number or text of one of the menu entries\n"
+                    break
+                  fi
                 fi
                 ;;
         esac
