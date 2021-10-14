@@ -239,14 +239,16 @@ screen_control() {
         else
           if [ "$1" == "status" ] || [ "$1" == "info" ]
           then
-            mirror info screen
+            INFO="screen"
+            system_info
           else
             usage
           fi
         fi
       fi
     else
-      mirror info screen
+      INFO="screen"
+      system_info
     fi
 }
 
@@ -499,7 +501,7 @@ model_remove() {
         rm -rf "${PICDIR}"
     }
     rm -f "${CONFDIR}/Models/config-${PICDIR}.js"
-    mirror default
+    set_config default
 }
 
 artist_create() {
@@ -553,7 +555,7 @@ artist_remove() {
         rm -rf "${PICDIR}"
     }
     rm -f "${CONFDIR}/Artists/config-${PICDIR}.js"
-    mirror default
+    set_config default
 }
 
 jav_create() {
@@ -607,7 +609,7 @@ jav_remove() {
         rm -rf "${PICDIR}"
     }
     rm -f "${CONFDIR}/JAV/config-${PICDIR}.js"
-    mirror default
+    set_config default
 }
 
 photo_create() {
@@ -661,7 +663,7 @@ photo_remove() {
         rm -rf "${PICDIR}"
     }
     rm -f "${CONFDIR}/Photographers/config-${PICDIR}.js"
-    mirror default
+    set_config default
 }
 
 wh_create() {
@@ -720,7 +722,7 @@ wh_create() {
           printf "\nCould not find identify command. Install ImageMagick"
           printf "\nSkipping removal of landscape photos\n"
         fi
-        mirror ${PICDIR}
+        set_config ${PICDIR}
     else
         printf "\nFolder argument ${WHVNDIR}/${PICDIR} does not exist or is not a directory."
         usage
@@ -739,7 +741,7 @@ wh_remove() {
         rm -rf "${PICDIR}"
     }
     rm -f "${CONFDIR}/config-${PICDIR}.js"
-    mirror default
+    set_config default
 }
 
 usage() {
@@ -971,7 +973,7 @@ get_info_type() {
                 break
                 ;;
             "quit",*|*,"quit")
-                exit 0
+                return 9
                 ;;
             "all",*|*,"all")
                 INFO="all"
@@ -1019,6 +1021,482 @@ get_info_type() {
                 ;;
         esac
     done
+    return 0
+}
+
+select_configuration() {
+    getconfs select
+    PS3="${BOLD}Please enter your MagicMirror configuration choice (numeric or text): ${NORMAL}"
+    options=(${CONFS} back quit)
+    select opt in "${options[@]}"
+    do
+        case "$opt,$REPLY" in
+            "back",*|*,"back")
+                printf "\nReturning\n"
+                break
+                ;;
+            "quit",*|*,"quit")
+                printf "\nExiting\n"
+                return 9
+                ;;
+            "Artists",*|*,"Artists")
+                printf "======================================================\n\n"
+                select_artist
+                [ $? -eq 9 ] && exit 0
+                break
+                ;;
+            "JAV",*|*,"JAV")
+                printf "======================================================\n\n"
+                select_javidol
+                [ $? -eq 9 ] && exit 0
+                break
+                ;;
+            "Models",*|*,"Models")
+                printf "======================================================\n\n"
+                select_model
+                [ $? -eq 9 ] && exit 0
+                break
+                ;;
+            "Photographers",*|*,"Photographers")
+                printf "======================================================\n\n"
+                select_photographer
+                [ $? -eq 9 ] && exit 0
+                break
+                ;;
+            "YouTube",*|*,"YouTube")
+                printf "======================================================\n\n"
+                select_youtube
+                [ $? -eq 9 ] && exit 0
+                break
+                ;;
+            *)
+                if [ -f config-${opt}.js ]
+                then
+                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
+                    setconf ${opt}
+                    break
+                else
+                    if [ -f config-${REPLY}.js ]
+                    then
+                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
+                        setconf ${REPLY}
+                        break
+                    else
+                        printf "\nInvalid entry. Please try again"
+                        printf "\nEnter either a number or text of one of the menu entries\n"
+                    fi
+                fi
+                ;;
+        esac
+    done
+    return 0
+}
+
+select_playback() {
+    PS3="${BOLD}Please enter your MagicMirror video playback choice (numeric or text): ${NORMAL}"
+    options=("Play video" "Pause video" "Replay video" "Next video" "Hide video" "Show video" "Main menu")
+    select opt in "${options[@]}"
+    do
+        case "$opt,$REPLY" in
+            "Quit",*|*,"Quit"|"quit",*|*,"quit")
+                printf "\nExiting\n"
+                return 9
+                ;;
+            "Main menu",*|*,"Main menu"|"Quit",*|*,"Quit"|"quit",*|*,"quit")
+                printf "\nReturning to main menu\n"
+                break
+                ;;
+            "Play video",*|*,"Play video")
+                printf "======================================================\n\n"
+                toggle_videoplay
+                break
+                ;;
+            "Pause video",*|*,"Pause video")
+                printf "======================================================\n\n"
+                toggle_videoplay
+                break
+                ;;
+            "Replay video",*|*,"Replay video")
+                printf "======================================================\n\n"
+                replay_video
+                break
+                ;;
+            "Next video",*|*,"Next video")
+                printf "======================================================\n\n"
+                next_video
+                break
+                ;;
+            "Hide video",*|*,"Hide video")
+                printf "======================================================\n\n"
+                hide_video
+                break
+                ;;
+            "Show video",*|*,"Show video")
+                printf "======================================================\n\n"
+                show_video
+                break
+                ;;
+            *)
+                printf "\nInvalid entry. Please try again"
+                printf "\nEnter either a number or text of one of the menu entries\n"
+                ;;
+        esac
+        REPLY=
+    done
+    return 0
+}
+
+select_artist() {
+  if [ -d "${SLISDIR}/Artists" ]
+  then
+    cd "${SLISDIR}/Artists"
+    for i in *
+    do
+        [ "$i" == "*" ] && continue
+        ARTS="${ARTS} $i"
+    done
+
+    cd "${CONFDIR}"
+    PS3="${BOLD}Enter your MagicMirror artist choice (numeric or text): ${NORMAL}"
+    options=(ALL ${ARTS} back quit)
+    select opt in "${options[@]}"
+    do
+        case "$opt,$REPLY" in
+            "back",*|*,"back")
+                printf "\nReturning\n"
+                break
+                ;;
+            "quit",*|*,"quit")
+                printf "\nExiting\n"
+                return 9
+                ;;
+            "ALL",*|*,"ALL")
+                if [ -f config-Artists.js ]
+                then
+                    printf "\nInstalling config-Artists.js MagicMirror configuration file\n"
+                    setconf Artists
+                    break
+                else
+                    printf "\nInvalid entry. Please try again"
+                    printf "\nEnter either a number or text of one of the menu entries\n"
+                fi
+                ;;
+            *)
+                if [ -f Artists/config-${opt}.js ]
+                then
+                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
+                    setconf ${opt} Artists
+                    break
+                else
+                    if [ -f Artists/config-${REPLY}.js ]
+                    then
+                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
+                        setconf ${REPLY} Artists
+                        break
+                    else
+                        printf "\nInvalid entry. Please try again"
+                        printf "\nEnter either a number or text of one of the menu entries\n"
+                    fi
+                fi
+                ;;
+        esac
+    done
+  else
+    echo "${SLISDIR}/Artists does not exist or is not a directory. Skipping."
+  fi
+  return 0
+}
+
+select_javidol() {
+  if [ -d "${SLISDIR}/JAV" ]
+  then
+    cd "${SLISDIR}/JAV"
+    for i in *
+    do
+        [ "$i" == "*" ] && continue
+        JAVS="${JAVS} $i"
+    done
+
+    cd "${CONFDIR}"
+    PS3="${BOLD}Enter your MagicMirror JAV Idol choice (numeric or text): ${NORMAL}"
+    options=(ALL ${JAVS} back quit)
+    select opt in "${options[@]}"
+    do
+        case "$opt,$REPLY" in
+            "back",*|*,"back")
+                printf "\nReturning\n"
+                break
+                ;;
+            "quit",*|*,"quit")
+                printf "\nExiting\n"
+                return 9
+                ;;
+            "ALL",*|*,"ALL")
+                if [ -f config-JAV.js ]
+                then
+                    printf "\nInstalling config-JAV.js MagicMirror configuration file\n"
+                    setconf JAV
+                    break
+                else
+                    printf "\nInvalid entry. Please try again"
+                    printf "\nEnter either a number or text of one of the menu entries\n"
+                fi
+                ;;
+            *)
+                if [ -f JAV/config-${opt}.js ]
+                then
+                    printf "\nInstalling JAV/config-${opt}.js MagicMirror configuration file\n"
+                    setconf ${opt} JAV
+                    break
+                else
+                    if [ -f JAV/config-${REPLY}.js ]
+                    then
+                        printf "\nInstalling JAV/config-${REPLY}.js MagicMirror configuration file\n"
+                        setconf ${REPLY} JAV
+                        break
+                    else
+                        printf "\nInvalid entry. Please try again"
+                        printf "\nEnter either a number or text of one of the menu entries\n"
+                    fi
+                fi
+                ;;
+        esac
+    done
+  else
+    echo "${SLISDIR}/JAV does not exist or is not a directory. Skipping."
+  fi
+  return 0
+}
+
+select_model() {
+  if [ -d "${SLISDIR}/Models" ]
+  then
+    cd "${SLISDIR}/Models"
+    for i in *
+    do
+        [ "$i" == "*" ] && continue
+        BACKS="${BACKS} $i"
+    done
+
+    cd "${CONFDIR}"
+    PS3="${BOLD}Enter your MagicMirror model choice (numeric or text): ${NORMAL}"
+    options=(ALL ${BACKS} back quit)
+    select opt in "${options[@]}"
+    do
+        case "$opt,$REPLY" in
+            "back",*|*,"back")
+                printf "\nReturning\n"
+                break
+                ;;
+            "quit",*|*,"quit")
+                printf "\nExiting\n"
+                return 9
+                ;;
+            "ALL",*|*,"ALL")
+                if [ -f config-Models.js ]
+                then
+                    printf "\nInstalling config-Models.js MagicMirror configuration file\n"
+                    setconf Models
+                    break
+                else
+                    printf "\nInvalid entry. Please try again"
+                    printf "\nEnter either a number or text of one of the menu entries\n"
+                fi
+                ;;
+            *)
+                if [ -f Models/config-${opt}.js ]
+                then
+                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
+                    setconf ${opt} Models
+                    break
+                else
+                    if [ -f Models/config-${REPLY}.js ]
+                    then
+                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
+                        setconf ${REPLY} Models
+                        break
+                    else
+                        printf "\nInvalid entry. Please try again"
+                        printf "\nEnter either a number or text of one of the menu entries\n"
+                    fi
+                fi
+                ;;
+        esac
+    done
+  else
+    echo "${SLISDIR}/Models does not exist or is not a directory. Skipping."
+  fi
+  return 0
+}
+
+select_photographer() {
+  if [ -d "${SLISDIR}/Photographers" ]
+  then
+    cd "${SLISDIR}/Photographers"
+    for i in *
+    do
+        [ "$i" == "*" ] && continue
+        PHOTS="${PHOTS} $i"
+    done
+
+    cd "${CONFDIR}"
+    PS3="${BOLD}Enter your MagicMirror photographer choice (numeric or text): ${NORMAL}"
+    options=(ALL ${PHOTS} back quit)
+    select opt in "${options[@]}"
+    do
+        case "$opt,$REPLY" in
+            "back",*|*,"back")
+                printf "\nReturning\n"
+                break
+                ;;
+            "quit",*|*,"quit")
+                printf "\nExiting\n"
+                return 9
+                ;;
+            "ALL",*|*,"ALL")
+                if [ -f config-Photographers.js ]
+                then
+                    printf "\nInstalling config-Photographers.js MagicMirror configuration file\n"
+                    setconf Photographers
+                    break
+                else
+                    printf "\nInvalid entry. Please try again"
+                    printf "\nEnter either a number or text of one of the menu entries\n"
+                fi
+                ;;
+            *)
+                if [ -f Photographers/config-${opt}.js ]
+                then
+                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
+                    setconf ${opt} Photographers
+                    break
+                else
+                    if [ -f Photographers/config-${REPLY}.js ]
+                    then
+                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
+                        setconf ${REPLY} Photographers
+                        break
+                    else
+                        printf "\nInvalid entry. Please try again"
+                        printf "\nEnter either a number or text of one of the menu entries\n"
+                    fi
+                fi
+                ;;
+        esac
+    done
+  else
+    echo "${SLISDIR}/Models does not exist or is not a directory. Skipping."
+  fi
+  return 0
+}
+
+select_youtube() {
+  if [ -d "${CONFDIR}/YouTube" ]
+  then
+    cd "${CONFDIR}/YouTube"
+    for i in config-*.js
+    do
+        [ "$i" == "config-*.js" ] && continue
+        j=`echo $i | sed -e "s/config-//" -e "s/.js//"`
+        case "$j" in
+            "deeppurple")
+                TUBS="${TUBS} Deep_Purple"
+                ;;
+            "dualipa")
+                TUBS="${TUBS} Dua_Lipa"
+                ;;
+            "fractalplaylist")
+                TUBS="${TUBS} Fractals"
+                ;;
+            "kpop")
+                TUBS="${TUBS} K-Pop"
+                ;;
+            "organ")
+                TUBS="${TUBS} Organ_Performances"
+                ;;
+            "qotsa")
+                TUBS="${TUBS} Queens_of_the_Stone_Age"
+                ;;
+            "rufus")
+                TUBS="${TUBS} Rufus_Wainwright"
+                ;;
+            "tvthemes")
+                TUBS="${TUBS} TV_Opening_Themes"
+                ;;
+            "zhu")
+                TUBS="${TUBS} ZHU"
+                ;;
+            *)
+                TUBS="${TUBS} $j"
+                ;;
+        esac
+    done
+
+    cd "${CONFDIR}"
+    PS3="${BOLD}Enter your MagicMirror YouTube choice (numeric or text): ${NORMAL}"
+    options=(${TUBS} back quit)
+    select opt in "${options[@]}"
+    do
+        case "$opt,$REPLY" in
+            "back",*|*,"back")
+                printf "\nReturning\n"
+                break
+                ;;
+            "quit",*|*,"quit")
+                printf "\nExiting\n"
+                return 9
+                ;;
+            "Deep_Purple",*|*,"Deep_Purple")
+                setconf deeppurple YouTube
+                ;;
+            "Dua_Lipa",*|*,"Dua_Lipa")
+                setconf dualipa YouTube
+                ;;
+            "Fractals",*|*,"Fractals")
+                setconf fractalplaylist YouTube
+                ;;
+            "K-Pop",*|*,"K-Pop")
+                setconf kpop YouTube
+                ;;
+            "Organ_Performances",*|*,"Organ_Performances")
+                setconf organ YouTube
+                ;;
+            "Queens_of_the_Stone_Age",*|*,"Queens_of_the_Stone_Age")
+                setconf qotsa YouTube
+                ;;
+            "Rufus_Wainwright",*|*,"Rufus_Wainwright")
+                setconf rufus YouTube
+                ;;
+            "TV_Opening_Themes",*|*,"TV_Opening_Themes")
+                setconf tvthemes YouTube
+                ;;
+            "ZHU",*|*,"ZHU")
+                setconf zhu YouTube
+                ;;
+            *)
+                if [ -f YouTube/config-${opt}.js ]
+                then
+                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
+                    setconf ${opt} YouTube
+                    break
+                else
+                    if [ -f YouTube/config-${REPLY}.js ]
+                    then
+                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
+                        setconf ${REPLY} YouTube
+                        break
+                    else
+                        printf "\nInvalid entry. Please try again"
+                        printf "\nEnter either a number or text of one of the menu entries\n"
+                    fi
+                fi
+                ;;
+        esac
+    done
+  else
+    echo "${CONFDIR}/YouTube does not exist or is not a directory. Skipping."
+  fi
+  return 0
 }
 
 # If invoked with no arguments present a menu of options to select from
@@ -1031,30 +1509,31 @@ get_info_type() {
     do
         case "$opt,$REPLY" in
             "debug mode",*|*,"debug mode")
-                mirror dev
+                start_dev
                 break
                 ;;
             "list active modules",*|*,"list active modules")
-                mirror list active
+                list_mods active
                 break
                 ;;
             "list installed modules",*|*,"list installed modules")
-                mirror list installed
+                list_mods installed
                 break
                 ;;
             "list configurations",*|*,"list configurations")
                 printf "\n======================================================\n"
-                mirror list configs
+                list_mods configs
                 printf "\n======================================================\n"
                 break
                 ;;
             "select configuration",*|*,"select configuration")
                 printf "======================================================\n\n"
-                mirror select
+                select_configuration
+                [ $? -eq 9 ] && exit 0
                 break
                 ;;
             "get brightness",*|*,"get brightness")
-                mirror getb
+                get_brightness
                 break
                 ;;
             "set brightness",*|*,"set brightness")
@@ -1099,6 +1578,7 @@ get_info_type() {
                 ;;
             "system info",*|*,"system info")
                 get_info_type
+                [ $? -eq 9 ] && exit 0
                 break
                 ;;
             "start",*|*,"start")
@@ -1127,7 +1607,8 @@ get_info_type() {
                 ;;
             "video playback",*|*,"video playback")
                 printf "======================================================\n\n"
-                mirror videoplayback
+                select_playback
+                [ $? -eq 9 ] && exit 0
                 break
                 ;;
             "quit",*|*,"quit")
@@ -1254,433 +1735,31 @@ done
 shift $(( OPTIND - 1 ))
 
 [ "$1" == "youtube" ] && {
-  if [ -d "${CONFDIR}/YouTube" ]
-  then
-    cd "${CONFDIR}/YouTube"
-    for i in config-*.js
-    do
-        [ "$i" == "config-*.js" ] && continue
-        j=`echo $i | sed -e "s/config-//" -e "s/.js//"`
-        case "$j" in
-            "dualipa")
-                TUBS="${TUBS} Dua_Lipa"
-                ;;
-            "fractalplaylist")
-                TUBS="${TUBS} Fractals"
-                ;;
-            "kpop")
-                TUBS="${TUBS} K-Pop"
-                ;;
-            "qotsa")
-                TUBS="${TUBS} QOTSA"
-                ;;
-            "rufus")
-                TUBS="${TUBS} Rufus_Wainwright"
-                ;;
-            "tvthemes")
-                TUBS="${TUBS} TV_Themes"
-                ;;
-            "zhu")
-                TUBS="${TUBS} ZHU"
-                ;;
-            *)
-                TUBS="${TUBS} $j"
-                ;;
-        esac
-    done
-
-    cd "${CONFDIR}"
-    PS3="${BOLD}Enter your MagicMirror YouTube choice (numeric or text): ${NORMAL}"
-    options=(${TUBS} quit)
-    select opt in "${options[@]}"
-    do
-        case "$opt,$REPLY" in
-            "quit",*|*,"quit")
-                printf "\nExiting\n"
-                exit 0
-                ;;
-            "Dua_Lipa",*|*,"Dua_Lipa")
-                setconf dualipa YouTube
-                ;;
-            "Fractals",*|*,"Fractals")
-                setconf fractalplaylist YouTube
-                ;;
-            "K-Pop",*|*,"K-Pop")
-                setconf kpop YouTube
-                ;;
-            "QOTSA",*|*,"QOTSA")
-                setconf qotsa YouTube
-                ;;
-            "Rufus_Wainwright",*|*,"Rufus_Wainwright")
-                setconf rufus YouTube
-                ;;
-            "TV_Themes",*|*,"TV_Themes")
-                setconf tvthemes YouTube
-                ;;
-            "ZHU",*|*,"ZHU")
-                setconf zhu YouTube
-                ;;
-            *)
-                if [ -f YouTube/config-${opt}.js ]
-                then
-                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
-                    setconf ${opt} YouTube
-                    break
-                else
-                    if [ -f YouTube/config-${REPLY}.js ]
-                    then
-                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
-                        setconf ${REPLY} YouTube
-                        break
-                    else
-                        printf "\nInvalid entry. Please try again"
-                        printf "\nEnter either a number or text of one of the menu entries\n"
-                    fi
-                fi
-                ;;
-        esac
-    done
-    exit 0
-  else
-    echo "${CONFDIR}/YouTube does not exist or is not a directory. Skipping."
-  fi
+    select_youtube
 }
 
 [ "$1" == "artists_dir" ] && {
-  if [ -d "${SLISDIR}/Artists" ]
-  then
-    cd "${SLISDIR}/Artists"
-    for i in *
-    do
-        [ "$i" == "*" ] && continue
-        ARTS="${ARTS} $i"
-    done
-
-    cd "${CONFDIR}"
-    PS3="${BOLD}Enter your MagicMirror artist choice (numeric or text): ${NORMAL}"
-    options=(ALL ${ARTS} quit)
-    select opt in "${options[@]}"
-    do
-        case "$opt,$REPLY" in
-            "quit",*|*,"quit")
-                printf "\nExiting\n"
-                exit 0
-                ;;
-            "ALL",*|*,"ALL")
-                if [ -f config-Artists.js ]
-                then
-                    printf "\nInstalling config-Artists.js MagicMirror configuration file\n"
-                    setconf Artists
-                    break
-                else
-                    printf "\nInvalid entry. Please try again"
-                    printf "\nEnter either a number or text of one of the menu entries\n"
-                fi
-                ;;
-            *)
-                if [ -f Artists/config-${opt}.js ]
-                then
-                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
-                    setconf ${opt} Artists
-                    break
-                else
-                    if [ -f Artists/config-${REPLY}.js ]
-                    then
-                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
-                        setconf ${REPLY} Artists
-                        break
-                    else
-                        printf "\nInvalid entry. Please try again"
-                        printf "\nEnter either a number or text of one of the menu entries\n"
-                    fi
-                fi
-                ;;
-        esac
-    done
-    exit 0
-  else
-    echo "${SLISDIR}/Artists does not exist or is not a directory. Skipping."
-  fi
+    select_artist
 }
 
 [ "$1" == "models_dir" ] && {
-  if [ -d "${SLISDIR}/Models" ]
-  then
-    cd "${SLISDIR}/Models"
-    for i in *
-    do
-        [ "$i" == "*" ] && continue
-        BACKS="${BACKS} $i"
-    done
-
-    cd "${CONFDIR}"
-    PS3="${BOLD}Enter your MagicMirror model choice (numeric or text): ${NORMAL}"
-    options=(ALL ${BACKS} quit)
-    select opt in "${options[@]}"
-    do
-        case "$opt,$REPLY" in
-            "quit",*|*,"quit")
-                printf "\nExiting\n"
-                exit 0
-                ;;
-            "ALL",*|*,"ALL")
-                if [ -f config-Models.js ]
-                then
-                    printf "\nInstalling config-Models.js MagicMirror configuration file\n"
-                    setconf Models
-                    break
-                else
-                    printf "\nInvalid entry. Please try again"
-                    printf "\nEnter either a number or text of one of the menu entries\n"
-                fi
-                ;;
-            *)
-                if [ -f Models/config-${opt}.js ]
-                then
-                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
-                    setconf ${opt} Models
-                    break
-                else
-                    if [ -f Models/config-${REPLY}.js ]
-                    then
-                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
-                        setconf ${REPLY} Models
-                        break
-                    else
-                        printf "\nInvalid entry. Please try again"
-                        printf "\nEnter either a number or text of one of the menu entries\n"
-                    fi
-                fi
-                ;;
-        esac
-    done
-    exit 0
-  else
-    echo "${SLISDIR}/Models does not exist or is not a directory. Skipping."
-  fi
+    select_model
 }
 
 [ "$1" == "photogs_dir" ] && {
-  if [ -d "${SLISDIR}/Photographers" ]
-  then
-    cd "${SLISDIR}/Photographers"
-    for i in *
-    do
-        [ "$i" == "*" ] && continue
-        PHOTS="${PHOTS} $i"
-    done
-
-    cd "${CONFDIR}"
-    PS3="${BOLD}Enter your MagicMirror photographer choice (numeric or text): ${NORMAL}"
-    options=(ALL ${PHOTS} quit)
-    select opt in "${options[@]}"
-    do
-        case "$opt,$REPLY" in
-            "quit",*|*,"quit")
-                printf "\nExiting\n"
-                exit 0
-                ;;
-            "ALL",*|*,"ALL")
-                if [ -f config-Photographers.js ]
-                then
-                    printf "\nInstalling config-Photographers.js MagicMirror configuration file\n"
-                    setconf Photographers
-                    break
-                else
-                    printf "\nInvalid entry. Please try again"
-                    printf "\nEnter either a number or text of one of the menu entries\n"
-                fi
-                ;;
-            *)
-                if [ -f Photographers/config-${opt}.js ]
-                then
-                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
-                    setconf ${opt} Photographers
-                    break
-                else
-                    if [ -f Photographers/config-${REPLY}.js ]
-                    then
-                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
-                        setconf ${REPLY} Photographers
-                        break
-                    else
-                        printf "\nInvalid entry. Please try again"
-                        printf "\nEnter either a number or text of one of the menu entries\n"
-                    fi
-                fi
-                ;;
-        esac
-    done
-    exit 0
-  else
-    echo "${SLISDIR}/Models does not exist or is not a directory. Skipping."
-  fi
+    select_photographer
 }
 
 [ "$1" == "jav_idols" ] && {
-  if [ -d "${SLISDIR}/JAV" ]
-  then
-    cd "${SLISDIR}/JAV"
-    for i in *
-    do
-        [ "$i" == "*" ] && continue
-        JAVS="${JAVS} $i"
-    done
-
-    cd "${CONFDIR}"
-    PS3="${BOLD}Enter your MagicMirror JAV Idol choice (numeric or text): ${NORMAL}"
-    options=(ALL ${JAVS} quit)
-    select opt in "${options[@]}"
-    do
-        case "$opt,$REPLY" in
-            "quit",*|*,"quit")
-                printf "\nExiting\n"
-                exit 0
-                ;;
-            "ALL",*|*,"ALL")
-                if [ -f config-JAV.js ]
-                then
-                    printf "\nInstalling config-JAV.js MagicMirror configuration file\n"
-                    setconf JAV
-                    break
-                else
-                    printf "\nInvalid entry. Please try again"
-                    printf "\nEnter either a number or text of one of the menu entries\n"
-                fi
-                ;;
-            *)
-                if [ -f JAV/config-${opt}.js ]
-                then
-                    printf "\nInstalling JAV/config-${opt}.js MagicMirror configuration file\n"
-                    setconf ${opt} JAV
-                    break
-                else
-                    if [ -f JAV/config-${REPLY}.js ]
-                    then
-                        printf "\nInstalling JAV/config-${REPLY}.js MagicMirror configuration file\n"
-                        setconf ${REPLY} JAV
-                        break
-                    else
-                        printf "\nInvalid entry. Please try again"
-                        printf "\nEnter either a number or text of one of the menu entries\n"
-                    fi
-                fi
-                ;;
-        esac
-    done
-    exit 0
-  else
-    echo "${SLISDIR}/JAV does not exist or is not a directory. Skipping."
-  fi
+    select_javidol
 }
 
 [ "$1" == "select" ] && {
-    getconfs select
-    PS3="${BOLD}Please enter your MagicMirror configuration choice (numeric or text): ${NORMAL}"
-    options=(${CONFS} quit)
-    select opt in "${options[@]}"
-    do
-        case "$opt,$REPLY" in
-            "quit",*|*,"quit")
-                printf "\nExiting\n"
-                exit 0
-                ;;
-            "Artists",*|*,"Artists")
-                printf "======================================================\n\n"
-                mirror artists_dir
-                break
-                ;;
-            "JAV",*|*,"JAV")
-                printf "======================================================\n\n"
-                mirror jav_idols
-                break
-                ;;
-            "Models",*|*,"Models")
-                printf "======================================================\n\n"
-                mirror models_dir
-                break
-                ;;
-            "Photographers",*|*,"Photographers")
-                printf "======================================================\n\n"
-                mirror photogs_dir
-                break
-                ;;
-            "YouTube",*|*,"YouTube")
-                printf "======================================================\n\n"
-                mirror youtube
-                break
-                ;;
-            *)
-                if [ -f config-${opt}.js ]
-                then
-                    printf "\nInstalling config-${opt}.js MagicMirror configuration file\n"
-                    setconf ${opt}
-                    break
-                else
-                    if [ -f config-${REPLY}.js ]
-                    then
-                        printf "\nInstalling config-${REPLY}.js MagicMirror configuration file\n"
-                        setconf ${REPLY}
-                        break
-                    else
-                        printf "\nInvalid entry. Please try again"
-                        printf "\nEnter either a number or text of one of the menu entries\n"
-                    fi
-                fi
-                ;;
-        esac
-    done
-    exit 0
+    select_configuration
 }
 
 [ "$1" == "videoplayback" ] && {
-    PS3="${BOLD}Please enter your MagicMirror video playback choice (numeric or text): ${NORMAL}"
-    options=("Play video" "Pause video" "Replay video" "Next video" "Hide video" "Show video" "Main menu")
-    select opt in "${options[@]}"
-    do
-        case "$opt,$REPLY" in
-            "Main menu",*|*,"Main menu"|"Quit",*|*,"Quit"|"quit",*|*,"quit")
-                printf "\nReturning to main menu\n"
-                exit 0
-                ;;
-            "Play video",*|*,"Play video")
-                printf "======================================================\n\n"
-                toggle_videoplay
-                #break
-                ;;
-            "Pause video",*|*,"Pause video")
-                printf "======================================================\n\n"
-                toggle_videoplay
-                #break
-                ;;
-            "Replay video",*|*,"Replay video")
-                printf "======================================================\n\n"
-                replay_video
-                #break
-                ;;
-            "Next video",*|*,"Next video")
-                printf "======================================================\n\n"
-                next_video
-                #break
-                ;;
-            "Hide video",*|*,"Hide video")
-                printf "======================================================\n\n"
-                hide_video
-                #break
-                ;;
-            "Show video",*|*,"Show video")
-                printf "======================================================\n\n"
-                show_video
-                #break
-                ;;
-            *)
-                printf "\nInvalid entry. Please try again"
-                printf "\nEnter either a number or text of one of the menu entries\n"
-                ;;
-        esac
-        REPLY=
-    done
-    exit 0
+    select_playback
 }
 
 [ "$1" == "dev" ] && {
