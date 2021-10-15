@@ -1,8 +1,10 @@
 #!/bin/bash
 #
 # Volume control script copied from https://dronkert.nl/rpi/vol.html
-# Modified to accept card number, mode, and mute/restore arguments
-# - No need to calculate percentage, use ##% format to specify a percentage
+# Modified by Ronald Joe Record to:
+#    - accept card number, quiet mode
+#    - mute/unmute/save/restore volume
+#    - No need to calculate percentage, use ##% format to specify a percentage
 #
 # Usage:
 # vol       Outputs the current volume as a number between 0 and 100
@@ -11,15 +13,20 @@
 # vol 85    Set the volume to 85%
 # vol -c 2 ...    Get/Set volume on card number 2
 # vol -q    Quiet mode
-# vol -m    Mute volume
+# vol -m    Mute/Unmute volume
 # vol -r    Restore volume to previous level setting
+# vol -s    Save current volume setting
 
 MIXER=amixer
+MIRROR_VOLUME=$HOME/.mirror_volume
+
 # Set this to the card number you wish to control by default
 # Use 'aplay -l' to get a listing of the supported cards
 # Use 'vol -c # ..." to specify an alternate card on the command line
 CARD=1
 MUTE=
+REST=
+SAVE=
 VERB=1
 # Adjust these to your preference
 declare -i LO=0     # Minimum volume; try 10 to avoid complete silence
@@ -28,8 +35,13 @@ declare -i ADJ=3    # Volume adjustment step size
 
 usage ()
 {
-	echo "Usage: `basename $0` [-c cardnumber] [-m] [-q] [-u] [ - | + | N ]" >&2
-	echo "  where N is a whole number percentage between $LO and $HI, inclusive." >&2
+	echo "Usage: `basename $0` [-c cardnumber] [-mqrsu] [ - | + | N ]" >&2
+	echo "  Where N is a whole number percentage between $LO and $HI, inclusive." >&2
+	echo "  -m toggles volume mute/unmute" >&2
+	echo "  -q indicates quiet mode, do not output messages" >&2
+	echo "  -r indicates restore saved volume setting" >&2
+	echo "  -s indicates save current volume setting in ${MIRROR_VOLUME}" >&2
+	echo "  +/- increase/decrease the volume setting by ${ADJ}%" >&2
 	exit 1
 }
 
@@ -39,17 +51,22 @@ if [ -z "$EXE" ]; then
 	exit 2
 fi
 
-while getopts c:mqu flag; do
+while getopts c:mqrsu flag; do
     case $flag in
         c)
             CARD="$OPTARG"
             ;;
         m)
-            # TODO: Get/Save volume setting
             MUTE=1
             ;;
         q)
             VERB=
+            ;;
+        r)
+            REST=1
+            ;;
+        s)
+            SAVE=1
             ;;
         u)
             usage
@@ -58,12 +75,25 @@ while getopts c:mqu flag; do
 done
 shift $(( OPTIND - 1 ))
 
-[ "${VERB}" ] && [ "${MUTE}" ] && echo "Muting volume"
-# TODO: Restore previous volume level from saved setting
-
 # Argument must be one of: empty, -, +, number
 [[ $1 == ?(-|+|+([0-9])) ]] || {
 	[ "${MUTE}" ] || usage
+}
+
+# Restore volume if requested
+[ "${REST}" ] && {
+    if [ -f ${MIRROR_VOLUME} ]
+    then
+        [ "${VERB}" ] && echo "Restoring saved volume setting"
+	    ARG=`cat ${MIRROR_VOLUME}`
+		vol ${ARG}
+    else
+        [ "${VERB}" ] && {
+	        echo "Previous volume setting not saved. Unable to restore volume level."
+	    }
+        exit 1
+    fi
+    exit 0
 }
 
 if [ "${MUTE}" ]
@@ -103,6 +133,31 @@ declare -i ABS=0
 declare -i PCT=0
 (( PCT = 100 * ABS / LEN ))
 
+[ "${SAVE}" ] && {
+    [ "${VERB}" ] && echo "Saving current volume setting = ${PCT}"
+	echo "${PCT}" > ${MIRROR_VOLUME}
+	exit 0
+}
+
+[ "${MUTE}" ] && {
+    if [ ${PCT} -eq ${LO} ]
+	then
+        [ "${VERB}" ] && echo "Unmuting volume"
+		if [ -f ${MIRROR_VOLUME} ]
+		then
+			ARG=`cat ${MIRROR_VOLUME}`
+		else
+            [ "${VERB}" ] && {
+			    echo "Previous volume setting not saved. Restoring to maximum volume"
+			}
+			vol ${HI}
+		    exit 0
+		fi
+	else
+        [ "${VERB}" ] && echo "Muting volume"
+	fi
+}
+
 if [ ! -z "$ARG" ]; then
 
 	declare -i OLD=$PCT
@@ -116,9 +171,8 @@ if [ ! -z "$ARG" ]; then
 	fi
 
 	if [[ "$PCT" != "$OLD" ]]; then
-#		(( ABS = PCT * LEN / 100 ))
-#		(( VAL = MIN + ABS ))
 		$EXE -q cset numid=$CARD -- ${PCT}%
+		[ "${MUTE}" ] || echo "${PCT}" > ${MIRROR_VOLUME}
 	fi
 fi
 
