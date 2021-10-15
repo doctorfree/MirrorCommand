@@ -331,14 +331,38 @@ set_brightness() {
 
 set_volume() {
     [ "$1" ] || {
-        printf "\nNumeric argument required to specify Mirror volume.\n"
+        printf "\nArgument required to specify Mirror volume.\n"
         vol_usage
     }
     havevol=`type -p vol`
     if [ "$havevol" ]
     then
-        echo "Setting MagicMirror volume to $1 percent"
-        vol -q $1
+        case "$1" in
+            "mute")
+                echo "Muting MagicMirror volume"
+                vol -q -m
+                ;;
+            "unmute")
+                echo "Unmuting MagicMirror volume"
+                vol -q -m
+                ;;
+            "save")
+                echo "Saving MagicMirror volume"
+                vol -q -s
+                ;;
+            "restore")
+                echo "Restoring MagicMirror volume"
+                vol -q -r
+                ;;
+            "get")
+                echo "Retrieving MagicMirror volume"
+                vol
+                ;;
+            *)
+                echo "Setting MagicMirror volume to $1 percent"
+                vol -q $1
+                ;;
+        esac
     else
         echo "Cannot locate vol script."
         echo "Install vol.sh from the MirrorCommandLine repository."
@@ -754,9 +778,10 @@ usage() {
     printf " list <active|installed|configs>, rotate [right|left|normal|inverted],"
     printf " artists_dir, models_dir, photogs_dir, youtube, select, restart, screen [on|off|info|status],"
     printf " playvideo, pausevideo, nextvideo, replayvideo, hidevideo, showvideo,"
-    printf " start, stop, status [all], dev, getb, setb <num>, vol <num>, ac <artist>,"
-    printf " ar <artist>, jc <idol>, jr <idol>, mc <model>, mr <model>,"
-    printf " pc <photographer>, pr <photographer>, wh <dir>, whrm <dir>"
+    printf " start, stop, status [all], dev, getb, setb <num>, vol <num>,"
+    printf " vol mute|unmute|save|restore|get, mute, unmute,"
+    printf " ac|ar <artist>, jc|jr <idol>, mc|mr <model>,"
+    printf " pc|pr <photographer>, wh|whrm <dir>"
 
     printf "\n\nor specify a config file to use with one of:"
     printf "\n\t${CONFS}"
@@ -1740,6 +1765,11 @@ shift $(( OPTIND - 1 ))
 
 [ "$1" == "mr" ] && {
     model_remove $2
+    exit 0
+}
+
+[ "$1" == "mute" ] || [ "$1" == "unmute" ] && {
+    set_volume $1
     exit 0
 }
 
