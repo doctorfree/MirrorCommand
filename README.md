@@ -17,7 +17,7 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 The Mirror Command Line project provides scripts to enable
 command line control of the MagicMirror system over a local network.
 
-A frontend Bash script, "mirror", can be installed on your MagicMirror to issue
+A frontend Bash script, `mirror`, can be installed on your MagicMirror to issue
 MagicMirror commands. Currently the command line MagicMirror control scripts
 include support for:
 - Specifying the MagicMirror configuration file to activate
@@ -40,6 +40,7 @@ include support for:
 	- Play next video
 	- Hide video playback module
 	- Show video playback module
+- Control the MagicMirror audio output volume level
 - Get MagicMirror status
 - Auto generation of new MagicMirror configuration files
 - Interactive mode via menu dialogs
@@ -194,8 +195,8 @@ pi@raspberrypi:~ $ mirror
 
 ## Usage
 
-The "mirror" shell script is installed on any system that you want to utilize
-for command line control of your MagicMirror. Remote execution of the "mirror"
+The `mirror` shell script is installed on any system that you want to utilize
+for command line control of your MagicMirror. Remote execution of the `mirror`
 command line script may be accomplished by using the "mm" convenience script on
 a remote system with SSH access to your MagicMirror.
 
