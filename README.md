@@ -195,10 +195,10 @@ pi@raspberrypi:~ $ mirror
 
 ## Usage
 
-The `mirror` shell script is installed on any system that you want to utilize
-for command line control of your MagicMirror. Remote execution of the `mirror`
-command line script may be accomplished by using the "mm" convenience script on
-a remote system with SSH access to your MagicMirror.
+The `mirror` shell script is installed on any MagicMirror system that you want
+to utilize for command line control of your MagicMirror. Remote execution of
+the `mirror` command line script may be accomplished by using the "mm"
+convenience script on a remote system with SSH access to your MagicMirror.
 
 Here is the current output of "mirror -u" which displays a usage message.
 
@@ -251,6 +251,22 @@ Examples:
 	mirror whrm foobar		# Deactivate and remove slideshow in foobar
 	mirror -u		# Display this usage message
 </pre>
+
+## MMM-Remote-Control integration
+
+The `mirror` command line utilities can be integrated into a custom
+[MMM-Remote-Control](https://github.com/Jopyth/MMM-Remote-Control) menu.
+In this way the MMM-Remote-Control module can be extended to perform
+many additional actions including taking a screenshot, rotating the
+display, and controlling playback of video. This can, for example,
+allow you to use your phone to control the MagicMirror while standing
+in front of the mirror, away from your computer. Particularly handy
+for taking screenshots.
+
+The MMM-Remote-Control module provides some documentation on creating
+a custom menu but it is currently incomplete. To add custom commands
+to MMM-Remote-Control using the `mirror` command, see the
+[MMM-Remote-Control Wiki Page](https://gitlab.com/doctorfree/MirrorCommandLine/-/wikis/Remote-Control-Custom-Menu).
 
 ## Contents
 
