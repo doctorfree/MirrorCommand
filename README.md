@@ -10,6 +10,7 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 1. [Installation](#installation)
 1. [Remote Access](#remote-access)
 1. [Usage](#usage)
+1. [MMM-Remote-Control integration](#mmm-remote-control-integration)
 1. [Contents](#contents)
 
 ## Overview
