@@ -43,35 +43,60 @@ var config = {
 	language: "en",
 	timeFormat: 12,
 	units: "imperial",
-	// serverOnly:  true/false/"local" ,
-			     // local for armv6l processors, default 
-			     //   starts serveronly and then starts chrome browser
-			     // false, default for all  NON-armv6l devices
-			     // true, force serveronly mode, because you want to.. no UI on this device
 	
 	modules: [
 		{
 			module: "alert",
 		},
-		// {
-		// 	module: "updatenotification",
-		// 	position: "top_bar"
-		// },
         {
             module: 'MMM-Remote-Control',
             config: {
-                apiKey: 'xxx_Remote-Control-API-Key_xxxxx'
+                apiKey: 'xxx_Remote-Control-API-Key_xxxxx',
+                customCommand: {
+                    shutdownCommand: '/usr/local/bin/shutdown',
+                    rebootCommand: '/usr/local/bin/reboot',
+                    monitorOnCommand: 'vcgencmd display_power 1',
+                    monitorOffCommand: 'vcgencmd display_power 0',
+                    screenshotCommand: '/usr/local/bin/mirror screenshot',
+                    rotateScreenRight: '/usr/local/bin/mirror rotate right',
+                    rotateScreenLeft: '/usr/local/bin/mirror rotate left',
+                    rotateScreenNormal: '/usr/local/bin/mirror rotate normal',
+                    rotateScreenInverted: '/usr/local/bin/mirror rotate inverted',
+                    playVideo: '/usr/local/bin/mirror playvideo',
+                    pauseVideo: '/usr/local/bin/mirror pausevideo',
+                    replayVideo: '/usr/local/bin/mirror replayvideo',
+                    nextVideo: '/usr/local/bin/mirror nextvideo',
+                    hideVideo: '/usr/local/bin/mirror hidevideo',
+                    showVideo: '/usr/local/bin/mirror showvideo',
+                    // Shell command to return status of monitor,
+                    // must return either "HDMI" or "true" if screen is on
+                    // "TV is Off" or "false" if it is off to be recognized
+                    // monitorStatusCommand: '/usr/local/bin/mirror screen status',
+                },
+                showModuleApiMenu: true,
+                secureEndpoints: true,
+                customMenu: "custom_menu.json",
+                // classes: {} // Optional, See "Custom Classes" below
             }
         },
         {
             module: 'MMM-Videoplayer',
             position: 'fullscreen_below',
             config: {
-              videolist: ["/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_0.mp4", "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_1.mp4", "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_2.mp4", "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_3.mp4"],
+              videolist: [
+                  "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_0.mp4",
+                  "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_1.mp4",
+                  "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_2.mp4",
+                  "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_3.mp4"
+              ],
               random: true,
-              autoplay: true, // If set to true, sound (muted by default) has to be muted, otherwise the video will not auto play.
+              // If set to true, sound (muted by default) has to be muted,
+              // otherwise the video will not auto play.
+              autoplay: true,
               muted: false,
-              notification: "VIDEOPLAYER1", // Unique notification string for this player (to be able to play and pause from another modules).
+              // Unique notification string for this player
+              // (to be able to play and pause from another modules).
+              notification: "VIDEOPLAYER1",
             }
          },
         // {

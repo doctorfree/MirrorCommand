@@ -1,0 +1,133 @@
+{
+   "id": "custom",
+   "type": "menu",
+   "icon": "id-card-o",
+   "text": "Mirror Command Line",
+   "items": [{
+         "id": "screenshot",
+         "type": "item",
+         "icon": "dot-circle-o",
+         "text": "Screenshot",
+         "action": "COMMAND",
+         "content": {
+            "command": "screenshotCommand"
+         }
+      },
+      {
+         "id": "rotate",
+         "type": "menu",
+         "menu": "custom",
+         "icon": "bars",
+         "text": "Rotate Screen",
+         "items": [{
+               "id": "rotate-right",
+               "type": "item",
+               "icon": "dot-circle-o",
+               "text": "Rotate Screen Right",
+               "action": "COMMAND",
+               "content": {
+                  "command": "rotateScreenRight"
+               }
+            },
+            {
+               "id": "rotate-left",
+               "type": "item",
+               "icon": "dot-circle-o",
+               "text": "Rotate Screen Left",
+               "action": "COMMAND",
+               "content": {
+                  "command": "rotateScreenLeft"
+               }
+            },
+            {
+               "id": "rotate-normal",
+               "type": "item",
+               "icon": "dot-circle-o",
+               "text": "Rotate Screen Normal",
+               "action": "COMMAND",
+               "content": {
+                  "command": "rotateScreenNormal"
+               }
+            },
+            {
+               "id": "rotate-inverted",
+               "type": "item",
+               "icon": "dot-circle-o",
+               "text": "Rotate Screen Inverted",
+               "action": "COMMAND",
+               "content": {
+                  "command": "rotateScreenInverted"
+               }
+            }
+         ]
+      },
+      {
+         "id": "video",
+         "type": "menu",
+         "menu": "custom",
+         "icon": "bars",
+         "text": "Video Playback",
+         "items": [{
+               "id": "play-video",
+               "type": "item",
+               "icon": "dot-circle-o",
+               "text": "Play Video",
+               "action": "COMMAND",
+               "content": {
+                  "command": "playVideo"
+               }
+            },
+            {
+               "id": "pause-video",
+               "type": "item",
+               "icon": "dot-circle-o",
+               "text": "Pause Video",
+               "action": "COMMAND",
+               "content": {
+                  "command": "pauseVideo"
+               }
+            },
+            {
+               "id": "replay-video",
+               "type": "item",
+               "icon": "dot-circle-o",
+               "text": "Replay Video",
+               "action": "COMMAND",
+               "content": {
+                  "command": "replayVideo"
+               }
+            },
+            {
+               "id": "next-video",
+               "type": "item",
+               "icon": "dot-circle-o",
+               "text": "Next Video",
+               "action": "COMMAND",
+               "content": {
+                  "command": "nextVideo"
+               }
+            },
+            {
+               "id": "hide-video",
+               "type": "item",
+               "icon": "dot-circle-o",
+               "text": "Hide Video",
+               "action": "COMMAND",
+               "content": {
+                  "command": "hideVideo"
+               }
+            },
+            {
+               "id": "show-video",
+               "type": "item",
+               "icon": "dot-circle-o",
+               "text": "Show Video",
+               "action": "COMMAND",
+               "content": {
+                  "command": "showVideo"
+               }
+            }
+         ]
+      }
+   ]
+}
