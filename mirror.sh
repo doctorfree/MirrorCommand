@@ -271,6 +271,7 @@ screen_shot() {
 start_dev() {
     printf "\n${BOLD}Starting MagicMirror in developer mode${NORMAL}\n"
     cd "${MM}"
+    # export ELECTRON_ENABLE_LOGGING=true
     pm2 stop MagicMirror --update-env
     npm start dev
     printf "\n${BOLD}Done${NORMAL}\n"
