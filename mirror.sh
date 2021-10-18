@@ -790,6 +790,9 @@ usage() {
     printf "\n\tconfig-<name>.js"
     printf "\n\nA config filename argument will be resolved into a config filename of the form:"
     printf "\n\tconfig-\$argument.js"
+    printf "\n\nA subdirectory in which to locate the config file can be specified"
+    printf " as the second argument, e.g. 'mirror foo bar' will attempt to use"
+    printf " the config file bar/config-foo.js"
     printf "\n\nArguments can also be specified as follows:"
     printf "\n\t-a <artist>, -A <artist>, -b <brightness>, -B, -c <config>, -d, -i <info>,"
     printf "\n\t-V, -N, -R (toggle video play, play next video, replay video),"
@@ -1794,5 +1797,5 @@ shift $(( OPTIND - 1 ))
     exit 0
 }
 
-[ "$1" ] && set_config $1
+[ "$1" ] && set_config $1 $2
 exit 0
