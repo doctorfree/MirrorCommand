@@ -45,16 +45,19 @@ var config = {
     modules: [
         {
             module: "alert",
-            classes: 'solar stocks fractals',
+            // classes: 'scores solar stocks owls fractals',
+            classes: 'scores solar stocks fractals',
         },
         {
             module: "updatenotification",
             position: "top_bar",
-            classes: 'solar stocks fractals',
+            // classes: 'scores solar stocks owls fractals',
+            classes: 'scores solar stocks fractals',
         },
         {
             module: 'MMM-Remote-Control',
-            classes: 'solar stocks fractals',
+            // classes: 'scores solar stocks owls fractals',
+            classes: 'scores solar stocks fractals',
             config: {
                 apiKey: 'xxx_Remote-Control-API-Key_xxxxx',
                 customCommand: {
@@ -83,7 +86,7 @@ var config = {
             module: "calendar",
             header: "Calendar Events",
             position: "top_left",
-            classes: 'solar stocks',
+            classes: 'scores solar stocks',
             config: {
                 colored: true,
                 maximumNumberOfDays: 7,
@@ -116,7 +119,7 @@ var config = {
         {
 		    module: "weather",
 		    position: "top_right",
-            classes: 'solar stocks',
+            classes: 'scores solar stocks',
 		    config: {
              type: 'current',
              location: "Santa Cruz,United States",
@@ -129,7 +132,7 @@ var config = {
             module: "weather",
             position: "top_right",
             header: "Weather Forecast",
-            classes: 'solar stocks',
+            classes: 'scores solar stocks',
             config: {
 			    type: 'forecast',
                 location: "Santa Cruz,United States",
@@ -138,6 +141,31 @@ var config = {
                 showRainAmount: "true",
                 colored: "true",
                 apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+            }
+        },
+        {
+            module: "newsfeed",
+            position: "top_bar",
+            classes: 'scores',
+            config: {
+                feeds: [
+                    {
+                        title: "Sporting News",
+                        url: "https://www.sportingnews.com/rss"
+                    },
+                    {
+                        title: "Independent ESPN News",
+                        url: "https://www.independent.co.uk/topic/espn/rss"
+                    },
+                    {
+                        title: "Independent Sports News",
+                        url: "https://www.independent.co.uk/sport/rss"
+                    },
+                ],
+                showSourceTitle: true,
+                showPublishDate: true,
+                broadcastNewsFeeds: true,
+                broadcastNewsUpdates: true
             }
         },
         {
@@ -168,7 +196,7 @@ var config = {
         {
             module: 'MMM-Tools',
             position: 'bottom_left',
-            classes: 'solar stocks',
+            classes: 'scores solar stocks',
             config: {
               device : "RPI", // "RPI" is also available
               refresh_interval_ms : 10000,
@@ -193,7 +221,7 @@ var config = {
         {
             module: 'MMM-SystemStats',
             position: "bottom_left",
-            classes: 'solar stocks',
+            classes: 'scores solar stocks',
             config: {
                 updateInterval: 10000, // every 10 seconds
                 align: 'right', // align labels
@@ -205,7 +233,7 @@ var config = {
         {
             module: 'MMM-stocks',
             position: 'bottom_bar',
-            classes: 'solar stocks',
+            classes: 'stocks',
             config: {
               apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
               crypto: 'FILUSDT,ADAUSDT',
@@ -217,7 +245,7 @@ var config = {
         {
 		    module: "MMM-DateOnly",
 		    position: "upper_third",
-            classes: 'solar stocks',
+            classes: 'scores solar stocks',
 		    config: {
                 showWeek: false,
                 dateFormat: "dddd, LLL",
@@ -262,6 +290,25 @@ var config = {
                 conversion: 'USD',
             }
         },
+        // Adding the Owls background slideshow exceeds MMM-Scenes resources?
+        // {
+        //     module: 'MMM-BackgroundSlideshow',
+        //     position: 'fullscreen_below',
+        //     classes: 'owls',
+        //     config: {
+        //         imagePaths: [
+        //             'modules/MMM-BackgroundSlideshow/pics/owls/',
+        //         ],
+        //         slideshowSpeed: 15000, // 15 seconds
+        //         transitionImages: true,
+        //         randomizeImageOrder: true,
+        //         recursiveSubDirectories: true,
+        //         resizeImages: true,
+        //         maxWidth: 1080,
+        //         maxHeight: 1920,
+        //         transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
+        //     }
+        // },
         {
             module: 'MMM-BackgroundSlideshow',
             position: 'fullscreen_below',
@@ -281,10 +328,48 @@ var config = {
             }
         },
         {
+            module: "MMM-MyScoreboard",
+            position: "middle_center",
+            classes: "scores default everyone",
+            header: "Ronnie's Scoreboard",
+            config: {
+              showLeagueSeparators: true,
+              colored: true,
+              viewStyle: "largeLogos",
+              sports: [
+                {
+                  league: "NHL",
+                  teams: ["SJ"],
+                  groups: ["Pacific"]
+                },
+                {
+                  league: "NBA",
+                  teams: ["GS"],
+                  groups: ["Pacific"]
+                },
+                {
+                  league: "MLB",
+                  teams: ["SF", "LAD", "BOS"],
+                  groups: ["NL West"]
+                },
+                {
+                  league: "NFL",
+                  teams: ["OAK", "LAR", "SF", "ARI"],
+                  groups: ["NFC West", "AFC West"]
+                },
+                {
+                  league: "NCAAF",
+                  teams: ["OKLA", "OKST"],
+                  groups: ["Top 25"]
+                }
+              ]
+            }
+        },
+        {
             module: 'MMM-NetworkScanner',
             position: "bottom_right",
             header: "",
-            classes: 'solar stocks',
+            classes: 'scores solar stocks',
             config: {
                 showLastSeen: "true",
                 colored: "true",
@@ -371,10 +456,24 @@ var config = {
         {
           module: 'MMM-Scenes',
           position: 'bottom_center',
-          classes: 'solar stocks fractals',
+          // classes: 'scores solar stocks owls fractals',
+          classes: 'scores solar stocks fractals',
           config: {
             duration: 60000,
             scenario: [
+              {
+                name: 'scores',
+                expelAnimation: 'pageUp',
+                admitAnimation: 'pageRight'
+              },
+              // {
+              //   name: 'owls',
+              //   expelAnimation: 'pageRight',
+              //   admitAnimation: [
+              //     { transform: 'rotate(-360deg) scale(0, 0)', opacity: 0 },
+              //     { transform: 'rotate(360deg) scale(1, 1)', opacity: 1 }
+              //   ]
+              // },
               {
                 name: 'solar',
                 expelAnimation: 'pageLeft',
@@ -395,8 +494,10 @@ var config = {
               },
             ],
             autoLoop: 'infinity',
-            inactiveIndicators: ['①', '②', '③'],
-            activeIndicators: ['❶', '❷', '❸']
+            // inactiveIndicators: ['①', '②', '③', '④', '⑤'],
+            // activeIndicators: ['❶', '❷', '❸', '❹', '❺']
+            inactiveIndicators: ['①', '②', '③', '④'],
+            activeIndicators: ['❶', '❷', '❸', '❹']
           }
         }
     ]
