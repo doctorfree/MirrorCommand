@@ -35,7 +35,7 @@ var config = {
         "10.0.1.85", // Raspberry Pi MagicMirror
         "10.0.1.80", // Raspberry Pi 400
         "10.0.1.69", // iPad Air
-        "10.0.1.76", // iPhone Max Xs
+        "10.0.1.52", // iPhone 12 Mini
         "::ffff:127.0.0.1",
         "::1",
     ],
