@@ -475,25 +475,6 @@ var config = {
                 showDelimiter: true
               }
         },
-        // {
-        //     module: "MMM-COVID-19",
-        //     header: "Coronavirus Daily Update",
-        //     position: "top_bar",
-        //     config: {
-        //       debug:false,
-        //       scanInterval: 1000 * 60 * 60 * 12,
-        //       rotateInterval: 1000 * 5, // 0 means no rotate
-        //       pinned: ["World", "US Total", "California, US", "Mexico"],
-        //       myPosition: {
-        //           latitude: 36.970019,
-        //           longitude: -122.042212,
-        //           metric: "mile"
-        //       },
-        //       reportTimeFormat: "YYYY.MM.DD hh a",
-        //       drawGraph: true,
-        //       logTerritory: false
-        //     }
-        // },
         {
             module: 'MMM-RAIN-RADAR',
             position: 'top_center',
@@ -547,17 +528,25 @@ var config = {
                     [
                         ["MMM-iFrame", "MMM-SystemStats", "MMM-Tools",
                          "MMM-Solar", "mmm-hue-lights", "MMM-NetworkScanner"],
-                        ["calendar", "newsfeed", "MMM-SystemStats", "MMM-Tools",
-                         "MMM-Solar", "mmm-hue-lights", "MMM-NetworkScanner"],
-                        ["MMM-COVID19-SPARKLINE", "newsfeed", "MMM-DateOnly"],
-                        ["MMM-GoogleMapsTraffic", "newsfeed", "MMM-DateOnly"],
-                        ["MMM-CoinMarketCap", "MMM-stocks", "MMM-DateOnly",
-                         "newsfeed"],
-                        ["MMM-RAIN-RADAR", "MMM-DarkSkyForecast", "MMM-DateOnly"],
+
+                        ["weather", "clock", "calendar", "newsfeed",
+                         "MMM-SystemStats", "MMM-Tools", "MMM-Solar",
+                         "mmm-hue-lights", "MMM-NetworkScanner"],
+
+                        ["weather", "clock", "MMM-COVID19-SPARKLINE",
+                         "newsfeed", "MMM-DateOnly"],
+
+                        ["weather", "clock", "MMM-GoogleMapsTraffic",
+                         "newsfeed", "MMM-DateOnly"],
+
+                        ["weather", "clock", "MMM-CoinMarketCap",
+                         "MMM-stocks", "MMM-DateOnly", "newsfeed"],
+
+                        ["weather", "clock", "MMM-RAIN-RADAR",
+                         "MMM-DarkSkyForecast", "MMM-DateOnly"],
                     ],
                 fixed:
-                    ["alert", "clock", "weather",
-                     "updatenotification", "MMM-Remote-Control"],
+                    ["alert", "updatenotification", "MMM-Remote-Control"],
                 rotationTime: 300000, // rotate page every 5 minutes = 5 * 60 * 1000
             }
         },

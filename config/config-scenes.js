@@ -33,19 +33,28 @@ var config = {
     ],
 
     language: "en",
+    locale: 'en-US',
     timeFormat: 12,
     units: "imperial",
+    logLevel: ['INFO', 'LOG', 'WARN', 'ERROR'],
+    // logLevel: ['DEBUG', 'INFO', 'LOG', 'WARN', 'ERROR'],
+    useHttps: false, // Support HTTPS or not, default "false" will use HTTP
+    httpsPrivateKey: '', // HTTPS private key path, only require when useHttps is true
+    httpsCertificate: '', // HTTPS Certificate path, only require when useHttps is true
     
     modules: [
         {
             module: "alert",
+            classes: 'solar stocks fractals',
         },
         {
             module: "updatenotification",
-            position: "top_bar"
+            position: "top_bar",
+            classes: 'solar stocks fractals',
         },
         {
             module: 'MMM-Remote-Control',
+            classes: 'solar stocks fractals',
             config: {
                 apiKey: 'xxx_Remote-Control-API-Key_xxxxx',
                 customCommand: {
@@ -71,27 +80,10 @@ var config = {
             }
         },
         {
-            module: "clock",
-            position: "top_center",
-            config: {
-                dateFormat: "dddd, LLL",
-                displayType: "analog",
-                analogFace: "face-009",
-                analogSize: "200px",
-                displaySeconds: "true",
-                secondsColor: "#BAA3DC",
-                timeFormat: "12",
-                showPeriod: "true",
-                showDate: "true",
-                clockBold: "false",
-                analogPlacement: "top",
-                analogShowDate: "top",
-            }
-        },
-        {
             module: "calendar",
             header: "Calendar Events",
             position: "top_left",
+            classes: 'solar stocks',
             config: {
                 colored: true,
                 maximumNumberOfDays: 7,
@@ -124,6 +116,7 @@ var config = {
         {
 		    module: "weather",
 		    position: "top_right",
+            classes: 'solar stocks',
 		    config: {
              type: 'current',
              location: "Santa Cruz,United States",
@@ -136,6 +129,7 @@ var config = {
             module: "weather",
             position: "top_right",
             header: "Weather Forecast",
+            classes: 'solar stocks',
             config: {
 			    type: 'forecast',
                 location: "Santa Cruz,United States",
@@ -149,6 +143,7 @@ var config = {
         {
             module: "newsfeed",
             position: "top_bar",
+            classes: 'solar stocks',
             config: {
                 feeds: [
                     {
@@ -172,7 +167,8 @@ var config = {
         },
         {
             module: 'MMM-Tools',
-            position: 'bottom_center',
+            position: 'bottom_left',
+            classes: 'solar stocks',
             config: {
               device : "RPI", // "RPI" is also available
               refresh_interval_ms : 10000,
@@ -196,7 +192,8 @@ var config = {
         },
         {
             module: 'MMM-SystemStats',
-            position: "bottom_right",
+            position: "bottom_left",
+            classes: 'solar stocks',
             config: {
                 updateInterval: 10000, // every 10 seconds
                 align: 'right', // align labels
@@ -208,6 +205,7 @@ var config = {
         {
             module: 'MMM-stocks',
             position: 'bottom_bar',
+            classes: 'solar stocks',
             config: {
               apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
               crypto: 'FILUSDT,ADAUSDT',
@@ -217,8 +215,18 @@ var config = {
             }
         },
         {
+		    module: "MMM-DateOnly",
+		    position: "upper_third",
+            classes: 'solar stocks',
+		    config: {
+                showWeek: false,
+                dateFormat: "dddd, LLL",
+		    }
+	    },
+        {
             module: "mmm-hue-lights",
-            position: "top_center",
+            position: "middle_center",
+            classes: 'solar',
             config: {
                 bridgeIp: "10.0.1.20",
                 user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
@@ -226,7 +234,8 @@ var config = {
         },
         {
             module: 'MMM-Solar',
-            position: "top_center",
+            position: "middle_center",
+            classes: 'solar',
             config: {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
@@ -235,9 +244,47 @@ var config = {
             }
         },
         {
+            module: 'MMM-CoinMarketCap',
+            position: "middle_center",
+            classes: 'stocks',
+            header: "Cryptocurrencies",
+            config: {
+                apiKey: 'xxxxx_CoinMarket-API-Key_xxxxxxxxx',
+                currencies: ['ADA', 'FIL', 'The Graph', 'AGIX', 'HNT', 'ICP', 'ETH' ],
+                view: 'graphWithChanges',
+                columns: [ 'logo', 'name', 'priceWithChanges', 'graph' ],
+                fontSize: 'medium',
+                percentChangeColored: true,
+                logoColored: true,
+                graphRange: 7,
+                graphSize: 'medium',
+                graphColored: true,
+                conversion: 'USD',
+            }
+        },
+        {
+            module: 'MMM-BackgroundSlideshow',
+            position: 'fullscreen_below',
+            classes: "fractals",
+            config: {
+                imagePaths: [
+                    'modules/MMM-BackgroundSlideshow/pics/fractals/',
+                ],
+                slideshowSpeed: 15000, // 15 seconds
+                transitionImages: true,
+                randomizeImageOrder: true,
+                recursiveSubDirectories: true,
+                resizeImages: true,
+                maxWidth: 1080,
+                maxHeight: 1920,
+                transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
+            }
+        },
+        {
             module: 'MMM-NetworkScanner',
-            position: "bottom_left",
+            position: "bottom_right",
             header: "",
+            classes: 'solar stocks',
             config: {
                 showLastSeen: "true",
                 colored: "true",
@@ -264,10 +311,6 @@ var config = {
                       color: "#26C6DA " },
                     { macAddress: "b0:6e:bf:2b:3a:f8",
                       name: "Miner (doctor)",
-                      icon: "hammer",
-                      color: "#ffff00"},
-                    { macAddress: "30:85:a9:8d:02:9d",
-                      name: "Miner (vivo)",
                       icon: "hammer",
                       color: "#ffff00"},
                     { macAddress: "4c:cc:6a:27:be:6a",
@@ -322,27 +365,40 @@ var config = {
                       name: "Sony TV",
                       icon: "tv",
                       color: "#26C6DA " },
-                    // { macAddress: "44:d8:84:6b:5f:b3",
-                    //   name: "AirPort Express",
-                    //   icon: "wifi",
-                    //   color: "#81C784" },
-                    // { macAddress: "24:a0:74:79:7f:9f",
-                    //   name: "AirPort Extreme",
-                    //   icon: "network-wired",
-                    //   color: "#81C784" },
                 ],
             },
         },
         {
-            module: 'MMM-pages',
-            config: {
-                modules:
-                    [[ "MMM-Solar"], [ "mmm-hue-lights"]],
-                fixed:
-                    ["alert", "updatenotification", "MMM-Remote-Control", "clock", "calendar", "weather", "newsfeed", "MMM-Tools", "MMM-SystemStats", "MMM-stocks", "MMM-NetworkScanner"],
-                rotationTime: 900000, // rotate page every 15 minutes = 15 * 60 * 1000
-            }
-        },
+          module: 'MMM-Scenes',
+          position: 'bottom_center',
+          classes: 'solar stocks fractals',
+          config: {
+            duration: 60000,
+            scenario: [
+              {
+                name: 'solar',
+                expelAnimation: 'pageLeft',
+                admitAnimation: 'pageDown'
+              },
+              {
+                name: 'fractals',
+                expelAnimation: 'pageRight',
+                admitAnimation: [
+                  { transform: 'rotate(-360deg) scale(0, 0)', opacity: 0 },
+                  { transform: 'rotate(360deg) scale(1, 1)', opacity: 1 }
+                ]
+              },
+              {
+                name: 'stocks',
+                expelAnimation: 'dismissOut',
+                admitAnimation: 'pageDown'
+              },
+            ],
+            autoLoop: 'infinity',
+            inactiveIndicators: ['①', '②', '③'],
+            activeIndicators: ['❶', '❷', '❸']
+          }
+        }
     ]
 };
 

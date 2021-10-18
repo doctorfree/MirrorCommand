@@ -2,8 +2,6 @@
  *
  * By Michael Teeuw http://michaelteeuw.nl
  * Modified by Ron Record http://ronrecord.com
- *     Intended to serve as the default MagicMirror configuration for a display
- *     that is not rotated but oriented normally in landscape mode.
  * MIT Licensed.
  *
  * For more information how you can configurate this file
@@ -64,15 +62,20 @@ var config = {
                     nextVideo: '/usr/local/bin/mirror nextvideo',
                     hideVideo: '/usr/local/bin/mirror hidevideo',
                     showVideo: '/usr/local/bin/mirror showvideo',
+                    // Shell command to return status of monitor,
+                    // must return either "HDMI" or "true" if screen is on
+                    // "TV is Off" or "false" if it is off to be recognized
+                    // monitorStatusCommand: '/usr/local/bin/mirror screen status',
                 },
                 showModuleApiMenu: true,
                 secureEndpoints: true,
                 customMenu: "custom_menu.json",
+                // classes: {} // Optional, See "Custom Classes" below
             }
         },
         {
             module: "clock",
-            position: "top_center",
+            position: "top_left",
             config: {
                 dateFormat: "dddd, LLL",
                 displayType: "analog",
@@ -86,39 +89,6 @@ var config = {
                 clockBold: "false",
                 analogPlacement: "top",
                 analogShowDate: "top",
-            }
-        },
-        {
-            module: "calendar",
-            header: "Calendar Events",
-            position: "top_left",
-            config: {
-                colored: true,
-                maximumNumberOfDays: 7,
-                maximumEntries: 10,
-                showLocation: true,
-                tableClass: "medium",
-                timeFormat: "absolute",
-                nextDaysRelative: true,
-                displaySymbol: true,
-                defaultSymbol: "calendar-alt",
-                calendars: [
-                    {
-                        symbol: "calendar",
-                        color: '#73FF33',
-                        url: "http://localhost:8080/modules/default/calendar/calendars/home.ics"
-                    },
-                    {
-                        symbol: "calendar",
-                        color: '#BAA3DC',
-                        url: "http://localhost:8080/modules/default/calendar/calendars/14D7ECFB-D078-4696-9558-E422AE330A63.ics"
-                    },
-//                  {
-//                      symbol: "calendar",
-//                      color: '#33FFFA',
-//                      url: "http://localhost:8080/modules/default/calendar/calendars/W14D7ECFB-D078-4696-9558-E422AE330A63.ics"
-//                  }
-                ]
             }
         },
         {
@@ -152,16 +122,16 @@ var config = {
             config: {
                 feeds: [
                     {
-                        title: "New York Times",
-                        url: "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+                        title: "Sporting News",
+                        url: "https://www.sportingnews.com/rss"
                     },
                     {
-                        title: "Washington Post",
-                        url: "http://feeds.washingtonpost.com/rss/national"
+                        title: "Independent ESPN News",
+                        url: "https://www.independent.co.uk/topic/espn/rss"
                     },
                     {
-                        title: "Mercury News",
-                        url: "https://www.mercurynews.com/feed"
+                        title: "Independent Sports News",
+                        url: "https://www.independent.co.uk/sport/rss"
                     },
                 ],
                 showSourceTitle: true,
@@ -171,8 +141,19 @@ var config = {
             }
         },
         {
+            module: 'MMM-SystemStats',
+            position: "bottom_left",
+            config: {
+                updateInterval: 10000, // every 10 seconds
+                align: 'right', // align labels
+                header: 'System Stats', // This is optional
+                units: 'imperial', // default, metric, imperial
+                view: 'textAndIcon',
+            }
+        },
+        {
             module: 'MMM-Tools',
-            position: 'bottom_center',
+            position: 'bottom_left',
             config: {
               device : "RPI", // "RPI" is also available
               refresh_interval_ms : 10000,
@@ -195,48 +176,8 @@ var config = {
             }
         },
         {
-            module: 'MMM-SystemStats',
-            position: "bottom_right",
-            config: {
-                updateInterval: 10000, // every 10 seconds
-                align: 'right', // align labels
-                header: 'System Stats', // This is optional
-                units: 'imperial', // default, metric, imperial
-                view: 'textAndIcon',
-            }
-        },
-        {
-            module: 'MMM-stocks',
-            position: 'bottom_bar',
-            config: {
-              apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
-              crypto: 'FILUSDT,ADAUSDT',
-              separator: '&nbsp;&nbsp;•&nbsp;&nbsp;', // separator between stocks
-              stocks: 'CND,ETHO,MIGFX,MSEGX,TRBCX,CGC,AAPL,JOBY', // stock symbols
-              updateInterval: 1000000 // update interval in milliseconds (16:40)
-            }
-        },
-        {
-            module: "mmm-hue-lights",
-            position: "top_center",
-            config: {
-                bridgeIp: "10.0.1.20",
-                user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
-            }
-        },
-        {
-            module: 'MMM-Solar',
-            position: "top_center",
-            config: {
-                apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
-                userId: "Solar-USER-ID",
-                systemId: "Solar-System-ID",
-                basicHeader: "true",
-            }
-        },
-        {
             module: 'MMM-NetworkScanner',
-            position: "bottom_left",
+            position: "bottom_right",
             header: "",
             config: {
                 showLastSeen: "true",
@@ -334,13 +275,41 @@ var config = {
             },
         },
         {
-            module: 'MMM-pages',
+            module: "MMM-MyScoreboard",
+            position: "middle_center",
+            classes: "default everyone",
+            header: "Ronnie's Scoreboard",
             config: {
-                modules:
-                    [[ "MMM-Solar"], [ "mmm-hue-lights"]],
-                fixed:
-                    ["alert", "updatenotification", "MMM-Remote-Control", "clock", "calendar", "weather", "newsfeed", "MMM-Tools", "MMM-SystemStats", "MMM-stocks", "MMM-NetworkScanner"],
-                rotationTime: 900000, // rotate page every 15 minutes = 15 * 60 * 1000
+              showLeagueSeparators: true,
+              colored: true,
+              viewStyle: "largeLogos",
+              sports: [
+                {
+                  league: "NHL",
+                  teams: ["SJ"],
+                  groups: ["Pacific"]
+                },
+                {
+                  league: "NBA",
+                  teams: ["GS"],
+                  groups: ["Pacific"]
+                },
+                {
+                  league: "MLB",
+                  teams: ["SF", "LAD", "BOS"],
+                  groups: ["NL West"]
+                },
+                {
+                  league: "NFL",
+                  teams: ["OAK", "LAR", "SF", "ARI"],
+                  groups: ["NFC West", "AFC West"]
+                },
+                {
+                  league: "NCAAF",
+                  teams: ["OKLA", "OKST"],
+                  groups: ["Top 25"]
+                }
+              ]
             }
         },
     ]
