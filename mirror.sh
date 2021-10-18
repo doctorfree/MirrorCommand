@@ -62,6 +62,7 @@ WHVN_TEMPLATE="${CONFDIR}/Templates/config-whvn-template.js"
 WHVNDIR="Pictures/Wallhaven"
 CONFS=
 SUBDIR_CONFS=
+START_DEV=
 INFO="all"
 BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
@@ -889,7 +890,12 @@ setconf() {
             }
             ;;
     esac
-    pm2 restart MagicMirror --update-env
+    if [ "${START_DEV}" ]
+    then
+        start_dev
+    else
+        pm2 restart MagicMirror --update-env
+    fi
 }
 
 set_config() {
@@ -1522,7 +1528,7 @@ while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
           set_config ${OPTARG}
           ;;
         d)
-          start_dev
+          START_DEV=1
           ;;
         h)
           show_video
@@ -1655,9 +1661,14 @@ shift $(( OPTIND - 1 ))
 }
 
 [ "$1" == "restart" ] && {
-    printf "\n${BOLD}Restarting MagicMirror${NORMAL}\n"
-    pm2 restart MagicMirror --update-env
-    printf "\n${BOLD}Done${NORMAL}\n"
+    if [ "${START_DEV}" ]
+    then
+        start_dev
+    else
+        printf "\n${BOLD}Restarting MagicMirror${NORMAL}\n"
+        pm2 restart MagicMirror --update-env
+        printf "\n${BOLD}Done${NORMAL}\n"
+    fi
     exit 0
 }
 
@@ -1672,9 +1683,14 @@ shift $(( OPTIND - 1 ))
 }
 
 [ "$1" == "start" ] && {
-    printf "\n${BOLD}Starting MagicMirror${NORMAL}\n"
-    pm2 start MagicMirror --update-env
-    printf "\n${BOLD}Done${NORMAL}\n"
+    if [ "${START_DEV}" ]
+    then
+        start_dev
+    else
+        printf "\n${BOLD}Starting MagicMirror${NORMAL}\n"
+        pm2 start MagicMirror --update-env
+        printf "\n${BOLD}Done${NORMAL}\n"
+    fi
     exit 0
 }
 
