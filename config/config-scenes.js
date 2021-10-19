@@ -146,6 +146,31 @@ var config = {
         {
             module: "newsfeed",
             position: "top_bar",
+            classes: 'stocks',
+            config: {
+                feeds: [
+                    {
+                        title: "CoinDesk",
+                        url: "https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml"
+                    },
+                    {
+                        title: "CoinJournal",
+                        url: "https://coinjournal.net/news/tag/usa/feed/"
+                    },
+                    {
+                        title: "CoinTelegraph",
+                        url: "https://cointelegraph.com/rss/tag/altcoin"
+                    },
+                ],
+                showSourceTitle: true,
+                showPublishDate: true,
+                broadcastNewsFeeds: true,
+                broadcastNewsUpdates: true
+            }
+        },
+        {
+            module: "newsfeed",
+            position: "top_bar",
             classes: 'scores',
             config: {
                 feeds: [
@@ -154,8 +179,8 @@ var config = {
                         url: "https://www.sportingnews.com/rss"
                     },
                     {
-                        title: "Independent ESPN News",
-                        url: "https://www.independent.co.uk/topic/espn/rss"
+                        title: "ESPN Sports News",
+                        url: "https://www.espn.com/espn/rss/news"
                     },
                     {
                         title: "Independent Sports News",
@@ -171,7 +196,7 @@ var config = {
         {
             module: "newsfeed",
             position: "top_bar",
-            classes: 'solar stocks',
+            classes: 'solar',
             config: {
                 feeds: [
                     {
@@ -230,18 +255,18 @@ var config = {
                 view: 'textAndIcon',
             }
         },
-        {
-            module: 'MMM-stocks',
-            position: 'bottom_bar',
-            classes: 'stocks',
-            config: {
-              apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
-              crypto: 'FILUSDT,ADAUSDT',
-              separator: '&nbsp;&nbsp;•&nbsp;&nbsp;', // separator between stocks
-              stocks: 'CND,ETHO,MIGFX,MSEGX,TRBCX,CGC,AAPL,JOBY', // stock symbols
-              updateInterval: 1000000 // update interval in milliseconds (16:40)
-            }
-        },
+        // {
+        //     module: 'MMM-stocks',
+        //     position: 'bottom_bar',
+        //     classes: 'stocks',
+        //     config: {
+        //       apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
+        //       crypto: 'FILUSDT,ADAUSDT',
+        //       separator: '&nbsp;&nbsp;•&nbsp;&nbsp;', // separator between stocks
+        //       stocks: 'CND,ETHO,MIGFX,MSEGX,TRBCX,CGC,AAPL,JOBY', // stock symbols
+        //       updateInterval: 1000000 // update interval in milliseconds (16:40)
+        //     }
+        // },
         {
 		    module: "MMM-DateOnly",
 		    position: "upper_third",
@@ -459,7 +484,7 @@ var config = {
           // classes: 'scores solar stocks owls fractals',
           classes: 'scores solar stocks fractals',
           config: {
-            duration: 60000,
+            duration: 300000,
             scenario: [
               {
                 name: 'scores',
