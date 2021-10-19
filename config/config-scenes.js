@@ -45,19 +45,16 @@ var config = {
     modules: [
         {
             module: "alert",
-            // classes: 'scores solar stocks owls fractals',
-            classes: 'scores solar stocks fractals',
+            classes: 'scores solar stocks art',
         },
         {
             module: "updatenotification",
             position: "top_bar",
-            // classes: 'scores solar stocks owls fractals',
-            classes: 'scores solar stocks fractals',
+            classes: 'scores solar stocks art',
         },
         {
             module: 'MMM-Remote-Control',
-            // classes: 'scores solar stocks owls fractals',
-            classes: 'scores solar stocks fractals',
+            classes: 'scores solar stocks art',
             config: {
                 apiKey: 'xxx_Remote-Control-API-Key_xxxxx',
                 customCommand: {
@@ -293,7 +290,7 @@ var config = {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
                 systemId: "Solar-System-ID",
-                basicHeader: "true",
+                // basicHeader: "true",
             }
         },
         {
@@ -315,32 +312,17 @@ var config = {
                 conversion: 'USD',
             }
         },
-        // Adding the Owls background slideshow exceeds MMM-Scenes resources?
-        // {
-        //     module: 'MMM-BackgroundSlideshow',
-        //     position: 'fullscreen_below',
-        //     classes: 'owls',
-        //     config: {
-        //         imagePaths: [
-        //             'modules/MMM-BackgroundSlideshow/pics/owls/',
-        //         ],
-        //         slideshowSpeed: 15000, // 15 seconds
-        //         transitionImages: true,
-        //         randomizeImageOrder: true,
-        //         recursiveSubDirectories: true,
-        //         resizeImages: true,
-        //         maxWidth: 1080,
-        //         maxHeight: 1920,
-        //         transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
-        //     }
-        // },
         {
             module: 'MMM-BackgroundSlideshow',
             position: 'fullscreen_below',
-            classes: "fractals",
+            classes: 'art',
             config: {
                 imagePaths: [
+                    'modules/MMM-BackgroundSlideshow/pics/Art/Kandinsky/',
+                    'modules/MMM-BackgroundSlideshow/pics/Art/Klee/',
                     'modules/MMM-BackgroundSlideshow/pics/fractals/',
+                    'modules/MMM-BackgroundSlideshow/pics/Art/Picasso/',
+                    'modules/MMM-BackgroundSlideshow/pics/Art/Zdzisław_Beksiński/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,
@@ -481,8 +463,7 @@ var config = {
         {
           module: 'MMM-Scenes',
           position: 'bottom_center',
-          // classes: 'scores solar stocks owls fractals',
-          classes: 'scores solar stocks fractals',
+          classes: 'scores solar stocks art',
           config: {
             duration: 300000,
             scenario: [
@@ -491,26 +472,18 @@ var config = {
                 expelAnimation: 'pageUp',
                 admitAnimation: 'pageRight'
               },
-              // {
-              //   name: 'owls',
-              //   expelAnimation: 'pageRight',
-              //   admitAnimation: [
-              //     { transform: 'rotate(-360deg) scale(0, 0)', opacity: 0 },
-              //     { transform: 'rotate(360deg) scale(1, 1)', opacity: 1 }
-              //   ]
-              // },
               {
-                name: 'solar',
-                expelAnimation: 'pageLeft',
-                admitAnimation: 'pageDown'
-              },
-              {
-                name: 'fractals',
+                name: 'art',
                 expelAnimation: 'pageRight',
                 admitAnimation: [
                   { transform: 'rotate(-360deg) scale(0, 0)', opacity: 0 },
                   { transform: 'rotate(360deg) scale(1, 1)', opacity: 1 }
                 ]
+              },
+              {
+                name: 'solar',
+                expelAnimation: 'pageLeft',
+                admitAnimation: 'pageDown'
               },
               {
                 name: 'stocks',
