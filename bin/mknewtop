@@ -1,12 +1,15 @@
 #!/bin/bash
 
-ART="/mnt/transcend/Pictures/MagicMirror"
+UPDSCRIPT="updtop"
 
-[ -d ${ART} ] || {
-    echo "$ART does not exist or is not a directory. Exiting."
+TYPEDIR="/mnt/transcend/Pictures/MagicMirror"
+PICDIR="${HOME}/Pictures"
+
+[ -d ${TYPEDIR} ] || {
+    echo "$TYPEDIR does not exist or is not a directory. Exiting."
     exit 1
 }
-cd ${ART}
+cd ${TYPEDIR}
 for i in $*
 do
     [ -d $i ] && {
@@ -14,5 +17,8 @@ do
         continue
     }
     mkdir $i
-    updtoplinks $i
+    ${UPDSCRIPT} $i
 done
+[ -d ${PICDIR} ] || mkdir -p ${PICDIR}
+cd ${PICDIR}
+ln -s ${TYPEDIR}/$1 .
