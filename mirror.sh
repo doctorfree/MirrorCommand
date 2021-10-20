@@ -61,6 +61,8 @@ PHOTO_TEMPLATE="${CONFDIR}/Templates/config-photo-template.js"
 WHVN_TEMPLATE="${CONFDIR}/Templates/config-whvn-template.js"
 WHVNDIR="Pictures/Wallhaven"
 CONFS=
+PLEASE="Please enter your MagicMirror"
+NUMPROMPT="Enter either a number or text of one of the menu entries"
 SUBDIR_CONFS=
 START_DEV=
 INFO="all"
@@ -1053,7 +1055,7 @@ get_info_type() {
                 ;;
             *)
                 printf "\nInvalid entry. Please try again"
-                printf "\nEnter either a number or text of one of the menu entries\n"
+                printf "\n${NUMPROMPT}\n"
                 ;;
         esac
     done
@@ -1062,7 +1064,7 @@ get_info_type() {
 
 select_configuration() {
     getconfs select
-    PS3="${BOLD}Please enter your MagicMirror configuration choice (numeric or text): ${NORMAL}"
+    PS3="${BOLD}${PLEASE} configuration choice (numeric or text): ${NORMAL}"
     options=(${CONFS} "Main menu" "Quit")
     while true
     do
@@ -1103,7 +1105,7 @@ select_configuration() {
                         break
                     else
                         printf "\nInvalid entry. Please try again"
-                        printf "\nEnter either a number or text of one of the menu entries\n"
+                        printf "\n${NUMPROMPT}\n"
                         break
                     fi
                 fi
@@ -1115,7 +1117,7 @@ select_configuration() {
 }
 
 select_playback() {
-    PS3="${BOLD}Please enter your MagicMirror video playback choice (numeric or text): ${NORMAL}"
+    PS3="${BOLD}${PLEASE} video playback choice (numeric or text): ${NORMAL}"
     options=("Play video" "Pause video" "Replay video" "Next video" "Hide video" "Show video" "Main menu" "Quit")
     while true
     do
@@ -1162,7 +1164,7 @@ select_playback() {
                 ;;
             *)
                 printf "\nInvalid entry. Please try again"
-                printf "\nEnter either a number or text of one of the menu entries\n"
+                printf "\n${NUMPROMPT}\n"
                 break
                 ;;
         esac
@@ -1189,7 +1191,7 @@ select_subdir() {
     done
 
     cd "${CONFDIR}"
-    PS3="${BOLD}Enter your MagicMirror ${SUBDIR} choice (numeric or text): ${NORMAL}"
+    PS3="${BOLD}${PLEASE} ${SUBDIR} choice (numeric or text): ${NORMAL}"
     options=(ALL ${SUBDIR_CONFS} "Main menu" "Quit")
     while true
     do
@@ -1212,7 +1214,7 @@ select_subdir() {
                     break
                 else
                     printf "\nInvalid entry. Please try again"
-                    printf "\nEnter either a number or text of one of the menu entries\n"
+                    printf "\n${NUMPROMPT}\n"
                     break
                 fi
                 ;;
@@ -1230,7 +1232,7 @@ select_subdir() {
                         break
                     else
                         printf "\nInvalid entry. Please try again"
-                        printf "\nEnter either a number or text of one of the menu entries\n"
+                        printf "\n${NUMPROMPT}\n"
                         break
                     fi
                 fi
@@ -1294,7 +1296,7 @@ select_youtube() {
     done
 
     cd "${CONFDIR}"
-    PS3="${BOLD}Enter your MagicMirror YouTube choice (numeric or text): ${NORMAL}"
+    PS3="${BOLD}${PLEASE} YouTube choice (numeric or text): ${NORMAL}"
     options=(${TUBS} "Main menu" "Quit")
     while true
     do
@@ -1367,7 +1369,7 @@ select_youtube() {
                     break
                   else
                     printf "\nInvalid entry. Please try again"
-                    printf "\nEnter either a number or text of one of the menu entries\n"
+                    printf "\n${NUMPROMPT}\n"
                     break
                   fi
                 fi
@@ -1385,7 +1387,7 @@ select_youtube() {
 [ "$1" ] || {
   while true
   do
-    PS3="${BOLD}Please enter your MagicMirror command choice (numeric or text): ${NORMAL}"
+    PS3="${BOLD}${PLEASE} command choice (numeric or text): ${NORMAL}"
     options=("list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "rotate inverted" "restart" "screen off" "screen on" "screenshot" "start" "stop" "status" "status all" "get brightness" "set brightness" "video playback" "system info" "debug mode" "quit")
     select opt in "${options[@]}"
     do
