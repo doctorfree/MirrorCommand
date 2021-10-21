@@ -18,7 +18,7 @@ var config = {
         "0.0.0.0",
         "127.0.0.1",
         "10.0.1.88", // Mac Mini
-        "10.0.1.51", // Mac Pro
+        "10.0.1.204", // iPad
         "10.0.1.57", // Mac Pro
         "10.0.8.130", // Mac Pro over Tunnelblick
         "10.0.1.81", // Roon Core
