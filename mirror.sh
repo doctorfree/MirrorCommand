@@ -936,7 +936,18 @@ set_config() {
     # for sub in ${subdir} Artists Models Photographers JAV
     for sub in __none__ ${subdir} ${CONF_SUBDIRS}
     do
-        [ "${sub}" == "__none__" ] && continue
+        [ "${sub}" == "__none__" ] && {
+            for confname in config-${mode}*.js
+            do
+                [ "${confname}" == "${sub}/config-${mode}*.js" ] && continue
+                [ -f ${confname} ] && {
+                    foundmode=`basename ${confname} | sed -e "s/config-//" -e "s/.js//"`
+                    setconf ${foundmode}
+                    return
+                }
+            done
+            continue
+        }
         for confname in ${sub}/config-${mode}*.js
         do
             [ "${confname}" == "${sub}/config-${mode}*.js" ] && continue
