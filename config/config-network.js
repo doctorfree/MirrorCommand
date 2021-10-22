@@ -110,7 +110,6 @@ var config = {
         },
         {
             module: "mmm-hue-lights",
-            // position: "middle_center",
             position: "upper_third",
             config: {
                 bridgeIp: "10.0.1.20",
@@ -119,8 +118,7 @@ var config = {
         },
         {
             module: 'MMM-Solar',
-            // position: "middle_center",
-            position: "upper_third",
+            position: "bottom_center",
             config: {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
@@ -128,34 +126,6 @@ var config = {
                 basicHeader: "true",
             }
         },
-        // {
-        //     module: "MMM-network-signal",
-        //     position: 'top_center',
-        //     config: {
-        //         // Time in ms between connection tests
-        //         // updateInterval: 5000, // 5 seconds
-        //         updateInterval: 300000, // 5 minutes
-        //         // Maximum timeout in ms for every pings
-        //         maxTimeout: 1000,
-        //         // Icon change animation time in ms
-        //         // animationSpeed: 250,
-        //         animationSpeed: 30000,
-        //         // Delay in ms for first ping
-        //         initialLoadDelay: 2500,
-        //         // Pingable server IP address
-        //         server: "8.8.8.8",
-        //         // Tresholds for icons (ping answer in ms)
-        //         thresholds: { strong: 50, medium: 150, weak: 500 },
-        //         // Shows status messages depending on how good or bad is the connection
-        //         showMessage: false,
-        //         // Sets the direction the module is displayed
-        //         // row displays the row in left-to-right mode (default)
-        //         // row-reverse displays the row in right-to-left mode
-        //         flexDirection: "row-reverse",
-        //         // How much to scale the ping icon. Must be greater than 0
-        //         scale: 0.90,
-        //     }
-        // },
         {
 	        module: 'internet-monitor',
             position: 'top_center',

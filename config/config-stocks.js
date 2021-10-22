@@ -75,7 +75,7 @@ var config = {
         },
         {
 		    module: "MMM-DateOnly",
-		    position: "top_bar",
+		    position: "upper_third",
 		    config: {
                 showWeek: false,
                 dateFormat: "dddd, LLL",
@@ -83,7 +83,7 @@ var config = {
 	    },
         {
             module: "newsfeed",
-            position: "top_bar",
+            position: "top_center",
             config: {
                 feeds: [
                     {
@@ -107,7 +107,7 @@ var config = {
         },
         {
             module: 'MMM-stocks',
-            position: 'lower_third',
+            position: 'bottom_bar',
             config: {
               apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
               crypto: 'FILUSDT,ADAUSDT',
@@ -116,38 +116,6 @@ var config = {
               updateInterval: 1000000 // update interval in milliseconds (16:40)
             }
         },
-        // {
-        //     module: "MMM-AVStock",
-        //     position: "middle_center", //"bottom_bar" is better for `mode:ticker`
-        //     config: {
-        //         apiKey : "xx_AVStock-API_x", // https://www.alphavantage.co/
-        //         timeFormat: "YYYY-MM-DD HH:mm:ss",
-        //         symbols : ["AAPL", "HEXO", "TLRY", "CGC", "ACB"],
-        //         alias: ["Apple", "Hexo", "Tilray", "Canopy", "Aurora"],
-        //         tickerDuration: 60, // Ticker will be cycled once per this second.
-        //         chartDays: 90, //For `mode:series`, how much daily data will be taken. (max. 90)
-        //         poolInterval : 1000*15, // (Changed in ver 1.1.0) - Only For Premium Account
-        //         mode : "series", // "table", "ticker", "series"
-        //         decimals: 4,
-        //         candleSticks : true, //show candle sticks if mode is Series
-        //         coloredCandles : true, //colored bars: red and green for negative and positive candles
-        //         premiumAccount: false,
-        //     }
-        // },
-        // {
-        //     module: 'MMM-TelegramBot',
-        //     config: {
-        //       telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-        //       allowedUser : ['Your-Telegram-Username'],
-        //       adminChatId : Your-Telegram-Chat-ID,
-        //       useWelcomeMessage: true,
-        //       verbose: false,
-        //       favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
-        //       screenshotScript: "scrot",
-        //       detailOption: {},
-        //       customCommands: [],
-        //     }
-        // },
         {
             module: 'MMM-Tools',
             position: 'bottom_left',
@@ -175,99 +143,206 @@ var config = {
         {
             module: 'MMM-NetworkScanner',
             position: "bottom_right",
-            header: "",
+            header: "ARP Local Area Scan - Discovered Devices",
             config: {
-                showLastSeen: "true",
-                colored: "true",
+                showLastSeen: false,
+                showLastSeenWhenOffline: false,
+                sort: false,
+                colored: true,
+                showDeviceColums: false,
+                coloredState: true,
+                // showIP can only be used with my modified version of the module
+                // Comment showIP out if using the stock MMM-NetworkScanner module
+                showIP: true,
+                showUnknown: false,
+                showOffline: true,
+                keepAlive: 900,
+                updateInterval: 60,
+                // residents: ["iPhone 12 Mini"],
+                // occupiedCMD: {
+                //     notification: 'REMOTE_ACTION',
+                //     payload: {
+                //         action: 'MONITORON'
+                //     }
+                // },
+                // vacantCMD  : {
+                //     notification: 'REMOTE_ACTION',
+                //     payload: {
+                //         action: 'MONITOROFF'
+                //     }
+                // },
                 devices: [
-                    { macAddress: "98:10:e8:f1:77:6d",
+                    {
+                      macAddress: "98:10:e8:f1:77:6d",
                       name: "Mac Mini",
                       icon: "desktop",
-                      color: "#00ff00"},
-                    { macAddress: "00:3e:e1:c8:14:5b",
+                      color: "#F61DF3",
+                    },
+                    {
+                      macAddress: "40:6C:8F:11:6A:79",
+                      name: "Macbook Air",
+                      icon: "desktop",
+                      color: "#F61DF3",
+                    },
+                    {
+                      macAddress: "00:3e:e1:c8:14:5b",
                       name: "Mac Pro",
                       icon: "desktop",
-                      color: "#ffff00"},
-                    { macAddress: "d4:90:9c:da:31:9e",
+                      color: "#F61DF3",
+                    },
+                    {
+                      macAddress: "74:1b:b2:da:2e:d9",
+                      name: "Mac Pro WiFi",
+                      icon: "desktop",
+                      color: "#F61DF3",
+                    },
+                    {
+                      macAddress: "d4:90:9c:da:31:9e",
                       name: "Homepod Max",
                       icon: "music",
-                      color: "#26C6DA " },
-                    { macAddress: "58:d3:49:2a:9f:f7",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "58:d3:49:2a:9f:f7",
                       name: "Homepod Mini Left",
                       icon: "music",
-                      color: "#26C6DA " },
-                    { macAddress: "58:d3:49:0f:02:23",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "58:d3:49:0f:02:23",
                       name: "Homepod Mini Right",
                       icon: "music",
-                      color: "#26C6DA " },
-                    { macAddress: "b0:6e:bf:2b:3a:f8",
-                      name: "Miner (doctor)",
-                      icon: "hammer",
-                      color: "#ffff00"},
-                    { macAddress: "30:85:a9:8d:02:9d",
-                      name: "Miner (vivo)",
-                      icon: "hammer",
-                      color: "#ffff00"},
-                    { macAddress: "4c:cc:6a:27:be:6a",
-                      name: "Miner (ronnie)",
-                      icon: "hammer",
-                      color: "#ffff00"},
-                    { ipAddress: "10.0.1.80",
-                      name: "Raspberry Pi 400",
-                      icon: "signal",
-                      color: "#00ff00" },
-                    { ipAddress: "10.0.1.81",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "1c:69:7a:65:19:9e",
                       name: "Roon ROCK",
                       icon: "music",
-                      color: "#00ff00" },
-                    { ipAddress: "10.0.1.94",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "b0:6e:bf:2b:3a:f8",
+                      name: "Miner - doctor",
+                      icon: "hammer",
+                      color: "#ffff00",
+                    },
+                    // { macAddress: "30:85:a9:8d:02:9d",
+                    //   name: "Miner - vivo",
+                    //   icon: "hammer",
+                    //   color: "#ffff00"},
+                    {
+                      macAddress: "4c:cc:6a:27:be:6a",
+                      name: "Miner - ronnie",
+                      icon: "hammer",
+                      color: "#ffff00",
+                    },
+                    {
+                      ipAddress: "10.0.1.80",
+                      name: "Raspberry Pi 400",
+                      icon: "signal",
+                      color: "#00ff00",
+                    },
+                    {
+                      macAddress: "dc:a6:32:75:32:ef",
                       name: "RPi Ropieee",
                       icon: "signal",
-                      color: "#00ff00" },
-                    { ipAddress: "10.0.1.85",
-                      name: "RPi MagicMirror",
-                      icon: "signal",
-                      color: "#00ff00" },
-                    { macAddress: "00:17:88:49:1a:cd",
-                      name: "Philips Hue",
-                      icon: "lightbulb",
-                      color: "#00ff00" },
-                    { macAddress: "00:04:20:f4:ea:9c",
-                      name: "Harmony Hub",
-                      icon: "weight",
-                      color: "#00ff00" },
-                    { macAddress: "2E:0E:84:7B:ED:39",
+                      color: "#00ff00",
+                    },
+                    // {
+                    //   macAddress: "dc:a6:32:14:0a:b1",
+                    //   name: "RPi MagicMirror",
+                    //   icon: "signal",
+                    //   color: "#00ff00",
+                    // },
+                    // {
+                    //   macAddress: "dc:a6:32:14:0a:b4",
+                    //   name: "MagicMirror",
+                    //   icon: "signal",
+                    //   color: "#00ff00",
+                    // },
+                    {
+                      macAddress: "2E:0E:84:7B:ED:39",
                       name: "Ronnie's iPad",
                       icon: "tablet",
-                      color: "#FF8A65" },
-                    { macAddress: "C8:69:CD:84:EC:47",
-                      name: "Apple TV",
-                      icon: "tv",
-                      color: "#26C6DA " },
-                    { macAddress: "36:7F:9E:F1:78:5A",
+                      color: "#DE41EF",
+                    },
+                    {
+                      macAddress: "00:1F:F3:C7:0D:15",
+                      name: "Time Capsule",
+                      icon: "database",
+                      color: "#DE41EF"},
+                    {
+                      macAddress: "36:7F:9E:F1:78:5A",
                       name: "iPhone 12 Mini",
                       icon: "mobile",
-                      color: "#FF8A65" },
-                    { macAddress: "00:1d:c0:62:42:67",
-                      name: "Enphase",
+                      color: "#DE41EF",
+                    },
+                    {
+                      macAddress: "00:1d:c0:62:42:67",
+                      name: "Rooftop Solar Array",
                       icon: "solar-panel",
-                      color: "#ffff00" },
-                    { macAddress: "00:11:d9:60:8b:54",
+                      color: "#83EE97",
+                    },
+                    {
+                      macAddress: "00:17:88:49:1a:cd",
+                      name: "Philips Hue",
+                      icon: "lightbulb",
+                      color: "#83EE97",
+                    },
+                    {
+                      macAddress: "00:04:20:f4:ea:9c",
+                      name: "Harmony Hub",
+                      icon: "weight",
+                      color: "#83EE97",
+                    },
+                    {
+                      macAddress: "C8:69:CD:84:EC:47",
+                      name: "Apple TV",
+                      icon: "tv",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "00:11:d9:60:8b:53",
                       name: "TiVo",
                       icon: "tv",
-                      color: "#26C6DA " },
-                    { macAddress: "00:1d:ba:c3:c7:17",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "00:1d:ba:c3:c7:17",
                       name: "Sony TV",
                       icon: "tv",
-                      color: "#26C6DA " },
-                    // { macAddress: "44:d8:84:6b:5f:b3",
-                    //   name: "AirPort Express",
-                    //   icon: "wifi",
-                    //   color: "#81C784" },
-                    // { macAddress: "24:a0:74:79:7f:9f",
-                    //   name: "AirPort Extreme",
-                    //   icon: "network-wired",
-                    //   color: "#81C784" },
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "e8:9f:80:14:95:fe",
+                      name: "Linksys Velops Router",
+                      icon: "wifi",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "C4:41:1E:F2:14:F5",
+                      name: "Kitchen WiFi Router",
+                      icon: "wifi",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "C4:41:1E:F2:2E:CC",
+                      name: "Main Bedroom WiFi Router",
+                      icon: "wifi",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "C4:41:1E:F2:38:72",
+                      name: "Guest Bedroom WiFi Router",
+                      icon: "wifi",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "C4:41:1E:F1:57:31",
+                      name: "Workshop WiFi Router",
+                      icon: "wifi",
+                      color: "#26C6DA",
+                    },
                 ],
             },
         },
