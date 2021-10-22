@@ -324,7 +324,7 @@ var config = {
             }
         },
         {
-            module: 'MMM-NetworkScanner',
+            module: 'MMM-MacAddressScan',
             position: "bottom_right",
             config: {
                 showLastSeen: false,
@@ -333,8 +333,6 @@ var config = {
                 colored: true,
                 showDeviceColums: false,
                 coloredState: true,
-                // showIP can only be used with my modified version of the module
-                // Comment showIP out if using the stock MMM-NetworkScanner module
                 showIP: true,
                 showUnknown: false,
                 showOffline: true,
@@ -633,11 +631,11 @@ var config = {
                 modules:
                     [
                         ["MMM-iFrame", "MMM-SystemStats", "MMM-Tools",
-                         "MMM-Solar", "mmm-hue-lights", "MMM-NetworkScanner"],
+                         "MMM-Solar", "mmm-hue-lights", "MMM-MacAddressScan"],
 
                         ["weather", "clock", "calendar", "newsfeed",
                          "MMM-SystemStats", "MMM-Tools", "MMM-Solar",
-                         "mmm-hue-lights", "MMM-NetworkScanner"],
+                         "mmm-hue-lights", "MMM-MacAddressScan"],
 
                         ["weather", "clock", "MMM-COVID19-SPARKLINE",
                          "newsfeed", "MMM-DateOnly"],

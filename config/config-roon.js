@@ -142,7 +142,7 @@ var config = {
             }
         },
         {
-            module: 'MMM-NetworkScanner',
+            module: 'MMM-MacAddressScan',
             position: "bottom_center",
             header: "ARP Local Area Scan - Discovered Devices",
             config: {
@@ -152,8 +152,6 @@ var config = {
                 colored: true,
                 showDeviceColums: false,
                 coloredState: true,
-                // showIP can only be used with my modified version of the module
-                // Comment showIP out if using the stock MMM-NetworkScanner module
                 showIP: true,
                 showUnknown: false,
                 showOffline: true,

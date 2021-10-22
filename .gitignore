@@ -3,10 +3,11 @@ hide_keys.sh
 hide_all_keys.sh
 show_keys.sh
 show_all_keys.sh
+config/config-crypto.js
 config/config-face.js
 config/config-instagram.js
 config/config-sample.js
-config/config-crypto.js
+config/config-unknown.js
 modules/MMM-AssistantMk2/deviceInstance.json
 modules/MMM-AssistantMk2/profiles/default.json
 modules/MMM-Hotword/trainer/trainer-withtoken.sh
