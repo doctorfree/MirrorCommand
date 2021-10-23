@@ -101,7 +101,7 @@ var config = {
         },
         {
             module: "mmm-hue-lights",
-            position: "lower_third",
+            position: "upper_third",
             header: 'Hue Lights',
             config: {
                 bridgeIp: "10.0.1.20",
@@ -142,7 +142,7 @@ var config = {
 	    },
         {
             module: 'MMM-MacAddressScan',
-            position: "upper_third",
+            position: "lower_third",
             header: "ARP Scan - Discovered Devices",
             config: {
                 showLastSeen: false,
