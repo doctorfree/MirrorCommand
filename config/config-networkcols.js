@@ -33,6 +33,7 @@ var config = {
     language: "en",
     timeFormat: 12,
     units: "imperial",
+    customCss: "css/custom-network-cols.css",
     
     modules: [
         {
@@ -74,19 +75,9 @@ var config = {
             }
         },
         {
-            module: 'MMM-iFrame',
-            position: 'fullscreen_below',
-            config: {
-                url: [ "http://10.0.1.81:9100/display/" ],
-                updateInterval: 30 * 60 * 1000, // rotate URLs every 30 minutes
-                width: "1080", // width of iframe
-                height: "756", // height of iframe
-                frameWidth: "1080"
-            }
-        },
-        {
             module: 'MMM-Tools',
             position: 'bottom_right',
+            header: "System Info",
             config: {
               device : "RPI", // "RPI" is also available
               refresh_interval_ms : 10000,
@@ -110,19 +101,16 @@ var config = {
         },
         {
             module: "mmm-hue-lights",
-            position: "middle_center",
-            // position: "lower_third",
+            position: "lower_third",
+            header: 'Hue Lights',
             config: {
                 bridgeIp: "10.0.1.20",
-                displayType: "grid",
-                minimalGrid: false,
-                updateInterval: 180000,
                 user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
             }
         },
         {
             module: 'MMM-Solar',
-            position: "middle_center",
+            position: "bottom_left",
             config: {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
@@ -131,15 +119,37 @@ var config = {
             }
         },
         {
+	        module: 'internet-monitor',
+            position: 'top_center',
+            header: 'Speed Test',
+            config:{
+                type: '',
+                maxTime: 20000,
+                updateInterval: 0,
+                verbose: false,
+                displayStrength: true,
+                displaySpeed: true,
+                strengthIconSize: 80,
+                maxGaugeScale: 120,
+		        // wifiSymbol:{
+                //     size: 80,
+                //     fullColor: '#3afc25',
+                //     almostColor: '#ffff0c',
+                //     halfColor: '#ff8c00',
+	            //     noneColor: '#ff1111'
+		        // },
+            },
+	    },
+        {
             module: 'MMM-MacAddressScan',
-            position: "bottom_center",
+            position: "upper_third",
             header: "ARP Scan - Discovered Devices",
             config: {
                 showLastSeen: false,
-                showLastSeenWhenOffline: false,
+                showLastSeenWhenOffline: true,
                 sort: false,
                 colored: true,
-                showDeviceColumns: false,
+                showDeviceColumns: true,
                 coloredState: true,
                 showIP: true,
                 showUnknown: false,
@@ -164,137 +174,178 @@ var config = {
                       macAddress: "98:10:e8:f1:77:6d",
                       name: "Mac Mini",
                       icon: "desktop",
-                      color: "#F61DF3",
+                      colorStateOnline: "#F61DF3",
+                      colorStateOffline: "#ff0000",
                     },
                     {
                       macAddress: "40:6C:8F:11:6A:79",
                       name: "Macbook Air",
                       icon: "desktop",
-                      color: "#F61DF3",
+                      colorStateOnline: "#F61DF3",
+                      colorStateOffline: "red",
                     },
                     {
                       macAddress: "00:3e:e1:c8:14:5b",
                       name: "Mac Pro",
                       icon: "desktop",
-                      color: "#F61DF3",
-                    },
-                    {
-                      macAddress: "d4:90:9c:da:31:9e",
-                      name: "Homepod Max",
-                      icon: "music",
-                      color: "#26C6DA",
-                    },
-                    {
-                      macAddress: "58:d3:49:2a:9f:f7",
-                      name: "Homepod Mini Left",
-                      icon: "music",
-                      color: "#26C6DA",
-                    },
-                    {
-                      macAddress: "58:d3:49:0f:02:23",
-                      name: "Homepod Mini Right",
-                      icon: "music",
-                      color: "#26C6DA",
-                    },
-                    {
-                      macAddress: "1c:69:7a:65:19:9e",
-                      name: "Roon ROCK",
-                      icon: "music",
-                      color: "#26C6DA",
-                    },
-                    {
-                      ipAddress: "10.0.1.80",
-                      name: "Raspberry Pi 400",
-                      icon: "signal",
-                      color: "#00ff00",
-                    },
-                    {
-                      macAddress: "dc:a6:32:75:32:ef",
-                      name: "RPi Ropieee",
-                      icon: "signal",
-                      color: "#00ff00",
+                      colorStateOnline: "#F61DF3",
+                      colorStateOffline: "red",
                     },
                     {
                       macAddress: "2E:0E:84:7B:ED:39",
                       name: "Ronnie's iPad",
                       icon: "tablet",
-                      color: "#DE41EF",
+                      colorStateOnline: "#DE41EF",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      macAddress: "b0:6e:bf:2b:3a:f8",
+                      name: "Miner - doctor",
+                      icon: "hammer",
+                      colorStateOnline: "#ffff00",
+                      colorStateOffline: "red",
+                      showInNewRow: true,
+                    },
+                    {
+                      macAddress: "4c:cc:6a:27:be:6a",
+                      name: "Miner - ronnie",
+                      icon: "hammer",
+                      colorStateOnline: "#ffff00",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      ipAddress: "10.0.1.80",
+                      name: "Raspberry Pi 400",
+                      icon: "signal",
+                      colorStateOnline: "#00ff00",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      macAddress: "dc:a6:32:75:32:ef",
+                      name: "RPi Ropieee",
+                      icon: "signal",
+                      colorStateOnline: "#00ff00",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      macAddress: "d4:90:9c:da:31:9e",
+                      name: "Homepod Max",
+                      icon: "music",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
+                      showInNewRow: true,
+                    },
+                    {
+                      macAddress: "58:d3:49:2a:9f:f7",
+                      name: "Homepod Mini Left",
+                      icon: "music",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      macAddress: "58:d3:49:0f:02:23",
+                      name: "Homepod Mini Right",
+                      icon: "music",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      macAddress: "1c:69:7a:65:19:9e",
+                      name: "Roon ROCK",
+                      icon: "music",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      macAddress: "00:1F:F3:C7:0D:15",
+                      name: "Time Capsule",
+                      icon: "database",
+                      colorStateOnline: "#DE41EF",
+                      colorStateOffline: "red",
+                      showInNewRow: true,
+                    },
+                    {
+                      macAddress: "00:1d:c0:62:42:67",
+                      name: "Rooftop Solar Array",
+                      icon: "solar-panel",
+                      colorStateOnline: "#83EE97",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      macAddress: "00:17:88:49:1a:cd",
+                      name: "Philips Hue",
+                      icon: "lightbulb",
+                      colorStateOnline: "#83EE97",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      macAddress: "00:04:20:f4:ea:9c",
+                      name: "Harmony Hub",
+                      icon: "weight",
+                      colorStateOnline: "#83EE97",
+                      colorStateOffline: "red",
                     },
                     {
                       macAddress: "36:7F:9E:F1:78:5A",
                       name: "iPhone 12 Mini",
                       icon: "mobile",
-                      color: "#DE41EF",
+                      colorStateOnline: "#DE41EF",
+                      colorStateOffline: "red",
+                      showInNewRow: true,
+                    },
+                    {
+                      macAddress: "C8:69:CD:84:EC:47",
+                      name: "Apple TV",
+                      icon: "tv",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      macAddress: "00:11:d9:60:8b:53",
+                      name: "TiVo",
+                      icon: "tv",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
+                    },
+                    {
+                      macAddress: "00:1d:ba:c3:c7:17",
+                      name: "Sony TV",
+                      icon: "tv",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
                     },
                     {
                       macAddress: "e8:9f:80:14:95:fe",
                       name: "Linksys Router",
                       icon: "wifi",
-                      color: "#26C6DA",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
+                      showInNewRow: true,
                     },
                     {
                       macAddress: "C4:41:1E:F2:14:F5",
                       name: "Kitchen WiFi",
                       icon: "wifi",
-                      color: "#26C6DA",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
                     },
                     {
                       macAddress: "C4:41:1E:F2:2E:CC",
-                      name: "Main Bedroom WiFi",
+                      name: "Bedroom WiFi",
                       icon: "wifi",
-                      color: "#26C6DA",
-                    },
-                    {
-                      macAddress: "C4:41:1E:F2:38:72",
-                      name: "Guest Bedroom WiFi",
-                      icon: "wifi",
-                      color: "#26C6DA",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
                     },
                     {
                       macAddress: "C4:41:1E:F1:57:31",
                       name: "Workshop WiFi",
                       icon: "wifi",
-                      color: "#26C6DA",
+                      colorStateOnline: "#26C6DA",
+                      colorStateOffline: "red",
                     },
                 ],
             },
         },
-        {
-            module: 'MMM-stocks',
-            position: 'bottom_bar',
-            config: {
-              apiKey: 'xxxxx_Stocks-API-Key_xxxxxxxxxxxxx',
-              crypto: 'FILUSDT,ADAUSDT',
-              separator: '&nbsp;&nbsp;•&nbsp;&nbsp;', // separator between stocks
-              stocks: 'CND,ETHO,MIGFX,MSEGX,TRBCX,CGC,AAPL,JOBY', // stock symbols
-              updateInterval: 1000000 // update interval in milliseconds (16:40)
-            }
-        },
-//      {
-//          module: 'MMM-TelegramBot',
-//          config: {
-//            telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-//            allowedUser : ['Your-Telegram-Username'],
-//            adminChatId : Your-Telegram-Chat-ID,
-//            useWelcomeMessage: true,
-//            verbose: false,
-//            favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
-//            screenshotScript: "scrot",
-//            detailOption: {},
-//            customCommands: [],
-//          }
-//      },
-        // {
-        //     module: "MMM-GoogleAssistant",
-        //     position: "top_right",
-        //     config: {
-        //         maxWidth: "100%",
-        //         header: "",
-        //     publishKey: 'xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx',
-        //     subscribeKey: 'xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx',
-        //     updateDelay: 500
-        //     }
-        // },
     ]
 };
 

@@ -124,6 +124,7 @@ var config = {
         {
 		    module: "weather",
 		    position: "top_right",
+            header: "Current Weather",
 		    config: {
              type: 'current',
              location: "Santa Cruz,United States",
@@ -173,6 +174,7 @@ var config = {
         {
             module: 'MMM-Tools',
             position: 'bottom_left',
+            header: "System Info",
             config: {
               device : "RPI", // "RPI" is also available
               refresh_interval_ms : 10000,
@@ -195,17 +197,6 @@ var config = {
             }
         },
         {
-            module: 'MMM-SystemStats',
-            position: "bottom_left",
-            config: {
-                updateInterval: 10000, // every 10 seconds
-                align: 'right', // align labels
-                header: 'System Stats', // This is optional
-                units: 'imperial', // default, metric, imperial
-                view: 'textAndIcon',
-            }
-        },
-        {
             module: 'MMM-stocks',
             position: 'bottom_bar',
             config: {
@@ -219,6 +210,7 @@ var config = {
         {
             module: "mmm-hue-lights",
             position: "top_center",
+            header: 'Hue Lights',
             config: {
                 bridgeIp: "10.0.1.20",
                 user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
@@ -231,19 +223,19 @@ var config = {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
                 systemId: "Solar-System-ID",
-                basicHeader: "true",
+                // basicHeader: "true",
             }
         },
         {
             module: 'MMM-MacAddressScan',
             position: "bottom_right",
-            header: "ARP Local Area Scan - Discovered Devices",
+            header: "ARP Scan - Discovered Devices",
             config: {
                 showLastSeen: false,
                 showLastSeenWhenOffline: false,
                 sort: false,
                 colored: true,
-                showDeviceColums: false,
+                showDeviceColumns: false,
                 coloredState: true,
                 showIP: true,
                 showUnknown: false,
@@ -407,31 +399,31 @@ var config = {
                     },
                     {
                       macAddress: "e8:9f:80:14:95:fe",
-                      name: "Linksys Velops Router",
+                      name: "Linksys Router",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
                     {
                       macAddress: "C4:41:1E:F2:14:F5",
-                      name: "Kitchen WiFi Router",
+                      name: "Kitchen WiFi",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
                     {
                       macAddress: "C4:41:1E:F2:2E:CC",
-                      name: "Main Bedroom WiFi Router",
+                      name: "Main Bedroom WiFi",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
                     {
                       macAddress: "C4:41:1E:F2:38:72",
-                      name: "Guest Bedroom WiFi Router",
+                      name: "Guest Bedroom WiFi",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
                     {
                       macAddress: "C4:41:1E:F1:57:31",
-                      name: "Workshop WiFi Router",
+                      name: "Workshop WiFi",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
@@ -444,7 +436,7 @@ var config = {
                 modules:
                     [[ "MMM-Solar"], [ "mmm-hue-lights"]],
                 fixed:
-                    ["alert", "updatenotification", "MMM-Remote-Control", "clock", "calendar", "weather", "newsfeed", "MMM-Tools", "MMM-SystemStats", "MMM-stocks", "MMM-MacAddressScan"],
+                    ["alert", "updatenotification", "MMM-Remote-Control", "clock", "calendar", "weather", "newsfeed", "MMM-Tools", "MMM-stocks", "MMM-MacAddressScan"],
                 rotationTime: 900000, // rotate page every 15 minutes = 15 * 60 * 1000
             }
         },

@@ -116,6 +116,7 @@ var config = {
         {
 		    module: "weather",
 		    position: "top_right",
+            header: "Current Weather",
             classes: 'scores solar stocks',
 		    config: {
              type: 'current',
@@ -218,6 +219,7 @@ var config = {
         {
             module: 'MMM-Tools',
             position: 'bottom_left',
+            header: "System Info",
             classes: 'scores solar stocks',
             config: {
               device : "RPI", // "RPI" is also available
@@ -241,18 +243,6 @@ var config = {
             }
         },
         {
-            module: 'MMM-SystemStats',
-            position: "bottom_left",
-            classes: 'scores solar stocks',
-            config: {
-                updateInterval: 10000, // every 10 seconds
-                align: 'right', // align labels
-                header: 'System Stats', // This is optional
-                units: 'imperial', // default, metric, imperial
-                view: 'textAndIcon',
-            }
-        },
-        {
 		    module: "MMM-DateOnly",
 		    position: "upper_third",
             classes: 'scores solar stocks',
@@ -264,6 +254,7 @@ var config = {
         {
             module: "mmm-hue-lights",
             position: "middle_center",
+            header: "Hue Lights",
             classes: 'solar',
             config: {
                 bridgeIp: "10.0.1.20",
@@ -285,7 +276,7 @@ var config = {
             module: 'MMM-CoinMarketCap',
             position: "middle_center",
             classes: 'stocks',
-            header: "Cryptocurrencies",
+            header: "Cryptocurrency Prices",
             config: {
                 apiKey: 'xxxxx_CoinMarket-API-Key_xxxxxxxxx',
                 currencies: ['ADA', 'FIL', 'The Graph', 'AGIX', 'HNT', 'ICP', 'ETH' ],
@@ -326,7 +317,7 @@ var config = {
             module: "MMM-MyScoreboard",
             position: "middle_center",
             classes: "scores default everyone",
-            header: "Ronnie's Scoreboard",
+            header: "Sports Scoreboard",
             config: {
               showLeagueSeparators: true,
               colored: true,
@@ -335,7 +326,6 @@ var config = {
                 {
                   league: "NHL",
                   teams: ["SJ"],
-                  groups: ["Pacific"]
                 },
                 {
                   league: "NBA",
@@ -355,7 +345,6 @@ var config = {
                 {
                   league: "NCAAF",
                   teams: ["OKLA", "OKST"],
-                  groups: ["Top 25"]
                 }
               ]
             }
@@ -364,12 +353,13 @@ var config = {
             module: 'MMM-MacAddressScan',
             position: "bottom_right",
             classes: 'scores solar stocks',
+            header: "ARP Scan - Discovered Devices",
             config: {
                 showLastSeen: false,
                 showLastSeenWhenOffline: false,
                 sort: false,
                 colored: true,
-                showDeviceColums: false,
+                showDeviceColumns: false,
                 coloredState: true,
                 showIP: true,
                 showUnknown: false,
@@ -510,7 +500,7 @@ var config = {
                     },
                     {
                       macAddress: "e8:9f:80:14:95:fe",
-                      name: "Linksys Velops Router",
+                      name: "Linksys Router",
                       icon: "wifi",
                       color: "#26C6DA",
                     },

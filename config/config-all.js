@@ -143,6 +143,7 @@ var config = {
         {
 		    module: "weather",
 		    position: "top_right",
+            header: "Current Weather",
 		    config: {
              type: 'current',
              location: "Santa Cruz,United States",
@@ -202,19 +203,9 @@ var config = {
             }
         },
         {
-            module: 'MMM-SystemStats',
-            position: "bottom_left",
-            config: {
-                updateInterval: 10000, // every 10 seconds
-                align: 'right', // align labels
-                header: 'System Stats', // This is optional
-                units: 'imperial', // default, metric, imperial
-                view: 'textAndIcon',
-            }
-        },
-        {
             module: 'MMM-Tools',
             position: 'bottom_left',
+            header: "System Info",
             config: {
               device : "RPI", // "RPI" is also available
               refresh_interval_ms : 10000,
@@ -244,28 +235,10 @@ var config = {
                 dateFormat: "dddd, LLL",
 		    }
 	    },
-        // {
-        //     module: "MMM-AVStock",
-        //     position: "bottom_bar", //"bottom_bar" is better for `mode:ticker`
-        //     config: {
-        //         apiKey : "xx_AVStock-API_x", // https://www.alphavantage.co/
-        //         timeFormat: "YYYY-MM-DD HH:mm:ss",
-        //         symbols : ["AAPL", "HEXO", "TLRY", "CGC", "ACB"],
-        //         alias: ["Apple", "Hexo", "Tilray", "Canopy", "Aurora"],
-        //         tickerDuration: 60, // Ticker will be cycled once per this second.
-        //         chartDays: 90, //For `mode:series`, how much daily data will be taken. (max. 90)
-        //         poolInterval : 1000*15, // (Changed in ver 1.1.0) - Only For Premium Account
-        //         mode : "ticker", // "table", "ticker", "series"
-        //         decimals: 4,
-        //         candleSticks : true, //show candle sticks if mode is Series
-        //         coloredCandles : true, //colored bars: red and green for negative and positive candles
-        //         premiumAccount: false,
-        //     }
-        // },
         {
             module: 'MMM-CoinMarketCap',
             position: "middle_center",
-            header: "Cryptocurrencies",
+            header: "Cryptocurrency Prices",
             config: {
                 apiKey: 'xxxxx_CoinMarket-API-Key_xxxxxxxxx',
                 currencies: ['ADA', 'FIL', 'The Graph', 'AGIX', 'HNT', 'ICP', 'ETH' ],
@@ -294,6 +267,7 @@ var config = {
         {
             module: "mmm-hue-lights",
             position: "middle_center",
+            header: 'Hue Lights',
             config: {
                 bridgeIp: "10.0.1.20",
                 displayType: "grid",
@@ -320,18 +294,19 @@ var config = {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
                 systemId: "Solar-System-ID",
-                basicHeader: "true",
+                // basicHeader: "true",
             }
         },
         {
             module: 'MMM-MacAddressScan',
             position: "bottom_right",
+            header: "ARP Scan - Discovered Devices",
             config: {
                 showLastSeen: false,
                 showLastSeenWhenOffline: false,
                 sort: false,
                 colored: true,
-                showDeviceColums: false,
+                showDeviceColumns: false,
                 coloredState: true,
                 showIP: true,
                 showUnknown: false,
@@ -495,67 +470,37 @@ var config = {
                     },
                     {
                       macAddress: "e8:9f:80:14:95:fe",
-                      name: "Linksys Velops Router",
+                      name: "Linksys Router",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
                     {
                       macAddress: "C4:41:1E:F2:14:F5",
-                      name: "Kitchen WiFi Router",
+                      name: "Kitchen WiFi",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
                     {
                       macAddress: "C4:41:1E:F2:2E:CC",
-                      name: "Main Bedroom WiFi Router",
+                      name: "Main Bedroom WiFi",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
                     {
                       macAddress: "C4:41:1E:F2:38:72",
-                      name: "Guest Bedroom WiFi Router",
+                      name: "Guest Bedroom WiFi",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
                     {
                       macAddress: "C4:41:1E:F1:57:31",
-                      name: "Workshop WiFi Router",
+                      name: "Workshop WiFi",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
                 ],
             },
         },
-        // {
-        //     module: 'MMM-TelegramBot',
-        //     config: {
-        //       telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-        //       allowedUser : ['Your-Telegram-Username'],
-        //       adminChatId : Your-Telegram-Chat-ID,
-        //       useWelcomeMessage: true,
-        //       verbose: false,
-        //       favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
-        //       screenshotScript: "scrot",
-        //       detailOption: {},
-        //       customCommands: [],
-        //     }
-        // },
-        // {
-        //     module: 'MMM-iFrame',
-        //     position: 'fullscreen_below',
-        //     config: {
-        //         url: [
-        //               "https://ncov2019.live/map",
-        //               "https://healthweather.us/",
-        //               "https://ncov2019.live/tweets",
-        //               "https://windy.app/coronavirus_map",
-        //              ],
-        //         updateInterval: 3 * 60 * 1000,  // rotate URLs every 3 minutes
-        //         width: "1080", // width of iframe
-        //         height: "1920", // height of iframe
-        //         frameWidth: "1080"
-        //     }
-        // },
         {
             module: 'MMM-COVID19-SPARKLINE',
               position: "middle_center",
@@ -630,12 +575,12 @@ var config = {
             config: {
                 modules:
                     [
-                        ["MMM-iFrame", "MMM-SystemStats", "MMM-Tools",
-                         "MMM-Solar", "mmm-hue-lights", "MMM-MacAddressScan"],
+                        ["MMM-iFrame", "MMM-Tools", "MMM-Solar",
+                         "mmm-hue-lights", "MMM-MacAddressScan"],
 
                         ["weather", "clock", "calendar", "newsfeed",
-                         "MMM-SystemStats", "MMM-Tools", "MMM-Solar",
-                         "mmm-hue-lights", "MMM-MacAddressScan"],
+                         "MMM-Tools", "MMM-Solar", "mmm-hue-lights",
+                         "MMM-MacAddressScan"],
 
                         ["weather", "clock", "MMM-COVID19-SPARKLINE",
                          "newsfeed", "MMM-DateOnly"],

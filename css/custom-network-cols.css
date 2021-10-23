@@ -1,0 +1,47 @@
+.MMM-MacAddressScan .headerDevCell {
+  font-size: 28px;
+}
+
+.MMM-MacAddressScan header {
+  font-size: 24px;
+  color: #B5F5F2;
+}
+
+.MMM-Tools header {
+  font-size: 24px;
+  color: #B5F5F2;
+}
+
+.MMM-Solar header {
+  font-size: 24px;
+  color: #B5F5F2;
+}
+
+.internet-monitor header {
+  font-size: 24px;
+  color: #B5F5F2;
+}
+
+.mmm-hue-lights header {
+  font-size: 24px;
+  color: #B5F5F2;
+}
+
+.mmm-hue-lights .grid {
+    width: auto;
+    display: flex;
+    flex-flow: row wrap;
+    margin: -10px;
+    max-width: none;
+    justify-content: center;
+}
+
+.mmm-hue-lights .grid .hue {
+    width: calc(33% - 20px);
+    margin: 10px;
+    display: block;
+}
+
+.MMM-Solar .module-content {
+  margin-top: 10px;
+}

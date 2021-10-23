@@ -73,27 +73,6 @@ var config = {
                 // classes: {} // Optional, See "Custom Classes" below
             }
         },
-        // {
-        //     module: "mmm-hue-lights",
-        //     position: "bottom_bar",
-        //     config: {
-        //         bridgeIp: "10.0.1.20",
-        //         displayType: "grid",
-        //         minimalGrid: false,
-        //         updateInterval: 180000,
-        //         user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
-        //     }
-        // },
-        // {
-        //     module: 'MMM-Solar',
-        //     position: "top_bar",
-        //     config: {
-        //         apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
-        //         userId: "Solar-USER-ID",
-        //         systemId: "Solar-System-ID",
-        //         basicHeader: "true",
-        //     }
-        // },
         {
             module: 'MMM-iFrame',
             position: 'fullscreen_below',

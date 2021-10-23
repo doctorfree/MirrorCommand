@@ -43,11 +43,6 @@ var config = {
 	language: "en",
 	timeFormat: 12,
 	units: "imperial",
-	// serverOnly:  true/false/"local" ,
-			     // local for armv6l processors, default 
-			     //   starts serveronly and then starts chrome browser
-			     // false, default for all  NON-armv6l devices
-			     // true, force serveronly mode, because you want to.. no UI on this device
 	
 	modules: [
 		{
@@ -77,24 +72,18 @@ var config = {
                     nextVideo: '/usr/local/bin/mirror nextvideo',
                     hideVideo: '/usr/local/bin/mirror hidevideo',
                     showVideo: '/usr/local/bin/mirror showvideo',
-                    // Shell command to return status of monitor,
-                    // must return either "HDMI" or "true" if screen is on
-                    // "TV is Off" or "false" if it is off to be recognized
-                    // monitorStatusCommand: '/usr/local/bin/mirror screen status',
                 },
                 showModuleApiMenu: true,
                 secureEndpoints: true,
                 customMenu: "custom_menu.json",
-                // classes: {} // Optional, See "Custom Classes" below
             }
         },
         {
             module: 'MMM-BackgroundSlideshow',
             position: 'fullscreen_below',
-            // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/ARTIST_DIR_HOLDER/',
+                    'modules/MMM-BackgroundSlideshow/pics/Models/Velana/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

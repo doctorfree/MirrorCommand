@@ -1,10 +1,19 @@
+header {
+  font-size: 20px;
+  color: #B5F5F2;
+}
+
 .MMM-Videoplayer video {
     width: 1920px;
     height: 1080px;
 }
 
-.mmm-hue-lights .module-content {
-    margin-top: 250px;
+.MMM-MacAddressScan .headerDevCell {
+  font-size: 28px;
+}
+
+.Tools {
+  font-size: 20px;
 }
 
 .mmm-hue-lights .grid {
@@ -17,7 +26,7 @@
 }
 
 .mmm-hue-lights .grid .hue {
-    width: calc(20% - 20px);
+    width: calc(33% - 20px);
     margin: 10px;
     display: block;
 }

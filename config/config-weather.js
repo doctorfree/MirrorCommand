@@ -99,6 +99,7 @@ var config = {
         {
 		    module: "weather",
 		    position: "top_right",
+            header: "Current Weather",
 		    config: {
              type: 'current',
              location: "Santa Cruz,United States",
@@ -151,21 +152,6 @@ var config = {
                 updateInterval: 60 * 60 * 1000,
             }
         },
-        // {
-		//     module: "weather",
-		//     position: "top_right",
-		//     config: {
-        //      type: 'current',
-        //      location: "Santa Cruz,United States",
-        //      locationID: "5393052",
-        //      units: "imperial",
-        //      apiBase: 'https://cors-anywhere.herokuapp.com/https://api.darksky.net',
-        //      weatherEndpoint: '/forecast',
-        //      apikey: "xxx_Dark-Sky-API-Key_xxxxxxxxxxx",
-		//      lat: "36.970019",
-		//      lon: "-122.042212",
-		//     }
-	    // },
 		{
             module: "MMM-DarkSkyForecast",
             header: "Dark Sky Weather Forecast",
@@ -218,17 +204,6 @@ var config = {
                 ],
             },
         },
-        // {
-        //     module: "MMM-GoogleAssistant",
-        //     position: "top_center",
-        //     config: {
-        //         maxWidth: "100%",
-        //         header: "",
-        //     publishKey: 'xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx',
-        //     subscribeKey: 'xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx',
-        //     updateDelay: 500
-        //     }
-        // },
 	]
 };
 

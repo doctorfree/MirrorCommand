@@ -94,6 +94,7 @@ var config = {
         {
 		    module: "weather",
 		    position: "top_right",
+            header: "Current Weather",
 		    config: {
              type: 'current',
              location: "Santa Cruz,United States",
@@ -141,19 +142,9 @@ var config = {
             }
         },
         {
-            module: 'MMM-SystemStats',
-            position: "bottom_left",
-            config: {
-                updateInterval: 10000, // every 10 seconds
-                align: 'right', // align labels
-                header: 'System Stats', // This is optional
-                units: 'imperial', // default, metric, imperial
-                view: 'textAndIcon',
-            }
-        },
-        {
             module: 'MMM-Tools',
             position: 'bottom_right',
+            header: "System Info",
             config: {
               device : "RPI", // "RPI" is also available
               refresh_interval_ms : 10000,
@@ -179,7 +170,7 @@ var config = {
             module: "MMM-MyScoreboard",
             position: "middle_center",
             classes: "default everyone",
-            header: "Ronnie's Scoreboard",
+            header: "Sports Scoreboard",
             config: {
               showLeagueSeparators: true,
               colored: true,
