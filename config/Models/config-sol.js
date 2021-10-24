@@ -106,32 +106,6 @@ var config = {
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
             }
         },
-        // {
-        //     module: 'MMM-TelegramBot',
-        //     config: {
-        //       telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-              // This is NOT the username of bot.
-        //       allowedUser : ['Your-Telegram-Username'],
-        //       adminChatId : Your-Telegram-Chat-ID,
-        //       useWelcomeMessage: true,
-        //       verbose: false,
-        //       favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
-        //       screenshotScript: "scrot",
-        //       detailOption: {},
-        //       customCommands: [],
-        //     }
-        // },
-        // {
-        //     module: "MMM-GoogleAssistant",
-        //     position: "top_right",
-        //     config: {
-        //         maxWidth: "100%",
-        //         header: "",
-        //     publishKey: 'xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx',
-        //     subscribeKey: 'xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx',
-        //     updateDelay: 500
-        //     }
-        // },
 	]
 };
 

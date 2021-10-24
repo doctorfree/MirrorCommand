@@ -222,83 +222,58 @@ do
     # This functionality is mostly for me, the maintainer and distributor.
     #
     case "$i" in
-        bash_aliases)
-            check "$i" "$inst" 121
-            ;;
         bash_profile)
             check "$i" "$inst" 8
             ;;
         bashrc)
             check "$i" "$inst" 58
             ;;
-        chktemp.sh)
-            check "$i" "$inst" 12
+        bash_aliases)
+            check "$i" "$inst" 121
+            ;;
+        mirror.sh|mmapiactions.sh|mmgetb.sh|mmsetb.sh|config/Templates/*|\
+        config/config-candy.js|config/config-covid.js|config/config-test.js|\
+        config/config-art.js|config/config-iframe.js|config/config-Photographers.js|\
+        config/config-unknown.js|config/config-waterfalls.js|config/Models/*)
+            check "$i" "$inst" 4
             ;;
         gethue.sh)
             check "$i" "$inst" 6
             ;;
-        getquote.sh)
+        getquote.sh|config/config-scenes-sample.js|config/config-stocks.js|\
+        config/config-YouTube.js|config/YouTube/config-*.js)
             check "$i" "$inst" 8
             ;;
-        mirror.sh|mmapiactions.sh|mmgetb.sh|mmsetb.sh|config/config-candy.js|config/config-covid.js|config/config-coronavirus.js|config/config-test.js)
-            check "$i" "$inst" 4
-            ;;
-        send_sms.sh)
+        chktemp.sh|config/config-scoreboard.js|config/config-volumio.js|\
+        config/config-calendar.js|config/config-crypto.js|\
+        send_sms.sh|mkreadme.sh|mkwmv.sh)
             check "$i" "$inst" 12
             ;;
-        config/config-all.js)
-            check "$i" "$inst" 58
-            ;;
-        config/config-calendar.js)
-            check "$i" "$inst" 28
-            ;;
-        config/config-crypto.js)
-            check "$i" "$inst" 30
-            ;;
-        config/config-default.js)
-            check "$i" "$inst" 46
-            ;;
-        config/config-iframe.js)
+        config/config-network.js|config/config-networkcols.js|\
+        config/config-darksky.js|config/config-iframe.js|config/config-scnews.js)
             check "$i" "$inst" 16
-            ;;
-        config/config-normal.js)
-            check "$i" "$inst" 42
             ;;
         config/config-rooncontrol.js)
             check "$i" "$inst" 18
             ;;
+        config/config-sample.js|config/config-traffic.js)
+            check "$i" "$inst" 24
+            ;;
+        config/config-server.js|config/config-calendar.js|\
+        config/config-face.js|config/config-scenes.js|config/config-normal.js)
+            check "$i" "$inst" 28
+            ;;
+        config/config-radar.js)
+            check "$i" "$inst" 32
+            ;;
         config/config-roon.js)
             check "$i" "$inst" 34
             ;;
-        config/config-server.js)
-            check "$i" "$inst" 48
+        config/config-all.js|config/config-default.js)
+            check "$i" "$inst" 46
             ;;
-        config/config-stocks.js)
-            check "$i" "$inst" 26
-            ;;
-        config/config-traffic.js)
-            check "$i" "$inst" 24
-            ;;
-        config/config-volumio.js)
-            check "$i" "$inst" 12
-            ;;
-        config/config-weather.js)
-            check "$i" "$inst" 40
-            ;;
-        config/config-YouTube.js)
-            check "$i" "$inst" 8
-            ;;
-        config/config.js.sample)
-            cmp -s "$i" "$inst" || differ "$i" "$inst"
-            ;;
-        config/YouTube/config-*.js)
-            check "$i" "$inst" 8
-            ;;
-        config/*)
+        config/*/config-*.js|config/config-*.js)
             check "$i" "$inst" 20
-            ;;
-        mkreadme.sh|mkwmv.sh)
-            check "$i" "$inst" 12
             ;;
         *)
             cmp -s "$i" "$inst" || differ "$i" "$inst"
