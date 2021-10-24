@@ -1,8 +1,10 @@
 dot-wireless-home.txt
 hide_keys.sh
+hide_bin_keys.sh
 hide_all_keys.sh
 rmlist.txt
 show_keys.sh
+show_bin_keys.sh
 show_all_keys.sh
 config/config-instagram.js
 config/config-sample.js

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 CONFDIR="$HOME/src/MirrorCommandLine/config"
+BINDIR="$HOME/src/MirrorCommandLine/bin"
 
 cd "${CONFDIR}"
 echo "Hiding keys in $CONFDIR"
@@ -14,3 +15,7 @@ do
         cd ..
     }
 done
+
+cd "${BINDIR}"
+echo "Hiding keys in $BINDIR"
+../hide_bin_keys.sh

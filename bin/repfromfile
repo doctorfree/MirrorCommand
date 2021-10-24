@@ -1,0 +1,24 @@
+#!/bin/bash
+
+APIKEY="xxx_Remote-Control-API-Key_xxxxx"
+STR="apiKey: '${APIKEY}'"
+SKIP="rotateScreenInverted"
+INPUT="foo.txt"
+
+[ -f ${INPUT} ] || {
+    echo "Missing input file ${INPUT}. Exiting."
+    exit 1
+}
+
+find . -type f | while read i
+do
+    grep ${APIKEY} $i > /dev/null && {
+        grep ${SKIP} $i > /dev/null && continue
+        b=`basename $i`
+        [ "$b" == "${INPUT}" ] && continue
+        echo "Processing $i"
+        cat $i | sed -e "/${STR}/r ${INPUT}" -e "/${STR}/d" > /tmp/$b
+        cp /tmp/$b $i
+        rm -f /tmp/$b
+    }
+done

@@ -5,5 +5,11 @@ cd /mnt/transcend/Pictures/MagicMirror
 while read i
 do
     j=`echo $i | sed -e "s/Artists\//Artists-ALL\//" -e "s/Models\//Models-ALL\//" -e "s/Photographers\//Photographers-ALL\//"`
-    [ -f $j ] || echo $j
+    if [ -L $j ]
+    then
+        echo $j
+    else
+        j=`echo $i | sed -e "s/Artists\//Artists-ALL\//" -e "s/Models\//Playboy-ALL\//" -e "s/Photographers\//Photographers-ALL\//"`
+        [ -L $j ] && echo $j
+    fi
 done < $HOME/Pictures/rmlist.txt

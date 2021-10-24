@@ -6,6 +6,7 @@ UPDSCRIPT="updplayboy"
 TYPEDIR="/mnt/transcend/Pictures/MagicMirror/${TYPE}"
 PICDIR="${HOME}/Pictures/${TYPE}"
 
+[ -d ${PICDIR} ] || mkdir -p ${PICDIR}
 [ -d ${TYPEDIR} ] || {
     echo "$TYPEDIR does not exist or is not a directory. Exiting."
     exit 1
@@ -19,7 +20,9 @@ do
     }
     mkdir $i
     ${UPDSCRIPT} $i
+    [ -d ${PICDIR}/$i ] || {
+        cd ${PICDIR}
+        ln -s ${TYPEDIR}/$1 .
+        cd ${TYPEDIR}
+    }
 done
-[ -d ${PICDIR} ] || mkdir -p ${PICDIR}
-cd ${PICDIR}
-ln -s ${TYPEDIR}/$1 .

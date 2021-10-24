@@ -4,5 +4,5 @@ cd $HOME/Pictures
 
 while read img
 do
-    rm -f $img
+    [ -f $img ] && rm -f $img
 done < rmlist.txt

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+LOGDIR=$HOME/.pm2/logs
+LOGS="MagicMirror-error.log MagicMirror-out.log"
+
+[ -d $LOGDIR ] || {
+    echo "$LOGDIR does not exist. Exiting."
+    exit 1
+}
+
+cd $LOGDIR
+for i in $LOGS
+do
+  rm -f $i
+  touch $i
+done

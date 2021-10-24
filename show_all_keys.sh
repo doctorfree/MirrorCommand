@@ -1,6 +1,7 @@
 #!/bin/bash
 
 CONFDIR="$HOME/src/MirrorCommandLine/config"
+BINDIR="$HOME/src/MirrorCommandLine/bin"
 
 cd "${CONFDIR}"
 echo "Showing keys in $CONFDIR"
@@ -14,3 +15,7 @@ do
         cd ..
     }
 done
+
+cd "${BINDIR}"
+echo "Showing keys in $BINDIR"
+../show_bin_keys.sh
