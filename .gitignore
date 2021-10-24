@@ -1,10 +1,9 @@
 dot-wireless-home.txt
 hide_keys.sh
 hide_all_keys.sh
+rmlist.txt
 show_keys.sh
 show_all_keys.sh
-config/config-crypto.js
-config/config-face.js
 config/config-instagram.js
 config/config-sample.js
 config/config-unknown.js

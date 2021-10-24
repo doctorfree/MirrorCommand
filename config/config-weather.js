@@ -10,18 +10,18 @@
  */
 
 var config = {
-//	address: "localhost",
-	address: "0.0.0.0", // Address to listen on, can be:
-	                      // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
-	                      // - another specific IPv4/6 to listen on a specific interface
-	                      // - "", "0.0.0.0", "::" to listen on any interface
-	                      // Default, when address config is left out, is "localhost"
-	port: 8080,
+//    address: "localhost",
+    address: "0.0.0.0", // Address to listen on, can be:
+                          // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+                          // - another specific IPv4/6 to listen on a specific interface
+                          // - "", "0.0.0.0", "::" to listen on any interface
+                          // Default, when address config is left out, is "localhost"
+    port: 8080,
     // Set [] to allow all IP addresses
-	// or add a specific IPv4 of 192.168.1.5 :
-	// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
-	// or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
-	// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
+    // or add a specific IPv4 of 192.168.1.5 :
+    // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+    // or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+    // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
     ipWhitelist: [
         "0.0.0.0",
         "127.0.0.1",
@@ -40,23 +40,23 @@ var config = {
         "::1",
     ],
 
-	language: "en",
-	timeFormat: 12,
-	units: "imperial",
-	// serverOnly:  true/false/"local" ,
-			     // local for armv6l processors, default 
-			     //   starts serveronly and then starts chrome browser
-			     // false, default for all  NON-armv6l devices
-			     // true, force serveronly mode, because you want to.. no UI on this device
-	
-	modules: [
-		{
-			module: "alert",
-		},
-		{
-			module: "updatenotification",
-			position: "top_bar"
-		},
+    language: "en",
+    timeFormat: 12,
+    units: "imperial",
+    // serverOnly:  true/false/"local" ,
+                 // local for armv6l processors, default 
+                 //   starts serveronly and then starts chrome browser
+                 // false, default for all  NON-armv6l devices
+                 // true, force serveronly mode, because you want to.. no UI on this device
+    
+    modules: [
+        {
+            module: "alert",
+        },
+        {
+            module: "updatenotification",
+            position: "top_bar"
+        },
         {
             module: 'MMM-Remote-Control',
             config: {
@@ -89,31 +89,31 @@ var config = {
             }
         },
         {
-		    module: "MMM-DateOnly",
-		    position: "top_bar",
-		    config: {
+            module: "MMM-DateOnly",
+            position: "top_bar",
+            config: {
                 showWeek: false,
                 dateFormat: "dddd, LLL",
-		    }
-	    },
+            }
+        },
         {
-		    module: "weather",
-		    position: "top_right",
+            module: "weather",
+            position: "top_right",
             header: "Current Weather",
-		    config: {
+            config: {
              type: 'current',
              location: "Santa Cruz,United States",
              locationID: "5393052",
              units: "imperial",
              apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
-		    }
-	    },
+            }
+        },
         {
             module: "weather",
             position: "top_right",
             header: "Weather Forecast",
             config: {
-			    type: 'forecast',
+                type: 'forecast',
                 location: "Santa Cruz,United States",
                 locationID: "5393052",
                 units: "imperial",
@@ -152,7 +152,7 @@ var config = {
                 updateInterval: 60 * 60 * 1000,
             }
         },
-		{
+        {
             module: "MMM-DarkSkyForecast",
             header: "Dark Sky Weather Forecast",
             position: "top_right",
@@ -160,29 +160,14 @@ var config = {
             disabled: false,
             config: {
               apikey: "xxx_Dark-Sky-API-Key_xxxxxxxxxxx",
-		      latitude: "36.970019",
-		      longitude: "-122.042212",
+              latitude: "36.970019",
+              longitude: "-122.042212",
               iconset: "5c",
               concise: false,
-			  units: "us",
+              units: "us",
               forecastLayout: "tiled"
             }
-         },
-         // {
-         //    module: 'MMM-TelegramBot',
-         //    config: {
-         //      telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-              // This is NOT the username of bot.
-         //      allowedUser : ['Your-Telegram-Username'],
-         //      adminChatId : Your-Telegram-Chat-ID,
-         //      useWelcomeMessage: true,
-         //      verbose: false,
-         //      favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
-         //      screenshotScript: "scrot",
-         //      detailOption: {},
-         //      customCommands: [],
-         //    }
-        // },
+        },
         {
             module: 'MMM-GoogleMapsTraffic',
             position: 'bottom_center',
@@ -204,7 +189,7 @@ var config = {
                 ],
             },
         },
-	]
+    ]
 };
 
 /*************** DO NOT EDIT THE LINE BELOW ***************/
