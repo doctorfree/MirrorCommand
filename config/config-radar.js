@@ -10,18 +10,18 @@
  */
 
 var config = {
-//	address: "localhost",
-	address: "0.0.0.0", // Address to listen on, can be:
-	                      // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
-	                      // - another specific IPv4/6 to listen on a specific interface
-	                      // - "", "0.0.0.0", "::" to listen on any interface
-	                      // Default, when address config is left out, is "localhost"
-	port: 8080,
+//    address: "localhost",
+    address: "0.0.0.0", // Address to listen on, can be:
+                          // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+                          // - another specific IPv4/6 to listen on a specific interface
+                          // - "", "0.0.0.0", "::" to listen on any interface
+                          // Default, when address config is left out, is "localhost"
+    port: 8080,
     // Set [] to allow all IP addresses
-	// or add a specific IPv4 of 192.168.1.5 :
-	// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
-	// or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
-	// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
+    // or add a specific IPv4 of 192.168.1.5 :
+    // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+    // or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+    // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
     ipWhitelist: [
         "0.0.0.0",
         "127.0.0.1",
@@ -40,25 +40,25 @@ var config = {
         "::1",
     ],
 
-	language: "en",
-	timeFormat: 12,
-	units: "imperial",
-	// serverOnly:  true/false/"local" ,
-			     // local for armv6l processors, default 
-			     //   starts serveronly and then starts chrome browser
-			     // false, default for all  NON-armv6l devices
-			     // true, force serveronly mode, because you want to.. no UI on this device
-	
-	modules: [
-		{
-			module: "alert",
+    language: "en",
+    timeFormat: 12,
+    units: "imperial",
+    // serverOnly:  true/false/"local" ,
+                 // local for armv6l processors, default 
+                 //   starts serveronly and then starts chrome browser
+                 // false, default for all  NON-armv6l devices
+                 // true, force serveronly mode, because you want to.. no UI on this device
+    
+    modules: [
+        {
+            module: "alert",
             classes: 'radar traffic weather',
-		},
-		{
-			module: "updatenotification",
-			position: "top_bar",
+        },
+        {
+            module: "updatenotification",
+            position: "top_bar",
             classes: 'radar traffic weather',
-		},
+        },
         {
             module: 'MMM-Remote-Control',
             classes: 'radar traffic weather',
@@ -205,7 +205,7 @@ var config = {
         },
         {
             module: "clock",
-			position: "bottom_center",
+            position: "bottom_center",
             classes: 'radar',
             config: {
                 dateFormat: "dddd, LLL",
@@ -256,6 +256,7 @@ var config = {
         {
             module: "weather",
             position: "top_right",
+            // classes: 'darksky weather',
             classes: 'weather',
             header: "Weather Forecast",
             config: {
@@ -338,9 +339,61 @@ var config = {
                 ],
             },
         },
+        // {
+        //     module: "clock",
+        //     position: "upper_third",
+        //     classes: 'darksky',
+        //     config: {
+        //         dateFormat: "dddd, LLL",
+        //         displayType: "analog",
+        //         analogFace: "face-009",
+        //         analogSize: "200px",
+        //         displaySeconds: "true",
+        //         secondsColor: "#BAA3DC",
+        //         timeFormat: "12",
+        //         showPeriod: "true",
+        //         showDate: "true",
+        //         clockBold: "false",
+        //         analogPlacement: "top",
+        //         analogShowDate: "top",
+        //     }
+        // },
+        // {
+        //     module: "weather",
+        //     position: "top_left",
+        //     classes: 'darksky',
+        //     header: "Current Weather",
+        //     config: {
+        //      type: 'current',
+        //      location: "Santa Cruz,United States",
+        //      locationID: "5393052",
+        //      units: "imperial",
+        //      apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+        //     }
+        // },
+        // {
+        //     module: "MMM-DarkSkyForecast",
+        //     header: "Dark Sky Weather Forecast",
+        //     position: "bottom_center",
+        //     classes: 'darksky',
+        //     disabled: false,
+        //     config: {
+        //       apikey: "xxx_Dark-Sky-API-Key_xxxxxxxxxxx",
+        //       latitude: "36.970019",
+        //       longitude: "-122.042212",
+        //       iconset: "5c",
+        //       concise: false,
+        //       units: "us",
+        //       forecastLayout: "tiled",
+        //       hourlyForecastInterval: 2,
+        //       maxHourliesToShow: 5,
+        //       maxDailiesToShow: 5,
+        //     }
+        // },
         {
           module: 'MMM-Scenes',
           position: 'bottom_bar',
+          // classes: 'darksky radar traffic weather',
           classes: 'radar traffic weather',
           config: {
             duration: 300000,
@@ -358,6 +411,14 @@ var config = {
                 expelAnimation: 'pageLeft',
                 admitAnimation: 'pageDown'
               },
+              // {
+              //   name: 'darksky',
+              //   expelAnimation: 'pageRight',
+              //   admitAnimation: [
+              //     { transform: 'rotate(-360deg) scale(0, 0)', opacity: 0 },
+              //     { transform: 'rotate(360deg) scale(1, 1)', opacity: 1 }
+              //   ]
+              // },
               {
                 name: 'weather',
                 expelAnimation: 'dismissOut',
@@ -373,7 +434,7 @@ var config = {
             activeIndicators: ['❶', '❷', '❸']
           }
         }
-	]
+    ]
 };
 
 /*************** DO NOT EDIT THE LINE BELOW ***************/
