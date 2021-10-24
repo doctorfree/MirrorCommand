@@ -104,40 +104,8 @@ var config = {
                 maxWidth: 1080,
                 maxHeight: 1920,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
-                //backgroundSize: "contain",
-                // DISPLAY THE SLIDE SHOW BETWEEN 1PM and 6PM then again between 9PM and Midnight
-                //module_schedule: [
-                //  {from: '0 13 * * *', to:   '0 18 * * *'},
-                //  {from: '0 21 * * *', to:   '59 23 * * *'}
-                //]
             }
         },
-        // {
-        //     module: 'MMM-TelegramBot',
-        //     config: {
-        //       telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-              // This is NOT the username of bot.
-        //       allowedUser : ['Your-Telegram-Username'],
-        //       adminChatId : Your-Telegram-Chat-ID,
-        //       useWelcomeMessage: true,
-        //       verbose: false,
-        //       favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
-        //       screenshotScript: "scrot",
-        //       detailOption: {},
-        //       customCommands: [],
-        //     }
-        // },
-        // {
-        //     module: "MMM-GoogleAssistant",
-        //     position: "top_right",
-        //     config: {
-        //         maxWidth: "100%",
-        //         header: "",
-        //     publishKey: 'xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx',
-        //     subscribeKey: 'xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx',
-        //     updateDelay: 500
-        //     }
-        // },
 	]
 };
 

@@ -43,11 +43,7 @@ var config = {
 	language: "en",
 	timeFormat: 12,
 	units: "imperial",
-	// serverOnly:  true/false/"local" ,
-			     // local for armv6l processors, default 
-			     //   starts serveronly and then starts chrome browser
-			     // false, default for all  NON-armv6l devices
-			     // true, force serveronly mode, because you want to.. no UI on this device
+    customCss: "css/custom-covid.css",
 	
 	modules: [
 		{

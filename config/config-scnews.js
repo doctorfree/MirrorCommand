@@ -94,18 +94,25 @@ var config = {
             config: {
                 feeds: [
                     {
-                        title: "Cruz 511",
-                        url: "https://cruz511.org/feed/",
+                        title: "Mercury News Santa Cruz",
+                        url: "https://www.mercurynews.com/location/california/bay-area/south-bay/santa-cruz-county/feed/",
                     },
                     {
-                        title: "Traffic Engineering Projects",
-                        url: "https://www.cityofsantacruz.com/Home/Components/RssFeeds/RssFeed/View?ctID=5&cateIDs=6",
+                        title: "Good Times",
+                        url: "https://goodtimes.sc/feed/atom/",
                     },
                     {
-                        title: "Santa Cruz Traffic and Transit News",
-                        url: "https://patch.com/rss.xml",
+                        title: "KION Santa Cruz",
+                        url: "https://kion546.com/category/news/santa-cruz/feed/",
+                    },
+                    {
+                        title: "Santa Cruz Sentinel",
+                        url: "https://www.santacruzsentinel.com/news/local-news/feed/",
                     },
                 ],
+                lengthDescription: 500,
+                updateInterval: 30000,
+                showDescription: true,
                 showSourceTitle: true,
                 showPublishDate: true,
                 broadcastNewsFeeds: true,
@@ -120,7 +127,7 @@ var config = {
                 key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
                 lat: 36.970019,
                 lng: -122.042212,
-                height: '1240px',
+                height: '1080px',
                 width: '1080px',
                 styledMapType: "standard",
                 disableDefaultUI: true,
@@ -152,32 +159,32 @@ var config = {
                 analogShowDate: "top",
             }
         },
-        // {
-        //     module: 'MMM-TelegramBot',
-        //     config: {
-        //       telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-              // This is NOT the username of bot.
-        //       allowedUser : ['Your-Telegram-Username'],
-        //       adminChatId : Your-Telegram-Chat-ID,
-        //       useWelcomeMessage: true,
-        //       verbose: false,
-        //       favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
-        //       screenshotScript: "scrot",
-        //       detailOption: {},
-        //       customCommands: [],
-        //     }
-        // },
-        // {
-        //     module: "MMM-GoogleAssistant",
-        //     position: "top_right",
-        //     config: {
-        //         maxWidth: "100%",
-        //         header: "",
-        //     publishKey: 'xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx',
-        //     subscribeKey: 'xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx',
-        //     updateDelay: 500
-        //     }
-        // },
+        {
+		    module: "weather",
+		    position: "bottom_left",
+            header: "Current Weather",
+		    config: {
+             type: 'current',
+             location: "Santa Cruz,United States",
+             locationID: "5393052",
+             units: "imperial",
+             apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+		    }
+	    },
+        {
+            module: "weather",
+		    position: "bottom_right",
+            header: "Weather Forecast",
+            config: {
+			    type: 'forecast',
+                location: "Santa Cruz,United States",
+                locationID: "5393052",
+                units: "imperial",
+                showRainAmount: "true",
+                colored: "true",
+                apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
+            }
+        },
 	]
 };
 
