@@ -12,3 +12,4 @@ config/config-unknown.js
 modules/MMM-AssistantMk2/deviceInstance.json
 modules/MMM-AssistantMk2/profiles/default.json
 modules/MMM-Hotword/trainer/trainer-withtoken.sh
+modules/MMM-TelegramBot/bot.txt

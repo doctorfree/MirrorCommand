@@ -270,31 +270,20 @@ var config = {
               updateInterval: 1000000 // update interval in milliseconds (16:40)
             }
         },
-//      {
-//          module: 'MMM-TelegramBot',
-//          config: {
-//            telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-//            allowedUser : ['Your-Telegram-Username'],
-//            adminChatId : Your-Telegram-Chat-ID,
-//            useWelcomeMessage: true,
-//            verbose: false,
-//            favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
-//            screenshotScript: "scrot",
-//            detailOption: {},
-//            customCommands: [],
-//          }
-//      },
-        // {
-        //     module: "MMM-GoogleAssistant",
-        //     position: "top_right",
-        //     config: {
-        //         maxWidth: "100%",
-        //         header: "",
-        //     publishKey: 'xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx',
-        //     subscribeKey: 'xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx',
-        //     updateDelay: 500
-        //     }
-        // },
+        {
+            module: 'MMM-TelegramBot',
+            config: {
+              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
+              allowedUser : ['Your-Telegram-Username'],
+              adminChatId : Your-Telegram-Chat-ID,
+              useWelcomeMessage: true,
+              verbose: false,
+              favourites:["/hideip", "/showip", "/hideOffline", "/showOffline"],
+              screenshotScript: "scrot",
+              detailOption: {},
+              customCommands: [],
+            }
+        },
     ]
 };
 

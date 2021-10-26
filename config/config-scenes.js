@@ -508,42 +508,57 @@ var config = {
             },
         },
         {
-          module: 'MMM-Scenes',
-          position: 'bottom_bar',
-          classes: 'scores solar stocks art',
-          config: {
-            duration: 300000,
-            scenario: [
-              {
-                name: 'scores',
-                expelAnimation: 'pageUp',
-                admitAnimation: 'pageRight'
-              },
-              {
-                name: 'art',
-                expelAnimation: 'pageRight',
-                admitAnimation: [
-                  { transform: 'rotate(-360deg) scale(0, 0)', opacity: 0 },
-                  { transform: 'rotate(360deg) scale(1, 1)', opacity: 1 }
-                ]
-              },
-              {
-                name: 'solar',
-                expelAnimation: 'pageLeft',
-                admitAnimation: 'pageDown'
-              },
-              {
-                name: 'stocks',
-                expelAnimation: 'dismissOut',
-                admitAnimation: 'pageDown'
-              },
-            ],
-            autoLoop: 'infinity',
-            // inactiveIndicators: ['①', '②', '③', '④', '⑤'],
-            // activeIndicators: ['❶', '❷', '❸', '❹', '❺']
-            inactiveIndicators: ['①', '②', '③', '④'],
-            activeIndicators: ['❶', '❷', '❸', '❹']
-          }
+            module: 'MMM-TelegramBot',
+            classes: 'scores solar stocks art',
+            config: {
+              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
+              allowedUser : ['Your-Telegram-Username'],
+              adminChatId : Your-Telegram-Chat-ID,
+              useWelcomeMessage: true,
+              verbose: false,
+              favourites:["/scene next", "/scene prev", "/screenshot", "/shutdown"],
+              screenshotScript: "scrot",
+              detailOption: {},
+              customCommands: [],
+            }
+        },
+        {
+            module: 'MMM-Scenes',
+            position: 'bottom_bar',
+            classes: 'scores solar stocks art',
+            config: {
+                duration: 300000,
+                scenario: [
+                    {
+                        name: 'scores',
+                        expelAnimation: 'pageUp',
+                        admitAnimation: 'pageRight'
+                    },
+                    {
+                        name: 'art',
+                        expelAnimation: 'pageRight',
+                        admitAnimation: [
+                          { transform: 'rotate(-360deg) scale(0, 0)', opacity: 0 },
+                          { transform: 'rotate(360deg) scale(1, 1)', opacity: 1 }
+                        ]
+                    },
+                    {
+                        name: 'solar',
+                        expelAnimation: 'pageLeft',
+                        admitAnimation: 'pageDown'
+                    },
+                    {
+                        name: 'stocks',
+                        expelAnimation: 'dismissOut',
+                        admitAnimation: 'pageDown'
+                    },
+                ],
+                autoLoop: 'infinity',
+                // inactiveIndicators: ['①', '②', '③', '④', '⑤'],
+                // activeIndicators: ['❶', '❷', '❸', '❹', '❺']
+                inactiveIndicators: ['①', '②', '③', '④'],
+                activeIndicators: ['❶', '❷', '❸', '❹']
+            }
         }
     ]
 };

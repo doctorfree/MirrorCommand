@@ -98,22 +98,21 @@ var config = {
               autoplay: true, // If set to true, sound (muted by default) has to be muted, otherwise the video will not auto play.
               notification: "VIDEOPLAYER1", // Unique notification string for this player (to be able to play and pause from another modules).
             }
-         },
-        // {
-        //     module: 'MMM-TelegramBot',
-        //     config: {
-        //       telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-              // This is NOT the username of bot.
-        //       allowedUser : ['Your-Telegram-Username'],
-        //       adminChatId : Your-Telegram-Chat-ID,
-        //       useWelcomeMessage: true,
-        //       verbose: false,
-        //       favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
-        //       screenshotScript: "scrot",
-        //       detailOption: {},
-        //       customCommands: [],
-        //     }
-        // },
+        },
+        {
+            module: 'MMM-TelegramBot',
+            config: {
+              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
+              allowedUser : ['Your-Telegram-Username'],
+              adminChatId : Your-Telegram-Chat-ID,
+              useWelcomeMessage: true,
+              verbose: false,
+              favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
+              screenshotScript: "scrot",
+              detailOption: {},
+              customCommands: [],
+            }
+        },
         // {
         //     module: "MMM-GoogleAssistant",
         //     position: "top_right",

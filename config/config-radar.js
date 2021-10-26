@@ -339,57 +339,21 @@ var config = {
                 ],
             },
         },
-        // {
-        //     module: "clock",
-        //     position: "upper_third",
-        //     classes: 'darksky',
-        //     config: {
-        //         dateFormat: "dddd, LLL",
-        //         displayType: "analog",
-        //         analogFace: "face-009",
-        //         analogSize: "200px",
-        //         displaySeconds: "true",
-        //         secondsColor: "#BAA3DC",
-        //         timeFormat: "12",
-        //         showPeriod: "true",
-        //         showDate: "true",
-        //         clockBold: "false",
-        //         analogPlacement: "top",
-        //         analogShowDate: "top",
-        //     }
-        // },
-        // {
-        //     module: "weather",
-        //     position: "top_left",
-        //     classes: 'darksky',
-        //     header: "Current Weather",
-        //     config: {
-        //      type: 'current',
-        //      location: "Santa Cruz,United States",
-        //      locationID: "5393052",
-        //      units: "imperial",
-        //      apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
-        //     }
-        // },
-        // {
-        //     module: "MMM-DarkSkyForecast",
-        //     header: "Dark Sky Weather Forecast",
-        //     position: "bottom_center",
-        //     classes: 'darksky',
-        //     disabled: false,
-        //     config: {
-        //       apikey: "xxx_Dark-Sky-API-Key_xxxxxxxxxxx",
-        //       latitude: "36.970019",
-        //       longitude: "-122.042212",
-        //       iconset: "5c",
-        //       concise: false,
-        //       units: "us",
-        //       forecastLayout: "tiled",
-        //       hourlyForecastInterval: 2,
-        //       maxHourliesToShow: 5,
-        //       maxDailiesToShow: 5,
-        //     }
-        // },
+        {
+            module: 'MMM-TelegramBot',
+            classes: 'radar traffic weather',
+            config: {
+              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
+              allowedUser : ['Your-Telegram-Username'],
+              adminChatId : Your-Telegram-Chat-ID,
+              useWelcomeMessage: true,
+              verbose: false,
+              favourites:["/hideip", "/showip", "/hideOffline", "/showOffline"],
+              screenshotScript: "scrot",
+              detailOption: {},
+              customCommands: [],
+            }
+        },
         {
           module: 'MMM-Scenes',
           position: 'bottom_bar',

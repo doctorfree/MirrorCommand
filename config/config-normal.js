@@ -440,6 +440,20 @@ var config = {
                 rotationTime: 900000, // rotate page every 15 minutes = 15 * 60 * 1000
             }
         },
+        {
+            module: 'MMM-TelegramBot',
+            config: {
+              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
+              allowedUser : ['Your-Telegram-Username'],
+              adminChatId : Your-Telegram-Chat-ID,
+              useWelcomeMessage: true,
+              verbose: false,
+              favourites:["/hideip", "/showip", "/hideOffline", "/showOffline"],
+              screenshotScript: "scrot",
+              detailOption: {},
+              customCommands: [],
+            }
+        },
     ]
 };
 

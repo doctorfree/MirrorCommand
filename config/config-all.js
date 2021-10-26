@@ -570,7 +570,7 @@ var config = {
               forecastLayout: "tiled"
             }
          },
-        {
+         {
             module: 'MMM-pages',
             config: {
                 modules:
@@ -597,6 +597,20 @@ var config = {
                 fixed:
                     ["alert", "updatenotification", "MMM-Remote-Control"],
                 rotationTime: 300000, // rotate page every 5 minutes = 5 * 60 * 1000
+            }
+        },
+        {
+            module: 'MMM-TelegramBot',
+            config: {
+              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
+              allowedUser : ['Your-Telegram-Username'],
+              adminChatId : Your-Telegram-Chat-ID,
+              useWelcomeMessage: true,
+              verbose: false,
+              favourites:["/hideip", "/showip", "/hideOffline", "/showOffline"],
+              screenshotScript: "scrot",
+              detailOption: {},
+              customCommands: [],
             }
         },
         // {
