@@ -84,6 +84,7 @@ var config = {
             config: {
                 imagePaths: [
                     'modules/MMM-BackgroundSlideshow/pics/waterfallPG/',
+                    'modules/MMM-BackgroundSlideshow/pics/gif/Nature/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

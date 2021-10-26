@@ -98,6 +98,7 @@ var config = {
             config: {
                 imagePaths: [
                     'modules/MMM-BackgroundSlideshow/pics/fractals/',
+                    'modules/MMM-BackgroundSlideshow/pics/gif/Nature/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,
@@ -107,6 +108,20 @@ var config = {
                 maxWidth: 1080,
                 maxHeight: 1920,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
+            }
+        },
+        {
+            module: 'MMM-TelegramBot',
+            config: {
+              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
+              allowedUser : ['Your-Telegram-Username'],
+              adminChatId : Your-Telegram-Chat-ID,
+              useWelcomeMessage: true,
+              verbose: false,
+              favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
+              screenshotScript: "scrot",
+              detailOption: {},
+              customCommands: [],
             }
         },
         {
@@ -120,7 +135,7 @@ var config = {
                         ["MMM-BackgroundSlideshow"],
                     ],
                 fixed:
-                    ["alert", "updatenotification", "MMM-Remote-Control"],
+                    ["alert", "updatenotification", "MMM-Remote-Control", "MMM-TelegramBot"],
                 rotationTime: 1200000, // rotate page every 20 minutes = 20 * 60 * 1000
             }
         },

@@ -431,16 +431,6 @@ var config = {
             },
         },
         {
-            module: 'MMM-pages',
-            config: {
-                modules:
-                    [[ "MMM-Solar"], [ "mmm-hue-lights"]],
-                fixed:
-                    ["alert", "updatenotification", "MMM-Remote-Control", "clock", "calendar", "weather", "newsfeed", "MMM-Tools", "MMM-stocks", "MMM-MacAddressScan"],
-                rotationTime: 900000, // rotate page every 15 minutes = 15 * 60 * 1000
-            }
-        },
-        {
             module: 'MMM-TelegramBot',
             config: {
               telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
@@ -452,6 +442,16 @@ var config = {
               screenshotScript: "scrot",
               detailOption: {},
               customCommands: [],
+            }
+        },
+        {
+            module: 'MMM-pages',
+            config: {
+                modules:
+                    [[ "MMM-Solar"], [ "mmm-hue-lights"]],
+                fixed:
+                    ["alert", "updatenotification", "MMM-Remote-Control", "clock", "calendar", "weather", "newsfeed", "MMM-Tools", "MMM-stocks", "MMM-MacAddressScan", "MMM-TelegramBot"],
+                rotationTime: 900000, // rotate page every 15 minutes = 15 * 60 * 1000
             }
         },
     ]

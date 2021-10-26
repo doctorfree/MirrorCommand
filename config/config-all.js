@@ -569,35 +569,6 @@ var config = {
 			  units: "us",
               forecastLayout: "tiled"
             }
-         },
-         {
-            module: 'MMM-pages',
-            config: {
-                modules:
-                    [
-                        ["MMM-iFrame", "MMM-Tools", "MMM-Solar",
-                         "mmm-hue-lights", "MMM-MacAddressScan"],
-
-                        ["weather", "clock", "calendar", "newsfeed",
-                         "MMM-Tools", "MMM-Solar", "mmm-hue-lights",
-                         "MMM-MacAddressScan"],
-
-                        ["weather", "clock", "MMM-COVID19-SPARKLINE",
-                         "newsfeed", "MMM-DateOnly"],
-
-                        ["weather", "clock", "MMM-GoogleMapsTraffic",
-                         "newsfeed", "MMM-DateOnly"],
-
-                        ["weather", "clock", "MMM-CoinMarketCap",
-                         "MMM-stocks", "MMM-DateOnly", "newsfeed"],
-
-                        ["weather", "clock", "MMM-RAIN-RADAR",
-                         "MMM-DarkSkyForecast", "MMM-DateOnly"],
-                    ],
-                fixed:
-                    ["alert", "updatenotification", "MMM-Remote-Control"],
-                rotationTime: 300000, // rotate page every 5 minutes = 5 * 60 * 1000
-            }
         },
         {
             module: 'MMM-TelegramBot',
@@ -624,6 +595,35 @@ var config = {
         //     updateDelay: 500
         //     }
         // },
+         {
+            module: 'MMM-pages',
+            config: {
+                modules:
+                    [
+                        ["MMM-iFrame", "MMM-Tools", "MMM-Solar",
+                         "mmm-hue-lights", "MMM-MacAddressScan"],
+
+                        ["weather", "clock", "calendar", "newsfeed",
+                         "MMM-Tools", "MMM-Solar", "mmm-hue-lights",
+                         "MMM-MacAddressScan"],
+
+                        ["weather", "clock", "MMM-COVID19-SPARKLINE",
+                         "newsfeed", "MMM-DateOnly"],
+
+                        ["weather", "clock", "MMM-GoogleMapsTraffic",
+                         "newsfeed", "MMM-DateOnly"],
+
+                        ["weather", "clock", "MMM-CoinMarketCap",
+                         "MMM-stocks", "MMM-DateOnly", "newsfeed"],
+
+                        ["weather", "clock", "MMM-RAIN-RADAR",
+                         "MMM-DarkSkyForecast", "MMM-DateOnly"],
+                    ],
+                fixed:
+                    ["alert", "updatenotification", "MMM-Remote-Control", "MMM-TelegramBot"],
+                rotationTime: 300000, // rotate page every 5 minutes = 5 * 60 * 1000
+            }
+        },
     ]
 };
 
