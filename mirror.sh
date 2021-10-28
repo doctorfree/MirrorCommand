@@ -65,6 +65,7 @@ PLEASE="Please enter your MagicMirror"
 NUMPROMPT="Enter either a number or text of one of the menu entries"
 SUBDIR_CONFS=
 START_DEV=
+MARKDOWN=
 INFO="all"
 BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
@@ -968,6 +969,51 @@ set_config() {
 }
 
 system_info() {
+  if [ "${MARKDOWN}" ]
+  then
+    printf "\nSystem information for:\n"
+    uname -a
+    [ "$INFO" == "all" ] || [ "$INFO" == "temp" ] && {
+        printf "\nCPU `vcgencmd measure_temp`\n"
+    }
+    [ "$INFO" == "all" ] || [ "$INFO" == "mem" ] && {
+        cpu_mem=`vcgencmd get_mem arm | awk -F "=" ' { print $2 } '`
+        gpu_mem=`vcgencmd get_mem gpu | awk -F "=" ' { print $2 } '`
+        printf "\nMemory Split:\tCPU=${cpu_mem}\tGPU=${gpu_mem}\n"
+        printf "\nMemory:\n"
+        free -h
+    }
+    [ "$INFO" == "all" ] || [ "$INFO" == "disk" ] && {
+        printf "\nDisk and filesystem usage:\n"
+        findmnt --fstab --evaluate
+        printf "\n"
+        df -h -x tmpfs -x udev -x devtmpfs
+    }
+    [ "$INFO" == "all" ] || [ "$INFO" == "usb" ] && {
+        printf "\nUSB Devices:\n"
+        lsusb
+    }
+    [ "$INFO" == "all" ] || [ "$INFO" == "net" ] && {
+        printf "\nNetwork IP/mask:\n"
+        ifconfig | grep inet | grep netmask
+    }
+    [ "$INFO" == "all" ] || [ "$INFO" == "wireless" ] && {
+        printf "\nWireless info:\n"
+        iwconfig 2> /dev/null | grep ESSID | while read entry
+        do
+            interface=`echo $entry | awk ' { print $1 } '`
+            iwconfig $interface
+        done
+    }
+    [ "$INFO" == "all" ] || [ "$INFO" == "screen" ] && {
+        printf "Screen dimensions and resolution:\n"
+        xrandr | grep Screen
+        xrandr | grep connected
+        xdpyinfo | grep dimensions
+        xdpyinfo | grep resolution
+        display_status
+    }
+  else
     printf "\n${BOLD}System information for:${NORMAL}\n"
     uname -a
     [ "$INFO" == "all" ] || [ "$INFO" == "temp" ] && {
@@ -1010,6 +1056,7 @@ system_info() {
         xdpyinfo | grep resolution
         display_status
     }
+  fi
 }
 
 get_info_type() {
@@ -1523,7 +1570,7 @@ select_youtube() {
 # stop
 # status [all]
 
-while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
+while getopts a:A:b:Bc:dDhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
     case $flag in
         a)
           artist_create ${OPTARG}
@@ -1542,6 +1589,9 @@ while getopts a:A:b:Bc:dhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
           ;;
         d)
           START_DEV=1
+          ;;
+        D)
+          MARKDOWN=1
           ;;
         h)
           show_video
@@ -1715,6 +1765,13 @@ shift $(( OPTIND - 1 ))
 }
 
 [ "$1" == "status" ] && {
+  if [ "${MARKDOWN}" ]
+  then
+    pm2 -m status MagicMirror
+    display_status
+    CONF=`readlink -f ${CONFDIR}/config.js`
+    echo "Using config file `basename ${CONF}`"
+  else
     printf "\n${BOLD}MagicMirror Status:${NORMAL}\n"
     pm2 status MagicMirror --update-env
     CONF=`readlink -f ${CONFDIR}/config.js`
@@ -1722,7 +1779,8 @@ shift $(( OPTIND - 1 ))
     display_status
     check_config $2
     printf "\n${BOLD}Done${NORMAL}\n"
-    exit 0
+  fi
+  exit 0
 }
 
 [ "$1" == "getb" ] && {
