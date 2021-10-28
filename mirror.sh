@@ -65,7 +65,7 @@ PLEASE="Please enter your MagicMirror"
 NUMPROMPT="Enter either a number or text of one of the menu entries"
 SUBDIR_CONFS=
 START_DEV=
-MARKDOWN=
+TELEGRAM=
 INFO="all"
 BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
@@ -159,11 +159,11 @@ list_mods() {
     }
     if [ "$1" == "active" ]
     then
-      if [ "${MARKDOWN}" ]
+      printf "\n${BOLD}Listing Active MagicMirror modules${NORMAL}\n\n"
+      if [ "${TELEGRAM}" ]
       then
         if [ "$usejq" ]
         then
-          printf "\nListing Active MagicMirror modules:\n\n"
           if [ "${apikey}" ]
           then
             curl -X GET http://${IP}:${PORT}/api/module?apiKey=${apikey} 2> /dev/null | jq '.data | .[] | .name'
@@ -174,7 +174,6 @@ list_mods() {
           printf "\nInstall jq to list active MagicMirror modules\n"
         fi
       else
-        printf "\n${BOLD}Listing Active MagicMirror modules${NORMAL}\n"
         if [ "$usejq" ]
         then
           if [ "${apikey}" ]
@@ -196,9 +195,9 @@ list_mods() {
     else
         if [ "$1" == "installed" ]
         then
-          if [ "${MARKDOWN}" ]
+          printf "\n${BOLD}Listing Installed MagicMirror modules${NORMAL}\n\n"
+          if [ "${TELEGRAM}" ]
           then
-            printf "\nListing Installed MagicMirror modules:\n\n"
             if [ "$usejq" ]
             then
               if [ "${apikey}" ]
@@ -211,7 +210,6 @@ list_mods() {
               printf "\nInstall jq to list installed MagicMirror modules\n"
             fi
           else
-            printf "\n${BOLD}Listing Installed MagicMirror modules${NORMAL}\n"
             if [ "$usejq" ]
             then
               if [ "${apikey}" ]
@@ -233,9 +231,9 @@ list_mods() {
         else
             if [ "$1" == "configs" ]
             then
-                if [ "${MARKDOWN}" ]
+                printf "\n${BOLD}Listing ${MMCFMSG}s:${NORMAL}\n\n"
+                if [ "${TELEGRAM}" ]
                 then
-                  printf "\nListing ${MMCFMSG}s:\n\n"
                   # /bin/ls config-*.js | cut -c -4000
                   configlist=
                   for c in config-*.js
@@ -250,10 +248,9 @@ list_mods() {
                   done
                   [ "$configlist" ] && echo $configlist | sed -e "s/ /\n/g"
                 else
-                  printf "\n${BOLD}Listing ${MMCFMSG}s:${NORMAL}\n\n"
                   ls config-*.js
                 fi
-                [ "${MARKDOWN}" ] || {
+                [ "${TELEGRAM}" ] || {
                   for confdir in __none__ ${CONF_SUBDIRS}
                   do
                     [ "${confdir}" == "__none__" ] && continue
@@ -334,14 +331,14 @@ start_dev() {
 }
 
 get_brightness() {
-    printf "\n${BOLD}Getting MagicMirror Brightness Level${NORMAL}\n"
+    printf "\n${BOLD}MagicMirror Brightness Level:${NORMAL} "
     if [ "$usejq" ]
     then
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/brightness?apiKey=${apikey} 2> /dev/null | jq .
+        curl -X GET http://${IP}:${PORT}/api/brightness?apiKey=${apikey} 2> /dev/null | jq '.result'
       else
-        curl -X GET http://${IP}:${PORT}/api/brightness 2> /dev/null | jq .
+        curl -X GET http://${IP}:${PORT}/api/brightness 2> /dev/null | jq '.result'
       fi
     else
       if [ "${apikey}" ]
@@ -1021,12 +1018,7 @@ set_config() {
 }
 
 system_info() {
-    if [ "${MARKDOWN}" ]
-    then
-        printf "\nSystem information for:\n"
-    else
-        printf "\n${BOLD}System information for:${NORMAL}\n"
-    fi
+    printf "\n${BOLD}System information for:${NORMAL}\n"
     uname -a
     [ "$INFO" == "all" ] || [ "$INFO" == "temp" ] && {
         printf "\nCPU `vcgencmd measure_temp`\n"
@@ -1602,7 +1594,9 @@ while getopts a:A:b:Bc:dDhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
           START_DEV=1
           ;;
         D)
-          MARKDOWN=1
+          TELEGRAM=1
+          BOLD=
+          NORMAL=
           ;;
         h)
           show_video
@@ -1776,21 +1770,17 @@ shift $(( OPTIND - 1 ))
 }
 
 [ "$1" == "status" ] && {
-  if [ "${MARKDOWN}" ]
+  printf "\n${BOLD}MagicMirror Status:${NORMAL}\n"
+  if [ "${TELEGRAM}" ]
   then
     pm2 -m status MagicMirror
-    display_status
-    CONF=`readlink -f ${CONFDIR}/config.js`
-    echo "Using config file `basename ${CONF}`"
   else
-    printf "\n${BOLD}MagicMirror Status:${NORMAL}\n"
     pm2 status MagicMirror --update-env
-    CONF=`readlink -f ${CONFDIR}/config.js`
-    printf "\nUsing config file `basename ${CONF}`\n"
-    display_status
     check_config $2
-    printf "\n${BOLD}Done${NORMAL}\n"
   fi
+  CONF=`readlink -f ${CONFDIR}/config.js`
+  printf "\nUsing config file `basename ${CONF}`\n"
+  display_status
   exit 0
 }
 
