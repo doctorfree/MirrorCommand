@@ -3,7 +3,18 @@
    "type": "menu",
    "icon": "id-card-o",
    "text": "Mirror Command Line",
-   "items": [{
+   "items": [
+      {
+         "id": "restartmm",
+         "type": "item",
+         "icon": "dot-circle-o",
+         "text": "Restart MagicMirror",
+         "action": "COMMAND",
+         "content": {
+            "command": "restartCommand"
+         }
+      },
+      {
          "id": "screenshot",
          "type": "item",
          "icon": "dot-circle-o",
