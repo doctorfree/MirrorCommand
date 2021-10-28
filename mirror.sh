@@ -159,6 +159,21 @@ list_mods() {
     }
     if [ "$1" == "active" ]
     then
+      if [ "${MARKDOWN}" ]
+      then
+        if [ "$usejq" ]
+        then
+          printf "\nListing Active MagicMirror modules:\n\n"
+          if [ "${apikey}" ]
+          then
+            curl -X GET http://${IP}:${PORT}/api/module?apiKey=${apikey} 2> /dev/null | jq '.data | .[] | .name'
+          else
+            curl -X GET http://${IP}:${PORT}/api/module 2> /dev/null | jq '.data | .[] | .name'
+          fi
+        else
+          printf "\nInstall jq to list active MagicMirror modules\n"
+        fi
+      else
         printf "\n${BOLD}Listing Active MagicMirror modules${NORMAL}\n"
         if [ "$usejq" ]
         then
@@ -177,9 +192,25 @@ list_mods() {
           fi
           echo ""
         fi
+      fi
     else
         if [ "$1" == "installed" ]
         then
+          if [ "${MARKDOWN}" ]
+          then
+            printf "\nListing Installed MagicMirror modules:\n\n"
+            if [ "$usejq" ]
+            then
+              if [ "${apikey}" ]
+              then
+                curl -X GET http://${IP}:${PORT}/api/module/installed?apiKey=${apikey} 2> /dev/null | jq '.data | .[] | .longname'
+              else
+                curl -X GET http://${IP}:${PORT}/api/module/installed 2> /dev/null | jq '.data | .[] | .longname'
+              fi
+            else
+              printf "\nInstall jq to list installed MagicMirror modules\n"
+            fi
+          else
             printf "\n${BOLD}Listing Installed MagicMirror modules${NORMAL}\n"
             if [ "$usejq" ]
             then
@@ -198,19 +229,40 @@ list_mods() {
               fi
               echo ""
             fi
+          fi
         else
             if [ "$1" == "configs" ]
             then
-                printf "\n${BOLD}Listing ${MMCFMSG}s:${NORMAL}\n\n"
-                ls config-*.js
-                for confdir in __none__ ${CONF_SUBDIRS}
-                do
+                if [ "${MARKDOWN}" ]
+                then
+                  printf "\nListing ${MMCFMSG}s:\n\n"
+                  # /bin/ls config-*.js | cut -c -4000
+                  configlist=
+                  for c in config-*.js
+                  do
+                      [ "$c" == "config-*.js" ] && continue
+                      echo $c | grep 'sample\|test\|unknown' > /dev/null && continue
+                      #echo $c | grep test > /dev/null && continue
+                      config_name=`echo $c | sed -e "s/config-//" -e "s/.js//"`
+                      configlist="$configlist $config_name"
+                      list_size=`echo $configlist | wc -c`
+                      [ $list_size -gt 350 ] && break
+                  done
+                  [ "$configlist" ] && echo $configlist | sed -e "s/ /\n/g"
+                else
+                  printf "\n${BOLD}Listing ${MMCFMSG}s:${NORMAL}\n\n"
+                  ls config-*.js
+                fi
+                [ "${MARKDOWN}" ] || {
+                  for confdir in __none__ ${CONF_SUBDIRS}
+                  do
                     [ "${confdir}" == "__none__" ] && continue
                     [ -d ${confdir} ] && {
                         printf "\n${BOLD}Listing MagicMirror ${confdir} configuration files:${NORMAL}\n\n"
                         ls ${confdir}/config-*.js
                     }
-                done
+                  done
+                }
             else
                 printf "\nmirror list $1 is not an accepted 2nd argument."
                 printf "\nValid 2nd arguments to the list command are 'active', 'installed', and 'configs'"
@@ -969,52 +1021,12 @@ set_config() {
 }
 
 system_info() {
-  if [ "${MARKDOWN}" ]
-  then
-    printf "\nSystem information for:\n"
-    uname -a
-    [ "$INFO" == "all" ] || [ "$INFO" == "temp" ] && {
-        printf "\nCPU `vcgencmd measure_temp`\n"
-    }
-    [ "$INFO" == "all" ] || [ "$INFO" == "mem" ] && {
-        cpu_mem=`vcgencmd get_mem arm | awk -F "=" ' { print $2 } '`
-        gpu_mem=`vcgencmd get_mem gpu | awk -F "=" ' { print $2 } '`
-        printf "\nMemory Split:\tCPU=${cpu_mem}\tGPU=${gpu_mem}\n"
-        printf "\nMemory:\n"
-        free -h
-    }
-    [ "$INFO" == "all" ] || [ "$INFO" == "disk" ] && {
-        printf "\nDisk and filesystem usage:\n"
-        findmnt --fstab --evaluate
-        printf "\n"
-        df -h -x tmpfs -x udev -x devtmpfs
-    }
-    [ "$INFO" == "all" ] || [ "$INFO" == "usb" ] && {
-        printf "\nUSB Devices:\n"
-        lsusb
-    }
-    [ "$INFO" == "all" ] || [ "$INFO" == "net" ] && {
-        printf "\nNetwork IP/mask:\n"
-        ifconfig | grep inet | grep netmask
-    }
-    [ "$INFO" == "all" ] || [ "$INFO" == "wireless" ] && {
-        printf "\nWireless info:\n"
-        iwconfig 2> /dev/null | grep ESSID | while read entry
-        do
-            interface=`echo $entry | awk ' { print $1 } '`
-            iwconfig $interface
-        done
-    }
-    [ "$INFO" == "all" ] || [ "$INFO" == "screen" ] && {
-        printf "Screen dimensions and resolution:\n"
-        xrandr | grep Screen
-        xrandr | grep connected
-        xdpyinfo | grep dimensions
-        xdpyinfo | grep resolution
-        display_status
-    }
-  else
-    printf "\n${BOLD}System information for:${NORMAL}\n"
+    if [ "${MARKDOWN}" ]
+    then
+        printf "\nSystem information for:\n"
+    else
+        printf "\n${BOLD}System information for:${NORMAL}\n"
+    fi
     uname -a
     [ "$INFO" == "all" ] || [ "$INFO" == "temp" ] && {
         printf "\nCPU `vcgencmd measure_temp`\n"
@@ -1056,7 +1068,6 @@ system_info() {
         xdpyinfo | grep resolution
         display_status
     }
-  fi
 }
 
 get_info_type() {
