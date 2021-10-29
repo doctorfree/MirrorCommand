@@ -66,6 +66,7 @@ NUMPROMPT="Enter either a number or text of one of the menu entries"
 SUBDIR_CONFS=
 START_DEV=
 TELEGRAM=
+ERROR_EXIT=1
 INFO="all"
 BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
@@ -79,7 +80,7 @@ usejq=`type -p jq`
 
 [ -d "${CONFDIR}" ] || {
     printf "\nCONFDIR does not exist or is not a directory. Exiting.\n"
-    exit 1
+    exit ${ERROR_EXIT}
 }
 cd "${CONFDIR}"
 
@@ -543,7 +544,7 @@ model_create() {
             cat ${MODEL_TEMPLATE} | sed -e "s/MODEL_DIR_HOLDER/${PICDIR}/" > "config-${PICDIR}.js"
         else
             echo "Model config template $MODEL_TEMPLATE not found"
-            exit 1
+            exit ${ERROR_EXIT}
         fi
     }
     if [ -d "${HOME}/Pictures/Models/${PICDIR}" ]
@@ -597,7 +598,7 @@ artist_create() {
             cat ${ARTIST_TEMPLATE} | sed -e "s/ARTIST_DIR_HOLDER/${PICDIR}/" > "config-${PICDIR}.js"
         else
             echo "Artist config template $ARTIST_TEMPLATE not found"
-            exit 1
+            exit ${ERROR_EXIT}
         fi
     }
     if [ -d "${HOME}/Pictures/Artists/${PICDIR}" ]
@@ -651,7 +652,7 @@ jav_create() {
             cat ${JAV_TEMPLATE} | sed -e "s/JAV_DIR_HOLDER/${PICDIR}/" > "config-${PICDIR}.js"
         else
             echo "JAV config template $JAV_TEMPLATE not found"
-            exit 1
+            exit ${ERROR_EXIT}
         fi
     }
     if [ -d "${HOME}/Pictures/JAV/${PICDIR}" ]
@@ -705,7 +706,7 @@ photo_create() {
             cat ${PHOTO_TEMPLATE} | sed -e "s/PHOTO_DIR_HOLDER/${PICDIR}/" > "config-${PICDIR}.js"
         else
             echo "Photographer config template $PHOTO_TEMPLATE not found"
-            exit 1
+            exit ${ERROR_EXIT}
         fi
     }
     if [ -d "${HOME}/Pictures/Photographers/${PICDIR}" ]
@@ -759,7 +760,7 @@ wh_create() {
             cat ${WHVN_TEMPLATE} | sed -e "s/WH_DIR_HOLDER/${PICDIR}/" > "config-${PICDIR}.js"
         else
             echo "Wallhaven config template $WHVN_TEMPLATE not found"
-            exit 1
+            exit ${ERROR_EXIT}
         fi
     }
     if [ -d "${HOME}/${WHVNDIR}/${PICDIR}" ]
@@ -824,10 +825,30 @@ wh_remove() {
 }
 
 usage() {
-    getconfs usage
+  getconfs usage
+  if [ "${TELEGRAM}" ]
+  then
+    printf "\n${BOLD}Usage:${NORMAL} mirror <command> <args>\n"
+    printf "\n  Where <command> can be one of the following:\n"
+    printf "\n    info <temp|mem|disk|usb|net|wireless|screen>"
+    printf "\n    list <active|installed|configs>"
+    printf "\n    rotate <right|left|normal|inverted>"
+    printf "\n    screen <on|off|info|status>"
+    printf "\n    stop|start|restart|mute|unmute"
+    printf "\n    playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo"
+    printf "\n    status <all>|dev|getb|setb <num>|vol <num>"
+    printf "\n    vol mute|unmute|save|restore|get"
+    printf "\n\n  or specify a config file to use with one of:"
+    printf "\n\n  ${CONFS}"
+    printf "\n\n  or any other config file you have created in ${CONFDIR} of the form:  config-<name>.js"
+    printf "\n\n  A config filename argument of 'foo', i.e. 'mirror foo', will be resolved into a config filename of the form:  config-foo.js"
+    printf "\n\n  A subdirectory in which to locate the config file can be specified"
+    printf " as the second argument, e.g. 'mirror foo bar' will attempt to use"
+    printf " the config file bar/config-foo.js"
+    printf "\n\nConsult the documentation or execute 'mirror -u' on your MagicMirror system for complete usage information.\n"
+  else
     printf "\n${BOLD}Usage:${NORMAL} mirror <command> [args]"
     printf "\nWhere <command> can be one of the following:"
-
     printf "\n\tinfo [temp|mem|disk|usb|net|wireless|screen],"
     printf " list <active|installed|configs>, rotate [right|left|normal|inverted],"
     printf " artists_dir, models_dir, photogs_dir, youtube, select, restart, screen [on|off|info|status],"
@@ -872,7 +893,8 @@ usage() {
     printf "\n\tmirror wh foobar\t\t# Creates and activates a slideshow config with pics in foobar"
     printf "\n\tmirror whrm foobar\t\t# Deactivate and remove slideshow in foobar"
     printf "\n\tmirror -u\t\t# Display this usage message\n"
-    exit 1
+  fi
+  exit ${ERROR_EXIT}
 }
 
 list_usage() {
@@ -924,7 +946,7 @@ setconf() {
         npm run --silent config:check
         rm -f config.js
         [ -f config-$$.js ] && mv config-$$.js config.js
-        exit 1
+        exit ${ERROR_EXIT}
     }
     [ -L config-$$.js ] && rm -f config-$$.js
     rotation=`xrandr | grep connected | awk ' { print $5 } '`
@@ -1597,6 +1619,7 @@ while getopts a:A:b:Bc:dDhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
           TELEGRAM=1
           BOLD=
           NORMAL=
+          ERROR_EXIT=0
           ;;
         h)
           show_video
