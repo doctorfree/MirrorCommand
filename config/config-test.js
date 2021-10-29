@@ -73,18 +73,80 @@ var config = {
                 // classes: {} // Optional, See "Custom Classes" below
             }
         },
-        // {
-        //     module: "MMM-Coinbase-Pro",
-        //     position: "middle_center",
-        //     header: "Coinbase Pro", // optional
-        //         config: {
-        //             apiKey: "0844c1b293b7ab2fed5c96a7556b2146",
-        //             apiSecret: "Qrpnrl/8HOL6q9MZl7wWzVPm8yS2jj5zu9zpI+ocNcdpuv7qwi4sbLu+tmB0OyrrpYJSXRsXvlEDbVaEiO5g3g==",
-        //             wallet: ["FIL", "ZRX"], // list of currencies to display
-        //             icons: false, // currently only Ethereum and Bitcoin supported
-        //             label: true,  // shows currency labels (e.g. BTC, ETH and so on)
-        //         }
-        // },
+        {
+            module: 'MMM-TelegramBot',
+            config: {
+              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
+              allowedUser : ['Your-Telegram-Username'],
+              adminChatId : Your-Telegram-Chat-ID,
+              useWelcomeMessage: true,
+              verbose: false,
+              favourites: [
+                  "/hideip",
+                  "/showip",
+                  "/hideOffline",
+                  "/showOffline",
+                  "/myReboot",
+                  "/myShutdown"
+              ],
+              screenshotScript: "scrot",
+              detailOption: {},
+              customCommands: [
+                {
+                  command: 'myReboot',
+                  description: "Executes custom MagicMirror `reboot` command",
+                  callback: (command, handler, self) => {
+                      var exec = "/usr/local/bin/reboot"
+                      handler.reply("TEXT", "Executing command: " + exec)
+                      var sessionId = Date.now() + "_" + self.commonSession.size
+                      if (exec) {
+                        self.commonSession.set(sessionId, handler)
+                        self.sendSocketNotification("SHELL", {
+                          session: sessionId,
+                          exec: exec
+                        })
+                      }
+                  },
+                },
+                {
+                  command: 'myShutdown',
+                  description: "Executes custom MagicMirror `shutdown` command",
+                  callback: (command, handler, self) => {
+                      var exec = "/usr/local/bin/shutdown"
+                      handler.reply("TEXT", "Executing command: " + exec)
+                      var sessionId = Date.now() + "_" + self.commonSession.size
+                      if (exec) {
+                        self.commonSession.set(sessionId, handler)
+                        self.sendSocketNotification("SHELL", {
+                          session: sessionId,
+                          exec: exec
+                        })
+                      }
+                  },
+                },
+                {
+                  command: 'mirror',
+                  description: "Executes MagicMirror `mirror` command\nTry `/mirror status`.",
+                  callback: (command, handler, self) => {
+                      if (handler.args) {
+                        var exec = "mirror -D " + handler.args
+                      } else {
+                        var exec = "mirror -D status"
+                      }
+                      handler.reply("TEXT", "Executing command: " + exec)
+                      var sessionId = Date.now() + "_" + self.commonSession.size
+                      if (exec) {
+                        self.commonSession.set(sessionId, handler)
+                        self.sendSocketNotification("SHELL", {
+                          session: sessionId,
+                          exec: exec
+                        })
+                      }
+                  },
+                },
+              ],
+            },
+        },
     ]
 };
 

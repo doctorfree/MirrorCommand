@@ -423,9 +423,6 @@ var config = {
                 ],
             },
         },
-        // {
-        //     module: 'MMM-TelegramCommands',
-        // },
         {
             module: 'MMM-TelegramBot',
             config: {
