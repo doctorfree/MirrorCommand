@@ -22,12 +22,12 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 1. [Overview](#overview)
 1. [History](#history)
 1. [Installation](#installation)
-1. [Remote Access](#remote-access)
+1. [Remote access](#remote-access)
+    1. [MMM-Remote-Control integration](#mmm-remote-control-integration)
+    1. [MMM-TelegramBot integration](#mmm-telegrambot-integration)
+        1. [TelegramBot installation](#telegrambot-installation)
+        1. [Telegram usage](#telegram-usage)
 1. [Usage](#usage)
-1. [MMM-Remote-Control integration](#mmm-remote-control-integration)
-1. [MMM-TelegramBot integration](#mmm-telegrambot-integration)
-    1. [TelegramBot installation](#telegrambot-installation)
-    1. [Telegram usage](#telegram-usage)
 1. [Contents](#contents)
 
 ## Overview
@@ -183,7 +183,7 @@ as needed.
 
 My custom.css is provided in the css subdirectory. Copy and modify as needed.
 
-## Remote Access
+## Remote access
 
 In order to remotely access the MagicMirror command line it is necessary to
 setup SSH and associated SSH keys. That configuration is outside the scope
@@ -211,66 +211,13 @@ shell command prompt:
 pi@raspberrypi:~ $ mirror
 </pre>
 
-## Usage
+Additional remote capabilities are provided by
+[MMM-Remote-Control integration](#mmm-remote-control-integration) and
+[MMM-TelegramBot integration](#mmm-telegrambot-integration). Accessing
+and controlling your MagicMirror using these facilities is described in
+the following sections.
 
-The `mirror` shell script is installed on any MagicMirror system that you want
-to utilize for command line control of your MagicMirror. Remote execution of
-the `mirror` command line script may be accomplished by using the "mm"
-convenience script on a remote system with SSH access to your MagicMirror.
-
-Here is the current output of "mirror -u" which displays a usage message.
-
-<pre>
-Usage: mirror [command] [args]
-Where [command] can be one of the following:
-	info [temp|mem|disk|usb|net|wireless|screen], list [active|installed|configs],
-	rotate [right|left|normal], artists_dir, models_dir, photogs_dir, select, restart,
-	screen [on|off|info|status], playvideo, pausevideo, nextvideo, hidevideo, showvideo,
-	replayvideo, start, stop, status [all], dev, getb, setb [num], ac [artist],
-	ar [artist], jc [idol], jr [idol], mc [model], mr [model], pc [photographer],
-	pr [photographer], wh [dir], whrm [dir]
-
-or specify a config file to use with one of:
-	 all Artists blank calendar coronavirus covidmap crypto default face
-	 fractals gif iframe instagram JAV Models Models_Photogs nature news
-	 normal nuts owls Photographers Playboy portal rooncontrol roon sample
-	 screencast server smoke stocks tantra test traffic tuigirl videotest
-	 volumio water weather youtube
-
-or any other config file you have created in /home/pi/MagicMirror/config of the form:
-	config-[name].js
-
-A config filename argument will be resolved into a config filename of the form:
-	config-$argument.js
-
-Arguments can also be specified as follows:
-	-a [artist], -A [artist], -b [brightness], -B, -c [config], -d, -i [info],
-	-V, -N, -R (toggle video play, play next video, replay video),
-	-H, -h (hide video, show video),
-	-I, -l [list], -r [rotate], -s [screen], -S, -m [model], -M [model],
-	-p [photographer], -P [photographer], -w [dir], -W [dir], -u
-
-Examples:
-	mirror		# Invoked with no arguments the mirror command displays a command menu
-	mirror list active		# lists active modules
-	mirror list configs		# lists available configuration files
-	mirror restart		# Restart MagicMirror
-	mirror fractals		# Installs configuration file config-fractals.js and restarts MagicMirror
-	mirror info		# Displays all MagicMirror system information
-	mirror info screen		# Displays MagicMirror screen information
-	mirror dev		# Restarts the mirror in developer mode
-	mirror rotate left/right/normal		# rotates the screen left, right, or normal
-	mirror screen on		#  Turns the Display ON
-	mirror screen off		# Turns the Display OFF
-	mirror status [all]		# Displays MagicMirror status, checks config syntax
-	mirror getb		# Displays current MagicMirror brightness level
-	mirror setb 150		# Sets MagicMirror brightness level to 150
-	mirror wh foobar		# Creates and activates a slideshow config with pics in foobar
-	mirror whrm foobar		# Deactivate and remove slideshow in foobar
-	mirror -u		# Display this usage message
-</pre>
-
-## MMM-Remote-Control integration
+### MMM-Remote-Control integration
 
 The `mirror` command line utilities can be integrated into a custom
 [MMM-Remote-Control](https://github.com/Jopyth/MMM-Remote-Control) menu.
@@ -286,7 +233,7 @@ a custom menu but it is currently incomplete. To add custom commands
 to MMM-Remote-Control using the `mirror` command, see the
 [MMM-Remote-Control Wiki Page](https://gitlab.com/doctorfree/MirrorCommandLine/-/wikis/Remote-Control-Custom-Menu).
 
-### MMM-TelegramBot integration
+#### MMM-TelegramBot integration
 You can control your MagicMirrir with the `mirror` command executed remotely
 using the Telegram app. This can allow you to control your MagicMirror from
 anywhere by simply sending a message on your phone using the Telegram app.
@@ -296,7 +243,7 @@ module, setup a Telegram Bot to send and receive MMM-TelegramBot messages,
 and add MMM-TelegramBot `customCommands` configuration to the MMM-TelegramBot
 config section in `config/config.js`.
 
-#### TelegramBot installation
+##### TelegramBot installation
 Follow the instructions at the
 [4th Party Modules Wiki](http://wiki.bugsounet.fr/en/MMM-TelegramBot)
 to create a Telegram Bot, install MMM-TelegramBot, and configure your
@@ -309,7 +256,7 @@ be modified to add `customCommands`. Samples of how to do this are in the
 config files in this repository. For example, see the `customCommands` entry in
 [**config/config-default.js**](config/config-default.js)
 
-#### Telegram usage
+##### Telegram usage
 Once installed and configured, you can control your MagicMirror
 by sending messages in the Telegram app to your previously created Telegram Bot.
 If you copied the example MMM-TelegramBot customCommands configuration in
@@ -345,6 +292,64 @@ To list the MagicMirror active modules, issue the command:
 ```
 Any `mirror` command can be executed via Telegram in this manner.
 See `mirror -u` for the `mirror` usage message.
+
+## Usage
+
+The `mirror` shell script is installed on any MagicMirror system that you want
+to utilize for command line control of your MagicMirror. Remote execution of
+the `mirror` command line script may be accomplished by using the "mm"
+convenience script on a remote system with SSH access to your MagicMirror.
+
+Here is the current output of "mirror -u" which displays a usage message.
+
+<pre>
+Usage: mirror <command> [args]
+Where <command> can be one of the following:
+	info [temp|mem|disk|usb|net|wireless|screen], list <active|installed|configs>, rotate [right|left|normal|inverted], artists_dir, models_dir, photogs_dir, youtube, select, restart, screen [on|off|info|status], playvideo, pausevideo, nextvideo, replayvideo, hidevideo, showvideo, start, stop, status [all], dev, getb, setb <num>, vol <num>, vol mute|unmute|save|restore|get, mute, unmute, ac|ar <artist>, jc|jr <idol>, mc|mr <model>, pc|pr <photographer>, wh|whrm <dir>
+
+or specify a config file to use with one of:
+	 all Artists art background blank calendar candy covid crypto
+	 darksky default face fractals gif iframe instagram JAV Models
+	 nature networkcols network news normal owls Photographers portal radar
+	 rooncontrol roon sample scenes scenes scnews scoreboard screencast server
+	 smoke stocks tantra test traffic unknown videotest volumio waterfalls
+	 weather YouTube
+
+or any other config file you have created in /home/pi/MagicMirror/config of the form:
+	config-<name>.js
+
+A config filename argument will be resolved into a config filename of the form:
+	config-$argument.js
+
+A subdirectory in which to locate the config file can be specified as the second argument, e.g. 'mirror foo bar' will attempt to use the config file bar/config-foo.js
+
+Arguments can also be specified as follows:
+	-a <artist>, -A <artist>, -b <brightness>, -B, -c <config>, -d, -i <info>,
+	-V, -N, -R (toggle video play, play next video, replay video),
+	-H, -h (Hide video, Show video),
+	-I, -l <list>, -r <rotate>, -s <screen>, -S, -m <model>, -M <model>,
+	-p <photographer>, -P <photographer>, -w <dir>, -W <dir>, -u
+
+Examples:
+	mirror		# Invoked with no arguments the mirror command displays a command menu
+	mirror list active		# lists active modules
+	mirror list configs		# lists available configuration files
+	mirror restart		# Restart MagicMirror
+	mirror fractals		# Installs configuration file config-fractals.js and restarts MagicMirror
+	mirror info		# Displays all MagicMirror system information
+	mirror info screen		# Displays MagicMirror screen information
+	mirror dev		# Restarts the mirror in developer mode
+	mirror rotate left/right/normal/inverted		# rotates the screen left, right, inverted, or normal
+	mirror screen on		#  Turns the Display ON
+	mirror screen off		# Turns the Display OFF
+	mirror status [all]		# Displays MagicMirror status, checks config syntax
+	mirror getb		# Displays current MagicMirror brightness level
+	mirror setb 150		# Sets MagicMirror brightness level to 150
+	mirror vol 50		# Sets MagicMirror volume level to 50
+	mirror wh foobar		# Creates and activates a slideshow config with pics in foobar
+	mirror whrm foobar		# Deactivate and remove slideshow in foobar
+	mirror -u		# Display this usage message
+</pre>
 
 ## Contents
 
