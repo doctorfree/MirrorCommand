@@ -25,7 +25,8 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 1. [Remote access](#remote-access)
     1. [MMM-Remote-Control integration](#mmm-remote-control-integration)
     1. [MMM-TelegramBot integration](#mmm-telegrambot-integration)
-        1. [TelegramBot installation](#telegrambot-installation)
+        1. [MMM-TelegramBot installation](#mmm-telegrambot-installation)
+        1. [MMM-TelegramBot module config](mmm-telegrambot-module-config)
         1. [Telegram usage](#telegram-usage)
 1. [Usage](#usage)
 1. [Contents](#contents)
@@ -243,18 +244,53 @@ module, setup a Telegram Bot to send and receive MMM-TelegramBot messages,
 and add MMM-TelegramBot `customCommands` configuration to the MMM-TelegramBot
 config section in `config/config.js`.
 
-##### TelegramBot installation
+##### MMM-TelegramBot installation
 Follow the instructions at the
 [4th Party Modules Wiki](http://wiki.bugsounet.fr/en/MMM-TelegramBot)
 to create a Telegram Bot, install MMM-TelegramBot, and configure your
 MagicMirror `config.js` to enable Telegram commands.
 
-**Note:** In addition to following the
+##### MMM-TelegramBot module config
+
+In addition to following the
 [4th Party Modules Wiki Installation instructions](http://wiki.bugsounet.fr/en/MMM-TelegramBot/Installation)
-to install the module, the config section of the module entry in `config.js` must
-be modified to add `customCommands`. Samples of how to do this are in the
-config files in this repository. For example, see the `customCommands` entry in
-[**config/config-default.js**](config/config-default.js)
+to install the module and setup a Telegram Bot, the config section of the
+MMM-TelegramBot module entry in `config.js` must be modified to add
+`customCommands`. Samples of how to do this are in the config files in
+this repository. For example, see the `customCommands` entry in
+[**config/config-default.js**](config/config-default.js).
+
+Here is the section of the `customCommands` array definition in the config
+section of the MMM-TelegramBot module entry in `config.js` that defines the
+`/mirror` Telegram command:
+
+```javascript
+{
+    command: 'mirror',
+    description: "Executes MagicMirror `mirror` command\nTry `/mirror status`.",
+    callback: (command, handler, self) => {
+        if (handler.args) {
+            var exec = "mirror -D " + handler.args
+        } else {
+            var exec = "mirror -D status"
+        }
+        handler.reply("TEXT", "Executing command: " + exec)
+        var sessionId = Date.now() + "_" + self.commonSession.size
+        if (exec) {
+            self.commonSession.set(sessionId, handler)
+            self.sendSocketNotification("SHELL", {
+                session: sessionId,
+                exec: exec
+            })
+        }
+    },
+},
+```
+
+This may look daunting.
+No worries, just copy and paste using either the above snippet or
+[one of the config files in this repository](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/config/config-default.js)
+as a guide.
 
 ##### Telegram usage
 Once installed and configured, you can control your MagicMirror
