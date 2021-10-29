@@ -211,11 +211,11 @@ shell command prompt:
 pi@raspberrypi:~ $ mirror
 </pre>
 
-Additional remote capabilities are provided by
-[MMM-Remote-Control integration](#mmm-remote-control-integration) and
-[MMM-TelegramBot integration](#mmm-telegrambot-integration). Accessing
-and controlling your MagicMirror using these facilities is described in
-the following sections.
+Additional remote capabilities are provided through integration with the
+[MMM-Remote-Control](https://github.com/Jopyth/MMM-Remote-Control) and
+[MMM-TelegramBot](https://github.com/bugsounet/MMM-TelegramBot) modules.
+Accessing and controlling your MagicMirror using these facilities is
+described in the following sections.
 
 ### MMM-Remote-Control integration
 
@@ -305,7 +305,12 @@ Here is the current output of "mirror -u" which displays a usage message.
 <pre>
 Usage: mirror <command> [args]
 Where <command> can be one of the following:
-	info [temp|mem|disk|usb|net|wireless|screen], list <active|installed|configs>, rotate [right|left|normal|inverted], artists_dir, models_dir, photogs_dir, youtube, select, restart, screen [on|off|info|status], playvideo, pausevideo, nextvideo, replayvideo, hidevideo, showvideo, start, stop, status [all], dev, getb, setb <num>, vol <num>, vol mute|unmute|save|restore|get, mute, unmute, ac|ar <artist>, jc|jr <idol>, mc|mr <model>, pc|pr <photographer>, wh|whrm <dir>
+	info [temp|mem|disk|usb|net|wireless|screen], list <active|installed|configs>,
+	rotate [right|left|normal|inverted], artists_dir, models_dir, photogs_dir,
+	youtube, select, restart, screen [on|off|info|status], playvideo, pausevideo,
+	nextvideo, replayvideo, hidevideo, showvideo, start, stop, status [all], dev,
+	getb, setb <num>, vol <num>, vol mute|unmute|save|restore|get, mute, unmute,
+	ac|ar <artist>, jc|jr <idol>, mc|mr <model>, pc|pr <photographer>, wh|whrm <dir>
 
 or specify a config file to use with one of:
 	 all Artists art background blank calendar candy covid crypto
@@ -321,7 +326,8 @@ or any other config file you have created in /home/pi/MagicMirror/config of the 
 A config filename argument will be resolved into a config filename of the form:
 	config-$argument.js
 
-A subdirectory in which to locate the config file can be specified as the second argument, e.g. 'mirror foo bar' will attempt to use the config file bar/config-foo.js
+A subdirectory in which to locate the config file can be specified as the second
+argument, e.g. 'mirror foo bar' will attempt to use the config file bar/config-foo.js
 
 Arguments can also be specified as follows:
 	-a <artist>, -A <artist>, -b <brightness>, -B, -c <config>, -d, -i <info>,
