@@ -25,6 +25,9 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 1. [Remote Access](#remote-access)
 1. [Usage](#usage)
 1. [MMM-Remote-Control integration](#mmm-remote-control-integration)
+1. [MMM-TelegramBot integration](#mmm-telegrambot-integration)
+    1. [TelegramBot installation](#telegrambot-installation)
+    1. [Telegram usage](#telegram-usage)
 1. [Contents](#contents)
 
 ## Overview
@@ -282,6 +285,66 @@ The MMM-Remote-Control module provides some documentation on creating
 a custom menu but it is currently incomplete. To add custom commands
 to MMM-Remote-Control using the `mirror` command, see the
 [MMM-Remote-Control Wiki Page](https://gitlab.com/doctorfree/MirrorCommandLine/-/wikis/Remote-Control-Custom-Menu).
+
+### TelegramBot integration
+You can control your MagicMirrir with the `mirror` command executed remotely
+using the Telegram app. This can allow you to control your MagicMirror from
+anywhere by simply sending a message on your phone using the Telegram app.
+To enable this feature, install the
+[MMM-TelegramBot](https://github.com/bugsounet/MMM-TelegramBot)
+module, setup a Telegram Bot to send and receive MMM-TelegramBot messages,
+and add MMM-TelegramBot `customCommands` configuration to the MMM-TelegramBot
+config section in `config/config.js`.
+
+#### TelegramBot installation
+Follow the instructions at the
+[4th Party Modules Wiki](http://wiki.bugsounet.fr/en/MMM-TelegramBot)
+to create a Telegram Bot, install MMM-TelegramBot, and configure your
+MagicMirror `config.js` to enable Telegram commands.
+
+**Note:** In addition to following the
+[4th Party Modules Wiki Installation instructions](http://wiki.bugsounet.fr/en/MMM-TelegramBot/Installation)
+to install the module, the config section of the module entry in `config.js` must
+be modified to add `customCommands`. Samples of how to do this are in the
+config files in this repository. For example, see the `customCommands` entry in
+[**config/config-default.js**](config/config-default.js)
+
+#### Telegram usage
+Once installed and configured, you can control your MagicMirror
+by sending messages in the Telegram app to your previously created Telegram Bot.
+If you copied the example MMM-TelegramBot customCommands configuration in
+one of the config files in this repository then you will have three new
+custom Telegram commands:
+
+- /myReboot
+    - Custom reboot command which executes /usr/local/bin/reboot
+- /myShutdown
+    - Custom shutdown command which executes /usr/local/bin/shutdown
+- /mirror
+    - General purpose command which executes the /usr/local/bin/mirror command with any arguments supplied in the Telegram command (e.g. `/mirror info` will retrieve your MagicMirror system information)
+
+A few examples follow:
+
+To switch the MagicMirror config.js to the configuration file
+'config/config-sample.js', issue the Telegram command:
+
+```
+/mirror sample
+```
+
+To retrieve the MagicMirror status, issue the command:
+
+```
+/mirror status
+```
+
+To list the MagicMirror active modules, issue the command:
+
+```
+/mirror list active
+```
+Any `mirror` command can be executed via Telegram in this manner.
+See `mirror -u` for the `mirror` usage message.
 
 ## Contents
 
