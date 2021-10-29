@@ -286,7 +286,7 @@ a custom menu but it is currently incomplete. To add custom commands
 to MMM-Remote-Control using the `mirror` command, see the
 [MMM-Remote-Control Wiki Page](https://gitlab.com/doctorfree/MirrorCommandLine/-/wikis/Remote-Control-Custom-Menu).
 
-### TelegramBot integration
+### MMM-TelegramBot integration
 You can control your MagicMirrir with the `mirror` command executed remotely
 using the Telegram app. This can allow you to control your MagicMirror from
 anywhere by simply sending a message on your phone using the Telegram app.
