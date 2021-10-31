@@ -33,6 +33,12 @@ var config = {
     language: "en",
     timeFormat: 12,
     units: "imperial",
+    electronOptions: {
+        webPreferences: {
+          webviewTag: true
+        }
+    },
+
     
     modules: [
         {
@@ -203,27 +209,71 @@ var config = {
             }
         },
         {
+            module: 'MMM-Solar',
+            position: "bottom_left",
+            config: {
+                apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
+                userId: "Solar-USER-ID",
+                systemId: "Solar-System-ID",
+                // basicHeader: "true",
+            }
+        },
+        {
             module: 'MMM-Tools',
             position: 'bottom_left',
             header: "System Info",
             config: {
-              device : "RPI", // "RPI" is also available
-              refresh_interval_ms : 10000,
-              warning_interval_ms : 1000 * 60 * 5,
-              enable_warning : true,
-              warning : {
-                CPU_TEMPERATURE : 65,
-                GPU_TEMPERATURE : 65,
-                CPU_USAGE : 75,
-                STORAGE_USED_PERCENT : 80,
-                MEMORY_USED_PERCENT : 80
+              refresh: 1000 * 5,
+              containerSize: null,
+              itemSize: null,
+              MM: {
+                displayMM: true,
+                orderMM: 0
               },
-              warning_text: {
-                CPU_TEMPERATURE : "The temperature of CPU is over %VAL%",
-                GPU_TEMPERATURE : "The temperature of GPU is over %VAL%",
-                CPU_USAGE : "The usage of CPU is over %VAL%",
-                STORAGE_USED_PERCENT : "The storage is used over %VAL% percent",
-                MEMORY_USED_PERCENT : "The memory is used over %VAL% percent",
+              OS: {
+                displayOs: true,
+                orderOs: 1
+              },
+              CPU: {
+                displayUsage: true,
+                orderUsage: 4,
+                displayTemp: true,
+                celciusTemp: true,
+                orderTemp: 7,
+                displayType: true,
+                orderType: 2
+              },
+              RAM: {
+                displayRam: true,
+                orderRam: 5
+              },
+              STORAGE: {
+                displayStorage: true,
+                orderStorage: 6,
+                partitionExclude : []
+              },
+              NETWORK: {
+                displayNetwork: true,
+                orderNetwork: 3,
+                nativeNetwork: false,
+                displayDefaultNetwork: true
+              },
+              UPTIME: {
+                displayUptime: true,
+                useMagicMirror: true,
+                orderUptime: 8,
+                displayRecord: true,
+                orderRecord: 9
+              },
+              WARNING: {
+                enableWarning: false,
+                interval: 1000 * 60 * 5,
+                check : {
+                  CPU_TEMP : 65,
+                  CPU_USAGE : 75,
+                  STORAGE_USED : 80,
+                  MEMORY_USED : 80,
+                }
               }
             }
         },
@@ -288,16 +338,6 @@ var config = {
             }
         },
         {
-            module: 'MMM-Solar',
-            position: "bottom_center",
-            config: {
-                apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
-                userId: "Solar-USER-ID",
-                systemId: "Solar-System-ID",
-                // basicHeader: "true",
-            }
-        },
-        {
             module: 'MMM-MacAddressScan',
             position: "bottom_right",
             header: "ARP Scan - Discovered Devices",
@@ -310,7 +350,7 @@ var config = {
                 coloredState: true,
                 showIP: true,
                 showUnknown: false,
-                showOffline: true,
+                showOffline: false,
                 keepAlive: 900,
                 updateInterval: 60,
                 // residents: ["iPhone 12 Mini"],
@@ -637,18 +677,134 @@ var config = {
               ],
             }
         },
-        // {
-        //     module: "MMM-GoogleAssistant",
-        //     position: "top_right",
-        //     config: {
-        //         maxWidth: "100%",
-        //         header: "",
-        //     publishKey: 'xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx',
-        //     subscribeKey: 'xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx',
-        //     updateDelay: 500
-        //     }
-        // },
-         {
+        {
+            module: "MMM-Detector",
+            position: "bottom_center",
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              autoStart: true,
+              useLogos: true,
+              newLogos: {
+                listen: "voice_assistant_head.jpg"
+              },
+              detectors: [
+                {
+                  detector: "Porcupine",
+                  Model: "ok google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "hey google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "computer",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                }
+              ],
+              NPMCheck: {
+                useChecker: true,
+                delay: 10 * 60 * 1000,
+                useAlert: true
+              }
+            }
+        },
+        {
+            module: "MMM-GoogleAssistant",
+            position: "top_center",
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              assistantConfig: {
+                lang: "en-US",
+                latitude: 36.970019,
+                longitude: -122.042212
+              },
+              responseConfig: {
+                useFullscreen: false,
+                useResponseOutput: true,
+                responseOutputCSS: "response_output.css",
+                screenOutputTimer: 5000,
+                activateDelay: 250,
+                useAudioOutput: true,
+                useChime: true,
+                confirmationChime: true,
+                useInformations: true,
+              },
+              Extented: {
+                useEXT: false,
+                youtube: {
+                  useYoutube: false,
+                  youtubeCommand: "youtube",
+                  displayResponse: true,
+                  useVLC: false,
+                  minVolume: 30,
+                  maxVolume: 100
+                },
+                links: {
+                  useLinks: false,
+                  displayDelay: 60 * 1000,
+                  scrollActivate: false,
+                  scrollStep: 25,
+                  scrollInterval: 1000,
+                  scrollStart: 5000
+                },
+                photos: {
+                  usePhotos: false,
+                  useGooglePhotosAPI: false,
+                  displayType: "none",
+                  displayDelay: 10 * 1000,
+                  albums: [],
+                  sort: "new",
+                  hiResolution: true,
+                  timeFormat: "DD/MM/YYYY HH:mm",
+                  moduleHeight: 300,
+                  moduleWidth: 300,
+                },
+                volume: {
+                  useVolume: false,
+                  // volumePreset: "ALSA_HEADPHONE",
+                  myScript: "/usr/local/bin/vol"
+                },
+                welcome: {
+                  useWelcome: true,
+                  welcome: "brief Today"
+                },
+                screen: {},
+                touch: {},
+                pir: {},
+                governor: {},
+                internet: {},
+                cast: {},
+                spotify: {
+                  useSpotify: false,
+                  visual: {},
+                  player: {}
+                },
+              },
+              recipes: ["myReboot-Restart-Shutdown.js"],
+              NPMCheck: {}
+            }
+        },
+        {
             module: 'MMM-pages',
             config: {
                 modules:
@@ -660,8 +816,8 @@ var config = {
                          "MMM-Tools", "MMM-Solar", "mmm-hue-lights",
                          "MMM-MacAddressScan"],
 
-                        ["weather", "clock", "MMM-COVID19-SPARKLINE",
-                         "newsfeed", "MMM-DateOnly"],
+                        ["clock", "MMM-COVID19-SPARKLINE", "newsfeed",
+                         "MMM-DateOnly", "MMM-Tools"],
 
                         ["weather", "clock", "MMM-GoogleMapsTraffic",
                          "newsfeed", "MMM-DateOnly"],
@@ -673,7 +829,8 @@ var config = {
                          "MMM-DarkSkyForecast", "MMM-DateOnly"],
                     ],
                 fixed:
-                    ["alert", "updatenotification", "MMM-Remote-Control", "MMM-TelegramBot"],
+                    ["alert", "updatenotification", "MMM-Remote-Control",
+                     "MMM-TelegramBot", "MMM-Detector", "MMM-GoogleAssistant"],
                 rotationTime: 300000, // rotate page every 5 minutes = 5 * 60 * 1000
             }
         },

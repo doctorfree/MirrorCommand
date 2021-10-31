@@ -4,7 +4,7 @@
               telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
               allowedUser : ['Your-Telegram-Username'],
               adminChatId : Your-Telegram-Chat-ID,
-              useWelcomeMessage: true,
+              useWelcomeMessage: false,
               verbose: false,
               favourites: [
                   "/hideip",

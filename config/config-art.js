@@ -43,6 +43,11 @@ var config = {
 	language: "en",
 	timeFormat: 12,
 	units: "imperial",
+    electronOptions: {
+        webPreferences: {
+          webviewTag: true
+        }
+    },
 	
 	modules: [
 		{
@@ -162,7 +167,7 @@ var config = {
                     'modules/MMM-BackgroundSlideshow/pics/Art/Picasso/',
                     'modules/MMM-BackgroundSlideshow/pics/Art/Zdzisław_Beksiński/',
                 ],
-                slideshowSpeed: 15000, // 15 seconds
+                slideshowSpeed: 60000, // 60 seconds
                 transitionImages: true,
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
@@ -170,6 +175,133 @@ var config = {
                 maxWidth: 1080,
                 maxHeight: 1920,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
+            }
+        },
+        {
+            module: "MMM-Detector",
+            position: "bottom_center",
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              autoStart: true,
+              useLogos: false,
+              newLogos: {
+                listen: "voice_assistant_head.jpg"
+              },
+              detectors: [
+                {
+                  detector: "Porcupine",
+                  Model: "ok google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "hey google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "computer",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                }
+              ],
+              NPMCheck: {
+                useChecker: true,
+                delay: 10 * 60 * 1000,
+                useAlert: true
+              }
+            }
+        },
+        {
+            module: "MMM-GoogleAssistant",
+            position: "top_center",
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              assistantConfig: {
+                lang: "en-US",
+                latitude: 36.970019,
+                longitude: -122.042212
+              },
+              responseConfig: {
+                useFullscreen: false,
+                useResponseOutput: true,
+                responseOutputCSS: "response_output.css",
+                screenOutputTimer: 5000,
+                activateDelay: 250,
+                useAudioOutput: true,
+                useChime: true,
+                confirmationChime: true,
+                useInformations: true,
+              },
+              Extented: {
+                useEXT: false,
+                youtube: {
+                  useYoutube: false,
+                  youtubeCommand: "youtube",
+                  displayResponse: true,
+                  useVLC: false,
+                  minVolume: 30,
+                  maxVolume: 100
+                },
+                links: {
+                  useLinks: false,
+                  displayDelay: 60 * 1000,
+                  scrollActivate: false,
+                  scrollStep: 25,
+                  scrollInterval: 1000,
+                  scrollStart: 5000
+                },
+                photos: {
+                  usePhotos: false,
+                  useGooglePhotosAPI: false,
+                  displayType: "none",
+                  displayDelay: 10 * 1000,
+                  albums: [],
+                  sort: "new",
+                  hiResolution: true,
+                  timeFormat: "DD/MM/YYYY HH:mm",
+                  moduleHeight: 300,
+                  moduleWidth: 300,
+                },
+                volume: {
+                  useVolume: false,
+                  // volumePreset: "ALSA_HEADPHONE",
+                  myScript: "/usr/local/bin/vol"
+                },
+                welcome: {
+                  useWelcome: true,
+                  welcome: "brief Today"
+                },
+                screen: {},
+                touch: {},
+                pir: {},
+                governor: {},
+                internet: {},
+                cast: {},
+                spotify: {
+                  useSpotify: false,
+                  visual: {},
+                  player: {}
+                },
+              },
+              recipes: ["myReboot-Restart-Shutdown.js"],
+              NPMCheck: {}
             }
         },
 	]

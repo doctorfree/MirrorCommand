@@ -43,11 +43,11 @@ var config = {
     language: "en",
     timeFormat: 12,
     units: "imperial",
-    // serverOnly:  true/false/"local" ,
-                 // local for armv6l processors, default 
-                 //   starts serveronly and then starts chrome browser
-                 // false, default for all  NON-armv6l devices
-                 // true, force serveronly mode, because you want to.. no UI on this device
+    electronOptions: {
+        webPreferences: {
+          webviewTag: true
+        }
+    },
     
     modules: [
         {
@@ -205,7 +205,7 @@ var config = {
         },
         {
             module: "clock",
-            position: "bottom_center",
+            position: "top_center",
             classes: 'radar',
             config: {
                 dateFormat: "dddd, LLL",
@@ -233,7 +233,7 @@ var config = {
         },
         {
             module: "MMM-DateOnly",
-            position: "bottom_center",
+            position: "top_center",
             classes: 'traffic',
             config: {
                 showWeek: false,
@@ -318,28 +318,6 @@ var config = {
             }
         },
         {
-            module: 'MMM-GoogleMapsTraffic',
-            position: 'bottom_center',
-            classes: 'weather',
-            config: {
-                key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
-                lat: 36.970019,
-                lng: -122.042212,
-                height: '600px',
-                width: '600px',
-                styledMapType: "standard",
-                disableDefaultUI: true,
-                backgroundColor: 'hsla(0, 0%, 0%, 0)',
-                markers: [
-                    {
-                        lat: 36.970019,
-                        lng: -122.042212,
-                        fillColor: '#9966ff'
-                    },
-                ],
-            },
-        },
-        {
             module: 'MMM-TelegramBot',
             classes: 'radar traffic weather',
             config: {
@@ -405,6 +383,147 @@ var config = {
                   },
                 },
               ],
+            }
+        },
+        {
+            module: "MMM-GoogleAssistant",
+            position: "bottom_center",
+            classes: 'radar traffic weather',
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              assistantConfig: {
+                lang: "en-US",
+                latitude: 36.970019,
+                longitude: -122.042212
+              },
+              responseConfig: {
+                useFullscreen: false,
+                useResponseOutput: true,
+                responseOutputCSS: "response_output.css",
+                screenOutputTimer: 5000,
+                activateDelay: 250,
+                useAudioOutput: true,
+                useChime: true,
+                confirmationChime: true,
+                useInformations: true,
+              },
+              Extented: {
+                useEXT: true,
+                youtube: {
+                  useYoutube: false,
+                  youtubeCommand: "youtube",
+                  displayResponse: true,
+                  useVLC: false,
+                  minVolume: 30,
+                  maxVolume: 100
+                },
+                links: {
+                  useLinks: true,
+                  displayDelay: 60 * 1000,
+                  scrollActivate: false,
+                  scrollStep: 25,
+                  scrollInterval: 1000,
+                  scrollStart: 5000
+                },
+                photos: {
+                  usePhotos: true,
+                  useGooglePhotosAPI: false,
+                  displayType: "none",
+                  displayDelay: 10 * 1000,
+                  albums: [],
+                  sort: "new",
+                  hiResolution: true,
+                  timeFormat: "DD/MM/YYYY HH:mm",
+                  moduleHeight: 300,
+                  moduleWidth: 300,
+                },
+                volume: {
+                  useVolume: true,
+                  volumePreset: "ALSA_HEADPHONE",
+                  myScript: "amixer sset -M 'Headphone' #VOLUME#%"
+                },
+                welcome: {
+                  useWelcome: true,
+                  welcome: "brief Today"
+                },
+                screen: {},
+                touch: {},
+                pir: {},
+                governor: {},
+                internet: {},
+                cast: {},
+                spotify: {
+                  useSpotify: false,
+                  visual: {},
+                  player: {}
+                },
+                music: {
+                  useMusic: true,
+                  useUSB: false,
+                  musicPath: "/home/pi/Music",
+                  checkSubDirectory: true,
+                  autoStart: false,
+                  minVolume: 30,
+                  maxVolume: 100
+                },
+              },
+              recipes: [
+                "myReboot-Restart-Shutdown.js",
+                "ExtRadio.js",
+              ],
+              NPMCheck: {}
+            }
+        },
+        {
+            module: "MMM-Detector",
+            position: "bottom_center",
+            classes: 'radar traffic weather',
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              autoStart: true,
+              useLogos: true,
+              newLogos: {
+                listen: "voice_assistant_head.jpg"
+              },
+              detectors: [
+                {
+                  detector: "Porcupine",
+                  Model: "ok google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "hey google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "computer",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                }
+              ],
+              NPMCheck: {
+                useChecker: true,
+                delay: 10 * 60 * 1000,
+                useAlert: true
+              }
             }
         },
         {

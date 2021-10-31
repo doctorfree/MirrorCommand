@@ -191,23 +191,57 @@ var config = {
             position: 'bottom_left',
             header: "System Info",
             config: {
-              device : "RPI", // "RPI" is also available
-              refresh_interval_ms : 10000,
-              warning_interval_ms : 1000 * 60 * 5,
-              enable_warning : true,
-              warning : {
-                CPU_TEMPERATURE : 65,
-                GPU_TEMPERATURE : 65,
-                CPU_USAGE : 75,
-                STORAGE_USED_PERCENT : 80,
-                MEMORY_USED_PERCENT : 80
+              refresh: 1000 * 5,
+              containerSize: null,
+              itemSize: null,
+              MM: {
+                displayMM: true,
+                orderMM: 0
               },
-              warning_text: {
-                CPU_TEMPERATURE : "The temperature of CPU is over %VAL%",
-                GPU_TEMPERATURE : "The temperature of GPU is over %VAL%",
-                CPU_USAGE : "The usage of CPU is over %VAL%",
-                STORAGE_USED_PERCENT : "The storage is used over %VAL% percent",
-                MEMORY_USED_PERCENT : "The memory is used over %VAL% percent",
+              OS: {
+                displayOs: true,
+                orderOs: 1
+              },
+              CPU: {
+                displayUsage: true,
+                orderUsage: 4,
+                displayTemp: true,
+                celciusTemp: true,
+                orderTemp: 7,
+                displayType: true,
+                orderType: 2
+              },
+              RAM: {
+                displayRam: true,
+                orderRam: 5
+              },
+              STORAGE: {
+                displayStorage: true,
+                orderStorage: 6,
+                partitionExclude : []
+              },
+              NETWORK: {
+                displayNetwork: true,
+                orderNetwork: 3,
+                nativeNetwork: false,
+                displayDefaultNetwork: true
+              },
+              UPTIME: {
+                displayUptime: true,
+                useMagicMirror: true,
+                orderUptime: 8,
+                displayRecord: true,
+                orderRecord: 9
+              },
+              WARNING: {
+                enableWarning: false,
+                interval: 1000 * 60 * 5,
+                check : {
+                  CPU_TEMP : 65,
+                  CPU_USAGE : 75,
+                  STORAGE_USED : 80,
+                  MEMORY_USED : 80,
+                }
               }
             }
         },

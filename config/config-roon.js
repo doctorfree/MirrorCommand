@@ -33,6 +33,11 @@ var config = {
     language: "en",
     timeFormat: 12,
     units: "imperial",
+    electronOptions: {
+        webPreferences: {
+          webviewTag: true
+        }
+    },
     
     modules: [
         {
@@ -86,25 +91,60 @@ var config = {
         },
         {
             module: 'MMM-Tools',
-            position: 'bottom_right',
+            position: 'bottom_left',
+            header: "System Info",
             config: {
-              device : "RPI", // "RPI" is also available
-              refresh_interval_ms : 10000,
-              warning_interval_ms : 1000 * 60 * 5,
-              enable_warning : true,
-              warning : {
-                CPU_TEMPERATURE : 65,
-                GPU_TEMPERATURE : 65,
-                CPU_USAGE : 75,
-                STORAGE_USED_PERCENT : 80,
-                MEMORY_USED_PERCENT : 80
+              refresh: 1000 * 5,
+              containerSize: null,
+              itemSize: null,
+              MM: {
+                displayMM: true,
+                orderMM: 0
               },
-              warning_text: {
-                CPU_TEMPERATURE : "The temperature of CPU is over %VAL%",
-                GPU_TEMPERATURE : "The temperature of GPU is over %VAL%",
-                CPU_USAGE : "The usage of CPU is over %VAL%",
-                STORAGE_USED_PERCENT : "The storage is used over %VAL% percent",
-                MEMORY_USED_PERCENT : "The memory is used over %VAL% percent",
+              OS: {
+                displayOs: true,
+                orderOs: 1
+              },
+              CPU: {
+                displayUsage: true,
+                orderUsage: 4,
+                displayTemp: true,
+                celciusTemp: true,
+                orderTemp: 7,
+                displayType: true,
+                orderType: 2
+              },
+              RAM: {
+                displayRam: true,
+                orderRam: 5
+              },
+              STORAGE: {
+                displayStorage: true,
+                orderStorage: 6,
+                partitionExclude : []
+              },
+              NETWORK: {
+                displayNetwork: true,
+                orderNetwork: 3,
+                nativeNetwork: false,
+                displayDefaultNetwork: true
+              },
+              UPTIME: {
+                displayUptime: true,
+                useMagicMirror: true,
+                orderUptime: 8,
+                displayRecord: true,
+                orderRecord: 9
+              },
+              WARNING: {
+                enableWarning: false,
+                interval: 1000 * 60 * 5,
+                check : {
+                  CPU_TEMP : 65,
+                  CPU_USAGE : 75,
+                  STORAGE_USED : 80,
+                  MEMORY_USED : 80,
+                }
               }
             }
         },
@@ -122,7 +162,7 @@ var config = {
         },
         {
             module: 'MMM-Solar',
-            position: "middle_center",
+            position: "bottom_left",
             config: {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
@@ -132,7 +172,7 @@ var config = {
         },
         {
             module: 'MMM-MacAddressScan',
-            position: "bottom_center",
+            position: "bottom_right",
             header: "ARP Scan - Discovered Devices",
             config: {
                 showLastSeen: false,
@@ -143,7 +183,7 @@ var config = {
                 coloredState: true,
                 showIP: true,
                 showUnknown: false,
-                showOffline: true,
+                showOffline: false,
                 keepAlive: 900,
                 updateInterval: 60,
                 // residents: ["iPhone 12 Mini"],
@@ -179,6 +219,12 @@ var config = {
                       color: "#F61DF3",
                     },
                     {
+                      macAddress: "74:1b:b2:da:2e:d9",
+                      name: "Mac Pro WiFi",
+                      icon: "desktop",
+                      color: "#F61DF3",
+                    },
+                    {
                       macAddress: "d4:90:9c:da:31:9e",
                       name: "Homepod Max",
                       icon: "music",
@@ -203,6 +249,22 @@ var config = {
                       color: "#26C6DA",
                     },
                     {
+                      macAddress: "b0:6e:bf:2b:3a:f8",
+                      name: "Miner - doctor",
+                      icon: "hammer",
+                      color: "#ffff00",
+                    },
+                    // { macAddress: "30:85:a9:8d:02:9d",
+                    //   name: "Miner - vivo",
+                    //   icon: "hammer",
+                    //   color: "#ffff00"},
+                    {
+                      macAddress: "4c:cc:6a:27:be:6a",
+                      name: "Miner - ronnie",
+                      icon: "hammer",
+                      color: "#ffff00",
+                    },
+                    {
                       ipAddress: "10.0.1.80",
                       name: "Raspberry Pi 400",
                       icon: "signal",
@@ -214,6 +276,18 @@ var config = {
                       icon: "signal",
                       color: "#00ff00",
                     },
+                    // {
+                    //   macAddress: "dc:a6:32:14:0a:b1",
+                    //   name: "RPi MagicMirror",
+                    //   icon: "signal",
+                    //   color: "#00ff00",
+                    // },
+                    // {
+                    //   macAddress: "dc:a6:32:14:0a:b4",
+                    //   name: "MagicMirror",
+                    //   icon: "signal",
+                    //   color: "#00ff00",
+                    // },
                     {
                       macAddress: "2E:0E:84:7B:ED:39",
                       name: "Ronnie's iPad",
@@ -221,10 +295,51 @@ var config = {
                       color: "#DE41EF",
                     },
                     {
+                      macAddress: "00:1F:F3:C7:0D:15",
+                      name: "Time Capsule",
+                      icon: "database",
+                      color: "#DE41EF"},
+                    {
                       macAddress: "36:7F:9E:F1:78:5A",
                       name: "iPhone 12 Mini",
                       icon: "mobile",
                       color: "#DE41EF",
+                    },
+                    {
+                      macAddress: "00:1d:c0:62:42:67",
+                      name: "Rooftop Solar Array",
+                      icon: "solar-panel",
+                      color: "#83EE97",
+                    },
+                    {
+                      macAddress: "00:17:88:49:1a:cd",
+                      name: "Philips Hue",
+                      icon: "lightbulb",
+                      color: "#83EE97",
+                    },
+                    {
+                      macAddress: "00:04:20:f4:ea:9c",
+                      name: "Harmony Hub",
+                      icon: "weight",
+                      color: "#83EE97",
+                    },
+                    {
+                      macAddress: "C8:69:CD:84:EC:47",
+                      name: "Apple TV",
+                      icon: "tv",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "00:11:d9:60:8b:53",
+                      name: "TiVo",
+                      icon: "tv",
+                      color: "#26C6DA",
+                    },
+                    {
+                      macAddress: "00:1d:ba:c3:c7:17",
+                      name: "Sony TV",
+                      icon: "tv",
+                      color: "#26C6DA",
                     },
                     {
                       macAddress: "e8:9f:80:14:95:fe",
@@ -240,7 +355,7 @@ var config = {
                     },
                     {
                       macAddress: "C4:41:1E:F2:2E:CC",
-                      name: "Main Bedroom WiFi",
+                      name: "Bedroom WiFi",
                       icon: "wifi",
                       color: "#26C6DA",
                     },
@@ -335,6 +450,145 @@ var config = {
                   },
                 },
               ],
+            }
+        },
+        {
+            module: "MMM-GoogleAssistant",
+            position: "bottom_center",
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              assistantConfig: {
+                lang: "en-US",
+                latitude: 36.970019,
+                longitude: -122.042212
+              },
+              responseConfig: {
+                useFullscreen: false,
+                useResponseOutput: true,
+                responseOutputCSS: "response_output.css",
+                screenOutputTimer: 5000,
+                activateDelay: 250,
+                useAudioOutput: true,
+                useChime: true,
+                confirmationChime: true,
+                useInformations: true,
+              },
+              Extented: {
+                useEXT: true,
+                youtube: {
+                  useYoutube: false,
+                  youtubeCommand: "youtube",
+                  displayResponse: true,
+                  useVLC: false,
+                  minVolume: 30,
+                  maxVolume: 100
+                },
+                links: {
+                  useLinks: true,
+                  displayDelay: 60 * 1000,
+                  scrollActivate: false,
+                  scrollStep: 25,
+                  scrollInterval: 1000,
+                  scrollStart: 5000
+                },
+                photos: {
+                  usePhotos: true,
+                  useGooglePhotosAPI: false,
+                  displayType: "none",
+                  displayDelay: 10 * 1000,
+                  albums: [],
+                  sort: "new",
+                  hiResolution: true,
+                  timeFormat: "DD/MM/YYYY HH:mm",
+                  moduleHeight: 300,
+                  moduleWidth: 300,
+                },
+                volume: {
+                  useVolume: true,
+                  volumePreset: "ALSA_HEADPHONE",
+                  myScript: "amixer sset -M 'Headphone' #VOLUME#%"
+                },
+                welcome: {
+                  useWelcome: true,
+                  welcome: "brief Today"
+                },
+                screen: {},
+                touch: {},
+                pir: {},
+                governor: {},
+                internet: {},
+                cast: {},
+                spotify: {
+                  useSpotify: false,
+                  visual: {},
+                  player: {}
+                },
+                music: {
+                  useMusic: true,
+                  useUSB: false,
+                  musicPath: "/home/pi/Music",
+                  checkSubDirectory: true,
+                  autoStart: false,
+                  minVolume: 30,
+                  maxVolume: 100
+                },
+              },
+              recipes: [
+                "myReboot-Restart-Shutdown.js",
+                "ExtRadio.js",
+              ],
+              NPMCheck: {}
+            }
+        },
+        {
+            module: "MMM-Detector",
+            position: "bottom_center",
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              autoStart: true,
+              useLogos: true,
+              newLogos: {
+                listen: "voice_assistant_head.jpg"
+              },
+              detectors: [
+                {
+                  detector: "Porcupine",
+                  Model: "ok google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "hey google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "computer",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                }
+              ],
+              NPMCheck: {
+                useChecker: true,
+                delay: 10 * 60 * 1000,
+                useAlert: true
+              }
             }
         },
     ]
