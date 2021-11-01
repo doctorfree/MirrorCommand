@@ -1,0 +1,104 @@
+#!/bin/bash
+#
+# mmscene - manage MMM-Scenes MagicMirror module scenes
+#
+# Author: Ronald Joe Record <ronaldrecord@gmail.com>
+#
+# Usage: mmscene [next|prev|name|number|info]
+#   Where 'mmscene next' moves the display to the next scene
+#         'mmscene prev' moves the display to the previous scene
+#         'mmscene name' moves the display to the named scene
+#         'mmscene number' moves the display to scene number 'number'
+#         'mmscene active' retrieves information on the active modules
+#         'mmscene current' retrieves information on the current scene (TBD)
+#         'mmscene info' retrieves information on the configured scenes
+#
+# The IP address of the MagicMirror
+IP="10.0.1.85"
+# The port on which it is listening
+PORT="8080"
+# The module name
+MODULE_NAME="MMM-Scenes"
+# The MMM-Remote-Control API key
+apikey="d8d8947ad3da477288bcbe3c7353523b"
+#
+modurl="http://${IP}:${PORT}/api/module/${MODULE_NAME}"
+apiurl="http://${IP}:${PORT}/api/notification"
+usejq=`type -p jq`
+
+usage() {
+    # printf "\nUsage: mmscene [active|current|info|next|prev|name|number]"
+    printf "\nUsage: mmscene [active|info|next|prev|name|number]"
+    printf "\nWhere:\n\t'mmscene next' moves the display to the next scene"
+    printf "\n\t'mmscene prev' moves the display to the previous scene"
+    printf "\n\t'mmscene name' moves the display to the named scene"
+    printf "\n\t'mmscene number' moves the display to scene number 'number'"
+    printf "\n\t'mmscene active' retrieves information on the active modules"
+    # printf "\n\t'mmscene current' retrieves information on the current scene"
+    printf "\n\t'mmscene info' retrieves information on the configured scenes\n"
+    exit 1
+}
+
+[ "$1" ] || {
+    echo "Argument required. Exiting."
+    usage
+}
+
+command="$1"
+
+case $command in
+    active)
+        curl -X GET http://${IP}:${PORT}/api/module?apiKey=${apikey} 2> /dev/null | jq .
+        ;;
+    current)
+        if [ "$usejq" ]
+        then
+            # curl -X GET ${apiurl}/SCENES_CURRENT?apiKey=${apikey} 2> /dev/null | jq '.[].name'
+            # curl -X GET "${apiurl}/SCENES_CURRENT?apiKey=${apikey}&callback=info" 2> /dev/null | jq '.payload.callback'
+            echo "'mmscene current' not yet implemented"
+        else
+            # curl -X GET ${apiurl}/SCENES_CURRENT?apiKey=${apikey} 2> /dev/null
+            echo "'mmscene current' not yet implemented"
+        fi
+        ;;
+    info)
+        if [ "$usejq" ]
+        then
+            curl -X GET ${modurl}?apiKey=${apikey} 2> /dev/null | jq .
+        else
+            curl -X GET ${modurl}?apiKey=${apikey} 2> /dev/null
+        fi
+        ;;
+    next)
+        if [ "$usejq" ]
+        then
+            curl -X GET ${apiurl}/SCENES_NEXT?apiKey=${apikey} 2> /dev/null | jq .
+        else
+            curl -X GET ${apiurl}/SCENES_NEXT?apiKey=${apikey} 2> /dev/null
+        fi
+        ;;
+    prev)
+        if [ "$usejq" ]
+        then
+            curl -X GET ${apiurl}/SCENES_PREV?apiKey=${apikey} 2> /dev/null | jq .
+        else
+            curl -X GET ${apiurl}/SCENES_PREV?apiKey=${apikey} 2> /dev/null
+        fi
+        ;;
+    [0-9]*)
+        if [ "$usejq" ]
+        then
+            curl -X GET "${apiurl}/SCENES_ACT?index=$command&apiKey=${apikey}" 2> /dev/null | jq .
+        else
+            curl -X GET "${apiurl}/SCENES_ACT?index=$command&apiKey=${apikey}" 2> /dev/null
+        fi
+        ;;
+    *)
+        if [ "$usejq" ]
+        then
+            curl -X GET "${apiurl}/SCENES_ACT?name=$command&apiKey=${apikey}" 2> /dev/null | jq .
+        else
+            curl -X GET "${apiurl}/SCENES_ACT?name=$command&apiKey=${apikey}" 2> /dev/null
+        fi
+        ;;
+esac

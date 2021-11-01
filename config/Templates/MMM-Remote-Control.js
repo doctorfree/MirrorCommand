@@ -1,0 +1,26 @@
+        {
+            module: 'MMM-Remote-Control',
+            config: {
+                apiKey: 'xxx_Remote-Control-API-Key_xxxxx',
+                customCommand: {
+                    shutdownCommand: '/usr/local/bin/shutdown',
+                    rebootCommand: '/usr/local/bin/reboot',
+                    monitorOnCommand: 'vcgencmd display_power 1',
+                    monitorOffCommand: 'vcgencmd display_power 0',
+                    screenshotCommand: '/usr/local/bin/mirror screenshot',
+                    rotateScreenRight: '/usr/local/bin/mirror rotate right',
+                    rotateScreenLeft: '/usr/local/bin/mirror rotate left',
+                    rotateScreenNormal: '/usr/local/bin/mirror rotate normal',
+                    rotateScreenInverted: '/usr/local/bin/mirror rotate inverted',
+                    playVideo: '/usr/local/bin/mirror playvideo',
+                    pauseVideo: '/usr/local/bin/mirror pausevideo',
+                    replayVideo: '/usr/local/bin/mirror replayvideo',
+                    nextVideo: '/usr/local/bin/mirror nextvideo',
+                    hideVideo: '/usr/local/bin/mirror hidevideo',
+                    showVideo: '/usr/local/bin/mirror showvideo',
+                },
+                showModuleApiMenu: true,
+                secureEndpoints: true,
+                customMenu: "custom_menu.json",
+            }
+        },
