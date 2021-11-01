@@ -94,10 +94,6 @@ var config = {
             config: {
                 feeds: [
                     {
-                        title: "Cruz 511",
-                        url: "https://cruz511.org/feed/",
-                    },
-                    {
                         title: "Traffic Engineering Projects",
                         url: "https://www.cityofsantacruz.com/Home/Components/RssFeeds/RssFeed/View?ctID=5&cateIDs=6",
                     },
@@ -293,7 +289,7 @@ var config = {
               },
               recipes: [
                 "myReboot-Restart-Shutdown.js",
-                "ExtRadio.js",
+                "ExtRadio.js","MirrorCommand.js",
               ],
               NPMCheck: {}
             }

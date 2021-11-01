@@ -98,10 +98,6 @@ var config = {
             config: {
                 feeds: [
                     {
-                        title: "Cruz 511",
-                        url: "https://cruz511.org/feed/",
-                    },
-                    {
                         title: "rssWeather Santa Cruz",
                         url: "http://www.rssweather.com/zipcode/95060/rss.php",
                     },
@@ -125,10 +121,6 @@ var config = {
             classes: 'traffic',
             config: {
                 feeds: [
-                    {
-                        title: "Cruz 511",
-                        url: "https://cruz511.org/feed/",
-                    },
                     {
                         title: "Traffic Engineering Projects",
                         url: "https://www.cityofsantacruz.com/Home/Components/RssFeeds/RssFeed/View?ctID=5&cateIDs=6",
@@ -204,25 +196,6 @@ var config = {
             }
         },
         {
-            module: "clock",
-            position: "top_center",
-            classes: 'radar',
-            config: {
-                dateFormat: "dddd, LLL",
-                displayType: "analog",
-                analogFace: "face-009",
-                analogSize: "200px",
-                displaySeconds: "true",
-                secondsColor: "#BAA3DC",
-                timeFormat: "12",
-                showPeriod: "true",
-                showDate: "true",
-                clockBold: "false",
-                analogPlacement: "top",
-                analogShowDate: "top",
-            }
-        },
-        {
             module: "MMM-DateOnly",
             position: "top_bar",
             classes: 'weather',
@@ -234,7 +207,7 @@ var config = {
         {
             module: "MMM-DateOnly",
             position: "top_center",
-            classes: 'traffic',
+            classes: 'radar traffic',
             config: {
                 showWeek: false,
                 dateFormat: "dddd, LLL",
@@ -468,10 +441,12 @@ var config = {
                   maxVolume: 100
                 },
               },
-              recipes: [
-                "myReboot-Restart-Shutdown.js",
-                "ExtRadio.js",
-              ],
+              recipes: ["with-MMM-Scenes.js", "myReboot-Restart-Shutdown.js",
+                        "ExtRadio.js","MirrorCommand.js"],
+              // recipes: [
+              //   "myReboot-Restart-Shutdown.js",
+              //   "ExtRadio.js","MirrorCommand.js",
+              // ],
               NPMCheck: {}
             }
         },

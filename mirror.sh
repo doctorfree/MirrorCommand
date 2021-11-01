@@ -30,7 +30,7 @@
 # Set this to your MagicMirror installation directory
 MM="${HOME}/MagicMirror"
 # Set the IP and PORT to the values on your system
-# IP is the IP address of your MagicMirror Raspberry Pi
+# IP is the IP address of your MagicMirror Raspberry Pi or 'localhost'
 IP="10.0.1.85"
 # PORT is the port your MMM-Remote-Control module is running on
 PORT="8080"
@@ -42,6 +42,9 @@ apikey="MMM-Remote-Control_API_Key"
 # Uncomment this line if you have not configured an MMM-Remote-Control API Key
 # apikey=
 #
+modurl="http://${IP}:${PORT}/api/module"
+apiurl="http://${IP}:${PORT}/api/notification"
+
 # Set this to the X11 DISPLAY you are using. DISPLAY=:0 works for most systems.
 export DISPLAY=:0
 # -----------------------------------------------------------------------
@@ -167,9 +170,9 @@ list_mods() {
         then
           if [ "${apikey}" ]
           then
-            curl -X GET http://${IP}:${PORT}/api/module?apiKey=${apikey} 2> /dev/null | jq '.data | .[] | .name'
+            curl -X GET ${modurl}?apiKey=${apikey} 2> /dev/null | jq '.data | .[] | .name'
           else
-            curl -X GET http://${IP}:${PORT}/api/module 2> /dev/null | jq '.data | .[] | .name'
+            curl -X GET ${modurl} 2> /dev/null | jq '.data | .[] | .name'
           fi
         else
           printf "\nInstall jq to list active MagicMirror modules\n"
@@ -179,16 +182,16 @@ list_mods() {
         then
           if [ "${apikey}" ]
           then
-            curl -X GET http://${IP}:${PORT}/api/module?apiKey=${apikey} 2> /dev/null | jq .
+            curl -X GET ${modurl}?apiKey=${apikey} 2> /dev/null | jq .
           else
-            curl -X GET http://${IP}:${PORT}/api/module 2> /dev/null | jq .
+            curl -X GET ${modurl} 2> /dev/null | jq .
           fi
         else
           if [ "${apikey}" ]
           then
-            curl -X GET http://${IP}:${PORT}/api/module?apiKey=${apikey}
+            curl -X GET ${modurl}?apiKey=${apikey}
           else
-            curl -X GET http://${IP}:${PORT}/api/module
+            curl -X GET ${modurl}
           fi
           echo ""
         fi
@@ -203,9 +206,9 @@ list_mods() {
             then
               if [ "${apikey}" ]
               then
-                curl -X GET http://${IP}:${PORT}/api/module/installed?apiKey=${apikey} 2> /dev/null | jq '.data | .[] | .longname'
+                curl -X GET ${modurl}/installed?apiKey=${apikey} 2> /dev/null | jq '.data | .[] | .longname'
               else
-                curl -X GET http://${IP}:${PORT}/api/module/installed 2> /dev/null | jq '.data | .[] | .longname'
+                curl -X GET ${modurl}/installed 2> /dev/null | jq '.data | .[] | .longname'
               fi
             else
               printf "\nInstall jq to list installed MagicMirror modules\n"
@@ -215,16 +218,16 @@ list_mods() {
             then
               if [ "${apikey}" ]
               then
-                curl -X GET http://${IP}:${PORT}/api/module/installed?apiKey=${apikey} 2> /dev/null | jq .
+                curl -X GET ${modurl}/installed?apiKey=${apikey} 2> /dev/null | jq .
               else
-                curl -X GET http://${IP}:${PORT}/api/module/installed 2> /dev/null | jq .
+                curl -X GET ${modurl}/installed 2> /dev/null | jq .
               fi
             else
               if [ "${apikey}" ]
               then
-                curl -X GET http://${IP}:${PORT}/api/module/installed?apiKey=${apikey}
+                curl -X GET ${modurl}/installed?apiKey=${apikey}
               else
-                curl -X GET http://${IP}:${PORT}/api/module/installed
+                curl -X GET ${modurl}/installed
               fi
               echo ""
             fi
@@ -424,22 +427,114 @@ set_volume() {
     fi
 }
 
+act_scene() {
+    printf "\n${BOLD}MMM-Scenes scene by name/id${NORMAL}\n"
+    case "$1" in
+      [0-9]*)
+        scenespec="index=$1"
+        ;;
+      *)
+        scenespec="name=$1"
+        ;;
+    esac
+    if [ "$usejq" ]
+    then
+      if [ "${apikey}" ]
+      then
+        curl -X GET "${apiurl}/SCENES_ACT?${scenespec}&apiKey=${apikey}" 2> /dev/null | jq .
+      else
+        curl -X GET "${apiurl}/SCENES_ACT?${scenespec}" 2> /dev/null | jq .
+      fi
+    else
+      if [ "${apikey}" ]
+      then
+        curl -X GET "${apiurl}/SCENES_ACT?${scenespec}&apiKey=${apikey}"
+      else
+        curl -X GET "${apiurl}/SCENES_ACT?${scenespec}"
+      fi
+      echo ""
+    fi
+}
+
+info_scene() {
+    printf "\n${BOLD}MMM-Scenes configuration info${NORMAL}\n"
+    if [ "$usejq" ]
+    then
+      if [ "${apikey}" ]
+      then
+        curl -X GET ${modurl}/MMM-Scenes?apiKey=${apikey} 2> /dev/null | jq .
+      else
+        curl -X GET ${modurl}/MMM-Scenes 2> /dev/null | jq .
+      fi
+    else
+      if [ "${apikey}" ]
+      then
+        curl -X GET ${modurl}/MMM-Scenes?apiKey=${apikey}
+      else
+        curl -X GET ${modurl}/MMM-Scenes
+      fi
+      echo ""
+    fi
+}
+
+next_scene() {
+    printf "\n${BOLD}Next MMM-Scenes scene${NORMAL}\n"
+    if [ "$usejq" ]
+    then
+      if [ "${apikey}" ]
+      then
+        curl -X GET ${apiurl}/SCENES_NEXT?apiKey=${apikey} 2> /dev/null | jq .
+      else
+        curl -X GET ${apiurl}/SCENES_NEXT 2> /dev/null | jq .
+      fi
+    else
+      if [ "${apikey}" ]
+      then
+        curl -X GET ${apiurl}/SCENES_NEXT?apiKey=${apikey}
+      else
+        curl -X GET ${apiurl}/SCENES_NEXT
+      fi
+      echo ""
+    fi
+}
+
+prev_scene() {
+    printf "\n${BOLD}Previous MMM-Scenes scene${NORMAL}\n"
+    if [ "$usejq" ]
+    then
+      if [ "${apikey}" ]
+      then
+        curl -X GET ${apiurl}/SCENES_PREV?apiKey=${apikey} 2> /dev/null | jq .
+      else
+        curl -X GET ${apiurl}/SCENES_PREV 2> /dev/null | jq .
+      fi
+    else
+      if [ "${apikey}" ]
+      then
+        curl -X GET ${apiurl}/SCENES_PREV?apiKey=${apikey}
+      else
+        curl -X GET ${apiurl}/SCENES_PREV
+      fi
+      echo ""
+    fi
+}
+
 hide_video() {
     printf "\n${BOLD}Hide MagicMirror Video${NORMAL}\n"
     if [ "$usejq" ]
     then
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/hide?apiKey=${apikey} 2> /dev/null | jq .
+        curl -X GET ${modurl}/MMM-Videoplayer/hide?apiKey=${apikey} 2> /dev/null | jq .
       else
-        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/hide 2> /dev/null | jq .
+        curl -X GET ${modurl}/MMM-Videoplayer/hide 2> /dev/null | jq .
       fi
     else
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/hide?apiKey=${apikey}
+        curl -X GET ${modurl}/MMM-Videoplayer/hide?apiKey=${apikey}
       else
-        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/hide
+        curl -X GET ${modurl}/MMM-Videoplayer/hide
       fi
       echo ""
     fi
@@ -451,16 +546,16 @@ show_video() {
     then
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/show?apiKey=${apikey} 2> /dev/null | jq .
+        curl -X GET ${modurl}/MMM-Videoplayer/show?apiKey=${apikey} 2> /dev/null | jq .
       else
-        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/show 2> /dev/null | jq .
+        curl -X GET ${modurl}/MMM-Videoplayer/show 2> /dev/null | jq .
       fi
     else
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/show?apiKey=${apikey}
+        curl -X GET ${modurl}/MMM-Videoplayer/show?apiKey=${apikey}
       else
-        curl -X GET http://${IP}:${PORT}/api/module/MMM-Videoplayer/show
+        curl -X GET ${modurl}/MMM-Videoplayer/show
       fi
       echo ""
     fi
@@ -472,16 +567,16 @@ next_video() {
     then
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/NEXT?apiKey=${apikey} 2> /dev/null | jq .
+        curl -X GET ${apiurl}/VIDEOPLAYER1/NEXT?apiKey=${apikey} 2> /dev/null | jq .
       else
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/NEXT 2> /dev/null | jq .
+        curl -X GET ${apiurl}/VIDEOPLAYER1/NEXT 2> /dev/null | jq .
       fi
     else
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/NEXT?apiKey=${apikey}
+        curl -X GET ${apiurl}/VIDEOPLAYER1/NEXT?apiKey=${apikey}
       else
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/NEXT
+        curl -X GET ${apiurl}/VIDEOPLAYER1/NEXT
       fi
       echo ""
     fi
@@ -493,16 +588,16 @@ replay_video() {
     then
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/REPLAY?apiKey=${apikey} 2> /dev/null | jq .
+        curl -X GET ${apiurl}/VIDEOPLAYER1/REPLAY?apiKey=${apikey} 2> /dev/null | jq .
       else
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/REPLAY 2> /dev/null | jq .
+        curl -X GET ${apiurl}/VIDEOPLAYER1/REPLAY 2> /dev/null | jq .
       fi
     else
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/REPLAY?apiKey=${apikey}
+        curl -X GET ${apiurl}/VIDEOPLAYER1/REPLAY?apiKey=${apikey}
       else
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/REPLAY
+        curl -X GET ${apiurl}/VIDEOPLAYER1/REPLAY
       fi
       echo ""
     fi
@@ -514,16 +609,16 @@ toggle_videoplay() {
     then
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/TOGGLE?apiKey=${apikey} 2> /dev/null | jq .
+        curl -X GET ${apiurl}/VIDEOPLAYER1/TOGGLE?apiKey=${apikey} 2> /dev/null | jq .
       else
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/TOGGLE 2> /dev/null | jq .
+        curl -X GET ${apiurl}/VIDEOPLAYER1/TOGGLE 2> /dev/null | jq .
       fi
     else
       if [ "${apikey}" ]
       then
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/TOGGLE?apiKey=${apikey}
+        curl -X GET ${apiurl}/VIDEOPLAYER1/TOGGLE?apiKey=${apikey}
       else
-        curl -X GET http://${IP}:${PORT}/api/notification/VIDEOPLAYER1/TOGGLE
+        curl -X GET ${apiurl}/VIDEOPLAYER1/TOGGLE
       fi
       echo ""
     fi
@@ -1825,6 +1920,51 @@ shift $(( OPTIND - 1 ))
 [ "$1" == "vol" ] && {
     set_volume $2
     exit 0
+}
+
+[ "$1" == "next" ] && [ "$2" == "scene" ] && {
+    next_scene
+    exit 0
+}
+
+[ "$1" == "nextscene" ] || [ "$1" == "scenenext" ] && {
+    next_scene
+    exit 0
+}
+
+[ "$1" == "prev" ] && [ "$2" == "scene" ] && {
+    prev_scene
+    exit 0
+}
+
+[ "$1" == "prevscene" ] || [ "$1" == "sceneprev" ] && {
+    prev_scene
+    exit 0
+}
+
+[ "$1" == "scene" ] && {
+  if [ "$2" ]
+  then
+    if [ "$2" == "next" ]
+    then
+      next_scene
+    else
+      if [ "$2" == "prev" ]
+      then
+        prev_scene
+      else
+        if [ "$2" == "info" ]
+        then
+          info_scene
+        else
+          act_scene $2
+        fi
+      fi
+    fi
+  else
+    next_scene
+  fi
+  exit 0
 }
 
 [ "$1" == "hidevideo" ] || [ "$1" == "videohide" ] && {
