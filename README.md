@@ -378,23 +378,23 @@ convenience script on a remote system with SSH access to your MagicMirror.
 Here is the current output of "mirror -u" which displays a usage message.
 
 <pre>
-Usage: mirror <command> [args]
-Where <command> can be one of the following:
-    info <temp|mem|disk|usb|net|wireless|screen>
-    list <active|installed|configs>
-    rotate <right|left|normal|inverted>
-    scene <next|prev|info|name|number>
-    screen <on|off|info|status>
+Usage: mirror [command] [args]
+Where [command] can be one of the following:
+    info [temp|mem|disk|usb|net|wireless|screen]
+    list [active|installed|configs]
+    rotate [right|left|normal|inverted]
+    scene [next|prev|info|name|number]
+    screen [on|off|info|status]
     stop|start|restart|mute|unmute|screenshot
     playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo
-    vol <percent>|mute|unmute|save|restore|get
-    dev | getb | setb <num> | select | status <all> | youtube
+    vol [percent]|mute|unmute|save|restore|get
+    dev | getb | setb [num] | select | status [all] | youtube
     artists_dir, models_dir, photogs_dir
-    ac|ar <artist>, jc|jr <idol>, mc|mr <model>, pc|pr <photographer>, wh|whrm <dir>
+    ac|ar [artist], jc|jr [idol], mc|mr [model], pc|pr [photographer], wh|whrm [dir]
 
 Specify a config file to use by executing a command of the form:
-	mirror <name>
-where <name> is one of:
+	mirror [name]
+where [name] is one of:
 	 all Artists art background blank calendar candy covid crypto
 	 darksky default face fractals gif iframe instagram JAV minscenes
 	 mintest Models nature networkcols network news normal owls Photographers
@@ -403,7 +403,7 @@ where <name> is one of:
 	 voice volumio waterfalls weather YouTube
 
 or any other config file you have created in /home/pi/MagicMirror/config of the form:
-	config-<name>.js
+	config-[name].js
 
 A config filename argument will be resolved into a config filename of the form:
 	config-$argument.js
@@ -415,11 +415,11 @@ The mirror command will attempt to match the specified config file name.
 For example, 'mirror foo' would match the config file named config-food.js
 
 Arguments can also be specified as follows:
-	-a <artist>, -A <artist>, -b <brightness>, -B, -c <config>, -d, -i <info>,
+	-a [artist], -A [artist], -b [brightness], -B, -c [config], -d, -i [info],
 	-V, -N, -R (toggle video play, play next video, replay video),
 	-H, -h (Hide video, Show video),
-	-I, -l <list>, -r <rotate>, -s <screen>, -S, -m <model>, -M <model>,
-	-p <photographer>, -P <photographer>, -w <dir>, -W <dir>, -u
+	-I, -l [list], -r [rotate], -s [screen], -S, -m [model], -M [model],
+	-p [photographer], -P [photographer], -w [dir], -W [dir], -u
 
 Examples:
 	mirror		# Invoked with no arguments the mirror command displays a command menu
