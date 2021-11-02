@@ -8,6 +8,7 @@ show_keys.sh
 show_bin_keys.sh
 show_all_keys.sh
 config/config-instagram.js
+config/config-mintest.js
 config/config-sample.js
 config/config-unknown.js
 modules/MMM-AssistantMk2/deviceInstance.json

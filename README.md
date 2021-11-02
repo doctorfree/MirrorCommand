@@ -26,8 +26,10 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
     1. [MMM-Remote-Control integration](#mmm-remote-control-integration)
     1. [MMM-TelegramBot integration](#mmm-telegrambot-integration)
         1. [MMM-TelegramBot installation](#mmm-telegrambot-installation)
-        1. [MMM-TelegramBot module config](mmm-telegrambot-module-config)
+        1. [MMM-TelegramBot module config](#mmm-telegrambot-module-config)
         1. [Telegram usage](#telegram-usage)
+1. [MMM-GoogleAssistant integration](#mmm-googleassistant-integration)
+1. [MMM-Scenes integration](#mmm-scenes-integration)
 1. [Usage](#usage)
 1. [Contents](#contents)
 
@@ -328,6 +330,43 @@ To list the MagicMirror active modules, issue the command:
 ```
 Any `mirror` command can be executed via Telegram in this manner.
 See `mirror -u` for the `mirror` usage message.
+
+## MMM-GoogleAssistant integration
+MirrorCommandLine includes configuration files to enable voice command
+control of your MagicMirror utilizing the
+[MMM-GoogleAssistant](http://wiki.bugsounet.fr/en/MMM-GoogleAssistant)
+module. Most of the MagicMirror config files in the config subdirectory
+come preconfigured with voice command support. See
+[**config/config-default.js**](config/config-default.js) for a sample config
+file with voice control enabled.
+
+In addition to preconfigured config files, MirrorCommandLine provides several
+[custom MMM-GoogleAssistant recipes](modules/MMM-GoogleAssistant/recipes).
+These include recipes to:
+- [Enable `mirror` command support via voice](modules/MMM-GoogleAssistant/recipes/MirrorCommand.js)
+    - Voice commands to:
+	    - Restart MagicMirror
+		- Rotate the screen
+		- Turn the screen on/off
+		- Mute/unmute sound
+		- Copy custom config files into config.js and restart the mirror
+- [Voice management of MMM-Scenes scenes](modules/MMM-GoogleAssistant/recipes/with-MMM-Scenes.js)
+    - Next scene
+	- Previous scene
+	- Scene by number (e.g. `scene 2`) 
+- [Customized reboot/restart/shutdown voice commands](modules/MMM-GoogleAssistant/recipes/myReboot-Restart-Shutdown.js)
+- [Radio station play via voice](modules/MMM-GoogleAssistant/recipes/ExtRadio.js)
+
+## [MMM-Scenes](https://github.com/MMRIZE/MMM-Scenes#readme) integration
+
+In addition to the voice control of MMM-Scenes described above, several `mirror`
+commands have been added to support management of MMM-Scenes scenes via the
+command line. Supported commands include:
+- `mirror scene next` : display the next scene in the scenario
+- `mirror scene prev` : display the previous scene in the scenario
+- `mirror scene name` : display the scene named 'name'
+- `mirror scene num`  : display scene number 'num'
+- `mirror scene info` : retrieve info on MMM-Scenes configuration
 
 ## Usage
 
