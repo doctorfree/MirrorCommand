@@ -380,20 +380,27 @@ Here is the current output of "mirror -u" which displays a usage message.
 <pre>
 Usage: mirror <command> [args]
 Where <command> can be one of the following:
-	info [temp|mem|disk|usb|net|wireless|screen], list <active|installed|configs>,
-	rotate [right|left|normal|inverted], artists_dir, models_dir, photogs_dir,
-	youtube, select, restart, screen [on|off|info|status], playvideo, pausevideo,
-	nextvideo, replayvideo, hidevideo, showvideo, start, stop, status [all], dev,
-	getb, setb <num>, vol <num>, vol mute|unmute|save|restore|get, mute, unmute,
-	ac|ar <artist>, jc|jr <idol>, mc|mr <model>, pc|pr <photographer>, wh|whrm <dir>
+    info <temp|mem|disk|usb|net|wireless|screen>
+    list <active|installed|configs>
+    rotate <right|left|normal|inverted>
+    scene <next|prev|info|name|number>
+    screen <on|off|info|status>
+    stop|start|restart|mute|unmute|screenshot
+    playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo
+    vol <percent>|mute|unmute|save|restore|get
+    dev | getb | setb <num> | select | status <all> | youtube
+    artists_dir, models_dir, photogs_dir
+    ac|ar <artist>, jc|jr <idol>, mc|mr <model>, pc|pr <photographer>, wh|whrm <dir>
 
-or specify a config file to use with one of:
+Specify a config file to use by executing a command of the form:
+	mirror <name>
+where <name> is one of:
 	 all Artists art background blank calendar candy covid crypto
-	 darksky default face fractals gif iframe instagram JAV Models
-	 nature networkcols network news normal owls Photographers portal radar
-	 rooncontrol roon sample scenes scenes scnews scoreboard screencast server
-	 smoke stocks tantra test traffic unknown videotest volumio waterfalls
-	 weather YouTube
+	 darksky default face fractals gif iframe instagram JAV minscenes
+	 mintest Models nature networkcols network news normal owls Photographers
+	 portal radar rooncontrol roon sample scenes scnews scoreboard screencast
+	 server smoke snowcrash stocks tantra test traffic unknown videotest
+	 voice volumio waterfalls weather YouTube
 
 or any other config file you have created in /home/pi/MagicMirror/config of the form:
 	config-<name>.js
@@ -403,6 +410,9 @@ A config filename argument will be resolved into a config filename of the form:
 
 A subdirectory in which to locate the config file can be specified as the second
 argument, e.g. 'mirror foo bar' will attempt to use the config file bar/config-foo.js
+
+The mirror command will attempt to match the specified config file name.
+For example, 'mirror foo' would match the config file named config-food.js
 
 Arguments can also be specified as follows:
 	-a <artist>, -A <artist>, -b <brightness>, -B, -c <config>, -d, -i <info>,
@@ -423,6 +433,7 @@ Examples:
 	mirror rotate left/right/normal/inverted		# rotates the screen left, right, inverted, or normal
 	mirror screen on		#  Turns the Display ON
 	mirror screen off		# Turns the Display OFF
+	mirror screenshot		# Takes a screenshot of the MagicMirror
 	mirror status [all]		# Displays MagicMirror status, checks config syntax
 	mirror getb		# Displays current MagicMirror brightness level
 	mirror setb 150		# Sets MagicMirror brightness level to 150
