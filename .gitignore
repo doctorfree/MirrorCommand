@@ -15,3 +15,7 @@ modules/MMM-AssistantMk2/deviceInstance.json
 modules/MMM-AssistantMk2/profiles/default.json
 modules/MMM-Hotword/trainer/trainer-withtoken.sh
 modules/MMM-TelegramBot/bot.txt
+modules/MMM-GoogleAssistant/credentials.json
+modules/MMM-GoogleAssistant/tokens/tokenGA.json
+modules/MMM-GoogleAssistant/tokens/tokenGP.json
+modules/MMM-GoogleAssistant/tokens/tokenYT.json

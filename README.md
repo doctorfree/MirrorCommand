@@ -367,6 +367,18 @@ credentials for that project. This process can seem daunting to many but once yo
 walk through it the process becomes more transparent. A smart young woman has
 provided us with a brief and simple tutorial walkthru of the process at
 [https://youtu.be/xVhqP3fBnVM](https://youtu.be/xVhqP3fBnVM).
+Her video is based on the
+[4th Party Modules Wiki](http://wiki.bugsounet.fr/en/MMM-GoogleAssistant/GoogleAssistantSetup)
+description of this process.
+
+**NOTE:** When authorizing the YouTube access token with `npm run tokens` as the final
+step in this process, I found it necessary to modify
+[MMM-GoogleAssistant/install/auth_YouTube.js](modules/MMM-GoogleAssistant/install/auth_YouTube.js)
+to add a console log output of the generated URL to allow access. This was necessary
+in my case because I was performing the process over an SSH connection in a terminal.
+This is not necessary if you are accessing the MagicMirror directly or if you have
+your DISPLAY set back to the system on which you are running SSH. If you need to use
+this modification, it can be found at the link above.
 
 ## [MMM-Scenes](https://github.com/MMRIZE/MMM-Scenes#readme) integration
 
