@@ -198,10 +198,10 @@ var config = {
               Extented: {
                 useEXT: true,
                 youtube: {
-                  useYoutube: false,
+                  useYoutube: true,
                   youtubeCommand: "youtube",
                   displayResponse: true,
-                  useVLC: false,
+                  useVLC: true,
                   minVolume: 30,
                   maxVolume: 100
                 },

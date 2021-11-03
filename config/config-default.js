@@ -561,10 +561,10 @@ var config = {
               Extented: {
                 useEXT: true,
                 youtube: {
-                  useYoutube: false,
+                  useYoutube: true,
                   youtubeCommand: "youtube",
                   displayResponse: true,
-                  useVLC: false,
+                  useVLC: true,
                   minVolume: 30,
                   maxVolume: 100
                 },
@@ -602,7 +602,10 @@ var config = {
                 pir: {},
                 governor: {},
                 internet: {},
-                cast: {},
+                cast: {
+                  useCast: true,
+                  port: 8569
+                },
                 spotify: {
                   useSpotify: false,
                   visual: {},

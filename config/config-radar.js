@@ -139,29 +139,29 @@ var config = {
                 broadcastNewsUpdates: true
             }
         },
-        {
-            module: 'MMM-GoogleMapsTraffic',
-            position: 'middle_center',
-            classes: 'traffic',
-            header: "Google Maps Traffic Information - Santa Cruz, California",
-            config: {
-                key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
-                lat: 36.970019,
-                lng: -122.042212,
-                height: '1240px',
-                width: '1080px',
-                styledMapType: "standard",
-                disableDefaultUI: true,
-                backgroundColor: 'hsla(0, 0%, 0%, 0)',
-                markers: [
-                    {
-                        lat: 36.970019,
-                        lng: -122.042212,
-                        fillColor: '#9966ff'
-                    },
-                ],
-            },
-        },
+        // {
+        //     module: 'MMM-GoogleMapsTraffic',
+        //     position: 'middle_center',
+        //     classes: 'traffic',
+        //     header: "Google Maps Traffic Information - Santa Cruz, California",
+        //     config: {
+        //         key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
+        //         lat: 36.970019,
+        //         lng: -122.042212,
+        //         height: '1240px',
+        //         width: '1080px',
+        //         styledMapType: "standard",
+        //         disableDefaultUI: true,
+        //         backgroundColor: 'hsla(0, 0%, 0%, 0)',
+        //         markers: [
+        //             {
+        //                 lat: 36.970019,
+        //                 lng: -122.042212,
+        //                 fillColor: '#9966ff'
+        //             },
+        //         ],
+        //     },
+        // },
         {
             module: 'MMM-RAIN-RADAR',
             position: 'middle_center',
@@ -384,10 +384,10 @@ var config = {
               Extented: {
                 useEXT: true,
                 youtube: {
-                  useYoutube: false,
+                  useYoutube: true,
                   youtubeCommand: "youtube",
                   displayResponse: true,
-                  useVLC: false,
+                  useVLC: true,
                   minVolume: 30,
                   maxVolume: 100
                 },
@@ -441,12 +441,12 @@ var config = {
                   maxVolume: 100
                 },
               },
-              recipes: ["with-MMM-Scenes.js", "myReboot-Restart-Shutdown.js",
-                        "ExtRadio.js","MirrorCommand.js"],
-              // recipes: [
-              //   "myReboot-Restart-Shutdown.js",
-              //   "ExtRadio.js","MirrorCommand.js",
-              // ],
+              recipes: [
+                  "myReboot-Restart-Shutdown.js",
+                  "ExtRadio.js",
+                  "MirrorCommand.js",
+                  "with-MMM-Scenes.js"
+              ],
               NPMCheck: {}
             }
         },
