@@ -29,6 +29,7 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
         1. [MMM-TelegramBot module config](#mmm-telegrambot-module-config)
         1. [Telegram usage](#telegram-usage)
 1. [MMM-GoogleAssistant integration](#mmm-googleassistant-integration)
+    1. [Google Cloud Platform API Keys](google-cloud-platform-api-keys)
 1. [MMM-Scenes integration](#mmm-scenes-integration)
 1. [Usage](#usage)
 1. [Contents](#contents)
@@ -356,6 +357,16 @@ These include recipes to:
 	- Scene by number (e.g. `scene 2`) 
 - [Customized reboot/restart/shutdown voice commands](modules/MMM-GoogleAssistant/recipes/myReboot-Restart-Shutdown.js)
 - [Radio station play via voice](modules/MMM-GoogleAssistant/recipes/ExtRadio.js)
+
+### Google Cloud Platform API Keys
+Several MagicMirror modules require a Google Cloud Platform API. The MMM-GoogleAssistant
+and MMM-GoogleMapsTraffic modules are examples of these. In order to configure
+the MMM-GoogleAssistant module you will need to create a Google Action project
+and enable API services for that project in the Google Cloud Platform then generate
+credentials for that project. This process can seem daunting to many but once you
+walk through it the process becomes more transparent. A smart young woman has
+provided us with a brief and simple tutorial walkthru of the process at
+[https://youtu.be/xVhqP3fBnVM](https://youtu.be/xVhqP3fBnVM).
 
 ## [MMM-Scenes](https://github.com/MMRIZE/MMM-Scenes#readme) integration
 
