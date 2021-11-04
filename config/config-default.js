@@ -578,10 +578,10 @@ var config = {
                 },
                 photos: {
                   usePhotos: true,
-                  useGooglePhotosAPI: false,
-                  displayType: "none",
+                  useGooglePhotosAPI: true,
+                  displayType: "Module",
                   displayDelay: 10 * 1000,
-                  albums: [],
+                  albums: ["Animated Gif", "Family and Stuff"],
                   sort: "new",
                   hiResolution: true,
                   timeFormat: "DD/MM/YYYY HH:mm",

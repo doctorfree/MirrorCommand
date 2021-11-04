@@ -50,7 +50,7 @@ export DISPLAY=:0
 # -----------------------------------------------------------------------
 CONFDIR="${MM}/config"
 # MagicMirror configuration files organized into subdirectories listed here
-CONF_SUBDIRS="Artists JAV Models Photographers YouTube"
+CONF_SUBDIRS="Artists JAV Models Photos Photographers YouTube"
 MMCFMSG="MagicMirror configuration file"
 SLISDIR="${MM}/modules/MMM-BackgroundSlideshow/pics"
 ARTISTDIR="Pictures/Artists-ALL"
