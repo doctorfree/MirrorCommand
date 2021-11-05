@@ -46,7 +46,7 @@ var config = {
             classes: 'radar traffic weather',
         },
         {
-            module: "MMM-UpdateNotification",
+            module: "updatenotification",
             position: "top_bar",
             classes: 'radar traffic weather',
         },

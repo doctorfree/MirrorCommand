@@ -48,7 +48,7 @@ var config = {
             classes: 'scores solar stocks art',
         },
         {
-            module: "MMM-UpdateNotification",
+            module: "updatenotification",
             position: "top_bar",
             classes: 'scores solar stocks art',
         },

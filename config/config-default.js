@@ -43,12 +43,8 @@ var config = {
         {
             module: "alert",
         },
-        // {
-        //     module: "MMM-UpdateNotification",
-        //     position: "top_bar"
-        // },
         {
-            module: "MMM-UpdateNotification",
+            module: "updatenotification",
             position: "top_bar",
         },
         {
