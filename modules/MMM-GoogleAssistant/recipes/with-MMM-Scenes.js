@@ -34,6 +34,10 @@ var recipe = {
       pattern: "scene five|scene 5",
       command: "SCENES_ACT_FIVE"
     },
+    "SCENES_ACT_NAME": {
+      pattern: "scene (.*)",
+      command: "SCENES_ACT_NAME"
+    },
   },
 
   commands: {
@@ -88,6 +92,17 @@ var recipe = {
     "SCENES_ACT_FIVE": {
       shellExec: {
         exec: "mirror scene 4"
+      },
+      soundExec: {
+        chime: "open"
+      }
+    },
+    "SCENES_ACT_NAME": {
+      shellExec: {
+        exec: (params) => {
+          var sceneName = params[1]
+          return "mirror scene " + sceneName
+        }
       },
       soundExec: {
         chime: "open"
