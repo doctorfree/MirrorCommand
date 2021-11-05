@@ -44,7 +44,7 @@ var config = {
             module: "alert",
         },
         {
-            module: "updatenotification",
+            module: "MMM-UpdateNotification",
             position: "top_bar"
         },
         {
@@ -262,10 +262,12 @@ var config = {
                       icon: "hammer",
                       color: "#ffff00",
                     },
-                    // { macAddress: "30:85:a9:8d:02:9d",
-                    //   name: "Miner - vivo",
-                    //   icon: "hammer",
-                    //   color: "#ffff00"},
+                    {
+                      macAddress: "30:85:a9:8d:02:9d",
+                      name: "Miner - doctorwhen",
+                      icon: "hammer",
+                      color: "#ffff00",
+                    },
                     {
                       macAddress: "4c:cc:6a:27:be:6a",
                       name: "Miner - ronnie",

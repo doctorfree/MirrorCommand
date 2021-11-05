@@ -54,7 +54,7 @@ var config = {
             module: "alert",
         },
         {
-            module: "updatenotification",
+            module: "MMM-UpdateNotification",
             classes: 'everyone',
             position: "top_bar"
         },

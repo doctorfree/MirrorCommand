@@ -43,9 +43,13 @@ var config = {
         {
             module: "alert",
         },
+        // {
+        //     module: "MMM-UpdateNotification",
+        //     position: "top_bar"
+        // },
         {
-            module: "updatenotification",
-            position: "top_bar"
+            module: "MMM-UpdateNotification",
+            position: "top_bar",
         },
         {
             module: 'MMM-Remote-Control',
@@ -342,10 +346,12 @@ var config = {
                       icon: "hammer",
                       color: "#ffff00",
                     },
-                    // { macAddress: "30:85:a9:8d:02:9d",
-                    //   name: "Miner - vivo",
-                    //   icon: "hammer",
-                    //   color: "#ffff00"},
+                    {
+                      macAddress: "30:85:a9:8d:02:9d",
+                      name: "Miner - doctorwhen",
+                      icon: "hammer",
+                      color: "#ffff00",
+                    },
                     {
                       macAddress: "4c:cc:6a:27:be:6a",
                       name: "Miner - ronnie",
@@ -577,11 +583,11 @@ var config = {
                   scrollStart: 5000
                 },
                 photos: {
-                  usePhotos: true,
-                  useGooglePhotosAPI: true,
+                  usePhotos: false,
+                  useGooglePhotosAPI: false,
                   displayType: "Module",
                   displayDelay: 10 * 1000,
-                  albums: ["Animated Gif", "Family and Stuff"],
+                  albums: [],
                   sort: "new",
                   hiResolution: true,
                   timeFormat: "DD/MM/YYYY HH:mm",

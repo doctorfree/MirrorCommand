@@ -11,6 +11,7 @@ config/config-instagram.js
 config/config-mintest.js
 config/config-sample.js
 config/config-unknown.js
+config/test/*
 modules/MMM-AssistantMk2/deviceInstance.json
 modules/MMM-AssistantMk2/profiles/default.json
 modules/MMM-Hotword/trainer/trainer-withtoken.sh

@@ -10,18 +10,9 @@
  */
 
 var config = {
-//    address: "localhost",
+//  address: "localhost",
     address: "0.0.0.0", // Address to listen on, can be:
-                          // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
-                          // - another specific IPv4/6 to listen on a specific interface
-                          // - "", "0.0.0.0", "::" to listen on any interface
-                          // Default, when address config is left out, is "localhost"
     port: 8080,
-    // Set [] to allow all IP addresses
-    // or add a specific IPv4 of 192.168.1.5 :
-    // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
-    // or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
-    // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
     ipWhitelist: [
         "0.0.0.0",
         "127.0.0.1",
@@ -55,7 +46,7 @@ var config = {
             classes: 'radar traffic weather',
         },
         {
-            module: "updatenotification",
+            module: "MMM-UpdateNotification",
             position: "top_bar",
             classes: 'radar traffic weather',
         },
@@ -80,15 +71,10 @@ var config = {
                     nextVideo: '/usr/local/bin/mirror nextvideo',
                     hideVideo: '/usr/local/bin/mirror hidevideo',
                     showVideo: '/usr/local/bin/mirror showvideo',
-                    // Shell command to return status of monitor,
-                    // must return either "HDMI" or "true" if screen is on
-                    // "TV is Off" or "false" if it is off to be recognized
-                    // monitorStatusCommand: '/usr/local/bin/mirror screen status',
                 },
                 showModuleApiMenu: true,
                 secureEndpoints: true,
                 customMenu: "custom_menu.json",
-                // classes: {} // Optional, See "Custom Classes" below
             }
         },
         {
@@ -139,29 +125,29 @@ var config = {
                 broadcastNewsUpdates: true
             }
         },
-        // {
-        //     module: 'MMM-GoogleMapsTraffic',
-        //     position: 'middle_center',
-        //     classes: 'traffic',
-        //     header: "Google Maps Traffic Information - Santa Cruz, California",
-        //     config: {
-        //         key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
-        //         lat: 36.970019,
-        //         lng: -122.042212,
-        //         height: '1240px',
-        //         width: '1080px',
-        //         styledMapType: "standard",
-        //         disableDefaultUI: true,
-        //         backgroundColor: 'hsla(0, 0%, 0%, 0)',
-        //         markers: [
-        //             {
-        //                 lat: 36.970019,
-        //                 lng: -122.042212,
-        //                 fillColor: '#9966ff'
-        //             },
-        //         ],
-        //     },
-        // },
+        {
+            module: 'MMM-GoogleMapsTraffic',
+            position: 'middle_center',
+            classes: 'traffic',
+            header: "Google Maps Traffic Information - Santa Cruz, California",
+            config: {
+                key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
+                lat: 36.970019,
+                lng: -122.042212,
+                height: '1240px',
+                width: '1080px',
+                styledMapType: "standard",
+                disableDefaultUI: true,
+                backgroundColor: 'hsla(0, 0%, 0%, 0)',
+                markers: [
+                    {
+                        lat: 36.970019,
+                        lng: -122.042212,
+                        fillColor: '#9966ff'
+                    },
+                ],
+            },
+        },
         {
             module: 'MMM-RAIN-RADAR',
             position: 'middle_center',
@@ -229,7 +215,6 @@ var config = {
         {
             module: "weather",
             position: "top_right",
-            // classes: 'darksky weather',
             classes: 'weather',
             header: "Weather Forecast",
             config: {
@@ -277,7 +262,6 @@ var config = {
             module: "MMM-DarkSkyForecast",
             header: "Dark Sky Weather Forecast",
             position: "top_right",
-            // classes: "weather default everyone",
             classes: "weather",
             disabled: false,
             config: {
@@ -359,152 +343,8 @@ var config = {
             }
         },
         {
-            module: "MMM-GoogleAssistant",
-            position: "bottom_center",
-            classes: 'radar traffic weather',
-            configDeepMerge: true,
-            config: {
-              debug: false,
-              assistantConfig: {
-                lang: "en-US",
-                latitude: 36.970019,
-                longitude: -122.042212
-              },
-              responseConfig: {
-                useFullscreen: false,
-                useResponseOutput: true,
-                responseOutputCSS: "response_output.css",
-                screenOutputTimer: 5000,
-                activateDelay: 250,
-                useAudioOutput: true,
-                useChime: true,
-                confirmationChime: true,
-                useInformations: true,
-              },
-              Extented: {
-                useEXT: true,
-                youtube: {
-                  useYoutube: true,
-                  youtubeCommand: "youtube",
-                  displayResponse: true,
-                  useVLC: true,
-                  minVolume: 30,
-                  maxVolume: 100
-                },
-                links: {
-                  useLinks: true,
-                  displayDelay: 60 * 1000,
-                  scrollActivate: false,
-                  scrollStep: 25,
-                  scrollInterval: 1000,
-                  scrollStart: 5000
-                },
-                photos: {
-                  usePhotos: true,
-                  useGooglePhotosAPI: false,
-                  displayType: "none",
-                  displayDelay: 10 * 1000,
-                  albums: [],
-                  sort: "new",
-                  hiResolution: true,
-                  timeFormat: "DD/MM/YYYY HH:mm",
-                  moduleHeight: 300,
-                  moduleWidth: 300,
-                },
-                volume: {
-                  useVolume: true,
-                  volumePreset: "ALSA_HEADPHONE",
-                  myScript: "amixer sset -M 'Headphone' #VOLUME#%"
-                },
-                welcome: {
-                  useWelcome: true,
-                  welcome: "brief Today"
-                },
-                screen: {},
-                touch: {},
-                pir: {},
-                governor: {},
-                internet: {},
-                cast: {},
-                spotify: {
-                  useSpotify: false,
-                  visual: {},
-                  player: {}
-                },
-                music: {
-                  useMusic: true,
-                  useUSB: false,
-                  musicPath: "/home/pi/Music",
-                  checkSubDirectory: true,
-                  autoStart: false,
-                  minVolume: 30,
-                  maxVolume: 100
-                },
-              },
-              recipes: [
-                  "myReboot-Restart-Shutdown.js",
-                  "ExtRadio.js",
-                  "MirrorCommand.js",
-                  "with-MMM-Scenes.js"
-              ],
-              NPMCheck: {}
-            }
-        },
-        {
-            module: "MMM-Detector",
-            position: "bottom_center",
-            classes: 'radar traffic weather',
-            configDeepMerge: true,
-            config: {
-              debug: false,
-              autoStart: true,
-              useLogos: true,
-              newLogos: {
-                listen: "voice_assistant_head.jpg"
-              },
-              detectors: [
-                {
-                  detector: "Porcupine",
-                  Model: "ok google",
-                  Sensitivity: null,
-                  Logo: "listen",
-                  autoRestart: false,
-                  onDetected: {
-                    notification: "GA_ACTIVATE"
-                  }
-                },
-                {
-                  detector: "Porcupine",
-                  Model: "hey google",
-                  Sensitivity: null,
-                  Logo: "listen",
-                  autoRestart: false,
-                  onDetected: {
-                    notification: "GA_ACTIVATE"
-                  }
-                },
-                {
-                  detector: "Porcupine",
-                  Model: "computer",
-                  Sensitivity: null,
-                  Logo: "listen",
-                  autoRestart: false,
-                  onDetected: {
-                    notification: "GA_ACTIVATE"
-                  }
-                }
-              ],
-              NPMCheck: {
-                useChecker: true,
-                delay: 10 * 60 * 1000,
-                useAlert: true
-              }
-            }
-        },
-        {
           module: 'MMM-Scenes',
           position: 'bottom_bar',
-          // classes: 'darksky radar traffic weather',
           classes: 'radar traffic weather',
           config: {
             duration: 300000,
@@ -522,14 +362,6 @@ var config = {
                 expelAnimation: 'pageLeft',
                 admitAnimation: 'pageDown'
               },
-              // {
-              //   name: 'darksky',
-              //   expelAnimation: 'pageRight',
-              //   admitAnimation: [
-              //     { transform: 'rotate(-360deg) scale(0, 0)', opacity: 0 },
-              //     { transform: 'rotate(360deg) scale(1, 1)', opacity: 1 }
-              //   ]
-              // },
               {
                 name: 'weather',
                 expelAnimation: 'dismissOut',
@@ -537,10 +369,6 @@ var config = {
               },
             ],
             autoLoop: 'infinity',
-            // inactiveIndicators: ['①', '②', '③', '④', '⑤'],
-            // activeIndicators: ['❶', '❷', '❸', '❹', '❺']
-            // inactiveIndicators: ['①', '②', '③', '④'],
-            // activeIndicators: ['❶', '❷', '❸', '❹']
             inactiveIndicators: ['①', '②', '③'],
             activeIndicators: ['❶', '❷', '❸']
           }

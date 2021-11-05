@@ -48,7 +48,7 @@ var config = {
             classes: 'scores solar stocks art',
         },
         {
-            module: "updatenotification",
+            module: "MMM-UpdateNotification",
             position: "top_bar",
             classes: 'scores solar stocks art',
         },
@@ -219,6 +219,7 @@ var config = {
         {
             module: 'MMM-Tools',
             position: 'bottom_left',
+            classes: 'scores solar stocks',
             header: "System Info",
             config: {
               refresh: 1000 * 5,
@@ -449,10 +450,12 @@ var config = {
                       icon: "hammer",
                       color: "#ffff00",
                     },
-                    // { macAddress: "30:85:a9:8d:02:9d",
-                    //   name: "Miner - vivo",
-                    //   icon: "hammer",
-                    //   color: "#ffff00"},
+                    {
+                      macAddress: "30:85:a9:8d:02:9d",
+                      name: "Miner - doctorwhen",
+                      icon: "hammer",
+                      color: "#ffff00",
+                    },
                     {
                       macAddress: "4c:cc:6a:27:be:6a",
                       name: "Miner - ronnie",
@@ -606,6 +609,197 @@ var config = {
                   },
                 },
               ],
+            }
+        },
+        {
+            module: "MMM-GoogleAssistant",
+            position: "bottom_center",
+            classes: 'scores solar stocks art',
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              assistantConfig: {
+                lang: "en-US",
+                latitude: 36.970019,
+                longitude: -122.042212
+              },
+              responseConfig: {
+                useFullscreen: false,
+                useResponseOutput: true,
+                responseOutputCSS: "response_output.css",
+                screenOutputTimer: 5000,
+                activateDelay: 250,
+                useAudioOutput: true,
+                useChime: true,
+                confirmationChime: true,
+                useInformations: true,
+              },
+              Extented: {
+                useEXT: true,
+                youtube: {
+                  useYoutube: true,
+                  youtubeCommand: "youtube",
+                  displayResponse: true,
+                  useVLC: true,
+                  minVolume: 30,
+                  maxVolume: 100
+                },
+                links: {
+                  useLinks: true,
+                  displayDelay: 60 * 1000,
+                  scrollActivate: false,
+                  scrollStep: 25,
+                  scrollInterval: 1000,
+                  scrollStart: 5000
+                },
+                photos: {
+                  usePhotos: true,
+                  useGooglePhotosAPI: false,
+                  displayType: "none",
+                  displayDelay: 10 * 1000,
+                  albums: [],
+                  sort: "new",
+                  hiResolution: true,
+                  timeFormat: "DD/MM/YYYY HH:mm",
+                  moduleHeight: 300,
+                  moduleWidth: 300,
+                },
+                volume: {
+                  useVolume: true,
+                  volumePreset: "ALSA_HEADPHONE",
+                  myScript: "amixer sset -M 'Headphone' #VOLUME#%"
+                },
+                welcome: {
+                  useWelcome: true,
+                  welcome: "brief Today"
+                },
+                screen: {},
+                touch: {},
+                pir: {},
+                governor: {},
+                internet: {},
+                cast: {},
+                spotify: {
+                  useSpotify: false,
+                  visual: {},
+                  player: {}
+                },
+                music: {
+                  useMusic: true,
+                  useUSB: false,
+                  musicPath: "/home/pi/Music",
+                  checkSubDirectory: true,
+                  autoStart: false,
+                  minVolume: 30,
+                  maxVolume: 100
+                },
+              },
+              recipes: [
+                  "myReboot-Restart-Shutdown.js",
+                  "ExtRadio.js",
+                  "MirrorCommand.js",
+                  "with-MMM-Scenes.js"
+              ],
+              NPMCheck: {}
+            }
+        },
+        {
+            module: "MMM-Detector",
+            position: "bottom_center",
+            classes: 'art',
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              autoStart: true,
+              useLogos: false,
+              detectors: [
+                {
+                  detector: "Porcupine",
+                  Model: "ok google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "hey google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "computer",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                }
+              ],
+              NPMCheck: {
+                useChecker: true,
+                delay: 10 * 60 * 1000,
+                useAlert: true
+              }
+            }
+        },
+        {
+            module: "MMM-Detector",
+            position: "bottom_center",
+            classes: 'scores solar stocks',
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              autoStart: true,
+              useLogos: true,
+              newLogos: {
+                listen: "voice_assistant_head.jpg"
+              },
+              detectors: [
+                {
+                  detector: "Porcupine",
+                  Model: "ok google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "hey google",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "computer",
+                  Sensitivity: null,
+                  Logo: "listen",
+                  autoRestart: false,
+                  onDetected: {
+                    notification: "GA_ACTIVATE"
+                  }
+                }
+              ],
+              NPMCheck: {
+                useChecker: true,
+                delay: 10 * 60 * 1000,
+                useAlert: true
+              }
             }
         },
         {
