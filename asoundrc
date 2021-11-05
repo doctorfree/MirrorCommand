@@ -15,6 +15,11 @@ pcm.output {
   card 1
 }
 
+pcm.input {
+  type hw
+  card 2
+}
+
 ctl.!default {
   type hw
   card 1

@@ -231,46 +231,66 @@ do
         bash_aliases)
             check "$i" "$inst" 121
             ;;
-        mirror.sh|mmapiactions.sh|mmgetb.sh|mmsetb.sh|config/Templates/*|\
-        config/config-candy.js|config/config-covid.js|config/config-test.js|\
-        config/config-art.js|config/config-iframe.js|config/config-Photographers.js|\
-        config/config-unknown.js|config/config-waterfalls.js|config/Models/*)
+        mirror.sh|mmapiactions.sh|mmgetb.sh|mmsetb.sh|\
+        config/Templates/MMM-Remote-Control.js)
             check "$i" "$inst" 4
             ;;
         gethue.sh)
             check "$i" "$inst" 6
             ;;
-        getquote.sh|config/config-scenes-sample.js|config/config-stocks.js|\
-        config/config-YouTube.js|config/YouTube/config-*.js)
+        config/telegrambot-custom-commands.js|getquote.sh)
             check "$i" "$inst" 8
             ;;
-        chktemp.sh|config/config-scoreboard.js|config/config-volumio.js|\
-        config/config-calendar.js|config/config-crypto.js|\
-        send_sms.sh|mkreadme.sh|mkwmv.sh)
+        config/config-art.js|config/config-candy.js|config/config-covid.js|\
+        config/config-fractals.js|config/config-gif.js|config/config-iframe.js|\
+        config/config-nature.js|config/config-news.js|config/config-owls.js|\
+        config/config-Photographers.js|config/config-portal.js|\
+        config/config-test.js|config/config-waterfalls.js|\
+        chktemp.sh|config/config-volumio.js|config/Templates/config-*|\
+        config/Models/*|config/Photos/*|send_sms.sh|mkreadme.sh|mkwmv.sh)
             check "$i" "$inst" 12
             ;;
-        config/config-network.js|config/config-networkcols.js|\
-        config/config-darksky.js|config/config-iframe.js|config/config-scnews.js)
+        config/config-iframe.js|\
+        config/config-scenes-sample.js|config/config-stocks.js|\
+        config/config-traffic.js|config/config-YouTube.js|config/YouTube/config-*.js)
             check "$i" "$inst" 16
             ;;
-        config/config-rooncontrol.js)
+        config/config-Artists.js|config/config-background.js|config/config-blank.js|\
+        config/config-JAV.js|config/config-Models.js|config/config-screencast.js|\
+        config/config-videotest.js|config/Artists/*|config/JAV/*|\
+        config/config-tantra.js|config/config-smoke.js|\
+        config/Photographers/*|config/config-rooncontrol.js)
             check "$i" "$inst" 18
             ;;
-        config/config-sample.js|config/config-traffic.js)
+        config/config-calendar.js|config/config-crypto.js|config/config-scoreboard.js)
+            check "$i" "$inst" 20
+            ;;
+        config/config-darksky.js|config/config-networkcols.js|\
+        config/config-network.js|config/config-scnews.js)
             check "$i" "$inst" 24
             ;;
-        config/config-server.js|config/config-calendar.js|\
-        config/config-face.js|config/config-scenes.js|config/config-normal.js)
+        config/config-radar.js|config/config-roon.js|\
+        config/config-weather.js)
             check "$i" "$inst" 28
             ;;
-        config/config-radar.js)
-            check "$i" "$inst" 32
+        config/config-face.js|config/config-normal.js|\
+        config/config-scenes.js|config/config-server.js)
+            check "$i" "$inst" 36
             ;;
-        config/config-roon.js)
-            check "$i" "$inst" 34
+        config/config-default.js|config/config-snowcrash.js|config/config-voice.js)
+            check "$i" "$inst" 40
             ;;
-        config/config-all.js|config/config-default.js)
-            check "$i" "$inst" 46
+        config/config-all.js)
+            check "$i" "$inst" 48
+            ;;
+        config/config-unknown.js)
+            check "$i" "$inst" 72
+            ;;
+        config/config-instagram.js)
+            check "$i" "$inst" 94
+            ;;
+        config/config-sample.js)
+            check "$i" "$inst" 98
             ;;
         config/*/config-*.js|config/config-*.js)
             check "$i" "$inst" 20
