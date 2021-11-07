@@ -265,6 +265,9 @@ do
         config/config-calendar.js|config/config-crypto.js|config/config-scoreboard.js)
             check "$i" "$inst" 20
             ;;
+        config/config-instagram.js)
+            check "$i" "$inst" 22
+            ;;
         config/config-darksky.js|config/config-networkcols.js|\
         config/config-network.js|config/config-scnews.js)
             check "$i" "$inst" 24
@@ -285,9 +288,6 @@ do
             ;;
         config/config-unknown.js)
             check "$i" "$inst" 72
-            ;;
-        config/config-instagram.js)
-            check "$i" "$inst" 94
             ;;
         config/config-sample.js)
             check "$i" "$inst" 98
