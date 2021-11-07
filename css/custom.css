@@ -135,3 +135,7 @@ header {
   height:100px;
   border-radius: 10px;
 }
+
+.MMM-InstagramView .module-header {
+  font-size: 40px;
+}
