@@ -1,7 +1,9 @@
     // Add to top
     electronOptions: {
         webPreferences: {
-          webviewTag: true
+          webviewTag: true,
+          contextIsolation: false,
+          enableRemoteModule: true
         }
     },
 

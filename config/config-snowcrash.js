@@ -37,7 +37,9 @@ var config = {
     customCss: "css/custom-huebig.css",
     electronOptions: {
         webPreferences: {
-          webviewTag: true
+          webviewTag: true,
+          contextIsolation: false,
+          enableRemoteModule: true
         }
     },
     

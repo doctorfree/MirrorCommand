@@ -36,7 +36,9 @@ var config = {
     customCss: "css/custom-network-cols.css",
     electronOptions: {
         webPreferences: {
-          webviewTag: true
+          webviewTag: true,
+          contextIsolation: false,
+          enableRemoteModule: true
         }
     },
     

@@ -37,7 +37,9 @@ var config = {
     units: "imperial",
     electronOptions: {
         webPreferences: {
-          webviewTag: true
+          webviewTag: true,
+          contextIsolation: false,
+          enableRemoteModule: true
         }
     },
     
