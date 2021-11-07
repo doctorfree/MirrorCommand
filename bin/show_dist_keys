@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Add your keys to /usr/local/MagicMirror/etc/mirrorkeys
+. /usr/local/MagicMirror/etc/mirrorkeys
+
+commands=/tmp/mk_sed$$
+
+rm -f ${commands}
+touch ${commands}
+chmod 600 ${commands}
+
+for key in "${!keys[@]}"; do
+  val="${keys[$key]}"
+  [ "${val}" ] && {
+    echo "s/${dumb[$key]}/${val}/" >> ${commands}
+  }
+done
+
+[ -s ${commands} ] && {
+  for conf in config-*
+  do
+    sed -i -f ${commands} ${conf}
+  done
+}
+rm -f ${commands}

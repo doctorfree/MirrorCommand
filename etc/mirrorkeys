@@ -1,0 +1,56 @@
+# Edit this file, adding your keys and private settings
+# to each of the 'keys[FOO]' settings with corresponding
+# 'dumb[FOO]' setting, leaving the 'dumb[FOO]' setting as-is
+#
+# Add the keys you wish to set and leave those you do not wish to set empty
+#
+# After adding your keys, execute the command
+#   '/usr/local/MagicMirror/bin/showkeys'
+# and it will edit the configuration files in
+# /usr/local/MagicMirror containing the placeholder dummy settings
+
+declare -A keys
+declare -A dumb
+
+# Set your Telegram API Key here
+keys[KEY]=
+# Leave the dummy value for the Telegram API Key as is
+dumb[KEY]="xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx"
+# Add keys for the others in a similar fashion
+keys[GKEY]=
+dumb[GKEY]="xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx"
+# Leave the value blank for keys you are not using or do not have
+keys[VPKEY]=
+dumb[VPKEY]="xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx"
+keys[VSKEY]=
+dumb[VSKEY]="xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx"
+keys[CRY]=
+dumb[CRY]="xxxxx_CoinMarket-API-Key_xxxxxxxxx"
+keys[RAP]=
+dumb[RAP]="xxxxx_Rapid-API-Key_xxxxxxxxx"
+keys[DOM]=
+dumb[DOM]='\"http\:\/\/your.domain.com\"'
+keys[NAM]=
+dumb[NAM]="'Your-Telegram-Username'"
+keys[NUM]=
+dumb[NUM]="Your-Telegram-Chat-ID"
+keys[APIKEY]=
+dumb[APIKEY]="xxx_Remote-Control-API-Key_xxxxx"
+keys[LOC]=
+dumb[LOC]="xx_OpenWeather-App-ID_xxxxxxxxxx"
+keys[STK]=
+dumb[STK]="xxxxx_Stocks-API-Key_xxxxxxxxxxxxx"
+keys[SOLAR]=
+dumb[SOLAR]="xxxxxx_Solar-API-Key_xxxxxxxxxxx"
+keys[USERID]=
+dumb[USERID]="Solar-USER-ID"
+keys[SYSTEM]=
+dumb[SYSTEM]="Solar-System-ID"
+keys[HUE]=
+dumb[HUE]="xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx"
+keys[AVS]=
+dumb[AVS]="xx_AVStock-API_x"
+keys[DKS]=
+dumb[DKS]="xxx_Dark-Sky-API-Key_xxxxxxxxxxx"
+keys[NEWS]=
+dumb[NEWS]="xxxxxxx_newsapi.org_xxxxxxxxxxx"
