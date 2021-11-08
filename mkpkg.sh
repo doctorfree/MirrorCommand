@@ -1,7 +1,7 @@
 #!/bin/bash
 PKG="mirrorcommandline"
 PKG_NAME="MirrorCommandLine"
-PKG_VER="2.1"
+PKG_VER="2.2"
 TOP="usr"
 DESTDIR="${TOP}/local"
 MM="${DESTDIR}/MagicMirror"
@@ -80,4 +80,7 @@ sudo chmod 755 ${OUT_DIR}/${MM}/bin/*
 cd dist
 sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 cd ${PKG_NAME}_${PKG_VER}
+echo "Creating compressed tar archive of ${PKG_NAME} ${PKG_VER} distribution"
 tar cf - usr | gzip -9 > ../${PKG_NAME}_${PKG_VER}-dist.tar.gz
+echo "Creating zip archive of ${PKG_NAME} ${PKG_VER} distribution"
+zip -q -r ../${PKG_NAME}_${PKG_VER}-dist.zip usr
