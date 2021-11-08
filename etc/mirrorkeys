@@ -8,10 +8,22 @@
 #   '/usr/local/MagicMirror/bin/showkeys'
 # and it will edit the configuration files in
 # /usr/local/MagicMirror containing the placeholder dummy settings
+#
+# You can add new keys by adding two lines - one with the key value
+# and one with a dummy value that can be used in a distributed version.
+# For instance, to add a key for the Fubar service you could add the following:
+#     keys[FOO]="sldkfwetycjfdio"
+#     dumb[FOO]="xxxxxxx_Your_Fubar_Key_xxxxxxx"
+# Note that new key entries must use a unique value for the keys and dumb arrays.
+# In the example above, I used 'FOO' as it is not used by any other key setting here.
 
 declare -A keys
 declare -A dumb
 
+# Set your Instagram Auth Code here
+keys[IGA]=
+# Leave the dummy value for the Instagram Auth Code as is
+dumb[IGA]="xxxxxx_Your-Instagram-Auth-Code_xxxxxxxxxxxxxxxxx"
 # Set your Telegram API Key here
 keys[KEY]=
 # Leave the dummy value for the Telegram API Key as is
