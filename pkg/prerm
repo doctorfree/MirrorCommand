@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # prerm script for mirrorcommandline
 #
 # see: dh_installdeb(1)
@@ -29,6 +29,46 @@ case "$1" in
                 }
             done
         }
+        MMHOME=/home/pi/MagicMirror
+        [ -d ${MMHOME}/config ] || {
+            MMHOME=
+            for homedir in /home/*
+            do
+                [ "${homedir}" == "/home/*" ] && continue
+                [ -d ${homedir}/MagicMirror/config ] && {
+                    MMHOME="${homedir}/MagicMirror"
+                    break
+                }
+            done
+        }
+        if [ "${MMHOME}" ]
+        then
+            cd "${MMHOME}/config"
+            for config in /usr/local/MagicMirror/config/*
+            do
+                b=`basename ${config}`
+                [ -L $b ] && {
+                    readlink $b | grep /usr/local/MagicMirror > /dev/null && rm -f $b
+                }
+            done
+            cd "${MMHOME}/css"
+            for css in /usr/local/MagicMirror/css/*
+            do
+                b=`basename ${css}`
+                [ -L $b ] && {
+                    readlink $b | grep /usr/local/MagicMirror > /dev/null && rm -f $b
+                }
+                c="custom-mirrorcommandline.css"
+                [ -L $c ] && {
+                    readlink $c | grep /usr/local/MagicMirror > /dev/null && rm -f $c
+                }
+            done
+        else
+            echo "Unable to locate MagicMirror installation folder."
+            echo "MirrorCommandLine config and css files in /usr/local/MagicMirror"
+            echo "have not been unlinked in the MagicMirror installation folder."
+            echo "This must be accomplished manually."
+        fi
     ;;
 
     failed-upgrade)

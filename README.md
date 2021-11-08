@@ -22,7 +22,12 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 1. [Overview](#overview)
 1. [History](#history)
 1. [Installation](#installation)
+    1. [Post installation configuration](#post-installation-configuration)
+    1. [Add keys to mirrorkeys](#add-keys-to-mirrorkeys)
+    1. [Configure mirror script](#configure-mirror-script)
+1. [Supporting utilities and config files](#supporting-utilities-and-config-files)
 1. [Remote access](#remote-access)
+    1. [Remote execution of mirror commands](#remote-execution-of-mirror-commands)
     1. [MMM-Remote-Control integration](#mmm-remote-control-integration)
     1. [MMM-TelegramBot integration](#mmm-telegrambot-integration)
         1. [MMM-TelegramBot installation](#mmm-telegrambot-installation)
@@ -91,6 +96,19 @@ properly, the project is primarily command line control of MagicMirror.
 
 ## Installation
 
+MirrorCommandLine version 2.2 and later includes a Debian format package
+which can be used to install the MirrorCommandLine utilities with the Apt
+package management system. To install:
+
+[Download the latest Debian package format release](https://gitlab.com/doctorfree/MirrorCommandLine/-/releases)
+
+Install the package by executing the command
+```bash
+sudo apt install MirrorCommandLine_<version>.deb
+```
+
+Alternately, you can create your own package from the repository source.
+
 Clone the MirrorCommandLine repository:
 
 <code>git clone ssh://gitlab.com/doctorfree/MirrorCommandLine.git</code>
@@ -99,10 +117,50 @@ or
 
 <code>git clone `https://gitlab.com/doctorfree/MirrorCommandLine.git`</code>
 
-Edit the main MagicMirror management script, [**mirror**](mirror.sh), setting
-the location of your MagicMirror installation, the IP address of your
-MagicMirror, port for your MMM-Remote-Control module, MMM-Remote-Control API
-Key, and configuration subdirectories.
+Use the `mkpkg.sh` script to create a Debian format package on a system with
+the prerequisite packaging development environment.
+
+### Post installation configuration
+
+The MirrorCommandLine installation process cannot automatically configure
+your private keys which are used to access various services the MagicMirror
+utilizes. For example, you may have private keys to access a weather service,
+Telegram, Google services, or the MMM-Remote-Control module.
+
+Before you can use the MirrorCommandLine utilites and config files you will
+need to add any keys you wish to use to the appropriate config files and utilities.
+
+#### Add keys to mirrorkeys
+
+**Don't Panic!** The MirrorCommandLine package includes utilities to add and
+remove private keys. To do so:
+
+Edit the file `/usr/local/MagicMirror/etc/mirrorkeys` adding the keys you have
+previously generated/retrieved to each of the 'keys[FOO]' settings with corresponding
+'dumb[FOO]' setting, leaving the 'dumb[FOO]' setting as-is
+
+Add the keys you wish to set and leave those you do not wish to set empty
+
+After adding your keys, execute the command
+
+```bash
+  '/usr/local/MagicMirror/bin/showkeys'
+```
+
+The `showkeys` command will read the `mirrorkeys` file and edit the appropriate
+configuration files in `/usr/local/MagicMirror` containing the placeholder dummy
+settings.
+
+#### Configure mirror script
+
+Edit the main MagicMirror management script,
+[**/usr/local/MagicMirror/bin/mirror**](mirror.sh), setting:
+
+- Location of your MagicMirror installation
+- IP address of your MagicMirror
+- Port for your MMM-Remote-Control module
+- MMM-Remote-Control API Key
+- Configuration subdirectories
 
 Defaults for these are:
 
@@ -112,24 +170,26 @@ Defaults for these are:
 - apikey="MMM-Remote-Control_API_Key"
 - CONF_SUBDIRS="Artists JAV Models Photographers"
 
+In most cases you will only need to set the IP address and MMM-Remote-Control API key.
+
 If you have not configured an API key for MagicMirror remote control then
 set the apikey to blank ( <code>apikey=</code> ).
 
-After configuring the mirror.sh script appropriately, copy it to a location in
-your execution path on the MagicMirror system. For example:
+## Supporting utilities and config files
 
-<code>sudo cp mirror.sh /usr/local/bin/mirror</code>
+There are several supporting scripts that can be used to enhance command
+line capabilites. These are installed in `/usr/local/MagicMirror/bin` with
+symbolic links created in `/usr/local/bin`. Ensure that `/usr/local/bin`
+is in your execution PATH.
 
-Ensure the mirror script is executable:
+Many sample MagicMirror configuration files are provided in the
+[**/usr/local/MagicMirror/config**](config) directory. The installation
+package script attempts to link these into your MagicMirror config folder.
+The sample config files use the naming convention `config-<name>.js`.
 
-<code>sudo chmod 755 /usr/local/bin/mirror</code>
+Several custom CSS files are provided in the `/usr/local/MagicMirror/css directory.
+Copy and modify as needed.
 
-If you wish to execute mirror commands remotely then install the convenience
-script [**mm**](mm.sh) on a system with SSH access to your MagicMirror. This
-script can be used to remotely execute the main mirror script.
-
-There are several supporting scripts that can be installed to enhance command
-line capabilites. These are optional and may be ignored or installed later.
 Some of the more useful supporting scripts include:
 
 - [**backgrounds**](backgrounds.sh)
@@ -181,12 +241,6 @@ Some of the more useful supporting scripts include:
 - [**wireless_dot_sample**](wireless_dot_sample)
   Sample $HOME/.wireless to assist in wireless configuration
 
-Many sample MagicMirror configuration files are provided in the [**config**](config)
-subdirectory. Copy those of interest to your MagicMirror/config folder and modify
-as needed.
-
-My custom.css is provided in the css subdirectory. Copy and modify as needed.
-
 ## Remote access
 
 In order to remotely access the MagicMirror command line it is necessary to
@@ -220,6 +274,12 @@ Additional remote capabilities are provided through integration with the
 [MMM-TelegramBot](https://github.com/bugsounet/MMM-TelegramBot) modules.
 Accessing and controlling your MagicMirror using these facilities is
 described in the following sections.
+
+#### Remote execution of mirror commands
+
+If you wish to execute mirror commands remotely then install the convenience
+script [**mm**](mm.sh) on a system with SSH access to your MagicMirror. This
+script can be used to remotely execute the main mirror script.
 
 ### MMM-Remote-Control integration
 

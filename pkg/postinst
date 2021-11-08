@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # postinst script for mirrorcommandline
 #
 # see: dh_installdeb(1)
@@ -26,13 +26,52 @@ case "$1" in
         for command in /usr/local/MagicMirror/bin/*
         do
             b=`basename ${command}`
-            if [ -f $b ]
-            then
-                echo "Could not link /usr/local/bin/$b - file already exists"
-            else
-                ln -s ${command} .
-            fi
+            [ -f $b ] || ln -s ${command} .
         done
+        MMHOME=/home/pi/MagicMirror
+        [ -d ${MMHOME}/config ] || {
+            MMHOME=
+            for homedir in /home/*
+            do
+                [ "${homedir}" == "/home/*" ] && continue
+                [ -d ${homedir}/MagicMirror/config ] && {
+                    MMHOME="${homedir}/MagicMirror"
+                    break
+                }
+            done
+        }
+        if [ "${MMHOME}" ]
+        then
+            cd "${MMHOME}/config"
+            for config in /usr/local/MagicMirror/config/*
+            do
+                b=`basename ${config}`
+                [ -f $b ] || [ -d $b ] || ln -s ${config} .
+            done
+            cd "${MMHOME}/css"
+            for css in /usr/local/MagicMirror/css/*
+            do
+                b=`basename ${css}`
+                if [ "$b" == "custom.css" ]
+                then
+                    if [ -f $b ]
+                    then
+                        [ -f custom-mirrorcommandline.css ] || {
+                            ln -s ${css} custom-mirrorcommandline.css
+                        }
+                    else
+                        ln -s ${css} .
+                    fi
+                else
+                    [ -f $b ] || [ -d $b ] || ln -s ${css} .
+                fi
+            done
+        else
+            echo "Unable to locate MagicMirror installation folder."
+            echo "MirrorCommandLine config and css files in /usr/local/MagicMirror"
+            echo "have not been linked into the MagicMirror installation folder."
+            echo "This must be accomplished manually."
+        fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
