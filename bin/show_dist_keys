@@ -11,8 +11,9 @@ chmod 600 ${commands}
 
 for key in "${!keys[@]}"; do
   val="${keys[$key]}"
+  dum="${dumb[$key]}"
   [ "${val}" ] && {
-    echo "s/${dumb[$key]}/${val}/" >> ${commands}
+    echo "s/${dum}/${val}/" >> ${commands}
   }
 done
 
