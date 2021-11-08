@@ -12,6 +12,7 @@ config/config-sample.js
 config/config-unknown.js
 config/config.js.sample
 config/test/*
+etc/my_mirrorkeys
 modules/MMM-AssistantMk2/deviceInstance.json
 modules/MMM-AssistantMk2/profiles/default.json
 modules/MMM-Hotword/trainer/trainer-withtoken.sh
