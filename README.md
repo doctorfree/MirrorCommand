@@ -107,9 +107,8 @@ Install the package by executing the command
 sudo apt install MirrorCommandLine_<version>.deb
 ```
 
-Alternately, you can create your own package from the repository source.
-
-Clone the MirrorCommandLine repository:
+You can create your own custom Debian format package from the repository source.
+To do so, clone the MirrorCommandLine repository:
 
 <code>git clone ssh://gitlab.com/doctorfree/MirrorCommandLine.git</code>
 
@@ -119,6 +118,9 @@ or
 
 Use the `mkpkg.sh` script to create a Debian format package on a system with
 the prerequisite packaging development environment.
+
+Alternately, for those who prefer to manually install and configure MirrorCommandLine,
+compressed archives (zip and gzip) are provided for download.
 
 ### Post installation configuration
 
