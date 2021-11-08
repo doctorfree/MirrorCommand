@@ -48,7 +48,7 @@ do
 done
 
 sudo cp -a bin ${OUT_DIR}/${MM}/bin
-sudo chown root:root ${OUT_DIR}/${MM}/bin
+#sudo chown root:root ${OUT_DIR}/${MM}/bin
 
 for script in *.sh
 do
