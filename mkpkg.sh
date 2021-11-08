@@ -1,5 +1,5 @@
 #!/bin/bash
-
+PKG="mirrorcommandline"
 PKG_NAME="MirrorCommandLine"
 PKG_VER="2.1"
 TOP="usr"
@@ -15,57 +15,69 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 }
 
 cd "${SRC}/${PKG_NAME}"
-[ -d dist ] || mkdir dist
+sudo rm -rf dist
+mkdir dist
+
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
-mkdir ${OUT_DIR}/DEBIAN
-echo "Package: ${PKG_NAME}
+cp -a pkg ${OUT_DIR}/DEBIAN
+
+echo "Package: ${PKG}
 Version: ${PKG_VER}
-Section: base
+Section: misc
 Priority: optional
 Architecture: armhf
 Depends: qterminal (>= 0.14.1)
 Maintainer: ${DEBFULLNAME} <${DEBEMAIL}>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.3
+Homepage: https://gitlab.com/doctorfree/MirrorCommandLine
 Description: MagicMirror Command Line Tools
  Manage your MagicMirror from the command line" > ${OUT_DIR}/DEBIAN/control
 
-for dir in "${TOP}" "${DESTDIR}" "${MM}" "${TOP}/share" "${TOP}/share/applications"
+for dir in "${TOP}" "${DESTDIR}" "${MM}" "${TOP}/share" "${TOP}/share/applications" \
+            "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 do
-    [ -d ${OUT_DIR}/${dir} ] || mkdir ${OUT_DIR}/${dir}
+    [ -d ${OUT_DIR}/${dir} ] || sudo mkdir ${OUT_DIR}/${dir}
+    sudo chown root:root ${OUT_DIR}/${dir}
 done
 
 for dir in bin etc css config modules
 do
-    [ -d ${OUT_DIR}/${MM}/${dir} ] && rm -rf ${OUT_DIR}/${MM}/${dir}
+    [ -d ${OUT_DIR}/${MM}/${dir} ] && sudo rm -rf ${OUT_DIR}/${MM}/${dir}
 done
 
-cp -a bin ${OUT_DIR}/${MM}/bin
+sudo cp -a bin ${OUT_DIR}/${MM}/bin
+sudo chown root:root ${OUT_DIR}/${MM}/bin
 
 for script in *.sh
 do
     grep ${script} .gitignore > /dev/null || {
         dest=`echo ${script} | sed -e "s/\.sh//"`
-        cp ${script} ${OUT_DIR}/${MM}/bin/${dest}
+        sudo cp ${script} ${OUT_DIR}/${MM}/bin/${dest}
     }
 done
 
-cp *.desktop "${OUT_DIR}/${TOP}/share/applications"
+sudo cp *.desktop "${OUT_DIR}/${TOP}/share/applications"
+sudo cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
+sudo cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+sudo gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
 
-cp -a config ${OUT_DIR}/${MM}/config
-cp -a css ${OUT_DIR}/${MM}/css
-cp -a etc ${OUT_DIR}/${MM}/etc
-cp -a modules ${OUT_DIR}/${MM}/modules
+sudo cp -a config ${OUT_DIR}/${MM}/config
+sudo cp -a css ${OUT_DIR}/${MM}/css
+sudo cp -a etc ${OUT_DIR}/${MM}/etc
+sudo cp -a modules ${OUT_DIR}/${MM}/modules
 
 [ -f .gitignore ] && {
     while read ignore
     do
-        rm -f ${OUT_DIR}/${MM}/${ignore}
+        sudo rm -f ${OUT_DIR}/${MM}/${ignore}
     done < .gitignore
 }
 
-chmod 755 ${OUT_DIR}/${MM}/bin/*
+sudo chmod 755 ${OUT_DIR}/${MM}/bin/*
 
 cd dist
-dpkg-deb --build ${PKG_NAME}_${PKG_VER}
+sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 cd ${PKG_NAME}_${PKG_VER}
 tar cf - usr | gzip -9 > ../${PKG_NAME}_${PKG_VER}-dist.tar.gz
