@@ -94,7 +94,7 @@ var config = {
               // Use an empty setting for auth_code to initialize
               // auth_code: '',
               auth_code: 'xxxxxx_Your-Instagram-Auth-Code_xxxxxxxxxxxxxxxxx',
-              showComments: true,
+              showCaptions: true,
               showChildren: true,
               showDate: true,
               showMediaType: false,
