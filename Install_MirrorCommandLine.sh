@@ -1,12 +1,20 @@
 #!/bin/bash
 
 PKG_NAME="MirrorCommandLine"
-PKG_VER="2.1"
+PKG_VER="2.2"
 SRC="${HOME}/src"
 DEB="${SRC}/${PKG_NAME}/dist/${PKG_NAME}_${PKG_VER}.deb"
 
 [ -f "${DEB}" ] || {
-    echo "$DEB not found. Exiting."
+    echo "$DEB not found."
+    for debs in ${SRC}/${PKG_NAME}/dist/${PKG_NAME}_*.deb
+    do
+      [ "${debs}" == "${SRC}/${PKG_NAME}/dist/${PKG_NAME}_*.deb" ] || {
+        echo "Found existing packages:"
+        echo "${debs}"
+      }
+    done
+    echo "Exiting."
     exit 1
 }
 
