@@ -59,8 +59,10 @@ do
 done
 
 sudo cp *.desktop "${OUT_DIR}/${TOP}/share/applications"
+sudo cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
 sudo cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
 sudo cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+sudo cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
 sudo gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
 
 sudo cp -a config ${OUT_DIR}/${MM}/config
