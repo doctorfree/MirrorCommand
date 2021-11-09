@@ -18,7 +18,7 @@ for key in "${!keys[@]}"; do
 done
 
 [ -s ${commands} ] && {
-  for conf in config-*
+  for conf in *.js
   do
     sed -i -f ${commands} ${conf}
   done
