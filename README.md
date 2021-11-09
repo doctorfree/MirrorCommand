@@ -25,6 +25,7 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
     1. [Post installation configuration](#post-installation-configuration)
     1. [Add keys to mirrorkeys](#add-keys-to-mirrorkeys)
     1. [Configure mirror script](#configure-mirror-script)
+	1. [Removal](#removal)
 1. [Supporting utilities and config files](#supporting-utilities-and-config-files)
 1. [Remote access](#remote-access)
     1. [Remote execution of mirror commands](#remote-execution-of-mirror-commands)
@@ -179,6 +180,20 @@ you will need to modify by hand in the `mirror` script is the IP address setting
 
 If you have not configured an API key for MagicMirror remote control then
 set the apikey to blank ( <code>apikey=</code> ).
+
+#### Removal
+
+To remove/uninstall the MirrorCommandLine package execute the command:
+
+```bash
+sudo apt remove mirrorcommandline
+```
+
+**Note:** Removal will issue a warning about removing `/usr/local` and other
+folders within `/usr/local`. This is an artifact of the Debian packaging system.
+If you wish to silence that warning and prevent the Debian packaging system from
+trying to remove `/usr/local` then install the
+[core-custom-local Debian package](https://gitlab.com/doctorfree/core-custom-local/-/releases).
 
 ## Supporting utilities and config files
 
