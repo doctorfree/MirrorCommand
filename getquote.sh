@@ -14,8 +14,8 @@ echo $1 | grep USDT > /dev/null && exch="crypto"
 usejq=`type -p jq`
 if [ "$usejq" ]
 then
-    curl -X GET https://cloud.iexapis.com/v1/$exch/$1/quote?token='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' 2> /dev/null | jq .
+    curl -X GET https://cloud.iexapis.com/v1/$exch/$1/quote?token='xxxxx_Stocks-API-Key_xxxxxxxxxxxxx' 2> /dev/null | jq .
 else
-    curl -X GET https://cloud.iexapis.com/v1/$exch/$1/quote?token='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+    curl -X GET https://cloud.iexapis.com/v1/$exch/$1/quote?token='xxxxx_Stocks-API-Key_xxxxxxxxxxxxx'
     echo ""
 fi

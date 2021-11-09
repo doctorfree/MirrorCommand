@@ -38,7 +38,7 @@ PORT="8080"
 # Set you MMM-Remote-Control API Key here or leave blank if you have not configured one
 #
 # Replace "MMM-Remote-Control_API_Key" with your MMM-Remote-Control API Key
-apikey="MMM-Remote-Control_API_Key"
+apikey="xxx_Remote-Control-API-Key_xxxxx"
 # Uncomment this line if you have not configured an MMM-Remote-Control API Key
 # apikey=
 #
