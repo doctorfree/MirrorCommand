@@ -18,7 +18,7 @@ for key in "${!keys[@]}"; do
 done
 
 [ -s ${commands} ] && {
-  for bin in *
+  for bin in chktemp gethue getquote mirror mmscene repfromfile send_sms
   do
     sed -i -f ${commands} ${bin}
   done
