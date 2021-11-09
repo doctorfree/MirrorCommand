@@ -39,6 +39,7 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 1. [MMM-Scenes integration](#mmm-scenes-integration)
 1. [Usage](#usage)
 1. [Contents](#contents)
+1. [License](#license)
 
 ## Overview
 
@@ -548,57 +549,10 @@ Examples:
 
 ## Contents
 
-- [**backgrounds**](backgrounds.sh)
-  Manipulate desktop wallpapers
-- [**bin**](bin)
-  Simple convenience scripts, mostly to manage my image folders
-- [**camsnap**](camsnap.sh)
-  Snap a photo with your MagicMirror webcam
-- [**chkconfig**](chkconfig.sh)
-  Validate active/installed MagicMirror configuration file syntax
-- [**chkinst**](chkinst.sh)
-  Check if currently installed MagicMirror scripts are up to date
-- [**chktemp**](chktemp.sh)
-  Check and report the Raspberry Pi temperature
-- [**get_temps**](get_temps.sh)
-  Get your MagicMirror Raspberry Pi temperature
-- [**gethue**](gethue.sh)
-  Get your Hue Hub properties
-- [**getquote**](getquote.sh)
-  Get a stock symbol quote
-- [**mirror**](mirror.sh)
-  Main MagicMirror management script
-- [**mmapiactions**](mmapiactions.sh)
-  Get the MMM-Remote-Control API actions
-- [**mmgetb**](mmgetb.sh)
-  Get the MagicMirror screen brightness level
-- [**mmsetb**](mmsetb.sh)
-  Set the MagicMirror screen brightness level
-- [**mm**](mm.sh)
-  Convenience script to remotely execute the main mirror script
-- [**pcmanslideshow**](pcmanslideshow.sh)
-  Display a slide show on your desktop using pcmanfm
-- [**rand_back**](rand_back.sh)
-  Select a random desktop wallpaper
-- [**reboot**](reboot.sh)
-  Perform additional actions before reboot, executed as a normal user using sudo
-- [**rmlandscape**](rmlandscape.sh)
-  Remove photos in a folder that are in landscape mode
-- [**sdbackup**](sdbackup.sh)
-  Backup an SD card
-- [**sderase**](sderase.sh)
-  Erase an SD card
-- [**sdrestore**](sdrestore.sh)
-  Restore an SD card from a previous backup
-- [**sdwrite**](sdwrite.sh)
-  Write an image to an SD card
-- [**shutdown**](shutdown.sh)
-  Perform additional actions before shutdown, executed as a normal user using sudo
-- [**vncview**](vncview.sh)
-  Remote script to start a VNC server on your MagicMirror and a VNC viewer on your desktop
-- [**vol**](vol.sh)
-  Script to control volume level of MagicMirror audio output
-- [**wireless_conf**](wireless_conf.sh)
-  Configure wireless using WPA Supplicant
-- [**wireless_dot_sample**](wireless_dot_sample)
-  Sample $HOME/.wireless to assist in wireless configuration
+See the [MirrorCommandLine Contents](https://gitlab.com/doctorfree/MirrorCommandLine/-/wikis/MirrorCommandLine-Contents) wiki page for a full contents listing.
+
+## License
+
+Copyright: 2014-2021 Ronald Joe Record <ronaldrecord@gmail.com>
+
+License: MIT
