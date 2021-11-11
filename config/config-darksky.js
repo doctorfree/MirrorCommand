@@ -166,15 +166,25 @@ var config = {
             },
         },
         {
+            module: "MMM-IronManGIF",
+            position: "upper_third",
+            config: {
+                style: 1,              // Style number
+                maxWidth: "100%",      // Sizes the images.
+                rotate: true,
+                updateInterval: 300000
+            }
+        },
+        {
             module: "clock",
             position: "upper_third",
             config: {
                 dateFormat: "dddd, LLL",
                 displayType: "analog",
-                analogFace: "face-009",
-                analogSize: "200px",
+                analogFace: "face-006",
+                analogSize: "295px",
                 displaySeconds: "true",
-                secondsColor: "#BAA3DC",
+                secondsColor: "#00FFFF",
                 timeFormat: "12",
                 showPeriod: "true",
                 showDate: "true",

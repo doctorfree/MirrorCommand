@@ -686,9 +686,9 @@ var config = {
                     [[ "MMM-Solar"], [ "mmm-hue-lights"]],
                 fixed:
                     ["alert", "updatenotification", "MMM-Remote-Control",
-                     "clock", "calendar", "weather", "newsfeed", "MMM-Tools",
+                     "calendar", "weather", "newsfeed", "MMM-Tools",
                      "MMM-stocks", "MMM-MacAddressScan", "MMM-TelegramBot",
-                     "MMM-GoogleAssistant", "MMM-Detector"],
+                     "clock", "MMM-GoogleAssistant", "MMM-Detector"],
                 rotationTime: 900000, // rotate page every 15 minutes = 15 * 60 * 1000
             }
         },

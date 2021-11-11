@@ -3,6 +3,14 @@ header {
   color: #B5F5F2;
 }
 
+.module.clock {
+  margin-bottom: 100px;
+}
+
+.MMM-IronManGIF {
+  margin-bottom:-364px;
+}
+
 .MMM-DarkSkyForecast * {
   box-sizing: border-box;
 }

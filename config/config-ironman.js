@@ -12,16 +12,7 @@
 var config = {
 //	address: "localhost",
 	address: "0.0.0.0", // Address to listen on, can be:
-	                      // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
-	                      // - another specific IPv4/6 to listen on a specific interface
-	                      // - "", "0.0.0.0", "::" to listen on any interface
-	                      // Default, when address config is left out, is "localhost"
 	port: 8080,
-    // Set [] to allow all IP addresses
-	// or add a specific IPv4 of 192.168.1.5 :
-	// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
-	// or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
-	// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
     ipWhitelist: [
         "0.0.0.0",
         "127.0.0.1",
@@ -40,6 +31,7 @@ var config = {
         "::1",
     ],
 
+    customCss: "css/custom-ironman.css",
 	language: "en",
 	timeFormat: 12,
 	units: "imperial",
@@ -164,19 +156,31 @@ var config = {
             position: "middle_center",
             config: {
                 style: 1,              // Style number
-                maxWidth: "100%"       // Sizes the images.
+                maxWidth: "100%",      // Sizes the images.
+                rotate: true,
+                updateInterval: 300000
             }
         },
+// {
+//   module: "clock",
+//   position: "middle_center",
+//   config: {
+// 	clockBold:false,
+// 	displayType:"analog",
+// 	analogSize: "295px",
+// 	analogFace:"face-006"
+//   }
+// },
         {
             module: "clock",
             position: "middle_center",
             config: {
                 dateFormat: "dddd, LLL",
                 displayType: "analog",
-                analogFace: "face-009",
-                analogSize: "200px",
+                analogFace: "face-006",
+                analogSize: "295px",
                 displaySeconds: "true",
-                secondsColor: "#BAA3DC",
+                secondsColor: "#00FFFF",
                 timeFormat: "12",
                 showPeriod: "true",
                 showDate: "true",
