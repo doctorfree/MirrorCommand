@@ -90,8 +90,8 @@ zip -q -r ../${PKG_NAME}_${PKG_VER}-dist.zip usr
 
 cd "${SRC}/${PKG_NAME}"
 
-PKG="mirror-images"
-PKG_NAME="MirrorImages"
+PKG="mirror-images-portrait"
+PKG_NAME="MirrorImagesPortrait"
 SRC=${HOME}/src
 # Subdirectory in which to create the distribution files
 OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
