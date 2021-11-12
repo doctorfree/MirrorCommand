@@ -30,20 +30,6 @@ case "$1" in
             b=`basename ${command}`
             [ -f $b ] || ln -s ${command} .
         done
-        [ -d ${MM}/pics ] || mkdir ${MM}/pics
-        cd ${MM}/pics
-        inst=`type -p pip`
-        [ "${inst}" ] || sudo apt-get install python-pip
-        pip list | grep -F tqdm > /dev/null || {
-            pip install tqdm
-        }
-        [ -x ${MM}/bin/getimages ] && {
-            ${MM}/bin/getimages
-            [ -f images.tar.gz ] && {
-                tar xzf images.tar.gz
-                rm -f images.tar.gz
-            }
-        }
         MMHOME=/home/pi/MagicMirror
         [ -d ${MMHOME}/config ] || {
             MMHOME=
@@ -86,35 +72,6 @@ case "$1" in
                     [ -f $b ] || [ -d $b ] || sudo -u ${USER} ln -s ${css} .
                 fi
               done
-            }
-            [ -d "${MMHOME}/modules" ] && {
-              cd "${MMHOME}/modules"
-              USER=$(stat -c '%U' ${MMHOME}/modules)
-              [ -d MMM-BackgroundSlideshow ] || {
-                inst=`type -p git`
-                [ "${inst}" ] && {
-                  sudo -u ${USER} git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
-                }
-              }
-              [ -d MMM-BackgroundSlideshow ] && {
-                cd MMM-BackgroundSlideshow
-                inst=`type -p npm`
-                [ "${inst}" ] && {
-                  sudo -u ${USER} npm_config_loglevel=silent npm install 2>&1 > /dev/null
-                }
-                [ -d pics ] || sudo -u ${USER} mkdir pics
-                [ -d ${MM}/pics ] && {
-                  cd pics
-                  for dir in Art Fractals Gif Owls Waterfall
-                  do
-                    [ -d ${MM}/pics/${dir} ] && {
-                      [ -L ${dir} ] || [ -d ${dir} ] || {
-                        sudo -u ${USER} ln -s ${MM}/pics/${dir} ${dir}
-                      }
-                    }
-                  done
-                }
-              }
             }
         else
             echo "Unable to locate MagicMirror installation folder."

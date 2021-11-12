@@ -20,16 +20,6 @@ set -e
 case "$1" in
     remove|upgrade|deconfigure)
         MM="/usr/local/MagicMirror"
-        [ -d /usr/local/bin ] && {
-            cd /usr/local/bin
-            for command in ${MM}/bin/*
-            do
-                b=`basename ${command}`
-                [ -L $b ] && {
-                    readlink $b | grep ${MM} > /dev/null && rm -f $b
-                }
-            done
-        }
         MMHOME=/home/pi/MagicMirror
         [ -d ${MMHOME}/config ] || {
             MMHOME=
@@ -44,25 +34,13 @@ case "$1" in
         }
         if [ "${MMHOME}" ]
         then
-            cd "${MMHOME}/config"
-            for config in ${MM}/config/*
-            do
-                b=`basename ${config}`
-                [ -L $b ] && {
-                    readlink $b | grep ${MM} > /dev/null && rm -f $b
-                }
-            done
-            [ -d "${MMHOME}/css" ] && {
-              cd "${MMHOME}/css"
-              for css in ${MM}/css/*
+            [ -d "${MMHOME}/modules/MMM-BackgroundSlideshow/pics" ] && {
+              cd "${MMHOME}/modules/MMM-BackgroundSlideshow/pics"
+              for img in ${MM}/pics/*
               do
-                b=`basename ${css}`
+                b=`basename ${img}`
                 [ -L $b ] && {
                     readlink $b | grep ${MM} > /dev/null && rm -f $b
-                }
-                c="custom-mirrorcommandline.css"
-                [ -L $c ] && {
-                    readlink $c | grep ${MM} > /dev/null && rm -f $c
                 }
               done
             }
@@ -72,6 +50,22 @@ case "$1" in
             echo "have not been unlinked in the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi
+
+        [ -d ${MM}/pics ] && {
+          if [ -f ${MM}/pics/imlist.txt ]
+          then
+            while read img
+            do
+              rm -f ${MM}/pics/${img}
+            done < ${MM}/pics/imlist.txt
+            rm -f ${MM}/pics/imlist.txt
+            rm -f ${MM}/pics/*.py
+            rmdir --ignore-fail-on-non-empty ${MM}/pics/*/*
+            rmdir --ignore-fail-on-non-empty ${MM}/pics/*
+          else
+            rm -rf ${MM}/pics
+          fi
+        }
     ;;
 
     failed-upgrade)

@@ -80,9 +80,55 @@ sudo cp -a modules ${OUT_DIR}/${MM}/modules
 sudo chmod 755 ${OUT_DIR}/${MM}/bin/*
 
 cd dist
+echo "Building ${PKG_NAME}_${PKG_VER} package"
 sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 cd ${PKG_NAME}_${PKG_VER}
 echo "Creating compressed tar archive of ${PKG_NAME} ${PKG_VER} distribution"
 tar cf - usr | gzip -9 > ../${PKG_NAME}_${PKG_VER}-dist.tar.gz
 echo "Creating zip archive of ${PKG_NAME} ${PKG_VER} distribution"
 zip -q -r ../${PKG_NAME}_${PKG_VER}-dist.zip usr
+
+cd "${SRC}/${PKG_NAME}"
+
+PKG="mirror-images"
+PKG_NAME="MirrorImages"
+SRC=${HOME}/src
+# Subdirectory in which to create the distribution files
+OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
+
+[ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
+mkdir ${OUT_DIR}
+cp -a pkgimg ${OUT_DIR}/DEBIAN
+
+echo "Package: ${PKG}
+Version: ${PKG_VER}
+Section: misc
+Priority: optional
+Architecture: armhf
+Depends: mirrorcommandline (>= 2.2)
+Maintainer: ${DEBFULLNAME} <${DEBEMAIL}>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.3
+Homepage: https://gitlab.com/doctorfree/MirrorCommandLine
+Description: MagicMirror Images
+ Images for a MagicMirror using the MirrorCommandLine configs" > ${OUT_DIR}/DEBIAN/control
+
+for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
+do
+    [ -d ${OUT_DIR}/${dir} ] || sudo mkdir ${OUT_DIR}/${dir}
+    sudo chown root:root ${OUT_DIR}/${dir}
+done
+
+sudo cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
+sudo cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
+sudo cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+sudo cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
+sudo gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+
+cd dist
+echo "Building ${PKG_NAME}_${PKG_VER} package"
+sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
+
+[ -d ../releases ] || mkdir ../releases
+[ -d ../releases/${PKG_VER} ] || mkdir ../releases/${PKG_VER}
+sudo cp *.deb *.gz *.zip ../releases/${PKG_VER}
