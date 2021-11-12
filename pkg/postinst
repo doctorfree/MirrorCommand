@@ -20,6 +20,7 @@ set -e
 
 case "$1" in
     configure)
+        export PATH=$PATH:/usr/local/bin
         [ -d /usr/local ] || mkdir /usr/local
         [ -d /usr/local/bin ] || mkdir /usr/local/bin
         cd /usr/local/bin
@@ -58,10 +59,11 @@ case "$1" in
         if [ "${MMHOME}" ]
         then
             cd "${MMHOME}/config"
+            USER=$(stat -c '%U' ${MMHOME}/config)
             for config in ${MM}/config/*
             do
                 b=`basename ${config}`
-                [ -f $b ] || [ -d $b ] || ln -s ${config} .
+                [ -f $b ] || [ -d $b ] || sudo -u ${USER} ln -s ${config} .
             done
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"
@@ -73,36 +75,37 @@ case "$1" in
                     if [ -f $b ]
                     then
                         [ -f custom-mirrorcommandline.css ] || {
-                            ln -s ${css} custom-mirrorcommandline.css
+                            sudo -u ${USER} ln -s ${css} custom-mirrorcommandline.css
                         }
                     else
-                        ln -s ${css} .
+                        sudo -u ${USER} ln -s ${css} .
                     fi
                 else
-                    [ -f $b ] || [ -d $b ] || ln -s ${css} .
+                    [ -f $b ] || [ -d $b ] || sudo -u ${USER} ln -s ${css} .
                 fi
               done
             }
             [ -d "${MMHOME}/modules" ] && {
               cd "${MMHOME}/modules"
+              USER=$(stat -c '%U' ${MMHOME}/modules)
               [ -d MMM-BackgroundSlideshow ] || {
                 inst=`type -p git`
                 [ "${inst}" ] && {
-                  git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
+                  sudo -u ${USER} git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
                 }
               }
               [ -d MMM-BackgroundSlideshow ] && {
                 cd MMM-BackgroundSlideshow
                 inst=`type -p npm`
-                [ "${inst}" ] && npm install
-                [ -d pics ] || mkdir pics
+                [ "${inst}" ] && sudo -u ${USER} npm install
+                [ -d pics ] || sudo -u ${USER} mkdir pics
                 [ -d ${MM}/pics ] && {
                   cd pics
                   for dir in Art Fractals Gif Owls Waterfall
                   do
                     [ -d ${MM}/pics/${dir} ] && {
                       [ -L ${dir} ] || [ -d ${dir} ] || {
-                        ln -s ${MM}/pics/${dir} ${dir}
+                        sudo -u ${USER} ln -s ${MM}/pics/${dir} ${dir}
                       }
                     }
                   done

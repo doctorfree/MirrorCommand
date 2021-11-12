@@ -27,7 +27,7 @@ Version: ${PKG_VER}
 Section: misc
 Priority: optional
 Architecture: armhf
-Depends: qterminal (>= 0.14.1)
+Depends: qterminal (>= 0.14.1), git (>= 2.20.1)
 Maintainer: ${DEBFULLNAME} <${DEBEMAIL}>
 Build-Depends: debhelper (>= 11)
 Standards-Version: 4.1.3
