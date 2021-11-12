@@ -99,6 +99,7 @@ var config = {
               showDate: true,
               showMediaType: false,
               startRandom: true,
+              shuffle: true,
               animationSpeed: 5000,
               updateInterval: 60000,
             }

@@ -91,14 +91,14 @@ var config = {
         },
         {
             module: "clock",
-			position: "upper_third",
+            position: "upper_third",
             config: {
                 dateFormat: "dddd, LLL",
                 displayType: "analog",
-                analogFace: "face-009",
+                analogFace: "face-006",
                 analogSize: "200px",
                 displaySeconds: "true",
-                secondsColor: "#BAA3DC",
+                secondsColor: "#00FFFF",
                 timeFormat: "12",
                 showPeriod: "true",
                 showDate: "true",
