@@ -1,0 +1,101 @@
+#!/bin/bash
+# postinst script for mirrorcommandline
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see https://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+
+case "$1" in
+    configure)
+        export PATH=/usr/local/bin:$PATH
+        MM="/usr/local/MagicMirror"
+        [ -d ${MM}/pics ] || mkdir ${MM}/pics
+        cd ${MM}/pics
+        inst=`type -p pip`
+        [ "${inst}" ] || sudo apt-get install python-pip
+        pip list | grep -F tqdm > /dev/null || {
+            pip install tqdm
+        }
+        [ -x ${MM}/bin/getphotogs ] && {
+            ${MM}/bin/getphotogs
+            [ -f Photographers-portrait.tar.gz ] && {
+                tar xzf Photographers-portrait.tar.gz
+                rm -f Photographers-portrait.tar.gz
+            }
+        }
+        MMHOME=/home/pi/MagicMirror
+        [ -d ${MMHOME}/config ] || {
+            MMHOME=
+            for homedir in /home/*
+            do
+                [ "${homedir}" == "/home/*" ] && continue
+                [ -d ${homedir}/MagicMirror/config ] && {
+                    MMHOME="${homedir}/MagicMirror"
+                    break
+                }
+            done
+        }
+        if [ "${MMHOME}" ]
+        then
+            [ -d "${MMHOME}/modules" ] && {
+              cd "${MMHOME}/modules"
+              USER=$(stat -c '%U' ${MMHOME}/modules)
+              GROUP=$(stat -c '%G' ${MMHOME}/modules)
+              chown -R ${USER}:${GROUP} ${MM}/pics
+              [ -d MMM-BackgroundSlideshow ] || {
+                inst=`type -p git`
+                [ "${inst}" ] && {
+                  sudo -u ${USER} git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
+                }
+              }
+              [ -d MMM-BackgroundSlideshow ] && {
+                cd MMM-BackgroundSlideshow
+                inst=`type -p npm`
+                [ "${inst}" ] && {
+                  sudo -u ${USER} npm_config_loglevel=silent npm install 2>&1 > /dev/null
+                }
+                [ -d pics ] || sudo -u ${USER} mkdir pics
+                [ -d ${MM}/pics ] && {
+                  cd pics
+                  for dir in Photographers
+                  do
+                    [ -d ${MM}/pics/${dir} ] && {
+                      [ -L ${dir} ] || [ -d ${dir} ] || {
+                        sudo -u ${USER} ln -s ${MM}/pics/${dir} ${dir}
+                      }
+                    }
+                  done
+                }
+              }
+            }
+        else
+            echo "Unable to locate MagicMirror installation folder."
+            echo "MirrorCommandLine config and css files in ${MM}"
+            echo "have not been linked into the MagicMirror installation folder."
+            echo "This must be accomplished manually."
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0

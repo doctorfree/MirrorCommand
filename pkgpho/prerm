@@ -36,7 +36,7 @@ case "$1" in
         then
             [ -d "${MMHOME}/modules/MMM-BackgroundSlideshow/pics" ] && {
               cd "${MMHOME}/modules/MMM-BackgroundSlideshow/pics"
-              for img in Art Fractals Gif Owls Waterfalls
+              for img in Photographers
               do
                 [ -L ${img} ] && {
                     readlink ${img} | grep ${MM} > /dev/null && rm -f ${img}
@@ -51,18 +51,18 @@ case "$1" in
         fi
 
         [ -d ${MM}/pics ] && {
-          if [ -f ${MM}/pics/imlist.txt ]
+          if [ -f ${MM}/pics/photogslist.txt ]
           then
             while read img
             do
               rm -f ${MM}/pics/${img}
-            done < ${MM}/pics/imlist.txt
-            rm -f ${MM}/pics/imlist.txt
+            done < ${MM}/pics/photogslist.txt
+            rm -f ${MM}/pics/photogslist.txt
             rm -f ${MM}/pics/*.py
-            rmdir --ignore-fail-on-non-empty ${MM}/pics/*/*
-            rmdir --ignore-fail-on-non-empty ${MM}/pics/*
+            rmdir --ignore-fail-on-non-empty ${MM}/pics/Photographers/*
+            rmdir --ignore-fail-on-non-empty ${MM}/pics/Photographers
           else
-            rm -rf ${MM}/pics
+            rm -rf ${MM}/pics/Photographers
           fi
         }
     ;;

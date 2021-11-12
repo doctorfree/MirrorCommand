@@ -1,4 +1,5 @@
 #!/bin/bash
 
+sudo apt remove photographers-portrait
 sudo apt remove mirror-images-portrait
 sudo apt remove mirrorcommandline

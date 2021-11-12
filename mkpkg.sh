@@ -1,5 +1,6 @@
 #!/bin/bash
 PKG="mirrorcommandline"
+SRC_NAME="MirrorCommandLine"
 PKG_NAME="MirrorCommandLine"
 PKG_VER="2.2"
 TOP="usr"
@@ -9,12 +10,12 @@ SRC=${HOME}/src
 # Subdirectory in which to create the distribution files
 OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 
-[ -d "${SRC}/${PKG_NAME}" ] || {
-    echo "$SRC/$PKG_NAME does not exist or is not a directory. Exiting."
+[ -d "${SRC}/${SRC_NAME}" ] || {
+    echo "$SRC/$SRC_NAME does not exist or is not a directory. Exiting."
     exit 1
 }
 
-cd "${SRC}/${PKG_NAME}"
+cd "${SRC}/${SRC_NAME}"
 sudo rm -rf dist
 mkdir dist
 
@@ -88,7 +89,7 @@ tar cf - usr | gzip -9 > ../${PKG_NAME}_${PKG_VER}-dist.tar.gz
 echo "Creating zip archive of ${PKG_NAME} ${PKG_VER} distribution"
 zip -q -r ../${PKG_NAME}_${PKG_VER}-dist.zip usr
 
-cd "${SRC}/${PKG_NAME}"
+cd "${SRC}/${SRC_NAME}"
 
 PKG="mirror-images-portrait"
 PKG_NAME="MirrorImagesPortrait"
@@ -112,6 +113,47 @@ Standards-Version: 4.1.3
 Homepage: https://gitlab.com/doctorfree/MirrorCommandLine
 Description: MagicMirror Images
  Images for a MagicMirror using the MirrorCommandLine configs" > ${OUT_DIR}/DEBIAN/control
+
+for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
+do
+    [ -d ${OUT_DIR}/${dir} ] || sudo mkdir ${OUT_DIR}/${dir}
+    sudo chown root:root ${OUT_DIR}/${dir}
+done
+
+sudo cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
+sudo cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
+sudo cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+sudo cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
+sudo gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+
+cd dist
+echo "Building ${PKG_NAME}_${PKG_VER} package"
+sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
+
+cd "${SRC}/${SRC_NAME}"
+
+PKG="photographers-portrait"
+PKG_NAME="PhotographersPortrait"
+SRC=${HOME}/src
+# Subdirectory in which to create the distribution files
+OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
+
+[ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
+mkdir ${OUT_DIR}
+cp -a pkgpho ${OUT_DIR}/DEBIAN
+
+echo "Package: ${PKG}
+Version: ${PKG_VER}
+Section: misc
+Priority: optional
+Architecture: armhf
+Depends: mirrorcommandline (>= 2.2)
+Maintainer: ${DEBFULLNAME} <${DEBEMAIL}>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.3
+Homepage: https://gitlab.com/doctorfree/MirrorCommandLine
+Description: MagicMirror Photographer Images
+ Photographer Images for a MagicMirror using the MirrorCommandLine configs" > ${OUT_DIR}/DEBIAN/control
 
 for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 do

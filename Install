@@ -44,3 +44,20 @@ DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
 
 echo "Installing ${DEB}"
 sudo apt install "${DEB}"
+
+PKG_NAME="PhotographersPortrait"
+DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
+
+[ -f "${DEB}" ] || {
+    echo "$DEB not found."
+    for debs in ${SRC}/${PKG_NAME}/releases/*/${PKG_NAME}_*.deb
+    do
+      [ "${debs}" == "${SRC}/${PKG_NAME}/releases/*/${PKG_NAME}_*.deb" ] || {
+        echo "Found existing packages:"
+        echo "${debs}"
+      }
+    done
+}
+
+echo "Installing ${DEB}"
+sudo apt install "${DEB}"
