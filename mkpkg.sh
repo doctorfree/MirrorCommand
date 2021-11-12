@@ -48,7 +48,7 @@ do
 done
 
 sudo cp -a bin ${OUT_DIR}/${MM}/bin
-sudo cp -a images ${OUT_DIR}/${MM}/pics
+sudo cp -a pics ${OUT_DIR}/${MM}/pics
 
 for script in *.sh
 do

@@ -29,6 +29,20 @@ case "$1" in
             b=`basename ${command}`
             [ -f $b ] || ln -s ${command} .
         done
+        [ -d ${MM}/pics ] || mkdir ${MM}/pics
+        cd ${MM}/pics
+        inst=`type -p pip`
+        [ "${inst}" ] || sudo apt-get install python-pip
+        pip list | grep -F tqdm > /dev/null || {
+            pip install tqdm
+        }
+        [ -x ${MM}/bin/getimages ] && {
+            ${MM}/bin/getimages
+            [ -f images.tar.gz ] && {
+                tar xzf images.tar.gz
+                rm -f images.tar.gz
+            }
+        }
         MMHOME=/home/pi/MagicMirror
         [ -d ${MMHOME}/config ] || {
             MMHOME=

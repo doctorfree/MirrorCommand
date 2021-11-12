@@ -82,6 +82,21 @@ case "$1" in
             echo "have not been unlinked in the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi
+
+        [ -d ${MM}/pics ] && {
+          if [ -f ${MM}/pics/imlist.txt ]
+          then
+            while read img
+            do
+              rm -f ${MM}/pics/${img}
+            done < ${MM}/pics/imlist.txt
+            rm -f ${MM}/pics/imlist.txt
+            rm -f ${MM}/pics/*.py
+            rmdir ${MM}/pics/*
+          else
+            rm -rf ${MM}/pics
+          fi
+        }
     ;;
 
     failed-upgrade)

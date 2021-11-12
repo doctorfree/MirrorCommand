@@ -1,0 +1,6 @@
+#!/bin/bash
+
+MM="/usr/local/MagicMirror"
+ID="1-0_sh3LDcz8dhTj8fCBSTRVurMRmhrkO"
+
+python ${MM}/pics/download_gdrive.py ${ID} ${MM}/pics/images.tar.gz 
