@@ -92,7 +92,8 @@ case "$1" in
             done < ${MM}/pics/imlist.txt
             rm -f ${MM}/pics/imlist.txt
             rm -f ${MM}/pics/*.py
-            rmdir ${MM}/pics/*
+            rmdir --ignore-fail-on-non-empty ${MM}/pics/*/*
+            rmdir --ignore-fail-on-non-empty ${MM}/pics/*
           else
             rm -rf ${MM}/pics
           fi
