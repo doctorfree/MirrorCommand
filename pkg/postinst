@@ -79,6 +79,8 @@ case "$1" in
               }
               [ -d MMM-BackgroundSlideshow ] && {
                 cd MMM-BackgroundSlideshow
+                inst=`type -p npm`
+                [ "${inst}" ] && npm install
                 [ -d pics ] || mkdir pics
                 [ -d ${MM}/pics ] && {
                   cd pics
