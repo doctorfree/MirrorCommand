@@ -60,6 +60,8 @@ case "$1" in
         then
             cd "${MMHOME}/config"
             USER=$(stat -c '%U' ${MMHOME}/config)
+            GROUP=$(stat -c '%G' ${MMHOME}/config)
+            chown -R ${USER}:${GROUP} ${MM}
             for config in ${MM}/config/*
             do
                 b=`basename ${config}`
