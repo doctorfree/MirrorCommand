@@ -1,0 +1,32 @@
+#!/bin/bash
+
+MM="/usr/local/MagicMirror"
+PICS="/mnt/transcend/Pictures"
+PM="${PICS}/MagicMirror"
+
+[ -d ${MM}/pics ] || {
+    echo "$MM/pics does not exist or is not a directory. Exiting."
+    exit 1
+}
+
+cd ${MM}/pics
+for subdir in *
+do
+  [ -d ${subdir} ] || continue
+  PDEST="${PM}"
+  [ -d ${PM}/${subdir} ] || {
+    [ -d ${PICS}/${subdir} ] && PDEST="${PICS}"
+  }
+  [ -d ${PDEST}/${subdir} ] || continue
+  find ${subdir} -type f | while read i
+  do
+    [ -f ${PDEST}/$i ] && {
+      cmp $i ${PDEST}/$i > /dev/null && {
+        cd `dirname $i`
+        rm -f `basename $i`
+        ln -s ${PDEST}/$i .
+        cd ${MM}/pics
+      }
+    }
+  done
+done

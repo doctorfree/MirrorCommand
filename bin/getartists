@@ -1,0 +1,6 @@
+#!/bin/bash
+
+MM="/usr/local/MagicMirror"
+ID="1-cMT_-mUklLzx4nsZFnoADhKov5mVxHH"
+
+python ${MM}/pics/download_gdrive.py ${ID} ${MM}/pics/Artists-portrait.tar.gz 
