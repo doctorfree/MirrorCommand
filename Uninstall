@@ -1,6 +1,4 @@
 #!/bin/bash
 
-sudo apt remove artists-portrait
-sudo apt remove photographers-portrait
-sudo apt remove mirror-images-portrait
-sudo apt remove mirrorcommandline
+sudo apt remove artists-portrait photographers-portrait \
+                mirror-images-portrait mirrorcommandline

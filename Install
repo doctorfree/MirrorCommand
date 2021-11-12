@@ -1,5 +1,9 @@
 #!/bin/bash
 #
+# Usage: ./Install [package names]
+#   If no package names are specified then all currently
+#   supported packages will be installed
+#
 # Versions of apt prior to 1.1 do not support install by Debian filename
 # You should probably be running a more recent version of apt
 # On these early versions, install with the following:
@@ -9,12 +13,16 @@
 
 
 SRC_NAME="MirrorCommandLine"
-PKG_NAME="MirrorCommandLine"
+PKG_NAMES="MirrorCommandLine MirrorImagesPortrait ArtistsPortrait PhotographersPortrait"
 PKG_VER="2.2"
 SRC="${HOME}/src"
-DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
 
-[ -f "${DEB}" ] || {
+[ "$1" ] && PKG_NAMES="$*"
+
+for PKG_NAME in ${PKG_NAMES}
+do
+  DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
+  [ -f "${DEB}" ] || {
     echo "$DEB not found."
     for debs in ${SRC}/${SRC_NAME}/releases/*/${PKG_NAME}_*.deb
     do
@@ -23,58 +31,9 @@ DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
         echo "${debs}"
       }
     done
-}
+    continue
+  }
 
-echo "Installing ${DEB}"
-sudo apt install "${DEB}"
-
-PKG_NAME="MirrorImagesPortrait"
-DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
-
-[ -f "${DEB}" ] || {
-    echo "$DEB not found."
-    for debs in ${SRC}/${PKG_NAME}/releases/*/${PKG_NAME}_*.deb
-    do
-      [ "${debs}" == "${SRC}/${PKG_NAME}/releases/*/${PKG_NAME}_*.deb" ] || {
-        echo "Found existing packages:"
-        echo "${debs}"
-      }
-    done
-}
-
-echo "Installing ${DEB}"
-sudo apt install "${DEB}"
-
-PKG_NAME="PhotographersPortrait"
-DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
-
-[ -f "${DEB}" ] || {
-    echo "$DEB not found."
-    for debs in ${SRC}/${PKG_NAME}/releases/*/${PKG_NAME}_*.deb
-    do
-      [ "${debs}" == "${SRC}/${PKG_NAME}/releases/*/${PKG_NAME}_*.deb" ] || {
-        echo "Found existing packages:"
-        echo "${debs}"
-      }
-    done
-}
-
-echo "Installing ${DEB}"
-sudo apt install "${DEB}"
-
-PKG_NAME="ArtistsPortrait"
-DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
-
-[ -f "${DEB}" ] || {
-    echo "$DEB not found."
-    for debs in ${SRC}/${PKG_NAME}/releases/*/${PKG_NAME}_*.deb
-    do
-      [ "${debs}" == "${SRC}/${PKG_NAME}/releases/*/${PKG_NAME}_*.deb" ] || {
-        echo "Found existing packages:"
-        echo "${debs}"
-      }
-    done
-}
-
-echo "Installing ${DEB}"
-sudo apt install "${DEB}"
+  echo "Installing ${DEB}"
+  sudo apt install "${DEB}"
+done

@@ -31,9 +31,9 @@ case "$1" in
         }
         [ -x ${MM}/bin/getimages ] && {
             ${MM}/bin/getimages
-            [ -f images.tar.gz ] && {
-                tar xzf images.tar.gz
-                rm -f images.tar.gz
+            [ -f MirrorImagesPortrait.zip ] && {
+                unzip -qq MirrorImagesPortrait.zip
+                rm -f MirrorImagesPortrait.zip
             }
         }
         MMHOME=/home/pi/MagicMirror
