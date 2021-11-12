@@ -23,7 +23,8 @@ case "$1" in
         [ -d /usr/local ] || mkdir /usr/local
         [ -d /usr/local/bin ] || mkdir /usr/local/bin
         cd /usr/local/bin
-        for command in /usr/local/MagicMirror/bin/*
+        MM="/usr/local/MagicMirror"
+        for command in ${MM}/bin/*
         do
             b=`basename ${command}`
             [ -f $b ] || ln -s ${command} .
@@ -43,14 +44,15 @@ case "$1" in
         if [ "${MMHOME}" ]
         then
             cd "${MMHOME}/config"
-            for config in /usr/local/MagicMirror/config/*
+            for config in ${MM}/config/*
             do
                 b=`basename ${config}`
                 [ -f $b ] || [ -d $b ] || ln -s ${config} .
             done
-            cd "${MMHOME}/css"
-            for css in /usr/local/MagicMirror/css/*
-            do
+            [ -d "${MMHOME}/css" ] && {
+              cd "${MMHOME}/css"
+              for css in ${MM}/css/*
+              do
                 b=`basename ${css}`
                 if [ "$b" == "custom.css" ]
                 then
@@ -65,10 +67,35 @@ case "$1" in
                 else
                     [ -f $b ] || [ -d $b ] || ln -s ${css} .
                 fi
-            done
+              done
+            }
+            [ -d "${MMHOME}/modules" ] && {
+              cd "${MMHOME}/modules"
+              [ -d MMM-BackgroundSlideshow ] || {
+                inst=`type -p git`
+                [ "${inst}" ] && {
+                  git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
+                }
+              }
+              [ -d MMM-BackgroundSlideshow ] && {
+                cd MMM-BackgroundSlideshow
+                [ -d pics ] || mkdir pics
+                [ -d ${MM}/pics ] && {
+                  cd pics
+                  for dir in Art Fractals Gif Owls Waterfall
+                  do
+                    [ -d ${MM}/pics/${dir} ] && {
+                      [ -L ${dir} ] || [ -d ${dir} ] || {
+                        ln -s ${MM}/pics/${dir} ${dir}
+                      }
+                    }
+                  done
+                }
+              }
+            }
         else
             echo "Unable to locate MagicMirror installation folder."
-            echo "MirrorCommandLine config and css files in /usr/local/MagicMirror"
+            echo "MirrorCommandLine config and css files in ${MM}"
             echo "have not been linked into the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi

@@ -42,13 +42,13 @@ do
     sudo chown root:root ${OUT_DIR}/${dir}
 done
 
-for dir in bin etc css config modules
+for dir in bin etc css config modules pics
 do
     [ -d ${OUT_DIR}/${MM}/${dir} ] && sudo rm -rf ${OUT_DIR}/${MM}/${dir}
 done
 
 sudo cp -a bin ${OUT_DIR}/${MM}/bin
-#sudo chown root:root ${OUT_DIR}/${MM}/bin
+sudo cp -a images ${OUT_DIR}/${MM}/pics
 
 for script in *.sh
 do

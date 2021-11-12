@@ -19,13 +19,14 @@ set -e
 
 case "$1" in
     remove|upgrade|deconfigure)
+        MM="/usr/local/MagicMirror"
         [ -d /usr/local/bin ] && {
             cd /usr/local/bin
-            for command in /usr/local/MagicMirror/bin/*
+            for command in ${MM}/bin/*
             do
                 b=`basename ${command}`
                 [ -L $b ] && {
-                    readlink $b | grep /usr/local/MagicMirror > /dev/null && rm -f $b
+                    readlink $b | grep ${MM} > /dev/null && rm -f $b
                 }
             done
         }
@@ -44,28 +45,40 @@ case "$1" in
         if [ "${MMHOME}" ]
         then
             cd "${MMHOME}/config"
-            for config in /usr/local/MagicMirror/config/*
+            for config in ${MM}/config/*
             do
                 b=`basename ${config}`
                 [ -L $b ] && {
-                    readlink $b | grep /usr/local/MagicMirror > /dev/null && rm -f $b
+                    readlink $b | grep ${MM} > /dev/null && rm -f $b
                 }
             done
-            cd "${MMHOME}/css"
-            for css in /usr/local/MagicMirror/css/*
-            do
+            [ -d "${MMHOME}/css" ] && {
+              cd "${MMHOME}/css"
+              for css in ${MM}/css/*
+              do
                 b=`basename ${css}`
                 [ -L $b ] && {
-                    readlink $b | grep /usr/local/MagicMirror > /dev/null && rm -f $b
+                    readlink $b | grep ${MM} > /dev/null && rm -f $b
                 }
                 c="custom-mirrorcommandline.css"
                 [ -L $c ] && {
-                    readlink $c | grep /usr/local/MagicMirror > /dev/null && rm -f $c
+                    readlink $c | grep ${MM} > /dev/null && rm -f $c
                 }
-            done
+              done
+            }
+            [ -d "${MMHOME}/modules/MMM-BackgroundSlideshow/pics" ] && {
+              cd "${MMHOME}/modules/MMM-BackgroundSlideshow/pics"
+              for img in ${MM}/pics/*
+              do
+                b=`basename ${img}`
+                [ -L $b ] && {
+                    readlink $b | grep ${MM} > /dev/null && rm -f $b
+                }
+              done
+            }
         else
             echo "Unable to locate MagicMirror installation folder."
-            echo "MirrorCommandLine config and css files in /usr/local/MagicMirror"
+            echo "MirrorCommandLine config and css files in ${MM}"
             echo "have not been unlinked in the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi
