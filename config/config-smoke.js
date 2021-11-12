@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/gif/Smoke/',
+                    'modules/MMM-BackgroundSlideshow/pics/Gif/Smoke/',
                 ],
                 slideshowSpeed: 30000, // 30 seconds
                 transitionImages: false,

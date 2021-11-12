@@ -91,7 +91,7 @@ var config = {
             //classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/fractals/',
+                    'modules/MMM-BackgroundSlideshow/pics/Fractals/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

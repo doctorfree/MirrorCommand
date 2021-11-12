@@ -96,7 +96,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/gif/Nature/',
+                    'modules/MMM-BackgroundSlideshow/pics/Gif/Nature/',
                 ],
                 slideshowSpeed: 30000, // 30 seconds
                 transitionImages: false,
