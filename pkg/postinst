@@ -20,7 +20,7 @@ set -e
 
 case "$1" in
     configure)
-        export PATH=$PATH:/usr/local/bin
+        export PATH=/usr/local/bin:$PATH
         [ -d /usr/local ] || mkdir /usr/local
         [ -d /usr/local/bin ] || mkdir /usr/local/bin
         cd /usr/local/bin
@@ -99,7 +99,9 @@ case "$1" in
               [ -d MMM-BackgroundSlideshow ] && {
                 cd MMM-BackgroundSlideshow
                 inst=`type -p npm`
-                [ "${inst}" ] && sudo -u ${USER} npm install
+                [ "${inst}" ] && {
+                  sudo -u ${USER} npm_config_loglevel=silent npm install 2>&1 > /dev/null
+                }
                 [ -d pics ] || sudo -u ${USER} mkdir pics
                 [ -d ${MM}/pics ] && {
                   cd pics
