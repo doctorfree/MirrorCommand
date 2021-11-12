@@ -1,9 +1,35 @@
 #!/bin/bash
+#
+# Versions of apt prior to 1.1 do not support install by Debian filename
+# You should probably be running a more recent version of apt
+# On these early versions, install with the following:
+#
+# sudo dpkg -i "${DEB}"
+# sudo apt-get install -f
 
+
+SRC_NAME="MirrorCommandLine"
 PKG_NAME="MirrorCommandLine"
 PKG_VER="2.2"
 SRC="${HOME}/src"
-DEB="${SRC}/${PKG_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
+DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
+
+[ -f "${DEB}" ] || {
+    echo "$DEB not found."
+    for debs in ${SRC}/${SRC_NAME}/releases/*/${PKG_NAME}_*.deb
+    do
+      [ "${debs}" == "${SRC}/${SRC_NAME}/releases/*/${PKG_NAME}_*.deb" ] || {
+        echo "Found existing packages:"
+        echo "${debs}"
+      }
+    done
+}
+
+echo "Installing ${DEB}"
+sudo apt install "${DEB}"
+
+PKG_NAME="MirrorImages"
+DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
 
 [ -f "${DEB}" ] || {
     echo "$DEB not found."
@@ -14,15 +40,7 @@ DEB="${SRC}/${PKG_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
         echo "${debs}"
       }
     done
-    echo "Exiting."
-    exit 1
 }
 
-# Versions of apt prior to 1.1 do not support install by Debian filename
-# You should probably be running a more recent version of apt
-# On these early versions, install with the following:
-#
-# sudo dpkg -i "${DEB}"
-# sudo apt-get install -f
-
+echo "Installing ${DEB}"
 sudo apt install "${DEB}"
