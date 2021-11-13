@@ -10,6 +10,7 @@ author: https://stackoverflow.com/users/1475331/user115202
 '''
 
 import requests
+import sys
 
 from tqdm import tqdm
 
@@ -28,8 +29,11 @@ def download_file_from_google_drive(id, destination):
             with tqdm(unit='B', unit_scale=True, unit_divisor=1024) as bar:
                 for chunk in response.iter_content(CHUNK_SIZE):
                     if chunk:  # filter out keep-alive new chunks
-                        sys.stdout.write(chunk)
-                        sys.stdout.flush()
+                        try:
+                            sys.stdout.write(chunk)
+                            sys.stdout.flush()
+                        except (BrokenPipeError, IOError):
+                            pass
                         bar.update(CHUNK_SIZE)
         else:
             with open(destination, "wb") as f:
