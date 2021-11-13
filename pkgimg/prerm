@@ -78,7 +78,12 @@ case "$1" in
               rm -f ${MM}/pics/imlist.txt
               for subdir in Art Fractals Gif Owls Waterfalls
               do
-                rmdir --ignore-fail-on-non-empty ${MM}/pics/${subdir}/*
+                for folder in ${MM}/pics/${subdir}/*
+                do
+                  [ "${folder}" == "${MM}/pics/${subdir}/*" ] || {
+                    rmdir --ignore-fail-on-non-empty "${folder}"
+                  }
+                done
                 rmdir --ignore-fail-on-non-empty ${MM}/pics/${subdir}
               done
             else
