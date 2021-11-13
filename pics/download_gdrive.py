@@ -32,7 +32,7 @@ def download_file_from_google_drive(id, destination):
                         try:
                             sys.stdout.write(chunk)
                             sys.stdout.flush()
-                        except (BrokenPipeError, IOError):
+                        except IOError:
                             pass
                         bar.update(CHUNK_SIZE)
         else:
