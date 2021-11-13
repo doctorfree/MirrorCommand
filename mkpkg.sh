@@ -2,11 +2,27 @@
 PKG="mirrorcommandline"
 SRC_NAME="MirrorCommandLine"
 PKG_NAME="MirrorCommandLine"
-PKG_VER="2.2"
 TOP="usr"
 DESTDIR="${TOP}/local"
 MM="${DESTDIR}/MagicMirror"
 SRC=${HOME}/src
+
+dpkg=`type -p dpkg-deb`
+[ "${dpkg}" ] || {
+    echo "Debian packaging tools do not appear to be installed on this system"
+    echo "Are you on the appropriate Linux system with packaging requirements ?"
+    echo "Exiting"
+    exit 1
+}
+
+[ -f "${SRC}/${SRC_NAME}/VERSION" ] || {
+    echo "$SRC/$SRC_NAME/VERSION does not exist. Exiting."
+    exit 1
+}
+
+. "${SRC}/${SRC_NAME}/VERSION"
+PKG_VER=${VERSION}
+
 # Subdirectory in which to create the distribution files
 OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 

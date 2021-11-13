@@ -11,12 +11,19 @@
 # sudo dpkg -i "${DEB}"
 # sudo apt-get install -f
 
-
 SRC_NAME="MirrorCommandLine"
 PKG_NAMES="MirrorCommandLine MirrorImagesPortrait ArtistsPortrait \
            ModelsPortrait PhotographersPortrait"
-PKG_VER="2.2"
 SRC="${HOME}/src"
+
+[ -f "${SRC}/${SRC_NAME}/VERSION" ] || {
+  echo "Missing VERSION file: ${SRC}/${SRC_NAME}/VERSION"
+  echo "Exiting"
+  exit 1
+}
+
+. "${SRC}/${SRC_NAME}/VERSION"
+PKG_VER=${VERSION}
 
 [ "$1" ] && {
   PKG_NAMES="$*"
@@ -43,7 +50,7 @@ for PKG_NAME in ${PKG_NAMES}
 do
   DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
   [ -f "${DEB}" ] || {
-    echo "$DEB not found."
+    echo "${PKG_NAME}_${PKG_VER}.deb not found."
     for debs in ${SRC}/${SRC_NAME}/releases/*/${PKG_NAME}_*.deb
     do
       [ "${debs}" == "${SRC}/${SRC_NAME}/releases/*/${PKG_NAME}_*.deb" ] || {
@@ -51,6 +58,7 @@ do
         echo "${debs}"
       }
     done
+    echo ""
     continue
   }
 
