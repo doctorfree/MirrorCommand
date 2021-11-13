@@ -51,19 +51,38 @@ case "$1" in
         fi
 
         [ -d ${MM}/pics ] && {
-          if [ -f ${MM}/pics/photogslist.txt ]
-          then
-            while read img
+          REMOVE=1
+          while true
+          do
+            PS3="${BOLD}Remove previously downloaded Photographer images ? ('Y'/'N'): ${NORMAL}"
+            options=("Yes" "No")
+            select opt in "${options[@]}"
             do
-              rm -f ${MM}/pics/${img}
-            done < ${MM}/pics/photogslist.txt
-            rm -f ${MM}/pics/photogslist.txt
-            rm -f ${MM}/pics/*.py
-            rmdir --ignore-fail-on-non-empty ${MM}/pics/Photographers/*
-            rmdir --ignore-fail-on-non-empty ${MM}/pics/Photographers
-          else
-            rm -rf ${MM}/pics/Photographers
-          fi
+              case "$opt,$REPLY" in
+                  "Yes",*|*,"Yes"|"Y",*|*,"Y"|"y",*|*,"y")
+                      break 2
+                      ;;
+                  "No",*|*,"No"|"N",*|*,"N"|"n",*|*,"n")
+                      REMOVE=
+                      break 2
+                      ;;
+              esac
+            done
+          done
+          [ "${REMOVE}" ] && {
+            if [ -f ${MM}/pics/photogslist.txt ]
+            then
+              while read img
+              do
+                rm -f ${MM}/pics/${img}
+              done < ${MM}/pics/photogslist.txt
+              rm -f ${MM}/pics/photogslist.txt
+              rmdir --ignore-fail-on-non-empty ${MM}/pics/Photographers/*
+              rmdir --ignore-fail-on-non-empty ${MM}/pics/Photographers
+            else
+              rm -rf ${MM}/pics/Photographers
+            fi
+          }
         }
     ;;
 

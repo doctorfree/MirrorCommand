@@ -14,7 +14,13 @@
 SRC_NAME="MirrorCommandLine"
 PKG_NAMES="MirrorCommandLine MirrorImagesPortrait ArtistsPortrait \
            ModelsPortrait PhotographersPortrait"
+APT_NAMES="mirrorcommandline mirror-images-portrait artists-portrait \
+           models-portrait photographers-portrait"
 SRC="${HOME}/src"
+
+PKG_INSTALLED=
+PKG_AVAILABLE=
+PKG_SELECTED=
 
 [ -f "${SRC}/${SRC_NAME}/VERSION" ] || {
   echo "Missing VERSION file: ${SRC}/${SRC_NAME}/VERSION"
@@ -25,8 +31,47 @@ SRC="${HOME}/src"
 . "${SRC}/${SRC_NAME}/VERSION"
 PKG_VER=${VERSION}
 
-[ "$1" ] && {
-  PKG_NAMES="$*"
+get_available_packages() {
+  for debs in ${SRC}/${SRC_NAME}/releases/${PKG_VER}/*.deb
+  do
+    [ "${debs}" == "${SRC}/${SRC_NAME}/releases/${PKG_VER}/*.deb" ] || {
+      for pkg in ${debs}
+      do
+        pkgname=`basename ${pkg} | sed -e "s/_${PKG_VER}.deb//"` 
+        PKG_AVAILABLE="${PKG_AVAILABLE} ${pkgname}"
+      done
+    }
+  done
+  # PKG_AVAILABLE=`echo $PKG_AVAILABLE | sed -e "s/ //"`
+}
+
+get_installed_packages() {
+  for pkg in ${APT_NAMES}
+  do
+    dpkg -s ${pkg} | grep Status: | grep 'ok installed' > /dev/null && {
+      case "${pkg}" in
+        "mirrorcommandline")
+            PKG_INSTALLED="${PKG_INSTALLED} MirrorCommandLine"
+            ;;
+        "mirror-images-portrait")
+            PKG_INSTALLED="${PKG_INSTALLED} MirrorImagesPortrait"
+            ;;
+        "artists-portrait")
+            PKG_INSTALLED="${PKG_INSTALLED} ArtistsPortrait"
+            ;;
+        "models-portrait")
+            PKG_INSTALLED="${PKG_INSTALLED} ModelsPortrait"
+            ;;
+        "photographers-portrait")
+            PKG_INSTALLED="${PKG_INSTALLED} PhotographersPortrait"
+            ;;
+       esac
+    }
+  done
+  # PKG_INSTALLED=`echo $PKG_INSTALLED | sed -e "s/ //"`
+}
+
+check_package_names() {
   for nam in ${PKG_NAMES}
   do
     echo "${PKG_NAMES}" | grep ${nam} > /dev/null || {
@@ -39,6 +84,95 @@ PKG_VER=${VERSION}
     pkg_names_tmp=`echo "${PKG_NAMES}" | sed -e "s/MirrorCommandLine//"`
     PKG_NAMES="MirrorCommandLine ${pkg_names_tmp}"
   }
+}
+
+get_available_packages
+[ "$PKG_AVAILABLE}" ] || {
+  echo "No packages for version ${PKG_VER} are currently available. Exiting."
+  exit 1
+}
+
+install_selected() {
+  for pkg in ${PKG_AVAILABLE}
+  do
+    while true
+    do
+      PS3="${BOLD}Install ${pkg} ? ('Y'/'N'): ${NORMAL}"
+      options=("Yes" "No" "Quit")
+      select opt in "${options[@]}"
+      do
+        case "$opt,$REPLY" in
+            "Yes",*|*,"Yes"|"Y",*|*,"Y"|"y",*|*,"y")
+                PKG_SELECTED="${PKG_SELECTED} $pkg"
+                break 2
+                ;;
+            "No",*|*,"No"|"N",*|*,"N"|"n",*|*,"n")
+                break 2
+                ;;
+            "Quit",*|*,"Quit"|"quit",*|*,"quit")
+                printf "\nExiting\n"
+                exit 0
+                ;;
+        esac
+      done
+    done
+  done
+  PKG_SELECTED=`echo $PKG_SELECTED | sed -e "s/ //"`
+}
+
+[ "$1" ] && {
+  # If invoked with -i argument, present a menu of options to select from
+  if [ "$1" == "-i" ]
+  then
+    shift
+    PKG_NAMES="$*"
+    check_package_names
+    get_installed_packages
+    [ "${PKG_INSTALLED}" ] && {
+      echo "Currently installed MirrorCommandLine packages:"
+      echo ""
+      for instpkg in ${PKG_INSTALLED}
+      do
+        echo "$instpkg"
+      done
+      echo ""
+    }
+    [ "${PKG_AVAILABLE}" ] && {
+      echo "Currently available MirrorCommandLine packages:"
+      echo ""
+      for avaipkg in ${PKG_AVAILABLE}
+      do
+        echo "$avaipkg"
+      done
+      echo ""
+    }
+    while true
+    do
+      PS3="${BOLD}Please enter your desire (numeric or text): ${NORMAL}"
+      options=("Install All" "Install Selected" "Quit")
+      select opt in "${options[@]}"
+      do
+        case "$opt,$REPLY" in
+            "Install All",*|*,"Install All")
+                PKG_NAMES="${PKG_AVAILABLE}"
+                break 2
+                ;;
+            "Install Selected",*|*,"Install Selected")
+                install_selected
+                PKG_NAMES="${PKG_SELECTED}"
+                break 2
+                ;;
+            "Quit",*|*,"Quit"|"quit",*|*,"quit")
+                printf "\nExiting\n"
+                exit 0
+                ;;
+        esac
+      done
+    done
+  else
+    PKG_NAMES="$*"
+  fi
+  check_package_names
 }
 
 [ "${PKG_NAMES}" ] || {

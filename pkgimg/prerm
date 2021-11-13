@@ -51,19 +51,44 @@ case "$1" in
         fi
 
         [ -d ${MM}/pics ] && {
-          if [ -f ${MM}/pics/imlist.txt ]
-          then
-            while read img
+          REMOVE=1
+          while true
+          do
+            PS3="${BOLD}Remove previously downloaded images ? ('Y'/'N'): ${NORMAL}"
+            options=("Yes" "No")
+            select opt in "${options[@]}"
             do
-              rm -f ${MM}/pics/${img}
-            done < ${MM}/pics/imlist.txt
-            rm -f ${MM}/pics/imlist.txt
-            rm -f ${MM}/pics/*.py
-            rmdir --ignore-fail-on-non-empty ${MM}/pics/*/*
-            rmdir --ignore-fail-on-non-empty ${MM}/pics/*
-          else
-            rm -rf ${MM}/pics
-          fi
+              case "$opt,$REPLY" in
+                  "Yes",*|*,"Yes"|"Y",*|*,"Y"|"y",*|*,"y")
+                      break 2
+                      ;;
+                  "No",*|*,"No"|"N",*|*,"N"|"n",*|*,"n")
+                      REMOVE=
+                      break 2
+                      ;;
+              esac
+            done
+          done
+          [ "${REMOVE}" ] && {
+            if [ -f ${MM}/pics/imlist.txt ]
+            then
+              while read img
+              do
+                rm -f ${MM}/pics/${img}
+              done < ${MM}/pics/imlist.txt
+              rm -f ${MM}/pics/imlist.txt
+              for subdir in Art Fractals Gif Owls Waterfalls
+              do
+                rmdir --ignore-fail-on-non-empty ${MM}/pics/${subdir}/*
+                rmdir --ignore-fail-on-non-empty ${MM}/pics/${subdir}
+              done
+            else
+              for subdir in Art Fractals Gif Owls Waterfalls
+              do
+                rm -rf ${MM}/pics/${subdir}
+              done
+            fi
+          }
         }
     ;;
 

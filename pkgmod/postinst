@@ -24,18 +24,33 @@ case "$1" in
         MM="/usr/local/MagicMirror"
         [ -d ${MM}/pics ] || mkdir ${MM}/pics
         cd ${MM}/pics
-        inst=`type -p pip`
-        [ "${inst}" ] || sudo apt-get install python-pip
-        pip list | grep -F tqdm > /dev/null || {
+        DOWNLOAD=
+        if [ -f ${MM}/pics/modelslist.txt ]
+        then
+          while read img
+          do
+            [ -f ${MM}/pics/${img} ] || {
+                DOWNLOAD=1
+                break
+            }
+          done < ${MM}/pics/modelslist.txt
+        else
+          DOWNLOAD=1
+        fi
+        [ "${DOWNLOAD}" ] && {
+          inst=`type -p pip`
+          [ "${inst}" ] || sudo apt-get install python-pip
+          pip list | grep -F tqdm > /dev/null || {
             pip install tqdm
-        }
-        [ -x ${MM}/bin/getmodels ] && {
+          }
+          [ -x ${MM}/bin/getmodels ] && {
             ${MM}/bin/getmodels
             [ -f ModelsPortrait.zip ] && {
                 echo "Extracting portrait mode Models image archive ..."
                 unzip -qq ModelsPortrait.zip
                 rm -f ModelsPortrait.zip
             }
+          }
         }
         MMHOME=/home/pi/MagicMirror
         [ -d ${MMHOME}/config ] || {
