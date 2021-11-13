@@ -77,6 +77,7 @@ case "$1" in
                 rm -f ${MM}/pics/${img}
               done < ${MM}/pics/modelslist.txt
               rm -f ${MM}/pics/modelslist.txt
+              rmdir --ignore-fail-on-non-empty ${MM}/pics/Models/*/*
               rmdir --ignore-fail-on-non-empty ${MM}/pics/Models/*
               rmdir --ignore-fail-on-non-empty ${MM}/pics/Models
             else
