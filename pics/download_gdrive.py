@@ -29,6 +29,7 @@ def download_file_from_google_drive(id, destination):
                 for chunk in response.iter_content(CHUNK_SIZE):
                     if chunk:  # filter out keep-alive new chunks
                         sys.stdout.write(chunk)
+                        sys.stdout.flush()
                         bar.update(CHUNK_SIZE)
         else:
             with open(destination, "wb") as f:
@@ -50,9 +51,6 @@ def download_file_from_google_drive(id, destination):
         response = session.get(URL, params = params, stream = True)
 
     save_response_content(response, destination)    
-    sys.stderr.close()
-    sys.stdout.close()
-
 
 if __name__ == "__main__":
     import sys
