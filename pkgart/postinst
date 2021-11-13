@@ -44,12 +44,8 @@ case "$1" in
             pip install tqdm
           }
           [ -x ${MM}/bin/getartists ] && {
-            ${MM}/bin/getartists
-            [ -f ArtistsPortrait.zip ] && {
-                echo "Extracting portrait mode Artists image archive ..."
-                unzip -qq ArtistsPortrait.zip
-                rm -f ArtistsPortrait.zip
-            }
+            echo "Extracting portrait mode Artists image archive ..."
+            ${MM}/bin/getartists | jar x
           }
         }
         MMHOME=/home/pi/MagicMirror

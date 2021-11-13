@@ -44,12 +44,8 @@ case "$1" in
             pip install tqdm
           }
           [ -x ${MM}/bin/getimages ] && {
-            ${MM}/bin/getimages
-            [ -f MirrorImagesPortrait.zip ] && {
-                echo "Extracting portrait mode image archive ..."
-                unzip -qq MirrorImagesPortrait.zip
-                rm -f MirrorImagesPortrait.zip
-            }
+            echo "Extracting portrait mode image archive ..."
+            ${MM}/bin/getimages | jar x
           }
         }
         MMHOME=/home/pi/MagicMirror

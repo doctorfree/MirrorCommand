@@ -3,4 +3,6 @@
 MM="/usr/local/MagicMirror"
 ID="1-sJx71HqzPMg5IwSHNI8NFWZO-i5PhXx"
 
-python ${MM}/pics/download_gdrive.py ${ID} ${MM}/pics/ArtistsPortrait.zip
+# python ${MM}/pics/download_gdrive.py ${ID} ${MM}/pics/ArtistsPortrait.zip
+
+python ${MM}/pics/download_gdrive.py ${ID} -

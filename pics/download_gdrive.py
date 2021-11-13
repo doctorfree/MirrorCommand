@@ -24,12 +24,19 @@ def download_file_from_google_drive(id, destination):
     def save_response_content(response, destination):
         CHUNK_SIZE = 32768
 
-        with open(destination, "wb") as f:
+        if destination == "-":
             with tqdm(unit='B', unit_scale=True, unit_divisor=1024) as bar:
                 for chunk in response.iter_content(CHUNK_SIZE):
                     if chunk:  # filter out keep-alive new chunks
-                        f.write(chunk)
+                        sys.stdout.write(chunk)
                         bar.update(CHUNK_SIZE)
+        else:
+            with open(destination, "wb") as f:
+                with tqdm(unit='B', unit_scale=True, unit_divisor=1024) as bar:
+                    for chunk in response.iter_content(CHUNK_SIZE):
+                        if chunk:  # filter out keep-alive new chunks
+                            f.write(chunk)
+                            bar.update(CHUNK_SIZE)
 
     URL = "https://docs.google.com/uc?export=download"
 
@@ -43,6 +50,8 @@ def download_file_from_google_drive(id, destination):
         response = session.get(URL, params = params, stream = True)
 
     save_response_content(response, destination)    
+    sys.stderr.close()
+    sys.stdout.close()
 
 
 if __name__ == "__main__":
