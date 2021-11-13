@@ -54,20 +54,19 @@ case "$1" in
           REMOVE=1
           while true
           do
-            PS3="${BOLD}Remove previously downloaded Model images ? ('Y'/'N'): ${NORMAL}"
-            options=("Yes" "No")
-            select opt in "${options[@]}"
-            do
-              case "$opt,$REPLY" in
-                  "Yes",*|*,"Yes"|"Y",*|*,"Y"|"y",*|*,"y")
-                      break 2
-                      ;;
-                  "No",*|*,"No"|"N",*|*,"N"|"n",*|*,"n")
-                      REMOVE=
-                      break 2
-                      ;;
-              esac
-            done
+            read -p "Remove previously downloaded Model images? ('Y'/'N'): " yn
+            case $yn in
+                [Yy]*)
+                    break
+                    ;;
+                [Nn]*)
+                    REMOVE=
+                    break
+                    ;;
+                * )
+                    echo "Please answer yes or no."
+                    ;;
+            esac
           done
           [ "${REMOVE}" ] && {
             if [ -f ${MM}/pics/modelslist.txt ]

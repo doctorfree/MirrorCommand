@@ -42,7 +42,7 @@ get_available_packages() {
       done
     }
   done
-  # PKG_AVAILABLE=`echo $PKG_AVAILABLE | sed -e "s/ //"`
+  PKG_AVAILABLE=`echo $PKG_AVAILABLE | sed -e "s/^ //"`
 }
 
 get_installed_packages() {
@@ -68,7 +68,7 @@ get_installed_packages() {
        esac
     }
   done
-  # PKG_INSTALLED=`echo $PKG_INSTALLED | sed -e "s/ //"`
+  PKG_INSTALLED=`echo $PKG_INSTALLED | sed -e "s/^ //"`
 }
 
 check_package_names() {
@@ -97,27 +97,22 @@ install_selected() {
   do
     while true
     do
-      PS3="${BOLD}Install ${pkg} ? ('Y'/'N'): ${NORMAL}"
-      options=("Yes" "No" "Quit")
-      select opt in "${options[@]}"
-      do
-        case "$opt,$REPLY" in
-            "Yes",*|*,"Yes"|"Y",*|*,"Y"|"y",*|*,"y")
-                PKG_SELECTED="${PKG_SELECTED} $pkg"
-                break 2
-                ;;
-            "No",*|*,"No"|"N",*|*,"N"|"n",*|*,"n")
-                break 2
-                ;;
-            "Quit",*|*,"Quit"|"quit",*|*,"quit")
-                printf "\nExiting\n"
-                exit 0
-                ;;
-        esac
-      done
+      read -p "Install ${pkg} ? ('Y'/'N'): " yn
+      case $yn in
+          [Yy]*)
+              PKG_SELECTED="${PKG_SELECTED} $pkg"
+              break
+              ;;
+          [Nn]*)
+              break
+              ;;
+          * )
+              echo "Please answer yes or no."
+              ;;
+      esac
     done
   done
-  PKG_SELECTED=`echo $PKG_SELECTED | sed -e "s/ //"`
+  PKG_SELECTED=`echo $PKG_SELECTED | sed -e "s/^ //"`
 }
 
 [ "$1" ] && {
