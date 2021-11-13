@@ -1,6 +1,6 @@
 #!/bin/bash
 
 MM="/usr/local/MagicMirror"
-ID="1-YkCW6FcXTiWQrl-ljbFjJCGV2A4YoUE"
+ID="1-urj1h71rZNwdlMJTdRBix8_1aftwdQM"
 
-python ${MM}/pics/download_gdrive.py ${ID} ${MM}/pics/Photographers-portrait.tar.gz 
+python ${MM}/pics/download_gdrive.py ${ID} ${MM}/pics/PhotographersPortrait.zip 

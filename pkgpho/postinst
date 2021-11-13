@@ -31,9 +31,9 @@ case "$1" in
         }
         [ -x ${MM}/bin/getphotogs ] && {
             ${MM}/bin/getphotogs
-            [ -f Photographers-portrait.tar.gz ] && {
-                tar xzf Photographers-portrait.tar.gz
-                rm -f Photographers-portrait.tar.gz
+            [ -f PhotographersPortrait.zip ] && {
+                unzip -qq PhotographersPortrait.zip
+                rm -f PhotographersPortrait.zip
             }
         }
         MMHOME=/home/pi/MagicMirror

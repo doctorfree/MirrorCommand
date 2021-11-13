@@ -1,0 +1,6 @@
+#!/bin/bash
+
+MM="/usr/local/MagicMirror"
+ID="1-wEbx0zfEiclHJS7e9J6P3XrN9axiTtQ"
+
+python ${MM}/pics/download_gdrive.py ${ID} ${MM}/pics/ModelsPortrait.zip 

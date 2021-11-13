@@ -29,11 +29,11 @@ case "$1" in
         pip list | grep -F tqdm > /dev/null || {
             pip install tqdm
         }
-        [ -x ${MM}/bin/getartists ] && {
-            ${MM}/bin/getartists
-            [ -f ArtistsPortrait.zip ] && {
-                unzip -qq ArtistsPortrait.zip
-                rm -f ArtistsPortrait.zip
+        [ -x ${MM}/bin/getmodels ] && {
+            ${MM}/bin/getmodels
+            [ -f ModelsPortrait.zip ] && {
+                unzip -qq ModelsPortrait.zip
+                rm -f ModelsPortrait.zip
             }
         }
         MMHOME=/home/pi/MagicMirror
@@ -70,7 +70,7 @@ case "$1" in
                 [ -d pics ] || sudo -u ${USER} mkdir pics
                 [ -d ${MM}/pics ] && {
                   cd pics
-                  for dir in Artists
+                  for dir in Models
                   do
                     [ -d ${MM}/pics/${dir} ] && {
                       [ -L ${dir} ] || [ -d ${dir} ] || {

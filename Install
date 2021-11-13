@@ -13,11 +13,19 @@
 
 
 SRC_NAME="MirrorCommandLine"
-PKG_NAMES="MirrorCommandLine MirrorImagesPortrait ArtistsPortrait PhotographersPortrait"
+PKG_NAMES="MirrorCommandLine MirrorImagesPortrait ArtistsPortrait \
+           ModelsPortrait PhotographersPortrait"
 PKG_VER="2.2"
 SRC="${HOME}/src"
 
-[ "$1" ] && PKG_NAMES="$*"
+[ "$1" ] && {
+  PKG_NAMES="$*"
+  echo "${PKG_NAMES}" | grep MirrorCommandLine > /dev/null && {
+    # Make sure MirrorCommandLine is installed first
+    pkg_names_tmp=`echo "${PKG_NAMES}" | sed -e "s/MirrorCommandLine//"`
+    PKG_NAMES="MirrorCommandLine ${pkg_names_tmp}"
+  }
+}
 
 for PKG_NAME in ${PKG_NAMES}
 do
