@@ -20,11 +20,23 @@ SRC="${HOME}/src"
 
 [ "$1" ] && {
   PKG_NAMES="$*"
+  for nam in ${PKG_NAMES}
+  do
+    echo "${PKG_NAMES}" | grep ${nam} > /dev/null || {
+      echo "${nam} is not a valid package name. Skipping installation of ${nam}"
+      PKG_NAMES=`echo "${PKG_NAMES}" | sed -e "s/${nam}//"`
+    }
+  done
   echo "${PKG_NAMES}" | grep MirrorCommandLine > /dev/null && {
     # Make sure MirrorCommandLine is installed first
     pkg_names_tmp=`echo "${PKG_NAMES}" | sed -e "s/MirrorCommandLine//"`
     PKG_NAMES="MirrorCommandLine ${pkg_names_tmp}"
   }
+}
+
+[ "${PKG_NAMES}" ] || {
+  echo "No valid Package names specified. Exiting."
+  exit 1
 }
 
 for PKG_NAME in ${PKG_NAMES}
