@@ -32,6 +32,7 @@ case "$1" in
         [ -x ${MM}/bin/getmodels ] && {
             ${MM}/bin/getmodels
             [ -f ModelsPortrait.zip ] && {
+                echo "Extracting portrait mode Models image archive ..."
                 unzip -qq ModelsPortrait.zip
                 rm -f ModelsPortrait.zip
             }
