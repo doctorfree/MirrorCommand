@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/JAV/Moe_Amatsuka',
+                    '/usr/local/MagicMirror/pics/JAV/Moe_Amatsuka',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

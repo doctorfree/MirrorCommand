@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/Smz-69/',
+                    '/usr/local/MagicMirror/pics/Artists/Smz-69/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

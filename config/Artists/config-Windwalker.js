@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/Windwalker/',
+                    '/usr/local/MagicMirror/pics/Artists/Windwalker/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

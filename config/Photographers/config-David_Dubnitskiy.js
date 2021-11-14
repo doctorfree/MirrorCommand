@@ -94,7 +94,8 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Photographers/David_Dubnitskiy',
+                    // '/usr/local/MagicMirror/pics/Photographers/David_Dubnitskiy',
+                    '/usr/local/MagicMirror/pics/Photographers/David_Dubnitskiy',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

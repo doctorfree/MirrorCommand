@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/JAV/Mayuki_Ito',
+                    '/usr/local/MagicMirror/pics/JAV/Mayuki_Ito',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/Nat_the_Lich/',
+                    '/usr/local/MagicMirror/pics/Artists/Nat_the_Lich/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

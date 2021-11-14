@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Models/Ali_Rose',
+                    '/usr/local/MagicMirror/pics/Models/Ali_Rose',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

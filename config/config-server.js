@@ -488,7 +488,7 @@ var config = {
             config: {
                 imagePaths: [
                     'modules/MMM-BackgroundSlideshow/exampleImages/',
-                    'modules/MMM-BackgroundSlideshow/pics/fractals/',
+                    '/usr/local/MagicMirror/pics/fractals/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

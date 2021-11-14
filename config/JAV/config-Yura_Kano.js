@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/JAV/Yura_Kano',
+                    '/usr/local/MagicMirror/pics/JAV/Yura_Kano',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

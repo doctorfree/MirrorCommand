@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/Axsens/',
+                    '/usr/local/MagicMirror/pics/Artists/Axsens/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

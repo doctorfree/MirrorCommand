@@ -52,7 +52,7 @@ CONFDIR="${MM}/config"
 # MagicMirror configuration files organized into subdirectories listed here
 CONF_SUBDIRS="Artists JAV Models Photos Photographers YouTube test"
 MMCFMSG="MagicMirror configuration file"
-SLISDIR="${MM}/modules/MMM-BackgroundSlideshow/pics"
+SLISDIR="/usr/local/MagicMirror/pics"
 ARTISTDIR="Pictures/Artists-ALL"
 JAVDIR="Pictures/JAV-ALL"
 MODELDIR="Pictures/Models-ALL"

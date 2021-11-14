@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/Ayya_Saparniyazova/',
+                    '/usr/local/MagicMirror/pics/Artists/Ayya_Saparniyazova/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

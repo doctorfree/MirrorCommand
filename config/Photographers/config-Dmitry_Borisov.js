@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Photographers/Dmitry_Borisov',
+                    '/usr/local/MagicMirror/pics/Photographers/Dmitry_Borisov',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

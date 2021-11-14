@@ -168,7 +168,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/WH_DIR_HOLDER/',
+                    '/usr/local/MagicMirror/pics/WH_DIR_HOLDER/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

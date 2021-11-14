@@ -167,12 +167,12 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Photographers/',
-                 // 'modules/MMM-BackgroundSlideshow/pics/Photographers/Aleksandr_Mavrin',
-                 // 'modules/MMM-BackgroundSlideshow/pics/Photographers/David_Dubnitskiy',
-                 // 'modules/MMM-BackgroundSlideshow/pics/Photographers/Dmitry_Borisov',
-                 // 'modules/MMM-BackgroundSlideshow/pics/Photographers/Igor_Viushkin',
-                 // 'modules/MMM-BackgroundSlideshow/pics/Photographers/Stefan_Soell',
+                    '/usr/local/MagicMirror/pics/Photographers/',
+                 // '/usr/local/MagicMirror/pics/Photographers/Aleksandr_Mavrin',
+                 // '/usr/local/MagicMirror/pics/Photographers/David_Dubnitskiy',
+                 // '/usr/local/MagicMirror/pics/Photographers/Dmitry_Borisov',
+                 // '/usr/local/MagicMirror/pics/Photographers/Igor_Viushkin',
+                 // '/usr/local/MagicMirror/pics/Photographers/Stefan_Soell',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

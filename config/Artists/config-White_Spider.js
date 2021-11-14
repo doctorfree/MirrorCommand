@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/White_Spider/',
+                    '/usr/local/MagicMirror/pics/Artists/White_Spider/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

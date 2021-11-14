@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/JAV/Suzu_Honjo',
+                    '/usr/local/MagicMirror/pics/JAV/Suzu_Honjo',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

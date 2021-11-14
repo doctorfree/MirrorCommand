@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Photographers/Igor_Viushkin',
+                    '/usr/local/MagicMirror/pics/Photographers/Igor_Viushkin',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

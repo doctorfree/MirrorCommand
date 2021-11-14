@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/Limgae/',
+                    '/usr/local/MagicMirror/pics/Artists/Limgae/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

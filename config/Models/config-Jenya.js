@@ -168,7 +168,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Models/Jenya/',
+                    '/usr/local/MagicMirror/pics/Models/Jenya/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

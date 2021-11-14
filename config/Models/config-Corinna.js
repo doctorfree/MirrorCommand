@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Models/Corinna',
+                    '/usr/local/MagicMirror/pics/Models/Corinna',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

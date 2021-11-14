@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/Krys_Decker/',
+                    '/usr/local/MagicMirror/pics/Artists/Krys_Decker/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

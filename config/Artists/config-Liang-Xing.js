@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/Liang-Xing/',
+                    '/usr/local/MagicMirror/pics/Artists/Liang-Xing/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

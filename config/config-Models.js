@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Models',
+                    '/usr/local/MagicMirror/pics/Models',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

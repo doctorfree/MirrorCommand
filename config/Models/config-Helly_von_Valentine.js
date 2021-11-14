@@ -168,7 +168,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Models/Helly_von_Valentine',
+                    '/usr/local/MagicMirror/pics/Models/Helly_von_Valentine',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

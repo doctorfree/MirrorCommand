@@ -168,7 +168,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Models/Nata_Lee',
+                    '/usr/local/MagicMirror/pics/Models/Nata_Lee',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

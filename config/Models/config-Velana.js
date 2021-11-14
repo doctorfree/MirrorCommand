@@ -157,7 +157,7 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Models/Velana/',
+                    '/usr/local/MagicMirror/pics/Models/Velana/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

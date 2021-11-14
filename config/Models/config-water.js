@@ -167,8 +167,8 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/waterfall/',
-                    'modules/MMM-BackgroundSlideshow/pics/river/',
+                    '/usr/local/MagicMirror/pics/waterfall/',
+                    '/usr/local/MagicMirror/pics/river/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

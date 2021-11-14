@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Models/Heidi_Romanova',
+                    '/usr/local/MagicMirror/pics/Models/Heidi_Romanova',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

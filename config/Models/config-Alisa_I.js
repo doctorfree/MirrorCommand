@@ -168,7 +168,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Models/Alisa_I',
+                    '/usr/local/MagicMirror/pics/Models/Alisa_I',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

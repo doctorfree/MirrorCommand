@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/JAV/Yua_Mikami',
+                    '/usr/local/MagicMirror/pics/JAV/Yua_Mikami',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

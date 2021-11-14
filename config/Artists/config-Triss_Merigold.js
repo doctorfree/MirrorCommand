@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/Triss_Merigold/',
+                    '/usr/local/MagicMirror/pics/Artists/Triss_Merigold/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

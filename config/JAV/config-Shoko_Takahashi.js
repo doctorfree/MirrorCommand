@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/JAV/Shoko_Takahashi',
+                    '/usr/local/MagicMirror/pics/JAV/Shoko_Takahashi',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

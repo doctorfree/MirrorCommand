@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Artists/Sciamano240/',
+                    '/usr/local/MagicMirror/pics/Artists/Sciamano240/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

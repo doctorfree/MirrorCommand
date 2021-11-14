@@ -164,10 +164,10 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/Art/Kandinsky/',
-                    'modules/MMM-BackgroundSlideshow/pics/Art/Klee/',
-                    'modules/MMM-BackgroundSlideshow/pics/Art/Picasso/',
-                    'modules/MMM-BackgroundSlideshow/pics/Art/Zdzisław_Beksiński/',
+                    '/usr/local/MagicMirror/pics/Art/Kandinsky/',
+                    '/usr/local/MagicMirror/pics/Art/Klee/',
+                    '/usr/local/MagicMirror/pics/Art/Picasso/',
+                    '/usr/local/MagicMirror/pics/Art/Zdzisław_Beksiński/',
                 ],
                 slideshowSpeed: 60000, // 60 seconds
                 transitionImages: true,

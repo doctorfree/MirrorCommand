@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/JAV/Kana_Momonogi',
+                    '/usr/local/MagicMirror/pics/JAV/Kana_Momonogi',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    'modules/MMM-BackgroundSlideshow/pics/JAV/Syunka_Ayami',
+                    '/usr/local/MagicMirror/pics/JAV/Syunka_Ayami',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,
