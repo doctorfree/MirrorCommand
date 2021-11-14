@@ -98,15 +98,22 @@ properly, the project is primarily command line control of MagicMirror.
 
 ## Installation
 
-MirrorCommandLine version 2.2 and later includes a Debian format package
-which can be used to install the MirrorCommandLine utilities with the Apt
-package management system. To install:
+MirrorCommandLine version 2.2 and later includes Debian format packages
+which can be used to install the MirrorCommandLine utilities and images
+with the Apt package management system.
+
+To install:
 
 [Download the latest Debian package format release](https://gitlab.com/doctorfree/MirrorCommandLine/-/releases)
 
-Install the package by executing the command
+Install the base MirrorCommandLine package by executing the command
 ```bash
 sudo apt install MirrorCommandLine_<version>.deb
+```
+Optionally install the image archives used in many of the MirrorCommandLine config files:
+```bash
+sudo apt install MirrorImagesPortrait_<version>.deb
+sudo apt install PhotographersPortrait_<version>.deb
 ```
 
 You can create your own custom Debian format package from the repository source.
@@ -118,8 +125,10 @@ or
 
 <code>git clone `https://gitlab.com/doctorfree/MirrorCommandLine.git`</code>
 
-Use the `mkpkg.sh` script to create a Debian format package on a system with
-the prerequisite packaging development environment.
+Use the `mkpkg.sh` script to create Debian format packages on a system with
+the prerequisite packaging development environment. Once packages have been
+created in the source repository they can be installed by executing the
+`./Install` command. Packages can be removed with `./Uninstall`.
 
 Alternately, for those who prefer to manually install and configure MirrorCommandLine,
 compressed archives (zip and gzip) are provided for download.
@@ -184,9 +193,11 @@ set the apikey to blank ( <code>apikey=</code> ).
 
 #### Removal
 
-To remove/uninstall the MirrorCommandLine package execute the command:
+To remove/uninstall the MirrorCommandLine packages execute the commands:
 
 ```bash
+sudo apt remove photographers-portrait
+sudo apt remove mirror-images-portrait
 sudo apt remove mirrorcommandline
 ```
 

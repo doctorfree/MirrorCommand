@@ -185,7 +185,7 @@ cd dist
 echo "Building ${PKG_NAME}_${PKG_VER} package"
 sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
-cd "${SRC}/${SRC_NAME}"
+#cd "${SRC}/${SRC_NAME}"
 
 #PKG="artists-portrait"
 #PKG_NAME="ArtistsPortrait"
