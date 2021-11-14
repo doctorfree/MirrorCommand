@@ -16,8 +16,11 @@ dpkg=`type -p dpkg-deb`
 }
 
 [ -f "${SRC}/${SRC_NAME}/VERSION" ] || {
+  [ -f "/builds/doctorfree/${SRC_NAME}/VERSION" ] || {
     echo "$SRC/$SRC_NAME/VERSION does not exist. Exiting."
     exit 1
+  }
+  SRC="/builds/doctorfree"
 }
 
 . "${SRC}/${SRC_NAME}/VERSION"
