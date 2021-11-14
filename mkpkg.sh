@@ -28,6 +28,8 @@ dpkg=`type -p dpkg-deb`
 . "${SRC}/${SRC_NAME}/VERSION"
 PKG_VER=${VERSION}
 
+umask 0022
+
 # Subdirectory in which to create the distribution files
 OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 
