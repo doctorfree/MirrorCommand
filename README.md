@@ -224,51 +224,51 @@ Copy and modify as needed.
 
 Some of the more useful supporting scripts include:
 
-- [**backgrounds**](backgrounds.sh)
+- [**backgrounds**](scripts/backgrounds.sh)
   Manipulate desktop wallpapers
-- [**camsnap**](camsnap.sh)
+- [**camsnap**](scripts/camsnap.sh)
   Snap a photo with your MagicMirror webcam
-- [**chkconfig**](chkconfig.sh)
+- [**chkconfig**](scripts/chkconfig.sh)
   Check your MagicMirror configuration files
 - [**chkinst**](chkinst.sh)
   Check your Mirror Command Line installation
-- [**chktemp**](chktemp.sh)
+- [**chktemp**](scripts/chktemp.sh)
   Check your MagicMirror Raspberry Pi temperature
-- [**get_temps**](get_temps.sh)
+- [**get_temps**](scripts/get_temps.sh)
   Get your MagicMirror Raspberry Pi temperature
-- [**gethue**](gethue.sh)
+- [**gethue**](scripts/gethue.sh)
   Get your Hue Hub properties
-- [**getquote**](getquote.sh)
+- [**getquote**](scripts/getquote.sh)
   Get a stock symbol quote
-- [**mmapiactions**](mmapiactions.sh)
+- [**mmapiactions**](scripts/mmapiactions.sh)
   Get the MMM-Remote-Control API actions
-- [**mmgetb**](mmgetb.sh)
+- [**mmgetb**](scripts/mmgetb.sh)
   Get the MagicMirror screen brightness level
-- [**mmsetb**](mmsetb.sh)
+- [**mmsetb**](scripts/mmsetb.sh)
   Set the MagicMirror screen brightness level
-- [**pcmanslideshow**](pcmanslideshow.sh)
+- [**pcmanslideshow**](scripts/pcmanslideshow.sh)
   Display a slide show on your desktop using pcmanfm
-- [**rand_back**](rand_back.sh)
+- [**rand_back**](scripts/rand_back.sh)
   Select a random desktop wallpaper
-- [**reboot**](reboot.sh)
+- [**reboot**](scripts/reboot.sh)
   Perform additional actions before reboot, executed as a normal user using sudo
-- [**rmlandscape**](rmlandscape.sh)
+- [**rmlandscape**](scripts/rmlandscape.sh)
   Remove photos in a folder that are in landscape mode
-- [**sdbackup**](sdbackup.sh)
+- [**sdbackup**](scripts/sdbackup.sh)
   Backup an SD card
-- [**sderase**](sderase.sh)
+- [**sderase**](scripts/sderase.sh)
   Erase an SD card
-- [**sdrestore**](sdrestore.sh)
+- [**sdrestore**](scripts/sdrestore.sh)
   Restore an SD card from a previous backup
-- [**sdwrite**](sdwrite.sh)
+- [**sdwrite**](scripts/sdwrite.sh)
   Write an image to an SD card
-- [**shutdown**](shutdown.sh)
+- [**shutdown**](scripts/shutdown.sh)
   Perform additional actions before shutdown, executed as a normal user using sudo
-- [**vncview**](vncview.sh)
+- [**vncview**](scripts/vncview.sh)
   Remote script to start a VNC server on your MagicMirror and a VNC viewer on your desktop
-- [**vol**](vol.sh)
+- [**vol**](scripts/vol.sh)
   Script to control volume level of MagicMirror audio output
-- [**wireless_conf**](wireless_conf.sh)
+- [**wireless_conf**](scripts/wireless_conf.sh)
   Configure wireless using WPA Supplicant
 - [**wireless_dot_sample**](wireless_dot_sample)
   Sample $HOME/.wireless to assist in wireless configuration

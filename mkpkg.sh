@@ -74,6 +74,13 @@ do
         sudo cp ${script} ${OUT_DIR}/${MM}/bin/${dest}
     }
 done
+for script in scripts/*.sh
+do
+    grep ${script} .gitignore > /dev/null || {
+        dest=`echo ${script} | sed -e "s/scripts\///" -e "s/\.sh//"`
+        sudo cp ${script} ${OUT_DIR}/${MM}/bin/${dest}
+    }
+done
 
 sudo cp *.desktop "${OUT_DIR}/${TOP}/share/applications"
 sudo cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
