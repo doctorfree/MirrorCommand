@@ -29,4 +29,5 @@ run-build:
   # The files which are to be made available in GitLab
   artifacts:
     paths:
-      - releases/*
+      - dist/*.deb
+      - dist/*.gz
