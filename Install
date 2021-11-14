@@ -12,10 +12,12 @@
 # sudo apt-get install -f
 
 SRC_NAME="MirrorCommandLine"
-PKG_NAMES="MirrorCommandLine MirrorImagesPortrait ArtistsPortrait \
-           ModelsPortrait PhotographersPortrait"
-APT_NAMES="mirrorcommandline mirror-images-portrait artists-portrait \
-           models-portrait photographers-portrait"
+# PKG_NAMES="MirrorCommandLine MirrorImagesPortrait ArtistsPortrait \
+#            ModelsPortrait PhotographersPortrait"
+# APT_NAMES="mirrorcommandline mirror-images-portrait artists-portrait \
+#            models-portrait photographers-portrait"
+PKG_NAMES="MirrorCommandLine MirrorImagesPortrait PhotographersPortrait"
+APT_NAMES="mirrorcommandline mirror-images-portrait photographers-portrait"
 SRC="${HOME}/src"
 
 PKG_INSTALLED=
