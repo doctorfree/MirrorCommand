@@ -16,7 +16,6 @@ deploy-job:
 run-build:  
   stage: build
   script:
-    - apt-get install -y zip
     - ./mkpkg.sh
 
   # This stage is only executed for new tags

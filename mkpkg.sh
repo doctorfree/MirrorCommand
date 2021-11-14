@@ -7,6 +7,7 @@ DESTDIR="${TOP}/local"
 MM="${DESTDIR}/MagicMirror"
 SRC=${HOME}/src
 SUDO=sudo
+ZIP=zip
 
 dpkg=`type -p dpkg-deb`
 [ "${dpkg}" ] || {
@@ -23,6 +24,7 @@ dpkg=`type -p dpkg-deb`
   }
   SRC="/builds/doctorfree"
   SUDO=
+  ZIP=
 }
 
 . "${SRC}/${SRC_NAME}/VERSION"
@@ -119,8 +121,10 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 cd ${PKG_NAME}_${PKG_VER}
 echo "Creating compressed tar archive of ${PKG_NAME} ${PKG_VER} distribution"
 tar cf - usr | gzip -9 > ../${PKG_NAME}_${PKG_VER}-dist.tar.gz
-echo "Creating zip archive of ${PKG_NAME} ${PKG_VER} distribution"
-zip -q -r ../${PKG_NAME}_${PKG_VER}-dist.zip usr
+[ "${ZIP}" ] && {
+    echo "Creating zip archive of ${PKG_NAME} ${PKG_VER} distribution"
+    zip -q -r ../${PKG_NAME}_${PKG_VER}-dist.zip usr
+}
 
 cd "${SRC}/${SRC_NAME}"
 
@@ -296,4 +300,9 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 [ -d ../releases ] || mkdir ../releases
 [ -d ../releases/${PKG_VER} ] || mkdir ../releases/${PKG_VER}
-${SUDO} cp *.deb *.gz *.zip ../releases/${PKG_VER}
+if [ "${ZIP}" ]
+then
+    ${SUDO} cp *.deb *.gz *.zip ../releases/${PKG_VER}
+else
+    ${SUDO} cp *.deb *.gz ../releases/${PKG_VER}
+fi
