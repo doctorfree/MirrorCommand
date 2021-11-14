@@ -6,6 +6,7 @@ TOP="usr"
 DESTDIR="${TOP}/local"
 MM="${DESTDIR}/MagicMirror"
 SRC=${HOME}/src
+SUDO=sudo
 
 dpkg=`type -p dpkg-deb`
 [ "${dpkg}" ] || {
@@ -21,6 +22,7 @@ dpkg=`type -p dpkg-deb`
     exit 1
   }
   SRC="/builds/doctorfree"
+  SUDO=
 }
 
 . "${SRC}/${SRC_NAME}/VERSION"
@@ -35,7 +37,7 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 }
 
 cd "${SRC}/${SRC_NAME}"
-sudo rm -rf dist
+${SUDO} rm -rf dist
 mkdir dist
 
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
@@ -58,57 +60,57 @@ Description: MagicMirror Command Line Tools
 for dir in "${TOP}" "${DESTDIR}" "${MM}" "${TOP}/share" "${TOP}/share/applications" \
             "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 do
-    [ -d ${OUT_DIR}/${dir} ] || sudo mkdir ${OUT_DIR}/${dir}
-    sudo chown root:root ${OUT_DIR}/${dir}
+    [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
+    ${SUDO} chown root:root ${OUT_DIR}/${dir}
 done
 
 for dir in bin etc css config modules pics
 do
-    [ -d ${OUT_DIR}/${MM}/${dir} ] && sudo rm -rf ${OUT_DIR}/${MM}/${dir}
+    [ -d ${OUT_DIR}/${MM}/${dir} ] && ${SUDO} rm -rf ${OUT_DIR}/${MM}/${dir}
 done
 
-sudo cp -a bin ${OUT_DIR}/${MM}/bin
-sudo cp -a pics ${OUT_DIR}/${MM}/pics
+${SUDO} cp -a bin ${OUT_DIR}/${MM}/bin
+${SUDO} cp -a pics ${OUT_DIR}/${MM}/pics
 
 for script in *.sh
 do
     grep ${script} .gitignore > /dev/null || {
         dest=`echo ${script} | sed -e "s/\.sh//"`
-        sudo cp ${script} ${OUT_DIR}/${MM}/bin/${dest}
+        ${SUDO} cp ${script} ${OUT_DIR}/${MM}/bin/${dest}
     }
 done
 for script in scripts/*.sh
 do
     grep ${script} .gitignore > /dev/null || {
         dest=`echo ${script} | sed -e "s/scripts\///" -e "s/\.sh//"`
-        sudo cp ${script} ${OUT_DIR}/${MM}/bin/${dest}
+        ${SUDO} cp ${script} ${OUT_DIR}/${MM}/bin/${dest}
     }
 done
 
-sudo cp *.desktop "${OUT_DIR}/${TOP}/share/applications"
-sudo cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
-sudo cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
-sudo cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
-sudo cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
-sudo gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+${SUDO} cp *.desktop "${OUT_DIR}/${TOP}/share/applications"
+${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
+${SUDO} cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
+${SUDO} cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+${SUDO} cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
+${SUDO} gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
 
-sudo cp -a config ${OUT_DIR}/${MM}/config
-sudo cp -a css ${OUT_DIR}/${MM}/css
-sudo cp -a etc ${OUT_DIR}/${MM}/etc
-sudo cp -a modules ${OUT_DIR}/${MM}/modules
+${SUDO} cp -a config ${OUT_DIR}/${MM}/config
+${SUDO} cp -a css ${OUT_DIR}/${MM}/css
+${SUDO} cp -a etc ${OUT_DIR}/${MM}/etc
+${SUDO} cp -a modules ${OUT_DIR}/${MM}/modules
 
 [ -f .gitignore ] && {
     while read ignore
     do
-        sudo rm -f ${OUT_DIR}/${MM}/${ignore}
+        ${SUDO} rm -f ${OUT_DIR}/${MM}/${ignore}
     done < .gitignore
 }
 
-sudo chmod 755 ${OUT_DIR}/${MM}/bin/*
+${SUDO} chmod 755 ${OUT_DIR}/${MM}/bin/*
 
 cd dist
 echo "Building ${PKG_NAME}_${PKG_VER} package"
-sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
+${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 cd ${PKG_NAME}_${PKG_VER}
 echo "Creating compressed tar archive of ${PKG_NAME} ${PKG_VER} distribution"
 tar cf - usr | gzip -9 > ../${PKG_NAME}_${PKG_VER}-dist.tar.gz
@@ -141,19 +143,19 @@ Description: MagicMirror Images
 
 for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 do
-    [ -d ${OUT_DIR}/${dir} ] || sudo mkdir ${OUT_DIR}/${dir}
-    sudo chown root:root ${OUT_DIR}/${dir}
+    [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
+    ${SUDO} chown root:root ${OUT_DIR}/${dir}
 done
 
-sudo cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
-sudo cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
-sudo cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
-sudo cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
-sudo gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
+${SUDO} cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
+${SUDO} cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+${SUDO} cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
+${SUDO} gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
 
 cd dist
 echo "Building ${PKG_NAME}_${PKG_VER} package"
-sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
+${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 cd "${SRC}/${SRC_NAME}"
 
@@ -181,19 +183,19 @@ Description: MagicMirror Photographer Images
 
 for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 do
-    [ -d ${OUT_DIR}/${dir} ] || sudo mkdir ${OUT_DIR}/${dir}
-    sudo chown root:root ${OUT_DIR}/${dir}
+    [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
+    ${SUDO} chown root:root ${OUT_DIR}/${dir}
 done
 
-sudo cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
-sudo cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
-sudo cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
-sudo cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
-sudo gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
+${SUDO} cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
+${SUDO} cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+${SUDO} cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
+${SUDO} gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
 
 cd dist
 echo "Building ${PKG_NAME}_${PKG_VER} package"
-sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
+${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 #cd "${SRC}/${SRC_NAME}"
 
@@ -221,19 +223,19 @@ sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 #for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 #do
-#    [ -d ${OUT_DIR}/${dir} ] || sudo mkdir ${OUT_DIR}/${dir}
-#    sudo chown root:root ${OUT_DIR}/${dir}
+#    [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
+#    ${SUDO} chown root:root ${OUT_DIR}/${dir}
 #done
 
-#sudo cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
-#sudo cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
-#sudo cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
-#sudo cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
-#sudo gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+#${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
+#${SUDO} cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
+#${SUDO} cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+#${SUDO} cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
+#${SUDO} gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
 
 #cd dist
 #echo "Building ${PKG_NAME}_${PKG_VER} package"
-#sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
+#${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 #cd "${SRC}/${SRC_NAME}"
 
@@ -261,20 +263,20 @@ sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 #for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 #do
-#    [ -d ${OUT_DIR}/${dir} ] || sudo mkdir ${OUT_DIR}/${dir}
-#    sudo chown root:root ${OUT_DIR}/${dir}
+#    [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
+#    ${SUDO} chown root:root ${OUT_DIR}/${dir}
 #done
 
-#sudo cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
-#sudo cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
-#sudo cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
-#sudo cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
-#sudo gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+#${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
+#${SUDO} cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
+#${SUDO} cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
+#${SUDO} cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
+#${SUDO} gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
 
 #cd dist
 #echo "Building ${PKG_NAME}_${PKG_VER} package"
-#sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
+#${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 [ -d ../releases ] || mkdir ../releases
 [ -d ../releases/${PKG_VER} ] || mkdir ../releases/${PKG_VER}
-sudo cp *.deb *.gz *.zip ../releases/${PKG_VER}
+${SUDO} cp *.deb *.gz *.zip ../releases/${PKG_VER}
