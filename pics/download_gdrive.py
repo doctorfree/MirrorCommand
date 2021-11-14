@@ -53,8 +53,6 @@ def download_file_from_google_drive(id, destination):
 
 if __name__ == "__main__":
     import sys
-    from signal import signal, SIGPIPE, SIG_DFL
-    signal(SIGPIPE, SIG_DFL)
 
     if len(sys.argv) is not 3:
         print("Usage: python google_drive.py drive_file_id destination_file_path")

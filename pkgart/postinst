@@ -40,12 +40,19 @@ case "$1" in
         [ "${DOWNLOAD}" ] && {
           inst=`type -p pip`
           [ "${inst}" ] || sudo apt-get install python-pip
-          pip list | grep -F tqdm > /dev/null || {
-            pip install tqdm
+          pip list | grep -F gdown > /dev/null || {
+            pip install gdown
           }
           [ -x ${MM}/bin/getartists ] && {
-            echo "Extracting portrait mode Artists image archive ..."
-            ${MM}/bin/getartists | jar x
+            echo "Downloading portrait mode Artists image archive ..."
+            ${MM}/bin/getartists
+            DN="Artists"
+            DL="${DN}Portrait.zip"
+            [ -f ${DL} ] && {
+              echo "Extracting portrait mode ${DN} image archive ..."
+              unzip -qq ${DL}
+              rm -f ${DL}
+            }
           }
         }
         MMHOME=/home/pi/MagicMirror

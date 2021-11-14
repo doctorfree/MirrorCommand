@@ -3,6 +3,8 @@
 MM="/usr/local/MagicMirror"
 ID="1-lO_i6P2xAslmU8UFbA5y0-Bhobso7P_"
 
-# python ${MM}/pics/download_gdrive.py ${ID} ${MM}/pics/MirrorImagesPortrait.zip 
+gdinst=`type -p gdown`
 
-python ${MM}/pics/download_gdrive.py ${ID} -
+[ "${gdinst}" ] || pip install gdown > /dev/null
+
+gdown --id ${ID}
