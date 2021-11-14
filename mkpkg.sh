@@ -28,7 +28,7 @@ dpkg=`type -p dpkg-deb`
 . "${SRC}/${SRC_NAME}/VERSION"
 PKG_VER=${VERSION}
 
-umask 0022
+# umask 0022
 
 # Subdirectory in which to create the distribution files
 OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
@@ -45,6 +45,7 @@ mkdir dist
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
 cp -a pkg/mirrorcommandline ${OUT_DIR}/DEBIAN
+chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN
 
 echo "Package: ${PKG}
 Version: ${PKG_VER}
@@ -129,6 +130,7 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
 cp -a pkg/mirror-images-portrait ${OUT_DIR}/DEBIAN
+chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN
 
 echo "Package: ${PKG}
 Version: ${PKG_VER}
@@ -169,6 +171,7 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
 cp -a pkg/photographers-portrait ${OUT_DIR}/DEBIAN
+chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN
 
 echo "Package: ${PKG}
 Version: ${PKG_VER}
@@ -209,6 +212,7 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 #[ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 #mkdir ${OUT_DIR}
 #cp -a pkg/artists-portrait ${OUT_DIR}/DEBIAN
+#chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN
 
 #echo "Package: ${PKG}
 #Version: ${PKG_VER}
@@ -249,6 +253,7 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 #[ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 #mkdir ${OUT_DIR}
 #cp -a pkg/models-portrait ${OUT_DIR}/DEBIAN
+#chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN
 
 #echo "Package: ${PKG}
 #Version: ${PKG_VER}
