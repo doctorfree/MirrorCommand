@@ -37,7 +37,7 @@ mkdir dist
 
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
-cp -a pkg ${OUT_DIR}/DEBIAN
+cp -a pkg/mirrorcommandline ${OUT_DIR}/DEBIAN
 
 echo "Package: ${PKG}
 Version: ${PKG_VER}
@@ -114,7 +114,7 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
-cp -a pkgimg ${OUT_DIR}/DEBIAN
+cp -a pkg/mirror-images-portrait ${OUT_DIR}/DEBIAN
 
 echo "Package: ${PKG}
 Version: ${PKG_VER}
@@ -154,7 +154,7 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
-cp -a pkgpho ${OUT_DIR}/DEBIAN
+cp -a pkg/photographers-portrait ${OUT_DIR}/DEBIAN
 
 echo "Package: ${PKG}
 Version: ${PKG_VER}
@@ -194,7 +194,7 @@ sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 #[ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 #mkdir ${OUT_DIR}
-#cp -a pkgart ${OUT_DIR}/DEBIAN
+#cp -a pkg/artists-portrait ${OUT_DIR}/DEBIAN
 
 #echo "Package: ${PKG}
 #Version: ${PKG_VER}
@@ -234,7 +234,7 @@ sudo dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 #[ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 #mkdir ${OUT_DIR}
-#cp -a pkgmod ${OUT_DIR}/DEBIAN
+#cp -a pkg/models-portrait ${OUT_DIR}/DEBIAN
 
 #echo "Package: ${PKG}
 #Version: ${PKG_VER}
