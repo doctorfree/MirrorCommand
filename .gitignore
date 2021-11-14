@@ -19,3 +19,4 @@ modules/MMM-Hotword/trainer/trainer-withtoken.sh
 modules/MMM-TelegramBot/bot.txt
 modules/MMM-GoogleAssistant/credentials.json
 modules/MMM-GoogleAssistant/tokens/token*.json
+tests/sample-gitlab-ci.yml
