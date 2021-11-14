@@ -45,7 +45,7 @@ mkdir dist
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
 cp -a pkg/mirrorcommandline ${OUT_DIR}/DEBIAN
-chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN
+chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN ${OUT_DIR}/DEBIAN/*
 
 echo "Package: ${PKG}
 Version: ${PKG_VER}
@@ -59,6 +59,8 @@ Standards-Version: 4.1.3
 Homepage: https://gitlab.com/doctorfree/MirrorCommandLine
 Description: MagicMirror Command Line Tools
  Manage your MagicMirror from the command line" > ${OUT_DIR}/DEBIAN/control
+
+chmod 644 ${OUT_DIR}/DEBIAN/control
 
 for dir in "${TOP}" "${DESTDIR}" "${MM}" "${TOP}/share" "${TOP}/share/applications" \
             "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
@@ -130,7 +132,7 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
 cp -a pkg/mirror-images-portrait ${OUT_DIR}/DEBIAN
-chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN
+chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN ${OUT_DIR}/DEBIAN/*
 
 echo "Package: ${PKG}
 Version: ${PKG_VER}
@@ -144,6 +146,8 @@ Standards-Version: 4.1.3
 Homepage: https://gitlab.com/doctorfree/MirrorCommandLine
 Description: MagicMirror Images
  Images for a MagicMirror using the MirrorCommandLine configs" > ${OUT_DIR}/DEBIAN/control
+
+chmod 644 ${OUT_DIR}/DEBIAN/control
 
 for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 do
@@ -171,7 +175,7 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
 cp -a pkg/photographers-portrait ${OUT_DIR}/DEBIAN
-chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN
+chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN ${OUT_DIR}/DEBIAN/*
 
 echo "Package: ${PKG}
 Version: ${PKG_VER}
@@ -185,6 +189,8 @@ Standards-Version: 4.1.3
 Homepage: https://gitlab.com/doctorfree/MirrorCommandLine
 Description: MagicMirror Photographer Images
  Photographer Images for a MagicMirror using the MirrorCommandLine configs" > ${OUT_DIR}/DEBIAN/control
+
+chmod 644 ${OUT_DIR}/DEBIAN/control
 
 for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 do
@@ -212,7 +218,7 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 #[ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 #mkdir ${OUT_DIR}
 #cp -a pkg/artists-portrait ${OUT_DIR}/DEBIAN
-#chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN
+#chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN ${OUT_DIR}/DEBIAN/*
 
 #echo "Package: ${PKG}
 #Version: ${PKG_VER}
@@ -226,6 +232,8 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 #Homepage: https://gitlab.com/doctorfree/MirrorCommandLine
 #Description: MagicMirror Artists Images
 # Artists Images for a MagicMirror using the MirrorCommandLine configs" > ${OUT_DIR}/DEBIAN/control
+
+#chmod 644 ${OUT_DIR}/DEBIAN/control
 
 #for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 #do
@@ -253,7 +261,7 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 #[ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 #mkdir ${OUT_DIR}
 #cp -a pkg/models-portrait ${OUT_DIR}/DEBIAN
-#chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN
+#chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN ${OUT_DIR}/DEBIAN/*
 
 #echo "Package: ${PKG}
 #Version: ${PKG_VER}
@@ -267,6 +275,8 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 #Homepage: https://gitlab.com/doctorfree/MirrorCommandLine
 #Description: MagicMirror Models Images
 # Models Images for a MagicMirror using the MirrorCommandLine configs" > ${OUT_DIR}/DEBIAN/control
+
+#chmod 644 ${OUT_DIR}/DEBIAN/control
 
 #for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 #do
