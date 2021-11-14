@@ -3,7 +3,7 @@
             config: {
               telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
               allowedUser : ['Your-Telegram-Username'],
-              adminChatId : Your-Telegram-Chat-ID,
+              adminChatId : 0000000000,
               useWelcomeMessage: false,
               verbose: false,
               favourites: [

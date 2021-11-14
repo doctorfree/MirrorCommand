@@ -42,10 +42,12 @@ keys[RAP]=
 dumb[RAP]="xxxxx_Rapid-API-Key_xxxxxxxxx"
 keys[DOM]=
 dumb[DOM]='\"http\:\/\/your.domain.com\"'
+# Set your Telegram Username here
 keys[NAM]=
 dumb[NAM]="'Your-Telegram-Username'"
+# Set your Telegram Chat ID here
 keys[NUM]=
-dumb[NUM]="Your-Telegram-Chat-ID"
+dumb[NUM]="0000000000"
 keys[APIKEY]=
 dumb[APIKEY]="xxx_Remote-Control-API-Key_xxxxx"
 keys[LOC]=
