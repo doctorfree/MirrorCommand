@@ -135,7 +135,7 @@ then
     cd ${HOME}/src/Scripts/MagicMirror 
     printf "\nInstalling MagicMirror convenience scripts in /usr/local/bin ..."
     [ -d /usr/local/bin ] || sudo mkdir /usr/local/bin
-    ./chkinst.sh -f -i > /dev/null 2>&1
+    ./chkinst -f -i > /dev/null 2>&1
     sudo chown -R pi:pi ${HOME}/MagicMirror/config
     printf "\tDone\n"
     [[ ":${PATH}:" == *":/usr/local/bin:"* ]] || {

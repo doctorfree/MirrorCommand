@@ -125,7 +125,7 @@ or
 
 <code>git clone `https://gitlab.com/doctorfree/MirrorCommandLine.git`</code>
 
-Use the `mkpkg.sh` script to create Debian format packages on a system with
+Use the `mkpkg` script to create Debian format packages on a system with
 the prerequisite packaging development environment. Once packages have been
 created in the source repository they can be installed by executing the
 `./Install` command. Packages can be removed with `./Uninstall`.
@@ -230,7 +230,7 @@ Some of the more useful supporting scripts include:
   Snap a photo with your MagicMirror webcam
 - [**chkconfig**](scripts/chkconfig.sh)
   Check your MagicMirror configuration files
-- [**chkinst**](chkinst.sh)
+- [**chkinst**](chkinst)
   Check your Mirror Command Line installation
 - [**chktemp**](scripts/chktemp.sh)
   Check your MagicMirror Raspberry Pi temperature

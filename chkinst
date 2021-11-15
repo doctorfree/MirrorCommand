@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-## @file chkinst.sh
+## @file chkinst
 ## @brief Check if installed files differ from those in current directory
 ## @author Ronald Joe Record (rr at ronrecord dot com)
 ## @copyright Copyright (c) 2014, Ronald Joe Record, all rights reserved.
@@ -164,10 +164,14 @@ while getopts adfinuw: flag; do
 done
 shift $(( OPTIND - 1 ))
 
-for i in * bin/* config/* config/*/* css/custom.css
+for i in * bin/* config/* config/*/* css/custom.css scripts/*
 do
     # Skip directories
     [ -d "$i" ] && continue
+    # Skip config tests
+    [ "$i" == "config/config-mintest.js" ] && continue
+    j=`dirname $i`
+    [ "$j" == "config/test" ] && continue
     # Strip any .sh suffix
     j=`echo $i | sed -e "s/\.sh$//"`
     # Scripts can be either commands or startup configuration files in $HOME 
