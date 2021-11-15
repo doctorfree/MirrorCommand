@@ -3,6 +3,10 @@
 DEV="/dev/sda1"
 MNT="/mnt/transcend"
 
+mirror_inst=`type -p mirror`
+[ "${mirror_inst}" ] && {
+    mirror stop
+}
 sudo umount ${MNT}
 sudo fsck -y ${DEV}
 sudo mount -o rw ${DEV} ${MNT}
