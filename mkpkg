@@ -93,6 +93,13 @@ do
         ${SUDO} cp ${script} ${OUT_DIR}/${MM}/bin/${dest}
     }
 done
+for script in remote/*
+do
+    grep ${script} .gitignore > /dev/null || {
+        dest=`echo ${script} | sed -e "s/remote\///" -e "s/\.sh//"`
+        ${SUDO} cp ${script} ${OUT_DIR}/${MM}/bin/${dest}
+    }
+done
 
 ${SUDO} cp *.desktop "${OUT_DIR}/${TOP}/share/applications"
 ${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS

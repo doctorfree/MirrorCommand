@@ -29,6 +29,7 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 1. [Supporting utilities and config files](#supporting-utilities-and-config-files)
 1. [Remote access](#remote-access)
     1. [Remote execution of mirror commands](#remote-execution-of-mirror-commands)
+    1. [Remote view of MagicMirror display](#remote-view-of-magicmirror-display)
     1. [MMM-Remote-Control integration](#mmm-remote-control-integration)
     1. [MMM-TelegramBot integration](#mmm-telegrambot-integration)
         1. [MMM-TelegramBot installation](#mmm-telegrambot-installation)
@@ -281,7 +282,7 @@ of this document. There are a number of guides on configuring SSH access on
 a variety of systems. To get started with SSH configuration on a Raspberry Pi,
 see https://www.raspberrypi.org/documentation/computers/remote-access.html
 
-Once SSH access is configured, the [**mm**](mm.sh) script can be installed on
+Once SSH access is configured, the [**mm**](remote/mm) script can be installed on
 remote systems and used to remotely execute the mirror script on the system
 hosting MagicMirror. All arguments provided to <code>mm</code> are simply
 passed along to the <code>mirror</code> script.
@@ -310,8 +311,14 @@ described in the following sections.
 #### Remote execution of mirror commands
 
 If you wish to execute mirror commands remotely then install the convenience
-script [**mm**](mm.sh) on a system with SSH access to your MagicMirror. This
+script [**mm**](remote/mm) on a system with SSH access to your MagicMirror. This
 script can be used to remotely execute the main mirror script.
+
+#### Remote view of MagicMirror display
+
+If you wish to view the MagicMirror display remotely then install the convenience
+script [**vncview**](remote/vncview) on a system with SSH access to your MagicMirror. This
+script can be used to remotely execute a VNC server and locally execute a VNC client.
 
 ### MMM-Remote-Control integration
 
