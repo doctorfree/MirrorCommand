@@ -77,7 +77,6 @@ do
 done
 
 ${SUDO} cp -a bin ${OUT_DIR}/${MM}/bin
-${SUDO} cp -a pics ${OUT_DIR}/${MM}/pics
 
 for script in *.sh
 do
@@ -145,6 +144,10 @@ mkdir ${OUT_DIR}
 cp -a pkg/mirror-images-portrait ${OUT_DIR}/DEBIAN
 chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN ${OUT_DIR}/DEBIAN/*
 
+[ -d ${OUT_DIR}/${MM} ] || mkdir ${OUT_DIR}/${MM}
+[ -d ${OUT_DIR}/${MM}/pics ] || mkdir ${OUT_DIR}/${MM}/pics
+[ -f pics/imlist.txt ] && ${SUDO} cp pics/imlist.txt ${OUT_DIR}/${MM}/pics
+
 echo "Package: ${PKG}
 Version: ${PKG_VER}
 Section: misc
@@ -187,6 +190,10 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 mkdir ${OUT_DIR}
 cp -a pkg/photographers-portrait ${OUT_DIR}/DEBIAN
 chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN ${OUT_DIR}/DEBIAN/*
+
+[ -d ${OUT_DIR}/${MM} ] || mkdir ${OUT_DIR}/${MM}
+[ -d ${OUT_DIR}/${MM}/pics ] || mkdir ${OUT_DIR}/${MM}/pics
+[ -f pics/photogslist.txt ] && ${SUDO} cp pics/photogslist.txt ${OUT_DIR}/${MM}/pics
 
 echo "Package: ${PKG}
 Version: ${PKG_VER}
@@ -231,6 +238,10 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 #cp -a pkg/artists-portrait ${OUT_DIR}/DEBIAN
 #chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN ${OUT_DIR}/DEBIAN/*
 
+#[ -d ${OUT_DIR}/${MM} ] || mkdir ${OUT_DIR}/${MM}
+#[ -d ${OUT_DIR}/${MM}/pics ] || mkdir ${OUT_DIR}/${MM}/pics
+#[ -f pics/artistslist.txt ] && ${SUDO} cp pics/artistslist.txt ${OUT_DIR}/${MM}/pics
+
 #echo "Package: ${PKG}
 #Version: ${PKG_VER}
 #Section: misc
@@ -273,6 +284,10 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 #mkdir ${OUT_DIR}
 #cp -a pkg/models-portrait ${OUT_DIR}/DEBIAN
 #chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN ${OUT_DIR}/DEBIAN/*
+
+#[ -d ${OUT_DIR}/${MM} ] || mkdir ${OUT_DIR}/${MM}
+#[ -d ${OUT_DIR}/${MM}/pics ] || mkdir ${OUT_DIR}/${MM}/pics
+#[ -f pics/modelslist.txt ] && ${SUDO} cp pics/modelslist.txt ${OUT_DIR}/${MM}/pics
 
 #echo "Package: ${PKG}
 #Version: ${PKG_VER}

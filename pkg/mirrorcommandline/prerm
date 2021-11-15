@@ -24,6 +24,7 @@ case "$1" in
             cd /usr/local/bin
             for command in ${MM}/bin/*
             do
+                [ "${command}" == "${MM}/bin/*" ] && continue
                 b=`basename ${command}`
                 [ -L $b ] && {
                     readlink $b | grep ${MM} > /dev/null && rm -f $b
@@ -47,6 +48,7 @@ case "$1" in
             cd "${MMHOME}/config"
             for config in ${MM}/config/*
             do
+                [ "${config}" == "${MM}/config/*" ] && continue
                 b=`basename ${config}`
                 [ -L $b ] && {
                     readlink $b | grep ${MM} > /dev/null && rm -f $b
@@ -56,6 +58,7 @@ case "$1" in
               cd "${MMHOME}/css"
               for css in ${MM}/css/*
               do
+                [ "${css}" == "${MM}/css/*" ] && continue
                 b=`basename ${css}`
                 [ -L $b ] && {
                     readlink $b | grep ${MM} > /dev/null && rm -f $b

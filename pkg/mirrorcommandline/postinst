@@ -27,6 +27,7 @@ case "$1" in
         MM="/usr/local/MagicMirror"
         for command in ${MM}/bin/*
         do
+            [ "${command}" == "${MM}/bin/*" ] && continue
             b=`basename ${command}`
             [ -f $b ] || ln -s ${command} .
         done
@@ -50,6 +51,7 @@ case "$1" in
             chown -R ${USER}:${GROUP} ${MM}
             for config in ${MM}/config/*
             do
+                [ "${config}" == "${MM}/config/*" ] && continue
                 b=`basename ${config}`
                 [ -f $b ] || [ -d $b ] || sudo -u ${USER} ln -s ${config} .
             done
@@ -57,6 +59,7 @@ case "$1" in
               cd "${MMHOME}/css"
               for css in ${MM}/css/*
               do
+                [ "${css}" == "${MM}/css/*" ] && continue
                 b=`basename ${css}`
                 if [ "$b" == "custom.css" ]
                 then
