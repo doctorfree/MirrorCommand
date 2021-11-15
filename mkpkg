@@ -163,7 +163,8 @@ Description: MagicMirror Images
 
 chmod 644 ${OUT_DIR}/DEBIAN/control
 
-for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
+for dir in "${TOP}" "${DESTDIR}" "${MM}" "${TOP}/share" \
+           "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 do
     [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
     ${SUDO} chown root:root ${OUT_DIR}/${dir}
@@ -210,7 +211,8 @@ Description: MagicMirror Photographer Images
 
 chmod 644 ${OUT_DIR}/DEBIAN/control
 
-for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
+for dir in "${TOP}" "${DESTDIR}" "${MM}" "${TOP}/share" \
+           "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 do
     [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
     ${SUDO} chown root:root ${OUT_DIR}/${dir}
@@ -257,7 +259,8 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 #chmod 644 ${OUT_DIR}/DEBIAN/control
 
-#for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
+#for dir in "${TOP}" "${DESTDIR}" "${MM}" "${TOP}/share" \
+#           "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 #do
 #    [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
 #    ${SUDO} chown root:root ${OUT_DIR}/${dir}
@@ -304,7 +307,8 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 
 #chmod 644 ${OUT_DIR}/DEBIAN/control
 
-#for dir in "${TOP}" "${TOP}/share" "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
+#for dir in "${TOP}" "${DESTDIR}" "${MM}" "${TOP}/share" \
+#           "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
 #do
 #    [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
 #    ${SUDO} chown root:root ${OUT_DIR}/${dir}
