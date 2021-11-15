@@ -37,7 +37,7 @@ isportrait() {
 }
 
 [ "$1" ] || {
-    echo "Use updall.sh to update all folders."
+    echo "Use 'mmupdall' to update all folders."
     echo "This script requires a folder or folders as arguments."
     echo "Exiting."
     exit 1
