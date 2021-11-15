@@ -127,6 +127,7 @@ check() {
 }
 
 ALL=
+CONF=
 DIFF=
 TELL=
 UPD=
@@ -137,10 +138,13 @@ UPTODATE=1
 # prompting you if you really want to.
 DIFFER=""
 
-while getopts adfinuw: flag; do
+while getopts acdfinuw: flag; do
     case $flag in
         a)
             ALL=1
+            ;;
+        c)
+            CONF=1
             ;;
         d)
             DIFF=1
@@ -164,7 +168,14 @@ while getopts adfinuw: flag; do
 done
 shift $(( OPTIND - 1 ))
 
-for i in * bin/* config/* config/*/* css/custom.css scripts/*
+if [ "${CONF}" ]
+then
+    CKCONF="config/* config/*/*"
+else
+    CKCONF=
+fi
+
+for i in * bin/* ${CKCONF} css/custom.css scripts/*
 do
     # Skip directories
     [ -d "$i" ] && continue
