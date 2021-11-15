@@ -166,8 +166,8 @@ do
     ${SUDO} chown root:root ${OUT_DIR}/${dir}
 done
 
-[ -d ${OUT_DIR}/${MM} ] || mkdir ${OUT_DIR}/${MM}
-[ -d ${OUT_DIR}/${MM}/pics ] || mkdir ${OUT_DIR}/${MM}/pics
+[ -d ${OUT_DIR}/${MM} ] || ${SUDO} mkdir ${OUT_DIR}/${MM}
+[ -d ${OUT_DIR}/${MM}/pics ] || ${SUDO} mkdir ${OUT_DIR}/${MM}/pics
 [ -f pics/imlist.txt ] && ${SUDO} cp pics/imlist.txt ${OUT_DIR}/${MM}/pics
 
 ${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
@@ -214,8 +214,8 @@ do
     ${SUDO} chown root:root ${OUT_DIR}/${dir}
 done
 
-[ -d ${OUT_DIR}/${MM} ] || mkdir ${OUT_DIR}/${MM}
-[ -d ${OUT_DIR}/${MM}/pics ] || mkdir ${OUT_DIR}/${MM}/pics
+[ -d ${OUT_DIR}/${MM} ] || ${SUDO} mkdir ${OUT_DIR}/${MM}
+[ -d ${OUT_DIR}/${MM}/pics ] || ${SUDO} mkdir ${OUT_DIR}/${MM}/pics
 [ -f pics/photogslist.txt ] && ${SUDO} cp pics/photogslist.txt ${OUT_DIR}/${MM}/pics
 
 ${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
@@ -262,8 +262,8 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 #    ${SUDO} chown root:root ${OUT_DIR}/${dir}
 #done
 
-#[ -d ${OUT_DIR}/${MM} ] || mkdir ${OUT_DIR}/${MM}
-#[ -d ${OUT_DIR}/${MM}/pics ] || mkdir ${OUT_DIR}/${MM}/pics
+#[ -d ${OUT_DIR}/${MM} ] || ${SUDO} mkdir ${OUT_DIR}/${MM}
+#[ -d ${OUT_DIR}/${MM}/pics ] || ${SUDO} mkdir ${OUT_DIR}/${MM}/pics
 #[ -f pics/artistslist.txt ] && ${SUDO} cp pics/artistslist.txt ${OUT_DIR}/${MM}/pics
 
 #${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
@@ -310,8 +310,8 @@ ${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
 #    ${SUDO} chown root:root ${OUT_DIR}/${dir}
 #done
 
-#[ -d ${OUT_DIR}/${MM} ] || mkdir ${OUT_DIR}/${MM}
-#[ -d ${OUT_DIR}/${MM}/pics ] || mkdir ${OUT_DIR}/${MM}/pics
+#[ -d ${OUT_DIR}/${MM} ] || ${SUDO} mkdir ${OUT_DIR}/${MM}
+#[ -d ${OUT_DIR}/${MM}/pics ] || ${SUDO} mkdir ${OUT_DIR}/${MM}/pics
 #[ -f pics/modelslist.txt ] && ${SUDO} cp pics/modelslist.txt ${OUT_DIR}/${MM}/pics
 
 #${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
