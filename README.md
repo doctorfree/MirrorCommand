@@ -394,7 +394,9 @@ section of the MMM-TelegramBot module entry in `config.js` that defines the
 
 Configuring MMM-TelegramBot customCommands can be daunting. Use the template at
 [MagicMirror/config/Templates/TelegramBot-customCommands.js](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/config/Templates/TelegramBot-customCommands.js)
-as a guide. Alternatively, several custom TelegramBot commands have been configured
+as a guide.
+
+Alternatively, several custom TelegramBot commands have been configured
 and enabled in the
 [MMM-TelegramCommands module](https://gitlab.com/doctorfree/MMM-TelegramCommands).
 To enable the MMM-TelegramCommands module commands, install this module:
