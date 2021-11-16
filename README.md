@@ -34,6 +34,7 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
     1. [MMM-TelegramBot integration](#mmm-telegrambot-integration)
         1. [MMM-TelegramBot installation](#mmm-telegrambot-installation)
         1. [MMM-TelegramBot module config](#mmm-telegrambot-module-config)
+        1. [MMM-TelegramCommands module](#mmm-telegramcommands-module)
         1. [Telegram usage](#telegram-usage)
 1. [MMM-GoogleAssistant integration](#mmm-googleassistant-integration)
     1. [Google Cloud Platform API Keys](google-cloud-platform-api-keys)
@@ -389,10 +390,33 @@ section of the MMM-TelegramBot module entry in `config.js` that defines the
 },
 ```
 
-This may look daunting.
-No worries, just copy and paste using either the above snippet or
-[one of the config files in this repository](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/config/config-default.js)
-as a guide.
+##### MMM-TelegramCommands module
+
+Configuring MMM-TelegramBot customCommands can be daunting. Use the template at
+[MagicMirror/config/Templates/TelegramBot-customCommands.js](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/config/Templates/TelegramBot-customCommands.js)
+as a guide. Alternatively, several custom TelegramBot commands have been configured
+and enabled in the
+[MMM-TelegramCommands module](https://gitlab.com/doctorfree/MMM-TelegramCommands).
+To enable the MMM-TelegramCommands module commands, install this module:
+
+```bash
+cd ~/MagicMirror/modules
+git clone https://gitlab.com/doctorfree/MMM-TelegramCommands
+cd MMM-TelegramCommands
+npm install
+```
+
+After installing MMM-TelegramCommands add the following to the modules array
+of any `config.js` that has MMM-TelegramBot activated:
+
+```javascript
+    {
+        module: 'MMM-TelegramCommands'
+    },
+```
+
+See this
+[simple example of MMM-TelegramCommands configuration](https://gitlab.com/doctorfree/MMM-TelegramCommands/-/blob/master/examples/config-simple.js) as a guide.
 
 ##### Telegram usage
 Once installed and configured, you can control your MagicMirror
