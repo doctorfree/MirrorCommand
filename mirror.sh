@@ -929,7 +929,7 @@ usage() {
     printf "\n    list <active|installed|configs>"
     printf "\n    rotate <right|left|normal|inverted>"
     printf "\n    screen <on|off|info|status>"
-    printf "\n    stop|start|restart|mute|unmute"
+    printf "\n    stop|start|restart|mute|unmute|reboot|shutdown"
     printf "\n    playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo"
     printf "\n    status <all>|dev|getb|setb <num>|vol <num>"
     printf "\n    vol mute|unmute|save|restore|get"
@@ -949,7 +949,7 @@ usage() {
     printf "\n    rotate <right|left|normal|inverted>"
     printf "\n    scene <next|prev|info|name|number>"
     printf "\n    screen <on|off|info|status>"
-    printf "\n    stop|start|restart|mute|unmute|screenshot"
+    printf "\n    stop|start|restart|mute|unmute|screenshot|reboot|shutdown"
     printf "\n    playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo"
     printf "\n    vol <percent>|mute|unmute|save|restore|get"
     printf "\n    dev | getb | setb <num> | select | status <all> | youtube"
@@ -1864,6 +1864,16 @@ shift $(( OPTIND - 1 ))
         pm2 restart MagicMirror --update-env
         printf "\n${BOLD}Done${NORMAL}\n"
     fi
+    exit 0
+}
+
+[ "$1" == "reboot" ] && {
+    [ -x /usr/local/bin/reboot ] && /usr/local/bin/reboot
+    exit 0
+}
+
+[ "$1" == "shutdown" ] && {
+    [ -x /usr/local/bin/shutdown ] && /usr/local/bin/shutdown
     exit 0
 }
 
