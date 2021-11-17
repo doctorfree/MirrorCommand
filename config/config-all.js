@@ -187,10 +187,10 @@ var config = {
                         title: "Washington Post",
                         url: "http://feeds.washingtonpost.com/rss/national"
                     },
-                    {
-                        title: "Mercury News",
-                        url: "https://www.mercurynews.com/feed"
-                    },
+                    // {
+                    //     title: "Mercury News",
+                    //     url: "https://www.mercurynews.com/feed"
+                    // },
                     {
                         title: "Centers for Disease Control",
                         url: "https://tools.cdc.gov/api/v2/resources/media/403372.rss"

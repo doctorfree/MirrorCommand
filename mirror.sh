@@ -78,6 +78,13 @@ BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
 usejq=`type -p jq`
 
+echo "${apikey}" | grep _Remote-Control-API-Key_ > /dev/null && {
+    printf "\nMMM-Remote-Control API Key is not configured."
+    printf "\nEither add your key or comment out the empty setting"
+    printf "\nfor 'apikey' near the beginning of this script."
+    printf "\n\nContinuing but some functionality disabled.\n"
+}
+
 [ -d "${CONFDIR}" ] || {
     printf "\nCONFDIR does not exist or is not a directory. Exiting.\n"
     exit ${ERROR_EXIT}
@@ -1027,7 +1034,7 @@ setconf() {
     else
         rm -f config.js
     fi
-    NOKEY="xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx"
+    NOKEY="x_Your-Telegram-API-Key_x"
     if [ "$subdir" ]
     then
         echo "Setting MagicMirror configuration to ${subdir}/config-${conf}.js"

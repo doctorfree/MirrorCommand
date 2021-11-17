@@ -205,10 +205,10 @@ var config = {
                         title: "Washington Post",
                         url: "http://feeds.washingtonpost.com/rss/national"
                     },
-                    {
-                        title: "Mercury News",
-                        url: "https://www.mercurynews.com/feed"
-                    },
+                    // {
+                    //     title: "Mercury News",
+                    //     url: "https://www.mercurynews.com/feed"
+                    // },
                 ],
                 showSourceTitle: true,
                 showPublishDate: true,
