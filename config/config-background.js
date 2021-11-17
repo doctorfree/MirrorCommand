@@ -105,7 +105,7 @@ var config = {
             //classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/fractals/',
+                    '/usr/local/MagicMirror/pics/Fractals/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

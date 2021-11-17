@@ -333,7 +333,7 @@ var config = {
                 imagePaths: [
                     '/usr/local/MagicMirror/pics/Art/Kandinsky/',
                     '/usr/local/MagicMirror/pics/Art/Klee/',
-                    '/usr/local/MagicMirror/pics/fractals/',
+                    '/usr/local/MagicMirror/pics/Fractals/',
                     '/usr/local/MagicMirror/pics/Art/Picasso/',
                     '/usr/local/MagicMirror/pics/Art/Zdzisław_Beksiński/',
                 ],

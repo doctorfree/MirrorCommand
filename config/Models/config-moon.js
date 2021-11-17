@@ -117,7 +117,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/moon/',
+                    '/usr/local/MagicMirror/pics/Moon_Maison/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+MNT=/mnt/transcend/Pictures/MagicMirror
+INS=/usr/local/MagicMirror/pics
+
+cd ${INS}
+for subdir in *
+do
+    [ -d ${subdir} ] && {
+        [ -L ${subdir} ] || {
+            find ${subdir} -type f | while read i
+            do
+                [ -f ${MNT}/$i ] && {
+                    cmp $i ${MNT}/$i > /dev/null && {
+                        rm -f $i
+                        ln -s ${MNT}/$i $i
+                    }
+                }
+            done
+        }
+    }
+done
