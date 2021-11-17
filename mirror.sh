@@ -1027,13 +1027,36 @@ setconf() {
     else
         rm -f config.js
     fi
+    NOKEY="xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx"
     if [ "$subdir" ]
     then
         echo "Setting MagicMirror configuration to ${subdir}/config-${conf}.js"
-        ln -s $subdir/config-${conf}.js config.js
+        grep ${NOKEY} ${subdir}/config-${conf}.js > /dev/null || NOKEY=
+        if [ "${NOKEY}" ]
+        then
+            if [ -f ../.config-nokey/$subdir/config-${conf}.js ]
+            then
+              ln -s ../.config-nokey/$subdir/config-${conf}.js config.js
+            else
+              ln -s $subdir/config-${conf}.js config.js
+            fi
+        else
+            ln -s $subdir/config-${conf}.js config.js
+        fi
     else
         echo "Setting MagicMirror configuration to config-${conf}.js"
-        ln -s config-${conf}.js config.js
+        grep ${NOKEY} config-${conf}.js > /dev/null || NOKEY=
+        if [ "${NOKEY}" ]
+        then
+            if [ -f ../.config-nokey/config-${conf}.js ]
+            then
+              ln -s ../.config-nokey/config-${conf}.js config.js
+            else
+              ln -s config-${conf}.js config.js
+            fi
+        else
+            ln -s config-${conf}.js config.js
+        fi
     fi
     npm run --silent config:check > /dev/null
     [ $? -eq 0 ] || {
