@@ -21,15 +21,24 @@ set -e
 case "$1" in
     configure)
         export PATH=/usr/local/bin:$PATH
+        # Scripts for which links will be made in /usr/local/bin
+        EXPORTS="backgrounds camsnap chkconfig chktemp cron.bash gethue getquote \
+            get_temps gitdiff mirror mknewartist mknewmodel mknewphotographer \
+            mknewplayboy mknewtop mm mmapiactions mmgetb mmscene mmsetb mmupdall \
+            pcmanslideshow play rand_back reboot remountusb rmlandscape sdbackup \
+            sderase sdrestore sdwrite send_sms showkeys shutdown updallartists \
+            updallmodels updallphotographers updalltop updarpscan updartist updgit \
+            updlinks updmodel updphotographer updtop vncview vol wireless_conf zerologs"
+
         [ -d /usr/local ] || mkdir /usr/local
         [ -d /usr/local/bin ] || mkdir /usr/local/bin
         cd /usr/local/bin
         MM="/usr/local/MagicMirror"
-        for command in ${MM}/bin/*
+        for command in ${EXPORTS}
         do
-            [ "${command}" == "${MM}/bin/*" ] && continue
-            b=`basename ${command}`
-            [ -f $b ] || ln -s ${command} .
+          [ -f ${MM}/bin/${command} ] && {
+            [ -f ${command} ] || ln -s ${MM}/bin/${command} .
+          }
         done
         MMHOME=/home/pi/MagicMirror
         [ -d ${MMHOME}/config ] || {
@@ -53,7 +62,7 @@ case "$1" in
             do
                 [ "${config}" == "${MM}/config/*" ] && continue
                 b=`basename ${config}`
-                [ -f $b ] || [ -d $b ] || sudo -u ${USER} ln -s ${config} .
+                [ -f $b ] || [ -d $b ] || sudo -u ${USER} cp -a ${config} .
             done
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"
@@ -66,13 +75,13 @@ case "$1" in
                     if [ -f $b ]
                     then
                         [ -f custom-mirrorcommandline.css ] || {
-                            sudo -u ${USER} ln -s ${css} custom-mirrorcommandline.css
+                            sudo -u ${USER} cp ${css} custom-mirrorcommandline.css
                         }
                     else
-                        sudo -u ${USER} ln -s ${css} .
+                        sudo -u ${USER} cp ${css} .
                     fi
                 else
-                    [ -f $b ] || [ -d $b ] || sudo -u ${USER} ln -s ${css} .
+                    [ -f $b ] || [ -d $b ] || sudo -u ${USER} cp ${css} .
                 fi
               done
             }

@@ -37,7 +37,7 @@ PORT="8080"
 #
 # Set you MMM-Remote-Control API Key here or leave blank if you have not configured one
 #
-# Replace "MMM-Remote-Control_API_Key" with your MMM-Remote-Control API Key
+# Replace "xxx_Remote-Control-API-Key_xxxxx" with your MMM-Remote-Control API Key
 apikey="xxx_Remote-Control-API-Key_xxxxx"
 # Uncomment this line if you have not configured an MMM-Remote-Control API Key
 # apikey=
@@ -48,6 +48,9 @@ apiurl="http://${IP}:${PORT}/api/notification"
 # Set this to the X11 DISPLAY you are using. DISPLAY=:0 works for most systems.
 export DISPLAY=:0
 # -----------------------------------------------------------------------
+[ -d /usr/local/MagicMirror/bin ] && {
+    export PATH=${PATH}:/usr/local/MagicMirror/bin
+}
 CONFDIR="${MM}/config"
 # MagicMirror configuration files organized into subdirectories listed here
 CONF_SUBDIRS="Artists JAV Models Photos Photographers YouTube test"
@@ -75,7 +78,7 @@ BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
 usejq=`type -p jq`
 
-[ "${apikey}" == "MMM-Remote-Control_API_Key" ] && {
+[ "${apikey}" == "xxx_Remote-Control-API-Key_xxxxx" ] && {
     printf "\nMMM-Remote-Control API Key is not configured. Either add your key"
     printf "\nor comment out the empty setting for 'apikey' near the beginning of this script."
     printf "\n\nContinuing but some functionality disabled.\n"

@@ -182,7 +182,7 @@ Defaults for these are:
 - MM="${HOME}/MagicMirror"
 - IP="10.0.1.85"
 - PORT="8080"
-- apikey="MMM-Remote-Control_API_Key"
+- apikey="xxx_Remote-Control-API-Key_xxxxx"
 - CONF_SUBDIRS="Artists JAV Models Photographers"
 
 In most cases you will only need to set the IP address and MMM-Remote-Control API key.

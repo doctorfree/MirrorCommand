@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apikey="MMM-Remote-Control_API_Key"
+apikey="xxx_Remote-Control-API-Key_xxxxx"
 
 # Get the current brightness setting
 usejq=`type -p jq`
