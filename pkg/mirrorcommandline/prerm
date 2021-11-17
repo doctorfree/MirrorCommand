@@ -45,19 +45,22 @@ case "$1" in
         }
         if [ "${MMHOME}" ]
         then
-            cd "${MMHOME}/config"
-            for config in ${MM}/config/*
+            for confdir in config .config-nokey
             do
-                [ "${config}" == "${MM}/config/*" ] && continue
+              [ -d "${MMHOME}/${confdir}" ] || continue
+              cd "${MMHOME}/${confdir}"
+              for config in ${MM}/${confdir}/*
+              do
+                [ "${config}" == "${MM}/${confdir}/*" ] && continue
                 b=`basename ${config}`
                 # [ -L $b ] && {
                 #     readlink $b | grep ${MM} > /dev/null && rm -f $b
                 # }
                 [ -d $b ] && {
                     cd $b
-                    for subconf in ${MM}/config/$b/*
+                    for subconf in ${MM}/${confdir}/$b/*
                     do
-                        [ "${subconf}" == "${MM}/config/$b/*" ] && continue
+                        [ "${subconf}" == "${MM}/${confdir}/$b/*" ] && continue
                         c=`basename ${subconf}`
                         diff ${subconf} $c > /dev/null && rm -f $c
                     done
@@ -66,6 +69,7 @@ case "$1" in
                 [ -f $b ] && {
                     diff ${config} $b > /dev/null && rm -f $b
                 }
+              done
             done
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"

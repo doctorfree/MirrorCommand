@@ -1,6 +1,7 @@
 #!/bin/bash
 
 MMCONFDIR="/usr/local/MagicMirror/config"
+NOCONFDIR="/usr/local/MagicMirror/.config-nokey"
 BINDIR="/usr/local/MagicMirror/bin"
 
 showconfkeys() {
@@ -33,9 +34,13 @@ MMHOME="$HOME/MagicMirror"
 [ "${MMHOME}" ] && {
     CONFDIR=${MMHOME}/config
     showconfkeys
+    CONFDIR=${MMHOME}/.config-nokey
+    showconfkeys
 }
 
 CONFDIR=${MMCONFDIR}
+showconfkeys
+CONFDIR=${NOCONFDIR}
 showconfkeys
 
 cd "${BINDIR}"

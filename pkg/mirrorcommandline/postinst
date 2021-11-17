@@ -54,15 +54,21 @@ case "$1" in
         }
         if [ "${MMHOME}" ]
         then
-            cd "${MMHOME}/config"
             USER=$(stat -c '%U' ${MMHOME}/config)
             GROUP=$(stat -c '%G' ${MMHOME}/config)
             chown -R ${USER}:${GROUP} ${MM}
-            for config in ${MM}/config/*
+            for confdir in config .config-nokey
             do
-                [ "${config}" == "${MM}/config/*" ] && continue
+              [ -d "${MMHOME}/${confdir}" ] || {
+                  sudo -u ${USER} mkdir "${MMHOME}/${confdir}"
+              }
+              cd "${MMHOME}/${confdir}"
+              for config in ${MM}/${confdir}/*
+              do
+                [ "${config}" == "${MM}/${confdir}/*" ] && continue
                 b=`basename ${config}`
                 [ -f $b ] || [ -d $b ] || sudo -u ${USER} cp -a ${config} .
+              done
             done
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"
