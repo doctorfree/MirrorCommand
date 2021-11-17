@@ -92,6 +92,13 @@ case "$1" in
                 rm -rf ${MM}/pics/${subdir}
               done
             fi
+            # Remove any symbolic links in the pics directory
+            for folder in ${MM}/pics/*
+            do
+              [ "${folder}" == "${MM}/pics/*" ] || {
+                [ -L "${folder}" ] && rm -f "${folder}"
+              }
+            done
           }
         }
     ;;

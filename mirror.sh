@@ -78,12 +78,6 @@ BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
 usejq=`type -p jq`
 
-[ "${apikey}" == "xxx_Remote-Control-API-Key_xxxxx" ] && {
-    printf "\nMMM-Remote-Control API Key is not configured. Either add your key"
-    printf "\nor comment out the empty setting for 'apikey' near the beginning of this script."
-    printf "\n\nContinuing but some functionality disabled.\n"
-}
-
 [ -d "${CONFDIR}" ] || {
     printf "\nCONFDIR does not exist or is not a directory. Exiting.\n"
     exit ${ERROR_EXIT}
