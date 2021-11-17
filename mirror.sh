@@ -108,7 +108,7 @@ check_config() {
             ln -s ${current} config.js
         else
             echo "Config file ${current} does not exist. Using default."
-            ln -s config-default.js config.js
+            setconf default
         fi
     else
         if [ -L config.js ] && [ -f config.js ]
@@ -122,7 +122,7 @@ check_config() {
                 echo "Config file config.js is a broken symbolic link. Removing."
                 rm -f config.js
                 echo "Installing default config file, config-default.js"
-                ln -s config-default.js config.js
+                setconf default
             fi
         fi
     fi
