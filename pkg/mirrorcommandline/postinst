@@ -67,7 +67,19 @@ case "$1" in
               do
                 [ "${config}" == "${MM}/${confdir}/*" ] && continue
                 b=`basename ${config}`
-                [ -f $b ] || [ -d $b ] || sudo -u ${USER} cp -a ${config} .
+                [ -d ${config} ] && {
+                    [ -d $b ] || sudo -u ${USER} mkdir $b
+                    cd $b
+                    for subconf in ${config}/*
+                    do
+                      [ "${subconf}" == "${config}/*" ] && continue
+                      c=`basename ${subconf}`
+                      [ -f $c ] || sudo -u ${USER} cp ${subconf} .
+                    done
+                    cd ..
+                    continue
+                }
+                [ -f $b ] || sudo -u ${USER} cp ${config} .
               done
             done
             [ -d "${MMHOME}/css" ] && {

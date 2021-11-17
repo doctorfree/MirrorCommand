@@ -95,8 +95,11 @@ case "$1" in
             # Remove any symbolic links in the pics directory
             for folder in ${MM}/pics/*
             do
-              [ "${folder}" == "${MM}/pics/*" ] || {
-                [ -L "${folder}" ] && rm -f "${folder}"
+              [ "${folder}" == "${MM}/pics/*" ] && continue
+              echo "Checking $folder for symlink to remove"
+              [ -L "${folder}" ] && {
+                  echo "Removing $folder"
+                  rm -f "${folder}"
               }
             done
           }

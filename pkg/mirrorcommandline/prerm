@@ -65,6 +65,7 @@ case "$1" in
                         diff ${subconf} $c > /dev/null && rm -f $c
                     done
                     cd ..
+                    rmdir --ignore-fail-on-non-empty $b
                 }
                 [ -f $b ] && {
                     diff ${config} $b > /dev/null && rm -f $b
