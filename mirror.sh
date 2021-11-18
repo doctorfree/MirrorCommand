@@ -87,6 +87,24 @@ NORMAL=$(tput sgr0)
 usejq=`type -p jq`
 usepm2=`type -p pm2`
 
+# Need this if not using PM2 because MagicMirror does not have a 'stop' npm script
+mirror_stop() {
+  ps -ef | grep pocket | grep -v "grep"  | awk '{print $2}' | while read pocketpid
+  do
+    sudo kill -9 ${pocketpid} > /dev/null 2>&1
+  done
+
+  ps -ef | grep node | grep -v "grep"  | awk '{print $2}' | while read nodepid
+  do
+    sudo kill -9 ${nodepid} > /dev/null 2>&1
+  done
+
+  ps -ef | grep chromium-browser | grep -v "grep"  | awk '{print $2}' | while read chromepid
+  do
+    sudo kill -9 ${chromepid} > /dev/null 2>&1
+  done
+}
+
 pm2msg() {
     printf "\nPM2 is installed but now PM2 process named ${PM2_PROCESS_NAME}"
     printf "\nwas found. Reverting to direct use of npm to manage MagicMirror."
@@ -364,7 +382,7 @@ start_dev() {
     then
         pm2 stop MagicMirror
     else
-        npm stop
+        mirror_stop
     fi
     npm start dev
     printf "\n${BOLD}Done${NORMAL}\n"
@@ -1982,8 +2000,7 @@ shift $(( OPTIND - 1 ))
     then
         pm2 stop MagicMirror
     else
-        cd "${MM}"
-        npm stop
+        mirror_stop
     fi
     printf "\n${BOLD}Done${NORMAL}\n"
     exit 0
