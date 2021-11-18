@@ -42,6 +42,14 @@ apikey="xxx_Remote-Control-API-Key_xxxxx"
 # Uncomment this line if you have not configured an MMM-Remote-Control API Key
 # apikey=
 #
+# By default, the mirror script uses the PM2 process named "MagicMirror" to
+# stop/start/restart and get the status of MagicMirror. If you have setup
+# PM2 to manage your MagicMirror process then either name that PM2 process
+# "MagicMirror" or change the setting below to your MagicMirror PM2 process name.
+#
+# Replace with your PM2 MagicMirror process name
+PM2_PROCESS_NAME="MagicMirror"
+#
 modurl="http://${IP}:${PORT}/api/module"
 apiurl="http://${IP}:${PORT}/api/notification"
 
@@ -78,6 +86,24 @@ BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
 usejq=`type -p jq`
 usepm2=`type -p pm2`
+
+pm2msg() {
+    printf "\nPM2 is installed but now PM2 process named ${PM2_PROCESS_NAME}"
+    printf "\nwas found. Reverting to direct use of npm to manage MagicMirror."
+    printf "\nIf you wish to use PM2 to manage your MagicMirror via this script"
+    printf "\nthen create a PM2 process named ${PM2_PROCESS_NAME} that can be"
+    printf "\nused to start/stop/restart MagicMirror."
+    printf "\n\nContinuing but some functionality disabled.\n"
+}
+
+[ "${usepm2}" ] && {
+  if [ "${usejq}" ]
+  then
+    pm2 jlist | jq .[].name | grep ${PM2_PROCESS_NAME} > /dev/null || pm2msg
+  else
+    pm2 list | grep ${PM2_PROCESS_NAME} > /dev/null || pm2msg
+  fi
+}
 
 echo "${apikey}" | grep _Remote-Control-API-Key_ > /dev/null && {
     printf "\nMMM-Remote-Control API Key is not configured."
