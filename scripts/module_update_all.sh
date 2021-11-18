@@ -3,8 +3,8 @@
 MOD_DIR="$HOME/MagicMirror/modules"
 REBUILD=
 
-[ "$1" ] || {
-  echo "Usage: module_update [-r] [module name]"
+usage() {
+  echo "Usage: module_update_all [-r]"
   exit 0
 }
 
@@ -13,18 +13,19 @@ REBUILD=
   shift
 }
 
-for module in $*
+[ -d  ${MOD_DIR} ] || {
+  echo "Modules directory $MOD_DIR does not exist or is not a directory."
+  echo "Exiting."
+  exit 1
+}
+
+cd ${MOD_DIR}
+for module in *
 do
-  [ -d ${MOD_DIR}/${module} ] || {
-    trymodule="MMM-${module}"
-    [ -d ${MOD_DIR}/${trymodule} ] || {
-      echo "Cannot locate module ${module}, skipping"
-      continue
-    }
-    module=${trymodule}
-  }
-  cd ${MOD_DIR}/${module}
-  case ${module} in
+  [ -d "${module}/.git" ] || continue
+  [ "${module}" == "default" ] && continue
+  cd "${module}"
+  case "${module}" in
     MMM-Detector|MMM-GoogleAssistant)
         if [ "${REBUILD}" ]
         then

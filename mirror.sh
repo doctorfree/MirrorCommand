@@ -37,7 +37,7 @@ PORT="8080"
 #
 # Set you MMM-Remote-Control API Key here or leave blank if you have not configured one
 #
-# Replace "xxx_Remote-Control-API-Key_xxxxx" with your MMM-Remote-Control API Key
+# Replace with your MMM-Remote-Control API Key
 apikey="xxx_Remote-Control-API-Key_xxxxx"
 # Uncomment this line if you have not configured an MMM-Remote-Control API Key
 # apikey=
@@ -77,6 +77,7 @@ INFO="all"
 BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
 usejq=`type -p jq`
+usepm2=`type -p pm2`
 
 echo "${apikey}" | grep _Remote-Control-API-Key_ > /dev/null && {
     printf "\nMMM-Remote-Control API Key is not configured."
@@ -333,7 +334,12 @@ start_dev() {
     printf "\n${BOLD}Starting MagicMirror in developer mode${NORMAL}\n"
     cd "${MM}"
     # export ELECTRON_ENABLE_LOGGING=true
-    pm2 stop MagicMirror --update-env
+    if [ "${usepm2}" ]
+    then
+        pm2 stop MagicMirror
+    else
+        npm stop
+    fi
     npm start dev
     printf "\n${BOLD}Done${NORMAL}\n"
 }
@@ -1099,7 +1105,13 @@ setconf() {
     then
         start_dev
     else
-        pm2 restart MagicMirror --update-env
+        if [ "${usepm2}" ]
+        then
+            pm2 restart MagicMirror
+        else
+            cd "${MM}"
+            npm restart
+        fi
     fi
 }
 
@@ -1888,7 +1900,13 @@ shift $(( OPTIND - 1 ))
         start_dev
     else
         printf "\n${BOLD}Restarting MagicMirror${NORMAL}\n"
-        pm2 restart MagicMirror --update-env
+        if [ "${usepm2}" ]
+        then
+            pm2 restart MagicMirror
+        else
+            cd "${MM}"
+            npm restart
+        fi
         printf "\n${BOLD}Done${NORMAL}\n"
     fi
     exit 0
@@ -1920,7 +1938,13 @@ shift $(( OPTIND - 1 ))
         start_dev
     else
         printf "\n${BOLD}Starting MagicMirror${NORMAL}\n"
-        pm2 start MagicMirror --update-env
+        if [ "${usepm2}" ]
+        then
+            pm2 start MagicMirror
+        else
+            cd "${MM}"
+            npm start
+        fi
         printf "\n${BOLD}Done${NORMAL}\n"
     fi
     exit 0
@@ -1928,19 +1952,31 @@ shift $(( OPTIND - 1 ))
 
 [ "$1" == "stop" ] && {
     printf "\n${BOLD}Stopping MagicMirror${NORMAL}\n"
-    pm2 stop MagicMirror --update-env
+    if [ "${usepm2}" ]
+    then
+        pm2 stop MagicMirror
+    else
+        cd "${MM}"
+        npm stop
+    fi
     printf "\n${BOLD}Done${NORMAL}\n"
     exit 0
 }
 
 [ "$1" == "status" ] && {
   printf "\n${BOLD}MagicMirror Status:${NORMAL}\n"
-  if [ "${TELEGRAM}" ]
+  if [ "${usepm2}" ]
   then
-    pm2 -m status MagicMirror
+    if [ "${TELEGRAM}" ]
+    then
+      pm2 -m status MagicMirror
+    else
+      pm2 status MagicMirror
+      check_config $2
+    fi
   else
-    pm2 status MagicMirror --update-env
-    check_config $2
+    echo "Unable to check running status without pm2"
+    [ "${TELEGRAM}" ] || check_config $2
   fi
   CONF=`readlink -f ${CONFDIR}/config.js`
   printf "\nUsing config file `basename ${CONF}`\n"

@@ -22,3 +22,4 @@ modules/MMM-GoogleAssistant/tokens/token*.json
 dist/*
 releases/*
 tests/sample-gitlab-ci.yml
+tmp/*

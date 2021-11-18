@@ -25,10 +25,11 @@ case "$1" in
         EXPORTS="backgrounds camsnap chkconfig chktemp cron.bash gethue getquote \
             get_temps gitdiff mirror mknewartist mknewmodel mknewphotographer \
             mknewplayboy mknewtop mm mmapiactions mmgetb mmscene mmsetb mmupdall \
-            pcmanslideshow play rand_back reboot remountusb rmlandscape sdbackup \
-            sderase sdrestore sdwrite send_sms showkeys shutdown updallartists \
+            pcmanslideshow play rand_back rmlandscape sdbackup \
+            sderase sdrestore sdwrite send_sms showkeys updallartists \
             updallmodels updallphotographers updalltop updarpscan updartist updgit \
             updlinks updmodel updphotographer updtop vncview vol wireless_conf zerologs"
+        LOCAL="myreboot myshutdown remountusb"
 
         [ -d /usr/local ] || mkdir /usr/local
         [ -d /usr/local/bin ] || mkdir /usr/local/bin
@@ -38,6 +39,22 @@ case "$1" in
         do
           [ -f ${MM}/bin/${command} ] && {
             [ -f ${command} ] || ln -s ${MM}/bin/${command} .
+          }
+        done
+        for command in ${LOCAL}
+        do
+          [ -f ${MM}/bin/${command} ] && {
+            [ -f /usr/bin/${command} ] || {
+              cp ${MM}/bin/${command} /usr/bin/${command}
+              chmod 755 /usr/bin/${command}
+            }
+            if [ "${command}" == "remountusb" ]
+            then
+              [ -f ${command} ] || ln -s /usr/bin/${command} .
+            else
+              localcomm=`echo ${command} | sed -e "s/my//"`
+              [ -f ${localcomm} ] || ln -s /usr/bin/${command} ${localcomm}
+            fi
           }
         done
         MMHOME=/home/pi/MagicMirror
