@@ -82,7 +82,7 @@ case "$1" in
                 cd MMM-BackgroundSlideshow
                 inst=`type -p npm`
                 [ "${inst}" ] && {
-                  sudo -u ${USER} npm_config_loglevel=silent npm install 2>&1 > /dev/null
+                  sudo -u ${USER} npm_config_loglevel=silent npm install > /dev/null 2>&1
                 }
                 [ -d pics ] || sudo -u ${USER} mkdir pics
                 [ -d ${MM}/pics ] && {
