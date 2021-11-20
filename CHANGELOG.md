@@ -2,6 +2,56 @@
 
 All notable changes to this project will be documented in this file.
 
+Sat Nov 20 14:17:43 2021 -0800 56cc6de :
+   New config file for Neu Ling
+Sat Nov 20 14:02:48 2021 -0800 14b217f :
+   Fix Uninstall check for installed packages
+Sat Nov 20 13:47:57 2021 -0800 0d5d222 :
+   Moved the image packages out into their own repository
+Sat Nov 20 08:40:10 2021 -0800 b9f654f :
+   Set Installed-Size in control file for downloaded images
+Sat Nov 20 08:30:17 2021 -0800 0286786 :
+   Default to base package and base images package in Install script
+Sat Nov 20 08:22:45 2021 -0800 a54a986 :
+   Download images piped to stdout and extract with tar from stdin to conserve disk space usage, only package mirrorcommandline here
+Fri Nov 19 15:14:34 2021 -0800 866cadf :
+   Fix redirection to /dev/null in packaging scripts
+Thu Nov 18 13:22:45 2021 -0800 24af451 :
+   Add capability to stop MagicMirror without pm2
+Thu Nov 18 12:21:48 2021 -0800 a454c20 :
+   Check if we recognize the PM2 process name
+Thu Nov 18 11:35:25 2021 -0800 6b3b0df :
+   Check if pm2 is installed, if not then use npm directly where possible
+Wed Nov 17 17:36:30 2021 -0800 78fcc22 :
+   Add module_update script
+Wed Nov 17 13:40:36 2021 -0800 e4a49b4 :
+   Use substrings of keys to check if set
+Wed Nov 17 12:40:54 2021 -0800 ae81bff :
+   Post and Pre need to handle case where config subdirs already exist
+Wed Nov 17 12:02:45 2021 -0800 72afe7c :
+   Always use setconf to set the config file link
+Wed Nov 17 11:57:50 2021 -0800 bee8a5e :
+   Check if Telegram API key set before linking config
+Wed Nov 17 11:40:08 2021 -0800 dda0cc4 :
+   Add a mirror config subdir with no Telegram modules
+Wed Nov 17 10:41:15 2021 -0800 75120ba :
+   Show keys in both installed config and deployed config
+Wed Nov 17 08:55:53 2021 -0800 b17fb8b :
+   Remove symlinks in pics dir, delete check for apikey in mirror script
+Wed Nov 17 08:17:20 2021 -0800 4403814 :
+   Copy config and css files rather than symlink, only symlink selected files out to /usr/local/bin
+Tue Nov 16 15:12:43 2021 -0800 ed10a71 :
+   Line break
+Tue Nov 16 14:44:24 2021 -0800 078b60e :
+   Add section on MMM-TelegramCommands
+Tue Nov 16 14:18:57 2021 -0800 bb7b8f0 :
+   Remove the customCommands section and use MMM-TelegramCommands instead
+Tue Nov 16 13:31:31 2021 -0800 5e39f1a :
+   Add support for reboot and shutdown
+Mon Nov 15 16:33:01 2021 -0800 663254a :
+   Remove old release artifacts
+Mon Nov 15 16:07:22 2021 -0800 a9dda7b :
+   Update Changelog in preparation for version 2.4 tag
 Mon Nov 15 12:31:30 2021 -0800 d96940a :
    Use sudo to make pics dirs
 Mon Nov 15 12:28:15 2021 -0800 a480d04 :
