@@ -1,10 +1,62 @@
 #!/bin/bash
 
-MM="/usr/local/MagicMirror"
-ID="1-wEbx0zfEiclHJS7e9J6P3XrN9axiTtQ"
+IDS="12gGGi2jL_cLuUQI6d_ahXwkIN4erYtnJ \
+     12wx5kOFG-LFXYqmuGmzGEedsrO51vucK \
+     12Re3H0I3RQmd6X2UtaQydZ46Zw_NPbSh \
+     13gqeWYFLfjsonH6c3neBMk_dm_qDaHv5 \
+     12Z2w71rANtSvXsAv_Nk2hsSd_cpul5Z8 \
+     13DZbG7RnKZAv-jy7C6G8IbEjHlgiBb2x \
+     13_ZPG7RYGh8a-JwfnoQgkXyKm3hMCNFx \
+     137SvoX-BfJVMYMeOZH0fzLDSJOQ8Ifp5 \
+     13A-JW9rimGT2UuSp3DSt821i5Jk7dgvb \
+     139aM27Pom2Q9FY4WO8nousy60JhkIyOE \
+     12ZM9um7nSWPT8VQwcNmmmopImXts4DpU \
+     13Aqm3v9Exr4PSgcnecpSQ7lO9_LisBUb \
+     12mHCyNtszbrCjqt3X10NlOCgWYMvRt68 \
+     13VlmS9FCZxfDvYEUrm1ppRVrrvNWt77p \
+     12cw1X1PToIgB5CZz1SxdUIhYAlsbabxt \
+     13YINLu050GVSM9vr6uiKGrBNpgvI773M \
+     13LpisPrGqKZ9_IwXXsEdqb6X2BEeAICC \
+     12Si4X8LGhQDDetuc4cJ_N_cb-gxz-DsF \
+     12rQlaui9yMCSiZU_fKc-Gc08M6GtTt9q"
 
-gdinst=`type -p gdown`
+HERE=`pwd`
+NUM_IDS=`echo ${IDS} | wc -w`
+printf "\nDownloading and extracting ${NUM_IDS} model archives "
+printf "will consume approximately 4.7G of disk space in "
+printf "${HERE}\n\n"
 
-[ "${gdinst}" ] || pip install gdown > /dev/null
+while true
+do
+  read -p "Do you wish to continue ? ('Y'/'N'): " yn
+  case $yn in
+      [Yy]*)
+          DOWNLOAD=1
+          break
+          ;;
+      [Nn]*)
+          DOWNLOAD=
+          break
+          ;;
+      * )
+          echo "Please answer yes or no."
+          ;;
+  esac
+done
 
-gdown --id ${ID}
+[ "${DOWNLOAD}" ] && {
+  gdinst=`type -p gdown`
+
+  [ "${gdinst}" ] || pip install gdown > /dev/null
+
+  i=1
+  for ID in ${IDS}
+  do
+    printf "\nDownloading and extracting ${i}/${NUM_IDS} model archives ..."
+    gdown -O - --id ${ID} --quiet | tar xzf -
+    printf " Done."
+    ((i++))
+  done
+  printf "\n"
+}
+

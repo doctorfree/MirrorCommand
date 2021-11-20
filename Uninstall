@@ -1,7 +1,14 @@
 #!/bin/bash
 
-# sudo apt remove artists-portrait -y
-# sudo apt remove models-portrait -y
-sudo apt remove photographers-portrait -y
-sudo apt remove mirror-images-portrait -y
+for pkg in artists-portrait \
+           models-portrait \
+           photographers-portrait \
+           mirror-images-portrait
+do
+    dpkg -s ${pkg} > /dev/null 2>&1
+    [ $? ] || {
+        echo "Removing ${pkg}"
+        sudo apt remove ${pkg} -y
+    }
+done
 sudo apt remove mirrorcommandline -y

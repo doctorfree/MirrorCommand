@@ -1,10 +1,68 @@
 #!/bin/bash
 
-MM="/usr/local/MagicMirror"
-ID="1-sJx71HqzPMg5IwSHNI8NFWZO-i5PhXx"
+IDS="11OzPAZt8XTZ9c6hZL4NEcaNEPBu7-0N7 \
+     11-zD2O4LLXtpH6WIojuCm_X18ikRFBKs \
+     12-KqEPG4CxBlcq2hYj5C1jBA22fE52V2 \
+     115Mphp7jAH8g6IQRUWhA496aUr8TFO79 \
+     12AyVIA-HUwiKWLKfnIp3qfupJIiBmMy5 \
+     11-mRdUbE-gS0Ysn9w9mcJzW4_B0rM1LE \
+     10bctaCn3HVYPH-Ju6oSQEwwbDUaHeVt6 \
+     129rKxu5xvdgso2jEzDS-CvL5RTF1cOex \
+     11oCDGZ35IgpzKvjQjw5BC4UtzJb5WCOR \
+     125CT8jM2TK63Zqlglkdab1qEGWq1A2eE \
+     11wGRflB1VTOB4iZu0zSs4YL3JOZiOyuW \
+     11JWAo-oyefBb2NffoIbJ8d60Tts7C0Q1 \
+     10n31Z4K2ElfE11lo8QhQJjtavMafQy8x \
+     10aQpVQkhrXv4C8zqRD_cXlqpne4w0x6p \
+     11aG8YNGuOsOXv1Yaqk2ArufcpaUEFSl- \
+     11usVdiHZCZ-83z0DtypdJzYIhCwAnf6W \
+     11wqluX6753oVPo14ZYy6AyDe_jpslfzC \
+     1237tAuXief3jGpz8N3oGs_93EMrnPS6R \
+     10mOIawom1MGCV_N5teP7K12tjiNyNyzR \
+     11wd3gRwlYEb5qs6Smswl0PuVconV1452 \
+     127Mndr5rNdeT9Vj84tdIafnOQob6mkZe \
+     110xjd6PQzroBhA9LNGN170ktOqUEq3rk \
+     10e65E6Sd4jsjn5dd3jma9f8TBdbjno_k \
+     10pazQLgo5BKp8eZeHNMVWg9XKgm2Ytts \
+     10cBgGmWCi5uCxpbt9SuLqP16rDZeYtm6"
 
-gdinst=`type -p gdown`
+HERE=`pwd`
+NUM_IDS=`echo ${IDS} | wc -w`
+printf "\nDownloading and extracting ${NUM_IDS} artist archives "
+printf "will consume approximately 5.4G of disk space in "
+printf "${HERE}\n\n"
 
-[ "${gdinst}" ] || pip install gdown > /dev/null
+while true
+do
+  read -p "Do you wish to continue ? ('Y'/'N'): " yn
+  case $yn in
+      [Yy]*)
+          DOWNLOAD=1
+          break
+          ;;
+      [Nn]*)
+          DOWNLOAD=
+          break
+          ;;
+      * )
+          echo "Please answer yes or no."
+          ;;
+  esac
+done
 
-gdown --id ${ID}
+[ "${DOWNLOAD}" ] && {
+  gdinst=`type -p gdown`
+
+  [ "${gdinst}" ] || pip install gdown > /dev/null
+
+  i=1
+  for ID in ${IDS}
+  do
+    printf "\nDownloading and extracting ${i}/${NUM_IDS} artist archives ..."
+    gdown -O - --id ${ID} --quiet | tar xzf -
+    printf " Done."
+    ((i++))
+  done
+  printf "\n"
+}
+

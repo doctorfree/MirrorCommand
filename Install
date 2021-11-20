@@ -16,8 +16,8 @@ SRC_NAME="MirrorCommandLine"
 #            ModelsPortrait PhotographersPortrait"
 # APT_NAMES="mirrorcommandline mirror-images-portrait artists-portrait \
 #            models-portrait photographers-portrait"
-PKG_NAMES="MirrorCommandLine MirrorImagesPortrait PhotographersPortrait"
-APT_NAMES="mirrorcommandline mirror-images-portrait photographers-portrait"
+PKG_NAMES="MirrorCommandLine"
+APT_NAMES="mirrorcommandline"
 SRC="${HOME}/src"
 
 PKG_INSTALLED=
