@@ -6,7 +6,8 @@ for pkg in artists-portrait \
            mirror-images-portrait
 do
     dpkg -s ${pkg} > /dev/null 2>&1
-    [ $? ] || {
+    retVal=$?
+    [ ${retVal} -eq 0 ] && {
         echo "Removing ${pkg}"
         sudo apt remove ${pkg} -y
     }
