@@ -65,9 +65,6 @@ case "$1" in
               do
                 [ "${config}" == "${MM}/${confdir}/*" ] && continue
                 b=`basename ${config}`
-                # [ -L $b ] && {
-                #     readlink $b | grep ${MM} > /dev/null && rm -f $b
-                # }
                 [ -d $b ] && {
                     cd $b
                     for subconf in ${MM}/${confdir}/$b/*
