@@ -151,6 +151,7 @@ Section: misc
 Priority: optional
 Architecture: armhf
 Depends: mirrorcommandline (>= 2.2)
+Installled-Size: 375000
 Maintainer: ${DEBFULLNAME} <${DEBEMAIL}>
 Build-Depends: debhelper (>= 11)
 Standards-Version: 4.1.3
