@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+MM=${HOME}/MagicMirror
+CONF=${MM}/config
+
+# If there is an existing config.js then check
+# if it is one that requires screen rotation
+[ -L ${CONF}/config.js ] && {
+    config=`readlink ${CONF}/config.js`
+    config=`basename ${config}`
+    config=`echo $config | sed -e "s/\.js$//" -e "s/^config-//"`
+    rotation=`xrandr | grep connected | awk ' { print $5 } '`
+    case ${config} in
+        tantra|iframe|candy|fractalplaylist|hardzoom)
+            [ "$rotation" == "normal" ] || {
+                printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
+                xrandr --output HDMI-1 --rotate normal
+            }
+            ;;
+        *)
+            [ "$rotation" == "right" ] || {
+                printf "\n${BOLD}Rotating screen display right ${NORMAL}\n"
+                xrandr --output HDMI-1 --rotate right
+            }
+            ;;
+    esac
+}
+
+cd ${MM}
+DISPLAY=:0 npm start

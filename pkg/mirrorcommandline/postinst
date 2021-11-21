@@ -29,7 +29,7 @@ case "$1" in
             sderase sdrestore sdwrite send_sms showkeys updallartists \
             updallmodels updallphotographers updalltop updarpscan updartist updgit \
             updlinks updmodel updphotographer updtop vncview vol wireless_conf zerologs"
-        LOCAL="myreboot myshutdown remountusb"
+        LOCAL="myreboot myshutdown remountusb mirror_start"
 
         [ -d /usr/local ] || mkdir /usr/local
         [ -d /usr/local/bin ] || mkdir /usr/local/bin
@@ -48,7 +48,7 @@ case "$1" in
               cp ${MM}/bin/${command} /usr/bin/${command}
               chmod 755 /usr/bin/${command}
             }
-            if [ "${command}" == "remountusb" ]
+            if [ "${command}" == "remountusb" ] || [ "${command}" == "mirror_start" ]
             then
               [ -f ${command} ] || ln -s /usr/bin/${command} .
             else

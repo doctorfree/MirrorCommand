@@ -20,7 +20,7 @@ set -e
 case "$1" in
     remove|upgrade|deconfigure)
         MM="/usr/local/MagicMirror"
-        MNTS="myreboot myshutdown remountusb"
+        MNTS="myreboot myshutdown remountusb mirror_start"
         [ -d /usr/local/bin ] && {
             cd /usr/local/bin
             for command in ${MM}/bin/*
@@ -35,7 +35,7 @@ case "$1" in
         for command in ${MNTS}
         do
             rm -f /usr/bin/${command}
-            if [ "${command}" == "remountusb" ]
+            if [ "${command}" == "remountusb" ] || [ "${command}" == "mirror_start" ]
             then
               rm -f /usr/local/bin/${command}
             else
