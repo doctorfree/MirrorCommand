@@ -80,7 +80,8 @@ var config = {
             module: "MMM-YouTubeWebView",
             position: "top_center",
             config: {
-              playlist: "PL16649CCE7EFA8B2F",
+              // playlist: "PL16649CCE7EFA8B2F",
+              playlist: "PLh3A0cnoWYsy-hWkixvwugKUwxbX9Xia1",
               autoplay: true,
               controls: false,
               loop: true,
