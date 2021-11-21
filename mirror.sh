@@ -1132,7 +1132,7 @@ setconf() {
     [ -L config-$$.js ] && rm -f config-$$.js
     rotation=`xrandr | grep connected | awk ' { print $5 } '`
     case ${conf} in
-        tantra|iframe|candy|fractalplaylist)
+        tantra|iframe|candy|fractalplaylist|hardzoom)
             [ "$rotation" == "normal" ] || {
                 printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
                 xrandr --output HDMI-1 --rotate normal
@@ -1151,7 +1151,7 @@ setconf() {
     else
         if [ "${usepm2}" ]
         then
-            pm2 restart MagicMirror
+            pm2 restart MagicMirror --update-env
         else
             cd "${MM}"
             npm restart
@@ -1541,6 +1541,9 @@ select_youtube() {
             "fractalplaylist")
                 TUBS="${TUBS} Fractals"
                 ;;
+            "hardzoom")
+                TUBS="${TUBS} Mandelbrot_Zoom"
+                ;;
             "kpop")
                 TUBS="${TUBS} K-Pop"
                 ;;
@@ -1599,6 +1602,10 @@ select_youtube() {
                 ;;
             "Fractals",*|*,"Fractals")
                 setconf fractalplaylist YouTube
+                break
+                ;;
+            "Mandelbrot_Zoom",*|*,"Mandelbrot_Zoom")
+                setconf hardzoom YouTube
                 break
                 ;;
             "K-Pop",*|*,"K-Pop")
@@ -1946,7 +1953,7 @@ shift $(( OPTIND - 1 ))
         printf "\n${BOLD}Restarting MagicMirror${NORMAL}\n"
         if [ "${usepm2}" ]
         then
-            pm2 restart MagicMirror
+            pm2 restart MagicMirror --update-env
         else
             cd "${MM}"
             npm restart
