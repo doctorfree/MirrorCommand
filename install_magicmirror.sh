@@ -132,15 +132,15 @@ printf "\nDone detecting and repairing vulnerabilities\n"
 
 [ -d ${HOME}/src ] || mkdir ${HOME}/src
 cd ${HOME}/src
-[ -d Scripts ] || {
-    printf "\nCloning Scripts repository ..."
-    git clone ssh://gitlab.com/doctorfree/Scripts.git > /dev/null 2>&1
+[ -d MirrorCommandLine ] || {
+    printf "\nCloning MirrorCommandLine repository ..."
+    git clone ssh://gitlab.com/doctorfree/MirrorCommandLine.git > /dev/null 2>&1
     printf "\tDone\n"
 }
 
-if [ -d ${HOME}/src/Scripts/MagicMirror ]
+if [ -d ${HOME}/src/MirrorCommandLine ]
 then
-    cd ${HOME}/src/Scripts/MagicMirror 
+    cd ${HOME}/src/MirrorCommandLine 
     printf "\nInstalling MagicMirror convenience scripts in /usr/local/bin ..."
     [ -d /usr/local/bin ] || sudo mkdir /usr/local/bin
     ./chkinst -f -i > /dev/null 2>&1
@@ -151,8 +151,8 @@ then
         echo "export PATH=/usr/local/bin:${PATH}" >> ${HOME}/.bashrc
     }
 else
-    echo "ERROR: Something went wrong with the Scripts git clone."
-    echo "No directory $HOME/src/Scripts/MagicMirror"
+    echo "ERROR: Something went wrong with the MirrorCommandLine git clone."
+    echo "No directory $HOME/src/MirrorCommandLine"
     echo "Skipping installation of MagicMirror convenience scripts"
 fi
 
@@ -379,13 +379,13 @@ then
                   MMM-Hotword/trainer/trainer-withtoken.sh \
                   MMM-Hotword/trainer/trainer.sh
     do
-        [ -f ${HOME}/src/Scripts/MagicMirror/modules/${modadd} ] && {
-            cp ${HOME}/src/Scripts/MagicMirror/modules/${modadd} ${modadd}
+        [ -f ${HOME}/src/MirrorCommandLine/modules/${modadd} ] && {
+            cp ${HOME}/src/MirrorCommandLine/modules/${modadd} ${modadd}
         }
     done
     cd ..
-    [ -f ${HOME}/src/Scripts/MagicMirror/css/custom.css ] && {
-        cp ${HOME}/src/Scripts/MagicMirror/css/custom.css css/custom.css
+    [ -f ${HOME}/src/MirrorCommandLine/css/custom.css ] && {
+        cp ${HOME}/src/MirrorCommandLine/css/custom.css css/custom.css
     }
 else
     echo "MMM-AssistantMk2 not installed. Skipping."
