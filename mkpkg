@@ -4,7 +4,7 @@ SRC_NAME="MirrorCommandLine"
 PKG_NAME="MirrorCommandLine"
 TOP="usr"
 DESTDIR="${TOP}/local"
-MM="${DESTDIR}/MagicMirror"
+MM="${DESTDIR}/${PKG_NAME}"
 SRC=${HOME}/src
 SUDO=sudo
 GCI=
@@ -29,6 +29,7 @@ dpkg=`type -p dpkg-deb`
 
 . "${SRC}/${SRC_NAME}/VERSION"
 PKG_VER=${VERSION}
+PKG_REL=${RELEASE}
 
 # umask 0022
 
@@ -50,7 +51,7 @@ cp -a pkg/mirrorcommandline ${OUT_DIR}/DEBIAN
 chmod 755 ${OUT_DIR} ${OUT_DIR}/DEBIAN ${OUT_DIR}/DEBIAN/*
 
 echo "Package: ${PKG}
-Version: ${PKG_VER}
+Version: ${PKG_VER}-${PKG_REL}
 Section: misc
 Priority: optional
 Architecture: all
@@ -123,14 +124,14 @@ ${SUDO} cp -a modules ${OUT_DIR}/${MM}/modules
 ${SUDO} chmod 755 ${OUT_DIR}/${MM}/bin/*
 
 cd dist
-echo "Building ${PKG_NAME}_${PKG_VER} package"
-${SUDO} dpkg-deb --build ${PKG_NAME}_${PKG_VER}
+echo "Building ${PKG_NAME}_${PKG_VER}-${PKG_REL} package"
+${SUDO} dpkg --build ${PKG_NAME}_${PKG_VER} ${PKG_NAME}_${PKG_VER}-${PKG_REL}.deb
 cd ${PKG_NAME}_${PKG_VER}
-echo "Creating compressed tar archive of ${PKG_NAME} ${PKG_VER} distribution"
-tar cf - usr | gzip -9 > ../${PKG_NAME}_${PKG_VER}-dist.tar.gz
+echo "Creating compressed tar archive of ${PKG_NAME} ${PKG_VER}-${PKG_REL} distribution"
+tar cf - usr | gzip -9 > ../${PKG_NAME}_${PKG_VER}-${PKG_REL}-dist.tar.gz
 [ "${GCI}" ] || {
-    echo "Creating zip archive of ${PKG_NAME} ${PKG_VER} distribution"
-    zip -q -r ../${PKG_NAME}_${PKG_VER}-dist.zip usr
+    echo "Creating zip archive of ${PKG_NAME} ${PKG_VER}-${PKG_REL} distribution"
+    zip -q -r ../${PKG_NAME}_${PKG_VER}-${PKG_REL}-dist.zip usr
 }
 cd ..
 

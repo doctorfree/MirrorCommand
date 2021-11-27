@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Models/Helly_von_Valentine',
+                    '/usr/local/MirrorCommandLine/pics/Models/Helly_von_Valentine',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Nuts_Magazine/',
+                    '/usr/local/MirrorCommandLine/pics/Nuts_Magazine/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

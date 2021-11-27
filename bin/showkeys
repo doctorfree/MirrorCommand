@@ -1,8 +1,8 @@
 #!/bin/bash
 
-MMCONFDIR="/usr/local/MagicMirror/config"
-NOCONFDIR="/usr/local/MagicMirror/config-notelegram"
-BINDIR="/usr/local/MagicMirror/bin"
+MMCONFDIR="/usr/local/MirrorCommandLine/config"
+NOCONFDIR="/usr/local/MirrorCommandLine/config-notelegram"
+BINDIR="/usr/local/MirrorCommandLine/bin"
 
 showconfkeys() {
     cd "${CONFDIR}"

@@ -96,7 +96,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Gif/Portal/',
+                    '/usr/local/MirrorCommandLine/pics/Gif/Portal/',
                 ],
                 slideshowSpeed: 30000, // 30 seconds
                 transitionImages: false,

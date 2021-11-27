@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Nodoka_Sakuraha',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Nodoka_Sakuraha',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

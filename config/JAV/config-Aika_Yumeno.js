@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Aika_Yumeno',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Aika_Yumeno',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

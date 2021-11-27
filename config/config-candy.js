@@ -97,8 +97,8 @@ var config = {
             //classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Fractals/',
-                    '/usr/local/MagicMirror/pics/Gif/Nature/',
+                    '/usr/local/MirrorCommandLine/pics/Fractals/',
+                    '/usr/local/MirrorCommandLine/pics/Gif/Nature/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

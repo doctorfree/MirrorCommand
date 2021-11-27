@@ -117,7 +117,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Photographers/PHOTO_DIR_HOLDER/',
+                    '/usr/local/MirrorCommandLine/pics/Photographers/PHOTO_DIR_HOLDER/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

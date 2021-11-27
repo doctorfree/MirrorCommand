@@ -4,7 +4,7 @@ TYPE="Models"
 UPDSCRIPT="updmodel"
 
 TYPEDIR="/mnt/transcend/Pictures/MagicMirror/${TYPE}"
-PICDIR="/usr/local/MagicMirror/pics/${TYPE}"
+PICDIR="/usr/local/MirrorCommandLine/pics/${TYPE}"
 
 [ -d ${PICDIR} ] || sudo mkdir -p ${PICDIR}
 

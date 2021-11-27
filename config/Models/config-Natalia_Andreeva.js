@@ -117,7 +117,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Models/Natalia_Andreeva',
+                    '/usr/local/MirrorCommandLine/pics/Models/Natalia_Andreeva',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

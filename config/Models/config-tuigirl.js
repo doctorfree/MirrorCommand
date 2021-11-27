@@ -93,7 +93,7 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Tuigirl',
+                    '/usr/local/MirrorCommandLine/pics/Tuigirl',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

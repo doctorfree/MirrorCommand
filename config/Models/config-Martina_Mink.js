@@ -117,7 +117,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Models/Martina_Mink',
+                    '/usr/local/MirrorCommandLine/pics/Models/Martina_Mink',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

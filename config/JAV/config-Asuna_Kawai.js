@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Asuna_Kawai',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Asuna_Kawai',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

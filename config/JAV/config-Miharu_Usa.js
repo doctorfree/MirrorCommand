@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Miharu_Usa',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Miharu_Usa',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

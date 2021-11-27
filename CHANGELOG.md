@@ -99,7 +99,7 @@ Sun Nov 14 08:36:46 2021 -0800 0ea598f :
 Sun Nov 14 08:17:49 2021 -0800 ec23c71 :
    Move packaging folders into pkg subdirs
 Sun Nov 14 08:07:24 2021 -0800 069d3d6 :
-   Change location of MMM-BackgroundSlideshow pics to /usr/local/MagicMirror/pics
+   Change location of MMM-BackgroundSlideshow pics to /usr/local/MirrorCommandLine/pics
 Sat Nov 13 18:57:09 2021 -0800 96bb508 :
    Version 2.3 release assets
 Sat Nov 13 18:22:44 2021 -0800 ebde905 :
@@ -183,7 +183,7 @@ Mon Nov 8 16:36:04 2021 -0800 7dd7897 :
 Mon Nov 8 16:26:50 2021 -0800 dde8cac :
    Sync keys and stubs with new distribution key management
 Mon Nov 8 15:16:36 2021 -0800 c4c25f1 :
-   Don't set ownership to root on /usr/local/MagicMirror/bin
+   Don't set ownership to root on /usr/local/MirrorCommandLine/bin
 Mon Nov 8 15:02:11 2021 -0800 5c4453e :
    Add instructions on adding new keys
 Mon Nov 8 14:52:25 2021 -0800 d88f9d5 :

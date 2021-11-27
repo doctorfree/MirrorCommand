@@ -93,12 +93,12 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Photographers/',
-                 // '/usr/local/MagicMirror/pics/Photographers/Aleksandr_Mavrin',
-                 // '/usr/local/MagicMirror/pics/Photographers/David_Dubnitskiy',
-                 // '/usr/local/MagicMirror/pics/Photographers/Dmitry_Borisov',
-                 // '/usr/local/MagicMirror/pics/Photographers/Igor_Viushkin',
-                 // '/usr/local/MagicMirror/pics/Photographers/Stefan_Soell',
+                    '/usr/local/MirrorCommandLine/pics/Photographers/',
+                 // '/usr/local/MirrorCommandLine/pics/Photographers/Aleksandr_Mavrin',
+                 // '/usr/local/MirrorCommandLine/pics/Photographers/David_Dubnitskiy',
+                 // '/usr/local/MirrorCommandLine/pics/Photographers/Dmitry_Borisov',
+                 // '/usr/local/MirrorCommandLine/pics/Photographers/Igor_Viushkin',
+                 // '/usr/local/MirrorCommandLine/pics/Photographers/Stefan_Soell',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

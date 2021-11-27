@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Yuna_Ogura',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Yuna_Ogura',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

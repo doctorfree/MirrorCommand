@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Aoi',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Aoi',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

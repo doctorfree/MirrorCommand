@@ -21,7 +21,7 @@ Comment[ru_RU]=Эмулятор терминала
 Comment[ja]=ターミナル　エミュレータ
 
 Icon=utilities-terminal
-Exec=qterminal --name Mirror --title Mirror --execute="/usr/local/MagicMirror/bin/mirror"
+Exec=qterminal --name Mirror --title Mirror --execute="/usr/local/MirrorCommandLine/bin/mirror"
 Terminal=false
 Categories=Qt;System;TerminalEmulator;
 Actions=Dropdown;

@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Artists/Fukuro_Ko/',
+                    '/usr/local/MirrorCommandLine/pics/Artists/Fukuro_Ko/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

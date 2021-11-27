@@ -117,7 +117,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Models/Alisa_I',
+                    '/usr/local/MirrorCommandLine/pics/Models/Alisa_I',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

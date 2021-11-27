@@ -19,7 +19,7 @@ set -e
 
 case "$1" in
     remove|upgrade|deconfigure)
-        MM="/usr/local/MagicMirror"
+        MM="/usr/local/MirrorCommandLine"
         MNTS="myreboot myshutdown remountusb mirror_start"
         [ -d /usr/local/bin ] && {
             cd /usr/local/bin

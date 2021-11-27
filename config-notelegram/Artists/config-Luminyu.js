@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Artists/Luminyu/',
+                    '/usr/local/MirrorCommandLine/pics/Artists/Luminyu/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

@@ -117,7 +117,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Models/Li_Moon',
+                    '/usr/local/MirrorCommandLine/pics/Models/Li_Moon',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

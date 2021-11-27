@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Models/Neu_Ling',
+                    '/usr/local/MirrorCommandLine/pics/Models/Neu_Ling',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

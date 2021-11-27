@@ -28,6 +28,7 @@ PKG_SELECTED=
 
 . "${SRC}/${SRC_NAME}/VERSION"
 PKG_VER=${VERSION}
+PKG_REL=${RELEASE}
 
 get_available_packages() {
   for debs in ${SRC}/${SRC_NAME}/releases/${PKG_VER}/*.deb
@@ -86,7 +87,7 @@ check_package_names() {
 
 get_available_packages
 [ "$PKG_AVAILABLE}" ] || {
-  echo "No packages for version ${PKG_VER} are currently available. Exiting."
+  echo "No packages for version ${PKG_VER}-${PKG_REL} are currently available. Exiting."
   exit 1
 }
 
@@ -175,9 +176,9 @@ install_selected() {
 
 for PKG_NAME in ${PKG_NAMES}
 do
-  DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}.deb"
+  DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}-${PKG_REL}.deb"
   [ -f "${DEB}" ] || {
-    echo "${PKG_NAME}_${PKG_VER}.deb not found."
+    echo "${PKG_NAME}_${PKG_VER}-${PKG_REL}.deb not found."
     for debs in ${SRC}/${SRC_NAME}/releases/*/${PKG_NAME}_*.deb
     do
       [ "${debs}" == "${SRC}/${SRC_NAME}/releases/*/${PKG_NAME}_*.deb" ] || {

@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Artists/Logan_Cure/',
+                    '/usr/local/MirrorCommandLine/pics/Artists/Logan_Cure/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

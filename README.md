@@ -148,7 +148,7 @@ need to add any keys you wish to use to the appropriate config files and utiliti
 **Don't Panic!** The MirrorCommandLine package includes utilities to add and
 remove private keys. To do so:
 
-Edit the file `/usr/local/MagicMirror/etc/mirrorkeys` adding the keys you have
+Edit the file `/usr/local/MirrorCommandLine/etc/mirrorkeys` adding the keys you have
 previously generated/retrieved to each of the 'keys[FOO]' settings with corresponding
 'dumb[FOO]' setting, leaving the 'dumb[FOO]' setting as-is
 
@@ -157,17 +157,17 @@ Add the keys you wish to set and leave those you do not wish to set empty
 After adding your keys, execute the command
 
 ```bash
-  '/usr/local/MagicMirror/bin/showkeys'
+  '/usr/local/MirrorCommandLine/bin/showkeys'
 ```
 
 The `showkeys` command will read the `mirrorkeys` file and edit the appropriate
-configuration files in `/usr/local/MagicMirror` containing the placeholder dummy
+configuration files in `/usr/local/MirrorCommandLine` containing the placeholder dummy
 settings.
 
 #### Configure mirror script
 
 Edit the main MagicMirror management script,
-[**/usr/local/MagicMirror/bin/mirror**](mirror.sh), setting:
+[**/usr/local/MirrorCommandLine/bin/mirror**](mirror.sh), setting:
 
 - Location of your MagicMirror installation
 - IP address of your MagicMirror
@@ -209,16 +209,16 @@ trying to remove `/usr/local` then install the
 ## Supporting utilities and config files
 
 There are several supporting scripts that can be used to enhance command
-line capabilites. These are installed in `/usr/local/MagicMirror/bin` with
+line capabilites. These are installed in `/usr/local/MirrorCommandLine/bin` with
 symbolic links created in `/usr/local/bin`. Ensure that `/usr/local/bin`
 is in your execution PATH.
 
 Many sample MagicMirror configuration files are provided in the
-[**/usr/local/MagicMirror/config**](config) directory. The installation
+[**/usr/local/MirrorCommandLine/config**](config) directory. The installation
 package script attempts to link these into your MagicMirror config folder.
 The sample config files use the naming convention `config-<name>.js`.
 
-Several custom CSS files are provided in the `/usr/local/MagicMirror/css directory.
+Several custom CSS files are provided in the `/usr/local/MirrorCommandLine/css directory.
 Copy and modify as needed.
 
 Some of the more useful supporting scripts include:

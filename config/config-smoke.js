@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Gif/Smoke/',
+                    '/usr/local/MirrorCommandLine/pics/Gif/Smoke/',
                 ],
                 slideshowSpeed: 30000, // 30 seconds
                 transitionImages: false,

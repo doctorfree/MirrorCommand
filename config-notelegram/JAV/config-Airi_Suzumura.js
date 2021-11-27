@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Airi_Suzumura',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Airi_Suzumura',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

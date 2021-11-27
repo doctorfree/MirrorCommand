@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MM="/usr/local/MagicMirror"
+MM="/usr/local/MirrorCommandLine"
 PICS="/mnt/transcend/Pictures"
 PM="${PICS}/MagicMirror"
 

@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Photographers/Ivan_Ustinov',
+                    '/usr/local/MirrorCommandLine/pics/Photographers/Ivan_Ustinov',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

@@ -90,10 +90,10 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Art/Kandinsky/',
-                    '/usr/local/MagicMirror/pics/Art/Klee/',
-                    '/usr/local/MagicMirror/pics/Art/Picasso/',
-                    '/usr/local/MagicMirror/pics/Art/Zdzisław_Beksiński/',
+                    '/usr/local/MirrorCommandLine/pics/Art/Kandinsky/',
+                    '/usr/local/MirrorCommandLine/pics/Art/Klee/',
+                    '/usr/local/MirrorCommandLine/pics/Art/Picasso/',
+                    '/usr/local/MirrorCommandLine/pics/Art/Zdzisław_Beksiński/',
                 ],
                 slideshowSpeed: 60000, // 60 seconds
                 transitionImages: true,

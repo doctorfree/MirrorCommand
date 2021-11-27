@@ -56,14 +56,14 @@ apiurl="http://${IP}:${PORT}/api/notification"
 # Set this to the X11 DISPLAY you are using. DISPLAY=:0 works for most systems.
 export DISPLAY=:0
 # -----------------------------------------------------------------------
-[ -d /usr/local/MagicMirror/bin ] && {
-    export PATH=${PATH}:/usr/local/MagicMirror/bin
+[ -d /usr/local/MirrorCommandLine/bin ] && {
+    export PATH=${PATH}:/usr/local/MirrorCommandLine/bin
 }
 CONFDIR="${MM}/config"
 # MagicMirror configuration files organized into subdirectories listed here
 CONF_SUBDIRS="Artists JAV Models Photos Photographers YouTube test"
 MMCFMSG="MagicMirror configuration file"
-SLISDIR="/usr/local/MagicMirror/pics"
+SLISDIR="/usr/local/MirrorCommandLine/pics"
 ARTISTDIR="Pictures/Artists-ALL"
 JAVDIR="Pictures/JAV-ALL"
 MODELDIR="Pictures/Models-ALL"

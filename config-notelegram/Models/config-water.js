@@ -93,7 +93,7 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Water/',
+                    '/usr/local/MirrorCommandLine/pics/Water/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

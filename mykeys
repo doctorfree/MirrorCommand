@@ -2,7 +2,7 @@
 
 MCL=$HOME/src/MirrorCommandLine
 PICDIR="/mnt/transcend/Pictures/MagicMirror"
-MAGDIR="/usr/local/MagicMirror"
+MAGDIR="/usr/local/MirrorCommandLine"
 
 cp ${MCL}/etc/my_mirrorkeys ${MAGDIR}/etc/mirrorkeys
 showkeys

@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Photographers/Aleksandr_Mavrin',
+                    '/usr/local/MirrorCommandLine/pics/Photographers/Aleksandr_Mavrin',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

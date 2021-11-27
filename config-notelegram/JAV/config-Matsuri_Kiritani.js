@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Matsuri_Kiritani',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Matsuri_Kiritani',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

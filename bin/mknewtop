@@ -3,7 +3,7 @@
 UPDSCRIPT="updtop"
 
 TYPEDIR="/mnt/transcend/Pictures/MagicMirror"
-PICDIR="/usr/local/MagicMirror/pics"
+PICDIR="/usr/local/MirrorCommandLine/pics"
 
 [ -d ${PICDIR} ] || sudo mkdir -p ${PICDIR}
 [ -d ${TYPEDIR} ] || {

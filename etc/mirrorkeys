@@ -5,9 +5,9 @@
 # Add the keys you wish to set and leave those you do not wish to set empty
 #
 # After adding your keys, execute the command
-#   '/usr/local/MagicMirror/bin/showkeys'
+#   '/usr/local/MirrorCommandLine/bin/showkeys'
 # and it will edit the configuration files in
-# /usr/local/MagicMirror containing the placeholder dummy settings
+# /usr/local/MirrorCommandLine containing the placeholder dummy settings
 #
 # You can add new keys by adding two lines - one with the key value
 # and one with a dummy value that can be used in a distributed version.

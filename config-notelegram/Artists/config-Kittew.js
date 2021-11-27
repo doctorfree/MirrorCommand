@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Artists/Kittew/',
+                    '/usr/local/MirrorCommandLine/pics/Artists/Kittew/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Utsunomiya_Shion',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Utsunomiya_Shion',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

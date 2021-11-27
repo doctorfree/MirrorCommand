@@ -34,7 +34,7 @@ case "$1" in
         [ -d /usr/local ] || mkdir /usr/local
         [ -d /usr/local/bin ] || mkdir /usr/local/bin
         cd /usr/local/bin
-        MM="/usr/local/MagicMirror"
+        MM="/usr/local/MirrorCommandLine"
         for command in ${EXPORTS}
         do
           [ -f ${MM}/bin/${command} ] && {

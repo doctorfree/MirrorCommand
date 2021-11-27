@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Minami_Hatsukawa',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Minami_Hatsukawa',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

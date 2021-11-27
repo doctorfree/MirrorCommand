@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/JAV/Masami_Ichikawa',
+                    '/usr/local/MirrorCommandLine/pics/JAV/Masami_Ichikawa',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

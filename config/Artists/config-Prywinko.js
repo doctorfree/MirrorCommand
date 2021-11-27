@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Artists/Prywinko/',
+                    '/usr/local/MirrorCommandLine/pics/Artists/Prywinko/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

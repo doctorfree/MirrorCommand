@@ -94,7 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Photographers/Stefan_Soell',
+                    '/usr/local/MirrorCommandLine/pics/Photographers/Stefan_Soell',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

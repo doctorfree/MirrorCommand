@@ -106,8 +106,8 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    '/usr/local/MagicMirror/pics/Waterfalls/',
-                    '/usr/local/MagicMirror/pics/Gif/Nature/',
+                    '/usr/local/MirrorCommandLine/pics/Waterfalls/',
+                    '/usr/local/MirrorCommandLine/pics/Gif/Nature/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,
