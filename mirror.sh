@@ -1091,9 +1091,9 @@ setconf() {
         grep ${NOKEY} ${subdir}/config-${conf}.js > /dev/null || NOKEY=
         if [ "${NOKEY}" ]
         then
-            if [ -f ../.config-nokey/$subdir/config-${conf}.js ]
+            if [ -f NoTelegram/$subdir/config-${conf}.js ]
             then
-              ln -s ../.config-nokey/$subdir/config-${conf}.js config.js
+              ln -s NoTelegram/$subdir/config-${conf}.js config.js
             else
               ln -s $subdir/config-${conf}.js config.js
             fi
@@ -1105,9 +1105,9 @@ setconf() {
         grep ${NOKEY} config-${conf}.js > /dev/null || NOKEY=
         if [ "${NOKEY}" ]
         then
-            if [ -f ../.config-nokey/config-${conf}.js ]
+            if [ -f NoTelegram/config-${conf}.js ]
             then
-              ln -s ../.config-nokey/config-${conf}.js config.js
+              ln -s NoTelegram/config-${conf}.js config.js
             else
               ln -s config-${conf}.js config.js
             fi

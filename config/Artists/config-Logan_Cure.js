@@ -10,8 +10,18 @@
  */
 
 var config = {
-    address: "0.0.0.0", // Address to listen on, can be:
-    port: 8080,
+//	address: "localhost",
+	address: "0.0.0.0", // Address to listen on, can be:
+	                      // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+	                      // - another specific IPv4/6 to listen on a specific interface
+	                      // - "", "0.0.0.0", "::" to listen on any interface
+	                      // Default, when address config is left out, is "localhost"
+	port: 8080,
+    // Set [] to allow all IP addresses
+	// or add a specific IPv4 of 192.168.1.5 :
+	// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+	// or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+	// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
     ipWhitelist: [
         "0.0.0.0",
         "127.0.0.1",
@@ -30,21 +40,23 @@ var config = {
         "::1",
     ],
 
-    language: "en",
-    timeFormat: 12,
-    units: "imperial",
-    electronOptions: {
-      webPreferences: {
-        webviewTag: true,
-		contextIsolation: false,
-		enableRemoteModule: true
-      },
-    },
-    
-    modules: [
-        {
-            module: "alert",
-        },
+	language: "en",
+	timeFormat: 12,
+	units: "imperial",
+	// serverOnly:  true/false/"local" ,
+			     // local for armv6l processors, default 
+			     //   starts serveronly and then starts chrome browser
+			     // false, default for all  NON-armv6l devices
+			     // true, force serveronly mode, because you want to.. no UI on this device
+	
+	modules: [
+		{
+			module: "alert",
+		},
+		{
+			module: "updatenotification",
+			position: "top_bar"
+		},
         {
             module: 'MMM-Remote-Control',
             config: {
@@ -77,39 +89,51 @@ var config = {
             }
         },
         {
-            module: "MMM-YouTubeWebView",
-            position: "top_center",
+            module: 'MMM-BackgroundSlideshow',
+            position: 'fullscreen_below',
+            // classes: 'scheduler',
             config: {
-              // playlist: "PL16649CCE7EFA8B2F",
-              playlist: "PLh3A0cnoWYsy-hWkixvwugKUwxbX9Xia1",
-              autoplay: true,
-              controls: false,
-              loop: true,
-              modestbranding: true,
-              width: "1080px",
-              height: "800px",
-              referrer: "http://your.domain.com",
+                imagePaths: [
+                    '/usr/local/MagicMirror/pics/Artists/Logan_Cure/',
+                ],
+                slideshowSpeed: 15000, // 15 seconds
+                transitionImages: true,
+                randomizeImageOrder: true,
+                recursiveSubDirectories: true,
+                resizeImages: true,
+                maxWidth: 1080,
+                maxHeight: 1920,
+                transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
             }
         },
         {
-            module: 'MMM-iFrame',
-            position: 'bottom_center',
+            module: 'MMM-TelegramCommands'
+        },
+        {
+            module: 'MMM-TelegramBot',
             config: {
-                url: [
-                      "https://en.wikipedia.org/wiki/Derek_Muller",
-                      "https://www.youtube.com/c/veritasium/about",
-                      "https://space.bilibili.com/94742590",
-                      "https://www.veritasium.com/",
-                      "https://www.veritasium.com/about",
-                      "https://www.veritasium.com/publications",
-                     ],
-                updateInterval: 4 * 60 * 1000, // rotate URLs every 4 minutes
-                width: "1080", // width of iframe
-                height: "1000", // height of iframe
-                frameWidth: "1080"
+              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
+              allowedUser : ['Your-Telegram-Username'],
+              adminChatId : 0000000000,
+              useWelcomeMessage: true,
+              verbose: false,
+              favourites:["/hideall", "/showall", "/screenshot", "/shutdown"],
+              screenshotScript: "scrot",
+              detailOption: {},
             }
         },
-    ]
+        // {
+        //     module: "MMM-GoogleAssistant",
+        //     position: "top_right",
+        //     config: {
+        //         maxWidth: "100%",
+        //         header: "",
+        //     publishKey: 'xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx',
+        //     subscribeKey: 'xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx',
+        //     updateDelay: 500
+        //     }
+        // },
+	]
 };
 
 /*************** DO NOT EDIT THE LINE BELOW ***************/

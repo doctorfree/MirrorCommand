@@ -77,39 +77,16 @@ var config = {
             }
         },
         {
-            module: 'MMM-TelegramCommands'
-        },
-        {
-            module: 'MMM-TelegramBot',
-            config: {
-              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-              allowedUser : ['Your-Telegram-Username'],
-              adminChatId : 0000000000,
-              useWelcomeMessage: true,
-              verbose: false,
-              favourites: [
-                  "/hideip",
-                  "/showip",
-                  "/hideOffline",
-                  "/showOffline",
-                  "/myReboot",
-                  "/myShutdown"
-              ],
-              screenshotScript: "scrot",
-              detailOption: {},
-            },
-        },
-        {
             module: "MMM-YouTubeWebView",
             position: "top_center",
             config: {
-              playlist: "PLh3A0cnoWYsy-hWkixvwugKUwxbX9Xia1",
+              video_id: "NL0TNGfcge4",
               autoplay: true,
               controls: false,
               loop: true,
               modestbranding: true,
-              width: "1080px",
-              height: "800px",
+              width: "1280px",
+              height: "720px",
               referrer: "http://your.domain.com",
             }
         },
@@ -118,12 +95,8 @@ var config = {
             position: 'bottom_center',
             config: {
                 url: [
-                      "https://en.wikipedia.org/wiki/Derek_Muller",
-                      "https://www.youtube.com/c/veritasium/about",
-                      "https://space.bilibili.com/94742590",
-                      "https://www.veritasium.com/",
-                      "https://www.veritasium.com/about",
-                      "https://www.veritasium.com/publications",
+                      "https://en.wikipedia.org/wiki/Pink_Floyd:_Live_at_Pompeii",
+                      "https://pinkfloydhyperbase.dk/film/live_at_pompei.php",
                      ],
                 updateInterval: 4 * 60 * 1000, // rotate URLs every 4 minutes
                 width: "1080", // width of iframe

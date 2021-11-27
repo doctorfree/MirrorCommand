@@ -74,30 +74,27 @@ case "$1" in
             USER=$(stat -c '%U' ${MMHOME}/config)
             GROUP=$(stat -c '%G' ${MMHOME}/config)
             chown -R ${USER}:${GROUP} ${MM}
-            for confdir in config .config-nokey
+            [ -d "${MMHOME}/config" ] || {
+                sudo -u ${USER} mkdir "${MMHOME}/config"
+            }
+            cd "${MMHOME}/config"
+            for config in ${MM}/config/*
             do
-              [ -d "${MMHOME}/${confdir}" ] || {
-                  sudo -u ${USER} mkdir "${MMHOME}/${confdir}"
+              [ "${config}" == "${MM}/config/*" ] && continue
+              b=`basename ${config}`
+              [ -d ${config} ] && {
+                  [ -d $b ] || sudo -u ${USER} mkdir $b
+                  cd $b
+                  for subconf in ${config}/*
+                  do
+                    [ "${subconf}" == "${config}/*" ] && continue
+                    c=`basename ${subconf}`
+                    [ -f $c ] || sudo -u ${USER} cp ${subconf} .
+                  done
+                  cd ..
+                  continue
               }
-              cd "${MMHOME}/${confdir}"
-              for config in ${MM}/${confdir}/*
-              do
-                [ "${config}" == "${MM}/${confdir}/*" ] && continue
-                b=`basename ${config}`
-                [ -d ${config} ] && {
-                    [ -d $b ] || sudo -u ${USER} mkdir $b
-                    cd $b
-                    for subconf in ${config}/*
-                    do
-                      [ "${subconf}" == "${config}/*" ] && continue
-                      c=`basename ${subconf}`
-                      [ -f $c ] || sudo -u ${USER} cp ${subconf} .
-                    done
-                    cd ..
-                    continue
-                }
-                [ -f $b ] || sudo -u ${USER} cp ${config} .
-              done
+              [ -f $b ] || sudo -u ${USER} cp ${config} .
             done
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"

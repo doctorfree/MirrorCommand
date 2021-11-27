@@ -57,29 +57,26 @@ case "$1" in
         }
         if [ "${MMHOME}" ]
         then
-            for confdir in config .config-nokey
+            [ -d "${MMHOME}/config" ] || continue
+            cd "${MMHOME}/config"
+            for config in ${MM}/config/*
             do
-              [ -d "${MMHOME}/${confdir}" ] || continue
-              cd "${MMHOME}/${confdir}"
-              for config in ${MM}/${confdir}/*
-              do
-                [ "${config}" == "${MM}/${confdir}/*" ] && continue
-                b=`basename ${config}`
-                [ -d $b ] && {
-                    cd $b
-                    for subconf in ${MM}/${confdir}/$b/*
-                    do
-                        [ "${subconf}" == "${MM}/${confdir}/$b/*" ] && continue
-                        c=`basename ${subconf}`
-                        diff ${subconf} $c > /dev/null && rm -f $c
-                    done
-                    cd ..
-                    rmdir --ignore-fail-on-non-empty $b
-                }
-                [ -f $b ] && {
-                    diff ${config} $b > /dev/null && rm -f $b
-                }
-              done
+              [ "${config}" == "${MM}/config/*" ] && continue
+              b=`basename ${config}`
+              [ -d $b ] && {
+                  cd $b
+                  for subconf in ${MM}/config/$b/*
+                  do
+                      [ "${subconf}" == "${MM}/config/$b/*" ] && continue
+                      c=`basename ${subconf}`
+                      diff ${subconf} $c > /dev/null && rm -f $c
+                  done
+                  cd ..
+                  rmdir --ignore-fail-on-non-empty $b
+              }
+              [ -f $b ] && {
+                  diff ${config} $b > /dev/null && rm -f $b
+              }
             done
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"

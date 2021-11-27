@@ -71,7 +71,7 @@ do
     ${SUDO} chown root:root ${OUT_DIR}/${dir}
 done
 
-for dir in bin etc css .config-nokey config modules pics
+for dir in bin etc css config modules pics
 do
     [ -d ${OUT_DIR}/${MM}/${dir} ] && ${SUDO} rm -rf ${OUT_DIR}/${MM}/${dir}
 done
@@ -108,7 +108,6 @@ ${SUDO} cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
 ${SUDO} gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
 
 ${SUDO} cp -a config ${OUT_DIR}/${MM}/config
-${SUDO} cp -a .config-nokey ${OUT_DIR}/${MM}/.config-nokey
 ${SUDO} cp -a css ${OUT_DIR}/${MM}/css
 ${SUDO} cp -a etc ${OUT_DIR}/${MM}/etc
 ${SUDO} cp -a modules ${OUT_DIR}/${MM}/modules
