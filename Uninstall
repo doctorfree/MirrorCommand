@@ -1,5 +1,6 @@
 #!/bin/bash
 
+PKG_SELECTED=
 for pkg in artists-portrait \
            models-portrait \
            photographers-portrait \
@@ -8,8 +9,31 @@ do
     dpkg -s ${pkg} > /dev/null 2>&1
     retVal=$?
     [ ${retVal} -eq 0 ] && {
-        echo "Removing ${pkg}"
-        sudo apt remove ${pkg} -y
+        while true
+        do
+          read -p "Also remove ${pkg} ? ('Y'/'N'): " yn
+          case $yn in
+              [Yy]*)
+                  PKG_SELECTED="${PKG_SELECTED} $pkg"
+                  break
+                  ;;
+              [Nn]*)
+                  break
+                  ;;
+              * )
+                  echo "Please answer yes or no."
+                  ;;
+          esac
+        done
     }
 done
+
+[ "${PKG_SELECTED}" ] && {
+    for pkg in ${PKG_SELECTED}
+    do
+        echo "Removing ${pkg}"
+        sudo apt remove ${pkg} -y
+    done
+}
+
 sudo apt remove mirrorcommandline -y
