@@ -15,15 +15,15 @@ do
         cd ..
     }
 done
-cd "${CONFDIR}/NoTelegram"
-echo "Showing keys in $CONFDIR/NoTelegram"
-../../show_keys.sh
+cd "${CONFDIR}/../config-notelegram"
+echo "Showing keys in $CONFDIR/../config-notelegram"
+../show_keys.sh
 for i in Artists JAV Models Photos Photographers Templates YouTube
 do
     [ -d $i ] && {
         cd $i
-        echo "Showing keys in NoTelegram/$i"
-        ../../../show_keys.sh
+        echo "Showing keys in ../config-notelegram/$i"
+        ../../show_keys.sh
         cd ..
     }
 done

@@ -74,15 +74,17 @@ case "$1" in
             USER=$(stat -c '%U' ${MMHOME}/config)
             GROUP=$(stat -c '%G' ${MMHOME}/config)
             chown -R ${USER}:${GROUP} ${MM}
-            [ -d "${MMHOME}/config" ] || {
-                sudo -u ${USER} mkdir "${MMHOME}/config"
-            }
-            cd "${MMHOME}/config"
-            for config in ${MM}/config/*
+            for cfg in config config-notelegram
             do
-              [ "${config}" == "${MM}/config/*" ] && continue
-              b=`basename ${config}`
-              [ -d ${config} ] && {
+              [ -d "${MMHOME}/${cfg}" ] || {
+                sudo -u ${USER} mkdir "${MMHOME}/${cfg}"
+              }
+              cd "${MMHOME}/${cfg}"
+              for config in ${MM}/${cfg}/*
+              do
+                [ "${config}" == "${MM}/${cfg}/*" ] && continue
+                b=`basename ${config}`
+                [ -d ${config} ] && {
                   [ -d $b ] || sudo -u ${USER} mkdir $b
                   cd $b
                   for subconf in ${config}/*
@@ -93,8 +95,9 @@ case "$1" in
                   done
                   cd ..
                   continue
-              }
-              [ -f $b ] || sudo -u ${USER} cp ${config} .
+                }
+                [ -f $b ] || sudo -u ${USER} cp ${config} .
+              done
             done
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"
