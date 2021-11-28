@@ -1,6 +1,7 @@
 #!/bin/bash
 
 IDS="11OzPAZt8XTZ9c6hZL4NEcaNEPBu7-0N7 \
+     13hZdP2B-r-BEKXu4AZAR4u19dFFFRmmr \
      11-zD2O4LLXtpH6WIojuCm_X18ikRFBKs \
      12-KqEPG4CxBlcq2hYj5C1jBA22fE52V2 \
      115Mphp7jAH8g6IQRUWhA496aUr8TFO79 \
@@ -64,5 +65,25 @@ done
     ((i++))
   done
   printf "\n"
+  MMHOME=/home/pi/MagicMirror
+  [ -d ${MMHOME}/config ] || {
+      MMHOME=
+      for homedir in /home/*
+      do
+          [ "${homedir}" == "/home/*" ] && continue
+          [ -d ${homedir}/MagicMirror/config ] && {
+              MMHOME="${homedir}/MagicMirror"
+              break
+          }
+      done
+  }
+  [ "${MMHOME}" ] && {
+      MM="/usr/local/MirrorCommandLine"
+      USER=$(stat -c '%U' ${MMHOME}/config)
+      GROUP=$(stat -c '%G' ${MMHOME}/config)
+      sudo chown -R ${USER}:${GROUP} ${MM}/pics/Artists
+      find ${MM}/pics/Artists -type d -print0 | xargs -0 chmod 755
+      find ${MM}/pics/Artists -type f -print0 | xargs -0 chmod 644
+  }
 }
 
