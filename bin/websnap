@@ -1,0 +1,35 @@
+#!/bin/bash
+
+OUT_DIR="${HOME}/Pictures/MirrorSnaps"
+RES="1280x720"
+
+usage() {
+    printf "\nUsage: websnap [-r width_x_height]"
+    printf "\n\nExample: websnap -r 1024x768\n"
+    printf "\nExecute 'v4l2-ctl --list-formats-ext' to find supported resolutions\n"
+    printf "\nMost modern webcams will support at least the following resolutions:"
+    printf "\n\t1920x1080, 1280x720, 1024x768, 800x600,"
+    printf "\n\t640x480, 640x360, 320x240, 320x180, 160x120\n"
+    exit 1
+}
+
+[ -d ${OUT_DIR} ] || mkdir -p ${OUT_DIR}
+
+[ "$1" == "-r" ] && {
+    [ "$2" ] || usage
+    RES="$2"
+    shift 2
+}
+
+[ "$1" == "-u" ] && usage
+
+inst_fswebcam=`type -p fswebcam`
+[ "${inst_fswebcam}" ] || {
+    printf "\nThe websnap utility requires fswebcam which is not currently"
+    printf "\nin your execution PATH."
+    printf "\n\nTo install fswebcam, execute the command:"
+    printf "\n\tsudo apt install fswebcam\n"
+    exit 1
+}
+
+fswebcam -r ${RES} --no-banner ${HOME}/Pictures/MirrorSnaps/websnap$$.jpg

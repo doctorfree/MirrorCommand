@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+Mon Nov 29 09:06:07 2021 -0800 f88b2c9 :
+   Added bin/gettantra script to download tutorial archive
+Sat Nov 27 17:48:10 2021 -0800 95e0ccd :
+   Set permissions and ownership after downloading images
+Sat Nov 27 14:09:53 2021 -0800 12b0419 :
+   Change install directory from /usr/local/MagicMirror to /usr/local/MirrorCommandLine
+Sat Nov 27 12:33:37 2021 -0800 9358209 :
+   Copy config-notelegram directory into dist for packaging
+Sat Nov 27 12:23:52 2021 -0800 3fb4518 :
+   Move NoTelegram configs up to config-notelegram folder
+Sat Nov 27 11:56:13 2021 -0800 e598d72 :
+   Prompt for images package removal during Uninstall
+Sat Nov 27 10:58:47 2021 -0800 500005b :
+   Merge branch 'master' of ssh://gitlab.com/doctorfree/MirrorCommandLine
+Sat Nov 27 10:58:27 2021 -0800 e487f1a :
+   Move .config-nokeys config folder to config/NoTelegram
+Fri Nov 26 07:06:48 2021 -0800 71fef2b :
+   Create new image folders in installed pics location rather than HOME/Pictures
+Wed Nov 24 13:16:20 2021 -0800 aa01e44 :
+   Scripts repo was renamed to DoctorFreeScripts
+Mon Nov 22 11:35:46 2021 -0800 c15f6f3 :
+   Set Architecture to 'all' in control file
+Sun Nov 21 10:21:05 2021 -0800 49f04e6 :
+   Delete Playboy scripts, add clone-wiki convenience script
+Sun Nov 21 08:15:02 2021 -0800 96a462f :
+   Use my own Veritasium playlist
+Sat Nov 20 20:22:30 2021 -0800 25a92b7 :
+   Add mirror_start MagicMirror PM2 startup script and configuration file for PM2
+Sat Nov 20 16:17:20 2021 -0800 fdb0b97 :
+   Use --update-env when restarting with pm2, add Mandelbrot zoom config
+Sat Nov 20 15:08:24 2021 -0800 5d48911 :
+   Update CHANGELOG for v2.5
 Sat Nov 20 14:17:43 2021 -0800 56cc6de :
    New config file for Neu Ling
 Sat Nov 20 14:02:48 2021 -0800 14b217f :
@@ -99,7 +131,7 @@ Sun Nov 14 08:36:46 2021 -0800 0ea598f :
 Sun Nov 14 08:17:49 2021 -0800 ec23c71 :
    Move packaging folders into pkg subdirs
 Sun Nov 14 08:07:24 2021 -0800 069d3d6 :
-   Change location of MMM-BackgroundSlideshow pics to /usr/local/MirrorCommandLine/pics
+   Change location of MMM-BackgroundSlideshow pics to /usr/local/MagicMirror/pics
 Sat Nov 13 18:57:09 2021 -0800 96bb508 :
    Version 2.3 release assets
 Sat Nov 13 18:22:44 2021 -0800 ebde905 :
@@ -183,7 +215,7 @@ Mon Nov 8 16:36:04 2021 -0800 7dd7897 :
 Mon Nov 8 16:26:50 2021 -0800 dde8cac :
    Sync keys and stubs with new distribution key management
 Mon Nov 8 15:16:36 2021 -0800 c4c25f1 :
-   Don't set ownership to root on /usr/local/MirrorCommandLine/bin
+   Don't set ownership to root on /usr/local/MagicMirror/bin
 Mon Nov 8 15:02:11 2021 -0800 5c4453e :
    Add instructions on adding new keys
 Mon Nov 8 14:52:25 2021 -0800 d88f9d5 :
