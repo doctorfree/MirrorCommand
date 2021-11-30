@@ -20,6 +20,7 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 ## Table of contents
 
 1. [Overview](#overview)
+1. [Screenshots](#screenshots)
 1. [History](#history)
 1. [Installation](#installation)
     1. [Post installation configuration](#post-installation-configuration)
@@ -76,6 +77,14 @@ include support for:
 - Auto generation of new MagicMirror configuration files
 - Interactive mode via menu dialogs
     - Invoked with no arguments the mirror command displays a command menu.
+
+## Screenshots
+
+<p float="left">
+Interactive menus when invoked with no arguments<br/>
+  <img src="screenshots/mirror_command_menu.jpg">
+  <img src="screenshots/mirror_submenu.jpg">
+</p>
 
 ## History
 
