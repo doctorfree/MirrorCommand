@@ -1,10 +1,31 @@
 #!/bin/bash
 
 OUT_DIR="${HOME}/Pictures/MirrorSnaps"
-RES="1280x720"
+RES="-r 1280x720"
+QUIET=
+VERBOSE=
+FPS=
+INP=
+PAL=
+DELAY=
+NUM=
+SKIP=
+TELL=
 
 usage() {
-    printf "\nUsage: websnap [-r width_x_height]"
+    printf "\nUsage: websnap [<options>] <filename> [[<options>] <filename> ... ]"
+    printf "\n\nOptions:\n"
+    printf "\n\t-u                 Display this usage message and exit"
+    printf "\n\t-N                 Tell me what you would do and exit"
+    printf "\n\t-q                 Hides all messages except for errors"
+    printf "\n\t-v                 Displays extra messages while capturing"
+    printf "\n\t-i <number/name>   Selects the input to use"
+    printf "\n\t-p <name>          Selects the palette format to use"
+    printf "\n\t-d <number>        Sets the pre-capture delay time (seconds)"
+    printf "\n\t-r <size>          Sets the capture resolution"
+    printf "\n\t-R <framerate>     Sets the capture frame rate"
+    printf "\n\t-n <number>        Sets the number of frames to capture"
+    printf "\n\t-s <number>        Sets the number of frames to skip"
     printf "\n\nExample: websnap -r 1024x768\n"
     printf "\nExecute 'v4l2-ctl --list-formats-ext' to find supported resolutions\n"
     printf "\nMost modern webcams will support at least the following resolutions:"
@@ -15,13 +36,44 @@ usage() {
 
 [ -d ${OUT_DIR} ] || mkdir -p ${OUT_DIR}
 
-[ "$1" == "-r" ] && {
-    [ "$2" ] || usage
-    RES="$2"
-    shift 2
-}
-
-[ "$1" == "-u" ] && usage
+while getopts i:p:d:n:s:qr:R:vNu flag; do
+    case $flag in
+        i)
+            INP="-i $OPTARG"
+            ;;
+        p)
+            PAL="-p $OPTARG"
+            ;;
+        d)
+            DELAY="-D $OPTARG"
+            ;;
+        n)
+            NUM="-F $OPTARG"
+            ;;
+        s)
+            SKIP="-S $OPTARG"
+            ;;
+        N)
+            TELL=1
+            ;;
+        q)
+            QUIET=1
+            ;;
+        v)
+            VERBOSE=1
+            ;;
+        r)
+            RES="-r $OPTARG"
+            ;;
+        R)
+            FPS="--fps $OPTARG"
+            ;;
+        u)
+            usage
+            ;;
+	esac
+done
+shift $(( OPTIND - 1 ))
 
 inst_fswebcam=`type -p fswebcam`
 [ "${inst_fswebcam}" ] || {
@@ -32,4 +84,13 @@ inst_fswebcam=`type -p fswebcam`
     exit 1
 }
 
-fswebcam -r ${RES} --no-banner ${HOME}/Pictures/MirrorSnaps/websnap$$.jpg
+if [ "${TELL}" ]
+then
+  printf "\nWould execute the following command:"
+  printf "\n\nfswebcam ${QUIET} ${VERBOSE} ${RES} ${FPS} ${INP} ${PAL}"
+  printf " ${DELAY} ${NUM} ${SKIP} --no-title --no-subtitle --no-timestamp"
+  printf " --no-banner ${OUT_DIR}/websnap$$.jpg\n\n"
+else
+  fswebcam ${QUIET} ${VERBOSE} ${RES} ${FPS} ${INP} ${PAL} ${DELAY} ${NUM} ${SKIP} \
+           --no-title --no-subtitle --no-timestamp --no-banner ${OUT_DIR}/websnap$$.jpg
+fi
