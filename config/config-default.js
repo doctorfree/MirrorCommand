@@ -46,6 +46,11 @@ var config = {
             module: "alert",
         },
         {
+	        disabled: false,
+	        module: "MMM-Selfieshot",
+	        config: {}
+        },
+        {
             module: "updatenotification",
             position: "top_bar",
         },
@@ -575,7 +580,7 @@ var config = {
                 },
               },
               recipes: [
-                "myReboot-Restart-Shutdown.js",
+                "myReboot-Restart-Shutdown.js", "with-MMM-Selfieshot.js",
                 "ExtRadio.js","MirrorCommand.js",
               ],
               NPMCheck: {}
