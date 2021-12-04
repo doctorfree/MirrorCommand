@@ -115,6 +115,9 @@ do
             top_sites[$ELITE]="Delilah_G"
             top_sites[$KIND]="Natalia_A"
             ;;
+        Niemira)
+            top_sites[$ELITE]="Niemira_A"
+            ;;
         *)
             ;;
     esac

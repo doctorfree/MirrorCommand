@@ -115,6 +115,9 @@ do
             photographer_sites[$ELITE]="Delilah_G"
             photographer_sites[$KIND]="Natalia_A"
             ;;
+        Niemira)
+            photographer_sites[$ELITE]="Niemira_A"
+            ;;
         *)
             ;;
     esac

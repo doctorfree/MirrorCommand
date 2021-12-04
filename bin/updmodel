@@ -115,6 +115,9 @@ do
             model_sites[$ELITE]="Delilah_G"
             model_sites[$KIND]="Natalia_A"
             ;;
+        Niemira)
+            model_sites[$ELITE]="Niemira_A"
+            ;;
         *)
             ;;
     esac

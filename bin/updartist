@@ -116,6 +116,9 @@ do
             artist_sites[$ELITE]="Delilah_G"
             artist_sites[$KIND]="Natalia_A"
             ;;
+        Niemira)
+            artist_sites[$ELITE]="Niemira_A"
+            ;;
         *)
             ;;
     esac
