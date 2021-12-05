@@ -118,6 +118,9 @@ do
         Niemira)
             model_sites[$ELITE]="Niemira_A"
             ;;
+        Priscilla_Huggins)
+            model_sites[$ELITE]="Priscilla_Huggins_Ortiz"
+            ;;
         *)
             ;;
     esac

@@ -118,6 +118,9 @@ do
         Niemira)
             photographer_sites[$ELITE]="Niemira_A"
             ;;
+        Priscilla_Huggins)
+            photographer_sites[$ELITE]="Priscilla_Huggins_Ortiz"
+            ;;
         *)
             ;;
     esac

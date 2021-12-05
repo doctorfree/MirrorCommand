@@ -119,6 +119,9 @@ do
         Niemira)
             artist_sites[$ELITE]="Niemira_A"
             ;;
+        Priscilla_Huggins)
+            artist_sites[$ELITE]="Priscilla_Huggins_Ortiz"
+            ;;
         *)
             ;;
     esac
