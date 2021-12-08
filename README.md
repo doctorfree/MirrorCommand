@@ -617,18 +617,18 @@ can be viewed by issueing the command:
 Manual pages for these MirrorCommandLine commands can be viewed by issueing
 any of the following commands (click to view the man page online):
 
-- `[man backgrounds](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/backgrounds.1.md)`
-- `[man mirror](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mirror.1.md)`
-- `[man mmscene](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mmscene.1.md)`
-- `[man pcmanslideshow](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/pcmanslideshow.1.md)`
-- `[man sdbackup](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sdbackup.1.md)`
-- `[man sderase](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sderase.1.md)`
-- `[man sdrestore](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sdrestore.1.md)`
-- `[man slides](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/slides.1.md)`
-- `[man slideshow](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/slideshow.1.md)`
-- `[man updgit](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/updgit.1.md)`
-- `[man vol](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/vol.1.md)`
-- `[man websnap](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/websnap.1.md)`
+- [man backgrounds](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/backgrounds.1.md)
+- [man mirror](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mirror.1.md)
+- [man mmscene](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mmscene.1.md)
+- [man pcmanslideshow](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/pcmanslideshow.1.md)
+- [man sdbackup](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sdbackup.1.md)
+- [man sderase](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sderase.1.md)
+- [man sdrestore](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sdrestore.1.md)
+- [man slides](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/slides.1.md)
+- [man slideshow](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/slideshow.1.md)
+- [man updgit](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/updgit.1.md)
+- [man vol](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/vol.1.md)
+- [man websnap](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/websnap.1.md)
 
 ## Contents
 
