@@ -41,6 +41,7 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
     1. [Google Cloud Platform API Keys](google-cloud-platform-api-keys)
 1. [MMM-Scenes integration](#mmm-scenes-integration)
 1. [Usage](#usage)
+1. [Documentation](#documentation)
 1. [Contents](#contents)
 1. [License](#license)
 
@@ -598,6 +599,36 @@ Examples:
 	mirror whrm foobar		# Deactivate and remove slideshow in foobar
 	mirror -u		# Display this usage message
 </pre>
+
+## Documentation
+
+Many MirrorCommandLine commands have manual pages. Execute `man <command-name>`
+to view the manual page for a command. The `mirror` frontend is the primary
+user interface for the MirrorCommandLine commands and the manual page for
+`mirror` can be viewed with the command `man mirror`. Most commands also have
+help/usage messages that can be viewed with the **-u** argument option,
+e.g. `mirror -u`.
+
+The manual page for the primary MirrorCommandLine user interface, `mirror`,
+can be viewed by issueing the command:
+
+- `man mirror`
+
+Manual pages for these MirrorCommandLine commands can be viewed by issueing
+any of the following commands (click to view the man page online):
+
+- `[man backgrounds](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/backgrounds.1.md)`
+- `[man mirror](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mirror.1.md)`
+- `[man mmscene](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mmscene.1.md)`
+- `[man pcmanslideshow](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/pcmanslideshow.1.md)`
+- `[man sdbackup](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sdbackup.1.md)`
+- `[man sderase](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sderase.1.md)`
+- `[man sdrestore](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sdrestore.1.md)`
+- `[man slides](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/slides.1.md)`
+- `[man slideshow](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/slideshow.1.md)`
+- `[man updgit](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/updgit.1.md)`
+- `[man vol](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/vol.1.md)`
+- `[man websnap](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/websnap.1.md)`
 
 ## Contents
 
