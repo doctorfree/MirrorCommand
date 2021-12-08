@@ -1,6 +1,6 @@
 #!/bin/bash
 
-HST="doctorwhen@10.0.1.57"
+HST="doctorwhen@CC.C.C.CC"
 WORK="/Volumes/Seagate_8TB/Pictures/Work"
 SRCE="${WORK}/JP_Erotica"
 DEST="/mnt/transcend/Pictures"

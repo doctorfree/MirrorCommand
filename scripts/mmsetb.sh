@@ -2,7 +2,7 @@
 #
 # Set the MagicMirror brightness setting
 #
-IP="10.0.1.85"
+IP="MM.M.M.MM"
 PORT=8080
 apikey="xxx_Remote-Control-API-Key_xxxxx"
 

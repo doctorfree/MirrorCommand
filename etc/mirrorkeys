@@ -20,6 +20,32 @@
 declare -A keys
 declare -A dumb
 
+# MagicMirror IP address
+keys[MMIP]=
+# IP addresses in MagicMirror config ipWhitelist
+keys[IPW1]=
+keys[IPW2]=
+keys[IPW3]=
+keys[IPW4]=
+keys[IPW5]=
+keys[IPW6]=
+keys[IPW7]=
+keys[IPW8]=
+keys[IPW9]=
+keys[IPW0]=
+# Leave the dummy values for IP addresses as-is
+dumb[MMIP]='MM.M.M.MM'
+dumb[IPW1]='AA.A.A.AA'
+dumb[IPW2]='BB.B.B.BBB'
+dumb[IPW3]='CC.C.C.CC'
+dumb[IPW4]='DD.D.D.DDD'
+dumb[IPW5]='EE.E.E.EE'
+dumb[IPW6]='FF.F.F.FF'
+dumb[IPW7]='GG.G.G.GG'
+dumb[IPW8]='HH.H.H.HH'
+dumb[IPW9]='II.I.I.II'
+dumb[IPW0]='JJ.J.J.JJ'
+
 # Set your Instagram Auth Code here
 keys[IGA]=
 # Leave the dummy value for the Instagram Auth Code as is

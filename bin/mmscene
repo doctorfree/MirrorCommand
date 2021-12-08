@@ -14,7 +14,7 @@
 #         'mmscene info' retrieves information on the configured scenes
 #
 # The IP address of the MagicMirror
-IP="10.0.1.85"
+IP="MM.M.M.MM"
 # The port on which it is listening
 PORT="8080"
 # The module name

@@ -3,16 +3,18 @@
 MMCONFDIR="/usr/local/MirrorCommandLine/config"
 NOCONFDIR="/usr/local/MirrorCommandLine/config-notelegram"
 BINDIR="/usr/local/MirrorCommandLine/bin"
+QUIET=
+[ "$1" == "-q" ] && QUIET=1
 
 showconfkeys() {
     cd "${CONFDIR}"
-    echo "Showing keys in $CONFDIR"
+    [ "${QUIET}" ] || echo "Showing keys in $CONFDIR"
     ${BINDIR}/show_dist_keys
     for i in Artists JAV Models Photos Photographers Templates YouTube
     do
         [ -d $i ] && {
             cd $i
-            echo "Showing keys in $i"
+            [ "${QUIET}" ] || echo "Showing keys in $i"
             ${BINDIR}/show_dist_keys
             cd ..
         }
@@ -44,5 +46,5 @@ CONFDIR=${NOCONFDIR}
 showconfkeys
 
 cd "${BINDIR}"
-echo "Showing keys in $BINDIR"
+[ "${QUIET}" ] || echo "Showing keys in $BINDIR"
 ${BINDIR}/show_dist_bin_keys

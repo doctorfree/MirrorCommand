@@ -187,15 +187,17 @@ Edit the main MagicMirror management script,
 Defaults for these are:
 
 - MM="${HOME}/MagicMirror"
-- IP="10.0.1.85"
+- IP="MM.M.M.MM"
 - PORT="8080"
 - apikey="xxx_Remote-Control-API-Key_xxxxx"
 - CONF_SUBDIRS="Artists JAV Models Photographers"
 
 In most cases you will only need to set the IP address and MMM-Remote-Control API key.
-And the MMM-Remote-Control API key is set by the `showkeys` command after the
-`mirrorkeys` file has been configured with the API key. So usually the only thing
-you will need to modify by hand in the `mirror` script is the IP address setting.
+The IP setting should have been configured properly during installation and the
+MMM-Remote-Control API key is set by the `showkeys` command after the `mirrorkeys`
+file has been configured with the API key.
+
+A typical installation will not need to modify anything by hand in the `mirror` script.
 
 If you have not configured an API key for MagicMirror remote control then
 set the apikey to blank ( <code>apikey=</code> ).

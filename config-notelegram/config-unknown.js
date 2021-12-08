@@ -15,17 +15,17 @@ var config = {
     ipWhitelist: [
         "0.0.0.0",
         "127.0.0.1",
-        "10.0.1.88", // Mac Mini
-        "10.0.1.204", // iPad
-        "10.0.1.57", // Mac Pro
-        "10.0.8.130", // Mac Pro over Tunnelblick
-        "10.0.1.81", // Roon Core
-        "10.0.1.82", // Mac Pro
-        "10.0.1.94", // Ropieee
-        "10.0.1.85", // Raspberry Pi MagicMirror
-        "10.0.1.80", // Raspberry Pi 400
-        "10.0.1.69", // iPad Air
-        "10.0.1.52", // iPhone 12 Mini
+        "AA.A.A.AA", // Mac Mini
+        "BB.B.B.BBB", // iPad
+        "CC.C.C.CC", // Mac Pro
+        "DD.D.D.DDD", // Mac Pro over Tunnelblick
+        "EE.E.E.EE", // Roon Core
+        "FF.F.F.FF", // Mac Pro
+        "GG.G.G.GG", // Ropieee
+        "MM.M.M.MM", // Raspberry Pi MagicMirror
+        "HH.H.H.HH", // Raspberry Pi 400
+        "II.I.I.II", // iPad Air
+        "JJ.J.J.JJ", // iPhone 12 Mini
         "::ffff:127.0.0.1",
         "::1",
     ],
@@ -124,7 +124,7 @@ var config = {
                       icon: "question",
                       color: "#FFFFFF"},
                     { macAddress: "00:3e:e1:c8:14:5b",
-                      name: "Apple, Inc.  10.0.1.57",
+                      name: "Apple, Inc.  CC.C.C.CC",
                       icon: "question",
                       color: "#FFFFFF"},
                     { macAddress: "00:04:20:f4:ea:9c",
@@ -132,7 +132,7 @@ var config = {
                       icon: "question",
                       color: "#FFFFFF"},
                     { macAddress: "1c:69:7a:65:19:9e",
-                      name: "EliteGroup Computer Systems Co., LTD 10.0.1.81",
+                      name: "EliteGroup Computer Systems Co., LTD EE.E.E.EE",
                       icon: "question",
                       color: "#FFFFFF"},
                     { macAddress: "58:d3:49:0f:02:23",
@@ -152,7 +152,7 @@ var config = {
                       icon: "question",
                       color: "#FFFFFF"},
                     { macAddress: "98:10:e8:f1:77:6d",
-                      name: "Apple, Inc.  10.0.1.88",
+                      name: "Apple, Inc.  AA.A.A.AA",
                       icon: "question",
                       color: "#FFFFFF"},
                     { macAddress: "c4:41:1e:f2:2e:cc",
@@ -200,11 +200,11 @@ var config = {
                       icon: "question",
                       color: "#FFFFFF"},
                     { macAddress: "44:d8:84:6b:5f:b2",
-                      name: "Apple, Inc.  10.0.1.82",
+                      name: "Apple, Inc.  FF.F.F.FF",
                       icon: "question",
                       color: "#FFFFFF"},
                     { macAddress: "dc:a6:32:75:32:ef",
-                      name: "Raspberry Pi Trading Ltd 10.0.1.94",
+                      name: "Raspberry Pi Trading Ltd GG.G.G.GG",
                       icon: "question",
                       color: "#FFFFFF"},
                 ],

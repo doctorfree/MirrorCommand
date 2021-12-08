@@ -25,17 +25,17 @@ var config = {
     ipWhitelist: [
         "0.0.0.0",
         "127.0.0.1",
-        "10.0.1.88", // Mac Mini
-        "10.0.1.204", // iPad
-        "10.0.1.57", // Mac Pro
-        "10.0.8.130", // Mac Pro over Tunnelblick
-        "10.0.1.81", // Roon Core
-        "10.0.1.82", // Mac Pro
-        "10.0.1.94", // Ropieee
-        "10.0.1.85", // Raspberry Pi MagicMirror
-        "10.0.1.80", // Raspberry Pi 400
-        "10.0.1.69", // iPad Air
-        "10.0.1.52", // iPhone 12 Mini
+        "AA.A.A.AA", // Mac Mini
+        "BB.B.B.BBB", // iPad
+        "CC.C.C.CC", // Mac Pro
+        "DD.D.D.DDD", // Mac Pro over Tunnelblick
+        "EE.E.E.EE", // Roon Core
+        "FF.F.F.FF", // Mac Pro
+        "GG.G.G.GG", // Ropieee
+        "MM.M.M.MM", // Raspberry Pi MagicMirror
+        "HH.H.H.HH", // Raspberry Pi 400
+        "II.I.I.II", // iPad Air
+        "JJ.J.J.JJ", // iPhone 12 Mini
         "::ffff:127.0.0.1",
         "::1",
     ],

@@ -31,7 +31,7 @@
 MM="${HOME}/MagicMirror"
 # Set the IP and PORT to the values on your system
 # IP is the IP address of your MagicMirror Raspberry Pi or 'localhost'
-IP="10.0.1.85"
+IP="MM.M.M.MM"
 # PORT is the port your MMM-Remote-Control module is running on
 PORT="8080"
 #

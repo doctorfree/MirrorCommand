@@ -2,7 +2,7 @@
 #
 
 TOP="/mnt/transcend/Pictures/transfer"
-HST="doctorwhen@10.0.1.57"
+HST="doctorwhen@CC.C.C.CC"
 SRC="/Volumes/Seagate_8TB/Pictures/MagicMirror"
 
 [ -d $TOP ] || {

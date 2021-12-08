@@ -4,6 +4,6 @@
 #
 # Set these to be the user and IP address of the Raspberry Pi driving the MagicMirror
 USER=pi
-IP=10.0.1.85
+IP=MM.M.M.MM
 
 ssh ${USER}@${IP} "export TERM=xterm-256color; mirror $*"

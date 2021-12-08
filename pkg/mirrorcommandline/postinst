@@ -126,6 +126,14 @@ case "$1" in
             echo "have not been linked into the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi
+        KEYS="/usr/local/MirrorCommandLine/etc/mirrorkeys"
+        MMIP=`hostname -I | awk ' { print $1 } '`
+        [ "${MMIP}" ] && {
+            cat ${KEYS} | sed -e "s/keys\[MMIP\]=/keys\[MMIP\]=\'${MMIP}\'/" > /tmp/keys$$
+            cp /tmp/keys$$ ${KEYS}
+            rm -f /tmp/keys$$
+            /usr/local/MirrorCommandLine/bin/showkeys -q
+        }
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
