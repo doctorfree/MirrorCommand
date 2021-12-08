@@ -21,7 +21,6 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 
 1. [Overview](#overview)
 1. [Screenshots](#screenshots)
-1. [History](#history)
 1. [Installation](#installation)
     1. [Post installation configuration](#post-installation-configuration)
     1. [Add keys to mirrorkeys](#add-keys-to-mirrorkeys)
@@ -42,6 +41,10 @@ set of scripts to initialize, configure, monitor, and manage a MagicMirror.
 1. [MMM-Scenes integration](#mmm-scenes-integration)
 1. [Usage](#usage)
 1. [Documentation](#documentation)
+1. [Motivation](#motivation)
+    1. [Introduction to Using the Command Line](#introduction-to-using-the-command-line)
+    1. [Why would I need or want command line control of MagicMirror](#why-would-i-need-or-want-command-line-control-of-magicmirror)
+    1. [History](#history)
 1. [Contents](#contents)
 1. [License](#license)
 
@@ -86,27 +89,6 @@ Interactive menus when invoked with no arguments<br/>
   <img src="screenshots/mirror_command_menu.jpg">
   <img src="screenshots/mirror_submenu.jpg">
 </p>
-
-## History
-
-This project began as an attempt to control my MagicMirror with Siri voice
-commands. I was able to get Siri voice control of a MagicMirror working with
-simple SSH shortcuts that execute Bash scripts on my mirror's Raspberry Pi.
-Apple’s SSH shortcuts are a powerful tool for command line control. They can
-be used to execute commands on systems that allow SSH access and they can
-be configured to activate via voice commands. SSH shortcuts enable voice
-control of anything that can be done at the command line.
-
-I created shortcuts on my iPhone which use the “Run script over SSH”
-option for Apple Scripting shortcuts. The shortcuts execute the appropriate
-Bash command on my MagicMirror Pi. Once I got the MagicMirror shortcuts working
-I then configured Siri to recognize various phrases to run those shortcuts.
-In this manner I was able to implement Siri voice control of my MagicMirror.
-
-Over time the project became primarily focused on the command line execution
-of these scripts as I found I spend more time in a terminal at the command line
-than I do talking to Siri. While voice control is still supported if configured
-properly, the project is primarily command line control of MagicMirror.
 
 ## Installation
 
@@ -610,11 +592,11 @@ help/usage messages that can be viewed with the **-u** argument option,
 e.g. `mirror -u`.
 
 The manual page for the primary MirrorCommandLine user interface, `mirror`,
-can be viewed by issueing the command:
+can be viewed by executing the command:
 
 - `man mirror`
 
-Manual pages for these MirrorCommandLine commands can be viewed by issueing
+Manual pages for these MirrorCommandLine commands can be viewed by executing
 any of the following commands (click to view the man page online):
 
 - [man backgrounds](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/backgrounds.1.md)
@@ -629,6 +611,86 @@ any of the following commands (click to view the man page online):
 - [man updgit](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/updgit.1.md)
 - [man vol](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/vol.1.md)
 - [man websnap](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/websnap.1.md)
+
+## Motivation
+
+### Introduction to Using the Command Line
+The command line has a long and storied history in computing. Read some of that
+history, learn how to open a command line terminal window on various systems,
+how to get started using the command line, and see some examples of why the command
+line interface is so powerful by reading the MirrorCommandLine wiki article
+[Introduction to Using the Command Line](https://gitlab.com/doctorfree/MirrorCommandLine/-/wikis/Introduction-to-Using-the-Command-Line).
+
+This introduction to the command line includes an example of how to automate
+display of a specified menu on a MagicMirror at designated times of day.
+
+### Why would I need or want command line control of MagicMirror
+
+One might reasonably ask "Why would I need or want command line control
+of my MagicMirror"? Truth be told, most MagicMirror users do not need or
+want command line control of MagicMirror or any other software. They are happy
+with the graphical user interfaces they use and never ever see a command
+line prompt. So the answer to that question is almost always "You don't".
+
+However, some users (mostly old propeller head codgers) are comfortable
+at the command line and prefer to use it over the tedious mouse clicks
+required to get anything done in a graphical user interface. Different
+lanes for different brains.
+
+I would say the most significant use case for command line control of anything
+is automation. For example, if I want to schedule playback of specified music
+in specific zones triggered by some event, then command line control can be
+used to implement this. That can be done via Cron jobs, play something in some
+zone at scheduled times. Or playback of specified songs in selected zones could
+be triggered by some event like when a particular face is recognized by my smart
+mirror or when my smart lights are turned to a particular profile. I use command
+line control of MagicMirror coupled with Apple Siri voice commands that trigger
+an SSH shortcut to run the command. There are many use cases for automation using
+command line utilities.
+
+The other main use case for command line control is simple convenience.
+If you spend a lot of time in a Shell environment then it is just easier
+to type a command that plays what you would like to hear where you want
+to hear it than it is to switch windows, bring up a GUI, click a few times
+to find what you want, and click to play it, then go back to your terminal
+window and Shell env. Most people do not live in a Shell environment like
+I do so this use case is not that significant.
+
+Finally, the command line interface and the associated MagicMirror API can provide
+capabilities not otherwise available. Searching, listing, and filtering
+can be augmented by the plethora of tools available in a typical Shell
+environment. You can pipe the output of a `mirror` command to grep, sed, awk,
+and other standard utilities to produce results difficult to achieve otherwise.
+That is, command line control along with the API and Shell utilities/builtins
+can extend the capabilities of the MagicMirror system. The MirrorCommandLine
+package also enables some features not easily available in MagicMirror.
+One of these, management of a large number of preconfigured MagicMirror config files,
+allows the MirrorCommandLine user to easily and quickly switch between any of these
+preconfigured config files. In my household I find it frequently desirable to be able
+to switch MagicMirror configs easily and quickly and I can do so by configuring these
+presets to my typical use cases and executing a simple `mirror` command.
+
+### History
+
+This project began as an attempt to control my MagicMirror with Siri voice
+commands. I was able to get Siri voice control of a MagicMirror working with
+simple SSH shortcuts that execute Bash scripts on my mirror's Raspberry Pi.
+Apple’s SSH shortcuts are a powerful tool for command line control. They can
+be used to execute commands on systems that allow SSH access and they can
+be configured to activate via voice commands. SSH shortcuts enable voice
+control of anything that can be done at the command line.
+
+I created shortcuts on my iPhone which use the “Run script over SSH”
+option for Apple Scripting shortcuts. The shortcuts execute the appropriate
+Bash command on my MagicMirror Pi. Once I got the MagicMirror shortcuts working
+I then configured Siri to recognize various phrases to run those shortcuts.
+In this manner I was able to implement Siri voice control of my MagicMirror.
+
+Over time the project became primarily focused on the command line execution
+of these scripts as I found I spend more time in a terminal at the command line
+than I do talking to Siri. While voice control is still supported if configured
+properly, the project is primarily command line control of MagicMirror.
+
 
 ## Contents
 
