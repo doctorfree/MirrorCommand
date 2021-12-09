@@ -6,7 +6,7 @@ UPDSCRIPT="updphotographer"
 TYPEDIR="/mnt/transcend/Pictures/MagicMirror/${TYPE}"
 PICDIR="/usr/local/MirrorCommandLine/pics/${TYPE}"
 
-[ -d ${PICDIR} ] || sudo mkdir -p ${PICDIR}
+[ -d ${PICDIR} ] || mkdir -p ${PICDIR}
 [ -d ${TYPEDIR} ] || {
     echo "$TYPEDIR does not exist or is not a directory. Exiting."
     exit 1
@@ -18,11 +18,11 @@ do
         echo "$i exists. skipping."
         continue
     }
-    sudo mkdir $i
+    mkdir $i
     ${UPDSCRIPT} $i
     [ -d ${PICDIR}/$i ] || {
         cd ${PICDIR}
-        sudo ln -s ${TYPEDIR}/$i .
+        ln -s ${TYPEDIR}/$i .
         cd ${TYPEDIR}
     }
 done
