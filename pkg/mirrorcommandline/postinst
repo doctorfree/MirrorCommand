@@ -121,6 +121,26 @@ case "$1" in
                 fi
               done
             }
+            # Copy any installed MirrorCommandLine Google Assistant recipes
+            # If any recipe of the same name already exists, do not overwrite
+            RECIPE_DIR="modules/MMM-GoogleAssistant/recipes"
+            [ -d "${MMHOME}/${RECIPE_DIR}" ] && {
+              cd "${MMHOME}/${RECIPE_DIR}"
+              for recipe in ${MM}/${RECIPE_DIR}/*
+              do
+                [ "${recipe}" == "${MM}/${RECIPE_DIR}/*" ] && continue
+                b=`basename ${recipe}`
+                if [ -f $b ]
+                then
+                  mcl=`echo $b | sed -e "s/\.js//"`
+                  [ -f ${mcl}-mcl.js ] || {
+                    sudo -u ${USER} cp ${recipe} ${mcl}-mcl.js
+                  }
+                else
+                  sudo -u ${USER} cp ${recipe} .
+                fi
+              done
+            }
         else
             echo "Unable to locate MagicMirror installation folder."
             echo "MirrorCommandLine config and css files in ${MM}"

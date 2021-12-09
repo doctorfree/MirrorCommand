@@ -80,17 +80,41 @@ case "$1" in
             done
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"
+              c="custom-mirrorcommandline.css"
+              if [ -L $c ]
+              then
+                readlink $c | grep ${MM} > /dev/null && rm -f $c
+              else
+                # Remove it if it has not been modified
+                [ -f $c ] && diff $c ${MM}/css/custom.css > /dev/null && rm -f $c
+              fi
               for css in ${MM}/css/*
               do
                 [ "${css}" == "${MM}/css/*" ] && continue
                 b=`basename ${css}`
-                [ -L $b ] && {
-                    readlink $b | grep ${MM} > /dev/null && rm -f $b
-                }
-                c="custom-mirrorcommandline.css"
-                [ -L $c ] && {
-                    readlink $c | grep ${MM} > /dev/null && rm -f $c
-                }
+                if [ -L $b ]
+                then
+                  readlink $b | grep ${MM} > /dev/null && rm -f $b
+                else
+                  # Remove it if it has not been modified
+                  [ -f $b ] && diff $b ${css} > /dev/null && rm -f $b
+                fi
+              done
+            }
+            RECIPE_DIR="modules/MMM-GoogleAssistant/recipes"
+            [ -d "${MMHOME}/${RECIPE_DIR}" ] && {
+              cd "${MMHOME}/${RECIPE_DIR}"
+              for recipe in ${MM}/${RECIPE_DIR}/*
+              do
+                [ "${recipe}" == "${MM}/${RECIPE_DIR}/*" ] && continue
+                b=`basename ${recipe}`
+                c=`echo $b | sed -e "s/\.js//"`
+                if [ -f ${c}-mcl.js ]
+                then
+                    rm -f ${c}-mcl.js
+                else
+                    rm -f $b
+                fi
               done
             }
         else
