@@ -394,7 +394,7 @@ To enable the MMM-TelegramCommands module commands, install this module:
 
 ```bash
 cd ~/MagicMirror/modules
-git clone https://gitlab.com/doctorfree/MMM-TelegramCommands
+git clone https://gitlab.com/doctorfree/MMM-TelegramCommands.git
 cd MMM-TelegramCommands
 npm install
 ```
