@@ -46,7 +46,7 @@ case "$1" in
         MMHOME=/home/pi/MagicMirror
         [ -d ${MMHOME}/config ] || {
             MMHOME=
-            for homedir in /home/*
+            for homedir in /usr/local /home/*
             do
                 [ "${homedir}" == "/home/*" ] && continue
                 [ -d ${homedir}/MagicMirror/config ] && {
