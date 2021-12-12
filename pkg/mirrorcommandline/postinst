@@ -120,12 +120,6 @@ case "$1" in
                 fi
               done
             }
-            # Verify git is installed
-            inst_git=`type -p git`
-            inst_apt=`type -p apt`
-            [ "${inst_git}" ] || {
-                [ "${inst_apt}" ] && apt install git
-            }
             # Install MagicMirror 3rd Party modules used by MirrorCommandLine
             MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
                      MMM-COVID19-SPARKLINE MMM-DarkSkyForecast MMM-DateOnly \

@@ -63,8 +63,6 @@ case "$1" in
                       }
                       [ -d /usr/local ] || mkdir /usr/local
                       cd /usr/local
-                      curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-                      apt install -y nodejs
                       git clone https://github.com/MichMich/MagicMirror
                       GROUP=`id -g -n ${USER}`
                       chown -R ${USER}:${GROUP} MagicMirror
