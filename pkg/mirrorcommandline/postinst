@@ -22,13 +22,12 @@ case "$1" in
     configure)
         export PATH=/usr/local/bin:$PATH
         # Scripts for which links will be made in /usr/local/bin
-        EXPORTS="backgrounds camsnap chkconfig chktemp cron.bash gethue getquote \
-            get_temps gitdiff mirror mknewartist mknewmodel mknewphotographer \
+        EXPORTS="camsnap chkconfig chktemp gethue getquote \
+            get_temps mirror mknewartist mknewmodel mknewphotographer \
             mknewplayboy mknewtop mm mmapiactions mmgetb mmscene mmsetb mmupdall \
-            module_update module_update_all pcmanslideshow play rand_back \
-            rmlandscape sdbackup sderase sdrestore sdwrite send_sms showkeys \
+            module_update module_update_all play rand_back send_sms showkeys \
             updallartists updallmodels updallphotographers updalltop updarpscan \
-            updartist updgit updlinks updmodel updphotographer updtop vncview vol \
+            updartist updlinks updmodel updphotographer updtop vncview vol \
             websnap wireless_conf zerologs"
         LOCAL="myreboot myshutdown remountusb mirror_start"
 

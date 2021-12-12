@@ -217,8 +217,6 @@ Copy and modify as needed.
 
 Some of the more useful supporting scripts include:
 
-- [**backgrounds**](scripts/backgrounds.sh)
-  Manipulate desktop wallpapers
 - [**camsnap**](scripts/camsnap.sh)
   Snap a photo with your MagicMirror webcam
 - [**chkconfig**](scripts/chkconfig.sh)
@@ -239,22 +237,10 @@ Some of the more useful supporting scripts include:
   Get the MagicMirror screen brightness level
 - [**mmsetb**](scripts/mmsetb.sh)
   Set the MagicMirror screen brightness level
-- [**pcmanslideshow**](scripts/pcmanslideshow.sh)
-  Display a slide show on your desktop using pcmanfm
 - [**rand_back**](scripts/rand_back.sh)
   Select a random desktop wallpaper
 - [**reboot**](scripts/reboot.sh)
   Perform additional actions before reboot, executed as a normal user using sudo
-- [**rmlandscape**](scripts/rmlandscape.sh)
-  Remove photos in a folder that are in landscape mode
-- [**sdbackup**](scripts/sdbackup.sh)
-  Backup an SD card
-- [**sderase**](scripts/sderase.sh)
-  Erase an SD card
-- [**sdrestore**](scripts/sdrestore.sh)
-  Restore an SD card from a previous backup
-- [**sdwrite**](scripts/sdwrite.sh)
-  Write an image to an SD card
 - [**shutdown**](scripts/shutdown.sh)
   Perform additional actions before shutdown, executed as a normal user using sudo
 - [**vncview**](scripts/vncview.sh)
@@ -599,16 +585,8 @@ can be viewed by executing the command:
 Manual pages for these MirrorCommandLine commands can be viewed by executing
 any of the following commands (click to view the man page online):
 
-- [man backgrounds](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/backgrounds.1.md)
 - [man mirror](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mirror.1.md)
 - [man mmscene](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mmscene.1.md)
-- [man pcmanslideshow](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/pcmanslideshow.1.md)
-- [man sdbackup](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sdbackup.1.md)
-- [man sderase](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sderase.1.md)
-- [man sdrestore](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/sdrestore.1.md)
-- [man slides](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/slides.1.md)
-- [man slideshow](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/slideshow.1.md)
-- [man updgit](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/updgit.1.md)
 - [man vol](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/vol.1.md)
 - [man websnap](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/websnap.1.md)
 
