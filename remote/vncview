@@ -11,8 +11,34 @@ USER=pi
 ssh ${USER}@${IP} "export TERM=xterm-256color; sudo systemctl start vncserver-x11-serviced.service"
 sleep 3
 
-# Run VNC Viewer on my Mac Pro
-"/Applications/VNC Viewer.app/Contents/MacOS/vncviewer" -UserName=${USER} ${IP}
+plat=`uname -s`
+if [ "$plat" == "Darwin" ]
+then
+  # Run VNC Viewer on my Mac Pro
+  "/Applications/VNC Viewer.app/Contents/MacOS/vncviewer" -UserName=${USER} ${IP}
+else
+    inst_vina=`type -p vinagre`
+    [ "${inst_vina}" ] || {
+        while true
+        do
+          read -p "Vinagre VNC client not found. Install Vinagre ? ('Y'/'N'): " yn
+          case $yn in
+              [Yy]*)
+                  sudo apt install vinagre
+                  break
+                  ;;
+              [Nn]*)
+                  echo "Exiting."
+                  exit 0
+                  ;;
+              * )
+                  echo "Please answer yes or no."
+                  ;;
+          esac
+        done
+    }
+    vinagre ${USER}@${IP}
+fi
 
 # Stop VNC Server on MagicMirror
 ssh ${USER}@${IP} "export TERM=xterm-256color; sudo systemctl stop vncserver-x11-serviced.service"
