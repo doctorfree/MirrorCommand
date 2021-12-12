@@ -1,0 +1,91 @@
+#!/bin/bash
+# preinst script for mirrorcommandline
+#
+# see: dh_installdeb(1)
+
+set -e
+
+case "$1" in
+    install|upgrade)
+        MMHOME="/home/pi/MagicMirror"
+        [ -d ${MMHOME}/config ] || {
+            MMHOME=
+            for homedir in /usr/local /home/*
+            do
+                [ "${homedir}" == "/home/*" ] && continue
+                [ -d ${homedir}/MagicMirror/config ] && {
+                    MMHOME="${homedir}/MagicMirror"
+                    break
+                }
+            done
+        }
+        [ "${MMHOME}" ] || {
+            echo "Unable to locate a MagicMirror installation on this system."
+            echo "MagicMirror is required in order to install MirrorCommandLine."
+            while true
+            do
+              read -p "Install MagicMirror ? ('Y'/'N'): " yn
+              case $yn in
+                  [Yy]*)
+                      USER=
+                      numusers=0
+                      users=
+                      for user in /home/*
+                      do
+                          [ "${user}" == "/home/*" ] && continue
+                          [ -d ${user} ] && {
+                              USER=`basename ${user}`
+                              users="${users} ${USER}"
+                              numusers=`expr ${numusers} + 1`
+                          }
+                      done
+                      [ $numusers -gt 1 ] && {
+                          # Create a selection dialog to allow user to select USER
+                          PS3="${BOLD}Please enter MagicMirror user (numeric or text): ${NORMAL}"
+                          options=(${users})
+                          select opt in "${options[@]}"
+                          do
+                            case "$opt,$REPLY" in
+                              *)
+                                  [ -d /home/${opt} ] && {
+                                      USER="${opt}"
+                                      break
+                                  }
+                                  printf "\nInvalid entry. Please try again"
+                                  printf "\nEnter either a number or text of one of the menu entries\n"
+                                  ;;
+                            esac
+                          done
+                      }
+                      [ "${USER}" ] || {
+                          echo "No MagicMirror user found or selected. Exiting."
+                          exit 1
+                      }
+                      [ -d /usr/local ] || mkdir /usr/local
+                      cd /usr/local
+                      curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+                      apt install -y nodejs
+                      git clone https://github.com/MichMich/MagicMirror
+                      GROUP=`id -g -n ${USER}`
+                      chown -R ${USER}:${GROUP} MagicMirror
+                      cd MagicMirror
+                      sudo -u ${USER} npm install
+                      sudo -u cp config/config.js.sample config/config.js
+                      break
+                      ;;
+                  [Nn]*)
+                      exit 1
+                      ;;
+                  * )
+                      echo "Please answer yes or no."
+                      ;;
+              esac
+            done
+        }
+    ;;
+
+    *)
+    ;;
+esac
+
+exit 0

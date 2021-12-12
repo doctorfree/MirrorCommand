@@ -120,6 +120,30 @@ case "$1" in
                 fi
               done
             }
+            # Verify git is installed
+            inst_git=`type -p git`
+            inst_apt=`type -p apt`
+            [ "${inst_git}" ] || {
+                [ "${inst_apt}" ] && apt install git
+            }
+            # Install MagicMirror 3rd Party modules used by MirrorCommandLine
+            MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
+                     MMM-COVID19-SPARKLINE MMM-DarkSkyForecast MMM-DateOnly \
+                     MMM-Detector MMM-GoogleAssistant MMM-GoogleMapsTraffic \
+                     mmm-hue-lights MMM-iFrame MMM-InstagramView \
+                     MMM-IronManGIF MMM-MacAddressScan MMM-MyScoreboard \
+                     MMM-pages MMM-RAIN-RADAR MMM-Remote-Control \
+                     MMM-Scenes MMM-Selfieshot MMM-Solar \
+                     MMM-stocks MMM-TelegramBot MMM-TelegramCommands \
+                     MMM-Tools MMM-Videoplayer MMM-YouTubeWebView"
+            for module in ${MODULES}
+            do
+              [ -d "${MMHOME}/modules/${module}" ] || {
+                [ -x "${MM}/bin/module_update" ] && {
+                  sudo -u ${USER} ${MM}/bin/module_update -i ${module}
+                }
+              }
+            done
             # Copy any installed MirrorCommandLine Google Assistant recipes
             # If any recipe of the same name already exists, do not overwrite
             RECIPE_DIR="modules/MMM-GoogleAssistant/recipes"
