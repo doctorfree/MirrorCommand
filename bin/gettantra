@@ -40,10 +40,10 @@ done
     ((i++))
   done
   printf "\n"
-  MMHOME=/home/pi/MagicMirror
+  MMHOME=${HOME}/MagicMirror
   [ -d ${MMHOME}/config ] || {
       MMHOME=
-      for homedir in /home/*
+      for homedir in /usr/local /home/*
       do
           [ "${homedir}" == "/home/*" ] && continue
           [ -d ${homedir}/MagicMirror/config ] && {

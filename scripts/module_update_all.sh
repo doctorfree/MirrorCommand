@@ -1,6 +1,18 @@
 #!/bin/bash
 
-MOD_DIR="$HOME/MagicMirror/modules"
+MMHOME=${HOME}/MagicMirror
+[ -d ${MMHOME}/config ] || {
+    MMHOME=
+    for homedir in /usr/local /home/*
+    do
+        [ "${homedir}" == "/home/*" ] && continue
+        [ -d ${homedir}/MagicMirror/config ] && {
+            MMHOME="${homedir}/MagicMirror"
+            break
+        }
+    done
+}
+MOD_DIR="${MMHOME}/modules"
 REBUILD=
 
 usage() {

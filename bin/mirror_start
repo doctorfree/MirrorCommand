@@ -1,6 +1,23 @@
 #!/bin/bash
 #
 MM=${HOME}/MagicMirror
+[ -d ${MM}/config ] || {
+      MM=
+      for homedir in /usr/local /home/*
+      do
+          [ "${homedir}" == "/home/*" ] && continue
+          [ -d ${homedir}/MagicMirror/config ] && {
+              MM="${homedir}/MagicMirror"
+              break
+          }
+      done
+}
+
+[ "${MM}" ] || {
+    echo "Cannot locate MagicMirror installation directory. Exiting."
+    exit 1
+}
+
 CONF=${MM}/config
 
 # If there is an existing config.js then check

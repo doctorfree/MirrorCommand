@@ -27,8 +27,21 @@
 #
 # User configurable settings. Make sure these are correct for your system.
 # -----------------------------------------------------------------------
-# Set this to your MagicMirror installation directory
-MM="${HOME}/MagicMirror"
+# Set this to your MagicMirror installation directory, typically $HOME/MagicMirror
+MM="__MagicMirror_Installation_Directory__"
+[ -d ${MM}/config ] || {
+      MM=
+      for homedir in /usr/local /home/*
+      do
+          [ "${homedir}" == "/home/*" ] && continue
+          [ -d ${homedir}/MagicMirror/config ] && {
+              MM="${homedir}/MagicMirror"
+              break
+          }
+      done
+}
+[ "${MM}" ] || MM="${HOME}/MagicMirror"
+
 # Set the IP and PORT to the values on your system
 # IP is the IP address of your MagicMirror Raspberry Pi or 'localhost'
 IP="MM.M.M.MM"

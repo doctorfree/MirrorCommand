@@ -527,7 +527,7 @@ where [name] is one of:
 	 server smoke snowcrash stocks tantra test traffic unknown videotest
 	 voice volumio waterfalls weather YouTube
 
-or any other config file you have created in /home/pi/MagicMirror/config of the form:
+or any other config file you have created in MagicMirror/config of the form:
 	config-[name].js
 
 A config filename argument will be resolved into a config filename of the form:

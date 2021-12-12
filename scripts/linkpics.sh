@@ -1,6 +1,18 @@
 #!/bin/bash
 
-SLIDES_DIR="$HOME/MagicMirror/modules/MMM-BackgroundSlideshow/pics"
+MMHOME=${HOME}/MagicMirror
+[ -d ${MMHOME}/config ] || {
+    MMHOME=
+    for homedir in /usr/local /home/*
+    do
+        [ "${homedir}" == "/home/*" ] && continue
+        [ -d ${homedir}/MagicMirror/config ] && {
+            MMHOME="${homedir}/MagicMirror"
+            break
+        }
+    done
+}
+SLIDES_DIR="${MMHOME}/modules/MMM-BackgroundSlideshow/pics"
 
 mksym () {
     PDIR="${LNDIR}/$1"

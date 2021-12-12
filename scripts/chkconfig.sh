@@ -1,6 +1,18 @@
 #!/bin/bash
 #
-CONFDIR=$HOME/MagicMirror/config
+MMHOME=${HOME}/MagicMirror
+[ -d ${MMHOME}/config ] || {
+    MMHOME=
+    for homedir in /usr/local /home/*
+    do
+        [ "${homedir}" == "/home/*" ] && continue
+        [ -d ${homedir}/MagicMirror/config ] && {
+            MMHOME="${homedir}/MagicMirror"
+            break
+        }
+    done
+}
+CONFDIR=${MMHOME}/config
 [ -d ${CONFDIR} ] || {
     echo "$CONFDIR does not exist or is not a directory. Exiting."
     exit 1
