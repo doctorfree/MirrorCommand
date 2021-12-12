@@ -13,15 +13,18 @@
 > ― Neal Stephenson, In the Beginning...Was the Command Line
 
 # MirrorCommandLine
-MagicMirror is an open source modular smart mirror platform
-(see https://magicmirror.builders/). This repository maintains an extensive
-set of scripts to initialize, configure, monitor, and manage a MagicMirror.
+[MagicMirror](https://magicmirror.builders) is an open source modular
+smart mirror platform (see https://magicmirror.builders/).
+This repository maintains an extensive set of scripts to initialize,
+configure, monitor, and manage a MagicMirror.
 
 ## Table of contents
 
 1. [Overview](#overview)
 1. [Screenshots](#screenshots)
 1. [Installation](#installation)
+    1. [MagicMirror Installation](#magicmirror-installation)
+    1. [MirrorCommandLine Installation](#mirrorcommandline-installation)
     1. [Post installation configuration](#post-installation-configuration)
     1. [Add keys to mirrorkeys](#add-keys-to-mirrorkeys)
     1. [Configure mirror script](#configure-mirror-script)
@@ -91,6 +94,55 @@ Interactive menus when invoked with no arguments<br/>
 </p>
 
 ## Installation
+
+### MagicMirror Installation
+MirrorCommandLine is intended for installation on a system running
+[MagicMirror](https://magicmirror.builders). If MagicMirror is not
+previously installed it can be installed following
+[these instructions](https://docs.magicmirror.builders/getting-started/installation.html#manual-installation).
+
+**Note:** An actual mirror with display mounted on the rear is not necessary.
+MagicMirror can be installed on a Raspberry Pi with a mirror display as intended
+or it can be installed on a Debian based Linux system (e.g. Ubuntu Linux)
+with standard monitor and desktop environment.
+
+MagicMirror requires Node version 12 or later.
+
+MirrorCommandLine assumes that MagicMirror is installed in either
+`/usr/local/MagicMirror` or a user's home directory.
+
+To install MagicMirror, first change directory to either `/usr/local`
+or a non-root user's home directory.
+
+From either `/usr/local` or a non-root user's home directory, execute
+the following commands:
+
+- Download and install the latest Node.js version
+    - `curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -`
+    - `sudo apt install -y nodejs`
+- Clone the repository and check out the master branch
+    - `git clone https://github.com/MichMich/MagicMirror`
+- Enter the repository
+    - `cd MagicMirror`
+- Install the application
+    - `npm install`
+- Make a copy of the config sample file
+    - `cp config/config.js.sample config/config.js`
+- Start the application
+    - `npm run start`
+
+To start the MagicMirror over SSH from a remote terminal, use the commands:
+
+- `cd /path/to/MagicMirror`
+- `DISPLAY=:0 nohup npm start &`
+
+To access the toolbar menu when in mirror mode, press the ALT key.
+
+If MagicMirror is not installed in either `/usr/local/MagicMirror` or a non-root
+user's home directory, then the MirrorCommandLine installation will ask if you
+wish to install MagicMirror and, if so, will install MagicMirror in `/usr/local`.
+
+### MirrorCommandLine Installation
 
 MirrorCommandLine version 2.2 and later includes Debian format packages
 which can be used to install the MirrorCommandLine utilities and images
