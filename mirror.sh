@@ -119,12 +119,13 @@ mirror_stop() {
 }
 
 pm2msg() {
-    printf "\nPM2 is installed but now PM2 process named ${PM2_PROCESS_NAME}"
+    printf "\nPM2 is installed but no PM2 process named ${PM2_PROCESS_NAME}"
     printf "\nwas found. Reverting to direct use of npm to manage MagicMirror."
     printf "\nIf you wish to use PM2 to manage your MagicMirror via this script"
     printf "\nthen create a PM2 process named ${PM2_PROCESS_NAME} that can be"
     printf "\nused to start/stop/restart MagicMirror."
     printf "\n\nContinuing but some functionality disabled.\n"
+    usepm2=
 }
 
 [ "${usepm2}" ] && {

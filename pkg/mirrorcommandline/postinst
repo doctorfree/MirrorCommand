@@ -22,7 +22,7 @@ case "$1" in
     configure)
         export PATH=/usr/local/bin:$PATH
         # Scripts for which links will be made in /usr/local/bin
-        EXPORTS="camsnap chkconfig chktemp gethue getquote \
+        EXPORTS="camsnap chkconfig chktemp gethue getquote screensaveroff \
             get_temps mirror mknewartist mknewmodel mknewphotographer \
             mknewplayboy mknewtop mm mmapiactions mmgetb mmscene mmsetb mmupdall \
             module_update module_update_all play rand_back send_sms showkeys \
@@ -30,6 +30,7 @@ case "$1" in
             updartist updlinks updmodel updphotographer updtop vncview vol \
             websnap wireless_conf zerologs"
         LOCAL="myreboot myshutdown remountusb mirror_start"
+        KEYS="/usr/local/MirrorCommandLine/etc/mirrorkeys"
 
         [ -d /usr/local ] || mkdir /usr/local
         [ -d /usr/local/bin ] || mkdir /usr/local/bin
@@ -69,11 +70,16 @@ case "$1" in
                 }
             done
         }
+        showkeys=
         if [ "${MMHOME}" ]
         then
             USER=$(stat -c '%U' ${MMHOME}/config)
             GROUP=$(stat -c '%G' ${MMHOME}/config)
             chown -R ${USER}:${GROUP} ${MM}
+            cat ${KEYS} | sed -e "s/keys\[MMHOME\]=/keys\[MMHOME\]=\'${MMHOME}\'/" > /tmp/keys$$
+            cp /tmp/keys$$ ${KEYS}
+            rm -f /tmp/keys$$
+            showkeys=1
             for cfg in config config-notelegram
             do
               [ -d "${MMHOME}/${cfg}" ] || {
@@ -165,13 +171,40 @@ case "$1" in
             echo "have not been linked into the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi
-        KEYS="/usr/local/MirrorCommandLine/etc/mirrorkeys"
         MMIP=`hostname -I | awk ' { print $1 } '`
         [ "${MMIP}" ] && {
             cat ${KEYS} | sed -e "s/keys\[MMIP\]=/keys\[MMIP\]=\'${MMIP}\'/" > /tmp/keys$$
             cp /tmp/keys$$ ${KEYS}
             rm -f /tmp/keys$$
-            /usr/local/MirrorCommandLine/bin/showkeys -q
+            showkeys=1
+        }
+        [ "${showkeys}" ] && /usr/local/MirrorCommandLine/bin/showkeys -q
+        [ "${MMHOME}" ] && {
+            # Setup PM2 if not already configured
+            inst_pm2=`type -p pm2`
+            [ "${inst_pm2}" ] || npm install pm2@latest -g > /dev/null 2>&1
+            inst_pm2=`type -p pm2`
+            [ "${inst_pm2}" ] && {
+                sudo -u ${USER} pm2 delete MagicMirror > /dev/null 2>&1
+                echo "Starting MagicMirror via pm2"
+                sudo -u ${USER} pm2 start ${MM}/etc/magicmirror.config.js
+                # Tell pm2 to save that configuration, for start at boot
+                echo "Saving MagicMirror pm2 configuration"
+                sudo -u ${USER} pm2 save
+                echo "Stopping MagicMirror via pm2"
+                sudo -u ${USER} pm2 stop MagicMirror
+                echo "Generating PM2 startup script"
+                pm2_startup=`sudo -u ${USER} pm2 startup | tail -n 1`
+                # Check to see if we can get the OS package name (Ubuntu)
+                if [ $(which lsb_release| wc -l) >0 ]; then
+                  # On Ubuntu 18.04, pm2 startup gets something wrong
+                  if [ $(lsb_release  -r | grep -m1 18.04 | wc -l) > 0 ]; then
+                    pm2_startup=$(echo ${pm2_startup} | sed 's/\/bin/\/bin:\/bin/')
+                  fi
+                fi
+                ${pm2_startup} > /dev/null 2>&1
+            }
+            echo "Done"
         }
     ;;
 

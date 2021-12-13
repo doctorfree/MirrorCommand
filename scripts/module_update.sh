@@ -281,8 +281,10 @@ do
         if [ "${QUIET}" ]
         then
           npm install > /dev/null 2>&1
+          [ "${module}" == "MMM-Solar" ] && npm install request > /dev/null 2>&1
         else
           npm install
+          [ "${module}" == "MMM-Solar" ] && npm install request
         fi
         cd ..
     else

@@ -55,9 +55,11 @@ case "$1" in
                 }
             done
         }
+        USER=
         if [ "${MMHOME}" ]
         then
             [ -d "${MMHOME}/config" ] || continue
+            USER=$(stat -c '%U' ${MMHOME}/config)
             cd "${MMHOME}/config"
             for config in ${MM}/config/*
             do
@@ -122,6 +124,12 @@ case "$1" in
             echo "MirrorCommandLine config and css files in ${MM}"
             echo "have not been unlinked in the MagicMirror installation folder."
             echo "This must be accomplished manually."
+        fi
+        if [ "${USER}" ]
+        then
+            sudo -u ${USER} pm2 delete MagicMirror > /dev/null 2>&1
+        else
+            pm2 delete MagicMirror > /dev/null 2>&1
         fi
     ;;
 
