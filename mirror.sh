@@ -28,7 +28,7 @@
 # User configurable settings. Make sure these are correct for your system.
 # -----------------------------------------------------------------------
 # Set this to your MagicMirror installation directory, typically $HOME/MagicMirror
-MM="__MagicMirror_Installation_Directory__"
+MM="__MagicMirror_Home__"
 [ -d ${MM}/config ] || {
       MM=
       for homedir in /usr/local /home/*

@@ -20,8 +20,6 @@
 declare -A keys
 declare -A dumb
 
-# MagicMirror installaton directory
-keys[MMHOME]=
 # MagicMirror IP address
 keys[MMIP]=
 # IP addresses in MagicMirror config ipWhitelist
@@ -36,7 +34,6 @@ keys[IPW8]=
 keys[IPW9]=
 keys[IPW0]=
 # Leave the dummy values for IP addresses as-is
-dumb[MMHOME]='__MagicMirror_Installation_Directory__'
 dumb[MMIP]='MM.M.M.MM'
 dumb[IPW1]='AA.A.A.AA'
 dumb[IPW2]='BB.B.B.BBB'

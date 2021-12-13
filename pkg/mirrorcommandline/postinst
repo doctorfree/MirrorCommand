@@ -70,16 +70,14 @@ case "$1" in
                 }
             done
         }
-        showkeys=
         if [ "${MMHOME}" ]
         then
             USER=$(stat -c '%U' ${MMHOME}/config)
             GROUP=$(stat -c '%G' ${MMHOME}/config)
             chown -R ${USER}:${GROUP} ${MM}
-            cat ${KEYS} | sed -e "s/keys\[MMHOME\]=/keys\[MMHOME\]=\'${MMHOME}\'/" > /tmp/keys$$
-            cp /tmp/keys$$ ${KEYS}
-            rm -f /tmp/keys$$
-            showkeys=1
+            cat ${MM}/bin/mirror | sed -e "s,__MagicMirror_Home__,${MMHOME}," > /tmp/mmhome$$
+            cp /tmp/mmhome$$ ${MM}/bin/mirror
+            rm -f /tmp/mmhome$$
             for cfg in config config-notelegram
             do
               [ -d "${MMHOME}/${cfg}" ] || {
@@ -176,9 +174,8 @@ case "$1" in
             cat ${KEYS} | sed -e "s/keys\[MMIP\]=/keys\[MMIP\]=\'${MMIP}\'/" > /tmp/keys$$
             cp /tmp/keys$$ ${KEYS}
             rm -f /tmp/keys$$
-            showkeys=1
+            /usr/local/MirrorCommandLine/bin/showkeys -q
         }
-        [ "${showkeys}" ] && /usr/local/MirrorCommandLine/bin/showkeys -q
         [ "${MMHOME}" ] && {
             # Setup PM2 if not already configured
             inst_pm2=`type -p pm2`
