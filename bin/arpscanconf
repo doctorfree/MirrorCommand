@@ -1,0 +1,21 @@
+#!/bin/bash
+
+ARPCOM="__ARP_SCAN_DEVICES__"
+STR="devices: \[\]\,"
+INPUT="/usr/local/MirrorCommandLine/etc/arp-devices.js"
+
+[ -f ${INPUT} ] || {
+    echo "Missing input file ${INPUT}. Exiting."
+    exit 1
+}
+
+find . -type f -name config-\*\.js | while read i
+do
+    grep ${ARPCOM} $i > /dev/null && {
+        b=`basename $i`
+        echo "Processing $i"
+        cat $i | sed -e "/${STR}/r ${INPUT}" -e "/${STR}/d" > /tmp/$b
+        grep -v ${ARPCOM} /tmp/$b > $i
+        rm -f /tmp/$b
+    }
+done

@@ -124,6 +124,17 @@ case "$1" in
                 fi
               done
             }
+            # Fixup the ARP Scan devices used by MMM-MacAddressScan module
+            inst_arpscan=`type -p arp-scan`
+            [ "${inst_arpscan}" ] && {
+              [ -x ${MM}/bin/arps2mm ] && ${MM}/bin/arps2mm > ${MM}/etc/arp-devices.js
+              [ -x ${MM}/bin/arpscanconf ] && {
+                cd "${MMHOME}/config"
+                ${MM}/bin/arpscanconf
+                cd "${MMHOME}/config-notelegram"
+                ${MM}/bin/arpscanconf
+              }
+            }
             # Copy default keyless config
             cd "${MMHOME}/config"
             rm -f config.js

@@ -235,6 +235,7 @@ var config = {
                 showOffline: true,
                 keepAlive: 900,
                 updateInterval: 60,
+                // DO NOT REMOVE __ARP_SCAN_DEVICES__
                 devices: [],
             },
         },
