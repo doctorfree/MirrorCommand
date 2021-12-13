@@ -188,12 +188,12 @@ case "$1" in
                   }
                 }
                 echo "Starting MagicMirror via pm2"
-                sudo -u ${USER} pm2 start ${MM}/etc/magicmirror.config.js
+                sudo -u ${USER} pm2 --silent start ${MM}/etc/magicmirror.config.js
                 # Tell pm2 to save that configuration, for start at boot
                 echo "Saving MagicMirror pm2 configuration"
-                sudo -u ${USER} pm2 save
+                sudo -u ${USER} pm2 --silent save
                 echo "Stopping MagicMirror via pm2"
-                sudo -u ${USER} pm2 stop MagicMirror
+                sudo -u ${USER} pm2 --silent stop MagicMirror
                 echo "Generating PM2 startup script"
                 pm2_startup=`sudo -u ${USER} pm2 startup | tail -n 1`
                 # Check to see if we can get the OS package name (Ubuntu)
