@@ -129,6 +129,7 @@ case "$1" in
           sudo -u ${USER} pm2 list | grep MagicMirror > /dev/null && {
             sudo -u ${USER} pm2 --silent describe MagicMirror && {
               sudo -u ${USER} pm2 --silent delete MagicMirror
+              sudo -u ${USER} pm2 --silent save
             }
           }
         }
