@@ -68,7 +68,7 @@ case "$1" in
                       chown -R ${USER}:${GROUP} MagicMirror
                       cd MagicMirror
                       sudo -u ${USER} npm install
-                      sudo -u cp config/config.js.sample config/config.js
+                      sudo -u ${USER} cp config/config.js.sample config/config.js
                       break
                       ;;
                   [Nn]*)
