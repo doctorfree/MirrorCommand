@@ -581,7 +581,7 @@ var config = {
               },
               recipes: [
                 "myReboot-Restart-Shutdown.js", "with-MMM-Selfieshot.js",
-                "ExtRadio.js","MirrorCommand.js",
+                "ExtRadio.js", "MirrorCommand.js", "RoonCommand.js",
               ],
               NPMCheck: {}
             }

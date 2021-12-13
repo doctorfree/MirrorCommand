@@ -464,7 +464,8 @@ var config = {
                 },
                 welcome: {
                   useWelcome: true,
-                  welcome: "brief Today"
+                  welcome: "what is the weather today"
+                  // welcome: "brief Today"
                 },
                 screen: {},
                 touch: {},
@@ -488,8 +489,8 @@ var config = {
                 },
               },
               recipes: [
-                "myReboot-Restart-Shutdown.js",
-                "ExtRadio.js","MirrorCommand.js",
+                "myReboot-Restart-Shutdown.js", "RoonCommand.js",
+                "ExtRadio.js", "MirrorCommand.js",
               ],
               NPMCheck: {}
             }
