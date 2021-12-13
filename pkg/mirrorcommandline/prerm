@@ -125,12 +125,13 @@ case "$1" in
             echo "have not been unlinked in the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi
-        if [ "${USER}" ]
-        then
-            sudo -u ${USER} pm2 delete MagicMirror > /dev/null 2>&1
-        else
-            pm2 delete MagicMirror > /dev/null 2>&1
-        fi
+        [ "${USER}" ] && {
+          sudo -u ${USER} pm2 list | grep MagicMirror > /dev/null && {
+            sudo -u ${USER} pm2 --silent describe MagicMirror && {
+              sudo -u ${USER} pm2 --silent delete MagicMirror
+            }
+          }
+        }
     ;;
 
     failed-upgrade)

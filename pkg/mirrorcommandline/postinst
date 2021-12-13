@@ -182,7 +182,11 @@ case "$1" in
             [ "${inst_pm2}" ] || npm install pm2@latest -g > /dev/null 2>&1
             inst_pm2=`type -p pm2`
             [ "${inst_pm2}" ] && {
-                sudo -u ${USER} pm2 delete MagicMirror > /dev/null 2>&1
+                sudo -u ${USER} pm2 list | grep MagicMirror > /dev/null && {
+                  sudo -u ${USER} pm2 --silent describe MagicMirror && {
+                    sudo -u ${USER} pm2 --silent delete MagicMirror
+                  }
+                }
                 echo "Starting MagicMirror via pm2"
                 sudo -u ${USER} pm2 start ${MM}/etc/magicmirror.config.js
                 # Tell pm2 to save that configuration, for start at boot
