@@ -60,14 +60,14 @@ do
         then
           if [ "${QUIET}" ]
           then
-            npm run rebuild > /dev/null
+            npm run rebuild > /dev/null 2>&1
           else
             npm run rebuild
           fi
         else
           if [ "${QUIET}" ]
           then
-            npm run update > /dev/null
+            npm run update > /dev/null 2>&1
           else
             npm run update
           fi
@@ -76,8 +76,8 @@ do
       *)
         if [ "${QUIET}" ]
         then
-          git pull > /dev/null
-          npm install > /dev/null
+          git pull > /dev/null 2>&1
+          npm install > /dev/null 2>&1
         else
           git pull
           npm install
@@ -92,7 +92,7 @@ do
           internet-monitor)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/ronny3050/internet-monitor.git > /dev/null
+              git clone https://github.com/ronny3050/internet-monitor.git > /dev/null 2>&1
             else
               git clone https://github.com/ronny3050/internet-monitor.git
             fi
@@ -100,7 +100,7 @@ do
           MMM-BackgroundSlideshow)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/darickc/MMM-BackgroundSlideshow.git > /dev/null
+              git clone https://github.com/darickc/MMM-BackgroundSlideshow.git > /dev/null 2>&1
             else
               git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
             fi
@@ -108,7 +108,7 @@ do
           MMM-CoinMarketCap)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/glitch452/MMM-CoinMarketCap.git > /dev/null
+              git clone https://github.com/glitch452/MMM-CoinMarketCap.git > /dev/null 2>&1
             else
               git clone https://github.com/glitch452/MMM-CoinMarketCap.git
             fi
@@ -116,7 +116,7 @@ do
           MMM-COVID19-SPARKLINE)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/skelliam/MMM-COVID19-SPARKLINE.git > /dev/null
+              git clone https://github.com/skelliam/MMM-COVID19-SPARKLINE.git > /dev/null 2>&1
             else
               git clone https://github.com/skelliam/MMM-COVID19-SPARKLINE.git
             fi
@@ -124,7 +124,7 @@ do
           MMM-DarkSkyForecast)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/jclarke0000/MMM-DarkSkyForecast.git > /dev/null
+              git clone https://github.com/jclarke0000/MMM-DarkSkyForecast.git > /dev/null 2>&1
             else
               git clone https://github.com/jclarke0000/MMM-DarkSkyForecast.git
             fi
@@ -132,7 +132,7 @@ do
           MMM-DateOnly)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/grabenhenrich/MMM-DateOnly.git > /dev/null
+              git clone https://github.com/grabenhenrich/MMM-DateOnly.git > /dev/null 2>&1
             else
               git clone https://github.com/grabenhenrich/MMM-DateOnly.git
             fi
@@ -140,7 +140,7 @@ do
           MMM-Detector|MMM-GoogleAssistant|MMM-TelegramBot|MMM-Tools)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/bugsounet/${module}.git > /dev/null
+              git clone https://github.com/bugsounet/${module}.git > /dev/null 2>&1
             else
               git clone https://github.com/bugsounet/${module}.git
             fi
@@ -148,7 +148,7 @@ do
           MMM-GoogleMapsTraffic)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/vicmora/MMM-GoogleMapsTraffic.git > /dev/null
+              git clone https://github.com/vicmora/MMM-GoogleMapsTraffic.git > /dev/null 2>&1
             else
               git clone https://github.com/vicmora/MMM-GoogleMapsTraffic.git
             fi
@@ -156,7 +156,7 @@ do
           mmm-hue-lights)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/michael5r/mmm-hue-lights.git > /dev/null
+              git clone https://github.com/michael5r/mmm-hue-lights.git > /dev/null 2>&1
             else
               git clone https://github.com/michael5r/mmm-hue-lights.git
             fi
@@ -164,7 +164,7 @@ do
           MMM-iFrame)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/alberttwong/MMM-iFrame.git > /dev/null
+              git clone https://github.com/alberttwong/MMM-iFrame.git > /dev/null 2>&1
             else
               git clone https://github.com/alberttwong/MMM-iFrame.git
             fi
@@ -172,7 +172,7 @@ do
           MMM-InstagramView|MMM-TelegramCommands|MMM-YouTubeWebView)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/doctorfree/${module}.git > /dev/null
+              git clone https://github.com/doctorfree/${module}.git > /dev/null 2>&1
             else
               git clone https://github.com/doctorfree/${module}.git
             fi
@@ -181,7 +181,7 @@ do
             if [ "${QUIET}" ]
             then
               # git clone https://github.com/2hdlockness/MMM-IronManGIF
-              git clone https://github.com/doctorfree/MMM-IronManGIF.git > /dev/null
+              git clone https://github.com/doctorfree/MMM-IronManGIF.git > /dev/null 2>&1
             else
               # git clone https://github.com/2hdlockness/MMM-IronManGIF
               git clone https://github.com/doctorfree/MMM-IronManGIF.git
@@ -190,8 +190,8 @@ do
           MMM-MacAddressScan)
             if [ "${QUIET}" ]
             then
-              sudo apt-get -y install arp-scan > /dev/null
-              git clone https://github.com/doctorfree/MMM-MacAddressScan.git > /dev/null
+              sudo apt-get -y install arp-scan > /dev/null 2>&1
+              git clone https://github.com/doctorfree/MMM-MacAddressScan.git > /dev/null 2>&1
             else
               sudo apt-get -y install arp-scan
               git clone https://github.com/doctorfree/MMM-MacAddressScan.git
@@ -200,7 +200,7 @@ do
           MMM-MyScoreboard)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/jclarke0000/MMM-MyScoreboard > /dev/null
+              git clone https://github.com/jclarke0000/MMM-MyScoreboard > /dev/null 2>&1
             else
               git clone https://github.com/jclarke0000/MMM-MyScoreboard
             fi
@@ -208,7 +208,7 @@ do
           MMM-pages)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/edward-shen/MMM-pages.git > /dev/null
+              git clone https://github.com/edward-shen/MMM-pages.git > /dev/null 2>&1
             else
               git clone https://github.com/edward-shen/MMM-pages.git
             fi
@@ -216,7 +216,7 @@ do
           MMM-RAIN-RADAR)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/jojoduquartier/MMM-RAIN-RADAR.git > /dev/null
+              git clone https://github.com/jojoduquartier/MMM-RAIN-RADAR.git > /dev/null 2>&1
             else
               git clone https://github.com/jojoduquartier/MMM-RAIN-RADAR.git
             fi
@@ -224,7 +224,7 @@ do
           MMM-Remote-Control)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/Jopyth/MMM-Remote-Control.git > /dev/null
+              git clone https://github.com/Jopyth/MMM-Remote-Control.git > /dev/null 2>&1
             else
               git clone https://github.com/Jopyth/MMM-Remote-Control.git
             fi
@@ -232,7 +232,7 @@ do
           MMM-Scenes)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/MMRIZE/MMM-Scenes > /dev/null
+              git clone https://github.com/MMRIZE/MMM-Scenes > /dev/null 2>&1
             else
               git clone https://github.com/MMRIZE/MMM-Scenes
             fi
@@ -240,8 +240,8 @@ do
           MMM-Selfieshot)
             if [ "${QUIET}" ]
             then
-              sudo apt-get -y install fswebcam > /dev/null
-              git clone https://github.com/eouia/MMM-Selfieshot > /dev/null
+              sudo apt-get -y install fswebcam > /dev/null 2>&1
+              git clone https://github.com/eouia/MMM-Selfieshot > /dev/null 2>&1
             else
               sudo apt-get -y install fswebcam
               git clone https://github.com/eouia/MMM-Selfieshot
@@ -250,7 +250,7 @@ do
           MMM-Solar)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/tkrywit/MMM-Solar.git > /dev/null
+              git clone https://github.com/tkrywit/MMM-Solar.git > /dev/null 2>&1
             else
               git clone https://github.com/tkrywit/MMM-Solar.git
             fi
@@ -258,7 +258,7 @@ do
           MMM-stocks)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/Elaniobro/MMM-stocks.git > /dev/null
+              git clone https://github.com/Elaniobro/MMM-stocks.git > /dev/null 2>&1
             else
               git clone https://github.com/Elaniobro/MMM-stocks.git
             fi
@@ -266,7 +266,7 @@ do
           MMM-Videoplayer)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/Snille/MMM-Videoplayer.git > /dev/null
+              git clone https://github.com/Snille/MMM-Videoplayer.git > /dev/null 2>&1
             else
               git clone https://github.com/Snille/MMM-Videoplayer.git
             fi
@@ -280,7 +280,7 @@ do
         cd ${module}
         if [ "${QUIET}" ]
         then
-          npm install > /dev/null
+          npm install > /dev/null 2>&1
         else
           npm install
         fi
