@@ -320,6 +320,8 @@ done
 echo "Removing unused packages"
 sudo apt-get -y autoremove > /dev/null 2>&1
 
+HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
+
 printf "\n============= Screen Orientation Selection Dialog ==================\n"
 PS3="${BOLD}Do you want to rotate the screen 90 degrees left or right? (enter number or text): ${NORMAL}"
 options=(no left right skip)
@@ -327,11 +329,15 @@ select opt in "${options[@]}"
 do
     case "$opt,$REPLY" in
         "left",*|*,"left")
-            printf "@xrandr --output HDMI-1 --rotate left\n" >> ${AUTOSTART}
+            [ "${HDMI}" ] && {
+              printf "@xrandr --output ${HDMI} --rotate left\n" >> ${AUTOSTART}
+            }
             break
             ;;
         "right",*|*,"right")
-            printf "@xrandr --output HDMI-1 --rotate right\n" >> ${AUTOSTART}
+            [ "${HDMI}" ] && {
+              printf "@xrandr --output ${HDMI} --rotate right\n" >> ${AUTOSTART}
+            }
             break
             ;;
         "no",*|*,"no"|"skip",*|*,"skip")

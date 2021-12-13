@@ -68,6 +68,7 @@ apiurl="http://${IP}:${PORT}/api/notification"
 
 # Set this to the X11 DISPLAY you are using. DISPLAY=:0 works for most systems.
 export DISPLAY=:0
+HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
 # -----------------------------------------------------------------------
 [ -d /usr/local/MirrorCommandLine/bin ] && {
     export PATH=${PATH}:/usr/local/MirrorCommandLine/bin
@@ -342,9 +343,11 @@ rotate_screen() {
         printf "\n Exiting.\n"
         usage
     }
-    printf "\n${BOLD}Rotating screen display $1 ${NORMAL}\n"
-    xrandr --output HDMI-1 --rotate $1
-    printf "\n${BOLD}Done${NORMAL}\n"
+    [ "${HDMI}" ] && {
+        printf "\n${BOLD}Rotating screen display $1 ${NORMAL}\n"
+        xrandr --output ${HDMI} --rotate $1
+        printf "\n${BOLD}Done${NORMAL}\n"
+    }
 }
 
 screen_control() {
@@ -1148,14 +1151,18 @@ setconf() {
     case ${conf} in
         tantra|iframe|candy|fractalplaylist|hardzoom)
             [ "$rotation" == "normal" ] || {
+              [ "${HDMI}" ] && {
                 printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
-                xrandr --output HDMI-1 --rotate normal
+                xrandr --output ${HDMI} --rotate normal
+              }
             }
             ;;
         *)
             [ "$rotation" == "right" ] || {
+              [ "${HDMI}" ] && {
                 printf "\n${BOLD}Rotating screen display right ${NORMAL}\n"
-                xrandr --output HDMI-1 --rotate right
+                xrandr --output ${HDMI} --rotate right
+              }
             }
             ;;
     esac

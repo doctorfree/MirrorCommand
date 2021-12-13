@@ -27,17 +27,18 @@ CONF=${MM}/config
     config=`basename ${config}`
     config=`echo $config | sed -e "s/\.js$//" -e "s/^config-//"`
     rotation=`xrandr | grep connected | awk ' { print $5 } '`
+    HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
     case ${config} in
         tantra|iframe|candy|fractalplaylist|hardzoom)
             [ "$rotation" == "normal" ] || {
                 printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
-                xrandr --output HDMI-1 --rotate normal
+                [ "${HDMI}" ] && xrandr --output ${HDMI} --rotate normal
             }
             ;;
         *)
             [ "$rotation" == "right" ] || {
                 printf "\n${BOLD}Rotating screen display right ${NORMAL}\n"
-                xrandr --output HDMI-1 --rotate right
+                [ "${HDMI}" ] && xrandr --output ${HDMI} --rotate right
             }
             ;;
     esac
