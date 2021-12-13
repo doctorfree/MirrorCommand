@@ -145,7 +145,7 @@ var config = {
                 darkTheme: 1,
                 UTCtime: 0,
                 legend: 1,
-                legendMin: 0, //set legend to 1 if you want legendMin to show
+                legendMin: 1, //set legend to 1 if you want legendMin to show
                 animate: 1,
                 // 1: after updateInterval, weather warnings for your US states will be used
                 // to determine if module should be hidden. 0 module is perpertually displayed
@@ -177,8 +177,8 @@ var config = {
                 key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
                 lat: 36.970019,
                 lng: -122.042212,
-                height: '600px',
-                width: '600px',
+                height: '500px',
+                width: '500px',
                 styledMapType: "standard",
                 disableDefaultUI: true,
                 backgroundColor: 'hsla(0, 0%, 0%, 0)',
@@ -250,7 +250,8 @@ var config = {
                 },
                 welcome: {
                   useWelcome: true,
-                  welcome: "brief Today"
+                  // welcome: "brief Today"
+                  welcome: "What is the weather today"
                 },
                 screen: {},
                 touch: {},
