@@ -1,6 +1,41 @@
 #!/bin/bash
 
 MMHOME=${HOME}/MagicMirror
+INSTALL=
+QUIET=
+REBUILD=
+
+usage() {
+  echo "Usage: module_update [-i] [-qQ] [-r] [module name]"
+  echo "Where:"
+  echo "-i indicates install module if not already installed"
+  echo "-r indicates rebuild module"
+  echo "-q indicates quiet mode"
+  exit 1
+}
+
+while getopts iqru flag; do
+    case $flag in
+        i)
+            INSTALL=1
+            ;;
+        q)
+            QUIET=1
+            ;;
+        r)
+            REBUILD=1
+            ;;
+        u)
+            usage
+            ;;
+    esac
+done
+shift $(( OPTIND - 1 ))
+
+[ "$1" ] || {
+  usage
+}
+
 [ -d ${MMHOME}/config ] || {
     MMHOME=
     for homedir in /usr/local /home/*
@@ -13,23 +48,6 @@ MMHOME=${HOME}/MagicMirror
     done
 }
 MOD_DIR="${MMHOME}/modules"
-INSTALL=
-REBUILD=
-
-[ "$1" ] || {
-  echo "Usage: module_update [-i] [-r] [module name]"
-  exit 0
-}
-
-[ "$1" == "-i" ] && {
-  INSTALL=1
-  shift
-}
-
-[ "$1" == "-r" ] && {
-  REBUILD=1
-  shift
-}
 
 for module in $*
 do
@@ -40,14 +58,30 @@ do
       MMM-Detector|MMM-GoogleAssistant)
         if [ "${REBUILD}" ]
         then
+          if [ "${QUIET}" ]
+          then
+            npm run rebuild > /dev/null
+          else
             npm run rebuild
+          fi
         else
+          if [ "${QUIET}" ]
+          then
+            npm run update > /dev/null
+          else
             npm run update
+          fi
         fi
         ;;
       *)
-        git pull
-        npm install
+        if [ "${QUIET}" ]
+        then
+          git pull > /dev/null
+          npm install > /dev/null
+        else
+          git pull
+          npm install
+        fi
         ;;
     esac
   else
@@ -56,73 +90,186 @@ do
       cd ${MOD_DIR}
       case ${module} in
           internet-monitor)
-            git clone https://github.com/ronny3050/internet-monitor.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/ronny3050/internet-monitor.git > /dev/null
+            else
+              git clone https://github.com/ronny3050/internet-monitor.git
+            fi
             ;;
           MMM-BackgroundSlideshow)
-            git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/darickc/MMM-BackgroundSlideshow.git > /dev/null
+            else
+              git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
+            fi
             ;;
           MMM-CoinMarketCap)
-            git clone https://github.com/glitch452/MMM-CoinMarketCap.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/glitch452/MMM-CoinMarketCap.git > /dev/null
+            else
+              git clone https://github.com/glitch452/MMM-CoinMarketCap.git
+            fi
             ;;
           MMM-COVID19-SPARKLINE)
-            git clone https://github.com/skelliam/MMM-COVID19-SPARKLINE.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/skelliam/MMM-COVID19-SPARKLINE.git > /dev/null
+            else
+              git clone https://github.com/skelliam/MMM-COVID19-SPARKLINE.git
+            fi
             ;;
           MMM-DarkSkyForecast)
-            git clone https://github.com/jclarke0000/MMM-DarkSkyForecast.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/jclarke0000/MMM-DarkSkyForecast.git > /dev/null
+            else
+              git clone https://github.com/jclarke0000/MMM-DarkSkyForecast.git
+            fi
             ;;
           MMM-DateOnly)
-            git clone https://github.com/grabenhenrich/MMM-DateOnly.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/grabenhenrich/MMM-DateOnly.git > /dev/null
+            else
+              git clone https://github.com/grabenhenrich/MMM-DateOnly.git
+            fi
             ;;
           MMM-Detector|MMM-GoogleAssistant|MMM-TelegramBot|MMM-Tools)
-            git clone https://github.com/bugsounet/${module}.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/bugsounet/${module}.git > /dev/null
+            else
+              git clone https://github.com/bugsounet/${module}.git
+            fi
             ;;
           MMM-GoogleMapsTraffic)
-            git clone https://github.com/vicmora/MMM-GoogleMapsTraffic.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/vicmora/MMM-GoogleMapsTraffic.git > /dev/null
+            else
+              git clone https://github.com/vicmora/MMM-GoogleMapsTraffic.git
+            fi
             ;;
           mmm-hue-lights)
-            git clone https://github.com/michael5r/mmm-hue-lights.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/michael5r/mmm-hue-lights.git > /dev/null
+            else
+              git clone https://github.com/michael5r/mmm-hue-lights.git
+            fi
             ;;
           MMM-iFrame)
-            git clone https://github.com/alberttwong/MMM-iFrame.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/alberttwong/MMM-iFrame.git > /dev/null
+            else
+              git clone https://github.com/alberttwong/MMM-iFrame.git
+            fi
             ;;
           MMM-InstagramView|MMM-TelegramCommands|MMM-YouTubeWebView)
-            git clone https://github.com/doctorfree/${module}.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/doctorfree/${module}.git > /dev/null
+            else
+              git clone https://github.com/doctorfree/${module}.git
+            fi
             ;;
           MMM-IronManGIF)
-            # git clone https://github.com/2hdlockness/MMM-IronManGIF
-            git clone https://github.com/doctorfree/MMM-IronManGIF.git
+            if [ "${QUIET}" ]
+            then
+              # git clone https://github.com/2hdlockness/MMM-IronManGIF
+              git clone https://github.com/doctorfree/MMM-IronManGIF.git > /dev/null
+            else
+              # git clone https://github.com/2hdlockness/MMM-IronManGIF
+              git clone https://github.com/doctorfree/MMM-IronManGIF.git
+            fi
             ;;
           MMM-MacAddressScan)
-            sudo apt-get -y install arp-scan
-            git clone https://github.com/doctorfree/MMM-MacAddressScan.git
+            if [ "${QUIET}" ]
+            then
+              sudo apt-get -y install arp-scan > /dev/null
+              git clone https://github.com/doctorfree/MMM-MacAddressScan.git > /dev/null
+            else
+              sudo apt-get -y install arp-scan
+              git clone https://github.com/doctorfree/MMM-MacAddressScan.git
+            fi
             ;;
           MMM-MyScoreboard)
-            git clone https://github.com/jclarke0000/MMM-MyScoreboard
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/jclarke0000/MMM-MyScoreboard > /dev/null
+            else
+              git clone https://github.com/jclarke0000/MMM-MyScoreboard
+            fi
             ;;
           MMM-pages)
-            git clone https://github.com/edward-shen/MMM-pages.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/edward-shen/MMM-pages.git > /dev/null
+            else
+              git clone https://github.com/edward-shen/MMM-pages.git
+            fi
             ;;
           MMM-RAIN-RADAR)
-            git clone https://github.com/jojoduquartier/MMM-RAIN-RADAR.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/jojoduquartier/MMM-RAIN-RADAR.git > /dev/null
+            else
+              git clone https://github.com/jojoduquartier/MMM-RAIN-RADAR.git
+            fi
             ;;
           MMM-Remote-Control)
-            git clone https://github.com/Jopyth/MMM-Remote-Control.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/Jopyth/MMM-Remote-Control.git > /dev/null
+            else
+              git clone https://github.com/Jopyth/MMM-Remote-Control.git
+            fi
             ;;
           MMM-Scenes)
-            it clone https://github.com/MMRIZE/MMM-Scenes
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/MMRIZE/MMM-Scenes > /dev/null
+            else
+              git clone https://github.com/MMRIZE/MMM-Scenes
+            fi
             ;;
           MMM-Selfieshot)
-            sudo apt-get -y install fswebcam
-            git clone https://github.com/eouia/MMM-Selfieshot
+            if [ "${QUIET}" ]
+            then
+              sudo apt-get -y install fswebcam > /dev/null
+              git clone https://github.com/eouia/MMM-Selfieshot > /dev/null
+            else
+              sudo apt-get -y install fswebcam
+              git clone https://github.com/eouia/MMM-Selfieshot
+            fi
             ;;
           MMM-Solar)
-            git clone https://github.com/tkrywit/MMM-Solar.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/tkrywit/MMM-Solar.git > /dev/null
+            else
+              git clone https://github.com/tkrywit/MMM-Solar.git
+            fi
             ;;
           MMM-stocks)
-            git clone https://github.com/Elaniobro/MMM-stocks.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/Elaniobro/MMM-stocks.git > /dev/null
+            else
+              git clone https://github.com/Elaniobro/MMM-stocks.git
+            fi
             ;;
           MMM-Videoplayer)
-            git clone https://github.com/Snille/MMM-Videoplayer.git
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/Snille/MMM-Videoplayer.git > /dev/null
+            else
+              git clone https://github.com/Snille/MMM-Videoplayer.git
+            fi
             ;;
           *)
               echo "Unsupported module: ${module}"
@@ -131,7 +278,12 @@ do
               ;;
         esac
         cd ${module}
-        npm install
+        if [ "${QUIET}" ]
+        then
+          npm install > /dev/null
+        else
+          npm install
+        fi
         cd ..
     else
       echo "Cannot locate module ${module}, skipping"
