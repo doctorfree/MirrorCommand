@@ -124,6 +124,15 @@ case "$1" in
                 fi
               done
             }
+            # Copy default keyless config
+            cd "${MMHOME}/config"
+            rm -f config.js
+            if [ -f config-nokeys.js ]
+            then
+                sudo -u ${USER} ln -s config-nokeys.js config.js
+            else
+                sudo -u ${USER} cp config.js.sample config.js
+            fi
             # Install MagicMirror 3rd Party modules used by MirrorCommandLine
             MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
                      MMM-COVID19-SPARKLINE MMM-DarkSkyForecast MMM-DateOnly \

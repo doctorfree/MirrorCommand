@@ -67,8 +67,9 @@ case "$1" in
                       GROUP=`id -g -n ${USER}`
                       chown -R ${USER}:${GROUP} MagicMirror
                       cd MagicMirror
-                      sudo -u ${USER} npm install > /dev/null
-                      sudo -u ${USER} cp config/config.js.sample config/config.js
+                      echo "Installing MagicMirror in /usr/local/MagicMirror"
+                      sudo -u ${USER} npm install > /dev/null 2>&1
+                      # sudo -u ${USER} cp config/config.js.sample config/config.js
                       break
                       ;;
                   [Nn]*)
