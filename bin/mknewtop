@@ -7,8 +7,11 @@ PICDIR="/usr/local/MirrorCommandLine/pics"
 
 [ -d ${PICDIR} ] || mkdir -p ${PICDIR}
 [ -d ${TYPEDIR} ] || {
-    echo "$TYPEDIR does not exist or is not a directory. Exiting."
-    exit 1
+    TYPEDIR="/u/pictures/MagicMirror"
+    [ -d ${TYPEDIR} ] || {
+        echo "$TYPEDIR does not exist or is not a directory. Exiting."
+        exit 1
+    }
 }
 
 portrait=
