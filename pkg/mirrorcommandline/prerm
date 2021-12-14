@@ -23,7 +23,7 @@ case "$1" in
         MNTS="myreboot myshutdown remountusb"
         [ -d /usr/local/bin ] && {
             cd /usr/local/bin
-            rm -f mirror_start
+            rm -f mirror_start vcgencmd
             for command in ${MM}/bin/*
             do
                 [ "${command}" == "${MM}/bin/*" ] && continue

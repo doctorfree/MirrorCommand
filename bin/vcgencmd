@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# vcgencmd is a Raspberry Pi utility
+# This script will attempt to provide functional compatibility with vcgencmd
+# for systems other than the Raspberry Pi
+
+exit 0

@@ -39,6 +39,10 @@ case "$1" in
         [ -f ${MM}/etc/mirror_start.sh ] && {
           [ -f mirror_start ] || ln -s ${MM}/etc/mirror_start.sh mirror_start
         }
+        inst_vcgencmd=`type -p vcgencmd`
+        [ "${inst_vcgencmd}" ] || {
+            [ -f vcgencmd ] || ln -s ${MM}/bin/vcgencmd vcgencmd
+        }
         for command in ${EXPORTS}
         do
           [ -f ${MM}/bin/${command} ] && {
