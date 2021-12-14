@@ -86,6 +86,12 @@ case "$1" in
             cat ${MM}/bin/mirror | sed -e "s,__MagicMirror_Home__,${MMHOME}," > /tmp/mmhome$$
             cp /tmp/mmhome$$ ${MM}/bin/mirror
             rm -f /tmp/mmhome$$
+            for remote in vncview mm
+            do
+              cat ${MM}/bin/${remote} | sed -e "s,__MagicMirror_User__,${USER}," > /tmp/${remote}$$
+              cp /tmp/${remote}$$ ${MM}/bin/${remote}
+              rm -f /tmp/${remote}$$
+            done
             for cfg in config config-notelegram
             do
               [ -d "${MMHOME}/${cfg}" ] || {

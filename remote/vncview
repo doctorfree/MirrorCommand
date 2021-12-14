@@ -5,7 +5,7 @@
 #       authenticate and the user must have sudo privileges
 #
 IP=MM.M.M.MM
-USER=pi
+USER="__MagicMirror_User__"
 
 # Start VNC Server on MagicMirror
 ssh ${USER}@${IP} "export TERM=xterm-256color; sudo systemctl start vncserver-x11-serviced.service"
