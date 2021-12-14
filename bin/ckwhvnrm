@@ -1,8 +1,17 @@
 #!/bin/bash
 
-cd /mnt/transcend/Pictures/Wallhaven
+MMDIR="/mnt/transcend/Pictures/Wallhaven"
+
+[ -d ${MMDIR} ] || {
+    MMDIR="/u/pictures/Wallhaven"
+    [ -d ${MMDIR} ] || {
+        echo "Cannot locate Wallhaven pics dir"
+        exit 1
+    }
+}
+cd ${MMDIR}
 
 while read i
 do
     [ -f $i ] && echo $i
-done < $HOME/Pictures/rmlist.txt
+done < /usr/local/MirrorCommandLine/etc/rmlist.txt

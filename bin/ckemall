@@ -1,6 +1,15 @@
 #!/bin/bash
 
-cd /mnt/transcend/Pictures/MagicMirror
+MMDIR="/mnt/transcend/Pictures/MagicMirror"
+
+[ -d ${MMDIR} ] || {
+    MMDIR="/u/pictures/MagicMirror"
+    [ -d ${MMDIR} ] || {
+        echo "Cannot locate MagicMirror pics dir"
+        exit 1
+    }
+}
+cd ${MMDIR}
 
 while read i
 do
@@ -12,4 +21,4 @@ do
         j=`echo $i | sed -e "s/Artists\//Artists-ALL\//" -e "s/Models\//Playboy-ALL\//" -e "s/Photographers\//Photographers-ALL\//"`
         [ -L $j ] && echo $j
     fi
-done < $HOME/Pictures/rmlist.txt
+done < /usr/local/MirrorCommandLine/etc/rmlist.txt

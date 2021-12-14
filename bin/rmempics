@@ -1,8 +1,17 @@
 #!/bin/bash
 
-cd /mnt/transcend/Pictures/MagicMirror
+MMDIR="/mnt/transcend/Pictures/MagicMirror"
+
+[ -d ${MMDIR} ] || {
+    MMDIR="/u/pictures/MagicMirror"
+    [ -d ${MMDIR} ] || {
+        echo "Cannot locate MagicMirror pics dir"
+        exit 1
+    }
+}
+cd ${MMDIR}
 
 while read img
 do
     rm -f $img
-done < $HOME/Pictures/rmlist.txt
+done < /usr/local/MirrorCommandLine/etc/rmlist.txt

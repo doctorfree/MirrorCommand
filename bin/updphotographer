@@ -2,15 +2,20 @@
 
 MNT_PT="/mnt/transcend/Pictures"
 PHO_DIR="${MNT_PT}/MagicMirror/Photographers"
-RMLIST="$HOME/Pictures/rmlist.txt"
+RMLIST="/usr/local/MirrorCommandLine/etc/rmlist.txt"
 
 # Use an associative array to map photographer names across sites
 declare -A photographer_sites
 
 [ -d ${PHO_DIR} ] || {
-    echo "$PHO_DIR does not exist or is not a directory. Exiting."
-    exit 1
+    MNT_PT="/u/pictures"
+    PHO_DIR="${MNT_PT}/MagicMirror/Photographers"
+    [ -d ${PHO_DIR} ] || {
+        echo "$PHO_DIR does not exist or is not a directory. Exiting."
+        exit 1
+    }
 }
+
 cd ${PHO_DIR}
 TOP="${MNT_PT}/Wallhaven"
 MOD="${TOP}/Models"

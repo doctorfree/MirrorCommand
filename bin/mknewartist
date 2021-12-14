@@ -8,8 +8,11 @@ PICDIR="/usr/local/MirrorCommandLine/pics/${TYPE}"
 
 [ -d ${PICDIR} ] || mkdir -p ${PICDIR}
 [ -d ${TYPEDIR} ] || {
+  TYPEDIR="/u/pictures/MagicMirror/${TYPE}"
+  [ -d ${TYPEDIR} ] || {
     echo "$TYPEDIR does not exist or is not a directory. Exiting."
     exit 1
+  }
 }
 cd ${TYPEDIR}
 for i in $*

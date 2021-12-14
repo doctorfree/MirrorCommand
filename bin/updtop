@@ -2,14 +2,18 @@
 
 MNT_PT="/mnt/transcend/Pictures"
 TOP_DIR="${MNT_PT}/MagicMirror"
-RMLIST="$HOME/Pictures/rmlist.txt"
+RMLIST="/usr/local/MirrorCommandLine/etc/rmlist.txt"
 
 # Use an associative array to map names across sites
 declare -A top_sites
 
 [ -d ${TOP_DIR} ] || {
-    echo "$TOP_DIR does not exist or is not a directory. Exiting."
-    exit 1
+    MNT_PT="/u/pictures"
+    TOP_DIR="${MNT_PT}/MagicMirror"
+    [ -d ${TOP_DIR} ] || {
+        echo "$TOP_DIR does not exist or is not a directory. Exiting."
+        exit 1
+    }
 }
 cd ${TOP_DIR}
 TOP="${MNT_PT}/Wallhaven"

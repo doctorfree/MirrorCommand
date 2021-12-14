@@ -8,8 +8,12 @@ RMLIST="$HOME/Pictures/rmlist.txt"
 declare -A artist_sites
 
 [ -d ${ART_DIR} ] || {
+  MNT_PT="/u/pictures"
+  ART_DIR="${MNT_PT}/MagicMirror/Artists"
+  [ -d ${ART_DIR} ] || {
     echo "$ART_DIR does not exist or is not a directory. Exiting."
     exit 1
+  }
 }
 cd ${ART_DIR}
 TOP="${MNT_PT}/Wallhaven"
