@@ -61,23 +61,26 @@ case "$1" in
         then
             [ -d "${MMHOME}/config" ] || continue
             USER=$(stat -c '%U' ${MMHOME}/config)
-            cd "${MMHOME}/config"
-            for config in ${MM}/config/*
+            cd "${MMHOME}"
+            for config in ${MM}/config/* ${MM}/config-notelegram/*
             do
               [ "${config}" == "${MM}/config/*" ] && continue
+              [ "${config}" == "${MM}/config-notelegram/*" ] && continue
               b=`basename ${config}`
-              [ -d $b ] && {
-                  cd $b
-                  for subconf in ${MM}/config/$b/*
+              d=`dirname ${config}`
+              e=`basename ${d}`
+              [ -d ${e}/$b ] && {
+                  cd ${e}/$b
+                  for subconf in ${MM}/$e/$b/*
                   do
-                      [ "${subconf}" == "${MM}/config/$b/*" ] && continue
+                      [ "${subconf}" == "${MM}/$e/$b/*" ] && continue
                       c=`basename ${subconf}`
                       rm -f $c
                   done
-                  cd ..
-                  rmdir --ignore-fail-on-non-empty $b
+                  cd "${MMHOME}"
+                  rmdir --ignore-fail-on-non-empty $e/$b
               }
-              rm -f $b
+              rm -f $e/$b
             done
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"
