@@ -20,8 +20,10 @@ case "$1" in
             done
         }
         [ "${MMHOME}" ] || {
+            echo ""
             echo "Unable to locate a MagicMirror installation on this system."
             echo "MagicMirror is required in order to install MirrorCommandLine."
+            echo ""
             while true
             do
               read -p "Install MagicMirror ? ('Y'/'N'): " yn
@@ -40,6 +42,7 @@ case "$1" in
                           }
                       done
                       [ $numusers -gt 1 ] && {
+                          echo ""
                           # Create a selection dialog to allow user to select USER
                           PS3="${BOLD}Please enter MagicMirror user (numeric or text): ${NORMAL}"
                           options=(${users})
