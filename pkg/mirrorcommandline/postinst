@@ -29,13 +29,16 @@ case "$1" in
             updallartists updallmodels updallphotographers updalltop updarpscan \
             updartist updlinks updmodel updphotographer updtop vncview vol \
             websnap wireless_conf zerologs"
-        LOCAL="myreboot myshutdown remountusb mirror_start"
+        LOCAL="myreboot myshutdown remountusb"
         KEYS="/usr/local/MirrorCommandLine/etc/mirrorkeys"
 
         [ -d /usr/local ] || mkdir /usr/local
         [ -d /usr/local/bin ] || mkdir /usr/local/bin
         cd /usr/local/bin
         MM="/usr/local/MirrorCommandLine"
+        [ -f ${MM}/etc/mirror_start.sh ] && {
+          [ -f mirror_start ] || ln -s ${MM}/etc/mirror_start.sh mirror_start
+        }
         for command in ${EXPORTS}
         do
           [ -f ${MM}/bin/${command} ] && {
@@ -49,7 +52,7 @@ case "$1" in
               cp ${MM}/bin/${command} /usr/bin/${command}
               chmod 755 /usr/bin/${command}
             }
-            if [ "${command}" == "remountusb" ] || [ "${command}" == "mirror_start" ]
+            if [ "${command}" == "remountusb" ]
             then
               [ -f ${command} ] || ln -s /usr/bin/${command} .
             else

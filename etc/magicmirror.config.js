@@ -2,7 +2,7 @@ module.exports = {
   apps : [{
     name   : "MagicMirror",
     interpreter : "/bin/bash",
-    script : "/usr/bin/mirror_start",
+    script : "/usr/local/MirrorCommandLine/etc/mirror_start.sh",
   }]
 }
 

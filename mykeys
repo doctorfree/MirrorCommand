@@ -4,6 +4,22 @@ MCL=$HOME/src/MirrorCommandLine
 PICDIR="/mnt/transcend/Pictures/MagicMirror"
 MAGDIR="/usr/local/MirrorCommandLine"
 
+[ -f ${MAGDIR}/etc/arp-devices.js ] && {
+  cp ${MAGDIR}/etc/arp-devices.js ${MAGDIR}/etc/arp-devices-inst.js
+}
+[ -f ${MCL}/etc/my_arp-devices.js ] && {
+  cp ${MCL}/etc/my_arp-devices.js ${MAGDIR}/etc/arp-devices.js
+}
+[ -f ${MCL}/etc/my_arp-devices-cols.js ] && {
+  cp ${MCL}/etc/my_arp-devices-cols.js ${MAGDIR}/etc/arp-devices-cols.js
+}
+
+[ -f ${MCL}/etc/my_mirrorkeys ] || {
+    echo "Cannot locate ${MCL}/etc/my_mirrorkeys"
+    echo "Find it and rerun this script"
+    exit 1
+}
+
 cp ${MCL}/etc/my_mirrorkeys ${MAGDIR}/etc/mirrorkeys
 showkeys
 

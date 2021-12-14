@@ -14,6 +14,8 @@ config/config-unknown.js
 config/config.js.sample
 config/test/*
 etc/my_mirrorkeys
+etc/my_arp-devices.js
+etc/my_arp-devices-cols.js
 modules/MMM-AssistantMk2/deviceInstance.json
 modules/MMM-AssistantMk2/profiles/default.json
 modules/MMM-Hotword/trainer/trainer-withtoken.sh

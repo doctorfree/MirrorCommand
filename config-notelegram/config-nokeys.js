@@ -62,29 +62,6 @@ var config = {
 			module: "compliments",
 			position: "lower_third"
 		},
-		{
-			module: "weather",
-			position: "top_right",
-			config: {
-				weatherProvider: "openweathermap",
-				type: "current",
-				location: "New York",
-				locationID: "5128581", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
-				apiKey: "YOUR_OPENWEATHER_API_KEY"
-			}
-		},
-		{
-			module: "weather",
-			position: "top_right",
-			header: "Weather Forecast",
-			config: {
-				weatherProvider: "openweathermap",
-				type: "forecast",
-				location: "New York",
-				locationID: "5128581", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
-				apiKey: "YOUR_OPENWEATHER_API_KEY"
-			}
-		},
         {
             module: 'MMM-Remote-Control',
             config: {
@@ -148,7 +125,7 @@ var config = {
 					{
 						title: "New York Times",
 						url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
-					}
+					},
                     {
                         title: "Washington Post",
                         url: "http://feeds.washingtonpost.com/rss/national"
@@ -232,7 +209,7 @@ var config = {
                 coloredState: true,
                 showIP: true,
                 showUnknown: false,
-                showOffline: true,
+                showOffline: false,
                 keepAlive: 900,
                 updateInterval: 60,
                 // DO NOT REMOVE __ARP_SCAN_DEVICES__
