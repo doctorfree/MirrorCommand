@@ -47,6 +47,12 @@ isportrait() {
     return $port
 }
 
+portrait=1
+[ "$1" == "-l" ] && {
+    portrait=
+    shift
+}
+
 [ "$1" ] || {
     echo "Use 'mmupdall' to update all folders."
     echo "This script requires a folder or folders as arguments."
@@ -152,7 +158,13 @@ do
                     }
                     if isportrait $subimg
                     then
-                        cp $MDIR/$chkfolder/$subimg ${MOD_DIR}/$folder/$subimg
+                        [ "${portrait}" ] && {
+                          cp $MDIR/$chkfolder/$subimg ${MOD_DIR}/$folder/$subimg
+                        }
+                    else
+                        [ "${portrait}" ] || {
+                          cp $MDIR/$chkfolder/$subimg ${MOD_DIR}/$folder/$subimg
+                        }
                     fi
                 done
             else
@@ -163,7 +175,13 @@ do
                 }
                 if isportrait $img
                 then
-                    cp $MDIR/$chkfolder/$img ${MOD_DIR}/$folder/$img
+                    [ "${portrait}" ] && {
+                      cp $MDIR/$chkfolder/$img ${MOD_DIR}/$folder/$img
+                    }
+                else
+                    [ "${portrait}" ] || {
+                      cp $MDIR/$chkfolder/$img ${MOD_DIR}/$folder/$img
+                    }
                 fi
             fi
         done

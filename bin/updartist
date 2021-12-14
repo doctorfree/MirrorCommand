@@ -47,6 +47,12 @@ isportrait() {
     return $port
 }
 
+portrait=1
+[ "$1" == "-l" ] && {
+    portrait=
+    shift
+}
+
 [ "$1" ] || {
     echo "Use 'mmupdall' to update all folders."
     echo "This script requires a folder or folders as arguments."
@@ -146,14 +152,22 @@ do
                 for subimg in $img/*
                 do
                     [ "$subimg" == "$img/*" ] && continue
-                    [ -L ${ART_DIR}/$folder/$subimg ] && rm -f ${ART_DIR}/$folder/$subimg
+                    [ -L ${ART_DIR}/$folder/$subimg ] && {
+                        rm -f ${ART_DIR}/$folder/$subimg
+                    }
                     grep $subimg $RMLIST > /dev/null && {
                         rm -f $subimg
                         continue
                     }
                     if isportrait $subimg
                     then
-                        cp $ADIR/$chkfolder/$subimg ${ART_DIR}/$folder/$subimg
+                        [ "${portrait}" ] && {
+                          cp $ADIR/$chkfolder/$subimg ${ART_DIR}/$folder/$subimg
+                        }
+                    else
+                        [ "${portrait}" ] || {
+                          cp $ADIR/$chkfolder/$subimg ${ART_DIR}/$folder/$subimg
+                        }
                     fi
                 done
             else
@@ -164,7 +178,13 @@ do
                 }
                 if isportrait $img
                 then
-                    cp $ADIR/$chkfolder/$img ${ART_DIR}/$folder/$img
+                    [ "${portrait}" ] && {
+                      cp $ADIR/$chkfolder/$img ${ART_DIR}/$folder/$img
+                    }
+                else
+                    [ "${portrait}" ] || {
+                      cp $ADIR/$chkfolder/$img ${ART_DIR}/$folder/$img
+                    }
                 fi
             fi
         done

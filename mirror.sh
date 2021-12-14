@@ -69,6 +69,13 @@ apiurl="http://${IP}:${PORT}/api/notification"
 # Set this to the X11 DISPLAY you are using. DISPLAY=:0 works for most systems.
 export DISPLAY=:0
 HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
+PORTRAIT=1
+SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
+echo ${SCREEN_RES} | grep x > /dev/null && {
+    SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
+    SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
+    [ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
+}
 # -----------------------------------------------------------------------
 [ -d /usr/local/MirrorCommandLine/bin ] && {
     export PATH=${PATH}:/usr/local/MirrorCommandLine/bin
@@ -1045,6 +1052,7 @@ usage() {
     printf "\n\t-a <artist>, -A <artist>, -b <brightness>, -B, -c <config>, -d, -i <info>,"
     printf "\n\t-V, -N, -R (toggle video play, play next video, replay video),"
     printf "\n\t-H, -h (Hide video, Show video),"
+    printf "\n\t-L, use landscape display mode and use landscape designed configs/pics,"
     printf "\n\t-I, -l <list>, -r <rotate>, -s <screen>, -S, -m <model>, -M <model>,"
     printf "\n\t-p <photographer>, -P <photographer>, -w <dir>, -W <dir>, -u"
     printf "\n\n${BOLD}Examples:${NORMAL}"
@@ -1810,7 +1818,7 @@ select_youtube() {
 # stop
 # status [all]
 
-while getopts a:A:b:Bc:dDhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
+while getopts a:A:b:Bc:dDhHi:Ij:J:l:Lm:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
     case $flag in
         a)
           artist_create ${OPTARG}
@@ -1873,6 +1881,9 @@ while getopts a:A:b:Bc:dDhHi:Ij:J:l:m:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
                 ;;
             esac
             ;;
+        L)
+          PORTRAIT=
+          ;;
         m)
           model_create ${OPTARG}
           ;;
