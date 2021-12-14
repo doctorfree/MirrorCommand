@@ -72,10 +72,19 @@ HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
 PORTRAIT=1
 SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
 echo ${SCREEN_RES} | grep x > /dev/null && {
-    SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
-    SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
-    [ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
+  SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
+  SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
 }
+if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
+then
+  SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
+fi
+if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
+then
+  SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
+fi
+[ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
+
 # -----------------------------------------------------------------------
 [ -d /usr/local/MirrorCommandLine/bin ] && {
     export PATH=${PATH}:/usr/local/MirrorCommandLine/bin
@@ -1155,8 +1164,9 @@ setconf() {
         exit ${ERROR_EXIT}
     }
     [ -L config-$$.js ] && rm -f config-$$.js
-    rotation=`xrandr | grep connected | awk ' { print $5 } '`
-    case ${conf} in
+    [ "${PORTRAIT}" ] && {
+      rotation=`xrandr | grep connected | awk ' { print $5 } '`
+      case ${conf} in
         tantra|iframe|candy|fractalplaylist|hardzoom)
             [ "$rotation" == "normal" ] || {
               [ "${HDMI}" ] && {
@@ -1173,7 +1183,8 @@ setconf() {
               }
             }
             ;;
-    esac
+      esac
+    }
     if [ "${START_DEV}" ]
     then
         start_dev
