@@ -82,6 +82,7 @@ case "$1" in
               }
               rm -f $e/$b
             done
+            rmdir --ignore-fail-on-non-empty ${MMHOME}/config-notelegram
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"
               c="custom-mirrorcommandline.css"
