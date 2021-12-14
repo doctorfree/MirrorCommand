@@ -19,3 +19,4 @@ do
         rm -f /tmp/$b
     }
 done
+exit 0
