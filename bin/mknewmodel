@@ -12,6 +12,13 @@ PICDIR="/usr/local/MirrorCommandLine/pics/${TYPE}"
     echo "$TYPEDIR does not exist or is not a directory. Exiting."
     exit 1
 }
+
+portrait=
+[ "$1" == "-l" ] && {
+    portrait="-l"
+    shift
+}
+
 cd ${TYPEDIR}
 for i in $*
 do
@@ -20,7 +27,7 @@ do
         continue
     }
     mkdir $i
-    ${UPDSCRIPT} $i
+    ${UPDSCRIPT} ${portrait} $i
     [ -d ${PICDIR}/$i ] || {
         cd ${PICDIR}
         ln -s ${TYPEDIR}/$i .
