@@ -26,12 +26,12 @@ MAGDIR="/usr/local/MirrorCommandLine"
 cp ${MCL}/etc/my_mirrorkeys ${MAGDIR}/etc/mirrorkeys
 showkeys
 
-cd ${MAGDIR}/pics
+[ -d ${MAGDIR}/pics ] && {
+    cd ${MAGDIR}/pics
 
-for pdir in Art Artists Fractals Gif JAV Models Moon_Maison Owls \
+    for pdir in Art Artists Fractals Gif JAV Models Moon_Maison Owls \
             Nuts_Magazine Photographers Tuigirl Water Waterfalls
-do
-    [ -d ${pdir} ] || {
-        ln -s ${PICDIR}/${pdir} ${pdir}
-    }
-done
+    do
+      [ -d ${pdir} ] || ln -s ${PICDIR}/${pdir} ${pdir}
+    done
+}
