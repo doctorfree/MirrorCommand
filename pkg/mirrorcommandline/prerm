@@ -128,7 +128,7 @@ case "$1" in
             echo "have not been unlinked in the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi
-        rm -f ${MM}/etc/arp-devices.js
+        rm -f ${MM}/etc/arp-devices*.js
         [ "${USER}" ] && {
           sudo -u ${USER} pm2 list | grep MagicMirror > /dev/null && {
             sudo -u ${USER} pm2 --silent describe MagicMirror && {
