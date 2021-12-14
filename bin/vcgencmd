@@ -4,4 +4,20 @@
 # This script will attempt to provide functional compatibility with vcgencmd
 # for systems other than the Raspberry Pi
 
+HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
+
+[ "${HDMI}" ] || {
+    echo "No connected monitors detected. Exiting."
+    exit 1
+}
+
+[ "$1" == "display_power" ] && {
+    if [ "$2" == "1" ]
+    then
+        xrandr --output ${HDMI} --auto
+    else
+        xrandr --output ${HDMI} --off
+    fi
+}
+
 exit 0
