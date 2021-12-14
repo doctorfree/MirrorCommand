@@ -2,7 +2,7 @@
 
 MNT_PT="/mnt/transcend/Pictures"
 ART_DIR="${MNT_PT}/MagicMirror/Artists"
-RMLIST="$HOME/Pictures/rmlist.txt"
+RMLIST="/usr/local/MirrorCommandLine/etc/rmlist.txt"
 
 # Use an associative array to map artist names across sites
 declare -A artist_sites
