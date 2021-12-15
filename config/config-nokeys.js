@@ -239,42 +239,8 @@ var config = {
                 showOffline: false,
                 keepAlive: 900,
                 updateInterval: 60,
-                devices: [
-    { macAddress: "b8:b7:f1:83:60:c8", name: "Wistron", icon: "mobile" },    // 10.0.1.101
-    { macAddress: "3c:6a:9d:12:84:49", name: "Dexatek", icon: "mobile" },    // 10.0.1.12
-    { macAddress: "48:e1:e9:29:51:ad", name: "Chengdu", icon: "mobile" },    // 10.0.1.128
-    { macAddress: "58:d3:49:2a:9f:f7", name: "(Unknown)", icon: "mobile" },    // 10.0.1.131
-    { macAddress: "f4:39:09:93:bd:49", name: "Hewlett", icon: "mobile" },    // 10.0.1.164
-    { macAddress: "00:11:d9:60:8b:53", name: "TiVo", icon: "mobile" },    // 10.0.1.176
-    { macAddress: "00:11:d9:60:8b:54", name: "TiVo", icon: "mobile" },    // 10.0.1.177
-    { macAddress: "00:1d:ba:c3:c7:17", name: "Sony", icon: "mobile" },    // 10.0.1.193
-    { macAddress: "e8:9f:80:14:95:fe", name: "(Unknown)", icon: "mobile" },    // 10.0.1.1
-    { macAddress: "00:17:88:49:1a:cd", name: "Philips", icon: "mobile" },    // 10.0.1.20
-    { macAddress: "00:1d:c0:62:42:67", name: "Enphase", icon: "mobile" },    // 10.0.1.24
-    { macAddress: "3c:6a:9d:12:7d:7a", name: "Dexatek", icon: "mobile" },    // 10.0.1.243
-    { macAddress: "c4:41:1e:f2:14:f5", name: "Belkin", icon: "mobile" },    // 10.0.1.246
-    { macAddress: "d4:90:9c:da:31:9e", name: "Apple,", icon: "mobile" },    // 10.0.1.31
-    { macAddress: "58:d3:49:0f:02:23", name: "(Unknown)", icon: "mobile" },    // 10.0.1.46
-    { macAddress: "74:1b:b2:da:2e:d9", name: "Apple,", icon: "mobile" },    // 10.0.1.51
-    { macAddress: "36:7f:9e:f1:78:5a", name: "(Unknown:", icon: "mobile" },    // JJ.J.J.JJ
-    { macAddress: "48:e1:e9:39:19:94", name: "Chengdu", icon: "mobile" },    // 10.0.1.54
-    { macAddress: "00:3e:e1:c8:14:5b", name: "Apple,", icon: "mobile" },    // CC.C.C.CC
-    { macAddress: "dc:a6:32:e3:e5:48", name: "Raspberry", icon: "mobile" },    // 10.0.1.60
-    { macAddress: "dc:a6:32:e3:e5:48", name: "Raspberry", icon: "mobile" },    // 10.0.1.60
-    { macAddress: "00:7e:56:91:28:b2", name: "China", icon: "mobile" },    // 10.0.1.72
-    { macAddress: "40:6c:8f:11:6a:79", name: "Apple,", icon: "mobile" },    // 10.0.1.74
-    { macAddress: "00:04:20:f4:ea:9c", name: "Slim", icon: "mobile" },    // 10.0.1.79
-    { macAddress: "1c:69:7a:65:19:9e", name: "EliteGroup", icon: "mobile" },    // EE.E.E.EE
-    { macAddress: "48:e1:e9:37:f0:1b", name: "Chengdu", icon: "mobile" },    // 10.0.1.83
-    { macAddress: "48:e1:e9:37:f0:1b", name: "Chengdu", icon: "mobile" },    // 10.0.1.83
-    { macAddress: "dc:a6:32:14:0a:b1", name: "Raspberry", icon: "mobile" },    // MM.M.M.MM
-    { macAddress: "dc:a6:32:14:0a:b1", name: "Raspberry", icon: "mobile" },    // 10.0.1.86
-    { macAddress: "dc:a6:32:14:0a:b4", name: "Raspberry", icon: "mobile" },    // 10.0.1.86
-    { macAddress: "dc:a6:32:14:0a:b4", name: "Raspberry", icon: "mobile" },    // 10.0.1.86
-    { macAddress: "98:10:e8:f1:77:6d", name: "Apple,", icon: "mobile" },    // AA.A.A.AA
-    { macAddress: "c4:41:1e:f2:2e:cc", name: "Belkin", icon: "mobile" },    // 10.0.1.89
-                ],
-
+                // DO NOT REMOVE __ARP_SCAN_DEVICES__
+                devices: [],
             },
         },
     ]
