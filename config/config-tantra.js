@@ -32,10 +32,10 @@ var config = {
         "EE.E.E.EE", // Roon Core
         "FF.F.F.FF", // Mac Pro
         "GG.G.G.GG", // Ropieee
-        "10.0.1.55", // Raspberry Pi MagicMirror
         "HH.H.H.HH", // Raspberry Pi 400
         "II.I.I.II", // iPad Air
         "JJ.J.J.JJ", // iPhone 12 Mini
+        "KK.K.K.KK", // Ubuntu MagicMirror
         "::ffff:127.0.0.1",
         "::1",
     ],
