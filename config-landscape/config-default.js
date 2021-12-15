@@ -15,17 +15,17 @@ var config = {
     ipWhitelist: [
         "0.0.0.0",
         "127.0.0.1",
-        "10.0.1.88", // Mac Mini
-        "10.0.1.204", // iPad
-        "10.0.1.57", // Mac Pro
-        "10.0.8.130", // Mac Pro over Tunnelblick
-        "10.0.1.81", // Roon Core
-        "10.0.1.82", // Mac Pro
-        "10.0.1.94", // Ropieee
+        "AA.A.A.AA", // Mac Mini
+        "BB.B.B.BBB", // iPad
+        "CC.C.C.CC", // Mac Pro
+        "DD.D.D.DDD", // Mac Pro over Tunnelblick
+        "EE.E.E.EE", // Roon Core
+        "FF.F.F.FF", // Mac Pro
+        "GG.G.G.GG", // Ropieee
         "10.0.1.55", // Raspberry Pi MagicMirror
-        "10.0.1.80", // Raspberry Pi 400
-        "10.0.1.69", // iPad Air
-        "10.0.1.52", // iPhone 12 Mini
+        "HH.H.H.HH", // Raspberry Pi 400
+        "II.I.I.II", // iPad Air
+        "JJ.J.J.JJ", // iPhone 12 Mini
         "::ffff:127.0.0.1",
         "::1",
     ],
@@ -57,7 +57,7 @@ var config = {
         {
             module: 'MMM-Remote-Control',
             config: {
-                apiKey: 'd8d8947ad3da477288bcbe3c7353523b',
+                apiKey: 'xxx_Remote-Control-API-Key_xxxxx',
                 customCommand: {
                     shutdownCommand: '/usr/local/bin/shutdown',
                     rebootCommand: '/usr/local/bin/reboot',
@@ -123,7 +123,7 @@ var config = {
 //           location: "Santa Cruz,United States",
 //           locationID: "5393052",
 //           units: "imperial",
-//           apiKey: "ec423d6763bd44f32632d89b1d5e7922"
+//           apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
 //          }
 //      },
 //      {
@@ -137,7 +137,7 @@ var config = {
 //              units: "imperial",
 //              showRainAmount: "true",
 //              colored: "true",
-//              apiKey: "ec423d6763bd44f32632d89b1d5e7922"
+//              apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
 //          }
 //      },
         {
@@ -168,9 +168,9 @@ var config = {
             module: 'MMM-Solar',
             position: "bottom_right",
             config: {
-                apiKey: "3c7c71ba1dd32339795a2a187823c6b3",
-                userId: "4d7a51344d7a49770a",
-                systemId: "423390",
+                apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
+                userId: "Solar-USER-ID",
+                systemId: "Solar-System-ID",
                 // basicHeader: "true",
             }
         },
@@ -239,7 +239,7 @@ var config = {
             header: 'Hue Lights',
             config: {
                 bridgeIp: "10.0.1.20",
-                user: "HtKqp3jJmVutSBGa9BvIme18CrWbv8SJ9W7ea0Td",
+                user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
             }
         },
         {
@@ -303,7 +303,7 @@ var config = {
                       colorStateOffline: "red",
                     },
                     {
-                      ipAddress: "10.0.1.80",
+                      ipAddress: "HH.H.H.HH",
                       name: "Raspberry Pi 400",
                       icon: "signal",
                       colorStateOnline: "#00ff00",
@@ -442,9 +442,9 @@ var config = {
         {
             module: 'MMM-TelegramBot',
             config: {
-              telegramAPIKey : '2088023396:AAGTbWdCneNtEQ5vHybJTVqmXxc_-rtNQYk',
-              allowedUser : ['ronrecord'],
-              adminChatId : 1810753652,
+              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
+              allowedUser : ['Your-Telegram-Username'],
+              adminChatId : 0000000000,
               useWelcomeMessage: false,
               verbose: false,
               favourites: [

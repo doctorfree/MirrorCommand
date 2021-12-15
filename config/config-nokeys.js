@@ -15,17 +15,17 @@ var config = {
     ipWhitelist: [
         "0.0.0.0",
         "127.0.0.1",
-        "10.0.1.88", // Mac Mini
-        "10.0.1.204", // iPad
-        "10.0.1.57", // Mac Pro
-        "10.0.8.130", // Mac Pro over Tunnelblick
-        "10.0.1.81", // Roon Core
-        "10.0.1.82", // Mac Pro
-        "10.0.1.94", // Ropieee
+        "AA.A.A.AA", // Mac Mini
+        "BB.B.B.BBB", // iPad
+        "CC.C.C.CC", // Mac Pro
+        "DD.D.D.DDD", // Mac Pro over Tunnelblick
+        "EE.E.E.EE", // Roon Core
+        "FF.F.F.FF", // Mac Pro
+        "GG.G.G.GG", // Ropieee
         "10.0.1.55", // Raspberry Pi MagicMirror
-        "10.0.1.80", // Raspberry Pi 400
-        "10.0.1.69", // iPad Air
-        "10.0.1.52", // iPhone 12 Mini
+        "HH.H.H.HH", // Raspberry Pi 400
+        "II.I.I.II", // iPad Air
+        "JJ.J.J.JJ", // iPhone 12 Mini
         "::ffff:127.0.0.1",
         "::1",
     ],
@@ -90,7 +90,7 @@ var config = {
         {
             module: 'MMM-Remote-Control',
             config: {
-                // apiKey: 'd8d8947ad3da477288bcbe3c7353523b',
+                // apiKey: 'xxx_Remote-Control-API-Key_xxxxx',
                 customCommand: {
                     shutdownCommand: '/usr/local/bin/shutdown',
                     rebootCommand: '/usr/local/bin/reboot',
@@ -256,22 +256,22 @@ var config = {
     { macAddress: "d4:90:9c:da:31:9e", name: "Apple,", icon: "mobile" },    // 10.0.1.31
     { macAddress: "58:d3:49:0f:02:23", name: "(Unknown)", icon: "mobile" },    // 10.0.1.46
     { macAddress: "74:1b:b2:da:2e:d9", name: "Apple,", icon: "mobile" },    // 10.0.1.51
-    { macAddress: "36:7f:9e:f1:78:5a", name: "(Unknown:", icon: "mobile" },    // 10.0.1.52
+    { macAddress: "36:7f:9e:f1:78:5a", name: "(Unknown:", icon: "mobile" },    // JJ.J.J.JJ
     { macAddress: "48:e1:e9:39:19:94", name: "Chengdu", icon: "mobile" },    // 10.0.1.54
-    { macAddress: "00:3e:e1:c8:14:5b", name: "Apple,", icon: "mobile" },    // 10.0.1.57
+    { macAddress: "00:3e:e1:c8:14:5b", name: "Apple,", icon: "mobile" },    // CC.C.C.CC
     { macAddress: "dc:a6:32:e3:e5:48", name: "Raspberry", icon: "mobile" },    // 10.0.1.60
     { macAddress: "dc:a6:32:e3:e5:48", name: "Raspberry", icon: "mobile" },    // 10.0.1.60
     { macAddress: "00:7e:56:91:28:b2", name: "China", icon: "mobile" },    // 10.0.1.72
     { macAddress: "40:6c:8f:11:6a:79", name: "Apple,", icon: "mobile" },    // 10.0.1.74
     { macAddress: "00:04:20:f4:ea:9c", name: "Slim", icon: "mobile" },    // 10.0.1.79
-    { macAddress: "1c:69:7a:65:19:9e", name: "EliteGroup", icon: "mobile" },    // 10.0.1.81
+    { macAddress: "1c:69:7a:65:19:9e", name: "EliteGroup", icon: "mobile" },    // EE.E.E.EE
     { macAddress: "48:e1:e9:37:f0:1b", name: "Chengdu", icon: "mobile" },    // 10.0.1.83
     { macAddress: "48:e1:e9:37:f0:1b", name: "Chengdu", icon: "mobile" },    // 10.0.1.83
-    { macAddress: "dc:a6:32:14:0a:b1", name: "Raspberry", icon: "mobile" },    // 10.0.1.85
+    { macAddress: "dc:a6:32:14:0a:b1", name: "Raspberry", icon: "mobile" },    // MM.M.M.MM
     { macAddress: "dc:a6:32:14:0a:b1", name: "Raspberry", icon: "mobile" },    // 10.0.1.86
     { macAddress: "dc:a6:32:14:0a:b4", name: "Raspberry", icon: "mobile" },    // 10.0.1.86
     { macAddress: "dc:a6:32:14:0a:b4", name: "Raspberry", icon: "mobile" },    // 10.0.1.86
-    { macAddress: "98:10:e8:f1:77:6d", name: "Apple,", icon: "mobile" },    // 10.0.1.88
+    { macAddress: "98:10:e8:f1:77:6d", name: "Apple,", icon: "mobile" },    // AA.A.A.AA
     { macAddress: "c4:41:1e:f2:2e:cc", name: "Belkin", icon: "mobile" },    // 10.0.1.89
                 ],
 

@@ -62,10 +62,15 @@ case "$1" in
             [ -d "${MMHOME}/config" ] || continue
             USER=$(stat -c '%U' ${MMHOME}/config)
             cd "${MMHOME}"
-            for config in ${MM}/config/* ${MM}/config-notelegram/*
+            for config in ${MM}/config/* \
+                          ${MM}/config-notelegram/* \
+                          ${MM}/config-landscape/* \
+                          ${MM}/config-landscape-notelegram/*
             do
               [ "${config}" == "${MM}/config/*" ] && continue
               [ "${config}" == "${MM}/config-notelegram/*" ] && continue
+              [ "${config}" == "${MM}/config-landscape/*" ] && continue
+              [ "${config}" == "${MM}/config-landscape-notelegram/*" ] && continue
               b=`basename ${config}`
               d=`dirname ${config}`
               e=`basename ${d}`
@@ -82,7 +87,9 @@ case "$1" in
               }
               rm -f $e/$b
             done
+            rmdir --ignore-fail-on-non-empty ${MMHOME}/config-landscape
             rmdir --ignore-fail-on-non-empty ${MMHOME}/config-notelegram
+            rmdir --ignore-fail-on-non-empty ${MMHOME}/config-landscape-notelegram
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"
               c="custom-mirrorcommandline.css"

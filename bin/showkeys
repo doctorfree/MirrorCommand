@@ -1,12 +1,12 @@
 #!/bin/bash
 
-MMCONFDIR="/usr/local/MirrorCommandLine/config"
-NOCONFDIR="/usr/local/MirrorCommandLine/config-notelegram"
+MMCONFDIR="/usr/local/MirrorCommandLine"
 BINDIR="/usr/local/MirrorCommandLine/bin"
 QUIET=
 [ "$1" == "-q" ] && QUIET=1
 
 showconfkeys() {
+  [ -d "${CONFDIR}" ] && {
     cd "${CONFDIR}"
     [ "${QUIET}" ] || echo "Showing keys in $CONFDIR"
     ${BINDIR}/show_dist_keys
@@ -19,6 +19,7 @@ showconfkeys() {
             cd ..
         }
     done
+  }
 }
 
 MMHOME="$HOME/MagicMirror"
@@ -38,11 +39,19 @@ MMHOME="$HOME/MagicMirror"
     showconfkeys
     CONFDIR=${MMHOME}/config-notelegram
     showconfkeys
+    CONFDIR=${MMHOME}/config-landscape
+    showconfkeys
+    CONFDIR=${MMHOME}/config-landscape-notelegram
+    showconfkeys
 }
 
-CONFDIR=${MMCONFDIR}
+CONFDIR=${MMCONFDIR}/config
 showconfkeys
-CONFDIR=${NOCONFDIR}
+CONFDIR=${MMCONFDIR}/config-notelegram
+showconfkeys
+CONFDIR=${MMCONFDIR}/config-landscape
+showconfkeys
+CONFDIR=${MMCONFDIR}/config-landscape-notelegram
 showconfkeys
 
 cd "${BINDIR}"

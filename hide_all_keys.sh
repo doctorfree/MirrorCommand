@@ -15,6 +15,18 @@ do
         cd ..
     }
 done
+cd "${CONFDIR}/../config-landscape"
+echo "Hiding keys in $CONFDIR/../config-landscape"
+../hide_keys.sh
+for i in Artists JAV Models Photos Photographers Templates YouTube
+do
+    [ -d $i ] && {
+        cd $i
+        echo "Hiding keys in ../config-landscape/$i"
+        ../../hide_keys.sh
+        cd ..
+    }
+done
 cd "${CONFDIR}/../config-notelegram"
 echo "Hiding keys in $CONFDIR/../config-notelegram"
 ../hide_keys.sh
@@ -23,6 +35,18 @@ do
     [ -d $i ] && {
         cd $i
         echo "Hiding keys in ../config-notelegram/$i"
+        ../../hide_keys.sh
+        cd ..
+    }
+done
+cd "${CONFDIR}/../config-landscape-notelegram"
+echo "Hiding keys in $CONFDIR/../config-landscape-notelegram"
+../hide_keys.sh
+for i in Artists JAV Models Photos Photographers Templates YouTube
+do
+    [ -d $i ] && {
+        cd $i
+        echo "Hiding keys in ../config-landscape-notelegram/$i"
         ../../hide_keys.sh
         cd ..
     }

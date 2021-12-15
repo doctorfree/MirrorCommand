@@ -32,7 +32,7 @@ var config = {
         "EE.E.E.EE", // Roon Core
         "FF.F.F.FF", // Mac Pro
         "GG.G.G.GG", // Ropieee
-        "MM.M.M.MM", // Raspberry Pi MagicMirror
+        "10.0.1.55", // Raspberry Pi MagicMirror
         "HH.H.H.HH", // Raspberry Pi 400
         "II.I.I.II", // iPad Air
         "JJ.J.J.JJ", // iPhone 12 Mini
@@ -81,7 +81,7 @@ var config = {
         },
         {
             module: 'MMM-Videoplayer',
-            position: 'fullscreen_below',
+            position: 'middle_center',
             config: {
               videolist: [
                   "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_0.mp4",

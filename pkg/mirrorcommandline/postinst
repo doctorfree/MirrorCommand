@@ -92,7 +92,7 @@ case "$1" in
               cp /tmp/${remote}$$ ${MM}/bin/${remote}
               rm -f /tmp/${remote}$$
             done
-            for cfg in config config-notelegram
+            for cfg in config config-landscape config-notelegram config-landscape-notelegram
             do
               [ -d "${MMHOME}/${cfg}" ] || {
                 sudo -u ${USER} mkdir "${MMHOME}/${cfg}"
@@ -146,6 +146,10 @@ case "$1" in
                 cd "${MMHOME}/config"
                 ${MM}/bin/arpscanconf
                 cd "${MMHOME}/config-notelegram"
+                ${MM}/bin/arpscanconf
+                cd "${MMHOME}/config-landscape"
+                ${MM}/bin/arpscanconf
+                cd "${MMHOME}/config-landscape-notelegram"
                 ${MM}/bin/arpscanconf
               }
             }
