@@ -181,6 +181,18 @@ case "$1" in
                 }
               }
             done
+            # Copy any installed MirrorCommandLine MMM-Detector resources
+            # If any resources of the same name already exists, do not overwrite
+            RESOURCES_DIR="modules/MMM-Detector/resources"
+            [ -d "${MMHOME}/${RESOURCES_DIR}" ] && {
+              cd "${MMHOME}/${RESOURCES_DIR}"
+              for resource in ${MM}/${RESOURCES_DIR}/*
+              do
+                [ "${resource}" == "${MM}/${RESOURCES_DIR}/*" ] && continue
+                b=`basename ${resource}`
+                [ -f $b ] || sudo -u ${USER} cp ${resource} .
+              done
+            }
             # Copy any installed MirrorCommandLine Google Assistant recipes
             # If any recipe of the same name already exists, do not overwrite
             RECIPE_DIR="modules/MMM-GoogleAssistant/recipes"
