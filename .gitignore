@@ -16,6 +16,7 @@ etc/my_mirrorkeys
 etc/my_arp-devices.js
 etc/my_arp-devices-cols.js
 etc/my_arp-devices-scenes.js
+modules/default/calendar/calendars/*
 modules/MMM-AssistantMk2/deviceInstance.json
 modules/MMM-AssistantMk2/profiles/default.json
 modules/MMM-Hotword/trainer/trainer-withtoken.sh

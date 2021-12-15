@@ -1125,28 +1125,58 @@ setconf() {
         grep ${NOKEY} ${subdir}/config-${conf}.js > /dev/null || NOKEY=
         if [ "${NOKEY}" ]
         then
-            if [ -f ../config-notelegram/$subdir/config-${conf}.js ]
+            if [ -f ../${TG_CONFDIR}/$subdir/config-${conf}.js ]
             then
-              ln -s ../config-notelegram/$subdir/config-${conf}.js config.js
+              ln -s ../${TG_CONFDIR}/$subdir/config-${conf}.js config.js
             else
-              ln -s $subdir/config-${conf}.js config.js
+              if [ -f ../${BU_TG_CONFDIR}/$subdir/config-${conf}.js ]
+              then
+                ln -s ../${BU_TG_CONFDIR}/$subdir/config-${conf}.js config.js
+              else
+                ln -s $subdir/config-${conf}.js config.js
+              fi
             fi
         else
-            ln -s $subdir/config-${conf}.js config.js
+            if [ "${PORTRAIT}" ]
+            then
+              ln -s $subdir/config-${conf}.js config.js
+            else
+              if [ -f ../${MM_CONFDIR}/$subdir/config-${conf}.js ]
+              then
+                ln -s ../${MM_CONFDIR}/$subdir/config-${conf}.js config.js
+              else
+                ln -s $subdir/config-${conf}.js config.js
+              fi
+            fi
         fi
     else
         echo "Setting MagicMirror configuration to config-${conf}.js"
         grep ${NOKEY} config-${conf}.js > /dev/null || NOKEY=
         if [ "${NOKEY}" ]
         then
-            if [ -f ../config-notelegram/config-${conf}.js ]
+            if [ -f ../${TG_CONFDIR}/config-${conf}.js ]
             then
-              ln -s ../config-notelegram/config-${conf}.js config.js
+              ln -s ../${TG_CONFDIR}/config-${conf}.js config.js
             else
-              ln -s config-${conf}.js config.js
+              if [ -f ../${BU_TG_CONFDIR}/config-${conf}.js ]
+              then
+                ln -s ../${BU_TG_CONFDIR}/config-${conf}.js config.js
+              else
+                ln -s config-${conf}.js config.js
+              fi
             fi
         else
-            ln -s config-${conf}.js config.js
+            if [ "${PORTRAIT}" ]
+            then
+              ln -s config-${conf}.js config.js
+            else
+              if [ -f ../${MM_CONFDIR}/config-${conf}.js ]
+              then
+                ln -s ../${MM_CONFDIR}/config-${conf}.js config.js
+              else
+                ln -s config-${conf}.js config.js
+              fi
+            fi
         fi
     fi
     npm run --silent config:check > /dev/null
@@ -1943,6 +1973,16 @@ while getopts a:A:b:Bc:dDhHi:Ij:J:l:Lm:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
     esac
 done
 shift $(( OPTIND - 1 ))
+
+if [ "${PORTRAIT}" ]
+then
+    MM_CONFDIR="config"
+    TG_CONFDIR="config-notelegram"
+else
+    MM_CONFDIR="config-landscape"
+    TG_CONFDIR="config-landscape-notelegram"
+fi
+BU_TG_CONFDIR="config-notelegram"
 
 [ "$1" == "youtube" ] && {
     select_youtube

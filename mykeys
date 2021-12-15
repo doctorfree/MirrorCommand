@@ -1,8 +1,16 @@
 #!/bin/bash
 
+MAGDIR="/usr/local/MirrorCommandLine"
+MIRDIR="/usr/local/MagicMirror"
 MCL=$HOME/src/MirrorCommandLine
 PICDIR="/mnt/transcend/Pictures/MagicMirror"
-MAGDIR="/usr/local/MirrorCommandLine"
+[ -d ${PICDIR} ] || {
+  PICDIR="/u/pictures/MagicMirror"
+  [ -d ${PICDIR} ] || {
+    echo "Cannot locate Pictures folder ${PICDIR}"
+    echo "Pictures folders in $MAGDIR unlinked"
+  }
+}
 
 [ -f ${MAGDIR}/etc/arp-devices.js ] && {
   cp ${MAGDIR}/etc/arp-devices.js ${MAGDIR}/etc/arp-devices-inst.js
@@ -26,7 +34,36 @@ MAGDIR="/usr/local/MirrorCommandLine"
 cp ${MCL}/etc/my_mirrorkeys ${MAGDIR}/etc/mirrorkeys
 showkeys
 
+echo "Copying in my calendars"
+CASRC="${MCL}/modules/default/calendar/calendars"
+CADIR="${MIRDIR}/modules/default/calendar/calendars"
+if [ -d ${CASRC} ]
+then
+  [ -d ${CADIR} ] || mkdir ${CADIR}
+  cp ${CASRC}/* ${CADIR}
+else
+  echo "Cannot locate calendars folder ${CASRC}"
+fi
+
+echo "Copying in Google Assistant credentials and tokens"
+GASRC="${MCL}/modules/MMM-GoogleAssistant"
+GADIR="${MIRDIR}/modules/MMM-GoogleAssistant"
+if [ -f ${GASRC}/credentials.json ]
+then
+  cp ${GASRC}/credentials.json ${GADIR}/credentials.json
+else
+  echo "Cannot locate credentials file ${GASRC}/credentials.json"
+fi
+if [ -d ${GASRC}/tokens ]
+then
+  [ -d ${GADIR}/tokens ] || mkdir ${GADIR}/tokens
+  cp ${GASRC}/tokens/* ${GADIR}/tokens
+else
+  echo "Cannot locate tokens folder ${GASRC}/tokens/"
+fi
+
 [ -d ${MAGDIR}/pics ] && {
+  [ -d ${PICDIR} ] && {
     cd ${MAGDIR}/pics
 
     for pdir in Art Artists Fractals Gif JAV Models Moon_Maison Owls \
@@ -34,4 +71,5 @@ showkeys
     do
       [ -d ${pdir} ] || ln -s ${PICDIR}/${pdir} ${pdir}
     done
+  }
 }
