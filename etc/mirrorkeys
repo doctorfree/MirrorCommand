@@ -86,8 +86,16 @@ keys[USERID]=
 dumb[USERID]="Solar-USER-ID"
 keys[SYSTEM]=
 dumb[SYSTEM]="Solar-System-ID"
+# Each device that accesses the Hue Hub API needs its own user
+# If you have more than one MagicMirror using the mmm-hue-lights
+# module then you will need multiple Hue API users. MirrorCommandLine
+# key management currently supports a maximum of three Hue API users.
 keys[HUE]=
 dumb[HUE]="xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx"
+keys[HUE2]=
+dumb[HUE2]="xxxxxxxxx_Hue-Hub-User-Two_xxxxxxxxxxxx"
+keys[HUE3]=
+dumb[HUE3]="xxxxxxxxx_Hue-Hub-User-Three_xxxxxxxxxx"
 keys[HIP]=
 dumb[HIP]="xxxxxxxxxx_Hue-Hub-IP_xxxxxxxxxxxxxxxx"
 keys[AVS]=

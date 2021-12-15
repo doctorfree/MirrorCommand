@@ -253,8 +253,13 @@ var config = {
             position: "top_center",
             header: 'Hue Lights',
             config: {
-                bridgeIp: "10.0.1.20",
+                bridgeIp: "xxxxxxxxxx_Hue-Hub-IP_xxxxxxxxxxxxxxxx",
                 user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
+                // If you've added a Hue API user and set it in mirrorkeys
+                // then replace the above setting of user with one of these
+                // and rerun showkeys.
+                // user: "xxxxxxxxx_Hue-Hub-User-Two_xxxxxxxxxxxx",
+                // user: "xxxxxxxxx_Hue-Hub-User-Three_xxxxxxxxxx",
             }
         },
         {
