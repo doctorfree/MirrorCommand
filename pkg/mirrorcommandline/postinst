@@ -22,7 +22,7 @@ case "$1" in
     configure)
         export PATH=/usr/local/bin:$PATH
         # Scripts for which links will be made in /usr/local/bin
-        EXPORTS="camsnap chkconfig chktemp gethue getquote screensaveroff \
+        EXPORTS="audiotest camsnap chkconfig chktemp gethue getquote screensaveroff \
             get_temps mirror mknewartist mknewmodel mknewphotographer \
             mknewplayboy mknewtop mm mmapiactions mmgetb mmscene mmsetb mmupdall \
             module_update module_update_all play rand_back send_sms showkeys \

@@ -55,10 +55,20 @@ configure, monitor, and manage a MagicMirror.
 
 The Mirror Command Line project provides scripts to enable
 command line control of the MagicMirror system over a local network.
+The MirrorCommandLine Debian format package installation scripts perform
+automatic installation and configuration of a MagicMirror including:
 
-A frontend Bash script, `mirror`, can be installed on your MagicMirror to issue
+- Automated installation of the MagicMirror software if not already installed
+- Automated configuration of the MagicMirror
+- Automated installation and configuration of several MagicMirror modules
+- PM2 process manager installation and configuration
+- Semi-automated key management to enable a single source for adding, storing, and managing the several keys necessary to activate many MagicMirror modules
+- Hundreds of MagicMirror configuration files preconfigured with layouts for both portrait and landscape mode displays and module activation
+
+The `mirror` command can be installed on your MagicMirror to issue
 MagicMirror commands. Currently the command line MagicMirror control scripts
 include support for:
+
 - Specifying the MagicMirror configuration file to activate
 - Starting, stopping, and restarting the MagicMirror
 - Display of various system info
@@ -99,7 +109,11 @@ Interactive menus when invoked with no arguments<br/>
 MirrorCommandLine is intended for installation on a system running
 [MagicMirror](https://magicmirror.builders). If MagicMirror is not
 previously installed it can be installed following
-[these instructions](https://docs.magicmirror.builders/getting-started/installation.html#manual-installation).
+[these instructions](https://docs.magicmirror.builders/getting-started/installation.html#manual-installation). Alternatively, the MirrorCommandLine Debian package
+format installation will automatically install and configure MagicMirror if no
+existing MagicMirror installation is detected. This automated installation
+of MagicMirror includes installing and configuring PM2 for easy and powerful
+process management of MagicMirror.
 
 **Note:** An actual mirror with display mounted on the rear is not necessary.
 MagicMirror can be installed on a Raspberry Pi with a mirror display as intended
@@ -111,25 +125,35 @@ MagicMirror requires Node version 12 or later.
 MirrorCommandLine assumes that MagicMirror is installed in either
 `/usr/local/MagicMirror` or a user's home directory.
 
-To install MagicMirror, first change directory to either `/usr/local`
-or a non-root user's home directory.
+To install MagicMirror simply install MirrorCommandLine using the Debian
+package format available at the
+[MirrorCommandLine Releases](https://gitlab.com/doctorfree/MirrorCommandLine/-/releases)
+area of the Git repository.
 
-From either `/usr/local` or a non-root user's home directory, execute
-the following commands:
+If MagicMirror is not installed in either `/usr/local/MagicMirror` or a non-root
+user's home directory, then the MirrorCommandLine installation will ask if you
+wish to install MagicMirror and, if so, will install MagicMirror in `/usr/local`.
+In addition to performing a MagicMirror installation and configuration, the
+MirrorCommandLine installation will install and configure several MagicMirror
+modules and PM2 process management.
 
-- Download and install the latest Node.js version
-    - `curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -`
-    - `sudo apt install -y nodejs`
-- Clone the repository and check out the master branch
-    - `git clone https://github.com/MichMich/MagicMirror`
-- Enter the repository
-    - `cd MagicMirror`
-- Install the application
-    - `npm install`
-- Make a copy of the config sample file
-    - `cp config/config.js.sample config/config.js`
-- Start the application
-    - `npm run start`
+Alternatively, MagicMirror can be installed manually following these steps:
+
+- Change directory to either `/usr/local` or a non-root user's home directory
+- From either `/usr/local` or a non-root user's home directory, execute the following commands:
+    - Download and install the latest Node.js version
+        - `curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -`
+        - `sudo apt install -y nodejs`
+    - Clone the repository and check out the master branch
+        - `git clone https://github.com/MichMich/MagicMirror`
+    - Enter the repository
+        - `cd MagicMirror`
+    - Install the application
+        - `npm install`
+    - Make a copy of the config sample file
+        - `cp config/config.js.sample config/config.js`
+    - Start the application
+        - `npm run start`
 
 To start the MagicMirror over SSH from a remote terminal, use the commands:
 
@@ -137,10 +161,6 @@ To start the MagicMirror over SSH from a remote terminal, use the commands:
 - `DISPLAY=:0 nohup npm start &`
 
 To access the toolbar menu when in mirror mode, press the ALT key.
-
-If MagicMirror is not installed in either `/usr/local/MagicMirror` or a non-root
-user's home directory, then the MirrorCommandLine installation will ask if you
-wish to install MagicMirror and, if so, will install MagicMirror in `/usr/local`.
 
 ### MirrorCommandLine Installation
 
@@ -269,6 +289,8 @@ Copy and modify as needed.
 
 Some of the more useful supporting scripts include:
 
+- [**audiotest**](scripts/audiotest.sh)
+  Test the ALSA audio configuration by playing test sounds to each speaker
 - [**camsnap**](scripts/camsnap.sh)
   Snap a photo with your MagicMirror webcam
 - [**chkconfig**](scripts/chkconfig.sh)
@@ -317,7 +339,7 @@ remote systems and used to remotely execute the mirror script on the system
 hosting MagicMirror. All arguments provided to <code>mm</code> are simply
 passed along to the <code>mirror</code> script.
 
-Alternately, the <code>mirror</code> script can be executed directly by a
+Alternatively, the <code>mirror</code> script can be executed directly by a
 user logging in to the MagicMirror system in a Shell environment (e.g. a
 terminal window). This can be accomplished remotely in a terminal window
 on the remote system by executing the ssh command. For example, using iTerm2
