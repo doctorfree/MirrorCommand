@@ -7,6 +7,7 @@ hide_all_keys.sh
 show_keys.sh
 show_bin_keys.sh
 show_all_keys.sh
+config*/tmp/*
 config/config-mintest.js
 config/config-sample.js
 config/config-unknown.js

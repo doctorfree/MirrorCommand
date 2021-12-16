@@ -2,6 +2,8 @@
 
 WIDMARK="__WIDTH__"
 HGTMARK="__HEIGHT__"
+HALFWIDMARK="__HALF_WIDTH__"
+HALFHGTMARK="__HALF_HEIGHT__"
 
 SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
 echo ${SCREEN_RES} | grep x > /dev/null && {
@@ -17,6 +19,9 @@ then
   SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
 fi
 
+HALF_WIDTH=$((${SCREEN_WIDTH} / 2))
+HALF_HEIGHT=$((${SCREEN_HEIGHT} / 2))
+
 for conf in *
 do
     [ ${conf} == "*" ] && continue
@@ -27,8 +32,18 @@ do
         rm -f /tmp/wid$$
     }
     grep ${HGTMARK} ${conf} > /dev/null && {
-        cat ${conf} | sed -e "s/${WIDMARK}/${SCREEN_WIDTH}/g" > /tmp/hgt$$
+        cat ${conf} | sed -e "s/${HGTMARK}/${SCREEN_HEIGHT}/g" > /tmp/hgt$$
         cp /tmp/hgt$$ ${conf}
         rm -f /tmp/hgt$$
+    }
+    grep ${HALFWIDMARK} ${conf} > /dev/null && {
+        cat ${conf} | sed -e "s/${HALFWIDMARK}/${HALF_WIDTH}/g" > /tmp/hwid$$
+        cp /tmp/hwid$$ ${conf}
+        rm -f /tmp/hwid$$
+    }
+    grep ${HGTMARK} ${conf} > /dev/null && {
+        cat ${conf} | sed -e "s/${HALFHGTMARK}/${HALF_HEIGHT}/g" > /tmp/hhgt$$
+        cp /tmp/hhgt$$ ${conf}
+        rm -f /tmp/hhgt$$
     }
 done
