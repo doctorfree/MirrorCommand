@@ -32,10 +32,10 @@ var config = {
         "EE.E.E.EE", // Roon Core
         "FF.F.F.FF", // Mac Pro
         "GG.G.G.GG", // Ropieee
-        "MM.M.M.MM", // Raspberry Pi MagicMirror
         "HH.H.H.HH", // Raspberry Pi 400
         "II.I.I.II", // iPad Air
         "JJ.J.J.JJ", // iPhone 12 Mini
+        "KK.K.K.KK", // Ubuntu MagicMirror
         "::ffff:127.0.0.1",
         "::1",
     ],
@@ -46,8 +46,8 @@ var config = {
     // These Electron Options place MagicMirror on the desktop background
     // It's an application running as your desktop wallpaper!
     electronOptions: {
-	    width: 1080,
-	    height: 1920,
+	    width: __WIDTH__,
+	    height: __HEIGHT__,
 	    fullscreen:  false,
 	    backgroundColor: '#00000000',
 	    titleBarStyle: 'none',
@@ -112,8 +112,8 @@ var config = {
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
                 resizeImages: true,
-                maxWidth: 1080,
-                maxHeight: 1920,
+                maxWidth: __WIDTH__,
+                maxHeight: __HEIGHT__,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
                 //backgroundSize: "contain",
                 // DISPLAY THE SLIDE SHOW BETWEEN 1PM and 6PM then again between 9PM and Midnight
