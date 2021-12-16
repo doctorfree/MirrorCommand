@@ -138,6 +138,17 @@ case "$1" in
                 fi
               done
             }
+            # Fixup those config files that have hard coded screen dimensions
+            [ -x ${MM}/bin/set_screen_conf ] && {
+              cd "${MMHOME}/config"
+              ${MM}/bin/set_screen_conf
+              cd "${MMHOME}/config-notelegram"
+              ${MM}/bin/set_screen_conf
+              cd "${MMHOME}/config-landscape"
+              ${MM}/bin/set_screen_conf
+              cd "${MMHOME}/config-landscape-notelegram"
+              ${MM}/bin/set_screen_conf
+            }
             # Fixup the ARP Scan devices used by MMM-MacAddressScan module
             inst_arpscan=`type -p arp-scan`
             [ "${inst_arpscan}" ] && {

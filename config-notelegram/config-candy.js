@@ -22,10 +22,10 @@ var config = {
         "EE.E.E.EE", // Roon Core
         "FF.F.F.FF", // Mac Pro
         "GG.G.G.GG", // Ropieee
-        "MM.M.M.MM", // Raspberry Pi MagicMirror
         "HH.H.H.HH", // Raspberry Pi 400
         "II.I.I.II", // iPad Air
         "JJ.J.J.JJ", // iPhone 12 Mini
+        "KK.K.K.KK", // Ubuntu MagicMirror
         "::ffff:127.0.0.1",
         "::1",
     ],
@@ -82,9 +82,9 @@ var config = {
                      ],
                      // "https://www.youtube.com/embed/95FxKgcgjN0?autoplay=1&amp;controls=0",
                 updateInterval: 5 * 60 * 1000, // rotate URLs every 5 minutes
-                width: "1920", // width of iframe
-                height: "1080", // height of iframe
-                frameWidth: "1920"
+                width: "__WIDTH__", // width of iframe
+                height: "__HEIGHT__", // height of iframe
+                frameWidth: "__WIDTH__"
             }
         },
 		{
@@ -121,7 +121,8 @@ var config = {
                         ["MMM-BackgroundSlideshow"],
                     ],
                 fixed:
-                    ["alert", "updatenotification", "MMM-Remote-Control"],
+                    ["alert", "updatenotification", "MMM-Remote-Control",
+                     "MMM-TelegramCommands", "MMM-TelegramBot"],
                 rotationTime: 1200000, // rotate page every 20 minutes = 20 * 60 * 1000
             }
         },
