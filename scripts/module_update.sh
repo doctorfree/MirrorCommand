@@ -197,6 +197,14 @@ do
               git clone https://github.com/doctorfree/MMM-MacAddressScan.git
             fi
             ;;
+          MMM-MoonPhase)
+            if [ "${QUIET}" ]
+            then
+              git clone https://github.com/NolanKingdon/MMM-MoonPhase > /dev/null 2>&1
+            else
+              git clone https://github.com/NolanKingdon/MMM-MoonPhase
+            fi
+            ;;
           MMM-MyScoreboard)
             if [ "${QUIET}" ]
             then
