@@ -42,7 +42,7 @@ do
         cp /tmp/hwid$$ ${conf}
         rm -f /tmp/hwid$$
     }
-    grep ${HGTMARK} ${conf} > /dev/null && {
+    grep ${HALFHGTMARK} ${conf} > /dev/null && {
         cat ${conf} | sed -e "s/${HALFHGTMARK}/${HALF_HEIGHT}/g" > /tmp/hhgt$$
         cp /tmp/hhgt$$ ${conf}
         rm -f /tmp/hhgt$$
