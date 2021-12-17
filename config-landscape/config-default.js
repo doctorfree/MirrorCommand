@@ -243,6 +243,7 @@ var config = {
                 // If you've added a Hue API user and set it in mirrorkeys
                 // then replace the above setting of user with one of these
                 // and rerun showkeys.
+                // user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
                 // user: "xxxxxxxxx_Hue-Hub-User-Two_xxxxxxxxxxxx",
                 // user: "xxxxxxxxx_Hue-Hub-User-Three_xxxxxxxxxx",
             }
