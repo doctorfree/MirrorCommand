@@ -125,12 +125,6 @@ var config = {
             position: "top_center",
             config: {
                 colored: true,
-                maximumNumberOfDays: 10,
-                maximumEntries: 9,
-                showLocation: true,
-                tableClass: "medium",
-                timeFormat: "absolute",
-                nextDaysRelative: true,
                 displaySymbol: true,
                 defaultSymbol: "calendar-alt",
                 calendars: [
