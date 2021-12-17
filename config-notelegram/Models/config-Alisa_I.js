@@ -98,8 +98,8 @@ var config = {
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,
-                maxWidth: 1080,
-                maxHeight: 1920,
+                maxWidth: __WIDTH__,
+                maxHeight: __HEIGHT__,
                 transitionImages: true,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
                 randomizeImageOrder: true,

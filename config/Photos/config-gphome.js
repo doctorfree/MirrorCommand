@@ -154,8 +154,8 @@ var config = {
                   sort: "new",
                   hiResolution: true,
                   timeFormat: "DD/MM/YYYY HH:mm",
-                  moduleHeight: 1920,
-                  moduleWidth: 1080,
+                  moduleHeight: __HEIGHT__,
+                  moduleWidth: __WIDTH__,
                 },
                 volume: {
                   useVolume: true,
