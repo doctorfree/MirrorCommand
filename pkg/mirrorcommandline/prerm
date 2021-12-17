@@ -61,6 +61,14 @@ case "$1" in
         then
             [ -d "${MMHOME}/config" ] || continue
             USER=$(stat -c '%U' ${MMHOME}/config)
+            cd "${MMHOME}/config"
+            readlink config.js | grep config- > /dev/null && {
+                [ -f config.js.sample ] && {
+                    rm -f config.js
+                    cp config.js.sample config.js
+                    chown ${USER} config.js
+                }
+            }
             cd "${MMHOME}"
             for config in ${MM}/config/* \
                           ${MM}/config-notelegram/* \
