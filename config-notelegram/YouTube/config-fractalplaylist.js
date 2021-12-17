@@ -85,8 +85,8 @@ var config = {
               controls: false,
               loop: true,
               modestbranding: true,
-              width: "1920px",
-              height: "1080px",
+              width: "__HEIGHT__px",
+              height: "__WIDTH__px",
               referrer: "http://your.domain.com",
             }
         },

@@ -114,8 +114,8 @@ var config = {
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
                 resizeImages: true,
-                maxWidth: 1080,
-                maxHeight: 1920,
+                maxWidth: __WIDTH__,
+                maxHeight: __HEIGHT__,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
             }
         },

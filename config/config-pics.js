@@ -82,9 +82,9 @@ var config = {
                      ],
                      // "https://www.youtube.com/embed/95FxKgcgjN0?autoplay=1&amp;controls=0",
                 updateInterval: 5 * 60 * 1000, // rotate URLs every 5 minutes
-                width: "1920", // width of iframe
-                height: "1080", // height of iframe
-                frameWidth: "1920"
+                width: "__WIDTH__", // width of iframe
+                height: "__HEIGHT__", // height of iframe
+                frameWidth: "__WIDTH__"
             }
         },
 		{
@@ -108,8 +108,8 @@ var config = {
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
                 resizeImages: true,
-                maxWidth: 1080,
-                maxHeight: 1920,
+                maxWidth: __WIDTH__,
+                maxHeight: __HEIGHT__,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
             }
         },

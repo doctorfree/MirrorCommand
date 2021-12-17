@@ -93,9 +93,9 @@ var config = {
                      ],
                      // "https://www.youtube.com/embed/95FxKgcgjN0?autoplay=1&amp;controls=0",
                 updateInterval: 10 * 60 * 1000, // rotate URLs every 10 minutes
-                width: "1920", // width of iframe
-                height: "1080", // height of iframe
-                frameWidth: "1920"
+                width: "__WIDTH__", // width of iframe
+                height: "__HEIGHT__", // height of iframe
+                frameWidth: "__WIDTH__"
             }
         },
         {

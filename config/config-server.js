@@ -313,8 +313,8 @@ var config = {
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
                 resizeImages: true,
-                maxWidth: 1080,
-                maxHeight: 1920,
+                maxWidth: __WIDTH__,
+                maxHeight: __HEIGHT__,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
                 // DISPLAY THE SLIDE SHOW BETWEEN 6PM and 8PM then again between 10PM and Midnight
                 module_schedule: [

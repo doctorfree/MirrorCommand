@@ -93,8 +93,8 @@ var config = {
               controls: false,
               loop: true,
               modestbranding: true,
-              width: "100%",
-              height: "800px",
+              width: "__WIDTH__px",
+              height: "__HALF_HEIGHT__px",
               referrer: "http://your.domain.com",
             }
         },
@@ -108,9 +108,9 @@ var config = {
                       "https://rufuswainwright.com/disc",
                      ],
                 updateInterval: 5 * 60 * 1000, // rotate URLs every 5 minutes
-                width: "1080",
-                height: "1000",
-                frameWidth: "1080"
+                width: "__WIDTH__",
+                height: "__HALF_HEIGHT__",
+                frameWidth: "__WIDTH__"
             }
         },
     ]

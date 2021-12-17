@@ -85,8 +85,8 @@ var config = {
               controls: false,
               loop: true,
               modestbranding: true,
-              width: "1080px",
-              height: "800px",
+              width: "__WIDTH__px",
+              height: "__HALF_HEIGHT__px",
               referrer: "http://your.domain.com",
             }
         },
@@ -100,9 +100,9 @@ var config = {
                       "https://www.davidbowie.com/pinups",
                      ],
                 updateInterval: 4 * 60 * 1000, // rotate URLs every 4 minutes
-                width: "1080", // width of iframe
-                height: "1000", // height of iframe
-                frameWidth: "1080"
+                width: "__WIDTH__", // width of iframe
+                height: "__HALF_HEIGHT__", // height of iframe
+                frameWidth: "__WIDTH__"
             }
         },
     ]

@@ -79,9 +79,9 @@ var config = {
             config: {
                 url: [ "http://HH.H.H.HH/playback" ],
                 updateInterval: 30 * 60 * 1000, // rotate URLs every 30 minutes
-                width: "1080", // width of iframe
-                height: "1920", // height of iframe
-                frameWidth: "1080"
+                width: "__WIDTH__", // width of iframe
+                height: "__HEIGHT__", // height of iframe
+                frameWidth: "__WIDTH__"
             }
         },
     ]
