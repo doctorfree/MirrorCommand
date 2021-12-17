@@ -123,7 +123,10 @@ case "$1" in
             # Fixup the ARP Scan devices used by MMM-MacAddressScan module
             inst_arpscan=`type -p arp-scan`
             [ "${inst_arpscan}" ] && {
-              [ -x ${MM}/bin/arps2mm ] && ${MM}/bin/arps2mm > ${MM}/etc/arp-devices.js
+              [ -x ${MM}/bin/arps2mm ] && {
+                ${MM}/bin/arps2mm > ${MM}/etc/arp-devices.js
+                chown ${USER}:${GROUP} ${MM}/etc/arp-devices.js
+              }
               [ -x ${MM}/bin/arpscanconf ] && {
                 cd "${MM}/config"
                 ${MM}/bin/arpscanconf
