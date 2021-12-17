@@ -92,6 +92,53 @@ case "$1" in
               cp /tmp/${remote}$$ ${MM}/bin/${remote}
               rm -f /tmp/${remote}$$
             done
+
+            # Fixup those config files that have hard coded screen dimensions
+            [ -x ${MM}/bin/set_screen_conf ] && {
+              cd "${MM}/config"
+              ${MM}/bin/set_screen_conf
+              cd "${MM}/config-notelegram"
+              ${MM}/bin/set_screen_conf
+              cd "${MM}/config-landscape"
+              ${MM}/bin/set_screen_conf
+              cd "${MM}/config-landscape-notelegram"
+              ${MM}/bin/set_screen_conf
+              cd "${MM}/css"
+              ${MM}/bin/set_screen_conf
+              cd "${MM}/css-landscape"
+              ${MM}/bin/set_screen_conf
+            }
+            # Fixup those config files that have hard coded Roon Core IP and Port
+            [ -x ${MM}/bin/set_roon_conf ] && {
+              cd "${MM}/config"
+              ${MM}/bin/set_roon_conf
+              cd "${MM}/config-notelegram"
+              ${MM}/bin/set_roon_conf
+              cd "${MM}/config-landscape"
+              ${MM}/bin/set_roon_conf
+              cd "${MM}/config-landscape-notelegram"
+              ${MM}/bin/set_roon_conf
+            }
+            # Fixup the ARP Scan devices used by MMM-MacAddressScan module
+            inst_arpscan=`type -p arp-scan`
+            [ "${inst_arpscan}" ] && {
+              [ -x ${MM}/bin/arps2mm ] && ${MM}/bin/arps2mm > ${MM}/etc/arp-devices.js
+              [ -x ${MM}/bin/arpscanconf ] && {
+                cd "${MM}/config"
+                ${MM}/bin/arpscanconf
+                cd "${MM}/config-notelegram"
+                ${MM}/bin/arpscanconf
+                cd "${MM}/config-landscape"
+                ${MM}/bin/arpscanconf
+                cd "${MM}/config-landscape-notelegram"
+                ${MM}/bin/arpscanconf
+              }
+            }
+
+            # Which css folder should be copied to MagicMirror home
+            [ -x ${MM}/bin/set_css_folder ] && ${MM}/bin/set_css_folder
+
+            # Copy in the config files to the MagicMirror home
             for cfg in config config-landscape config-notelegram config-landscape-notelegram
             do
               [ -d "${MMHOME}/${cfg}" ] || {
@@ -117,6 +164,8 @@ case "$1" in
                 [ -f $b ] || sudo -u ${USER} cp ${config} .
               done
             done
+
+            # Copy in the css files to the MagicMirror home
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"
               for css in ${MM}/css/*
@@ -138,32 +187,7 @@ case "$1" in
                 fi
               done
             }
-            # Fixup those config files that have hard coded screen dimensions
-            [ -x ${MM}/bin/set_screen_conf ] && {
-              cd "${MMHOME}/config"
-              ${MM}/bin/set_screen_conf
-              cd "${MMHOME}/config-notelegram"
-              ${MM}/bin/set_screen_conf
-              cd "${MMHOME}/config-landscape"
-              ${MM}/bin/set_screen_conf
-              cd "${MMHOME}/config-landscape-notelegram"
-              ${MM}/bin/set_screen_conf
-            }
-            # Fixup the ARP Scan devices used by MMM-MacAddressScan module
-            inst_arpscan=`type -p arp-scan`
-            [ "${inst_arpscan}" ] && {
-              [ -x ${MM}/bin/arps2mm ] && ${MM}/bin/arps2mm > ${MM}/etc/arp-devices.js
-              [ -x ${MM}/bin/arpscanconf ] && {
-                cd "${MMHOME}/config"
-                ${MM}/bin/arpscanconf
-                cd "${MMHOME}/config-notelegram"
-                ${MM}/bin/arpscanconf
-                cd "${MMHOME}/config-landscape"
-                ${MM}/bin/arpscanconf
-                cd "${MMHOME}/config-landscape-notelegram"
-                ${MM}/bin/arpscanconf
-              }
-            }
+
             # Copy default keyless config
             cd "${MMHOME}/config"
             rm -f config.js
@@ -173,6 +197,7 @@ case "$1" in
             else
                 sudo -u ${USER} cp config.js.sample config.js
             fi
+
             # Install MagicMirror 3rd Party modules used by MirrorCommandLine
             MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
                      MMM-COVID19-SPARKLINE MMM-DarkSkyForecast MMM-DateOnly \
@@ -192,6 +217,7 @@ case "$1" in
                 }
               }
             done
+
             # Copy any installed MirrorCommandLine MMM-Detector resources
             # If any resources of the same name already exists, do not overwrite
             RESOURCES_DIR="modules/MMM-Detector/resources"
@@ -204,6 +230,7 @@ case "$1" in
                 [ -f $b ] || sudo -u ${USER} cp ${resource} .
               done
             }
+
             # Copy any installed MirrorCommandLine Google Assistant recipes
             # If any recipe of the same name already exists, do not overwrite
             RECIPE_DIR="modules/MMM-GoogleAssistant/recipes"
@@ -230,6 +257,7 @@ case "$1" in
             echo "have not been linked into the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi
+
         MMIP=`hostname -I | awk ' { print $1 } '`
         [ "${MMIP}" ] && {
             cat ${KEYS} | sed -e "s/keys\[MMIP\]=/keys\[MMIP\]=\'${MMIP}\'/" > /tmp/keys$$

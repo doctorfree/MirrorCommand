@@ -77,7 +77,7 @@ var config = {
             module: 'MMM-iFrame',
             position: 'fullscreen_below',
             config: {
-                // url: [ "http://EE.E.E.EE:9100/display/", "http://localhost:8082" ],
+                // url: [ "http://EE.E.E.EE:__Roon_Core_Port__/display/", "http://localhost:8082" ],
                 url: [ "http://localhost:8082" ],
                 updateInterval: 30 * 60 * 1000, // rotate URLs every 30 minutes
                 width: "1080", // width of iframe

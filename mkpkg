@@ -73,7 +73,7 @@ do
     ${SUDO} chown root:root ${OUT_DIR}/${dir}
 done
 
-for dir in bin etc css config config-landscape config-notelegram config-landscape-notelegram modules pics
+for dir in bin etc css css-landscape config config-landscape config-notelegram config-landscape-notelegram modules pics
 do
     [ -d ${OUT_DIR}/${MM}/${dir} ] && ${SUDO} rm -rf ${OUT_DIR}/${MM}/${dir}
 done
@@ -117,6 +117,7 @@ ${SUDO} cp -a config-notelegram ${OUT_DIR}/${MM}/config-notelegram
 ${SUDO} cp -a config-landscape ${OUT_DIR}/${MM}/config-landscape
 ${SUDO} cp -a config-landscape-notelegram ${OUT_DIR}/${MM}/config-landscape-notelegram
 ${SUDO} cp -a css ${OUT_DIR}/${MM}/css
+${SUDO} cp -a css-landscape ${OUT_DIR}/${MM}/css-landscape
 ${SUDO} cp -a etc ${OUT_DIR}/${MM}/etc
 ${SUDO} cp -a modules ${OUT_DIR}/${MM}/modules
 

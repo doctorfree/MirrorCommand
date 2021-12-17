@@ -20,8 +20,8 @@ header {
 }
 
 .MMM-Videoplayer video {
-    width: __HEIGHT__px;
-    height: __WIDTH__px;
+    width: __WIDTH__px;
+    height: __HEIGHT__px;
 }
 
 .MMM-MacAddressScan .headerDevCell {

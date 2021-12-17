@@ -1,0 +1,26 @@
+#!/bin/bash
+
+ROONPORT="__Roon_Core_Port__"
+ROON_INI="/usr/local/Roon/etc/roon_api.ini"
+CORE_PORT="9330"
+
+[ -f ${ROON_INI} ] && {
+    RoonCorePort=`grep RoonCorePort ${ROON_INI} | \
+                    awk -F '=' ' { print $2 } ' | \
+                    sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"`
+    [ "${RoonCorePort}" ] && CORE_PORT="${RoonCorePort}"
+}
+
+for conf in * */*
+do
+    [ ${conf} == "*" ] && continue
+    [ ${conf} == "*/*" ] && continue
+    [ -d ${conf} ] && continue
+    grep ${ROONPORT} ${conf} > /dev/null && {
+        cat ${conf} | sed -e "s/${ROONPORT}/${CORE_PORT}/g" > /tmp/wid$$
+        cp /tmp/wid$$ ${conf}
+        rm -f /tmp/wid$$
+    }
+done
+
+exit 0

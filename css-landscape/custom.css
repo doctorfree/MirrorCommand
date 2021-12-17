@@ -3,14 +3,6 @@ header {
   color: #B5F5F2;
 }
 
-.module.clock {
-  margin-bottom: 100px;
-}
-
-.MMM-IronManGIF {
-  margin-bottom:-364px;
-}
-
 .newsfeed-source {
   color: var(--color-text-bright);
 }
@@ -20,8 +12,8 @@ header {
 }
 
 .MMM-Videoplayer video {
-    width: __HEIGHT__px;
-    height: __WIDTH__px;
+    width: __WIDTH__px;
+    height: __HEIGHT__px;
 }
 
 .MMM-MacAddressScan .headerDevCell {

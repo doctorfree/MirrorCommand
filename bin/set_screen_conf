@@ -22,9 +22,10 @@ fi
 HALF_WIDTH=$((${SCREEN_WIDTH} / 2))
 HALF_HEIGHT=$((${SCREEN_HEIGHT} / 2))
 
-for conf in *
+for conf in * */*
 do
     [ ${conf} == "*" ] && continue
+    [ ${conf} == "*/*" ] && continue
     [ -d ${conf} ] && continue
     grep ${WIDMARK} ${conf} > /dev/null && {
         cat ${conf} | sed -e "s/${WIDMARK}/${SCREEN_WIDTH}/g" > /tmp/wid$$
@@ -47,3 +48,5 @@ do
         rm -f /tmp/hhgt$$
     }
 done
+
+exit 0
