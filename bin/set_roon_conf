@@ -7,7 +7,7 @@ CORE_PORT="9330"
 [ -f ${ROON_INI} ] && {
     RoonCorePort=`grep RoonCorePort ${ROON_INI} | \
                     awk -F '=' ' { print $2 } ' | \
-                    sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"`
+                    sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'`
     [ "${RoonCorePort}" ] && CORE_PORT="${RoonCorePort}"
 }
 

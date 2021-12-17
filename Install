@@ -30,6 +30,8 @@ PKG_SELECTED=
 PKG_VER=${VERSION}
 PKG_REL=${RELEASE}
 
+export DISPLAY=:0
+
 get_available_packages() {
   for debs in ${SRC}/${SRC_NAME}/releases/${PKG_VER}/*.deb
   do
@@ -173,6 +175,8 @@ install_selected() {
   echo "No valid Package names specified. Exiting."
   exit 1
 }
+
+xhost +
 
 for PKG_NAME in ${PKG_NAMES}
 do
