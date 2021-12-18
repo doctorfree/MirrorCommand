@@ -24,11 +24,11 @@ case "$1" in
         export DISPLAY=:0
         # Scripts for which links will be made in /usr/local/bin
         EXPORTS="audiotest camsnap chkconfig chktemp gethue getquote screensaveroff \
-            get_temps mirror mknewartist mknewmodel mknewphotographer \
+            get_temps mirror mknewartist mknewjav mknewmodel mknewphotographer \
             mknewplayboy mknewtop mm mmapiactions mmgetb mmscene mmsetb mmupdall \
             module_update module_update_all play rand_back send_sms showkeys \
             updallartists updallmodels updallphotographers updalltop updarpscan \
-            updartist updlinks updmodel updphotographer updtop vncview vol \
+            updartist updlinks updjav updmodel updphotographer updtop vncview vol \
             websnap wireless_conf zerologs"
         LOCAL="myreboot myshutdown remountusb"
         KEYS="/usr/local/MirrorCommandLine/etc/mirrorkeys"

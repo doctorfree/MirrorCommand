@@ -126,9 +126,6 @@ var config = {
                 transitionImages: true,
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
-                resizeImages: true,
-                maxWidth: __WIDTH__,
-                maxHeight: __HEIGHT__,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
             }
         },

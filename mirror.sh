@@ -86,18 +86,15 @@ fi
 [ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
 
 # -----------------------------------------------------------------------
-[ -d /usr/local/MirrorCommandLine/bin ] && {
-    export PATH=${PATH}:/usr/local/MirrorCommandLine/bin
+MCL_HOME="/usr/local/MirrorCommandLine"
+[ -d ${MCL_HOME}/bin ] && {
+    export PATH=${PATH}:${MCL_HOME}/bin
 }
 CONFDIR="${MM}/config"
 # MagicMirror configuration files organized into subdirectories listed here
 CONF_SUBDIRS="Artists JAV Models Photos Photographers YouTube test"
 MMCFMSG="MagicMirror configuration file"
-SLISDIR="/usr/local/MirrorCommandLine/pics"
-ARTISTDIR="Pictures/Artists-ALL"
-JAVDIR="Pictures/JAV-ALL"
-MODELDIR="Pictures/Models-ALL"
-PHOTODIR="Pictures/Photographers-ALL"
+SLISDIR="${MCL_HOME}/pics"
 ARTIST_TEMPLATE="${CONFDIR}/Templates/config-artist-template.js"
 JAV_TEMPLATE="${CONFDIR}/Templates/config-jav-template.js"
 MODEL_TEMPLATE="${CONFDIR}/Templates/config-model-template.js"
@@ -729,24 +726,17 @@ model_create() {
             exit ${ERROR_EXIT}
         fi
     }
-    if [ -d "${HOME}/Pictures/Models/${PICDIR}" ]
+    if [ -d "${SLISDIR}/Models/${PICDIR}" ]
     then
         # Already have a prepared folder for this model
         printf "\nUsing existing model folder pics\n"
         setconf ${PICDIR} Models
     else
-      if [ -d "${HOME}/${MODELDIR}/${PICDIR}" ]
+      if [ -x ${MCL_HOME}/bin/mknewmodel ]
       then
-        printf "\nCreating image folder for ${SLISDIR}/Models/${PICDIR}\n"
-        [ -d "${SLISDIR}/Models/${PICDIR}" ] || mkdir -p "${SLISDIR}/Models/${PICDIR}"
-        cd "${SLISDIR}/Models/${PICDIR}"
-        rm -f *.jpg
-        cp -L ${HOME}/${MODELDIR}/${PICDIR}/*.jpg .
-        cd "${CONFDIR}"
-        setconf ${PICDIR} Models
+          ${MCL_HOME}/bin/mknewmodel ${PICDIR}
       else
-        printf "\nFolder argument ${MODELDIR}/${PICDIR} does not exist or is not a directory."
-        usage
+          echo "${MCL_HOME}/bin/mknewmodel does not exist or is not executable."
       fi
     fi
 }
@@ -757,10 +747,9 @@ model_remove() {
         usage
     }
     PICDIR="$1"
-    [ -d "${SLISDIR}/${PICDIR}" ] && {
-        printf "\nRemoving config file and pic folder for ${MODELDIR}/${PICDIR}"
-        cd "${SLISDIR}"
-        rm -rf "${PICDIR}"
+    [ -d "${SLISDIR}/Models/${PICDIR}" ] && {
+        printf "\nRemoving config file and pic folder for Models/${PICDIR}\n"
+        rm -rf "${SLISDIR}/Models/${PICDIR}"
     }
     rm -f "${CONFDIR}/Models/config-${PICDIR}.js"
     set_config default
@@ -783,25 +772,18 @@ artist_create() {
             exit ${ERROR_EXIT}
         fi
     }
-    if [ -d "${HOME}/Pictures/Artists/${PICDIR}" ]
+    if [ -d "${MCL_HOME}/pics/Artists/${PICDIR}" ]
     then
         # Already have a prepared folder for this artist
         printf "\nUsing existing ${PICDIR} image folder\n"
         setconf ${PICDIR} Artists
     else
-      if [ -d "${HOME}/${ARTISTDIR}/${PICDIR}" ]
-      then
-        printf "\nCreating image folder ${SLISDIR}/Artists/${PICDIR}\n"
-        [ -d "${SLISDIR}/Artists/${PICDIR}" ] || mkdir -p "${SLISDIR}/Artists/${PICDIR}"
-        cd "${SLISDIR}/Artists/${PICDIR}"
-        rm -f *.jpg
-        cp -L ${HOME}/${ARTISTDIR}/${PICDIR}/*.jpg .
-        cd "${CONFDIR}"
-        setconf ${PICDIR} Artists
-      else
-        printf "\nFolder argument ${ARTISTDIR}/${PICDIR} does not exist or is not a directory."
-        usage
-      fi
+        if [ -x ${MCL_HOME}/bin/mknewartist ]
+        then
+            ${MCL_HOME}/bin/mknewartist ${PICDIR}
+        else
+            echo "${MCL_HOME}/bin/mknewartist does not exist or is not executable."
+        fi
     fi
 }
 
@@ -811,10 +793,9 @@ artist_remove() {
         usage
     }
     PICDIR="$1"
-    [ -d "${SLISDIR}/${PICDIR}" ] && {
-        printf "\nRemoving config file and pic folder for ${ARTISTDIR}/${PICDIR}"
-        cd "${SLISDIR}"
-        rm -rf "${PICDIR}"
+    [ -d "${SLISDIR}/Artists/${PICDIR}" ] && {
+        printf "\nRemoving config file and pic folder for Artists/${PICDIR}\n"
+        rm -rf "${SLISDIR}/Artists/${PICDIR}"
     }
     rm -f "${CONFDIR}/Artists/config-${PICDIR}.js"
     set_config default
@@ -837,25 +818,18 @@ jav_create() {
             exit ${ERROR_EXIT}
         fi
     }
-    if [ -d "${HOME}/Pictures/JAV/${PICDIR}" ]
+    if [ -d "${MCL_HOME}/pics/JAV/${PICDIR}" ]
     then
         # Already have a prepared folder for this photographer
         printf "\nUsing existing ${PICDIR} image folder\n"
         setconf ${PICDIR} JAV
     else
-      if [ -d "${HOME}/${JAVDIR}/${PICDIR}" ]
-      then
-        printf "\nCreating image folder ${SLISDIR}/JAV/${PICDIR}\n"
-        [ -d "${SLISDIR}/JAV/${PICDIR}" ] || mkdir -p "${SLISDIR}/JAV/${PICDIR}"
-        cd "${SLISDIR}/JAV/${PICDIR}"
-        rm -f *.jpg
-        cp -L ${HOME}/${JAVDIR}/${PICDIR}/*.jpg .
-        cd "${CONFDIR}"
-        setconf ${PICDIR} JAV
-      else
-        printf "\nFolder argument ${JAVDIR}/${PICDIR} does not exist or is not a directory."
-        usage
-      fi
+        if [ -x ${MCL_HOME}/bin/mknewjav ]
+        then
+            ${MCL_HOME}/bin/mknewjav ${PICDIR}
+        else
+            echo "${MCL_HOME}/bin/mknewjav does not exist or is not executable."
+        fi
     fi
 }
 
@@ -865,10 +839,9 @@ jav_remove() {
         usage
     }
     PICDIR="$1"
-    [ -d "${SLISDIR}/${PICDIR}" ] && {
-        printf "\nRemoving config file and pic folder for ${JAVDIR}/${PICDIR}"
-        cd "${SLISDIR}"
-        rm -rf "${PICDIR}"
+    [ -d "${SLISDIR}/JAV/${PICDIR}" ] && {
+        printf "\nRemoving config file and pic folder for JAV/${PICDIR}\n"
+        rm -rf "${SLISDIR}/JAV/${PICDIR}"
     }
     rm -f "${CONFDIR}/JAV/config-${PICDIR}.js"
     set_config default
@@ -891,25 +864,18 @@ photo_create() {
             exit ${ERROR_EXIT}
         fi
     }
-    if [ -d "${HOME}/Pictures/Photographers/${PICDIR}" ]
+    if [ -d "${MCL_HOME}/pics/Photographers/${PICDIR}" ]
     then
         # Already have a prepared folder for this photographer
         printf "\nUsing existing ${PICDIR} image folder\n"
         setconf ${PICDIR} Photographers
     else
-      if [ -d "${HOME}/${PHOTODIR}/${PICDIR}" ]
-      then
-        printf "\nCreating image folder ${SLISDIR}/Photographers/${PICDIR}\n"
-        [ -d "${SLISDIR}/Photographers/${PICDIR}" ] || mkdir -p "${SLISDIR}/Photographers/${PICDIR}"
-        cd "${SLISDIR}/Photographers/${PICDIR}"
-        rm -f *.jpg
-        cp -L ${HOME}/${PHOTODIR}/${PICDIR}/*.jpg .
-        cd "${CONFDIR}"
-        setconf ${PICDIR} Photographers
-      else
-        printf "\nFolder argument ${PHOTODIR}/${PICDIR} does not exist or is not a directory."
-        usage
-      fi
+        if [ -x ${MCL_HOME}/bin/mknewphotographer ]
+        then
+            ${MCL_HOME}/bin/mknewphotographer ${PICDIR}
+        else
+            echo "${MCL_HOME}/bin/mknewphotographer does not exist or is not executable."
+        fi
     fi
 }
 
@@ -919,10 +885,9 @@ photo_remove() {
         usage
     }
     PICDIR="$1"
-    [ -d "${SLISDIR}/${PICDIR}" ] && {
-        printf "\nRemoving config file and pic folder for ${PHOTODIR}/${PICDIR}"
-        cd "${SLISDIR}"
-        rm -rf "${PICDIR}"
+    [ -d "${SLISDIR}/Photographers/${PICDIR}" ] && {
+        printf "\nRemoving config file and pic folder for Photographers/${PICDIR}\n"
+        rm -rf "${SLISDIR}/Photographers/${PICDIR}"
     }
     rm -f "${CONFDIR}/Photographers/config-${PICDIR}.js"
     set_config default
@@ -934,8 +899,9 @@ wh_create() {
         usage
     }
     PICDIR="$1"
-    cd "${CONFDIR}"
+    # Create a configuration file for this category if one does not exist
     printf "\nCreating config file ${CONFDIR}/config-${PICDIR}.js\n"
+    cd "${CONFDIR}"
     [ -f "config-${PICDIR}.js" ] || {
         if [ -f ${WHVN_TEMPLATE} ]
         then
@@ -945,49 +911,18 @@ wh_create() {
             exit ${ERROR_EXIT}
         fi
     }
-    if [ -d "${HOME}/${WHVNDIR}/${PICDIR}" ]
+    if [ -d "${SLISDIR}/${PICDIR}" ]
     then
-        printf "\nCreating image folder ${SLISDIR}/${PICDIR}"
-        [ -d "${SLISDIR}/${PICDIR}" ] || mkdir -p "${SLISDIR}/${PICDIR}"
-        cd "${SLISDIR}/${PICDIR}"
-        rm -f *.jpg
-        cp -L ${HOME}/${WHVNDIR}/${PICDIR}/*.jpg .
-        haveim=`type -p identify`
-        if [ "$haveim" ]
-        then
-          # Remove photos in landscape mode for vertical mirror
-          for i in *.jpg
-          do
-            [ "$i" == "*.jpg" ] && {
-                printf "\nNo JPEG pics found in ${WHVNDIR}/${PICDIR} ... Exiting\n"
-                cd ..
-                rm -rf "${PICDIR}"
-                usage
-            }
-            GEO=`identify "$i" 2> /dev/null | awk ' { print $(NF-6) } '`
-            W=`echo $GEO | awk -F "x" ' { print $1 } '`
-            # Remove if width not greater than 750
-            [ "$W" ] && [ $W -gt 750 ] || {
-                rm -f "$i"
-                continue
-            }
-            H=`echo $GEO | awk -F "x" ' { print $2 } '`
-            # Remove if height not greater than 1000
-            [ "$H" ] && [ $H -gt 1000 ] || {
-                rm -f "$i"
-                continue
-            }
-            # Remove if height not greater than width
-            [ "$W" ] && [ "$H" ] && [ $H -gt $W ] || rm -f "$i"
-          done
-        else
-          printf "\nCould not find identify command. Install ImageMagick"
-          printf "\nSkipping removal of landscape photos\n"
-        fi
-        set_config ${PICDIR}
+        # Already have a prepared folder for this category
+        printf "\nUsing existing category folder pics\n"
+        setconf ${PICDIR}
     else
-        printf "\nFolder argument ${WHVNDIR}/${PICDIR} does not exist or is not a directory."
-        usage
+      if [ -x ${MCL_HOME}/bin/mknewtop ]
+      then
+          ${MCL_HOME}/bin/mknewtop ${PICDIR}
+      else
+          echo "${MCL_HOME}/bin/mknewtop does not exist or is not executable."
+      fi
     fi
 }
 
@@ -998,9 +933,8 @@ wh_remove() {
     }
     PICDIR="$1"
     [ -d "${SLISDIR}/${PICDIR}" ] && {
-        printf "\nRemoving config file and pic folder for ${WHVNDIR}/${PICDIR}"
-        cd "${SLISDIR}"
-        rm -rf "${PICDIR}"
+        printf "\nRemoving config file and pic folder for ${PICDIR}\n"
+        rm -rf "${SLISDIR}/${PICDIR}"
     }
     rm -f "${CONFDIR}/config-${PICDIR}.js"
     set_config default

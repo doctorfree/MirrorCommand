@@ -89,43 +89,20 @@ var config = {
             }
         },
         {
-            module: 'MMM-TelegramCommands'
-        },
-        {
-            module: 'MMM-TelegramBot',
-            config: {
-              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
-              allowedUser : ['Your-Telegram-Username'],
-              adminChatId : 0000000000,
-              useWelcomeMessage: true,
-              verbose: false,
-              favourites: [
-                  "/hideip",
-                  "/showip",
-                  "/hideOffline",
-                  "/showOffline",
-                  "/myReboot",
-                  "/myShutdown"
-              ],
-              screenshotScript: "scrot",
-              detailOption: {},
-            },
-        },
-        {
             module: 'MMM-BackgroundSlideshow',
             position: 'fullscreen_below',
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommandLine/pics/Models/Natalia_Andreeva',
+                    '/usr/local/MirrorCommandLine/pics/Models/Mila_Azul/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
-                resizeImages: true,
-                maxWidth: __WIDTH__,
-                maxHeight: __HEIGHT__,
                 transitionImages: true,
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
+                resizeImages: true,
+                maxWidth: __WIDTH__,
+                maxHeight: __HEIGHT__,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
             }
         },

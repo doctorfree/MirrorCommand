@@ -1,0 +1,197 @@
+#!/bin/bash
+
+MNT_PT="/mnt/transcend/Pictures"
+MOD_DIR="${MNT_PT}/MagicMirror/JAV"
+RMLIST="/usr/local/MirrorCommandLine/etc/rmlist.txt"
+
+# Use an associative array to map model names across sites
+declare -A model_sites
+
+[ -d ${MOD_DIR} ] || {
+    MNT_PT="/u/pictures"
+    MOD_DIR="${MNT_PT}/MagicMirror/JAV"
+    [ -d ${MOD_DIR} ] || {
+        echo "Cannot locate MagicMirror JAV pics dir"
+        exit 1
+    }
+}
+
+cd ${MOD_DIR}
+TOP="${MNT_PT}/Wallhaven"
+MOD="${TOP}/Models"
+ART="${TOP}/Artists"
+JAV="${TOP}/JAV_Idol"
+PHO="${TOP}/Photographers"
+PLA="${MOD}/Playboy"
+PEN="${MOD}/Penthouse"
+DRO="${MOD}/Photodromm"
+KIND="${MNT_PT}/KindGirls"
+ELITE="${MNT_PT}/Elite_Babes"
+
+isportrait() {
+    port=0
+    #GEO=`identify "$1" | awk ' { print $(NF-6) } '`
+    GEO=`identify "$1" | awk ' { print $3 } '`
+    W=`echo $GEO | awk -F "x" ' { print $1 } '`
+    # Check if width not greater than 600
+    [ "$W" ] && [ $W -gt 600 ] || {
+        port=1
+        return $port
+    }
+    H=`echo $GEO | awk -F "x" ' { print $2 } '`
+    # Check if height not greater than 800
+    [ "$H" ] && [ $H -gt 800 ] || {
+        port=1
+        return $port
+    }
+    # Check if width less than height
+    [ "$W" ] && [ "$H" ] && [ $W -lt $H ] || {
+        port=1
+        return $port
+    }
+    return $port
+}
+
+portrait=1
+[ "$1" == "-l" ] && {
+    portrait=
+    shift
+}
+
+[ "$1" ] || {
+    echo "Use 'mmupdall' to update all folders."
+    echo "This script requires a folder or folders as arguments."
+    echo "Exiting."
+    exit 1
+}
+
+for folder in $*
+do
+    [ "$folder" == "*" ] && continue
+    [ "$folder" == "Unused" ] && continue
+    [ -d $folder ] || continue
+    cd $folder
+    for img in *
+    do
+        [ "$img" == "*" ] && continue
+        if [ -d "$img" ]
+        then
+            for subimg in $img/*
+            do
+                [ "$subimg" == "$img/*" ] && continue
+                [ -L $subimg ] && rm -f $subimg
+                grep $subimg $RMLIST > /dev/null && {
+                    rm -f $subimg
+                    continue
+                }
+                for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
+                do
+                    [ -f $MDIR/$folder/$subimg ] && {
+                        rm -f $subimg
+                        cp $MDIR/$folder/$subimg $subimg
+                        break
+                    }
+                done
+              done
+        else
+            [ -L $img ] && rm -f $img
+            grep $img $RMLIST > /dev/null && {
+                rm -f $img
+                continue
+            }
+            for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
+            do
+                [ -f $MDIR/$folder/$img ] && {
+                    rm -f $img
+                    cp $MDIR/$folder/$img .
+                    break
+                }
+            done
+        fi
+    done
+    cd ${MOD_DIR}
+done
+
+# Identify any newly added files and copy them
+for folder in $*
+do
+    [ "$folder" == "*" ] && continue
+    [ "$folder" == "Unused" ] && continue
+    [ -d $folder ] || continue
+    case $folder in
+        Jenya)
+            model_sites[$ELITE]="Eugenia_Diordiychuk"
+            ;;
+        Natalia_Andreeva)
+            model_sites[$ELITE]="Delilah_G"
+            model_sites[$KIND]="Natalia_A"
+            ;;
+        Niemira)
+            model_sites[$ELITE]="Niemira_A"
+            ;;
+        Priscilla_Huggins)
+            model_sites[$ELITE]="Priscilla_Huggins_Ortiz"
+            ;;
+        *)
+            ;;
+    esac
+    for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
+    do
+      chkfolder=$folder
+      [ "${model_sites[$MDIR]}" ] && {
+              chkfolder="${model_sites[$MDIR]}"
+      }
+      [ -d $MDIR/$chkfolder ] && {
+        echo "Checking $MDIR/$chkfolder for newly added files"
+        cd $MDIR/$chkfolder
+        for img in *
+        do
+            [ "$img" == "*" ] && continue
+            [ "$img" == "downloaded.txt" ] && continue
+            [ "$img" == "SUMS.txt" ] && continue
+            [ "$img" == "Description.txt" ] && continue
+            if [ -d "$img" ]
+            then
+                [ -d ${MOD_DIR}/$folder/$img ] || mkdir -p ${MOD_DIR}/$folder/$img
+                for subimg in $img/*
+                do
+                    [ "$subimg" == "$img/*" ] && continue
+                    [ -L ${MOD_DIR}/$folder/$subimg ] && rm -f ${MOD_DIR}/$folder/$subimg
+                    grep $subimg $RMLIST > /dev/null && {
+                        rm -f $subimg
+                        continue
+                    }
+                    if isportrait $subimg
+                    then
+                        [ "${portrait}" ] && {
+                          cp $MDIR/$chkfolder/$subimg ${MOD_DIR}/$folder/$subimg
+                        }
+                    else
+                        [ "${portrait}" ] || {
+                          cp $MDIR/$chkfolder/$subimg ${MOD_DIR}/$folder/$subimg
+                        }
+                    fi
+                done
+            else
+                [ -L ${MOD_DIR}/$folder/$img ] && rm -f ${MOD_DIR}/$folder/$img
+                grep $img $RMLIST > /dev/null && {
+                    rm -f $img
+                    continue
+                }
+                if isportrait $img
+                then
+                    [ "${portrait}" ] && {
+                      cp $MDIR/$chkfolder/$img ${MOD_DIR}/$folder/$img
+                    }
+                else
+                    [ "${portrait}" ] || {
+                      cp $MDIR/$chkfolder/$img ${MOD_DIR}/$folder/$img
+                    }
+                fi
+            fi
+        done
+        cd ${MOD_DIR}
+      }
+    done
+    cd ${MOD_DIR}
+done

@@ -117,15 +117,15 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommandLine/pics/Models/Natalia_Andreeva',
+                    '/usr/local/MirrorCommandLine/pics/Models/Mila_Azul/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
-                resizeImages: true,
-                maxWidth: __WIDTH__,
-                maxHeight: __HEIGHT__,
                 transitionImages: true,
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
+                resizeImages: true,
+                maxWidth: __WIDTH__,
+                maxHeight: __HEIGHT__,
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
             }
         },
