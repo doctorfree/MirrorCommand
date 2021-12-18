@@ -55,7 +55,7 @@ Version: ${PKG_VER}-${PKG_REL}
 Section: misc
 Priority: optional
 Architecture: all
-Depends: qterminal (>= 0.14.1), git (>= 2.20.1), nodejs (>= 12.0.0), arp-scan (>= 1.9.7)
+Depends: qterminal (>= 0.14.1), git (>= 2.20.1), nodejs (>= 12.0.0), arp-scan (>= 1.9.5)
 Suggests: jq (>= 1.4), fswebcam (>= 20140113)
 Maintainer: ${DEBFULLNAME} <${DEBEMAIL}>
 Build-Depends: debhelper (>= 11)

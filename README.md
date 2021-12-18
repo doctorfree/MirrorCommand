@@ -113,7 +113,8 @@ previously installed it can be installed following
 format installation will automatically install and configure MagicMirror if no
 existing MagicMirror installation is detected. This automated installation
 of MagicMirror includes installing and configuring PM2 for easy and powerful
-process management of MagicMirror.
+process management of MagicMirror as well as the installation of several
+MagicMirror 3rd party modules used by MirrorCommandLine.
 
 **Note:** An actual mirror with display mounted on the rear is not necessary.
 MagicMirror can be installed on a Raspberry Pi with a mirror display as intended
@@ -167,6 +168,14 @@ To access the toolbar menu when in mirror mode, press the ALT key.
 MirrorCommandLine version 2.2 and later includes Debian format packages
 which can be used to install the MirrorCommandLine utilities and images
 with the Apt package management system.
+
+**NOTE:** If you plan to install both the
+[RoonCommandLine package](https://gitlab.com/doctorfree/RoonCommandLine)
+and the
+[MirrorCommandLine package](https://gitlab.com/doctorfree/MirrorCommandLine)
+on the same system then in order to enable automatic configuration of
+MirrorCommandLine's Roon configuration files, the RoonCommandLine
+package must be installed before the MirrorCommandLine package.
 
 To install:
 
