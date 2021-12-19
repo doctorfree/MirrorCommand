@@ -1,23 +1,32 @@
 #!/bin/bash
 
 MM="/usr/local/MirrorCommandLine"
+MS="${MM}/etc/mirrorscreen"
+HAVE_PORT=
 
-SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
-echo ${SCREEN_RES} | grep x > /dev/null && {
-  SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
-  SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
+[ -f ${MS} ] && {
+  . ${MS}
+  grep PORTRAIT= ${MS} > /dev/null && HAVE_PORT=1
 }
-if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
-then
-  SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
-fi
-if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
-then
-  SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
-fi
 
-PORTRAIT=1
-[ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
+[ "${HAVE_PORT}" ] || {
+  SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
+  echo ${SCREEN_RES} | grep x > /dev/null && {
+    SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
+    SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
+  }
+  if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
+  then
+    SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
+  fi
+  if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
+  then
+    SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
+  fi
+
+  PORTRAIT=1
+  [ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
+}
 
 [ -d ${MM} ] && {
   cd ${MM}

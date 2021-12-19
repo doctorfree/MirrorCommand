@@ -66,30 +66,40 @@ PM2_PROCESS_NAME="MagicMirror"
 modurl="http://${IP}:${PORT}/api/module"
 apiurl="http://${IP}:${PORT}/api/notification"
 
-# Set this to the X11 DISPLAY you are using. DISPLAY=:0 works for most systems.
-export DISPLAY=:0
-HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
-PORTRAIT=1
-SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
-echo ${SCREEN_RES} | grep x > /dev/null && {
-  SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
-  SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
-}
-if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
-then
-  SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
-fi
-if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
-then
-  SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
-fi
-[ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
-
-# -----------------------------------------------------------------------
 MCL_HOME="/usr/local/MirrorCommandLine"
 [ -d ${MCL_HOME}/bin ] && {
     export PATH=${PATH}:${MCL_HOME}/bin
 }
+
+# Set this to the X11 DISPLAY you are using. DISPLAY=:0 works for most systems.
+export DISPLAY=:0
+HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
+
+MIRRORSCREEN="${MCL_HOME}/etc/mirrorscreen"
+HAVE_PORT=
+[ -f ${MIRRORSCREEN} ] && {
+  . ${MIRRORSCREEN}
+  grep PORTRAIT= ${MIRRORSCREEN} > /dev/null && HAVE_PORT=1
+}
+[ "${HAVE_PORT}" ] || {
+  PORTRAIT=1
+  SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
+  echo ${SCREEN_RES} | grep x > /dev/null && {
+    SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
+    SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
+  }
+  if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
+  then
+    SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
+  fi
+  if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
+  then
+    SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
+  fi
+  [ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
+}
+
+# -----------------------------------------------------------------------
 CONFDIR="${MM}/config"
 # MagicMirror configuration files organized into subdirectories listed here
 CONF_SUBDIRS="Artists JAV Models Photos Photographers YouTube test"

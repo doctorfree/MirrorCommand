@@ -81,6 +81,14 @@ case "$1" in
         }
         if [ "${MMHOME}" ]
         then
+            MSI="${MMHOME}/.mirrorscreen"
+            MSO="${MM}/etc/mirrorscreen"
+            [ -f ${MSI} ] && {
+              [ -f ${MSO} ] && {
+                mv ${MSO} ${MSO}.bak
+              }
+              ln -s ${MSI} ${MSO}
+            }
             USER=$(stat -c '%U' ${MMHOME}/config)
             GROUP=$(stat -c '%G' ${MMHOME}/config)
             chown -R ${USER}:${GROUP} ${MM}

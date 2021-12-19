@@ -70,6 +70,7 @@ case "$1" in
                       GROUP=`id -g -n ${USER}`
                       chown -R ${USER}:${GROUP} MagicMirror
                       cd MagicMirror
+                      MMHOME="/usr/local/MagicMirror"
                       echo "Installing MagicMirror in /usr/local/MagicMirror"
                       sudo -u ${USER} npm install > /dev/null 2>&1
                       # sudo -u ${USER} cp config/config.js.sample config/config.js
@@ -83,6 +84,59 @@ case "$1" in
                       ;;
               esac
             done
+        }
+        MSO="${MMHOME}/.mirrorscreen"
+        echo ""
+        echo "Portrait mode display screens are taller than wide."
+        echo "Landscape mode display screens are wider than tall."
+        # Create a selection dialog to allow user to select screen orientation
+        PS3="${BOLD}Please enter your display screen's orientation (numeric or text): ${NORMAL}"
+        options=(Portrait Landscape Unknown)
+        select opt in "${options[@]}"
+        do
+          case "$opt,$REPLY" in
+            "Portrait",*|*,"Portrait"|"portrait",*|*,"portrait")
+                if [ -f ${MSO} ]
+                then
+                    grep "PORTRAIT=" ${MSO} > /dev/null && {
+                        grep -v "PORTRAIT=" ${MSO} > /tmp/mso$$
+                        cp /tmp/mso$$ ${MSO}
+                        rm -f /tmp/mso$$
+                    }
+                    echo "PORTRAIT=1" >> ${MSO}
+                else
+                    echo "PORTRAIT=1" > ${MSO}
+                fi
+                break
+                ;;
+            "Landscape",*|*,"Landscape"|"landscape",*|*,"landscape")
+                if [ -f ${MSO} ]
+                then
+                    grep "PORTRAIT=" ${MSO} > /dev/null && {
+                        grep -v "PORTRAIT=" ${MSO} > /tmp/mso$$
+                        cp /tmp/mso$$ ${MSO}
+                        rm -f /tmp/mso$$
+                    }
+                    echo "PORTRAIT=" >> ${MSO}
+                else
+                    echo "PORTRAIT=" > ${MSO}
+                fi
+                break
+                ;;
+            *)
+                printf "\nInvalid entry. Please try again"
+                printf "\nEnter either a number or text of one of the menu entries\n"
+                ;;
+          esac
+        done
+        [ -f ${MSO} ] && {
+          [ "${USER}" ] || {
+            USER=$(stat -c '%U' ${MMHOME}/config)
+          }
+          [ "${GROUP}" ] || {
+            GROUP=$(stat -c '%G' ${MMHOME}/config)
+          }
+          [ "${USER}" ] && [ "${GROUP}" ] && chown ${USER}:${GROUP} ${MSO}
         }
     ;;
 

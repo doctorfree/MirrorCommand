@@ -2,22 +2,6 @@
 #
 MM=${HOME}/MagicMirror
 
-PORTRAIT=1
-SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
-echo ${SCREEN_RES} | grep x > /dev/null && {
-  SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
-  SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
-}
-if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
-then
-  SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
-fi
-if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
-then
-  SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
-fi
-[ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
-
 [ -d ${MM}/config ] || {
       MM=
       for homedir in /usr/local /home/*
@@ -33,6 +17,32 @@ fi
 [ "${MM}" ] || {
     echo "Cannot locate MagicMirror installation directory. Exiting."
     exit 1
+}
+
+MS="${MM}/etc/mirrorscreen"
+HAVE_PORT=
+
+[ -f ${MS} ] && {
+  . ${MS}
+  grep PORTRAIT= ${MS} > /dev/null && HAVE_PORT=1
+}
+
+[ "${HAVE_PORT}" ] || {
+  PORTRAIT=1
+  SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
+  echo ${SCREEN_RES} | grep x > /dev/null && {
+    SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
+    SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
+  }
+  if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
+  then
+    SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
+  fi
+  if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
+  then
+    SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
+  fi
+  [ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
 }
 
 CONF=${MM}/config
