@@ -1129,7 +1129,13 @@ setconf() {
     }
     [ -L config-$$.js ] && rm -f config-$$.js
     [ "${PORTRAIT}" ] && {
-      rotation=`xrandr | grep connected | awk ' { print $5 } '`
+      primary=`xrandr --query --verbose | grep connected | grep -v disconnected | grep primary > /dev/null`
+      if [ "${primary}" ]
+      then
+        rotation=`xrandr --query --verbose | grep connected | grep -v disconnected | awk ' { print $6 } '`
+      else
+        rotation=`xrandr --query --verbose | grep connected | grep -v disconnected | awk ' { print $5 } '`
+      fi
       case ${conf} in
         tantra|iframe|candy|fractalplaylist|hardzoom)
             [ "$rotation" == "normal" ] || {
@@ -1267,8 +1273,8 @@ system_info() {
     }
     [ "$INFO" == "all" ] || [ "$INFO" == "screen" ] && {
         printf "${BOLD}Screen dimensions and resolution:${NORMAL}\n"
-        xrandr | grep Screen
-        xrandr | grep connected
+        xrandr --query --verbose | grep Screen
+        xrandr --query --verbose | grep connected | grep -v disconnected
         xdpyinfo | grep dimensions
         xdpyinfo | grep resolution
         display_status

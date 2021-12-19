@@ -44,7 +44,13 @@ CONF=${MM}/config
     config=`readlink ${CONF}/config.js`
     config=`basename ${config}`
     config=`echo $config | sed -e "s/\.js$//" -e "s/^config-//"`
-    rotation=`xrandr | grep connected | awk ' { print $5 } '`
+    primary=`xrandr --query --verbose | grep connected | grep -v disconnected | grep primary > /dev/null`
+    if [ "${primary}" ]
+    then
+        rotation=`xrandr --query --verbose | grep connected | grep -v disconnected | awk ' { print $6 } '`
+    else
+        rotation=`xrandr --query --verbose | grep connected | grep -v disconnected | awk ' { print $5 } '`
+    fi
     HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
     case ${config} in
         tantra|iframe|candy|fractalplaylist|hardzoom)
