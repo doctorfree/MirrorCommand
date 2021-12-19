@@ -148,14 +148,14 @@ case "$1" in
                   }
                 done
               }
-              [ -f ${MCL}/etc/my_arp-devices.js ] && {
+              [ -f ${MCL}/etc/arp-devices.js ] && {
                 [ -f ${MM}/etc/arp-devices.js ] && {
                   cp ${MM}/etc/arp-devices.js ${MM}/etc/arp-devices-inst.js
                 }
-                cp ${MCL}/etc/my_arp-devices.js ${MM}/etc/arp-devices.js
-                for arpdev in ${MCL}/etc/my_arp-devices-*.js
+                cp ${MCL}/etc/arp-devices.js ${MM}/etc/arp-devices.js
+                for arpdev in ${MCL}/etc/arp-devices-*.js
                 do
-                  [ "${arpdev}" == "${MCL}/etc/my_arp-devices-*.js" ] && continue
+                  [ "${arpdev}" == "${MCL}/etc/arp-devices-*.js" ] && continue
                   custarp=`basename ${arpdev}`
                   cp ${arpdev} ${MM}/etc/${custarp}
                 done
