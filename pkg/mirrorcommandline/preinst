@@ -123,6 +123,21 @@ case "$1" in
                 fi
                 break
                 ;;
+            "Unknown",*|*,"Unknown"|"unknown",*|*,"unknown")
+                echo "Using landscape display mode"
+                if [ -f ${MSO} ]
+                then
+                    grep "PORTRAIT=" ${MSO} > /dev/null && {
+                        grep -v "PORTRAIT=" ${MSO} > /tmp/mso$$
+                        cp /tmp/mso$$ ${MSO}
+                        rm -f /tmp/mso$$
+                    }
+                    echo "PORTRAIT=" >> ${MSO}
+                else
+                    echo "PORTRAIT=" > ${MSO}
+                fi
+                break
+                ;;
             *)
                 printf "\nInvalid entry. Please try again"
                 printf "\nEnter either a number or text of one of the menu entries\n"

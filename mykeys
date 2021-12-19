@@ -12,18 +12,18 @@ PICDIR="/mnt/transcend/Pictures/MagicMirror"
   }
 }
 
-[ -f ${MAGDIR}/etc/arp-devices.js ] && {
-  cp ${MAGDIR}/etc/arp-devices.js ${MAGDIR}/etc/arp-devices-inst.js
-}
-[ -f ${MCL}/etc/my_arp-devices.js ] && {
-  cp ${MCL}/etc/my_arp-devices.js ${MAGDIR}/etc/arp-devices.js
-}
-[ -f ${MCL}/etc/my_arp-devices-cols.js ] && {
-  cp ${MCL}/etc/my_arp-devices-cols.js ${MAGDIR}/etc/arp-devices-cols.js
-}
-[ -f ${MCL}/etc/my_arp-devices-scenes.js ] && {
-  cp ${MCL}/etc/my_arp-devices-scenes.js ${MAGDIR}/etc/arp-devices-scenes.js
-}
+#[ -f ${MAGDIR}/etc/arp-devices.js ] && {
+#  cp ${MAGDIR}/etc/arp-devices.js ${MAGDIR}/etc/arp-devices-inst.js
+#}
+#[ -f ${MCL}/etc/my_arp-devices.js ] && {
+#  cp ${MCL}/etc/my_arp-devices.js ${MAGDIR}/etc/arp-devices.js
+#}
+#[ -f ${MCL}/etc/my_arp-devices-cols.js ] && {
+#  cp ${MCL}/etc/my_arp-devices-cols.js ${MAGDIR}/etc/arp-devices-cols.js
+#}
+#[ -f ${MCL}/etc/my_arp-devices-scenes.js ] && {
+#  cp ${MCL}/etc/my_arp-devices-scenes.js ${MAGDIR}/etc/arp-devices-scenes.js
+#}
 
 [ -f ${MCL}/etc/my_mirrorkeys ] || {
     echo "Cannot locate ${MCL}/etc/my_mirrorkeys"

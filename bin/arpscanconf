@@ -2,6 +2,7 @@
 
 ARPCOM="__ARP_SCAN_DEVICES__"
 STR="devices: \[\]\,"
+ARPSTR="showDeviceColumns: true"
 INPDIR="/usr/local/MirrorCommandLine/etc"
 DEFINP="${INPDIR}/arp-devices.js"
 
@@ -20,7 +21,18 @@ do
         then
             ARPINP="${INPDIR}/arp-devices-${config_name}.js"
         else
-            ARPINP="${DEFINP}"
+            grep "${ARPSTR}" $i > /dev/null
+            if [ $? -eq 0 ]
+            then
+                if [ -f ${INPDIR}/arp-devices-cols.js ]
+                then
+                    ARPINP="${INPDIR}/arp-devices-cols.js"
+                else
+                    ARPINP="${DEFINP}"
+                fi
+            else
+                ARPINP="${DEFINP}"
+            fi
         fi
         cat $i | sed -e "/${STR}/r ${ARPINP}" -e "/${STR}/d" > /tmp/$b
         grep -v ${ARPCOM} /tmp/$b > $i
