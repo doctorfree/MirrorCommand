@@ -31,12 +31,12 @@ case "$1" in
             updartist updlinks updjav updmodel updphotographer updtop vncview vol \
             websnap wireless_conf zerologs"
         LOCAL="myreboot myshutdown remountusb"
-        KEYS="/usr/local/MirrorCommandLine/etc/mirrorkeys"
+        MM="/usr/local/MirrorCommandLine"
+        KEYS="${MM}/etc/mirrorkeys"
 
         [ -d /usr/local ] || mkdir /usr/local
         [ -d /usr/local/bin ] || mkdir /usr/local/bin
         cd /usr/local/bin
-        MM="/usr/local/MirrorCommandLine"
         [ -f ${MM}/etc/mirror_start.sh ] && {
           [ -f mirror_start ] || ln -s ${MM}/etc/mirror_start.sh mirror_start
         }
@@ -134,6 +134,32 @@ case "$1" in
               [ -x ${MM}/bin/arps2mm ] && {
                 ${MM}/bin/arps2mm > ${MM}/etc/arp-devices.js
                 chown ${USER}:${GROUP} ${MM}/etc/arp-devices.js
+              }
+              MMUP=`dirname ${MMHOME}`
+              MCL="${MMUP}/src/MirrorCommandLine"
+              [ -d ${MCL} ] || {
+                MCL=
+                for homedir in /usr/local /home/*
+                do
+                  [ "${homedir}" == "/home/*" ] && continue
+                  [ -d ${homedir}/src/MirrorCommandLine ] && {
+                    MCL="${homedir}/src/MirrorCommandLine"
+                    break
+                  }
+                done
+              }
+              [ -f ${MCL}/etc/my_arp-devices.js ] && {
+                [ -f ${MM}/etc/arp-devices.js ] && {
+                  cp ${MM}/etc/arp-devices.js ${MM}/etc/arp-devices-inst.js
+                }
+                cp ${MCL}/etc/my_arp-devices.js ${MM}/etc/arp-devices.js
+                for arpdev in ${MCL}/etc/my_arp-devices-*.js
+                do
+                  [ "${arpdev}" == "${MCL}/etc/my_arp-devices-*.js" ] && continue
+                  custarp=`basename ${arpdev}`
+                  cp ${arpdev} ${MM}/etc/${custarp}
+                done
+                chown ${USER}:${GROUP} ${MM}/etc/*arp-devices*.js
               }
               [ -x ${MM}/bin/arpscanconf ] && {
                 cd "${MM}/config"
@@ -275,7 +301,7 @@ case "$1" in
             cat ${KEYS} | sed -e "s/keys\[MMIP\]=/keys\[MMIP\]=\'${MMIP}\'/" > /tmp/keys$$
             cp /tmp/keys$$ ${KEYS}
             rm -f /tmp/keys$$
-            /usr/local/MirrorCommandLine/bin/showkeys -q
+            ${MM}/bin/showkeys -q
         }
         [ "${MMHOME}" ] && {
             # Setup PM2 if not already configured

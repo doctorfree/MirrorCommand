@@ -228,7 +228,7 @@ getconfs() {
     CONFS=
     for i in config-*.js
     do
-        j=`echo $i | awk -F "-" ' { print $2 } ' | sed -e "s/.js//"`
+        j=`echo $i | sed -e "s/config-//" -e "s/.js//"`
         CONFS="${CONFS} $j"
         [ "$1" == "usage" ] && {
             numconfs=`expr $numconfs + 1`
