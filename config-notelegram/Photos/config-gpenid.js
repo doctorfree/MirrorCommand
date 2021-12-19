@@ -168,7 +168,7 @@ var config = {
                 },
               },
               recipes: [
-                "myGooglePhotos.js", "myReboot-Restart-Shutdown.js",
+                "myReboot-Restart-Shutdown.js",
                 "ExtRadio.js","MirrorCommand.js",
               ],
               NPMCheck: {}

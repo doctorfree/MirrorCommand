@@ -24,19 +24,18 @@ var recipe = {
       },
       soundExec: {
         chime: "open"
-      },
-      displayResponse: false
+      }
     },
     "GP_SHOW_ALBUM": {
       functionExec: {
         exec: (params) => {
-          this.showGooglePhotos()
+          var albumName = params[1]
+          return this.showGooglePhotos(albumName)
         }
       },
       soundExec: {
         chime: "open"
-      },
-      displayResponse: false
+      }
     }
   }
 }
