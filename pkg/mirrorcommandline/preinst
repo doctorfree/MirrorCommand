@@ -87,64 +87,38 @@ case "$1" in
             done
         }
         MSO="${MMHOME}/.mirrorscreen"
-        echo ""
-        echo "Portrait mode display screens are taller than wide."
-        echo "Landscape mode display screens are wider than tall."
-        # Create a selection dialog to allow user to select screen orientation
-        PS3="${BOLD}Please enter your display screen's orientation (numeric or text): ${NORMAL}"
-        options=(Portrait Landscape Unknown)
-        select opt in "${options[@]}"
-        do
-          case "$opt,$REPLY" in
-            "Portrait",*|*,"Portrait"|"portrait",*|*,"portrait")
-                if [ -f ${MSO} ]
-                then
-                    grep "PORTRAIT=" ${MSO} > /dev/null && {
-                        grep -v "PORTRAIT=" ${MSO} > /tmp/mso$$
-                        cp /tmp/mso$$ ${MSO}
-                        rm -f /tmp/mso$$
-                    }
-                    echo "PORTRAIT=1" >> ${MSO}
-                else
-                    echo "PORTRAIT=1" > ${MSO}
-                fi
-                break
-                ;;
-            "Landscape",*|*,"Landscape"|"landscape",*|*,"landscape")
-                if [ -f ${MSO} ]
-                then
-                    grep "PORTRAIT=" ${MSO} > /dev/null && {
-                        grep -v "PORTRAIT=" ${MSO} > /tmp/mso$$
-                        cp /tmp/mso$$ ${MSO}
-                        rm -f /tmp/mso$$
-                    }
-                    echo "PORTRAIT=" >> ${MSO}
-                else
-                    echo "PORTRAIT=" > ${MSO}
-                fi
-                break
-                ;;
-            "Unknown",*|*,"Unknown"|"unknown",*|*,"unknown")
-                echo "Using landscape display mode"
-                if [ -f ${MSO} ]
-                then
-                    grep "PORTRAIT=" ${MSO} > /dev/null && {
-                        grep -v "PORTRAIT=" ${MSO} > /tmp/mso$$
-                        cp /tmp/mso$$ ${MSO}
-                        rm -f /tmp/mso$$
-                    }
-                    echo "PORTRAIT=" >> ${MSO}
-                else
-                    echo "PORTRAIT=" > ${MSO}
-                fi
-                break
-                ;;
-            *)
-                printf "\nInvalid entry. Please try again"
-                printf "\nEnter either a number or text of one of the menu entries\n"
-                ;;
-          esac
-        done
+        [ -f ${MSO} ] || {
+          echo ""
+          echo "Portrait mode display screens are taller than wide."
+          echo "Landscape mode display screens are wider than tall."
+          # Create a selection dialog to allow user to select screen orientation
+          PS3="${BOLD}Please enter your display screen's orientation (numeric or text): ${NORMAL}"
+          options=(Portrait Landscape Unknown)
+          select opt in "${options[@]}"
+          do
+            case "$opt,$REPLY" in
+              "Portrait",*|*,"Portrait"|"portrait",*|*,"portrait")
+                  echo "Using portrait display mode"
+                  echo "PORTRAIT=1" > ${MSO}
+                  break
+                  ;;
+              "Landscape",*|*,"Landscape"|"landscape",*|*,"landscape")
+                  echo "Using landscape display mode"
+                  echo "PORTRAIT=" > ${MSO}
+                  break
+                  ;;
+              "Unknown",*|*,"Unknown"|"unknown",*|*,"unknown")
+                  echo "Using landscape display mode"
+                  echo "PORTRAIT=" > ${MSO}
+                  break
+                  ;;
+              *)
+                  printf "\nInvalid entry. Please try again"
+                  printf "\nEnter either a number or text of one of the menu entries\n"
+                  ;;
+            esac
+          done
+        }
         echo "Setting ownership of MirrorCommandLine screen mode configuration file"
         [ -f ${MSO} ] && {
           [ "${USER}" ] || {
