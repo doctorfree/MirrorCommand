@@ -8,6 +8,8 @@ set -e
 case "$1" in
     install|upgrade)
         MMHOME="/home/pi/MagicMirror"
+        USER=
+        GROUP=
         [ -d ${MMHOME}/config ] || {
             MMHOME=
             for homedir in /usr/local /home/*
@@ -29,7 +31,6 @@ case "$1" in
               read -p "Install MagicMirror ? ('Y'/'N'): " yn
               case $yn in
                   [Yy]*)
-                      USER=
                       numusers=0
                       users=
                       for user in /home/*
@@ -61,8 +62,8 @@ case "$1" in
                           done
                       }
                       [ "${USER}" ] || {
-                          echo "No MagicMirror user found or selected. Exiting."
-                          exit 1
+                          echo "No MagicMirror user found or selected. Using root."
+                          USER="root"
                       }
                       [ -d /usr/local ] || mkdir /usr/local
                       cd /usr/local
@@ -144,15 +145,17 @@ case "$1" in
                 ;;
           esac
         done
+        echo "Setting ownership of MirrorCommandLine screen mode configuration file"
         [ -f ${MSO} ] && {
           [ "${USER}" ] || {
             USER=$(stat -c '%U' ${MMHOME}/config)
           }
           [ "${GROUP}" ] || {
-            GROUP=$(stat -c '%G' ${MMHOME}/config)
+            GROUP=`id -g -n ${USER}`
           }
-          [ "${USER}" ] && [ "${GROUP}" ] && chown ${USER}:${GROUP} ${MSO}
+          chown ${USER}:${GROUP} ${MSO}
         }
+        echo "MirrorCommandLine pre-installation configuration complete"
     ;;
 
     *)

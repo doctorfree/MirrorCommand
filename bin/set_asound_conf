@@ -30,42 +30,44 @@ then
 else
   [ -f ${ASOUND} ] && {
     [ -f ${ASOUND}.orig ] || sudo cp ${ASOUND} ${ASOUND}.orig
-    INPUT=`grep ${INGREP} ${CARDS} | grep -i "Webcam" | awk ' { print $1 } '`
-    [ "${INPUT}" ] || {
-      INPUT=`grep ${INGREP} ${CARDS} | grep "Audio Device" | awk ' { print $1 } '`
-    }
-    [ "${INPUT}" ] && {
-      INPUT=`echo ${INPUT} | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'`
-    }
-    OUTPUT=`grep ${OUTGREP} ${CARDS} | grep "DAC" | awk ' { print $1 } '`
-    [ "${OUTPUT}" ] || {
-      OUTPUT=`grep ${OUTGREP} ${CARDS} | grep "Audio Device" | awk ' { print $1 } '`
-    }
-    [ "${OUTPUT}" ] && {
-      OUTPUT=`echo ${OUTPUT} | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'`
-    }
-    # If audio input or output device could not be detected just use 0 and 1
-    [ "${INPUT}" ] || {
-      if [ "${OUTPUT}" == "0" ]
-      then
-        INPUT=1
-      else
-        INPUT=0
-      fi
-    }
-    [ "${OUTPUT}" ] || {
-      if [ "${INPUT}" == "0" ]
-      then
-        OUTPUT=1
-      else
-        OUTPUT=0
-      fi
-    }
-    cat ${ASOUND_TMPL} | \
-      sed -e "s/${INPSTR}/${INPUT}/" -e "s/${OUTSTR}/${OUTPUT}/" > /tmp/asound$$
-    cp /tmp/asound$$ ${ASOUND}
-    rm -f /tmp/asound$$
   }
+  INPUT=`grep ${INGREP} ${CARDS} | grep -i "Webcam" | awk ' { print $1 } '`
+  [ "${INPUT}" ] || {
+    INPUT=`grep ${INGREP} ${CARDS} | grep "Audio Device" | awk ' { print $1 } '`
+  }
+  [ "${INPUT}" ] && {
+    INPUT=`echo ${INPUT} | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'`
+  }
+  OUTPUT=`grep ${OUTGREP} ${CARDS} | grep "DAC" | awk ' { print $1 } '`
+  [ "${OUTPUT}" ] || {
+    OUTPUT=`grep ${OUTGREP} ${CARDS} | grep "Audio Device" | awk ' { print $1 } '`
+  }
+  [ "${OUTPUT}" ] && {
+    OUTPUT=`echo ${OUTPUT} | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'`
+  }
+  # If audio input or output device could not be detected just use 0 and 1
+  [ "${INPUT}" ] || {
+    if [ "${OUTPUT}" == "0" ]
+    then
+      INPUT=1
+    else
+      INPUT=0
+    fi
+  }
+  [ "${OUTPUT}" ] || {
+    if [ "${INPUT}" == "0" ]
+    then
+      OUTPUT=1
+    else
+      OUTPUT=0
+    fi
+  }
+  cat ${ASOUND_TMPL} | \
+    sed -e "s/${INPSTR}/${INPUT}/" -e "s/${OUTSTR}/${OUTPUT}/" > /tmp/asound$$
+  cp /tmp/asound$$ ${ASOUND}
+  rm -f /tmp/asound$$
 fi
+
+exit 0
 
 exit 0
