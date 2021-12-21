@@ -49,35 +49,44 @@ CONF=${MM}/config
 
 # If there is an existing config.js and we are in portrait mode
 # then check if it is one that requires screen rotation
-[ "${PORTRAIT}" ] && {
-  [ -L ${CONF}/config.js ] && {
-    config=`readlink ${CONF}/config.js`
-    config=`basename ${config}`
-    config=`echo $config | sed -e "s/\.js$//" -e "s/^config-//"`
-    primary=`xrandr --query --verbose | grep connected | grep -v disconnected | grep primary > /dev/null`
-    if [ "${primary}" ]
-    then
-        rotation=`xrandr --query --verbose | grep connected | grep -v disconnected | awk ' { print $6 } '`
-    else
-        rotation=`xrandr --query --verbose | grep connected | grep -v disconnected | awk ' { print $5 } '`
-    fi
-    HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
-    case ${config} in
-        tantra|iframe|candy|fractalplaylist|hardzoom)
-            [ "$rotation" == "normal" ] || {
-                printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
-                [ "${HDMI}" ] && xrandr --output ${HDMI} --rotate normal
-            }
-            ;;
-        *)
-            [ "$rotation" == "right" ] || {
-                printf "\n${BOLD}Rotating screen display right ${NORMAL}\n"
-                [ "${HDMI}" ] && xrandr --output ${HDMI} --rotate right
-            }
-            ;;
-    esac
-  }
-}
+if [ -L ${CONF}/config.js ]
+then
+  config=`readlink ${CONF}/config.js`
+  config=`basename ${config}`
+  config=`echo $config | sed -e "s/\.js$//" -e "s/^config-//"`
+else
+  config="config"
+fi
+
+primary=`xrandr --query --verbose | grep connected | grep -v disconnected | grep primary > /dev/null`
+if [ "${primary}" ]
+then
+  rotation=`xrandr --query --verbose | grep connected | grep -v disconnected | awk ' { print $6 } '`
+else
+  rotation=`xrandr --query --verbose | grep connected | grep -v disconnected | awk ' { print $5 } '`
+fi
+HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
+
+if [ "${PORTRAIT}" ]
+then
+  case ${config} in
+    tantra|iframe|candy|fractalplaylist|hardzoom)
+      [ "$rotation" == "normal" ] || {
+        printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
+        [ "${HDMI}" ] && xrandr --output ${HDMI} --rotate normal
+      }
+      ;;
+    *)
+      [ "$rotation" == "right" ] || {
+        printf "\n${BOLD}Rotating screen display right ${NORMAL}\n"
+        [ "${HDMI}" ] && xrandr --output ${HDMI} --rotate right
+      }
+      ;;
+  esac
+else
+  printf "\n${BOLD}Rotating screen display normal ${NORMAL}\n"
+  [ "${HDMI}" ] && xrandr --output ${HDMI} --rotate normal
+fi
 
 cd ${MM}
 DISPLAY=:0 npm start
