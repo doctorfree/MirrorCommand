@@ -180,11 +180,9 @@ do
           MMM-IronManGIF)
             if [ "${QUIET}" ]
             then
-              # git clone https://github.com/2hdlockness/MMM-IronManGIF
-              git clone https://github.com/doctorfree/MMM-IronManGIF.git > /dev/null 2>&1
+              git clone https://github.com/2hdlockness/MMM-IronManGIF.git > /dev/null 2>&1
             else
-              # git clone https://github.com/2hdlockness/MMM-IronManGIF
-              git clone https://github.com/doctorfree/MMM-IronManGIF.git
+              git clone https://github.com/2hdlockness/MMM-IronManGIF.git
             fi
             ;;
           MMM-MacAddressScan)
