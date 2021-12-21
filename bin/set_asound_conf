@@ -64,7 +64,9 @@ done
 shift $(( OPTIND - 1 ))
 
 [ -f ${ASOUND_TMPL} ] || {
-  echo "Cannot locate ${ASOUND_TMPL}. Exiting."
+  [ "${QUT}" ] || {
+    echo "Cannot locate ${ASOUND_TMPL}. Exiting."
+  }
   exit 0
 }
 
@@ -120,14 +122,23 @@ else
     then
       if [ "${SAME}" ]
       then
-        echo "${ASOUND} is identical to a generated asound.conf. No need to update."
+        [ "${QUT}" ] || {
+          echo "${ASOUND} is identical to a generated asound.conf. No need to update."
+        }
+        exit 0
       else
-        echo "${ASOUND} differs with generated asound.conf as follows:"
-        diff /tmp/asound$$ ${ASOUND}
+        [ "${QUT}" ] || {
+          echo "${ASOUND} differs with generated asound.conf as follows:"
+          diff /tmp/asound$$ ${ASOUND}
+        }
+        exit 1
       fi
     else
-      echo "No ${ASOUND} detected. Check not performed."
-      echo "Use 'set_asound_conf -e' to generate and update ${ASOUND}"
+      [ "${QUT}" ] || {
+        echo "No ${ASOUND} detected. Check not performed."
+        echo "Use 'set_asound_conf -e' to generate and update ${ASOUND}"
+      }
+      exit 1
     fi
   else
     if [ "${UPD}" ]

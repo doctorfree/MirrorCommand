@@ -1,0 +1,9 @@
+[Unit]
+Description=Configure ALSA audio input and output devices
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/set_asound_conf -e -q
+
+[Install]
+WantedBy=multi-user.target
