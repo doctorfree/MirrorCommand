@@ -19,7 +19,7 @@ MM=${HOME}/MagicMirror
     exit 1
 }
 
-MS="${MM}/etc/mirrorscreen"
+MS="${MM}/.mirrorscreen"
 HAVE_PORT=
 
 [ -f ${MS} ] && {

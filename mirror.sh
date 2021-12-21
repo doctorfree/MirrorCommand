@@ -77,6 +77,7 @@ HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
 
 MIRRORSCREEN="${MCL_HOME}/etc/mirrorscreen"
 HAVE_PORT=
+[ -f ${MIRRORSCREEN} ] || MIRRORSCREEN="${MM}/.mirrorscreen"
 [ -f ${MIRRORSCREEN} ] && {
   . ${MIRRORSCREEN}
   grep PORTRAIT= ${MIRRORSCREEN} > /dev/null && HAVE_PORT=1
