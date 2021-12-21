@@ -16,21 +16,65 @@ OUTGREP="USB-Audio"
 # String to look for in /proc/asound/cards for audio input device
 INGREP="USB-Audio"
 
+usage() {
+    printf "\nUsage: set_asound_conf [-c] [-e] [-o outfile] [-q] [-r] [-t template] [-u]" 
+    printf "\nWhere:"
+    printf "\n\t-c indicates perform a check and notify if update needed"
+    printf "\n\t-e indicates perform an update of /etc/asound.conf"
+    printf "\n\t-o 'outfile' specifies an alternate output file for generated asound.conf"
+    printf "\n\t-q indicates quiet execution"
+    printf "\n\t-r indicates restore original /etc/asound.conf"
+    printf "\n\t-t 'template' specifies an alternate asound.conf template to use"
+    printf "\n\t-u indicates display this usage message and exit"
+    printf "\n\nDefault generated output is the file /etc/asound.conf"
+    printf "\nDefault asound.conf template can be found in:"
+    printf "\n\t/usr/local/MirrorCommandLine/etc/asound.conf.tmpl\n\n"
+    exit 0
+}
+
+UPD=
+CHK=
+REV=
+QUT=
+while getopts ceo:qrt:u flag; do
+    case $flag in
+        c)
+            CHK=1
+            ;;
+        e)
+            UPD=1
+            ;;
+        o)
+            ASOUND="${OPTARG}"
+            ;;
+        q)
+            QUT=1
+            ;;
+        r)
+            REV=1
+            ;;
+        t)
+            ASOUND_TMPL="${OPTARG}"
+            ;;
+        u)
+            usage
+            ;;
+    esac
+done
+shift $(( OPTIND - 1 ))
+
 [ -f ${ASOUND_TMPL} ] || {
   echo "Cannot locate ${ASOUND_TMPL}. Exiting."
   exit 0
 }
 
-if [ "$1" == "-r" ]
+if [ "$REV" ]
 then
   [ -f ${ASOUND}.orig ] && {
     sudo cp ${ASOUND}.orig ${ASOUND}
     sudo rm -f ${ASOUND}.orig
   }
 else
-  [ -f ${ASOUND} ] && {
-    [ -f ${ASOUND}.orig ] || sudo cp ${ASOUND} ${ASOUND}.orig
-  }
   INPUT=`grep ${INGREP} ${CARDS} | grep -i "Webcam" | awk ' { print $1 } '`
   [ "${INPUT}" ] || {
     INPUT=`grep ${INGREP} ${CARDS} | grep "Audio Device" | awk ' { print $1 } '`
@@ -62,12 +106,72 @@ else
       OUTPUT=0
     fi
   }
+
+  # Generate a new asound.conf from the template
   cat ${ASOUND_TMPL} | \
     sed -e "s/${INPSTR}/${INPUT}/" -e "s/${OUTSTR}/${OUTPUT}/" > /tmp/asound$$
-  cp /tmp/asound$$ ${ASOUND}
+
+  SAME=
+  diff /tmp/asound$$ ${ASOUND} > /dev/null
+  [ $? -eq 0 ] && SAME=1
+  if [ "${CHK}" ]
+  then
+    if [ -f ${ASOUND} ]
+    then
+      if [ "${SAME}" ]
+      then
+        echo "${ASOUND} is identical to a generated asound.conf. No need to update."
+      else
+        echo "${ASOUND} differs with generated asound.conf as follows:"
+        diff /tmp/asound$$ ${ASOUND}
+      fi
+    else
+      echo "No ${ASOUND} detected. Check not performed."
+      echo "Use 'set_asound_conf -e' to generate and update ${ASOUND}"
+    fi
+  else
+    if [ "${UPD}" ]
+    then
+      [ -f ${ASOUND} ] && {
+        if [ "${SAME}" ]
+        then
+          [ "${QUT}" ] || {
+            echo "${ASOUND} is identical to a generated asound.conf. No need to update."
+          }
+        else
+          if [ -f ${ASOUND}.orig ]
+          then
+            [ "${QUT}" ] || {
+              echo "Copying ${ASOUND} to ${ASOUND}.bak$$"
+            }
+            sudo cp ${ASOUND} ${ASOUND}.bak$$
+          else
+            [ "${QUT}" ] || {
+              echo "Copying original ${ASOUND} to ${ASOUND}.orig"
+            }
+            sudo cp ${ASOUND} ${ASOUND}.orig
+          fi
+          [ "${QUT}" ] || {
+            echo "Installing generated asound.conf as ${ASOUND}"
+          }
+          sudo cp /tmp/asound$$ ${ASOUND}
+        fi
+      }
+    else
+      if [ "${SAME}" ]
+      then
+        [ "${QUT}" ] || {
+          echo "${ASOUND} is identical to a generated asound.conf. No need to update."
+        }
+      else
+        [ "${QUT}" ] || {
+          echo "Copying generated asound.conf to ${ASOUND}.gen$$"
+        }
+        sudo cp /tmp/asound$$ ${ASOUND}.gen$$
+      fi
+    fi
+  fi
   rm -f /tmp/asound$$
 fi
-
-exit 0
 
 exit 0

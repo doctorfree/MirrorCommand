@@ -309,7 +309,7 @@ case "$1" in
           read -p "Configure ALSA /etc/asound.conf for audio input/output ? ('Y'/'N'): " yn
           case $yn in
               [Yy]*)
-                  [ -x ${MM}/bin/set_asound_conf ] && ${MM}/bin/set_asound_conf
+                  [ -x ${MM}/bin/set_asound_conf ] && ${MM}/bin/set_asound_conf -e -q
                   break
                   ;;
               [Nn]*)
