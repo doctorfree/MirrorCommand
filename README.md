@@ -25,6 +25,7 @@ configure, monitor, and manage a MagicMirror.
 1. [Installation](#installation)
     1. [MagicMirror Installation](#magicmirror-installation)
     1. [MirrorCommandLine Installation](#mirrorcommandline-installation)
+        1. [ALSA audio input and output devices configuration](alsa-audio-input-and-output-devices-configuration)
     1. [Post installation configuration](#post-installation-configuration)
     1. [Add keys to mirrorkeys](#add-keys-to-mirrorkeys)
     1. [Configure mirror script](#configure-mirror-script)
@@ -205,6 +206,27 @@ Use the `mkpkg` script to create Debian format packages on a system with
 the prerequisite packaging development environment. Once packages have been
 created in the source repository they can be installed by executing the
 `./Install` command. Packages can be removed with `./Uninstall`.
+
+#### ALSA audio input and output devices configuration
+The MirrorCommandLine installation attempts to detect and configure ALSA
+audio input and output devices. Currently this automated ALSA configuration
+is limited to USB audio devices such as a microphone, webcam, or DAC.
+
+The installation process will modify `/etc/asound.conf` if it detects USB
+audio devices not correctly configured. In addition, the installation process
+will setup a system service that runs every time the system boots, checks the
+ALSA configuration in `/etc/asound.conf`, and corrects it if necessary. This
+system service attempts to compensate for shifting audio device numbers over
+system reboots.
+
+No changes are made to individual users' `.asoundrc` in their home directories.
+If you wish to override the settings configured by the `asound-conf` system
+service you can do so by creating an `.asoundrc` file in your home directory
+and managing the ALSA audio device settings there.
+
+To disable the `asound-conf` system service, issue the command:
+
+`sudo systemctl disable asound-conf`
 
 ### Post installation configuration
 
