@@ -24,8 +24,9 @@ HAVE_PORT=
 
 [ -f ${MS} ] && {
   . ${MS}
-  [ ${SCREEN_0[mode]+_} ] && {
-    PORTRAIT=${SCREEN_0[mode]}
+  screen=SCREEN_${MM_SCREEN}[mode]
+  [ ${!screen+_} ] && {
+    PORTRAIT=${!screen}
     HAVE_PORT=1
   }
 }
@@ -69,11 +70,12 @@ else
   rotation=`xrandr --query --verbose | grep connected | grep -v disconnected | awk ' { print $5 } '`
 fi
 
-if [ ${SCREEN_0[hdmi]+_} ]
+device=SCREEN_${MM_SCREEN}[hdmi]
+if [ ${!device+_} ]
 then
-  HDMI=${SCREEN_0[hdmi]+_}
+  HDMI=${!device}
 else
-  HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
+  HDMI=`xrandr --listactivemonitors | grep ${MM_SCREEN}: | awk ' { print $4 } '`
 fi
 
 if [ "${PORTRAIT}" ]

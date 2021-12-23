@@ -87,11 +87,20 @@ case "$1" in
             done
         }
         MSO="${MMHOME}/.mirrorscreen"
-        [ -f ${MSO} ] && mv ${MSO} ${MSO}.bak
-        touch ${MSO}
+        [ -f ${MSO} ] && mv ${MSO} ${MSO}.bak$$
+        echo "# MirrorCommandLine Display Configuration" > ${MSO}
+        echo "# The SCREEN_# associative arrays contain the mode and device" >> ${MSO}
+        echo "# for each screen. A 'mode' value of '1' indicates Portrait mode" >> ${MSO}
+        echo "# while an empty 'mode' value indicates Landscape mode" >> ${MSO}
+        echo "# To get a list of your active display screens, execute the command:" >> ${MSO}
+        echo "#    xrandr --listactivemonitors" >> ${MSO}
+        echo "" >> ${MSO}
+        echo "# MM_SCREEN is the screen number on which MagicMirror will display" >> ${MSO}
+        echo "MM_SCREEN=0" >> ${MSO}
         echo ""
         echo "Portrait mode display screens are taller than wide."
         echo "Landscape mode display screens are wider than tall."
+        echo ""
         numscreens=`xrandr --listactivemonitors | grep Monitors: | awk ' { print $2 } '`
         screens=0
         while [ ${screens} -lt ${numscreens} ]
@@ -115,6 +124,8 @@ case "$1" in
             case "$opt,$REPLY" in
               "Portrait",*|*,"Portrait"|"portrait",*|*,"portrait")
                 echo "Using portrait display mode"
+                echo "" >> ${MSO}
+                echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
                 echo "declare -A SCREEN_${screens}" >> ${MSO}
                 echo "SCREEN_${screens}[mode]=1" >> ${MSO}
                 echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
@@ -122,6 +133,8 @@ case "$1" in
                 ;;
               "Landscape",*|*,"Landscape"|"landscape",*|*,"landscape")
                 echo "Using landscape display mode"
+                echo "" >> ${MSO}
+                echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
                 echo "declare -A SCREEN_${screens}" >> ${MSO}
                 echo "SCREEN_${screens}[mode]=" >> ${MSO}
                 echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
@@ -129,6 +142,8 @@ case "$1" in
                 ;;
               "Unknown",*|*,"Unknown"|"unknown",*|*,"unknown")
                 echo "Using landscape display mode"
+                echo "" >> ${MSO}
+                echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
                 echo "declare -A SCREEN_${screens}" >> ${MSO}
                 echo "SCREEN_${screens}[mode]=" >> ${MSO}
                 echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}

@@ -153,6 +153,7 @@ case "$1" in
         }
         rm -f ${MM}/etc/*arp-devices*.js
         rm -f ${MM}/etc/mirrorscreen
+        rm -f ${MMHOME}/.mirrorscreen*
         [ "${USER}" ] && {
           sudo -u ${USER} pm2 list | grep MagicMirror > /dev/null && {
             sudo -u ${USER} pm2 --silent describe MagicMirror && {

@@ -6,8 +6,9 @@ HAVE_PORT=
 
 [ -f ${MS} ] && {
   . ${MS}
-  [ ${SCREEN_0[mode]+_} ] && {
-    PORTRAIT=${SCREEN_0[mode]}
+  screen=SCREEN_${MM_SCREEN}[mode]
+  [ ${!screen+_} ] && {
+    PORTRAIT=${!screen}
     HAVE_PORT=1
   }
 }
