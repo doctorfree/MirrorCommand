@@ -87,69 +87,65 @@ case "$1" in
             done
         }
         MSO="${MMHOME}/.mirrorscreen"
-        [ -f ${MSO} ] && mv ${MSO} ${MSO}.bak
-        touch ${MSO}
-        echo ""
-        echo "Portrait mode display screens are taller than wide."
-        echo "Landscape mode display screens are wider than tall."
-        numscreens=`xrandr --listactivemonitors | grep Monitors: | awk ' { print $2 } '`
-        screens=0
-        while [ ${screens} -lt ${numscreens} ]
-        do
-          HDMI=`xrandr --listactivemonitors | grep ${screens}: | awk ' { print $4 } '`
-          # Create a selection dialog to allow user to select screen orientation
-          if [ ${numscreens} -gt 1 ]
-          then
-            if [ ${screens} -eq 0 ]
-            then
-              PS3="${BOLD}Please enter your primary display screen's orientation (numeric or text): ${NORMAL}"
-            else
-              PS3="${BOLD}Please enter your secondary display screen's orientation (numeric or text): ${NORMAL}"
-            fi
-          else
-            PS3="${BOLD}Please enter your display screen's orientation (numeric or text): ${NORMAL}"
-          fi
-          options=(Portrait Landscape Unknown)
-          select opt in "${options[@]}"
+        [ -f ${MSO} ] || {
+          touch ${MSO}
+          echo ""
+          echo "Portrait mode display screens are taller than wide."
+          echo "Landscape mode display screens are wider than tall."
+          numscreens=`xrandr --listactivemonitors | grep Monitors: | awk ' { print $2 } '`
+          screens=1
+          while read screeninfo
           do
-            case "$opt,$REPLY" in
-              "Portrait",*|*,"Portrait"|"portrait",*|*,"portrait")
-                echo "Using portrait display mode"
-                echo "declare -A SCREEN_${screens}" >> ${MSO}
-                echo "SCREEN_${screens}[mode]=1" >> ${MSO}
-                echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
-                break
-                ;;
-              "Landscape",*|*,"Landscape"|"landscape",*|*,"landscape")
-                echo "Using landscape display mode"
-                echo "declare -A SCREEN_${screens}" >> ${MSO}
-                echo "SCREEN_${screens}[mode]=" >> ${MSO}
-                echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
-                break
-                ;;
-              "Unknown",*|*,"Unknown"|"unknown",*|*,"unknown")
-                echo "Using landscape display mode"
-                echo "declare -A SCREEN_${screens}" >> ${MSO}
-                echo "SCREEN_${screens}[mode]=" >> ${MSO}
-                echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
-                break
-                ;;
-              *)
-                printf "\nInvalid entry. Please try again"
-                printf "\nEnter either a number or text of one of the menu entries\n"
-                ;;
-            esac
-          done
-          ((screens+=1))
-        done
+            # Create a selection dialog to allow user to select screen orientation
+            if [ ${numscreens} -gt 1 ]
+            then
+              if [ ${screens} -eq 1 ]
+              then
+                PS3="${BOLD}Please enter your primary display screen's orientation (numeric or text): ${NORMAL}"
+              else
+                PS3="${BOLD}Please enter your secondary display screen's orientation (numeric or text): ${NORMAL}"
+              fi
+            else
+              PS3="${BOLD}Please enter your display screen's orientation (numeric or text): ${NORMAL}"
+            fi
+            options=(Portrait Landscape Unknown)
+            select opt in "${options[@]}"
+            do
+              case "$opt,$REPLY" in
+                "Portrait",*|*,"Portrait"|"portrait",*|*,"portrait")
+                  echo "Using portrait display mode"
+                  echo "PORTRAIT_${screens}=1" >> ${MSO}
+                  break
+                  ;;
+                "Landscape",*|*,"Landscape"|"landscape",*|*,"landscape")
+                  echo "Using landscape display mode"
+                  echo "PORTRAIT_${screens}=" >> ${MSO}
+                  break
+                  ;;
+                "Unknown",*|*,"Unknown"|"unknown",*|*,"unknown")
+                  echo "Using landscape display mode"
+                  echo "PORTRAIT_${screens}=" >> ${MSO}
+                  break
+                  ;;
+                *)
+                  printf "\nInvalid entry. Please try again"
+                  printf "\nEnter either a number or text of one of the menu entries\n"
+                  ;;
+              esac
+            done
+            ((screens+=1))
+          done < `xrandr --listactivemonitors | grep 0:`
+        }
         echo "Setting ownership of MirrorCommandLine screen mode configuration file"
-        [ "${USER}" ] || {
-          USER=$(stat -c '%U' ${MMHOME}/config)
+        [ -f ${MSO} ] && {
+          [ "${USER}" ] || {
+            USER=$(stat -c '%U' ${MMHOME}/config)
+          }
+          [ "${GROUP}" ] || {
+            GROUP=`id -g -n ${USER}`
+          }
+          chown ${USER}:${GROUP} ${MSO}
         }
-        [ "${GROUP}" ] || {
-          GROUP=`id -g -n ${USER}`
-        }
-        chown ${USER}:${GROUP} ${MSO}
         echo "MirrorCommandLine pre-installation configuration complete"
     ;;
 

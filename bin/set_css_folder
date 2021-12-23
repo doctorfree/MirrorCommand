@@ -6,7 +6,10 @@ HAVE_PORT=
 
 [ -f ${MS} ] && {
   . ${MS}
-  grep PORTRAIT= ${MS} > /dev/null && HAVE_PORT=1
+  [ ${SCREEN_0[mode]+_} ] && {
+    PORTRAIT=${SCREEN_0[mode]}
+    HAVE_PORT=1
+  }
 }
 
 [ "${HAVE_PORT}" ] || {

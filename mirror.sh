@@ -73,14 +73,16 @@ MCL_HOME="/usr/local/MirrorCommandLine"
 
 # Set this to the X11 DISPLAY you are using. DISPLAY=:0 works for most systems.
 export DISPLAY=:0
-HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
 
 MIRRORSCREEN="${MCL_HOME}/etc/mirrorscreen"
 HAVE_PORT=
 [ -f ${MIRRORSCREEN} ] || MIRRORSCREEN="${MM}/.mirrorscreen"
 [ -f ${MIRRORSCREEN} ] && {
   . ${MIRRORSCREEN}
-  grep PORTRAIT= ${MIRRORSCREEN} > /dev/null && HAVE_PORT=1
+  [ ${SCREEN_0[mode]+_} ] && {
+    PORTRAIT=${SCREEN_0[mode]}
+    HAVE_PORT=1
+  }
 }
 [ "${HAVE_PORT}" ] || {
   PORTRAIT=1
@@ -99,6 +101,13 @@ HAVE_PORT=
   fi
   [ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
 }
+
+if [ ${SCREEN_0[hdmi]+_} ]
+then
+  HDMI=${SCREEN_0[hdmi]+_}
+else
+  HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
+fi
 
 # -----------------------------------------------------------------------
 CONFDIR="${MM}/config"
