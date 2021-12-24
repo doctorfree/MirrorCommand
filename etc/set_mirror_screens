@@ -1,0 +1,115 @@
+#!/bin/bash
+
+MMHOME="/home/pi/MagicMirror"
+[ -d ${MMHOME}/config ] || {
+    MMHOME=
+    for homedir in /usr/local /home/*
+    do
+        [ "${homedir}" == "/home/*" ] && continue
+        [ -d ${homedir}/MagicMirror/config ] && {
+            MMHOME="${homedir}/MagicMirror"
+            break
+        }
+    done
+}
+[ "${MMHOME}" ] || {
+    echo "Cannot locate MagicMirror install folder. Exiting."
+    exit 0
+}
+
+MSO="${MMHOME}/.mirrorscreen"
+[ -f ${MSO} ] && mv ${MSO} ${MSO}.bak$$
+echo "# MirrorCommandLine Display Configuration" > ${MSO}
+echo "# The SCREEN_# associative arrays contain the mode and device" >> ${MSO}
+echo "# for each screen. A 'mode' value of '1' indicates Portrait mode" >> ${MSO}
+echo "# while an empty 'mode' value indicates Landscape mode" >> ${MSO}
+echo "# To get a list of your active display screens, execute the command:" >> ${MSO}
+echo "#    xrandr --listactivemonitors" >> ${MSO}
+echo "" >> ${MSO}
+echo "# MM_SCREEN is the screen number on which MagicMirror will display" >> ${MSO}
+
+echo "MM_SCREEN=0" >> ${MSO}
+echo ""
+echo "Portrait mode display screens are taller than wide."
+echo "Landscape mode display screens are wider than tall."
+echo ""
+numscreens=`xrandr --listactivemonitors | grep Monitors: | awk ' { print $2 } '`
+echo "NUMSCREENS=${numscreens}" >> ${MSO}
+
+screens=0
+while [ ${screens} -lt ${numscreens} ]
+do
+  HDMI=`xrandr --listactivemonitors | grep ${screens}: | awk ' { print $4 } '`
+  GEOM=`xrandr --listactivemonitors | grep ${screens}: | awk ' { print $3 } '`
+  WIDTH=`echo ${GEOM} | awk -F 'x' '{ print $1 }' | awk -F '/' '{ print $1 }'`
+  HEIGHT=`echo ${GEOM} | awk -F 'x' '{ print $2 }' | awk -F '/' '{ print $1 }'`
+  XOFF=`echo ${GEOM} | awk -F '+' ' { print $2 } '`
+  YOFF=`echo ${GEOM} | awk -F '+' ' { print $3 } '`
+  # Create a selection dialog to allow user to select screen orientation
+  if [ ${numscreens} -gt 1 ]
+  then
+    if [ ${screens} -eq 0 ]
+    then
+      PS3="${BOLD}Please enter your primary display screen's orientation (numeric or text): ${NORMAL}"
+    else
+      PS3="${BOLD}Please enter your secondary display screen's orientation (numeric or text): ${NORMAL}"
+    fi
+  else
+    PS3="${BOLD}Please enter your display screen's orientation (numeric or text): ${NORMAL}"
+  fi
+  options=(Portrait Landscape Unknown)
+  select opt in "${options[@]}"
+  do
+    case "$opt,$REPLY" in
+      "Portrait",*|*,"Portrait"|"portrait",*|*,"portrait")
+        echo "Using portrait display mode"
+        echo "" >> ${MSO}
+        echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
+        echo "declare -A SCREEN_${screens}" >> ${MSO}
+        echo "SCREEN_${screens}[mode]=1" >> ${MSO}
+        echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
+        echo "SCREEN_${screens}[width]=${WIDTH}" >> ${MSO}
+        echo "SCREEN_${screens}[height]=${HEIGHT}" >> ${MSO}
+        echo "SCREEN_${screens}[xoff]=${XOFF}" >> ${MSO}
+        echo "SCREEN_${screens}[yoff]=${YOFF}" >> ${MSO}
+        break
+        ;;
+      "Landscape",*|*,"Landscape"|"landscape",*|*,"landscape")
+        echo "Using landscape display mode"
+        echo "" >> ${MSO}
+        echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
+        echo "declare -A SCREEN_${screens}" >> ${MSO}
+        echo "SCREEN_${screens}[mode]=" >> ${MSO}
+        echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
+        echo "SCREEN_${screens}[width]=${WIDTH}" >> ${MSO}
+        echo "SCREEN_${screens}[height]=${HEIGHT}" >> ${MSO}
+        echo "SCREEN_${screens}[xoff]=${XOFF}" >> ${MSO}
+        echo "SCREEN_${screens}[yoff]=${YOFF}" >> ${MSO}
+        break
+        ;;
+      "Unknown",*|*,"Unknown"|"unknown",*|*,"unknown")
+        echo "Using landscape display mode"
+        echo "" >> ${MSO}
+        echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
+        echo "declare -A SCREEN_${screens}" >> ${MSO}
+        echo "SCREEN_${screens}[mode]=" >> ${MSO}
+        echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
+        echo "SCREEN_${screens}[width]=${WIDTH}" >> ${MSO}
+        echo "SCREEN_${screens}[height]=${HEIGHT}" >> ${MSO}
+        echo "SCREEN_${screens}[xoff]=${XOFF}" >> ${MSO}
+        echo "SCREEN_${screens}[yoff]=${YOFF}" >> ${MSO}
+        break
+        ;;
+      *)
+        printf "\nInvalid entry. Please try again"
+        printf "\nEnter either a number or text of one of the menu entries\n"
+        ;;
+    esac
+  done
+  ((screens+=1))
+done
+echo "Setting ownership of MirrorCommandLine screen mode configuration file"
+USER=$(stat -c '%U' ${MMHOME}/config)
+GROUP=`id -g -n ${USER}`
+chown ${USER}:${GROUP} ${MSO}
+exit 0

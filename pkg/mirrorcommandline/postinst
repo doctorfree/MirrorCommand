@@ -80,12 +80,11 @@ case "$1" in
         }
         if [ "${MMHOME}" ]
         then
+            [ -x ${MM}/etc/set_mirror_screens ] && ${MM}/etc/set_mirror_screens
             MSI="${MMHOME}/.mirrorscreen"
             MSO="${MM}/etc/mirrorscreen"
             [ -f ${MSI} ] && {
-              [ -f ${MSO} ] && {
-                mv ${MSO} ${MSO}.bak
-              }
+              rm -f ${MSO}
               ln -s ${MSI} ${MSO}
             }
             USER=$(stat -c '%U' ${MMHOME}/config)
