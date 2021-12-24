@@ -139,6 +139,11 @@ case "$1" in
                 fi
               done
             }
+            VIDEO_DIR="modules/MMM-Videoplayer"
+            [ -d "${MMHOME}/${VIDEO_DIR}" ] && {
+              cd "${MMHOME}/${VIDEO_DIR}"
+              [ -L movies ] && rm -f movies
+            }
         else
             echo "Unable to locate MagicMirror installation folder."
             echo "MirrorCommandLine config and css files in ${MM}"

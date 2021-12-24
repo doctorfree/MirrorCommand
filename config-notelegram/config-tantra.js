@@ -89,10 +89,10 @@ var config = {
             position: 'middle_center',
             config: {
               videolist: [
-                  "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_0.mp4",
-                  "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_1.mp4",
-                  "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_2.mp4",
-                  "/modules/MMM-Videoplayer/video/tantra/Tantra_Massage_Tutorial_3.mp4"
+                  "/modules/MMM-Videoplayer/movies/Tantra/Tantra_Massage_Tutorial_0.mp4",
+                  "/modules/MMM-Videoplayer/movies/Tantra/Tantra_Massage_Tutorial_1.mp4",
+                  "/modules/MMM-Videoplayer/movies/Tantra/Tantra_Massage_Tutorial_2.mp4",
+                  "/modules/MMM-Videoplayer/movies/Tantra/Tantra_Massage_Tutorial_3.mp4"
               ],
               random: true,
               // If set to true, sound (muted by default) has to be muted,

@@ -289,6 +289,12 @@ case "$1" in
                 fi
               done
             }
+            # Create a link in the MMM-Videoplayer module for MirrorCommandLine movies
+            VIDEO_DIR="modules/MMM-Videoplayer"
+            [ -d "${MMHOME}/${VIDEO_DIR}" ] && {
+              cd "${MMHOME}/${VIDEO_DIR}"
+              [ -d movies ] || ln -s ${MM}/movies movies
+            }
         else
             echo "Unable to locate MagicMirror installation folder."
             echo "MirrorCommandLine config and css files in ${MM}"
