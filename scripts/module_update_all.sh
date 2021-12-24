@@ -51,4 +51,5 @@ do
         npm install
         ;;
   esac
+  cd ..
 done
