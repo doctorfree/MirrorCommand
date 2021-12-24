@@ -101,6 +101,7 @@ case "$1" in
             done
 
             # Fixup those config files that have hard coded screen dimensions
+            printf "\nSetting up MagicMirror config files ..."
             [ -x ${MM}/bin/set_screen_conf ] && {
               cd "${MM}/config"
               ${MM}/bin/set_screen_conf
@@ -200,6 +201,7 @@ case "$1" in
                 [ -f $b ] || sudo -u ${USER} cp ${config} .
               done
             done
+            printf " Done\n"
 
             # Copy in the css files to the MagicMirror home
             [ -d "${MMHOME}/css" ] && {
