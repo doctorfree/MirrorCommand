@@ -62,7 +62,7 @@ do
   do
     case "$opt,$REPLY" in
       "Portrait",*|*,"Portrait"|"portrait",*|*,"portrait")
-        echo "Using portrait display mode"
+        echo "Using portrait display mode for screen ${screens}"
         echo "" >> ${MSO}
         echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
         echo "declare -A SCREEN_${screens}" >> ${MSO}
@@ -75,7 +75,7 @@ do
         break
         ;;
       "Landscape",*|*,"Landscape"|"landscape",*|*,"landscape")
-        echo "Using landscape display mode"
+        echo "Using landscape display mode for screen ${screens}"
         echo "" >> ${MSO}
         echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
         echo "declare -A SCREEN_${screens}" >> ${MSO}
@@ -88,7 +88,7 @@ do
         break
         ;;
       "Unknown",*|*,"Unknown"|"unknown",*|*,"unknown")
-        echo "Using landscape display mode"
+        echo "Using landscape display mode for screen ${screens}"
         echo "" >> ${MSO}
         echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
         echo "declare -A SCREEN_${screens}" >> ${MSO}
@@ -108,7 +108,6 @@ do
   done
   ((screens+=1))
 done
-echo "Setting ownership of MirrorCommandLine screen mode configuration file"
 USER=$(stat -c '%U' ${MMHOME}/config)
 GROUP=`id -g -n ${USER}`
 chown ${USER}:${GROUP} ${MSO}
