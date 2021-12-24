@@ -16,11 +16,21 @@ INPUTS="Side_Left.wav \
 usage() {
     printf "\nUsage: audiotest [-c card] [-d device] [-u]"
     printf "\nDefaults: card 1, device 0\n\n"
-    [ -f ${HOME}/.asoundrc ] && {
+    if [ -f ${HOME}/.asoundrc ]
+    then
         printf "Current ALSA settings in $HOME/.asoundrc :\n\n"
         cat ${HOME}/.asoundrc
         printf "\n"
-    }
+    else
+        if [ -f /etc/asound.conf ]
+        then
+            printf "Current ALSA settings in /etc/asound.conf :\n\n"
+            cat /etc/asound.conf
+            printf "\n"
+        else
+            echo "Cannot locate ALSA configuration $HOME/.asoundrc or /etc/asound.conf"
+        fi
+    fi
     exit 1
 }
 
