@@ -1,0 +1,87 @@
+#!/bin/bash
+#
+# mmscreen - move the MagicMirror window from screen to screen
+
+usage() {
+    printf "\nUsage: mmscreen <screen number>"
+    printf "\nExample:\n\tmmscreen 1"
+    printf "\n\twould move MagicMirror display to the primary screen\n"
+    printf "\nScreen numbers begin with 1, not 0."
+    printf "\nIf you have 3 monitors they are numbered 1, 2, and 3.\n\n"
+    exit 0
+}
+
+[ "$1" == "-u" ] && usage
+
+if [ "$1" -eq "$1" ] 2> /dev/null
+then
+    screen="$1"
+    [ ${screen} -eq 0 ] && screen=1
+    ((screen-=1))
+else
+    usage
+fi
+
+MCL="/usr/local/MirrorCommandLine"
+MM="/home/pi/MagicMirror"
+[ -d ${MM}/config ] || {
+    MM=
+    for homedir in /usr/local /home/*
+    do
+        [ "${homedir}" == "/home/*" ] && continue
+        [ -d ${homedir}/MagicMirror/config ] && {
+            MM="${homedir}/MagicMirror"
+            break
+        }
+    done
+}
+[ "${MM}" ] || MM="${HOME}/MagicMirror"
+
+MIRRORSCREEN="${MCL}/etc/mirrorscreen"
+[ -f ${MIRRORSCREEN} ] || MIRRORSCREEN="${MM}/.mirrorscreen"
+[ -f ${MIRRORSCREEN} ] || {
+    echo "Cannot locate mirrorscreen configuration file. Exiting."
+    exit 0
+}
+
+. ${MIRRORSCREEN}
+
+check_screen=SCREEN_${screen}[hdmi]
+if [ ${!check_screen+_} ]
+then
+    WID=`wmctrl -l | grep MagicMirror | awk ' { print $1 } '`
+    [ "${WID}" ] || {
+        echo "Cannot retrieve MagicMirror window ID. Exiting"
+        exit 0
+    }
+    width=SCREEN_${screen}[width]
+    [ ${!width+_} ] || {
+        echo "Cannot retrieve MagicMirror window width. Exiting"
+        exit 0
+    }
+    width=${!width}
+    height=SCREEN_${screen}[height]
+    [ ${!height+_} ] || {
+        echo "Cannot retrieve MagicMirror window height. Exiting"
+        exit 0
+    }
+    height=${!height}
+    xoff=SCREEN_${screen}[xoff]
+    [ ${!xoff+_} ] || {
+        echo "Cannot retrieve MagicMirror window xoff. Exiting"
+        exit 0
+    }
+    xoff=${!xoff}
+    yoff=SCREEN_${screen}[yoff]
+    [ ${!yoff+_} ] || {
+        echo "Cannot retrieve MagicMirror window yoff. Exiting"
+        exit 0
+    }
+    yoff=${!yoff}
+    wmctrl -i -r ${WID} -e 0,${xoff},${yoff},${width},${height}
+    wmctrl -i -r ${WID} -b add,maximized_vert,maximized_horz,above,fullscreen
+else
+    echo "No configured screen number $1"
+fi
+
+exit 0

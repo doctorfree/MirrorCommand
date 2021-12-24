@@ -386,19 +386,29 @@ rotate_screen() {
 }
 
 set_screen() {
+  if [ "$1" -eq "$1" ] 2> /dev/null
+  then
     scn=$1
-    check_screen=SCREEN_${scn}[hdmi]
-    if [ ${!check_screen+_} ]
+    [ ${scn} -eq 0 ] && scn=1
+    ((scn-=1))
+    hdmi=SCREEN_${scn}[hdmi]
+    if [ ${!hdmi+_} ]
     then
       [ -f ${MIRRORSCREEN} ] && {
         cat ${MIRRORSCREEN} | sed -e "s/^MM_SCREEN=.*/MM_SCREEN=${scn}/" > /tmp/mm$$
         cp /tmp/mm$$ ${MIRRORSCREEN}
         rm -f /tmp/mm$$
+        [ -x /usr/local/bin/mmscreen ] && /usr/local/bin/mmscreen $1
+        HDMI=${!hdmi}
       }
     else
-      echo "No configured screen number ${scn}"
+      echo "No configured screen number $1"
     fi
+  else
+    usage
+  fi
 }
+
 screen_control() {
     if [ "$1" ]
     then
@@ -415,12 +425,7 @@ screen_control() {
             INFO="screen"
             system_info
           else
-            if [ "$1" -eq "$1" ] 2> /dev/null
-            then
-              set_screen $1
-            else
-              usage
-            fi
+            set_screen $1
           fi
         fi
       fi
