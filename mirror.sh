@@ -399,6 +399,8 @@ set_screen() {
         cp /tmp/mm$$ ${MIRRORSCREEN}
         rm -f /tmp/mm$$
         [ -x /usr/local/bin/mmscreen ] && /usr/local/bin/mmscreen $1
+        screen=SCREEN_${scn}[mode]
+        [ ${!screen+_} ] && PORTRAIT=${!screen}
         HDMI=${!hdmi}
       }
     else
