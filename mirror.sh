@@ -372,17 +372,52 @@ list_mods() {
     fi
 }
 
+rotate_all_screens() {
+    [ -f ${MIRRORSCREEN} ] && {
+        numscreen=0
+        while [ ${numscreen} -lt ${NUMSCREENS} ]
+        do
+            screenmode=SCREEN_${numscreen}[mode]
+            [ ${!screenmode+_} ] && {
+              screenmode=${!screenmode}
+              hdmi=SCREEN_${numscreen}[hdmi]
+              [ ${!hdmi+_} ] && {
+                hdmi=${!hdmi}
+                if [ "${screenmode}" ]
+                then
+                  printf "\n${BOLD}Rotating ${hdmi} screen ${numscreen} right ${NORMAL}\n"
+                  xrandr --output ${hdmi} --auto --rotate right
+                else
+                  printf "\n${BOLD}Rotating ${hdmi} screen ${numscreen} normal ${NORMAL}\n"
+                  xrandr --output ${hdmi} --auto --rotate normal
+                fi
+                printf "\n${BOLD}Done${NORMAL}\n"
+              }
+            }
+            ((numscreen+=1))
+        done
+    }
+}
+
 rotate_screen() {
-    [ "$1" == "inverted" ] || [ "$1" == "left" ] || [ "$1" == "normal" ] || [ "$1" == "right" ] || {
-        printf "\nUsage: rotate option takes an argument of 'left', 'right', 'inverted', or 'normal'"
+    case "$1" in
+      inverted|left|right|normal)
+        [ "${HDMI}" ] && {
+          printf "\n${BOLD}Rotating screen display $1 ${NORMAL}\n"
+          xrandr --output ${HDMI} --rotate $1
+          printf "\n${BOLD}Done${NORMAL}\n"
+        }
+        ;;
+      default)
+        rotate_all_screens
+        ;;
+      *)
+        printf "\nUsage: rotate option takes an argument of 'left', 'right',"
+        printf "\n\t'inverted', 'default', or 'normal'"
         printf "\n Exiting.\n"
         usage
-    }
-    [ "${HDMI}" ] && {
-        printf "\n${BOLD}Rotating screen display $1 ${NORMAL}\n"
-        xrandr --output ${HDMI} --rotate $1
-        printf "\n${BOLD}Done${NORMAL}\n"
-    }
+        ;;
+    esac
 }
 
 set_screen() {
@@ -996,7 +1031,7 @@ usage() {
     printf "\n  Where <command> can be one of the following:\n"
     printf "\n    info <temp|mem|disk|usb|net|wireless|screen>"
     printf "\n    list <active|installed|configs>"
-    printf "\n    rotate <right|left|normal|inverted>"
+    printf "\n    rotate <right|left|normal|inverted|default>"
     printf "\n    screen <on|off|info|status|number>"
     printf "\n    stop|start|restart|mute|unmute|reboot|shutdown"
     printf "\n    playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo"
@@ -1015,7 +1050,7 @@ usage() {
     printf "\nWhere <command> can be one of the following:"
     printf "\n    info <temp|mem|disk|usb|net|wireless|screen>"
     printf "\n    list <active|installed|configs>"
-    printf "\n    rotate <right|left|normal|inverted>"
+    printf "\n    rotate <right|left|normal|inverted|default>"
     printf "\n    scene <next|prev|info|name|number>"
     printf "\n    screen <on|off|info|status>"
     printf "\n    stop|start|restart|mute|unmute|screenshot|reboot|shutdown"
@@ -1057,7 +1092,7 @@ usage() {
     printf "\n\tmirror info\t\t# Displays all MagicMirror system information"
     printf "\n\tmirror info screen\t\t# Displays MagicMirror screen information"
     printf "\n\tmirror dev\t\t# Restarts the mirror in developer mode"
-    printf "\n\tmirror rotate left/right/normal/inverted\t\t# rotates the screen left, right, inverted, or normal"
+    printf "\n\tmirror rotate left/right/normal/inverted/default\t\t# rotates the screen left, right, inverted, normal, or restores all screens to their default rotation"
     printf "\n\tmirror screen on\t\t#  Turns the Display ON"
     printf "\n\tmirror screen off\t\t# Turns the Display OFF"
     printf "\n\tmirror screenshot\t\t# Takes a screenshot of the MagicMirror"
@@ -1740,7 +1775,7 @@ select_youtube() {
   while true
   do
     PS3="${BOLD}${PLEASE} command choice (numeric or text): ${NORMAL}"
-    options=("list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "rotate inverted" "restart" "screen off" "screen on" "screenshot" "start" "stop" "status" "status all" "get brightness" "set brightness" "video playback" "system info" "debug mode" "quit")
+    options=("list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "rotate inverted" "rotate default" "restart" "screen off" "screen on" "screenshot" "start" "stop" "status" "status all" "get brightness" "set brightness" "video playback" "system info" "debug mode" "quit")
     select opt in "${options[@]}"
     do
         case "$opt,$REPLY" in
