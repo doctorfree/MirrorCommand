@@ -44,7 +44,12 @@ var config = {
 	timeFormat: 12,
 	units: "imperial",
 	
-	modules: [
+	electronOptions: {
+        x: 0, // __X_OFFSET__ Do Not Remove
+        y: 0, // __Y_OFFSET__ Do Not Remove
+    },
+
+    modules: [
 		{
 			module: "alert",
 		},

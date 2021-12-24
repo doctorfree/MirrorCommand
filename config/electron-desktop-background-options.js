@@ -1,6 +1,8 @@
     // These Electron Options place MagicMirror on the desktop background
     // It's an application running as your desktop wallpaper!
     electronOptions: {
+        x: 0, // __X_OFFSET__ Do Not Remove
+        y: 0, // __Y_OFFSET__ Do Not Remove
 	    width: __WIDTH__,
 	    height: __HEIGHT__,
 	    fullscreen:  false,

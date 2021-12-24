@@ -1135,6 +1135,21 @@ setconf() {
             fi
         fi
     fi
+    # If there is an existing config.js then set the Electron screen offsets
+    # Must have both xoff and yoff from mirrorscreen for this screen
+    xoff=SCREEN_${MM_SCREEN}[xoff]
+    [ ${!xoff+_} ] && {
+      XOFF=${!xoff}
+      yoff=SCREEN_${MM_SCREEN}[yoff]
+      [ ${!yoff+_} ] && {
+        YOFF=${!yoff}
+        [ -f ${CONFDIR}/config.js ] && {
+          [ -x /usr/local/bin/updoffsets ] && {
+            /usr/local/bin/updoffsets -x ${XOFF} -y ${YOFF} ${CONFDIR}/config.js
+          }
+        }
+      }
+    }
     npm run --silent config:check > /dev/null
     [ $? -eq 0 ] || {
         if [ "$subdir" ]

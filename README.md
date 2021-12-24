@@ -182,6 +182,17 @@ To install:
 
 [Download the latest Debian package format release](https://gitlab.com/doctorfree/MirrorCommandLine/-/releases)
 
+**NOTE:** The automated configuration requires access to some X11 graphical
+utilities. Depending upon your system's X11 configuration, it may be necessary
+to grant the *root* user access to the display. To do so, prior to installation
+issue the command:
+
+`xhost +si:localuser:root`
+
+or grant everyone access with
+
+`xhost +`
+
 Install the base MirrorCommandLine package by executing the command
 
 ```bash
@@ -774,6 +785,10 @@ of these scripts as I found I spend more time in a terminal at the command line
 than I do talking to Siri. While voice control is still supported if configured
 properly, the project is primarily command line control of MagicMirror.
 
+Recent releases have focused on automated installation and configuration as well
+as configuration based upon auto-detected system features. Some aspects of the
+automated installation of MagicMirror drew upon previous work by Sam Detweiler
+in his [MagicMirror scripts project](https://github.com/sdetweil/MagicMirror_scripts).
 
 ## Contents
 

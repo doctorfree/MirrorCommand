@@ -42,6 +42,11 @@ var config = {
     httpsPrivateKey: '', // HTTPS private key path, only require when useHttps is true
     httpsCertificate: '', // HTTPS Certificate path, only require when useHttps is true
     
+    electronOptions: {
+        x: 0, // __X_OFFSET__ Do Not Remove
+        y: 0, // __Y_OFFSET__ Do Not Remove
+    },
+
     modules: [
         {
             module: "alert",

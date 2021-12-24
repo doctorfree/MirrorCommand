@@ -50,6 +50,11 @@ var config = {
                  // false, default for all  NON-armv6l devices
                  // true, force serveronly mode, because you want to.. no UI on this device
     
+    electronOptions: {
+        x: 0, // __X_OFFSET__ Do Not Remove
+        y: 0, // __Y_OFFSET__ Do Not Remove
+    },
+
     modules: [
         {
             module: "alert",

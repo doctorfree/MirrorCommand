@@ -50,7 +50,12 @@ var config = {
 			     // true, force serveronly mode, because you want to.. no UI on this device
 	serverOnly:  true,
 	
-	modules: [
+	electronOptions: {
+        x: 0, // __X_OFFSET__ Do Not Remove
+        y: 0, // __Y_OFFSET__ Do Not Remove
+    },
+
+    modules: [
 		{
 			module: "alert",
 		},

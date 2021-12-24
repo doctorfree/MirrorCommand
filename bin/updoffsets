@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+
+usage() {
+    printf "\nUsage: updoffsets -x xoffset -y yoffset config.js [config2.js ...]\n"
+    exit 1
+}
+
+XOFF=
+YOFF=
+while getopts x:y:u flag; do
+    case $flag in
+        x)
+            XOFF=${OPTARG}
+            ;;
+        y)
+            YOFF=${OPTARG}
+            ;;
+        u)
+            usage
+            ;;
+    esac
+done
+shift $(( OPTIND - 1 ))
+
+# Exit if we did not get both X and Y offsets
+[ "${XOFF}" ] || usage
+[ "${YOFF}" ] || usage
+
+# Adjust offsets in all files provided in remaining arguments
+for conf in $*
+do
+  [ -f "${conf}" ] || continue
+  grep __X_OFFSET__ ${conf} > /dev/null && {
+    grep __Y_OFFSET__ ${conf} > /dev/null && {
+      cat ${conf} | sed -e "s#.*__X_OFFSET__.*#        x: ${XOFF}, // __X_OFFSET__ Do Not Remove#" -e "s#.*__Y_OFFSET__.*#        y: ${YOFF}, // __Y_OFFSET__ Do Not Remove#" > /tmp/conf$$
+      cp /tmp/conf$$ ${conf}
+      rm -f /tmp/conf$$
+    }
+  }
+done

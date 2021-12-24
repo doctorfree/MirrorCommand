@@ -51,6 +51,22 @@ HAVE_PORT=
 
 CONF=${MM}/config
 
+# If there is an existing config.js then set the Electron screen offsets
+# Must have both xoff and yoff from mirrorscreen for this screen
+xoff=SCREEN_${MM_SCREEN}[xoff]
+[ ${!xoff+_} ] && {
+  XOFF=${!xoff}
+  yoff=SCREEN_${MM_SCREEN}[yoff]
+  [ ${!yoff+_} ] && {
+    YOFF=${!yoff}
+    [ -f ${CONF}/config.js ] && {
+      [ -x /usr/local/bin/updoffsets ] && {
+        /usr/local/bin/updoffsets -x ${XOFF} -y ${YOFF} ${CONF}/config.js
+      }
+    }
+  }
+}
+
 # If there is an existing config.js and we are in portrait mode
 # then check if it is one that requires screen rotation
 if [ -L ${CONF}/config.js ]

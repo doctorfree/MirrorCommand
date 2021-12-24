@@ -1,5 +1,7 @@
     // Add to top
     electronOptions: {
+        x: 0, // __X_OFFSET__ Do Not Remove
+        y: 0, // __Y_OFFSET__ Do Not Remove
         webPreferences: {
           webviewTag: true,
           contextIsolation: false,
