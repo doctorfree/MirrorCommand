@@ -176,7 +176,7 @@ install_selected() {
   exit 1
 }
 
-xhost +
+xhost +si:localuser:root
 
 for PKG_NAME in ${PKG_NAMES}
 do
