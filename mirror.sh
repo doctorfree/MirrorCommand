@@ -385,6 +385,20 @@ rotate_screen() {
     }
 }
 
+set_screen() {
+    scn=$1
+    check_screen=SCREEN_${scn}[hdmi]
+    if [ ${!check_screen+_} ]
+    then
+      [ -f ${MIRRORSCREEN} ] && {
+        cat ${MIRRORSCREEN} | sed -e "s/^MM_SCREEN=.*/MM_SCREEN=${scn}/" > /tmp/mm$$
+        cp /tmp/mm$$ ${MIRRORSCREEN}
+        rm -f /tmp/mm$$
+      }
+    else
+      echo "No configured screen number ${scn}"
+    fi
+}
 screen_control() {
     if [ "$1" ]
     then
@@ -401,7 +415,12 @@ screen_control() {
             INFO="screen"
             system_info
           else
-            usage
+            if [ "$1" -eq "$1" ] 2> /dev/null
+            then
+              set_screen $1
+            else
+              usage
+            fi
           fi
         fi
       fi
@@ -971,7 +990,7 @@ usage() {
     printf "\n    info <temp|mem|disk|usb|net|wireless|screen>"
     printf "\n    list <active|installed|configs>"
     printf "\n    rotate <right|left|normal|inverted>"
-    printf "\n    screen <on|off|info|status>"
+    printf "\n    screen <on|off|info|status|number>"
     printf "\n    stop|start|restart|mute|unmute|reboot|shutdown"
     printf "\n    playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo"
     printf "\n    status <all>|dev|getb|setb <num>|vol <num>"
@@ -1019,7 +1038,8 @@ usage() {
     printf "\n\t-H, -h (Hide video, Show video),"
     printf "\n\t-L, use landscape display mode and use landscape designed configs/pics,"
     printf "\n\t-I, -l <list>, -r <rotate>, -s <screen>, -S, -m <model>, -M <model>,"
-    printf "\n\t-p <photographer>, -P <photographer>, -w <dir>, -W <dir>, -u"
+    printf "\n\t-p <photographer>, -P <photographer>, -w <dir>, -W <dir>"
+    printf "\n\t-X <screen number>, -Z, -u"
     printf "\n\n${BOLD}Examples:${NORMAL}"
     printf "\n\tmirror\t\t# Invoked with no arguments the mirror command displays a command menu"
     printf "\n\tmirror list active\t\t# lists active modules"
@@ -1034,6 +1054,7 @@ usage() {
     printf "\n\tmirror screen on\t\t#  Turns the Display ON"
     printf "\n\tmirror screen off\t\t# Turns the Display OFF"
     printf "\n\tmirror screenshot\t\t# Takes a screenshot of the MagicMirror"
+    printf "\n\tmirror screen num\t\t# Switches mirror display to screen num"
     printf "\n\tmirror status [all]\t\t# Displays MagicMirror status, checks config syntax"
     printf "\n\tmirror getb\t\t# Displays current MagicMirror brightness level"
     printf "\n\tmirror setb 150\t\t# Sets MagicMirror brightness level to 150"
@@ -1836,7 +1857,7 @@ select_youtube() {
 # stop
 # status [all]
 
-while getopts a:A:b:Bc:dDhHi:Ij:J:l:Lm:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
+while getopts a:A:b:Bc:dDhHi:Ij:J:l:Lm:M:Np:P:r:Rs:Sv:Vw:W:X:Zu flag; do
     case $flag in
         a)
           artist_create ${OPTARG}
@@ -1940,6 +1961,9 @@ while getopts a:A:b:Bc:dDhHi:Ij:J:l:Lm:M:Np:P:r:Rs:Sv:Vw:W:Zu flag; do
           ;;
         W)
           wh_remove ${OPTARG}
+          ;;
+        X)
+          set_screen ${OPTARG}
           ;;
         Z)
           screen_shot
