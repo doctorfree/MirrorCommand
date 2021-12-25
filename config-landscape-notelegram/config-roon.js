@@ -94,109 +94,6 @@ var config = {
             }
         },
         {
-            module: 'MMM-Tools',
-            position: 'top_left',
-            header: "System Info",
-            config: {
-              refresh: 1000 * 5,
-              containerSize: null,
-              itemSize: null,
-              MM: {
-                displayMM: true,
-                orderMM: 0
-              },
-              OS: {
-                displayOs: true,
-                orderOs: 1
-              },
-              CPU: {
-                displayUsage: true,
-                orderUsage: 4,
-                displayTemp: true,
-                celciusTemp: true,
-                orderTemp: 7,
-                displayType: true,
-                orderType: 2
-              },
-              RAM: {
-                displayRam: true,
-                orderRam: 5
-              },
-              STORAGE: {
-                displayStorage: true,
-                orderStorage: 6,
-                partitionExclude : []
-              },
-              NETWORK: {
-                displayNetwork: true,
-                orderNetwork: 3,
-                nativeNetwork: false,
-                displayDefaultNetwork: true
-              },
-              UPTIME: {
-                displayUptime: true,
-                useMagicMirror: true,
-                orderUptime: 8,
-                displayRecord: true,
-                orderRecord: 9
-              },
-              WARNING: {
-                enableWarning: false,
-                interval: 1000 * 60 * 5,
-                check : {
-                  CPU_TEMP : 65,
-                  CPU_USAGE : 75,
-                  STORAGE_USED : 80,
-                  MEMORY_USED : 80,
-                }
-              }
-            }
-        },
-        {
-            module: "mmm-hue-lights",
-            position: "top_center",
-            config: {
-                bridgeIp: "xxxxxxxxxx_Hue-Hub-IP_xxxxxxxxxxxxxxxx",
-                displayType: "grid",
-                user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
-                // If you've added a Hue API user and set it in mirrorkeys
-                // then replace the above setting of user with one of these
-                // and rerun showkeys.
-                // user: "xxxxxxxxx_Hue-Hub-User-Two_xxxxxxxxxxxx",
-                // user: "xxxxxxxxx_Hue-Hub-User-Three_xxxxxxxxxx",
-            }
-        },
-        {
-            module: 'MMM-Solar',
-            position: "top_left",
-            config: {
-                apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
-                userId: "Solar-USER-ID",
-                systemId: "Solar-System-ID",
-                // basicHeader: "true",
-            }
-        },
-        {
-            module: 'MMM-MacAddressScan',
-            position: "top_right",
-            header: "ARP Scan - Discovered Devices",
-            config: {
-                showLastSeen: false,
-                showLastSeenWhenOffline: false,
-                sort: false,
-                colored: true,
-                showDeviceColumns: false,
-                coloredState: true,
-                showIP: true,
-                showUnknown: false,
-                showOffline: true,
-                keepAlive: 900,
-                updateInterval: 60,
-                // DO NOT REMOVE __ARP_SCAN_DEVICES__
-                devices: [],
-            },
-        },
-        {
             module: "MMM-GoogleAssistant",
             position: "bottom_center",
             configDeepMerge: true,
@@ -272,10 +169,10 @@ var config = {
                   player: {}
                 },
                 music: {
-                  useMusic: true,
+                  useMusic: false,
                   useUSB: false,
                   musicPath: "/home/pi/Music",
-                  checkSubDirectory: true,
+                  checkSubDirectory: false,
                   autoStart: false,
                   minVolume: 30,
                   maxVolume: 100
@@ -295,7 +192,7 @@ var config = {
             config: {
               debug: false,
               autoStart: true,
-              useLogos: true,
+              useLogos: false,
               newLogos: {
                 listen: "voice_assistant_head.jpg"
               },
