@@ -4,20 +4,57 @@ WIDMARK="__WIDTH__"
 HGTMARK="__HEIGHT__"
 HALFWIDMARK="__HALF_WIDTH__"
 HALFHGTMARK="__HALF_HEIGHT__"
+MM=${HOME}/MagicMirror
 
-SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
-echo ${SCREEN_RES} | grep x > /dev/null && {
-  SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
-  SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
+[ -d ${MM}/config ] || {
+    MM=
+    for homedir in /usr/local /home/*
+    do
+        [ "${homedir}" == "/home/*" ] && continue
+        [ -d ${homedir}/MagicMirror/config ] && {
+            MM="${homedir}/MagicMirror"
+            break
+        }
+    done
 }
-if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
-then
-  SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
-fi
-if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
-then
-  SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
-fi
+
+[ "${MM}" ] || {
+    echo "Cannot locate MagicMirror installation directory. Exiting."
+    exit 0
+}
+
+MS="${MM}/.mirrorscreen"
+[ -f ${MS} ] || MS="/usr/local/MirrorCommandLine/etc/mirrorscreen"
+HAVE_CONF=
+
+[ -f ${MS} ] && {
+  . ${MS}
+  width=SCREEN_${MM_SCREEN}[width]
+  [ ${!width+_} ] && {
+    SCREEN_WIDTH=${!width}
+  }
+  height=SCREEN_${MM_SCREEN}[height]
+  [ ${!height+_} ] && {
+    SCREEN_HEIGHT=${!height}
+  }
+  [ "${SCREEN_WIDTH}" ] && [ "${SCREEN_HEIGHT}" ] && HAVE_CONF=1
+}
+
+[ "${HAVE_CONF}" ] || {
+  SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
+  echo ${SCREEN_RES} | grep x > /dev/null && {
+    SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
+    SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
+  }
+  if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
+  then
+    SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
+  fi
+  if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
+  then
+    SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
+  fi
+}
 
 HALF_WIDTH=$((${SCREEN_WIDTH} / 2))
 HALF_HEIGHT=$((${SCREEN_HEIGHT} / 2))
