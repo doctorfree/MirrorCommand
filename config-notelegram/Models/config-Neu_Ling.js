@@ -103,14 +103,14 @@ var config = {
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,
-                maxWidth: __WIDTH__,
-                maxHeight: __HEIGHT__,
+                maxWidth: __WIDTH__, // __SET_MAX_WIDTH__ Do Not Remove
+                maxHeight: __HEIGHT__, // __SET_MAX_HEIGHT__ Do Not Remove
                 transitionImages: true,
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
                 resizeImages: true,
-                maxWidth: __WIDTH__,
-                maxHeight: __HEIGHT__,
+                maxWidth: __WIDTH__, // __SET_MAX_WIDTH__ Do Not Remove
+                maxHeight: __HEIGHT__, // __SET_MAX_HEIGHT__ Do Not Remove
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
             }
         },

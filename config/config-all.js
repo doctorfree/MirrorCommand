@@ -136,8 +136,8 @@ var config = {
                 key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
                 lat: 36.970019,
                 lng: -122.042212,
-                height: '1240px',
-                width: '1080px',
+                width: "__WIDTH__px", // __SET_WIDTH_PX__ Do Not Remove
+                height: "__HALF_HEIGHT__px", // __SET_HALF_HEIGHT_PX__ Do Not Remove
                 styledMapType: "standard",
                 disableDefaultUI: true,
                 backgroundColor: 'hsla(0, 0%, 0%, 0)',
@@ -341,9 +341,9 @@ var config = {
             config: {
                 url: [ "http://EE.E.E.EE:__Roon_Core_Port__/display/" ],
                 updateInterval: 30 * 60 * 1000, // rotate URLs every 30 minutes
-                width: "1080", // width of iframe
-                height: "756", // height of iframe
-                frameWidth: "1080"
+                width: "__WIDTH__", // __SET_Q_WIDTH__ Do Not Remove
+                height: "__HALF_HEIGHT__", // __SET_Q_HALF_HEIGHT__ Do Not Remove
+                frameWidth: "__WIDTH__", // __SET_FRM_WIDTH__ Do Not Remove
             }
         },
         {

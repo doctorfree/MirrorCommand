@@ -31,9 +31,18 @@ shift $(( OPTIND - 1 ))
 for conf in $*
 do
   [ -f "${conf}" ] || continue
-  grep __X_WIDTH__ ${conf} > /dev/null && {
-    grep __Y_HEIGHT__ ${conf} > /dev/null && {
-      cat ${conf} | sed -e "s#.*__X_WIDTH__.*#        x: ${WIDTH}, // __X_WIDTH__ Do Not Remove#" -e "s#.*__Y_HEIGHT__.*#        y: ${HEIGHT}, // __Y_HEIGHT__ Do Not Remove#" > /tmp/conf$$
+  grep __SET_WIDTH__ ${conf} > /dev/null && {
+    grep __SET_HEIGHT__ ${conf} > /dev/null && {
+      cat ${conf} | sed \
+        -e "s#.*__SET_WIDTH__.*#        width: ${WIDTH}, // __SET_WIDTH__ Do Not Remove#" \
+        -e "s#.*__SET_HEIGHT__.*#        height: ${HEIGHT}, // __SET_HEIGHT__ Do Not Remove#" \
+        -e "s#.*__SET_FRM_WIDTH__.*#        frameWidth: \"${WIDTH}\", // __SET_FRM_WIDTH__ Do Not Remove#" \
+        -e "s#.*__SET_MAX_WIDTH__.*#        maxWidth: ${WIDTH}, // __SET_MAX_WIDTH__ Do Not Remove#" \
+        -e "s#.*__SET_MAX_HEIGHT__.*#        maxHeight: ${HEIGHT}, // __SET_MAX_HEIGHT__ Do Not Remove#" \
+        -e "s#.*__SET_WIDTH_PX__.*#        width: \"${WIDTH}px\", // __SET_WIDTH_PX__ Do Not Remove#" \
+        -e "s#.*__SET_HEIGHT_PX__.*#        height: \"${HEIGHT}px\", // __SET_HEIGHT_PX__ Do Not Remove#" \
+        -e "s#.*__SET_Q_WIDTH__.*#        width: \"${WIDTH}\", // __SET_Q_WIDTH__ Do Not Remove#" \
+        -e "s#.*__SET_Q_HEIGHT__.*#        height: \"${HEIGHT}\", // __SET_Q_HEIGHT__ Do Not Remove#" > /tmp/conf$$
       cp /tmp/conf$$ ${conf}
       rm -f /tmp/conf$$
     }

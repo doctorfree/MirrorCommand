@@ -87,9 +87,9 @@ var config = {
                      ],
                      // "https://www.youtube.com/embed/95FxKgcgjN0?autoplay=1&amp;controls=0",
                 updateInterval: 5 * 60 * 1000, // rotate URLs every 5 minutes
-                width: "__WIDTH__", // width of iframe
-                height: "__HEIGHT__", // height of iframe
-                frameWidth: "__WIDTH__"
+                width: "__WIDTH__", // __SET_Q_WIDTH__ Do Not Remove
+                height: "__HEIGHT__", // __SET_Q_HEIGHT__ Do Not Remove
+                frameWidth: "__WIDTH__", // __SET_FRM_WIDTH__ Do Not Remove
             }
         },
 		{
@@ -113,8 +113,8 @@ var config = {
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
                 resizeImages: true,
-                maxWidth: __WIDTH__,
-                maxHeight: __HEIGHT__,
+                maxWidth: __WIDTH__, // __SET_MAX_WIDTH__ Do Not Remove
+                maxHeight: __HEIGHT__, // __SET_MAX_HEIGHT__ Do Not Remove
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
             }
         },

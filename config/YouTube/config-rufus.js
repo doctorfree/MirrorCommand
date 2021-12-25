@@ -118,7 +118,7 @@ var config = {
               controls: false,
               loop: true,
               modestbranding: true,
-              width: "__WIDTH__px",
+              width: "__WIDTH__px", // __SET_WIDTH_PX__ Do Not Remove
               height: "__HALF_HEIGHT__px",
               referrer: "http://your.domain.com",
             }
@@ -135,7 +135,7 @@ var config = {
                 updateInterval: 5 * 60 * 1000, // rotate URLs every 5 minutes
                 width: "__WIDTH__",
                 height: "__HALF_HEIGHT__",
-                frameWidth: "__WIDTH__"
+                frameWidth: "__WIDTH__", // __SET_FRM_WIDTH__ Do Not Remove
             }
         },
     ]

@@ -25,4 +25,5 @@ modules/MMM-GoogleAssistant/tokens/token*.json
 dist/*
 releases/*
 tests/*
+tools/*
 tmp/*

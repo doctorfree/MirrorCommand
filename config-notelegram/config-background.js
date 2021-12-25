@@ -48,8 +48,8 @@ var config = {
     electronOptions: {
         x: 0, // __X_OFFSET__ Do Not Remove
         y: 0, // __Y_OFFSET__ Do Not Remove
-	    width: __WIDTH__,
-	    height: __HEIGHT__,
+	    width: __WIDTH__, // __SET_WIDTH__ Do Not Remove
+	    height: __HEIGHT__, // __SET_HEIGHT__ Do Not Remove
 	    fullscreen:  false,
 	    backgroundColor: '#00000000',
 	    titleBarStyle: 'none',
@@ -114,8 +114,8 @@ var config = {
                 randomizeImageOrder: true,
                 recursiveSubDirectories: true,
                 resizeImages: true,
-                maxWidth: __WIDTH__,
-                maxHeight: __HEIGHT__,
+                maxWidth: __WIDTH__, // __SET_MAX_WIDTH__ Do Not Remove
+                maxHeight: __HEIGHT__, // __SET_MAX_HEIGHT__ Do Not Remove
                 transitions: ['opacity', 'slideFromRight', 'slideFromLeft', 'slideFromTopLeft', 'slideFromTopRight', 'slideFromBottomLeft', 'slideFromBottomRight', 'flipX', 'flipY'],
                 //backgroundSize: "contain",
                 // DISPLAY THE SLIDE SHOW BETWEEN 1PM and 6PM then again between 9PM and Midnight

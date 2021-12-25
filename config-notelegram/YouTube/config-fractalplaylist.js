@@ -87,8 +87,8 @@ var config = {
               controls: false,
               loop: true,
               modestbranding: true,
-              width: "__HEIGHT__px",
-              height: "__WIDTH__px",
+              width: "__WIDTH__px", // __SET_WIDTH_PX__ Do Not Remove
+              height: "__HEIGHT__px", // __SET_HEIGHT_PX__ Do Not Remove
               referrer: "http://your.domain.com",
             }
         },

@@ -3,8 +3,8 @@
     electronOptions: {
         x: 0, // __X_OFFSET__ Do Not Remove
         y: 0, // __Y_OFFSET__ Do Not Remove
-	    width: __WIDTH__,
-	    height: __HEIGHT__,
+	    width: __WIDTH__, // __SET_WIDTH__ Do Not Remove
+	    height: __HEIGHT__, // __SET_HEIGHT__ Do Not Remove
 	    fullscreen:  false,
 	    backgroundColor: '#00000000',
 	    titleBarStyle: 'none',

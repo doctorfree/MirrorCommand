@@ -194,10 +194,10 @@ var config = {
                         title: "Washington Post",
                         url: "http://feeds.washingtonpost.com/rss/national"
                     },
-                    {
-                        title: "Mercury News",
-                        url: "https://www.mercurynews.com/feed"
-                    },
+                    // {
+                    //     title: "Mercury News",
+                    //     url: "https://www.mercurynews.com/feed"
+                    // },
                 ],
                 showSourceTitle: true,
                 showPublishDate: true,
@@ -290,10 +290,9 @@ var config = {
                      ],
                      // "https://www.youtube.com/embed/95FxKgcgjN0?autoplay=1&amp;controls=0",
                 updateInterval: 15 * 60 * 1000, // rotate URLs every 15 minutes
-                width: "1080", // width of iframe
-                height: "1580", // height of iframe
-                // width of embedded iframe, height is beeing calculated by aspect ratio of iframe
-                frameWidth: "1080"
+                width: "__WIDTH__", // __SET_Q_WIDTH__ Do Not Remove
+                height: "__HALF_HEIGHT__", // __SET_Q_HALF_HEIGHT__ Do Not Remove
+                frameWidth: "__WIDTH__", // __SET_FRM_WIDTH__ Do Not Remove
             }
         },
         {

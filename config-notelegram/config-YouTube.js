@@ -87,8 +87,8 @@ var config = {
               controls: false,
               loop: true,
               modestbranding: true,
-              width: "1080px",
-              height: "800px",
+              width: "__WIDTH__px", // __SET_WIDTH_PX__ Do Not Remove
+              height: "__HALF_HEIGHT__px", // __SET_HALF_HEIGHT_PX__ Do Not Remove
               referrer: "http://your.domain.com",
             }
         },
@@ -102,9 +102,9 @@ var config = {
                       "https://archive.ronrecord.com/bio.html",
                      ],
                 updateInterval: 4 * 60 * 1000, // rotate URLs every 4 minutes
-                width: "1080", // width of iframe
-                height: "1000", // height of iframe
-                frameWidth: "1080"
+                width: "__WIDTH__", // __SET_Q_WIDTH__ Do Not Remove
+                height: "__HALF_HEIGHT__", // __SET_Q_HALF_HEIGHT__ Do Not Remove
+                frameWidth: "__WIDTH__", // __SET_FRM_WIDTH__ Do Not Remove
             }
         },
     ]
