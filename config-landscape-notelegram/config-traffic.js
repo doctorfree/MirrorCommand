@@ -100,8 +100,8 @@ var config = {
                 key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
                 lat: 36.970019,
                 lng: -122.042212,
-                width: '__WIDTH__px',
-                height: '__HEIGHT__px',
+                width: "__WIDTH__px", // __SET_WIDTH_PX__ Do Not Remove
+                height: "__HEIGHT__px", // __SET_HEIGHT_PX__ Do Not Remove
                 styledMapType: "standard",
                 disableDefaultUI: true,
                 backgroundColor: 'hsla(0, 0%, 0%, 0)',

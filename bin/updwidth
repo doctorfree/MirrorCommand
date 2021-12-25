@@ -51,6 +51,7 @@ do
         -e "s#.*__SET_WIDTH_PX__.*#        width: \"${WIDTH}px\", // __SET_WIDTH_PX__ Do Not Remove#" \
         -e "s#.*__SET_HEIGHT_PX__.*#        height: \"${HEIGHT}px\", // __SET_HEIGHT_PX__ Do Not Remove#" \
         -e "s#.*__SET_HALF_HEIGHT_PX__.*#        height: \"${HALF_HEIGHT}px\", // __SET_HALF_HEIGHT_PX__ Do Not Remove#" \
+        -e "s#.*__SET_HALF_HEIGHT__.*#        height: ${HALF_HEIGHT}, // __SET_HALF_HEIGHT__ Do Not Remove#" \
         -e "s#.*__SET_Q_HALF_HEIGHT__.*#        height: \"${HALF_HEIGHT}\", // __SET_Q_HALF_HEIGHT__ Do Not Remove#" \
         -e "s#.*__SET_Q_WIDTH__.*#        width: \"${WIDTH}\", // __SET_Q_WIDTH__ Do Not Remove#" \
         -e "s#.*__SET_Q_HEIGHT__.*#        height: \"${HEIGHT}\", // __SET_Q_HEIGHT__ Do Not Remove#" > /tmp/conf$$

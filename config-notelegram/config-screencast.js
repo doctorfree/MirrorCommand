@@ -99,23 +99,12 @@ var config = {
 		    position: 'bottom_right',
 		    config: {
 			    position: 'center',
-			    height: 512,
-			    width: 1024,
+			    height: __HALF_HEIGHT__, // __SET_HALF_HEIGHT__ Do Not Remove
+			    width: __WIDTH__, // __SET_WIDTH__ Do Not Remove
 				castName: "Doctorfree's Raspberry Pi Screencast",
                 port: 8569,
 		    }
         },
-        // {
-        //     module: "MMM-GoogleAssistant",
-        //     position: "top_right",
-        //     config: {
-        //         maxWidth: "100%",
-        //         header: "",
-        //     publishKey: 'xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx',
-        //     subscribeKey: 'xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx',
-        //     updateDelay: 500
-        //     }
-        // },
 	]
 };
 

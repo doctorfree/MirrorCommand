@@ -99,8 +99,8 @@ var config = {
 		    position: 'bottom_right',
 		    config: {
 			    position: 'center',
-			    height: 512,
-			    width: 1024,
+			    height: __HALF_HEIGHT__, // __SET_HALF_HEIGHT__ Do Not Remove
+			    width: __WIDTH__, // __SET_WIDTH__ Do Not Remove
 				castName: "Doctorfree's Raspberry Pi Screencast",
                 port: 8569,
 		    }

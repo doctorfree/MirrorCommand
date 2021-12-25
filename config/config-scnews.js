@@ -154,8 +154,8 @@ var config = {
                 key: 'xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx',
                 lat: 36.970019,
                 lng: -122.042212,
-                height: '1080px',
-                width: '1080px',
+                height: "__WIDTH__px", // __SET_WIDTH_PX__ Do Not Remove
+                width: "__HALF_HEIGHT__px", // __SET_HALF_HEIGHT_PX__ Do Not Remove
                 styledMapType: "standard",
                 disableDefaultUI: true,
                 backgroundColor: 'hsla(0, 0%, 0%, 0)',
