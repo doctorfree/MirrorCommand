@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+
+usage() {
+    printf "\nUsage: updwidth -x width -y height config.js [config2.js ...]\n"
+    exit 1
+}
+
+WIDTH=
+HEIGHT=
+while getopts x:y:u flag; do
+    case $flag in
+        x)
+            WIDTH=${OPTARG}
+            ;;
+        y)
+            HEIGHT=${OPTARG}
+            ;;
+        u)
+            usage
+            ;;
+    esac
+done
+shift $(( OPTIND - 1 ))
+
+# Exit if we did not get both X and Y dimensions
+[ "${WIDTH}" ] || usage
+[ "${HEIGHT}" ] || usage
+
+# Adjust dimensions in all files provided in remaining arguments
+for conf in $*
+do
+  [ -f "${conf}" ] || continue
+  grep __X_WIDTH__ ${conf} > /dev/null && {
+    grep __Y_HEIGHT__ ${conf} > /dev/null && {
+      cat ${conf} | sed -e "s#.*__X_WIDTH__.*#        x: ${WIDTH}, // __X_WIDTH__ Do Not Remove#" -e "s#.*__Y_HEIGHT__.*#        y: ${HEIGHT}, // __Y_HEIGHT__ Do Not Remove#" > /tmp/conf$$
+      cp /tmp/conf$$ ${conf}
+      rm -f /tmp/conf$$
+    }
+  }
+done

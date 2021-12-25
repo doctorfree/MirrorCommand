@@ -66,6 +66,21 @@ xoff=SCREEN_${MM_SCREEN}[xoff]
     }
   }
 }
+# Also set the screen width and height config settings
+# Must have both width and height from mirrorscreen for this screen
+width=SCREEN_${MM_SCREEN}[width]
+[ ${!width+_} ] && {
+  WIDTH=${!width}
+  height=SCREEN_${MM_SCREEN}[height]
+  [ ${!height+_} ] && {
+    HEIGHT=${!height}
+    [ -f ${CONF}/config.js ] && {
+      [ -x /usr/local/bin/updwidth ] && {
+        /usr/local/bin/updwidth -x ${WIDTH} -y ${HEIGHT} ${CONF}/config.js
+      }
+    }
+  }
+}
 
 # If there is an existing config.js and we are in portrait mode
 # then check if it is one that requires screen rotation

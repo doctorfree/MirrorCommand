@@ -1213,6 +1213,21 @@ setconf() {
         }
       }
     }
+    # Also set the screen width and height config settings
+    # Must have both width and height from mirrorscreen for this screen
+    width=SCREEN_${MM_SCREEN}[width]
+    [ ${!width+_} ] && {
+      WIDTH=${!width}
+      height=SCREEN_${MM_SCREEN}[height]
+      [ ${!height+_} ] && {
+        HEIGHT=${!height}
+        [ -f ${CONFDIR}/config.js ] && {
+          [ -x /usr/local/bin/updwidth ] && {
+            /usr/local/bin/updwidth -x ${WIDTH} -y ${HEIGHT} ${CONFDIR}/config.js
+          }
+        }
+      }
+    }
     npm run --silent config:check > /dev/null
     [ $? -eq 0 ] || {
         if [ "$subdir" ]
