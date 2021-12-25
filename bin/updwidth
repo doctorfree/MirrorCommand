@@ -23,9 +23,18 @@ while getopts x:y:u flag; do
 done
 shift $(( OPTIND - 1 ))
 
+# At least one config file argument required
+[ $# -gt 0 ] || {
+  echo "No config file argument provided"
+  usage
+}
+
 # Exit if we did not get both X and Y dimensions
 [ "${WIDTH}" ] || usage
 [ "${HEIGHT}" ] || usage
+
+HALF_WIDTH=$((${WIDTH} / 2))
+HALF_HEIGHT=$((${HEIGHT} / 2))
 
 # Adjust dimensions in all files provided in remaining arguments
 for conf in $*
@@ -41,6 +50,8 @@ do
         -e "s#.*__SET_MAX_HEIGHT__.*#        maxHeight: ${HEIGHT}, // __SET_MAX_HEIGHT__ Do Not Remove#" \
         -e "s#.*__SET_WIDTH_PX__.*#        width: \"${WIDTH}px\", // __SET_WIDTH_PX__ Do Not Remove#" \
         -e "s#.*__SET_HEIGHT_PX__.*#        height: \"${HEIGHT}px\", // __SET_HEIGHT_PX__ Do Not Remove#" \
+        -e "s#.*__SET_HALF_HEIGHT_PX__.*#        height: \"${HALF_HEIGHT}px\", // __SET_HALF_HEIGHT_PX__ Do Not Remove#" \
+        -e "s#.*__SET_Q_HALF_HEIGHT__.*#        height: \"${HALF_HEIGHT}\", // __SET_Q_HALF_HEIGHT__ Do Not Remove#" \
         -e "s#.*__SET_Q_WIDTH__.*#        width: \"${WIDTH}\", // __SET_Q_WIDTH__ Do Not Remove#" \
         -e "s#.*__SET_Q_HEIGHT__.*#        height: \"${HEIGHT}\", // __SET_Q_HEIGHT__ Do Not Remove#" > /tmp/conf$$
       cp /tmp/conf$$ ${conf}
