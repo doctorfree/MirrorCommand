@@ -49,7 +49,7 @@ MIRRORSCREEN="${MCL}/etc/mirrorscreen"
 check_screen=SCREEN_${screen}[hdmi]
 if [ ${!check_screen+_} ]
 then
-    WID=`wmctrl -l | grep MagicMirror | awk ' { print $1 } '`
+    WID=`wmctrl -l -x | grep MagicMirror | grep -i electron | awk ' { print $1 } '`
     [ "${WID}" ] || {
         echo "Cannot retrieve MagicMirror window ID."
         exit 0
