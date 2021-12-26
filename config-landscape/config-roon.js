@@ -84,7 +84,7 @@ var config = {
         },
         {
             module: 'MMM-iFrame',
-            position: 'top_center',
+            position: 'fullscreen_below',
             config: {
                 url: [ "http://EE.E.E.EE:__Roon_Core_Port__/display/" ],
                 updateInterval: 30 * 60 * 1000, // rotate URLs every 30 minutes
