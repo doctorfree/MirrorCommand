@@ -426,20 +426,61 @@ set_screen() {
     scn=$1
     [ ${scn} -eq 0 ] && scn=1
     ((scn-=1))
+    switched=
     hdmi=SCREEN_${scn}[hdmi]
     if [ ${!hdmi+_} ]
     then
+      HDMI=${!hdmi}
       [ -f ${MIRRORSCREEN} ] && {
         cat ${MIRRORSCREEN} | sed -e "s/^MM_SCREEN=.*/MM_SCREEN=${scn}/" > /tmp/mm$$
         cp /tmp/mm$$ ${MIRRORSCREEN}
         rm -f /tmp/mm$$
         MM_SCREEN=${scn}
         screen=SCREEN_${MM_SCREEN}[mode]
-        [ ${!screen+_} ] && PORTRAIT=${!screen}
+        [ ${!screen+_} ] && {
+          [ "${PORTRAIT}" == "${!screen}" ] || {
+            # The screen mode is switching between portrait and landscape
+            # Check to see if we need to switch out the config.js
+            cd "${CONFDIR}"
+            if [ "${PORTRAIT}" ]
+            then
+              MM_CONFDIR="config-landscape"
+              TG_CONFDIR="config-landscape-notelegram"
+              [ -L ${CONFDIR}/config.js ] && {
+                CONFLINK=`readlink ${CONFDIR}/config.js`
+                echo ${CONFLINK} | grep landscape > /dev/null || {
+                  NEWLINK=`dirname ${CONFLINK} | sed -e "s/config-/config-landscape/"`
+                  OLDBASE=`basename ${CONFLINK}`
+                  [ -f ${NEWLINK}/${OLDBASE} ] && {
+                    # Relink to landscape mode version of this config file
+                    rm -f config.js
+                    ln -s ${NEWLINK}/${OLDBASE} config.js
+                    switched=1
+                  }
+                }
+              }
+            else
+              MM_CONFDIR="config"
+              TG_CONFDIR="config-notelegram"
+              [ -L ${CONFDIR}/config.js ] && {
+                CONFLINK=`readlink ${CONFDIR}/config.js`
+                echo ${CONFLINK} | grep landscape > /dev/null && {
+                  NEWLINK=`dirname ${CONFLINK} | sed -e "s/config-landscape/config-/"`
+                  OLDBASE=`basename ${CONFLINK}`
+                  [ -f ${NEWLINK}/${OLDBASE} ] && {
+                    # Relink to portrait mode version of this config file
+                    rm -f config.js
+                    ln -s ${NEWLINK}/${OLDBASE} config.js
+                    switched=1
+                  }
+                }
+              }
+            fi
+          }
+          PORTRAIT=${!screen}
+        }
         [ -x /usr/local/bin/mmscreen ] && /usr/local/bin/mmscreen $1
-        screen=SCREEN_${scn}[mode]
-        [ ${!screen+_} ] && PORTRAIT=${!screen}
-        HDMI=${!hdmi}
+        [ "${switched}" ] && mirror restart
       }
     else
       echo "No configured screen number $1"

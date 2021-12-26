@@ -40,7 +40,7 @@ MM="/home/pi/MagicMirror"
 MIRRORSCREEN="${MCL}/etc/mirrorscreen"
 [ -f ${MIRRORSCREEN} ] || MIRRORSCREEN="${MM}/.mirrorscreen"
 [ -f ${MIRRORSCREEN} ] || {
-    echo "Cannot locate mirrorscreen configuration file. Exiting."
+    echo "Cannot locate mirrorscreen configuration file."
     exit 0
 }
 
@@ -51,30 +51,30 @@ if [ ${!check_screen+_} ]
 then
     WID=`wmctrl -l | grep MagicMirror | awk ' { print $1 } '`
     [ "${WID}" ] || {
-        echo "Cannot retrieve MagicMirror window ID. Exiting"
+        echo "Cannot retrieve MagicMirror window ID."
         exit 0
     }
     width=SCREEN_${screen}[width]
     [ ${!width+_} ] || {
-        echo "Cannot retrieve MagicMirror window width. Exiting"
+        echo "Cannot retrieve MagicMirror window width."
         exit 0
     }
     width=${!width}
     height=SCREEN_${screen}[height]
     [ ${!height+_} ] || {
-        echo "Cannot retrieve MagicMirror window height. Exiting"
+        echo "Cannot retrieve MagicMirror window height."
         exit 0
     }
     height=${!height}
     xoff=SCREEN_${screen}[xoff]
     [ ${!xoff+_} ] || {
-        echo "Cannot retrieve MagicMirror window xoff. Exiting"
+        echo "Cannot retrieve MagicMirror window xoff."
         exit 0
     }
     xoff=${!xoff}
     yoff=SCREEN_${screen}[yoff]
     [ ${!yoff+_} ] || {
-        echo "Cannot retrieve MagicMirror window yoff. Exiting"
+        echo "Cannot retrieve MagicMirror window yoff."
         exit 0
     }
     yoff=${!yoff}
