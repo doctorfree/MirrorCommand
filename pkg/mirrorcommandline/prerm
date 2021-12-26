@@ -167,6 +167,19 @@ case "$1" in
             }
           }
         }
+        # Delete MagicMirror symlinks in home dirs if we put them there
+        [ "${MMHOME}" == "/usr/local/MagicMirror" ] && {
+          for userhome in /home/*
+          do
+            [ "${userhome}" == "/home/*" ] && continue
+            MMUSER="${userhome}/MagicMirror"
+            [ -L "${MMUSER}" ] && {
+              readlink "${MMUSER}" | grep ${MMHOME} > /dev/null && {
+                rm -f "${MMUSER}"
+              }
+            }
+          done
+        }
     ;;
 
     failed-upgrade)

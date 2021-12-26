@@ -236,7 +236,23 @@ case "$1" in
                 sudo -u ${USER} cp config.js.sample config.js
             fi
 
+            # If MagicMirror is installed in /usr/local then create links in
+            # users' home directories to provide compatibility with modules that
+            # assume location of MagicMirror is somewhere like /home/pi/MagicMirror
+            [ "${MMHOME}" == "/usr/local/MagicMirror" ] && {
+                for userhome in /home/*
+                do
+                    [ "${userhome}" == "/home/*" ] && continue
+                    [ -d "${userhome}" ] && {
+                        [ -d "${userhome}"/MagicMirror ] || {
+                            cd "${userhome}"
+                            ln -s ${MMHOME} MagicMirror
+                        }
+                    }
+                done
+            }
             # Install MagicMirror 3rd Party modules used by MirrorCommandLine
+            [ -d "${MMHOME}/modules" ] && cd "${MMHOME}/modules"
             MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
                      MMM-COVID19-SPARKLINE MMM-DarkSkyForecast MMM-DateOnly \
                      MMM-Detector MMM-GoogleAssistant MMM-GoogleMapsTraffic \
