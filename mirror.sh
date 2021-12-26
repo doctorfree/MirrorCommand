@@ -1243,7 +1243,7 @@ setconf() {
         [ -f config-$$.js ] && mv config-$$.js config.js
         exit ${ERROR_EXIT}
     }
-    [ -L config-$$.js ] && rm -f config-$$.js
+    rm -f config-$$.js
     [ "${PORTRAIT}" ] && {
       primary=`xrandr --query --verbose | grep connected | grep -v disconnected | grep primary > /dev/null`
       if [ "${primary}" ]
