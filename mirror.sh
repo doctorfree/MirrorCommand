@@ -433,6 +433,7 @@ set_screen() {
         cat ${MIRRORSCREEN} | sed -e "s/^MM_SCREEN=.*/MM_SCREEN=${scn}/" > /tmp/mm$$
         cp /tmp/mm$$ ${MIRRORSCREEN}
         rm -f /tmp/mm$$
+        MM_SCREEN=${scn}
         [ -x /usr/local/bin/mmscreen ] && /usr/local/bin/mmscreen $1
         screen=SCREEN_${scn}[mode]
         [ ${!screen+_} ] && PORTRAIT=${!screen}
