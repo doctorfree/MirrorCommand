@@ -434,6 +434,8 @@ set_screen() {
         cp /tmp/mm$$ ${MIRRORSCREEN}
         rm -f /tmp/mm$$
         MM_SCREEN=${scn}
+        screen=SCREEN_${MM_SCREEN}[mode]
+        [ ${!screen+_} ] && PORTRAIT=${!screen}
         [ -x /usr/local/bin/mmscreen ] && /usr/local/bin/mmscreen $1
         screen=SCREEN_${scn}[mode]
         [ ${!screen+_} ] && PORTRAIT=${!screen}
