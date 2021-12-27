@@ -112,7 +112,13 @@ tested on Ubuntu Linux 20.04 with generic x86_64 hardware.
 
 It has been tested on systems with a mirror display and systems with a
 standard computer monitor display. MirrorCommandLine version 2.7 and later
-has been tested on systems with multiple monitors.
+has been tested on systems with multiple monitors. Testing has been performed
+on systems with a variety of screen resolutions and orientation including
+1920x1080 portrait mode display, 2560x1440 landscape mode display, and
+1920x1080 landscape mode display. Deployment of the MirrorCommandLine
+MagicMirror configuration files on screens with display resolution differing
+significantly from those tested may require changes to the module positions,
+layout, and geometry.
 
 The installation package format is Debian so the automated installation and
 configuration is limited to systems that support the Debian packaging format.
