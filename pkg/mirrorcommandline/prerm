@@ -121,7 +121,7 @@ case "$1" in
                 fi
               done
             }
-            rm -rf ${MM}/css-portrait
+            # rm -rf ${MM}/css-portrait
 
             RECIPE_DIR="modules/MMM-GoogleAssistant/recipes"
             [ -d "${MMHOME}/${RECIPE_DIR}" ] && {

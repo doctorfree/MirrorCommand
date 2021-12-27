@@ -49,7 +49,8 @@ HAVE_PORT=
   [ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
 }
 
-CONF=${MM}/config
+CONFDIR=${MM}/config
+CSSDIR=${MM}/css
 
 # If there is an existing config.js then set the Electron screen offsets
 # Must have both xoff and yoff from mirrorscreen for this screen
@@ -59,9 +60,9 @@ xoff=SCREEN_${MM_SCREEN}[xoff]
   yoff=SCREEN_${MM_SCREEN}[yoff]
   [ ${!yoff+_} ] && {
     YOFF=${!yoff}
-    [ -f ${CONF}/config.js ] && {
+    [ -f ${CONFDIR}/config.js ] && {
       [ -x /usr/local/bin/updoffsets ] && {
-        /usr/local/bin/updoffsets -x ${XOFF} -y ${YOFF} ${CONF}/config.js
+        /usr/local/bin/updoffsets -x ${XOFF} -y ${YOFF} ${CONFDIR}/config.js
       }
     }
   }
@@ -74,19 +75,33 @@ width=SCREEN_${MM_SCREEN}[width]
   height=SCREEN_${MM_SCREEN}[height]
   [ ${!height+_} ] && {
     HEIGHT=${!height}
-    [ -f ${CONF}/config.js ] && {
+    [ -f ${CONFDIR}/config.js ] && {
       [ -x /usr/local/bin/updwidth ] && {
-        /usr/local/bin/updwidth -x ${WIDTH} -y ${HEIGHT} ${CONF}/config.js
+        /usr/local/bin/updwidth -x ${WIDTH} -y ${HEIGHT} ${CONFDIR}/config.js
       }
+    }
+    [ -x /usr/local/bin/updcsswidth ] && {
+      for css in ${CSSDIR}/*.css
+      do
+        [ "${css}" == "${CSSDIR}/*.css" ] && continue
+        [ -f ${css} ] && {
+          if [ "${PORTRAIT}" ]
+          then
+            /usr/local/bin/updcsswidth -x ${HEIGHT} -y ${WIDTH} ${css}
+          else
+            /usr/local/bin/updcsswidth -x ${WIDTH} -y ${HEIGHT} ${css}
+          fi
+        }
+      done
     }
   }
 }
 
 # If there is an existing config.js and we are in portrait mode
 # then check if it is one that requires screen rotation
-if [ -L ${CONF}/config.js ]
+if [ -L ${CONFDIR}/config.js ]
 then
-  config=`readlink ${CONF}/config.js`
+  config=`readlink ${CONFDIR}/config.js`
   config=`basename ${config}`
   config=`echo $config | sed -e "s/\.js$//" -e "s/^config-//"`
 else

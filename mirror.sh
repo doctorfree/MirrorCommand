@@ -113,6 +113,7 @@ fi
 
 # -----------------------------------------------------------------------
 CONFDIR="${MM}/config"
+CSSDIR="${MM}/css"
 # MagicMirror configuration files organized into subdirectories listed here
 CONF_SUBDIRS="Artists JAV Models Photos Photographers YouTube test"
 MMCFMSG="MagicMirror configuration file"
@@ -1269,6 +1270,20 @@ setconf() {
           [ -x /usr/local/bin/updwidth ] && {
             /usr/local/bin/updwidth -x ${WIDTH} -y ${HEIGHT} ${CONFDIR}/config.js
           }
+        }
+        [ -x /usr/local/bin/updcsswidth ] && {
+          for css in ${CSSDIR}/*.css
+          do
+            [ "${css}" == "${CSSDIR}/*.css" ] && continue
+            [ -f ${css} ] && {
+              if [ "${PORTRAIT}" ]
+              then
+                /usr/local/bin/updcsswidth -x ${HEIGHT} -y ${WIDTH} ${css}
+              else
+                /usr/local/bin/updcsswidth -x ${WIDTH} -y ${HEIGHT} ${css}
+              fi
+            }
+          done
         }
       }
     }

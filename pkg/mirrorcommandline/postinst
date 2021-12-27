@@ -22,13 +22,14 @@ case "$1" in
         export PATH=/usr/local/bin:$PATH
         export DISPLAY=:0
         # Scripts for which links will be made in /usr/local/bin
-        EXPORTS="audiotest camsnap chkconfig chktemp gethue getquote screensaveroff \
-            get_temps mirror mknewartist mknewjav mknewmodel mknewphotographer \
-            mknewplayboy mknewtop mm mmapiactions mmgetb mmscene mmscreen mmsetb \
-            mmupdall module_update module_update_all play rand_back send_sms \
-            set_asound_conf showkeys updallartists updallmodels updallphotographers \
-            updalltop updarpscan updartist updlinks updjav updmodel updphotographer \
-            updtop updoffsets updwidth vncview vol websnap wireless_conf zerologs"
+        EXPORTS="audiotest camsnap chkconfig chktemp gethue getquote \
+            screensaveroff get_temps mirror mknewartist mknewjav mknewmodel \
+            mknewphotographer mknewplayboy mknewtop mm mmapiactions mmgetb \
+            mmscene mmscreen mmsetb mmupdall module_update module_update_all \
+            play rand_back send_sms set_asound_conf showkeys updallartists \
+            updallmodels updallphotographers updalltop updarpscan updartist \
+            updlinks updjav updmodel updphotographer updtop updoffsets \
+            updcsswidth updwidth vncview vol websnap wireless_conf zerologs"
         LOCAL="myreboot myshutdown remountusb"
         MM="/usr/local/MirrorCommandLine"
         KEYS="${MM}/etc/mirrorkeys"
@@ -113,8 +114,8 @@ case "$1" in
               ${MM}/bin/set_screen_conf
               cd "${MM}/css"
               ${MM}/bin/set_screen_conf
-              cd "${MM}/css-landscape"
-              ${MM}/bin/set_screen_conf
+              # cd "${MM}/css-landscape"
+              # ${MM}/bin/set_screen_conf
             }
             # Fixup those config files that have hard coded Roon Core IP and Port
             [ -x ${MM}/bin/set_roon_conf ] && {
@@ -173,7 +174,7 @@ case "$1" in
             }
 
             # Which css folder should be copied to MagicMirror home
-            [ -x ${MM}/bin/set_css_folder ] && ${MM}/bin/set_css_folder
+            # [ -x ${MM}/bin/set_css_folder ] && ${MM}/bin/set_css_folder
 
             # Copy in the config files to the MagicMirror home
             for cfg in config config-landscape config-notelegram config-landscape-notelegram
