@@ -40,7 +40,8 @@ var config = {
         "::1",
     ],
 
-	language: "en",
+	customCss: "css/custom-mirrorcommandline.css",
+    language: "en",
 	timeFormat: 12,
 	units: "imperial",
 	

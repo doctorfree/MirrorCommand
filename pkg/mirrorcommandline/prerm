@@ -100,28 +100,13 @@ case "$1" in
             rmdir --ignore-fail-on-non-empty ${MMHOME}/config-landscape-notelegram
             [ -d "${MMHOME}/css" ] && {
               cd "${MMHOME}/css"
-              c="custom-mirrorcommandline.css"
-              if [ -L $c ]
-              then
-                readlink $c | grep ${MM} > /dev/null && rm -f $c
-              else
-                # Remove it if it has not been modified
-                [ -f $c ] && diff $c ${MM}/css/custom.css > /dev/null && rm -f $c
-              fi
               for css in ${MM}/css/*
               do
                 [ "${css}" == "${MM}/css/*" ] && continue
                 b=`basename ${css}`
-                if [ -L $b ]
-                then
-                  readlink $b | grep ${MM} > /dev/null && rm -f $b
-                else
-                  # Remove it if it has not been modified
-                  [ -f $b ] && diff $b ${css} > /dev/null && rm -f $b
-                fi
+                [ "$b" == "custom.css" ] || rm -f $b
               done
             }
-            # rm -rf ${MM}/css-portrait
 
             RECIPE_DIR="modules/MMM-GoogleAssistant/recipes"
             [ -d "${MMHOME}/${RECIPE_DIR}" ] && {

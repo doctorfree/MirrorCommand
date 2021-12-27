@@ -32,6 +32,7 @@ var config = {
         "::1",
     ],
 
+    customCss: "css/custom-mirrorcommandline.css",
     language: "en",
     locale: 'en-US',
     timeFormat: 12,

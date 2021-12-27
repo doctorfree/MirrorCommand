@@ -31,6 +31,7 @@ var config = {
         "::1",
     ],
 
+    customCss: "css/custom-mirrorcommandline.css",
     language: "en",
     timeFormat: 12,
     units: "imperial",
