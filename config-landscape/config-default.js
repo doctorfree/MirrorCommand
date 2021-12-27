@@ -114,7 +114,7 @@ var config = {
         },
         {
             module: 'MMM-Solar',
-            position: "bottom_right",
+            position: "bottom_left",
             config: {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
@@ -198,14 +198,14 @@ var config = {
         },
         {
             module: 'MMM-MacAddressScan',
-            position: "bottom_bar",
+            position: "bottom_right",
             header: "ARP Scan - Discovered Devices",
             config: {
                 showLastSeen: false,
                 showLastSeenWhenOffline: false,
                 sort: false,
                 colored: true,
-                showDeviceColumns: true,
+                showDeviceColumns: false,
                 coloredState: true,
                 showIP: true,
                 showUnknown: false,

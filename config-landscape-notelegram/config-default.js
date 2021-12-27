@@ -114,7 +114,7 @@ var config = {
         },
         {
             module: 'MMM-Solar',
-            position: "bottom_right",
+            position: "bottom_left",
             config: {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
@@ -191,20 +191,21 @@ var config = {
                 // If you've added a Hue API user and set it in mirrorkeys
                 // then replace the above setting of user with one of these
                 // and rerun showkeys.
+                // user: "xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx",
                 // user: "xxxxxxxxx_Hue-Hub-User-Two_xxxxxxxxxxxx",
                 // user: "xxxxxxxxx_Hue-Hub-User-Three_xxxxxxxxxx",
             }
         },
         {
             module: 'MMM-MacAddressScan',
-            position: "bottom_bar",
+            position: "bottom_right",
             header: "ARP Scan - Discovered Devices",
             config: {
                 showLastSeen: false,
                 showLastSeenWhenOffline: false,
                 sort: false,
                 colored: true,
-                showDeviceColumns: true,
+                showDeviceColumns: false,
                 coloredState: true,
                 showIP: true,
                 showUnknown: false,
