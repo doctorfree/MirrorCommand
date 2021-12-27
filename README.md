@@ -716,7 +716,11 @@ Manual pages for these MirrorCommandLine commands can be viewed by executing
 any of the following commands (click to view the man page online):
 
 - [man mirror](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mirror.1.md)
+- [man 5 mirrorkeys](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mirrorkeys.5.md)
+- [man set_asound_conf](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/set_asound_conf.1.md)
 - [man mmscene](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mmscene.1.md)
+- [man mmscreen](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mmscreen.1.md)
+- [man showkeys](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/showkeys.1.md)
 - [man vol](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/vol.1.md)
 - [man websnap](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/websnap.1.md)
 
