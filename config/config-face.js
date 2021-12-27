@@ -150,30 +150,17 @@ var config = {
         },
         {
             module: "calendar",
-            header: "Calendar Events",
+            header: "US Holidays",
             position: "top_left",
-            classes: 'ronnie',
             config: {
                 colored: true,
-                maximumNumberOfDays: 10,
-                maximumEntries: 20,
-                showLocation: true,
+                displaySymbol: true,
+                defaultSymbol: "calendar-alt",
                 calendars: [
                     {
-                        symbol: "calendar",
-                        color: '#73FF33',
-                        url: "http://localhost:8080/modules/default/calendar/calendars/home.ics"
-                    },
-                    {
-                        symbol: "calendar",
-                        color: '#BAA3DC',
-                        url: "http://localhost:8080/modules/default/calendar/calendars/14D7ECFB-D078-4696-9558-E422AE330A63.ics"
-                    },
-//                  {
-//                      symbol: "calendar",
-//                      color: '#33FFFA',
-//                      url: "http://localhost:8080/modules/default/calendar/calendars/W14D7ECFB-D078-4696-9558-E422AE330A63.ics"
-//                  }
+                        symbol: "calendar-check",
+                        url: "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics"
+                    }
                 ]
             }
         },

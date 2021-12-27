@@ -88,60 +88,6 @@ var config = {
                 // classes: {} // Optional, See "Custom Classes" below
             }
         },
-//      {
-//          module: "calendar",
-//          header: "Calendar Events",
-//          position: "top_left",
-//          config: {
-//              colored: true,
-//              maximumNumberOfDays: 10,
-//              maximumEntries: 9,
-//              showLocation: true,
-//              tableClass: "medium",
-//              timeFormat: "absolute",
-//              nextDaysRelative: true,
-//              displaySymbol: true,
-//              defaultSymbol: "calendar-alt",
-//              calendars: [
-//                  {
-//                      symbol: "calendar",
-//                      color: '#73FF33',
-//                      url: "http://localhost:8080/modules/default/calendar/calendars/home.ics"
-//                  },
-//                  {
-//                      symbol: "calendar",
-//                      color: '#BAA3DC',
-//                      url: "http://localhost:8080/modules/default/calendar/calendars/14D7ECFB-D078-4696-9558-E422AE330A63.ics"
-//                  },
-//              ]
-//          }
-//      },
-//      {
-//          module: "weather",
-//          position: "top_right",
-//          header: "Current Weather",
-//          config: {
-//           type: 'current',
-//           location: "Santa Cruz,United States",
-//           locationID: "5393052",
-//           units: "imperial",
-//           apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
-//          }
-//      },
-//      {
-//          module: "weather",
-//          position: "top_right",
-//          header: "Weather Forecast",
-//          config: {
-//              type: 'forecast',
-//              location: "Santa Cruz,United States",
-//              locationID: "5393052",
-//              units: "imperial",
-//              showRainAmount: "true",
-//              colored: "true",
-//              apiKey: "xx_OpenWeather-App-ID_xxxxxxxxxx"
-//          }
-//      },
         {
             module: "newsfeed",
             position: "top_bar",

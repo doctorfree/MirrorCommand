@@ -127,16 +127,6 @@ var config = {
                         color: '#73FF33',
 						url: "http://localhost:8080/modules/default/calendar/calendars/home.ics"
                     },
-					{
-						symbol: "calendar",
-                        color: '#BAA3DC',
-						url: "http://localhost:8080/modules/default/calendar/calendars/14D7ECFB-D078-4696-9558-E422AE330A63.ics"
-                    },
-//					{
-//						symbol: "calendar",
-//                        color: '#33FFFA',
-//						url: "http://localhost:8080/modules/default/calendar/calendars/W14D7ECFB-D078-4696-9558-E422AE330A63.ics"
-//                    }
 				]
 			}
 		},

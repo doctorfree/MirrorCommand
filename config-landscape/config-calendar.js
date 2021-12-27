@@ -35,7 +35,7 @@ var config = {
         "::1",
     ],
 
-    customCss: "css/custom-ironman.css",
+    customCss: "css/custom.css",
 	language: "en",
 	timeFormat: 12,
 	units: "imperial",
@@ -112,38 +112,17 @@ var config = {
             },
         },
         {
-            module: "MMM-IronManGIF",
+            module: "MMM-DateOnly",
             position: "top_center",
             config: {
-                style: 1,              // Style number
-                maxWidth: "100%",      // Sizes the images.
-                rotate: true,
-                updateInterval: 300000
-            }
-        },
-        {
-            module: "clock",
-			position: "top_center",
-            config: {
+                showWeek: false,
                 dateFormat: "dddd, LLL",
-                displayType: "analog",
-                analogFace: "face-006",
-                analogSize: "295px",
-                displaySeconds: "true",
-                secondsColor: "#00FFFF",
-                timeFormat: "12",
-                showPeriod: "true",
-                showDate: "true",
-                clockBold: "false",
-                analogPlacement: "top",
-                analogShowDate: "top",
             }
         },
 		{
 			module: "calendar",
 			header: "Calendar Events",
-			// position: "middle_center",
-			position: "lower_third",
+			position: "top_center",
 			config: {
                 colored: true,
                 maximumNumberOfDays: 14,
@@ -160,16 +139,6 @@ var config = {
                         color: '#73FF33',
 						url: "http://localhost:8080/modules/default/calendar/calendars/home.ics"
                     },
-					{
-						symbol: "calendar",
-                        color: '#BAA3DC',
-						url: "http://localhost:8080/modules/default/calendar/calendars/14D7ECFB-D078-4696-9558-E422AE330A63.ics"
-                    },
-//					{
-//						symbol: "calendar",
-//                       color: '#33FFFA',
-//						url: "http://localhost:8080/modules/default/calendar/calendars/W14D7ECFB-D078-4696-9558-E422AE330A63.ics"
-//                   }
 				]
 			}
 		},

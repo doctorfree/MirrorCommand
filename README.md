@@ -234,24 +234,19 @@ created in the source repository they can be installed by executing the
 
 #### ALSA audio input and output devices configuration
 The MirrorCommandLine installation attempts to detect and configure ALSA
-audio input and output devices. Currently this automated ALSA configuration
-is limited to USB audio devices such as a microphone, webcam, or DAC.
+audio input and output devices such as a microphone, webcam, or DAC.
 
-The installation process will modify `/etc/asound.conf` if it detects USB
-audio devices not correctly configured. In addition, the installation process
-will setup a system service that runs every time the system boots, checks the
-ALSA configuration in `/etc/asound.conf`, and corrects it if necessary. This
-system service attempts to compensate for shifting audio device numbers over
-system reboots.
+The installation process will modify `/etc/asound.conf` if it detects
+audio devices incorrectly configured. No changes are made to individual
+users' `.asoundrc` in their home directories. If you wish to override the
+settings configured by the `set_asound_conf` command, you can do so by
+creating an `.asoundrc` file in your home directory and managing the ALSA
+audio device settings there.
 
-No changes are made to individual users' `.asoundrc` in their home directories.
-If you wish to override the settings configured by the `asound-conf` system
-service you can do so by creating an `.asoundrc` file in your home directory
-and managing the ALSA audio device settings there.
+To reconfigure the `/etc/asound.conf` ALSA audio configuration file,
+issue the command:
 
-To disable the `asound-conf` system service, issue the command:
-
-`sudo systemctl disable asound-conf`
+`sudo /usr/local/bin/set_asound_conf`
 
 ### Post installation configuration
 
@@ -284,6 +279,14 @@ The `showkeys` command will read the `mirrorkeys` file and edit the appropriate
 configuration files in `/usr/local/MirrorCommandLine` containing the placeholder dummy
 settings.
 
+For more info on the `showkeys` command and the
+`/usr/local/MirrorCommandLine/etc/mirrorkeys` configuration file, see the
+man pages `showkeys.1` and `mirrorkeys.5` by executing the `man` command:
+
+`man showkeys`
+
+`man 5 mirrorkeys`
+
 #### Configure mirror script
 
 Edit the main MagicMirror management script,
@@ -303,12 +306,10 @@ Defaults for these are:
 - apikey="xxx_Remote-Control-API-Key_xxxxx"
 - CONF_SUBDIRS="Artists JAV Models Photographers"
 
-In most cases you will only need to set the IP address and MMM-Remote-Control API key.
+In most cases you will only need to set the MMM-Remote-Control API key.
 The IP setting should have been configured properly during installation and the
 MMM-Remote-Control API key is set by the `showkeys` command after the `mirrorkeys`
 file has been configured with the API key.
-
-A typical installation will not need to modify anything by hand in the `mirror` script.
 
 If you have not configured an API key for MagicMirror remote control then
 set the apikey to blank ( <code>apikey=</code> ).
