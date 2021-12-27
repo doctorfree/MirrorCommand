@@ -4,24 +4,37 @@
 .hy
 .SH NAME
 .PP
-\f[B]mmscene\f[R] - PLACE BRIEF SUMMARY HERE
+\f[B]mmscene\f[R] - control the scenes displayed by the MMM-Scenes
+MagicMirror module
 .SH SYNOPSIS
 .PP
-\f[B]mmscene\f[R] [ \f[B]OPTION\f[R] ARG ]
+\f[B]mmscene\f[R] [active|info|next|prev|name|number]
 .SH DESCRIPTION
 .PP
-PLACE DESCRIPTION HERE
+The \f[I]mmscene\f[R] command can be used to control the scenes
+displayed by the MMM-Scenes MagicMirror module.
+The command provided command line controls to move to the next scene,
+previous scene, named scene, scene number, and can be used to retrieve
+info on the active and configured scenes.
 .SH COMMAND LINE OPTIONS
 .TP
-\f[B]-u\f[R]
-display usage message
+\f[B]mmscene next\f[R]
+moves the display to the next scene
 .TP
-\f[B]-n\f[R]
-ADDITIONAL OPTIONS
-.SH EXAMPLES
+\f[B]mmscene prev\f[R]
+moves the display to the previous scene
 .TP
-\f[B]mmscene -n Arg\f[R]
-EXAMPLE DESCRIPTION GOES HERE
+\f[B]mmscene name\f[R]
+moves the display to the named scene
+.TP
+\f[B]mmscene number\f[R]
+moves the display to scene number \[aq]number\[aq]
+.TP
+\f[B]mmscene active\f[R]
+retrieves information on the active modules
+.TP
+\f[B]mmscene info\f[R]
+retrieves information on the configured scenes
 .SH AUTHORS
 .PP
 Written by Ronald Record <<github@ronrecord.com>>

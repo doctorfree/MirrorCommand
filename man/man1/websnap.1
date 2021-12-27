@@ -4,24 +4,62 @@
 .hy
 .SH NAME
 .PP
-\f[B]websnap\f[R] - PLACE BRIEF SUMMARY HERE
+\f[B]websnap\f[R] - Take a photo with the camera attached to a
+MagicMirror
 .SH SYNOPSIS
 .PP
-\f[B]websnap\f[R] [ \f[B]OPTION\f[R] ARG ]
+\f[B]websnap\f[R] [\f[B]options\f[R]] filename [[\f[B]options\f[R]]
+filename ...
+]
 .SH DESCRIPTION
 .PP
-PLACE DESCRIPTION HERE
+The \f[I]websnap\f[R] command can be used to take a photo with a webcam
+or other camera attached to the system.
+This provides a command line interface to the action of the camera
+allowing a greater degree of flexibility in automated control of the
+camera
 .SH COMMAND LINE OPTIONS
 .TP
 \f[B]-u\f[R]
-display usage message
+Display usage message
 .TP
-\f[B]-n\f[R]
-ADDITIONAL OPTIONS
+\f[B]-N\f[R]
+Tell me what you would do and exit
+.TP
+\f[B]-q\f[R]
+Hides all messages except for errors
+.TP
+\f[B]-v\f[R]
+Displays extra messages while capturing
+.TP
+\f[B]-i number/name\f[R]
+Selects the input to use
+.TP
+\f[B]-p name\f[R]
+Selects the palette format to use
+.TP
+\f[B]-d number\f[R]
+Sets the pre-capture delay time (seconds)
+.TP
+\f[B]-r size\f[R]
+Sets the capture resolution
+.TP
+\f[B]-R framerate\f[R]
+Sets the capture frame rate
+.TP
+\f[B]-n number\f[R]
+Sets the number of frames to capture
+.TP
+\f[B]-s number\f[R]
+Sets the number of frames to skip
 .SH EXAMPLES
 .TP
-\f[B]websnap -n Arg\f[R]
-EXAMPLE DESCRIPTION GOES HERE
+\f[B]websnap -r 1024x768\f[R]
+Take a picture with the webcam with width=1024 and height=768 Most
+modern webcams will support at least the following resolutions:
+1920x1080, 1280x720, 1024x768, 800x600, 640x480, 640x360, 320x240,
+320x180, 160x120 Execute \[aq]v4l2-ctl --list-formats-ext\[aq] to find
+supported resolutions
 .SH AUTHORS
 .PP
 Written by Ronald Record <<github@ronrecord.com>>

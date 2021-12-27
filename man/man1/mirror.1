@@ -20,7 +20,7 @@ rotate <right|left|normal|inverted>
 .IP \[bu] 2
 scene <next|prev|info|name|number>
 .IP \[bu] 2
-screen <on|off|info|status>
+screen <on|off|info|status|number>
 .IP \[bu] 2
 stop|start|restart|mute|unmute|screenshot|reboot|shutdown
 .IP \[bu] 2
@@ -202,6 +202,10 @@ previous folder by that name exists
 removes the MagicMirror config file for the specified \f[I]Wallhaven
 tag\f[R] name and deletes the image folder for that Wallhaven tag
 .TP
+\f[B]-X number\f[R]
+Sets the default screen to use for MagicMirror display and moves an
+existing MagicMirror window to that screen number
+.TP
 \f[B]youtube\f[R]
 displays an interactive menu of available YouTube config files to select
 from
@@ -335,6 +339,9 @@ Restarts the mirror in developer mode
 .TP
 \f[B]mirror rotate left/right/normal/inverted\f[R]
 rotates the screen left, right, inverted, or normal
+.TP
+\f[B]mirror screen 2\f[R]
+Move the MagicMirror window to the secondary monitor
 .TP
 \f[B]mirror screen on\f[R]
 Turns the Display ON

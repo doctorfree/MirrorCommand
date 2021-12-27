@@ -6,24 +6,35 @@ footer: mmscene 2.6
 date: December 07, 2021
 ---
 # NAME
-**mmscene** - PLACE BRIEF SUMMARY HERE
+**mmscene** - control the scenes displayed by the MMM-Scenes MagicMirror module
 
 # SYNOPSIS
-**mmscene** [ **OPTION** ARG ]
+**mmscene** [active|info|next|prev|name|number]
 
 # DESCRIPTION
-PLACE DESCRIPTION HERE
+The *mmscene* command can be used to control the scenes displayed by the
+MMM-Scenes MagicMirror module. The command provided command line controls
+to move to the next scene, previous scene, named scene, scene number, and
+can be used to retrieve info on the active and configured scenes.
 
 # COMMAND LINE OPTIONS
-**-u**
-: display usage message
+**mmscene next**
+: moves the display to the next scene
 
-**-n**
-: ADDITIONAL OPTIONS
+**mmscene prev**
+: moves the display to the previous scene
 
-# EXAMPLES
-**mmscene -n Arg**
-: EXAMPLE DESCRIPTION GOES HERE
+**mmscene name**
+: moves the display to the named scene
+
+**mmscene number**
+: moves the display to scene number 'number'
+
+**mmscene active**
+: retrieves information on the active modules
+
+**mmscene info**
+: retrieves information on the configured scenes
 
 # AUTHORS
 Written by Ronald Record &lt;github@ronrecord.com&gt;

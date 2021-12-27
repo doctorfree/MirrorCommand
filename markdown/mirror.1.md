@@ -17,7 +17,7 @@ Where *command &lt;args&gt;* includes:
 - list &lt;active|installed|configs&gt;
 - rotate &lt;right|left|normal|inverted&gt;
 - scene &lt;next|prev|info|name|number&gt;
-- screen &lt;on|off|info|status&gt;
+- screen &lt;on|off|info|status|number&gt;
 - stop|start|restart|mute|unmute|screenshot|reboot|shutdown
 - playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo
 - vol &lt;percent&gt;mute|unmute|save|restore|get
@@ -135,6 +135,9 @@ Currently the command line MagicMirror control scripts include support for:
 
 **-W tagname | wh tagname**
 : removes the MagicMirror config file for the specified *Wallhaven tag* name and deletes the image folder for that Wallhaven tag
+
+**-X number**
+: Sets the default screen to use for MagicMirror display and moves an existing MagicMirror window to that screen number
 
 **youtube**
 : displays an interactive menu of available YouTube config files to select from
@@ -254,6 +257,9 @@ Currently the command line MagicMirror control scripts include support for:
 
 **mirror rotate left/right/normal/inverted**
 : rotates the screen left, right, inverted, or normal
+
+**mirror screen 2**
+:  Move the MagicMirror window to the secondary monitor
 
 **mirror screen on**
 :  Turns the Display ON

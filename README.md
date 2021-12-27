@@ -22,6 +22,7 @@ configure, monitor, and manage a MagicMirror.
 
 1. [Overview](#overview)
 1. [Screenshots](#screenshots)
+1. [Compatibility](#compatibility)
 1. [Installation](#installation)
     1. [MagicMirror Installation](#magicmirror-installation)
     1. [MirrorCommandLine Installation](#mirrorcommandline-installation)
@@ -103,6 +104,19 @@ Interactive menus when invoked with no arguments<br/>
   <img src="screenshots/mirror_command_menu.jpg">
   <img src="screenshots/mirror_submenu.jpg">
 </p>
+
+## Compatibility
+MirrorCommandLine has been successfully deployed and tested on a Raspberry Pi 4
+and Raspberry Pi 400 running Raspbian Buster. It has also been deployed and
+tested on Ubuntu Linux 20.04 with generic x86_64 hardware.
+
+It has been tested on systems with a mirror display and systems with a
+standard computer monitor display. MirrorCommandLine version 2.7 and later
+has been tested on systems with multiple monitors.
+
+The installation package format is Debian so the automated installation and
+configuration is limited to systems that support the Debian packaging format.
+However, it should deploy on most Debian based Linux environments.
 
 ## Installation
 
