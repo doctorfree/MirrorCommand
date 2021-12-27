@@ -34,14 +34,14 @@ shift $(( OPTIND - 1 ))
 [ "${HEIGHT}" ] || usage
 
 # Adjust dimensions in all files provided in remaining arguments
-for conf in $*
+for css in $*
 do
-  [ -f "${conf}" ] || continue
-  cat ${conf} | sed \
+  [ -f "${css}" ] || continue
+  cat ${css} | sed \
     -e "s#.*__SET_CSS_WIDTH__.*#        width: ${WIDTH}, /* __SET_CSS_WIDTH__ Do Not Remove */#" \
     -e "s#.*__SET_CSS_HEIGHT__.*#        height: ${HEIGHT}, /* __SET_CSS_HEIGHT__ Do Not Remove */#" \
     -e "s#.*__SET_CSS_WIDTH_PX__.*#        width: ${WIDTH}px, /* __SET_CSS_WIDTH_PX__ Do Not Remove */#" \
-    -e "s#.*__SET_CSS_HEIGHT_PX__.*#        height: ${HEIGHT}px, /* __SET_CSS_HEIGHT_PX__ Do Not Remove */#" /tmp/conf$$
-  cp /tmp/conf$$ ${conf}
-  rm -f /tmp/conf$$
+    -e "s#.*__SET_CSS_HEIGHT_PX__.*#        height: ${HEIGHT}px, /* __SET_CSS_HEIGHT_PX__ Do Not Remove */#" > /tmp/css$$
+  cp /tmp/css$$ ${css}
+  rm -f /tmp/css$$
 done
