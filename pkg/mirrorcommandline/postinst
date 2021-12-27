@@ -346,14 +346,14 @@ case "$1" in
           done
         }
         # Setup asound-conf system service
-        ASND_SVC="/etc/systemd/system/asound-conf.service"
-        [ -f ${MM}/etc/asound-conf.service ] && {
-          [ -f ${ASND_SVC} ] || {
-            cp ${MM}/etc/asound-conf.service ${ASND_SVC}
-            chmod 644 ${ASND_SVC}
-          }
-          systemctl enable asound-conf
-        }
+        # ASND_SVC="/etc/systemd/system/asound-conf.service"
+        # [ -f ${MM}/etc/asound-conf.service ] && {
+        #   [ -f ${ASND_SVC} ] || {
+        #     cp ${MM}/etc/asound-conf.service ${ASND_SVC}
+        #     chmod 644 ${ASND_SVC}
+        #   }
+        #   systemctl enable asound-conf
+        # }
 
         [ "${MMHOME}" ] && {
             # Setup PM2 if not already configured

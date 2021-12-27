@@ -151,11 +151,11 @@ case "$1" in
             echo "This must be accomplished manually."
         fi
         # Delete asound-conf system service
-        ASND_SVC="/etc/systemd/system/asound-conf.service"
-        [ -f ${ASND_SVC} ] && {
-          systemctl disable asound-conf
-          rm -f ${ASND_SVC}
-        }
+        # ASND_SVC="/etc/systemd/system/asound-conf.service"
+        # [ -f ${ASND_SVC} ] && {
+        #   systemctl disable asound-conf
+        #   rm -f ${ASND_SVC}
+        # }
         rm -f ${MM}/etc/*arp-devices*.js
         rm -f ${MM}/etc/mirrorscreen
         rm -f ${MMHOME}/.mirrorscreen*
