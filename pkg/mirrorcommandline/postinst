@@ -114,8 +114,6 @@ case "$1" in
               ${MM}/bin/set_screen_conf
               cd "${MM}/css"
               ${MM}/bin/set_screen_conf
-              # cd "${MM}/css-landscape"
-              # ${MM}/bin/set_screen_conf
             }
             # Fixup those config files that have hard coded Roon Core IP and Port
             [ -x ${MM}/bin/set_roon_conf ] && {
@@ -172,9 +170,6 @@ case "$1" in
                 ${MM}/bin/arpscanconf
               }
             }
-
-            # Which css folder should be copied to MagicMirror home
-            # [ -x ${MM}/bin/set_css_folder ] && ${MM}/bin/set_css_folder
 
             # Copy in the config files to the MagicMirror home
             for cfg in config config-landscape config-notelegram config-landscape-notelegram
