@@ -47,6 +47,14 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Tue Dec 28 10:51:45 2021 -0800 db61919 :
+   Pass the right number to mmscreen
+Tue Dec 28 10:43:44 2021 -0800 277cdf0 :
+   Renamed custom-mirrorcommandline.css to custom-mirrorcommand.css
+Tue Dec 28 17:06:05 2021 +0000 b1b6306 :
+   Merge branch 'mirrorcommand' into 'master'
+Tue Dec 28 08:55:05 2021 -0800 f18d47f :
+   Set version to 3.0, release to 1, updated changelog
 Tue Dec 28 08:31:24 2021 -0800 f12f7b4 :
    Rename from MirrorCommandLine to MirrorCommand
 Tue Dec 28 07:42:54 2021 -0800 5a93305 :
