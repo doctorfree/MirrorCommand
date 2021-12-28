@@ -1,17 +1,25 @@
 #!/bin/bash
 
-ART="/mnt/transcend/Pictures/MagicMirror"
-
-[ -d ${ART} ] || {
-    echo "$ART does not exist or is not a directory. Exiting."
-    exit 1
+MNT_PT="/mnt/transcend/Pictures"
+[ -d ${MNT_PT} ] || {
+    MNT_PT="/u/pictures"
+    [ -d ${MNT_PT} ] || {
+        echo "Cannot locate mount point for images"
+        exit 1
+    }
 }
-cd ${ART}
-rm -f counts.txt
-touch counts.txt
-for i in *
+PMM="${MNT_PT}/MagicMirror"
+
+for orient in landscape portrait
 do
+  [ -d ${PMM}/${orient} ] || continue
+  cd ${PMM}/${orient}
+  rm -f counts.txt
+  touch counts.txt
+  for i in *
+  do
     [ -d $i ] || continue
     count=`ls -1 $i | wc -l`
     echo "$count $i" >> counts.txt
+  done
 done

@@ -1,22 +1,35 @@
 #!/bin/bash
 
-TOP_DIR="/mnt/transcend/Pictures/MagicMirror"
-
-[ -d ${TOP_DIR} ] || {
-    echo "$TOP_DIR does not exist or is not a directory. Exiting."
-    exit 1
+MNT_PT="/mnt/transcend/Pictures"
+[ -d ${MNT_PT} ] || {
+    MNT_PT="/u/pictures"
+    [ -d ${MNT_PT} ] || {
+        echo "Cannot locate mount point for images"
+        exit 1
+    }
 }
-cd ${TOP_DIR}
+PMM="${MNT_PT}/MagicMirror"
 
-for folder in *
+for orient in landscape portrait
 do
+  MOD_DIR="${PMM}/${orient}"
+  [ -d ${MOD_DIR} ] || continue
+  cd ${MOD_DIR}
+
+  for folder in *
+  do
     case $folder in
         Artists | Artists-ALL | JAV | JAV-ALL | Models | Models-ALL | Photographers | Photographers-ALL | Playboy-ALL)
             continue
             ;;
         *)
-            echo "Updating $folder"
-            updtop "$folder"
+            if [ "${orient}" == "landscape" ]
+            then
+              updtop -l "$folder"
+            else
+              updtop "$folder"
+            fi
             ;;
     esac
+  done
 done

@@ -1,6 +1,14 @@
 #!/bin/bash
 
-MAG="/mnt/transcend/Pictures/MagicMirror"
+MNT_PT="/mnt/transcend/Pictures"
+[ -d ${MNT_PT} ] || {
+    MNT_PT="/u/pictures"
+    [ -d ${MNT_PT} ] || {
+        echo "Cannot locate mount point for images"
+        exit 1
+    }
+}
+MAG="${MNT_PT}/MagicMirror"
 TOP="/mnt/transcend/Pictures/Wallhaven"
 ART=${TOP}/Artists
 PHO=${TOP}/Photographers
@@ -10,39 +18,68 @@ PEN=${MOD}/Penthouse
 
 FAVS="Ali_Rose Alisa_I Carisha Corinna David_Dubnitskiy Dmitry_Borisov Heidi_Romanova Helly_von_Valentine Igor_Viushkin Jenya Li_Moon Martina_Mink Nata_Lee Natalia_Andreeva Niemira Priscilla_Huggins Sakimichan Stefan_Soell Tuigirl"
 
-cd $MAG
-
-for i in $FAVS
+for orient in landscape portrait
 do
+  [ -d ${MAG}/${orient} ] || continue
+  cd ${MAG}/${orient}
+
+  for i in $FAVS
+  do
     echo "Creating/updating $i MagicMirror background pics"
     [ -d $TOP/$i ] && {
         echo "Found $i in $TOP"
         [ -d $i ] || mkdir $i
-        updtoplinks $i
+        if [ "${orient}" == "landscape" ]
+        then
+          updtop -l "$i"
+        else
+          updtop "$i"
+        fi
         continue
     }
     [ -d $ART/$i ] && {
         echo "Found $i in $ART"
         [ -d Artists/$i ] || mkdir Artists/$i
-        updartistlinks $i
+        if [ "${orient}" == "landscape" ]
+        then
+          updartist -l "$i"
+        else
+          updartist "$i"
+        fi
         continue
     }
     [ -d $MOD/$i ] && {
         echo "Found $i in $MOD"
         [ -d Models/$i ] || mkdir Models/$i
-        updmodellinks $i
+        if [ "${orient}" == "landscape" ]
+        then
+          updmodel -l "$i"
+        else
+          updmodel "$i"
+        fi
         continue
     }
     [ -d $PHO/$i ] && {
         echo "Found $i in $PHO"
         [ -d Photographers/$i ] || mkdir Photographers/$i
-        updphotographerlinks $i
+        if [ "${orient}" == "landscape" ]
+        then
+          updphotographer -l "$i"
+        else
+          updphotographer "$i"
+        fi
         continue
     }
     [ -d $PLA/$i ] && {
         echo "Found $i in $PLA"
         [ -d Playboy/$i ] || mkdir Playboy/$i
-        updplayboylinks $i
+        if [ "${orient}" == "landscape" ]
+        then
+          updplayboy -l "$i"
+        else
+          updplayboy "$i"
+        fi
         continue
     }
+  done
 done

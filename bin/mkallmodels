@@ -26,9 +26,9 @@ do
     mkdir $j
     if [ "${orient}" == "landscape" ]
     then
-      updmodellinks -l $j
+      updmodel -l $j
     else
-      updmodellinks $j
+      updmodel $j
     fi
   done
 done

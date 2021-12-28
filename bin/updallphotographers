@@ -1,14 +1,28 @@
 #!/bin/bash
 
-PHO_DIR="/mnt/transcend/Pictures/MagicMirror/Photographers"
-
-[ -d ${PHO_DIR} ] || {
-    echo "$PHO_DIR does not exist or is not a directory. Exiting."
-    exit 1
+MNT_PT="/mnt/transcend/Pictures"
+[ -d ${MNT_PT} ] || {
+    MNT_PT="/u/pictures"
+    [ -d ${MNT_PT} ] || {
+        echo "Cannot locate mount point for images"
+        exit 1
+    }
 }
-cd ${PHO_DIR}
+PMM="${MNT_PT}/MagicMirror"
 
-for folder in *
+for orient in landscape portrait
 do
-    updphotographer "$folder"
+  MOD_DIR="${PMM}/${orient}/Photographers"
+  [ -d ${MOD_DIR} ] || continue
+  cd ${MOD_DIR}
+
+  for folder in *
+  do
+    if [ "${orient}" == "landscape" ]
+    then
+      updphotographer -l "$folder"
+    else
+      updphotographer "$folder"
+    fi
+  done
 done

@@ -3,23 +3,40 @@
 TYPE="Artists"
 UPDSCRIPT="updartist"
 
-TYPEDIR="/mnt/transcend/Pictures/MagicMirror/${TYPE}"
-PICDIR="/usr/local/MirrorCommandLine/pics/${TYPE}"
-
-[ -d ${PICDIR} ] || mkdir -p ${PICDIR}
-[ -d ${TYPEDIR} ] || {
-  TYPEDIR="/u/pictures/MagicMirror/${TYPE}"
-  [ -d ${TYPEDIR} ] || {
-    echo "$TYPEDIR does not exist or is not a directory. Exiting."
-    exit 1
-  }
+MNT_PT="/mnt/transcend/Pictures"
+[ -d ${MNT_PT} ] || {
+    MNT_PT="/u/pictures"
+    [ -d ${MNT_PT} ] || {
+        echo "Cannot locate mount point for images"
+        exit 1
+    }
 }
+PMM="${MNT_PT}/MagicMirror"
 
 portrait=
+orientation="portrait"
 [ "$1" == "-l" ] && {
     portrait="-l"
+    orientation="landscape"
     shift
 }
+
+PICDIR="/usr/local/MirrorCommandLine/pics-${orientation}"
+[ -d ${PICDIR} ] || mkdir -p ${PICDIR}
+
+for orient in ${orientation}
+do
+  TYPEDIR="${PMM}/${orient}/${TYPE}"
+  PICDIR="${PICDIR}/${TYPE}"
+  [ -d ${PICDIR} ] || mkdir -p ${PICDIR}
+  [ -d ${TYPEDIR} ] || {
+    TYPEDIR="/v/pictures/MagicMirror/${orient}/${TYPE}"
+    [ -d ${TYPEDIR} ] || {
+        echo "$TYPEDIR does not exist or is not a directory. Exiting."
+        exit 1
+    }
+  }
+done
 
 cd ${TYPEDIR}
 for i in $*

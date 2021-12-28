@@ -1,21 +1,36 @@
 #!/bin/bash
 
 MNT_PT="/mnt/transcend/Pictures"
-ART_DIR="${MNT_PT}/MagicMirror/Artists"
+[ -d ${MNT_PT} ] || {
+    MNT_PT="/u/pictures"
+    [ -d ${MNT_PT} ] || {
+        echo "Cannot locate mount point for images"
+        exit 1
+    }
+}
+PMM="${MNT_PT}/MagicMirror"
+
+portrait=1
+orientation="portrait"
+[ "$1" == "-l" ] && {
+    portrait=
+    orientation="landscape"
+    shift
+}
+
+MOD_DIR="${MNT_PT}/MagicMirror/${orientation}/Artists"
 RMLIST="/usr/local/MirrorCommandLine/etc/rmlist.txt"
 
-# Use an associative array to map artist names across sites
-declare -A artist_sites
-
-[ -d ${ART_DIR} ] || {
-  MNT_PT="/u/pictures"
-  ART_DIR="${MNT_PT}/MagicMirror/Artists"
-  [ -d ${ART_DIR} ] || {
-    echo "$ART_DIR does not exist or is not a directory. Exiting."
-    exit 1
-  }
+[ -d ${MOD_DIR} ] || {
+    MNT_PT="/v/pictures"
+    MOD_DIR="${MNT_PT}/MagicMirror/${orientation}/Artists"
+    [ -d ${MOD_DIR} ] || {
+        echo "Cannot locate MagicMirror Artists pics dir"
+        exit 1
+    }
 }
-cd ${ART_DIR}
+
+cd ${MOD_DIR}
 TOP="${MNT_PT}/Wallhaven"
 MOD="${TOP}/Models"
 ART="${TOP}/Artists"
@@ -51,12 +66,6 @@ isportrait() {
     return $port
 }
 
-portrait=1
-[ "$1" == "-l" ] && {
-    portrait=
-    shift
-}
-
 [ "$1" ] || {
     echo "Use 'mmupdall' to update all folders."
     echo "This script requires a folder or folders as arguments."
@@ -83,11 +92,11 @@ do
                     rm -f $subimg
                     continue
                 }
-                for ADIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
+                for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
                 do
-                    [ -f $ADIR/$folder/$subimg ] && {
+                    [ -f $MDIR/$folder/$subimg ] && {
                         rm -f $subimg
-                        cp $ADIR/$folder/$subimg $subimg
+                        cp $MDIR/$folder/$subimg $subimg
                         break
                     }
                 done
@@ -98,17 +107,17 @@ do
                 rm -f $img
                 continue
             }
-            for ADIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
+            for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
             do
-                [ -f $ADIR/$folder/$img ] && {
+                [ -f $MDIR/$folder/$img ] && {
                     rm -f $img
-                    cp $ADIR/$folder/$img .
+                    cp $MDIR/$folder/$img .
                     break
                 }
             done
         fi
     done
-    cd ${ART_DIR}
+    cd ${MOD_DIR}
 done
 
 # Identify any newly added files and copy them
@@ -117,33 +126,12 @@ do
     [ "$folder" == "*" ] && continue
     [ "$folder" == "Unused" ] && continue
     [ -d $folder ] || continue
-    # In case we need this in the future, follow the example of model sites
-    case $folder in
-        Jenya)
-            artist_sites[$ELITE]="Eugenia_Diordiychuk"
-            ;;
-        Natalia_Andreeva)
-            artist_sites[$ELITE]="Delilah_G"
-            artist_sites[$KIND]="Natalia_A"
-            ;;
-        Niemira)
-            artist_sites[$ELITE]="Niemira_A"
-            ;;
-        Priscilla_Huggins)
-            artist_sites[$ELITE]="Priscilla_Huggins_Ortiz"
-            ;;
-        *)
-            ;;
-    esac
-    for ADIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
+    for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
     do
       chkfolder=$folder
-      [ "${artist_sites[$ADIR]}" ] && {
-              chkfolder="${artist_sites[$ADIR]}"
-      }
-      [ -d $ADIR/$chkfolder ] && {
-        echo "Checking $ADIR/$chkfolder for newly added files"
-        cd $ADIR/$chkfolder
+      [ -d $MDIR/$chkfolder ] && {
+        echo "Checking $MDIR/$chkfolder for newly added files"
+        cd $MDIR/$chkfolder
         for img in *
         do
             [ "$img" == "*" ] && continue
@@ -152,13 +140,11 @@ do
             [ "$img" == "Description.txt" ] && continue
             if [ -d "$img" ]
             then
-                [ -d ${ART_DIR}/$folder/$img ] || mkdir -p ${ART_DIR}/$folder/$img
+                [ -d ${MOD_DIR}/$folder/$img ] || mkdir -p ${MOD_DIR}/$folder/$img
                 for subimg in $img/*
                 do
                     [ "$subimg" == "$img/*" ] && continue
-                    [ -L ${ART_DIR}/$folder/$subimg ] && {
-                        rm -f ${ART_DIR}/$folder/$subimg
-                    }
+                    [ -L ${MOD_DIR}/$folder/$subimg ] && rm -f ${MOD_DIR}/$folder/$subimg
                     grep $subimg $RMLIST > /dev/null && {
                         rm -f $subimg
                         continue
@@ -166,16 +152,16 @@ do
                     if isportrait $subimg
                     then
                         [ "${portrait}" ] && {
-                          cp $ADIR/$chkfolder/$subimg ${ART_DIR}/$folder/$subimg
+                          cp $MDIR/$chkfolder/$subimg ${MOD_DIR}/$folder/$subimg
                         }
                     else
                         [ "${portrait}" ] || {
-                          cp $ADIR/$chkfolder/$subimg ${ART_DIR}/$folder/$subimg
+                          cp $MDIR/$chkfolder/$subimg ${MOD_DIR}/$folder/$subimg
                         }
                     fi
                 done
             else
-                [ -L ${ART_DIR}/$folder/$img ] && rm -f ${ART_DIR}/$folder/$img
+                [ -L ${MOD_DIR}/$folder/$img ] && rm -f ${MOD_DIR}/$folder/$img
                 grep $img $RMLIST > /dev/null && {
                     rm -f $img
                     continue
@@ -183,17 +169,17 @@ do
                 if isportrait $img
                 then
                     [ "${portrait}" ] && {
-                      cp $ADIR/$chkfolder/$img ${ART_DIR}/$folder/$img
+                      cp $MDIR/$chkfolder/$img ${MOD_DIR}/$folder/$img
                     }
                 else
                     [ "${portrait}" ] || {
-                      cp $ADIR/$chkfolder/$img ${ART_DIR}/$folder/$img
+                      cp $MDIR/$chkfolder/$img ${MOD_DIR}/$folder/$img
                     }
                 fi
             fi
         done
-        cd ${ART_DIR}
+        cd ${MOD_DIR}
       }
     done
-    cd ${ART_DIR}
+    cd ${MOD_DIR}
 done
