@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 MM=${HOME}/MagicMirror
+MCL_HOME="/usr/local/MirrorCommandLine"
 
 [ -d ${MM}/config ] || {
       MM=
@@ -123,6 +124,27 @@ then
 else
   HDMI=`xrandr --listactivemonitors | grep ${MM_SCREEN}: | awk ' { print $4 } '`
 fi
+
+[ -L ${MCL_HOME}/pics ] && {
+  PICS_LINK=`readlink ${MCL_HOME}/pics`
+  TARG_LINK=`basename ${PICS_LINK}`
+  if [ "${PORTRAIT}" ]
+  then
+    [ "${TARG_LINK}" == "pics-portrait" ] || {
+      [ -d ${MCL_HOME}/pics-portrait ] && {
+        rm -f ${MCL_HOME}/pics
+        ln -s ${MCL_HOME}/pics-portrait ${MCL_HOME}/pics
+      }
+    }
+  else
+    [ "${TARG_LINK}" == "pics-landscape" ] || {
+      [ -d ${MCL_HOME}/pics-landscape ] && {
+        rm -f ${MCL_HOME}/pics
+        ln -s ${MCL_HOME}/pics-landscape ${MCL_HOME}/pics
+      }
+    }
+  fi
+}
 
 if [ "${PORTRAIT}" ]
 then

@@ -481,7 +481,22 @@ set_screen() {
           PORTRAIT=${!screen}
         }
         [ -x /usr/local/bin/mmscreen ] && /usr/local/bin/mmscreen $1
-        [ "${switched}" ] && mirror restart
+        [ "${switched}" ] && {
+          [ -L ${MCL_HOME}/pics ] && {
+            rm -f ${MCL_HOME}/pics
+            if [ "${PORTRAIT}" ]
+            then
+              [ -d ${MCL_HOME}/pics-portrait ] && {
+                ln -s ${MCL_HOME}/pics-portrait ${MCL_HOME}/pics
+              }
+            else
+              [ -d ${MCL_HOME}/pics-landscape ] && {
+                ln -s ${MCL_HOME}/pics-landscape ${MCL_HOME}/pics
+              }
+            fi
+          }
+          mirror restart
+        }
       }
     else
       echo "No configured screen number $1"
