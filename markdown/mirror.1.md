@@ -261,6 +261,9 @@ Currently the command line MagicMirror control scripts include support for:
 **mirror screen 2**
 :  Move the MagicMirror window to the secondary monitor
 
+**mirror screen switch**
+:  Switch the screen on which the MagicMirror window is displayed
+
 **mirror screen on**
 :  Turns the Display ON
 

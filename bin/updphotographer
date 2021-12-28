@@ -1,22 +1,36 @@
 #!/bin/bash
 
 MNT_PT="/mnt/transcend/Pictures"
-PHO_DIR="${MNT_PT}/MagicMirror/Photographers"
+[ -d ${MNT_PT} ] || {
+    MNT_PT="/u/pictures"
+    [ -d ${MNT_PT} ] || {
+        echo "Cannot locate mount point for images"
+        exit 1
+    }
+}
+PMM="${MNT_PT}/MagicMirror"
+
+portrait=1
+orientation="portrait"
+[ "$1" == "-l" ] && {
+    portrait=
+    orientation="landscape"
+    shift
+}
+
+MOD_DIR="${MNT_PT}/MagicMirror/${orientation}/Photographers"
 RMLIST="/usr/local/MirrorCommand/etc/rmlist.txt"
 
-# Use an associative array to map photographer names across sites
-declare -A photographer_sites
-
-[ -d ${PHO_DIR} ] || {
-    MNT_PT="/u/pictures"
-    PHO_DIR="${MNT_PT}/MagicMirror/Photographers"
-    [ -d ${PHO_DIR} ] || {
-        echo "$PHO_DIR does not exist or is not a directory. Exiting."
+[ -d ${MOD_DIR} ] || {
+    MNT_PT="/v/pictures"
+    MOD_DIR="${MNT_PT}/MagicMirror/${orientation}/Photographers"
+    [ -d ${MOD_DIR} ] || {
+        echo "Cannot locate MagicMirror Photographers pics dir"
         exit 1
     }
 }
 
-cd ${PHO_DIR}
+cd ${MOD_DIR}
 TOP="${MNT_PT}/Wallhaven"
 MOD="${TOP}/Models"
 ART="${TOP}/Artists"
@@ -50,12 +64,6 @@ isportrait() {
         return $port
     }
     return $port
-}
-
-portrait=1
-[ "$1" == "-l" ] && {
-    portrait=
-    shift
 }
 
 [ "$1" ] || {
@@ -109,7 +117,7 @@ do
             done
         fi
     done
-    cd ${PHO_DIR}
+    cd ${MOD_DIR}
 done
 
 # Identify any newly added files and copy them
@@ -118,29 +126,9 @@ do
     [ "$folder" == "*" ] && continue
     [ "$folder" == "Unused" ] && continue
     [ -d $folder ] || continue
-    case $folder in
-        Jenya)
-            photographer_sites[$ELITE]="Eugenia_Diordiychuk"
-            ;;
-        Natalia_Andreeva)
-            photographer_sites[$ELITE]="Delilah_G"
-            photographer_sites[$KIND]="Natalia_A"
-            ;;
-        Niemira)
-            photographer_sites[$ELITE]="Niemira_A"
-            ;;
-        Priscilla_Huggins)
-            photographer_sites[$ELITE]="Priscilla_Huggins_Ortiz"
-            ;;
-        *)
-            ;;
-    esac
     for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
     do
       chkfolder=$folder
-      [ "${photographer_sites[$MDIR]}" ] && {
-              chkfolder="${photographer_sites[$MDIR]}"
-      }
       [ -d $MDIR/$chkfolder ] && {
         echo "Checking $MDIR/$chkfolder for newly added files"
         cd $MDIR/$chkfolder
@@ -152,46 +140,46 @@ do
             [ "$img" == "Description.txt" ] && continue
             if [ -d "$img" ]
             then
-                [ -d ${PHO_DIR}/$folder/$img ] || mkdir -p ${PHO_DIR}/$folder/$img
+                [ -d ${MOD_DIR}/$folder/$img ] || mkdir -p ${MOD_DIR}/$folder/$img
                 for subimg in $img/*
                 do
                     [ "$subimg" == "$img/*" ] && continue
-                    [ -L ${PHO_DIR}/$folder/$subimg ] && rm -f ${PHO_DIR}/$folder/$subimg
+                    [ -L ${MOD_DIR}/$folder/$subimg ] && rm -f ${MOD_DIR}/$folder/$subimg
                     grep $subimg $RMLIST > /dev/null && {
                         rm -f $subimg
                         continue
                     }
                     if isportrait $subimg
                     then
-                      [ "${portrait}" ] && {
-                        cp $MDIR/$chkfolder/$subimg ${PHO_DIR}/$folder/$subimg
-                      }
+                        [ "${portrait}" ] && {
+                          cp $MDIR/$chkfolder/$subimg ${MOD_DIR}/$folder/$subimg
+                        }
                     else
-                      [ "${portrait}" ] || {
-                        cp $MDIR/$chkfolder/$subimg ${PHO_DIR}/$folder/$subimg
-                      }
+                        [ "${portrait}" ] || {
+                          cp $MDIR/$chkfolder/$subimg ${MOD_DIR}/$folder/$subimg
+                        }
                     fi
                 done
             else
-                [ -L ${PHO_DIR}/$folder/$img ] && rm -f ${PHO_DIR}/$folder/$img
+                [ -L ${MOD_DIR}/$folder/$img ] && rm -f ${MOD_DIR}/$folder/$img
                 grep $img $RMLIST > /dev/null && {
                     rm -f $img
                     continue
                 }
                 if isportrait $img
                 then
-                  [ "${portrait}" ] && {
-                    cp $MDIR/$chkfolder/$img ${PHO_DIR}/$folder/$img
-                  }
+                    [ "${portrait}" ] && {
+                      cp $MDIR/$chkfolder/$img ${MOD_DIR}/$folder/$img
+                    }
                 else
-                  [ "${portrait}" ] || {
-                    cp $MDIR/$chkfolder/$img ${PHO_DIR}/$folder/$img
-                  }
+                    [ "${portrait}" ] || {
+                      cp $MDIR/$chkfolder/$img ${MOD_DIR}/$folder/$img
+                    }
                 fi
             fi
         done
-        cd ${PHO_DIR}
+        cd ${MOD_DIR}
       }
     done
-    cd ${PHO_DIR}
+    cd ${MOD_DIR}
 done

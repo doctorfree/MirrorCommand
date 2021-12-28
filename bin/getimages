@@ -6,10 +6,21 @@ IDS="10Dnj1YiWQeeGryVldRW2tyBGyFNidKFY \
      10GbIF2-D3GOuWBTikHF0fatxUCqfytch \
      10Hufi-VPrd2iR3uwUvQV3rCCDZzwekwg"
 
+# Placeholder, replace with landscape archive IDs
+LAND_IDS="10cBgGmWCi5uCxpbt9SuLqP16rDZeYtm6"
+
+PICDIR="pics-portrait"
+SPACE="375M"
+[ "$1" == "-l" ] && {
+  IDS=${LAND_IDS}
+  PICDIR="pics-landscape"
+  SPACE="375M"
+}
+
 HERE=`pwd`
 NUM_IDS=`echo ${IDS} | wc -w`
 printf "\nDownloading and extracting ${NUM_IDS} image archives "
-printf "will consume approximately 375M of disk space in "
+printf "will consume approximately ${SPACE} of disk space in "
 printf "${HERE}\n\n"
 
 while true
@@ -60,9 +71,9 @@ done
       MM="/usr/local/MirrorCommand"
       USER=$(stat -c '%U' ${MMHOME}/config)
       GROUP=$(stat -c '%G' ${MMHOME}/config)
-      sudo chown -R ${USER}:${GROUP} ${MM}/pics
-      find ${MM}/pics -type d -print0 | xargs -0 chmod 755
-      find ${MM}/pics -type f -print0 | xargs -0 chmod 644
+      sudo chown -R ${USER}:${GROUP} ${MM}/${PICDIR}
+      find ${MM}/${PICDIR} -type d -print0 | xargs -0 chmod 755
+      find ${MM}/${PICDIR} -type f -print0 | xargs -0 chmod 644
   }
 }
 
