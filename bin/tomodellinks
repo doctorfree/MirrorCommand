@@ -1,24 +1,31 @@
 #!/bin/bash
 
-ART_DIR="/mnt/transcend/Pictures/MagicMirror/Models"
-
-[ -d ${ART_DIR} ] || {
-    echo "$ART_DIR does not exist or is not a directory. Exiting."
-    exit 1
+MNT_PT="/mnt/transcend/Pictures"
+[ -d ${MNT_PT} ] || {
+    MNT_PT="/u/pictures"
+    [ -d ${MNT_PT} ] || {
+        echo "Cannot locate mount point for images"
+        exit 1
+    }
 }
-cd ${ART_DIR}
-#TOP="/Volumes/Seagate_8TB/Pictures/Work/Wallhaven/Models"
-TOP="../../Wallhaven"
+PMM="${MNT_PT}/MagicMirror"
+TOP="../../../Wallhaven"
 ART="${TOP}/Artists"
 MOD="${TOP}/Models"
 PHO="${TOP}/Photographers"
 PLA="${MOD}/Playboy"
 PEN="${MOD}/Penthouse"
 DRO="${MOD}/Photodromm"
-KND="../../KindGirls"
+KND="../../../KindGirls"
 
-for folder in *
+for orient in landscape portrait
 do
+  MOD_DIR="${PMM}/${orient}/Models"
+  [ -d ${MOD_DIR} ] || continue
+  cd ${MOD_DIR}
+
+  for folder in *
+  do
     [ -d $folder ] || continue
     cd $folder
     for img in *
@@ -34,4 +41,5 @@ do
         done
     done
     cd ..
+  done
 done

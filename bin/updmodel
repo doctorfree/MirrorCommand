@@ -1,15 +1,32 @@
 #!/bin/bash
 
 MNT_PT="/mnt/transcend/Pictures"
-MOD_DIR="${MNT_PT}/MagicMirror/Models"
+[ -d ${MNT_PT} ] || {
+    MNT_PT="/u/pictures"
+    [ -d ${MNT_PT} ] || {
+        echo "Cannot locate mount point for images"
+        exit 1
+    }
+}
+PMM="${MNT_PT}/MagicMirror"
+
+portrait=1
+orientation="portrait"
+[ "$1" == "-l" ] && {
+    portrait=
+    orientation="landscape"
+    shift
+}
+
+MOD_DIR="${MNT_PT}/MagicMirror/${orientation}/Models"
 RMLIST="/usr/local/MirrorCommandLine/etc/rmlist.txt"
 
 # Use an associative array to map model names across sites
 declare -A model_sites
 
 [ -d ${MOD_DIR} ] || {
-    MNT_PT="/u/pictures"
-    MOD_DIR="${MNT_PT}/MagicMirror/Models"
+    MNT_PT="/v/pictures"
+    MOD_DIR="${MNT_PT}/MagicMirror/${orientation}/Models"
     [ -d ${MOD_DIR} ] || {
         echo "Cannot locate MagicMirror Models pics dir"
         exit 1
@@ -50,12 +67,6 @@ isportrait() {
         return $port
     }
     return $port
-}
-
-portrait=1
-[ "$1" == "-l" ] && {
-    portrait=
-    shift
 }
 
 [ "$1" ] || {
