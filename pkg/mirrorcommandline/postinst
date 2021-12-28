@@ -341,15 +341,6 @@ case "$1" in
             esac
           done
         }
-        # Setup asound-conf system service
-        # ASND_SVC="/etc/systemd/system/asound-conf.service"
-        # [ -f ${MM}/etc/asound-conf.service ] && {
-        #   [ -f ${ASND_SVC} ] || {
-        #     cp ${MM}/etc/asound-conf.service ${ASND_SVC}
-        #     chmod 644 ${ASND_SVC}
-        #   }
-        #   systemctl enable asound-conf
-        # }
 
         [ "${MMHOME}" ] && {
             # Setup PM2 if not already configured
@@ -380,6 +371,30 @@ case "$1" in
                 fi
                 ${pm2_startup} > /dev/null 2>&1
             }
+        }
+        # Create links to image and movie folders if they exist
+        MNT_PT="/mnt/transcend/Pictures"
+        [ -d ${MNT_PT} ] || {
+            MNT_PT="/u/pictures"
+            [ -d ${MNT_PT} ] || MNT_PT="/v/pictures"
+        }
+        [ -d ${MNT_PT} ] && {
+            cd ${MM}
+            PMM="${MNT_PT}/MagicMirror"
+            for orient in landscape portrait
+            do
+                [ -d ${PMM}/${orient} ] || continue
+                [ -d pics-${orient} ] || ln -s ${PMM}/${orient} pics-${orient}
+            done
+        }
+        MNT_PT="/mnt/transcend/Movies"
+        [ -d ${MNT_PT} ] || {
+            MNT_PT="/u/movies"
+            [ -d ${MNT_PT} ] || MNT_PT="/v/movies"
+        }
+        [ -d ${MNT_PT} ] && {
+            cd ${MM}
+            [ -d movies ] || ln -s ${MNT_PT} movies
         }
         echo "MirrorCommandLine installation Complete"
     ;;

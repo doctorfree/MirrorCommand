@@ -135,12 +135,11 @@ case "$1" in
             echo "have not been unlinked in the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi
-        # Delete asound-conf system service
-        # ASND_SVC="/etc/systemd/system/asound-conf.service"
-        # [ -f ${ASND_SVC} ] && {
-        #   systemctl disable asound-conf
-        #   rm -f ${ASND_SVC}
-        # }
+
+        [ -L ${MM}/movies ] && rm -f ${MM}/movies
+        [ -L ${MM}/pics ] && rm -f ${MM}/pics
+        [ -L ${MM}/pics-landscape ] && rm -f ${MM}/pics-landscape
+        [ -L ${MM}/pics-portrait ] && rm -f ${MM}/pics-portrait
         rm -f ${MM}/etc/*arp-devices*.js
         rm -f ${MM}/etc/mirrorscreen
         rm -f ${MMHOME}/.mirrorscreen*
