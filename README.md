@@ -50,6 +50,10 @@ configure, monitor, and manage a MagicMirror.
     1. [Google Cloud Platform API Keys](google-cloud-platform-api-keys)
 1. [MMM-Scenes integration](#mmm-scenes-integration)
 1. [Usage](#usage)
+    1. [Getting to the Command Line](#getting-to-the-command-line)
+    1. [Switching screens](#switching-screens)
+        1. [Using the mirror command to switch screens](#using-the-mirror-command-to-switch-screens)
+        1. [Using voice commands to switch screens](#using-voice-commands-to-switch-screens)
 1. [Documentation](#documentation)
 1. [Motivation](#motivation)
     1. [Introduction to Using the Command Line](#introduction-to-using-the-command-line)
@@ -656,6 +660,13 @@ These include recipes to:
 		- Turn the screen on/off
 		- Mute/unmute sound
 		- Copy custom config files into config.js and restart the mirror
+        - Manage MagicMirror screen position on multi-screen systems
+            - Move MagicMirror to screen 1
+                - Say `screen one` or `mirror screen one`
+            - Move MagicMirror to screen 2
+                - Say `screen two` or `mirror screen two`
+            - Switch the MagicMirror screen
+                - Say `screen switch` or `switch screens` or `mirror screen switch`
 - [Voice management of MMM-Scenes scenes](modules/MMM-GoogleAssistant/recipes/with-MMM-Scenes.js)
     - Next scene
 	- Previous scene
@@ -770,6 +781,73 @@ Examples:
 	mirror whrm foobar		# Deactivate and remove slideshow in foobar
 	mirror -u		# Display this usage message
 </pre>
+
+### Getting to the Command Line
+
+Learn how to open a command line terminal window on various systems,
+how to get started using the command line, and see some examples of why
+the command line interface is so powerful by reading the MirrorCommand
+wiki article
+[Introduction to Using the Command Line](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/Introduction-to-Using-the-Command-Line).
+
+Note that some screen switching operations on systems with multiple monitors
+may move the window focus from the command line terminal window to the
+MagicMirror window. When this happens the mouse and keyboard input are no
+longer being sent to the terminal window. To restore focus in the terminal
+window, move the mouse cursor over the terminal window and click.
+
+If your terminal window is obscured by the fullscreen MagicMirror window
+and you wish to return to the terminal window, press &lt;F11&gt; to exit
+MagicMirror fullscreen and click the mouse in the terminal window.
+
+### Switching screens
+
+On systems with more than one monitor it is possible to move the MagicMirror
+window from one screen to another. Screens are numbered starting with '1' so
+the primary screen display is screen number 1 and the secondary screen
+is screen number 2. Naturally, this does not correspond to the internal
+numbers assigned to screens which start with '0'. The wise geeks at
+Doctorwhen's Bodacious Laboratory always start counting things at 1, not 0.
+They thought you might also.
+
+#### Using the mirror command to switch screens
+
+You can use the `mirror` command to switch screens. For example, to move
+the MagicMirror window from the primary screen to the secondary screen,
+execute the command `mirror screen 2`. To switch screens without knowing
+which screen is number 1 and which is number 2, execute the command
+`mirror screen switch` or `mirror switch`.
+
+To start MagicMirror on a specified screen execute the command:
+
+`mirror -X <screen_number> ...`
+
+#### Using voice commands to switch screens
+
+The `MirrorCommand` package installs several `MMM-GoogleAssistant` voice
+recipes. One of these, the `MirrorCommand.js` recipe, enables several voice
+commands that can be used to control the MagicMirror. See the section
+[MMM-GoogleAssistant integration](#mmm-googleassistant-integration)
+to get started with MMM-GoogleAssistant setup and integration.
+
+Once you have MMM-GoogleAssistant working and you can talk to your mirror
+and get a response from Google Assistant, you can add the `MirrorCommand.js`
+recipe to the MagicMirror `config.js` to issue MirrorCommand voice commands.
+
+Among the MirrorCommand voice commands there are the following which control
+screen switching:
+
+Assuming your `MMM-Detector` key phrase ('Model' config value) is "computer",
+
+- Move MagicMirror to screen 1
+    - Say `computer` and pause
+    - Say `screen one` or `mirror screen one`
+- Move MagicMirror to screen 2
+    - Say `computer` and pause
+    - Say `screen two` or `mirror screen two`
+- Switch the MagicMirror screen
+    - Say `computer` and pause
+    - Say `screen switch` or `switch screens` or `mirror screen switch`
 
 ## Documentation
 
