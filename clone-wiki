@@ -1,6 +1,6 @@
 #!/bin/bash
 
-project="MirrorCommandLine.wiki"
+project="MirrorCommand.wiki"
 patch="${project}-patch.tgz"
 
 [ -d ${project} ] && {

@@ -2,7 +2,7 @@
 
 MNT_PT="/mnt/transcend/Pictures"
 TOP_DIR="${MNT_PT}/MagicMirror"
-RMLIST="/usr/local/MirrorCommandLine/etc/rmlist.txt"
+RMLIST="/usr/local/MirrorCommand/etc/rmlist.txt"
 
 # Use an associative array to map names across sites
 declare -A top_sites

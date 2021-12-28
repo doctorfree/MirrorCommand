@@ -36,4 +36,4 @@ done
     done
 }
 
-sudo apt remove mirrorcommandline -y
+sudo apt remove mirrorcommand -y

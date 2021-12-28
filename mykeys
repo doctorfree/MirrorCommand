@@ -1,8 +1,8 @@
 #!/bin/bash
 
-MAGDIR="/usr/local/MirrorCommandLine"
+MAGDIR="/usr/local/MirrorCommand"
 MIRDIR="/usr/local/MagicMirror"
-MCL=$HOME/src/MirrorCommandLine
+MCL=$HOME/src/MirrorCommand
 PICDIR="/mnt/transcend/Pictures/MagicMirror"
 [ -d ${PICDIR} ] || {
   PICDIR="/u/pictures/MagicMirror"

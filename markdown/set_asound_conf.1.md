@@ -40,7 +40,7 @@ Default generated output is the file */etc/asound.conf*
 
 Default asound.conf template can be found in:
 
-	*/usr/local/MirrorCommandLine/etc/asound.conf.tmpl*
+	*/usr/local/MirrorCommand/etc/asound.conf.tmpl*
 
 # EXAMPLES
 **set_asound_conf -c -q**
@@ -60,8 +60,8 @@ for information on terms &amp; conditions for accessing and
 otherwise using SET_ASOUND_CONF and for a DISCLAIMER OF ALL WARRANTIES.
 
 # BUGS
-Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommandLine/issues&gt;
+Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommand/issues&gt;
 
 # SEE ALSO
-Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommandLine&gt;
+Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommand&gt;
 

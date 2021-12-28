@@ -19,7 +19,7 @@ orientation="portrait"
 }
 
 MOD_DIR="${MNT_PT}/MagicMirror/${orientation}/Artists"
-RMLIST="/usr/local/MirrorCommandLine/etc/rmlist.txt"
+RMLIST="/usr/local/MirrorCommand/etc/rmlist.txt"
 
 [ -d ${MOD_DIR} ] || {
     MNT_PT="/v/pictures"

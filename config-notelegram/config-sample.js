@@ -34,7 +34,7 @@ var config = {
         "::1",
     ],
 
-	customCss: "css/custom-mirrorcommandline.css",
+	customCss: "css/custom-mirrorcommand.css",
     language: "en",
 	timeFormat: 24,
 	units: "metric",

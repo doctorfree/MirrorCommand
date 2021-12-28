@@ -40,7 +40,7 @@ var config = {
         "::1",
     ],
 
-	customCss: "css/custom-mirrorcommandline.css",
+	customCss: "css/custom-mirrorcommand.css",
     language: "en",
 	timeFormat: 12,
 	units: "imperial",
@@ -100,7 +100,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommandLine/pics/JAV/JAV_DIR_HOLDER/',
+                    '/usr/local/MirrorCommand/pics/JAV/JAV_DIR_HOLDER/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

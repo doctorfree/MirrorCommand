@@ -4,7 +4,7 @@
 .hy
 .SH NAME
 .PP
-\f[B]mirrorkeys\f[R] - configuration file for MirrorCommandLine keys
+\f[B]mirrorkeys\f[R] - configuration file for MirrorCommand keys
 .SH INTRODUCTION
 .PP
 MagicMirror modules often utilize services that require registration and
@@ -16,12 +16,12 @@ The creation and maintenance of these multiple configuration settings
 can be tedious and unreliable as these keys can be scattered over many
 files and locations within files.
 The \f[I]mirrorkeys\f[R] configuration file gathers all keys used by
-MagicMirror and MirrorCommandLine into a single location along with an
+MagicMirror and MirrorCommand into a single location along with an
 extensible format to allow for the addition of new keys and removal of
 old.
 .SH DESCRIPTION
 .PP
-The \f[I]/usr/local/MirrorCommandLine/etc/mirrorkeys\f[R] configuration
+The \f[I]/usr/local/MirrorCommand/etc/mirrorkeys\f[R] configuration
 file contains two associative arrays, \f[I]keys\f[R] and \f[I]dumb\f[R].
 Each service has an arbitrary unique identifying string that serves as
 an array key.
@@ -43,7 +43,7 @@ dumb[MMIP]=\[aq]MM.M.M.MM\[aq]
 .fi
 .PP
 The \f[I]keys\f[R] array holds the private key values and other settings
-used in the MagicMirror and MirrorCommandLine configuration files.
+used in the MagicMirror and MirrorCommand configuration files.
 For example, if the IP address of the MagicMirror system were
 \f[I]10.0.1.85\f[R] then the \f[I]keys\f[R] array entry for the
 MagicMirror IP address using the string identifier \f[I]MMIP\f[R] would
@@ -55,7 +55,7 @@ keys[MMIP]=\[aq]10.0.1.85\[aq]
 \f[R]
 .fi
 .PP
-The MirrorCommandLine package initializes a \f[I]mirrorkeys\f[R]
+The MirrorCommand package initializes a \f[I]mirrorkeys\f[R]
 configuration file with over 40 preconfigured \[aq]dummy\[aq] values and
 several \[aq]keys\[aq] values detected during installation.
 It is the job of the MagicMirror system administrator to update the
@@ -76,7 +76,7 @@ keys[LOC]=\[dq]somestringofcharactersthatisyourappid\[dq]
 .fi
 .PP
 After adding all the keys and configuration values used by MagicMirror
-and MirrorCommandLine to the \f[I]mirrorkeys\f[R] file, execute the
+and MirrorCommand to the \f[I]mirrorkeys\f[R] file, execute the
 \f[I]showkeys\f[R] command.
 The \f[I]showkeys\f[R] command reads the \f[I]mirrorkeys\f[R]
 configuration file and, for every key value that is set in the
@@ -97,10 +97,10 @@ MIRRORKEYS and for a DISCLAIMER OF ALL WARRANTIES.
 .SH BUGS
 .PP
 Submit bug reports online at:
-<<https://gitlab.com/doctorfree/MirrorCommandLine/issues>>
+<<https://gitlab.com/doctorfree/MirrorCommand/issues>>
 .SH SEE ALSO
 .PP
 \f[B]showkeys\f[R](1)
 .PP
 Full documentation and sources at:
-<<https://gitlab.com/doctorfree/MirrorCommandLine>>
+<<https://gitlab.com/doctorfree/MirrorCommand>>

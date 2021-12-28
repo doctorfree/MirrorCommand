@@ -40,7 +40,7 @@ var config = {
         "::1",
     ],
 
-	customCss: "css/custom-mirrorcommandline.css",
+	customCss: "css/custom-mirrorcommand.css",
     language: "en",
 	timeFormat: 12,
 	units: "imperial",
@@ -100,7 +100,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommandLine/pics/Photographers/Igor_Viushkin',
+                    '/usr/local/MirrorCommand/pics/Photographers/Igor_Viushkin',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

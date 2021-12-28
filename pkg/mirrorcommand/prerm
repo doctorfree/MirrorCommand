@@ -1,5 +1,5 @@
 #!/bin/bash
-# prerm script for mirrorcommandline
+# prerm script for mirrorcommand
 #
 # see: dh_installdeb(1)
 
@@ -19,7 +19,7 @@ set -e
 
 case "$1" in
     remove|upgrade|deconfigure)
-        MM="/usr/local/MirrorCommandLine"
+        MM="/usr/local/MirrorCommand"
         MNTS="myreboot myshutdown remountusb"
         [ -d /usr/local/bin ] && {
             cd /usr/local/bin
@@ -131,7 +131,7 @@ case "$1" in
             }
         else
             echo "Unable to locate MagicMirror installation folder."
-            echo "MirrorCommandLine config and css files in ${MM}"
+            echo "MirrorCommand config and css files in ${MM}"
             echo "have not been unlinked in the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi

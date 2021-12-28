@@ -19,7 +19,7 @@ orientation="portrait"
 }
 
 MOD_DIR="${MNT_PT}/MagicMirror/${orientation}/JAV"
-RMLIST="/usr/local/MirrorCommandLine/etc/rmlist.txt"
+RMLIST="/usr/local/MirrorCommand/etc/rmlist.txt"
 
 # Use an associative array to map model names across sites
 declare -A model_sites

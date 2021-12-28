@@ -40,7 +40,7 @@ var config = {
         "::1",
     ],
 
-	customCss: "css/custom-mirrorcommandline.css",
+	customCss: "css/custom-mirrorcommand.css",
     language: "en",
 	timeFormat: 12,
 	units: "imperial",
@@ -116,10 +116,10 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommandLine/pics/Art/Kandinsky/',
-                    '/usr/local/MirrorCommandLine/pics/Art/Klee/',
-                    '/usr/local/MirrorCommandLine/pics/Art/Picasso/',
-                    '/usr/local/MirrorCommandLine/pics/Art/Zdzisław_Beksiński/',
+                    '/usr/local/MirrorCommand/pics/Art/Kandinsky/',
+                    '/usr/local/MirrorCommand/pics/Art/Klee/',
+                    '/usr/local/MirrorCommand/pics/Art/Picasso/',
+                    '/usr/local/MirrorCommand/pics/Art/Zdzisław_Beksiński/',
                 ],
                 slideshowSpeed: 60000, // 60 seconds
                 transitionImages: true,

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MM="/usr/local/MirrorCommandLine"
+MM="/usr/local/MirrorCommand"
 ASOUND_TMPL="${MM}/etc/asound.conf.tmpl"
 ASOUND="/etc/asound.conf"
 CARDS="/proc/asound/cards"
@@ -28,7 +28,7 @@ usage() {
     printf "\n\t-u indicates display this usage message and exit"
     printf "\n\nDefault generated output is the file /etc/asound.conf"
     printf "\nDefault asound.conf template can be found in:"
-    printf "\n\t/usr/local/MirrorCommandLine/etc/asound.conf.tmpl\n\n"
+    printf "\n\t/usr/local/MirrorCommand/etc/asound.conf.tmpl\n\n"
     exit 0
 }
 

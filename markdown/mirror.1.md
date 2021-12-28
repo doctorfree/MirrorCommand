@@ -49,11 +49,11 @@ The mirror command will attempt to match the specified config file name. For exa
 *mirror foo* would match the config file named *config-foodie.js*
 
 # DESCRIPTION
-The [MirrorCommandLine](https://gitlab.com/doctorfree/MirrorCommandLine)
+The [MirrorCommand](https://gitlab.com/doctorfree/MirrorCommand)
 project provides scripts to enable command line control of a
 [MagicMirror](https://magicmirror.builders/) system over a local network.
 
-The *mirror* command is the primary MirrorCommandLine interface and acts
+The *mirror* command is the primary MirrorCommand interface and acts
 as a front-end for the command line management tools.
 
 Multiple MagicMirror config files can be maintained and activated using
@@ -298,8 +298,8 @@ for information on terms &amp; conditions for accessing and
 otherwise using MIRROR and for a DISCLAIMER OF ALL WARRANTIES.
 
 # BUGS
-Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommandLine/issues&gt;
+Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommand/issues&gt;
 
 # SEE ALSO
-Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommandLine&gt;
+Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommand&gt;
 

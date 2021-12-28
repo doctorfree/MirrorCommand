@@ -21,7 +21,7 @@ orientation="portrait"
     shift
 }
 
-PICDIR="/usr/local/MirrorCommandLine/pics-${orientation}"
+PICDIR="/usr/local/MirrorCommand/pics-${orientation}"
 [ -d ${PICDIR} ] || mkdir -p ${PICDIR}
 
 for orient in ${orientation}

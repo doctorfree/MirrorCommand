@@ -1,7 +1,7 @@
 /**   with-MMM-Scenes                                 **/
 /**   Voice commands script to manage MMM-Scenes      **/
-/**   Requires MirrorCommandLine:                     **/
-/**   https://gitlab.com/doctorfree/MirrorCommandLine **/
+/**   Requires MirrorCommand:                     **/
+/**   https://gitlab.com/doctorfree/MirrorCommand **/
 /**   @doctorfree                                     **/
 
 var recipe = {

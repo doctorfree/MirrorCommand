@@ -24,7 +24,7 @@ MM=${HOME}/MagicMirror
 }
 
 MS="${MM}/.mirrorscreen"
-[ -f ${MS} ] || MS="/usr/local/MirrorCommandLine/etc/mirrorscreen"
+[ -f ${MS} ] || MS="/usr/local/MirrorCommand/etc/mirrorscreen"
 HAVE_CONF=
 
 [ -f ${MS} ] && {

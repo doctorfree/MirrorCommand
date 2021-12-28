@@ -53,7 +53,7 @@ done
       done
   }
   [ "${MMHOME}" ] && {
-      MM="/usr/local/MirrorCommandLine"
+      MM="/usr/local/MirrorCommand"
       USER=$(stat -c '%U' ${MMHOME}/config)
       GROUP=$(stat -c '%G' ${MMHOME}/config)
       sudo chown -R ${USER}:${GROUP} ${MM}/movies

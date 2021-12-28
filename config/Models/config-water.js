@@ -40,7 +40,7 @@ var config = {
         "::1",
     ],
 
-	customCss: "css/custom-mirrorcommandline.css",
+	customCss: "css/custom-mirrorcommand.css",
     language: "en",
 	timeFormat: 12,
 	units: "imperial",
@@ -122,7 +122,7 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommandLine/pics/Water/',
+                    '/usr/local/MirrorCommand/pics/Water/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

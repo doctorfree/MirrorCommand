@@ -4,7 +4,7 @@ TYPE="JAV"
 UPDSCRIPT="updjav"
 
 TYPEDIR="/mnt/transcend/Pictures/MagicMirror/${TYPE}"
-PICDIR="/usr/local/MirrorCommandLine/pics/${TYPE}"
+PICDIR="/usr/local/MirrorCommand/pics/${TYPE}"
 
 [ -d ${PICDIR} ] || mkdir -p ${PICDIR}
 

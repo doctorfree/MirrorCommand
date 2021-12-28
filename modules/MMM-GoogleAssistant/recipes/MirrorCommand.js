@@ -1,8 +1,8 @@
 /**   Mirror Command                                  **/
 /**   Voice commands script                           **/
 /**   set pattern in your language                    **/
-/**   Requires MirrorCommandLine:                     **/
-/**   https://gitlab.com/doctorfree/MirrorCommandLine **/
+/**   Requires MirrorCommand:                     **/
+/**   https://gitlab.com/doctorfree/MirrorCommand **/
 /**   @doctorfree                                     **/
 
 var recipe = {

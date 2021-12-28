@@ -6,8 +6,8 @@ footer: showkeys 2.6
 date: December 07, 2021
 ---
 # NAME
-**showkeys** - update MirrorCommandLine config file templates with keys configured in
-*/usr/local/MirrorCommandLine/etc/mirrorkeys*
+**showkeys** - update MirrorCommand config file templates with keys configured in
+*/usr/local/MirrorCommand/etc/mirrorkeys*
 
 # SYNOPSIS
 **showkeys** [options]
@@ -15,7 +15,7 @@ date: December 07, 2021
 
 # DESCRIPTION
 The *showkeys* command reads the keys configured in 
-*/usr/local/MirrorCommandLine/etc/mirrorkeys* and modifies all MagicMirror config
+*/usr/local/MirrorCommand/etc/mirrorkeys* and modifies all MagicMirror config
 file templates in */usr/local/MagicMirror* replacing key templates with values
 from the *mirrorkeys* key configuration file.
 
@@ -33,10 +33,10 @@ for information on terms &amp; conditions for accessing and
 otherwise using SHOWKEYS and for a DISCLAIMER OF ALL WARRANTIES.
 
 # BUGS
-Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommandLine/issues&gt;
+Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommand/issues&gt;
 
 # SEE ALSO
 **mirrorkeys**(5)
 
-Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommandLine&gt;
+Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommand&gt;
 

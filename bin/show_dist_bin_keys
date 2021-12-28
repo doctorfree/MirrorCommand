@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Add your keys to /usr/local/MirrorCommandLine/etc/mirrorkeys
-. /usr/local/MirrorCommandLine/etc/mirrorkeys
+# Add your keys to /usr/local/MirrorCommand/etc/mirrorkeys
+. /usr/local/MirrorCommand/etc/mirrorkeys
 
 binfiles="chktemp gethue getquote mirror mmscene repfromfile \
           send_sms mm mmapiactions mmgetb mmsetb vncview"
