@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+28 December 2021, MirrorCommand version 3.0 release 1:
+
+  This major release of MirrorCommand introduces support for multiple
+  monitors, switching MagicMirror screen display between monitors,
+  full support for both portrait and landscape mode displays,
+  and renames the project from MirrorCommandLine to MirrorCommand.
+  Voice commands for screen switching have been added via the
+  MMM-GoogleAssistant module recipe file MirrorCommand.js.
+
 21 December 2021, MirrorCommandLine version 2.7 release 2:
 
   This minor release update includes changes to enable automated
@@ -38,6 +47,110 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Tue Dec 28 08:31:24 2021 -0800 f12f7b4 :
+   Rename from MirrorCommandLine to MirrorCommand
+Tue Dec 28 07:42:54 2021 -0800 5a93305 :
+   Added switch screen commands
+Tue Dec 28 07:24:13 2021 -0800 7f6b18d :
+   Add screen switching voice commands
+Tue Dec 28 07:19:12 2021 -0800 259f96f :
+   Accept 'one' and 'two' as screen number args
+Mon Dec 27 19:14:20 2021 -0800 4066a04 :
+   Update scripts to support both orientation folders for images
+Mon Dec 27 18:07:20 2021 -0800 5198c21 :
+   Create image folder symlinks during installation
+Mon Dec 27 17:37:20 2021 -0800 b0401b1 :
+   Set images folder link dynamically on startup
+Mon Dec 27 17:04:53 2021 -0800 f3d3324 :
+   Create links to image and movie folders if detected
+Mon Dec 27 16:40:54 2021 -0800 dd17d93 :
+   First pass at image scripts support for both orientations, Models only first
+Mon Dec 27 14:14:17 2021 -0800 53ca04e :
+   All MM configs now use a custom CSS file with custom-mirrorcommandline.css the default
+Mon Dec 27 12:19:23 2021 -0800 51e961f :
+   Adjust network configs for landscape mode layout
+Mon Dec 27 11:31:07 2021 -0800 4a1780a :
+   Adjust config-default layout for smaller resolution landscape mode
+Mon Dec 27 11:13:33 2021 -0800 619307d :
+   Fix typo in updcsswidth
+Mon Dec 27 11:06:29 2021 -0800 47b5802 :
+   Note about tested screen resolutions and orientation
+Mon Dec 27 10:52:10 2021 -0800 78e11b5 :
+   Finish off getting rid of css-landscape in favor of combined CSS with dynamic configuration
+Mon Dec 27 10:38:12 2021 -0800 499bd36 :
+   Combine CSS files and edit CSS settings when switching modes or screen geometry
+Mon Dec 27 09:45:40 2021 -0800 5d641c9 :
+   Clean up calendars, only user home.ics or holidays in distributed configs
+Mon Dec 27 08:50:52 2021 -0800 f80c0da :
+   Do not setup asound-conf system service
+Sun Dec 26 18:01:47 2021 -0800 bed7d5e :
+   Add new man pages to README Documentation section
+Sun Dec 26 17:51:17 2021 -0800 b999ea5 :
+   New man pages for showkeys, set_asound_conf, mmscreen, and mirrorkeys
+Sun Dec 26 14:14:37 2021 -0800 db7fc94 :
+   Roon always in fullscreen mode
+Sun Dec 26 14:09:01 2021 -0800 1a6e964 :
+   Filter window listing by class as well as title
+Sun Dec 26 13:34:01 2021 -0800 8d7f570 :
+   Switch config.js link if mode switches when screen switches
+Sun Dec 26 11:58:36 2021 -0800 d8895de :
+   Set portrait or landscape mode when switching screens
+Sun Dec 26 11:28:27 2021 -0800 691ac3c :
+   Symlink MagicMirror directory in users home directories if globally installed in /usr/local
+Sun Dec 26 11:06:57 2021 -0800 08c3576 :
+   Always fixup the screen dimension config settings when linking a new config.js
+Sun Dec 26 10:48:12 2021 -0800 ed1ad91 :
+   Reset MM_SCREEN when switching screens
+Sat Dec 25 14:21:01 2021 -0800 a2550fe :
+   Stamp out last of the hard coded config dimensions
+Sat Dec 25 13:38:56 2021 -0800 a6b8b4b :
+   Add all screen dimension markers to dynamically configure to updwidth
+Sat Dec 25 13:11:43 2021 -0800 e70cfab :
+   Add comment templates to width and height config settings to enable dynamic configuration
+Fri Dec 24 19:25:02 2021 -0800 aa3db5b :
+   Add updwidth to set width and height config values on installation, startup, and new config.js
+Fri Dec 24 17:25:14 2021 -0800 dab4be1 :
+   Use mirrorscreen config rather than xrandr to get screen width and height
+Fri Dec 24 16:57:24 2021 -0800 2502800 :
+   Present a menu for ALSA device selection
+Fri Dec 24 13:10:58 2021 -0800 6bc28c1 :
+   Create symlink in MMM-Videoplayer for MirrorCommandLine movies
+Fri Dec 24 12:17:29 2021 -0800 65dc265 :
+   Display /etc/asound.conf if no .asoundrc found
+Fri Dec 24 11:35:25 2021 -0800 1ce4aca :
+   Add wmctrl to dependencies
+Fri Dec 24 10:58:06 2021 -0800 96d2aa7 :
+   Cleanup messages when setting mirror screens
+Fri Dec 24 09:43:12 2021 -0800 883326d :
+   Add option to restore all screens to their default rotation
+Fri Dec 24 09:16:02 2021 -0800 53a436e :
+   Ignore tests subdir in git
+Fri Dec 24 08:35:20 2021 -0800 02fd14c :
+   Reset PORTRAIT when switching screens
+Fri Dec 24 08:31:08 2021 -0800 bca4a09 :
+   Add bin/mmscreen for command control of which screen to use for display
+Thu Dec 23 21:47:14 2021 -0800 c26fef9 :
+   Let user know when configuring config files during postinst
+Thu Dec 23 21:38:03 2021 -0800 a5c0c21 :
+   Give local root user window access with xhost rather than everyone
+Thu Dec 23 21:35:34 2021 -0800 23f5894 :
+   Move setting mirrorscreens to postinst and use etc/set_mirror_screens script
+Thu Dec 23 20:52:18 2021 -0800 98e3ecc :
+   Config for Alexander Grinn
+Thu Dec 23 20:45:11 2021 -0800 b0842d5 :
+   Options to mirror script to set screen display number
+Thu Dec 23 17:37:19 2021 -0800 5dae5e6 :
+   Fix bug in module_update_all
+Thu Dec 23 16:42:03 2021 -0800 e06edd8 :
+   Set Electron offset options in config files, startup script, and mirror script
+Wed Dec 22 17:44:00 2021 -0800 a0329f7 :
+   Add MM_SCREEN to mirrorscreen config but not working yet
+Wed Dec 22 16:10:24 2021 -0800 8dbad2e :
+   First pass at multi-monitor support
+Wed Dec 22 06:50:01 2021 -0800 180a281 :
+   Updated job number
+Tue Dec 21 16:51:29 2021 -0800 4bbee01 :
+   Bump release number and update changelog in preparation for new minor release
 Tue Dec 21 15:50:41 2021 -0800 d29e948 :
    Fix startup screen rotation for both portrait and landscape mode displays
 Tue Dec 21 15:32:06 2021 -0800 63213ea :

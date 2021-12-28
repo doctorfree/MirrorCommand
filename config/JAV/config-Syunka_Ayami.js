@@ -40,7 +40,7 @@ var config = {
         "::1",
     ],
 
-	customCss: "css/custom-mirrorcommandline.css",
+	customCss: "css/custom-mirrorcommand.css",
     language: "en",
 	timeFormat: 12,
 	units: "imperial",
@@ -100,7 +100,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommandLine/pics/JAV/Syunka_Ayami',
+                    '/usr/local/MirrorCommand/pics/JAV/Syunka_Ayami',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

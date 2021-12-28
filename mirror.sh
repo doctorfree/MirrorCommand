@@ -66,7 +66,7 @@ PM2_PROCESS_NAME="MagicMirror"
 modurl="http://${IP}:${PORT}/api/module"
 apiurl="http://${IP}:${PORT}/api/notification"
 
-MCL_HOME="/usr/local/MirrorCommandLine"
+MCL_HOME="/usr/local/MirrorCommand"
 [ -d ${MCL_HOME}/bin ] && {
     export PATH=${PATH}:${MCL_HOME}/bin
 }
@@ -657,7 +657,7 @@ set_volume() {
         esac
     else
         echo "Cannot locate vol script."
-        echo "Install vol.sh from the MirrorCommandLine repository."
+        echo "Install vol.sh from the MirrorCommand repository."
     fi
 }
 

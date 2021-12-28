@@ -32,7 +32,7 @@ var config = {
         "::1",
     ],
 
-    customCss: "css/custom-mirrorcommandline.css",
+    customCss: "css/custom-mirrorcommand.css",
     language: "en",
     locale: 'en-US',
     timeFormat: 12,
@@ -332,11 +332,11 @@ var config = {
             classes: 'art',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommandLine/pics/Art/Kandinsky/',
-                    '/usr/local/MirrorCommandLine/pics/Art/Klee/',
-                    '/usr/local/MirrorCommandLine/pics/Fractals/',
-                    '/usr/local/MirrorCommandLine/pics/Art/Picasso/',
-                    '/usr/local/MirrorCommandLine/pics/Art/Zdzisław_Beksiński/',
+                    '/usr/local/MirrorCommand/pics/Art/Kandinsky/',
+                    '/usr/local/MirrorCommand/pics/Art/Klee/',
+                    '/usr/local/MirrorCommand/pics/Fractals/',
+                    '/usr/local/MirrorCommand/pics/Art/Picasso/',
+                    '/usr/local/MirrorCommand/pics/Art/Zdzisław_Beksiński/',
                 ],
                 slideshowSpeed: 30000, // 30 seconds
                 transitionImages: true,

@@ -6,7 +6,7 @@ footer: mirrorkeys 2.6
 date: December 07, 2021
 ---
 # NAME
-**mirrorkeys** - configuration file for MirrorCommandLine keys
+**mirrorkeys** - configuration file for MirrorCommand keys
 
 # INTRODUCTION
 MagicMirror modules often utilize services that require registration and
@@ -16,11 +16,11 @@ MagicMirror to securely access these services over the Internet. The creation
 and maintenance of these multiple configuration settings can be tedious and
 unreliable as these keys can be scattered over many files and locations within
 files. The *mirrorkeys* configuration file gathers all keys used by MagicMirror
-and MirrorCommandLine into a single location along with an extensible format
+and MirrorCommand into a single location along with an extensible format
 to allow for the addition of new keys and removal of old.
 
 # DESCRIPTION
-The */usr/local/MirrorCommandLine/etc/mirrorkeys* configuration file contains
+The */usr/local/MirrorCommand/etc/mirrorkeys* configuration file contains
 two associative arrays, *keys* and *dumb*. Each service has an arbitrary
 unique identifying string that serves as an array key. For example, the
 array entries for the MagicMirror IP address use the string identifier *MMIP*
@@ -34,14 +34,14 @@ is the string *MM.M.M.MM*:
     dumb[MMIP]='MM.M.M.MM'
 
 The *keys* array holds the private key values and other settings used in the
-MagicMirror and MirrorCommandLine configuration files. For example, if the
+MagicMirror and MirrorCommand configuration files. For example, if the
 IP address of the MagicMirror system were *10.0.1.85* then the *keys*
 array entry for the MagicMirror IP address using the string identifier *MMIP*
 would be the string *10.0.1.85*:
 
     keys[MMIP]='10.0.1.85'
 
-The MirrorCommandLine package initializes a *mirrorkeys* configuration file
+The MirrorCommand package initializes a *mirrorkeys* configuration file
 with over 40 preconfigured 'dummy' values and several 'keys' values detected
 during installation. It is the job of the MagicMirror system administrator to
 update the *mirrorkeys* file with values for service keys used by activated
@@ -54,7 +54,7 @@ file in the *keys* array for the *LOC* service identifier:
     keys[LOC]="somestringofcharactersthatisyourappid"
 
 After adding all the keys and configuration values used by MagicMirror and
-MirrorCommandLine to the *mirrorkeys* file, execute the *showkeys* command.
+MirrorCommand to the *mirrorkeys* file, execute the *showkeys* command.
 The *showkeys* command reads the *mirrorkeys* configuration file and, for
 every key value that is set in the *keys* array, edits the MagicMirror
 configuration files replacing the dummy values specified in the *dumb*
@@ -71,10 +71,10 @@ for information on terms &amp; conditions for accessing and
 otherwise using MIRRORKEYS and for a DISCLAIMER OF ALL WARRANTIES.
 
 # BUGS
-Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommandLine/issues&gt;
+Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommand/issues&gt;
 
 # SEE ALSO
 **showkeys**(1)
 
-Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommandLine&gt;
+Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommand&gt;
 

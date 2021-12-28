@@ -12,7 +12,7 @@
 >
 > ― Neal Stephenson, In the Beginning...Was the Command Line
 
-# MirrorCommandLine
+# MirrorCommand
 [MagicMirror](https://magicmirror.builders) is an open source modular
 smart mirror platform (see https://magicmirror.builders/).
 This repository maintains an extensive set of scripts to initialize,
@@ -25,7 +25,7 @@ configure, monitor, and manage a MagicMirror.
 1. [Compatibility](#compatibility)
 1. [Installation](#installation)
     1. [MagicMirror Installation](#magicmirror-installation)
-    1. [MirrorCommandLine Installation](#mirrorcommandline-installation)
+    1. [MirrorCommand Installation](#mirrorcommand-installation)
         1. [ALSA audio input and output devices configuration](alsa-audio-input-and-output-devices-configuration)
     1. [Post installation configuration](#post-installation-configuration)
     1. [Add keys to mirrorkeys](#add-keys-to-mirrorkeys)
@@ -57,7 +57,7 @@ configure, monitor, and manage a MagicMirror.
 
 The Mirror Command Line project provides scripts to enable
 command line control of the MagicMirror system over a local network.
-The MirrorCommandLine Debian format package installation scripts perform
+The MirrorCommand Debian format package installation scripts perform
 automatic installation and configuration of a MagicMirror including:
 
 - Automated installation of the MagicMirror software if not already installed
@@ -106,16 +106,16 @@ Interactive menus when invoked with no arguments<br/>
 </p>
 
 ## Compatibility
-MirrorCommandLine has been successfully deployed and tested on a Raspberry Pi 4
+MirrorCommand has been successfully deployed and tested on a Raspberry Pi 4
 and Raspberry Pi 400 running Raspbian Buster. It has also been deployed and
 tested on Ubuntu Linux 20.04 with generic x86_64 hardware.
 
 It has been tested on systems with a mirror display and systems with a
-standard computer monitor display. MirrorCommandLine version 2.7 and later
+standard computer monitor display. MirrorCommand version 2.7 and later
 has been tested on systems with multiple monitors. Testing has been performed
 on systems with a variety of screen resolutions and orientation including
 1920x1080 portrait mode display, 2560x1440 landscape mode display, and
-1920x1080 landscape mode display. Deployment of the MirrorCommandLine
+1920x1080 landscape mode display. Deployment of the MirrorCommand
 MagicMirror configuration files on screens with display resolution differing
 significantly from those tested may require changes to the module positions,
 layout, and geometry.
@@ -127,15 +127,15 @@ However, it should deploy on most Debian based Linux environments.
 ## Installation
 
 ### MagicMirror Installation
-MirrorCommandLine is intended for installation on a system running
+MirrorCommand is intended for installation on a system running
 [MagicMirror](https://magicmirror.builders). If MagicMirror is not
 previously installed it can be installed following
-[these instructions](https://docs.magicmirror.builders/getting-started/installation.html#manual-installation). Alternatively, the MirrorCommandLine Debian package
+[these instructions](https://docs.magicmirror.builders/getting-started/installation.html#manual-installation). Alternatively, the MirrorCommand Debian package
 format installation will automatically install and configure MagicMirror if no
 existing MagicMirror installation is detected. This automated installation
 of MagicMirror includes installing and configuring PM2 for easy and powerful
 process management of MagicMirror as well as the installation of several
-MagicMirror 3rd party modules used by MirrorCommandLine.
+MagicMirror 3rd party modules used by MirrorCommand.
 
 **Note:** An actual mirror with display mounted on the rear is not necessary.
 MagicMirror can be installed on a Raspberry Pi with a mirror display as intended
@@ -144,19 +144,19 @@ with standard monitor and desktop environment.
 
 MagicMirror requires Node version 12 or later.
 
-MirrorCommandLine assumes that MagicMirror is installed in either
+MirrorCommand assumes that MagicMirror is installed in either
 `/usr/local/MagicMirror` or a user's home directory.
 
-To install MagicMirror simply install MirrorCommandLine using the Debian
+To install MagicMirror simply install MirrorCommand using the Debian
 package format available at the
-[MirrorCommandLine Releases](https://gitlab.com/doctorfree/MirrorCommandLine/-/releases)
+[MirrorCommand Releases](https://gitlab.com/doctorfree/MirrorCommand/-/releases)
 area of the Git repository.
 
 If MagicMirror is not installed in either `/usr/local/MagicMirror` or a non-root
-user's home directory, then the MirrorCommandLine installation will ask if you
+user's home directory, then the MirrorCommand installation will ask if you
 wish to install MagicMirror and, if so, will install MagicMirror in `/usr/local`.
 In addition to performing a MagicMirror installation and configuration, the
-MirrorCommandLine installation will install and configure several MagicMirror
+MirrorCommand installation will install and configure several MagicMirror
 modules and PM2 process management.
 
 Alternatively, MagicMirror can be installed manually following these steps:
@@ -184,23 +184,23 @@ To start the MagicMirror over SSH from a remote terminal, use the commands:
 
 To access the toolbar menu when in mirror mode, press the ALT key.
 
-### MirrorCommandLine Installation
+### MirrorCommand Installation
 
-MirrorCommandLine version 2.2 and later includes Debian format packages
-which can be used to install the MirrorCommandLine utilities and images
+MirrorCommand version 2.2 and later includes Debian format packages
+which can be used to install the MirrorCommand utilities and images
 with the Apt package management system.
 
 **NOTE:** If you plan to install both the
 [RoonCommandLine package](https://gitlab.com/doctorfree/RoonCommandLine)
 and the
-[MirrorCommandLine package](https://gitlab.com/doctorfree/MirrorCommandLine)
+[MirrorCommand package](https://gitlab.com/doctorfree/MirrorCommand)
 on the same system then in order to enable automatic configuration of
-MirrorCommandLine's Roon configuration files, the RoonCommandLine
-package must be installed before the MirrorCommandLine package.
+MirrorCommand's Roon configuration files, the RoonCommandLine
+package must be installed before the MirrorCommand package.
 
 To install:
 
-[Download the latest Debian package format release](https://gitlab.com/doctorfree/MirrorCommandLine/-/releases)
+[Download the latest Debian package format release](https://gitlab.com/doctorfree/MirrorCommand/-/releases)
 
 **NOTE:** The automated configuration requires access to some X11 graphical
 utilities. Depending upon your system's X11 configuration, it may be necessary
@@ -213,25 +213,25 @@ or grant everyone access with
 
 `xhost +`
 
-Install the base MirrorCommandLine package by executing the command
+Install the base MirrorCommand package by executing the command
 
 ```bash
-sudo apt install MirrorCommandLine_<version>.deb
+sudo apt install MirrorCommand_<version>.deb
 ```
-Optionally install the image archives used in many of the MirrorCommandLine config files:
+Optionally install the image archives used in many of the MirrorCommand config files:
 
 ```bash
 sudo apt install MirrorImagesPortrait_<version>.deb
 ```
 
 You can create your own custom Debian format package from the repository source.
-To do so, clone the MirrorCommandLine repository:
+To do so, clone the MirrorCommand repository:
 
-<code>git clone ssh://gitlab.com/doctorfree/MirrorCommandLine.git</code>
+<code>git clone ssh://gitlab.com/doctorfree/MirrorCommand.git</code>
 
 or
 
-<code>git clone `https://gitlab.com/doctorfree/MirrorCommandLine.git`</code>
+<code>git clone `https://gitlab.com/doctorfree/MirrorCommand.git`</code>
 
 Use the `mkpkg` script to create Debian format packages on a system with
 the prerequisite packaging development environment. Once packages have been
@@ -239,7 +239,7 @@ created in the source repository they can be installed by executing the
 `./Install` command. Packages can be removed with `./Uninstall`.
 
 #### ALSA audio input and output devices configuration
-The MirrorCommandLine installation attempts to detect and configure ALSA
+The MirrorCommand installation attempts to detect and configure ALSA
 audio input and output devices such as a microphone, webcam, or DAC.
 
 The installation process will modify `/etc/asound.conf` if it detects
@@ -256,20 +256,20 @@ issue the command:
 
 ### Post installation configuration
 
-The MirrorCommandLine installation process cannot automatically configure
+The MirrorCommand installation process cannot automatically configure
 your private keys which are used to access various services the MagicMirror
 utilizes. For example, you may have private keys to access a weather service,
 Telegram, Google services, or the MMM-Remote-Control module.
 
-Before you can use the MirrorCommandLine utilites and config files you will
+Before you can use the MirrorCommand utilites and config files you will
 need to add any keys you wish to use to the appropriate config files and utilities.
 
 #### Add keys to mirrorkeys
 
-**Don't Panic!** The MirrorCommandLine package includes utilities to add and
+**Don't Panic!** The MirrorCommand package includes utilities to add and
 remove private keys. To do so:
 
-Edit the file `/usr/local/MirrorCommandLine/etc/mirrorkeys` adding the keys you have
+Edit the file `/usr/local/MirrorCommand/etc/mirrorkeys` adding the keys you have
 previously generated/retrieved to each of the 'keys[FOO]' settings with corresponding
 'dumb[FOO]' setting, leaving the 'dumb[FOO]' setting as-is
 
@@ -278,15 +278,15 @@ Add the keys you wish to set and leave those you do not wish to set empty
 After adding your keys, execute the command
 
 ```bash
-  '/usr/local/MirrorCommandLine/bin/showkeys'
+  '/usr/local/MirrorCommand/bin/showkeys'
 ```
 
 The `showkeys` command will read the `mirrorkeys` file and edit the appropriate
-configuration files in `/usr/local/MirrorCommandLine` containing the placeholder dummy
+configuration files in `/usr/local/MirrorCommand` containing the placeholder dummy
 settings.
 
 For more info on the `showkeys` command and the
-`/usr/local/MirrorCommandLine/etc/mirrorkeys` configuration file, see the
+`/usr/local/MirrorCommand/etc/mirrorkeys` configuration file, see the
 man pages `showkeys.1` and `mirrorkeys.5` by executing the `man` command:
 
 `man showkeys`
@@ -296,7 +296,7 @@ man pages `showkeys.1` and `mirrorkeys.5` by executing the `man` command:
 #### Configure mirror script
 
 Edit the main MagicMirror management script,
-[**/usr/local/MirrorCommandLine/bin/mirror**](mirror.sh), setting:
+[**/usr/local/MirrorCommand/bin/mirror**](mirror.sh), setting:
 
 - Location of your MagicMirror installation
 - IP address of your MagicMirror
@@ -322,11 +322,11 @@ set the apikey to blank ( <code>apikey=</code> ).
 
 #### Removal
 
-To remove/uninstall the MirrorCommandLine packages execute the commands:
+To remove/uninstall the MirrorCommand packages execute the commands:
 
 ```bash
 sudo apt remove mirror-images-portrait
-sudo apt remove mirrorcommandline
+sudo apt remove mirrorcommand
 ```
 
 **Note:** Removal will issue a warning about removing `/usr/local` and other
@@ -338,16 +338,16 @@ trying to remove `/usr/local` then install the
 ## Supporting utilities and config files
 
 There are several supporting scripts that can be used to enhance command
-line capabilites. These are installed in `/usr/local/MirrorCommandLine/bin` with
+line capabilites. These are installed in `/usr/local/MirrorCommand/bin` with
 symbolic links created in `/usr/local/bin`. Ensure that `/usr/local/bin`
 is in your execution PATH.
 
 Many sample MagicMirror configuration files are provided in the
-[**/usr/local/MirrorCommandLine/config**](config) directory. The installation
+[**/usr/local/MirrorCommand/config**](config) directory. The installation
 package script attempts to link these into your MagicMirror config folder.
 The sample config files use the naming convention `config-<name>.js`.
 
-Several custom CSS files are provided in the `/usr/local/MirrorCommandLine/css directory.
+Several custom CSS files are provided in the `/usr/local/MirrorCommand/css directory.
 Copy and modify as needed.
 
 Some of the more useful supporting scripts include:
@@ -449,7 +449,7 @@ for taking screenshots.
 The MMM-Remote-Control module provides some documentation on creating
 a custom menu but it is currently incomplete. To add custom commands
 to MMM-Remote-Control using the `mirror` command, see the
-[MMM-Remote-Control Wiki Page](https://gitlab.com/doctorfree/MirrorCommandLine/-/wikis/Remote-Control-Custom-Menu).
+[MMM-Remote-Control Wiki Page](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/Remote-Control-Custom-Menu).
 
 #### MMM-TelegramBot integration
 You can control your MagicMirrir with the `mirror` command executed remotely
@@ -507,7 +507,7 @@ section of the MMM-TelegramBot module entry in `config.js` that defines the
 ##### MMM-TelegramCommands module
 
 Configuring MMM-TelegramBot customCommands can be daunting. Use the template at
-[MagicMirror/config/Templates/TelegramBot-customCommands.js](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/config/Templates/TelegramBot-customCommands.js)
+[MagicMirror/config/Templates/TelegramBot-customCommands.js](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/config/Templates/TelegramBot-customCommands.js)
 as a guide.
 
 Alternatively, several custom TelegramBot commands have been configured
@@ -572,7 +572,7 @@ Any `mirror` command can be executed via Telegram in this manner.
 See `mirror -u` for the `mirror` usage message.
 
 ## MMM-GoogleAssistant integration
-MirrorCommandLine includes configuration files to enable voice command
+MirrorCommand includes configuration files to enable voice command
 control of your MagicMirror utilizing the
 [MMM-GoogleAssistant](http://wiki.bugsounet.fr/en/MMM-GoogleAssistant)
 module. Most of the MagicMirror config files in the config subdirectory
@@ -580,7 +580,7 @@ come preconfigured with voice command support. See
 [**config/config-default.js**](config/config-default.js) for a sample config
 file with voice control enabled.
 
-In addition to preconfigured config files, MirrorCommandLine provides several
+In addition to preconfigured config files, MirrorCommand provides several
 [custom MMM-GoogleAssistant recipes](modules/MMM-GoogleAssistant/recipes).
 These include recipes to:
 - [Enable `mirror` command support via voice](modules/MMM-GoogleAssistant/recipes/MirrorCommand.js)
@@ -707,29 +707,29 @@ Examples:
 
 ## Documentation
 
-Many MirrorCommandLine commands have manual pages. Execute `man <command-name>`
+Many MirrorCommand commands have manual pages. Execute `man <command-name>`
 to view the manual page for a command. The `mirror` frontend is the primary
-user interface for the MirrorCommandLine commands and the manual page for
+user interface for the MirrorCommand commands and the manual page for
 `mirror` can be viewed with the command `man mirror`. Most commands also have
 help/usage messages that can be viewed with the **-u** argument option,
 e.g. `mirror -u`.
 
-The manual page for the primary MirrorCommandLine user interface, `mirror`,
+The manual page for the primary MirrorCommand user interface, `mirror`,
 can be viewed by executing the command:
 
 - `man mirror`
 
-Manual pages for these MirrorCommandLine commands can be viewed by executing
+Manual pages for these MirrorCommand commands can be viewed by executing
 any of the following commands (click to view the man page online):
 
-- [man mirror](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mirror.1.md)
-- [man 5 mirrorkeys](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mirrorkeys.5.md)
-- [man set_asound_conf](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/set_asound_conf.1.md)
-- [man mmscene](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mmscene.1.md)
-- [man mmscreen](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/mmscreen.1.md)
-- [man showkeys](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/showkeys.1.md)
-- [man vol](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/vol.1.md)
-- [man websnap](https://gitlab.com/doctorfree/MirrorCommandLine/-/blob/master/markdown/websnap.1.md)
+- [man mirror](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/mirror.1.md)
+- [man 5 mirrorkeys](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/mirrorkeys.5.md)
+- [man set_asound_conf](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/set_asound_conf.1.md)
+- [man mmscene](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/mmscene.1.md)
+- [man mmscreen](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/mmscreen.1.md)
+- [man showkeys](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/showkeys.1.md)
+- [man vol](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/vol.1.md)
+- [man websnap](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/websnap.1.md)
 
 ## Motivation
 
@@ -737,8 +737,8 @@ any of the following commands (click to view the man page online):
 The command line has a long and storied history in computing. Read some of that
 history, learn how to open a command line terminal window on various systems,
 how to get started using the command line, and see some examples of why the command
-line interface is so powerful by reading the MirrorCommandLine wiki article
-[Introduction to Using the Command Line](https://gitlab.com/doctorfree/MirrorCommandLine/-/wikis/Introduction-to-Using-the-Command-Line).
+line interface is so powerful by reading the MirrorCommand wiki article
+[Introduction to Using the Command Line](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/Introduction-to-Using-the-Command-Line).
 
 This introduction to the command line includes an example of how to automate
 display of a specified menu on a MagicMirror at designated times of day.
@@ -781,10 +781,10 @@ can be augmented by the plethora of tools available in a typical Shell
 environment. You can pipe the output of a `mirror` command to grep, sed, awk,
 and other standard utilities to produce results difficult to achieve otherwise.
 That is, command line control along with the API and Shell utilities/builtins
-can extend the capabilities of the MagicMirror system. The MirrorCommandLine
+can extend the capabilities of the MagicMirror system. The MirrorCommand
 package also enables some features not easily available in MagicMirror.
 One of these, management of a large number of preconfigured MagicMirror config files,
-allows the MirrorCommandLine user to easily and quickly switch between any of these
+allows the MirrorCommand user to easily and quickly switch between any of these
 preconfigured config files. In my household I find it frequently desirable to be able
 to switch MagicMirror configs easily and quickly and I can do so by configuring these
 presets to my typical use cases and executing a simple `mirror` command.
@@ -817,7 +817,7 @@ in his [MagicMirror scripts project](https://github.com/sdetweil/MagicMirror_scr
 
 ## Contents
 
-See the [MirrorCommandLine Contents](https://gitlab.com/doctorfree/MirrorCommandLine/-/wikis/MirrorCommandLine-Contents) wiki page for a full contents listing.
+See the [MirrorCommand Contents](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/MirrorCommand-Contents) wiki page for a full contents listing.
 
 ## License
 

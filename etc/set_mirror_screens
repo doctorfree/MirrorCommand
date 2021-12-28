@@ -19,7 +19,7 @@ MMHOME="/home/pi/MagicMirror"
 
 MSO="${MMHOME}/.mirrorscreen"
 [ -f ${MSO} ] && mv ${MSO} ${MSO}.bak$$
-echo "# MirrorCommandLine Display Configuration" > ${MSO}
+echo "# MirrorCommand Display Configuration" > ${MSO}
 echo "# The SCREEN_# associative arrays contain the mode and device" >> ${MSO}
 echo "# for each screen. A 'mode' value of '1' indicates Portrait mode" >> ${MSO}
 echo "# while an empty 'mode' value indicates Landscape mode" >> ${MSO}

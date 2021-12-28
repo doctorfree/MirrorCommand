@@ -1,5 +1,5 @@
 #!/bin/bash
-# postinst script for mirrorcommandline
+# postinst script for mirrorcommand
 #
 # see: dh_installdeb(1)
 
@@ -31,7 +31,7 @@ case "$1" in
             updlinks updjav updmodel updphotographer updtop updoffsets \
             updcsswidth updwidth vncview vol websnap wireless_conf zerologs"
         LOCAL="myreboot myshutdown remountusb"
-        MM="/usr/local/MirrorCommandLine"
+        MM="/usr/local/MirrorCommand"
         KEYS="${MM}/etc/mirrorkeys"
 
         [ -d /usr/local ] || mkdir /usr/local
@@ -139,14 +139,14 @@ case "$1" in
                 chown ${USER}:${GROUP} ${MM}/etc/arp-devices.js
               }
               MMUP=`dirname ${MMHOME}`
-              MCL="${MMUP}/src/MirrorCommandLine"
+              MCL="${MMUP}/src/MirrorCommand"
               [ -d ${MCL} ] || {
                 MCL=
                 for homedir in /usr/local /home/*
                 do
                   [ "${homedir}" == "/home/*" ] && continue
-                  [ -d ${homedir}/src/MirrorCommandLine ] && {
-                    MCL="${homedir}/src/MirrorCommandLine"
+                  [ -d ${homedir}/src/MirrorCommand ] && {
+                    MCL="${homedir}/src/MirrorCommand"
                     break
                   }
                 done
@@ -215,8 +215,8 @@ case "$1" in
                 then
                     if [ -f $b ]
                     then
-                        [ -f custom-mirrorcommandline.css ] || {
-                            sudo -u ${USER} cp ${css} custom-mirrorcommandline.css
+                        [ -f custom-mirrorcommand.css ] || {
+                            sudo -u ${USER} cp ${css} custom-mirrorcommand.css
                         }
                     else
                         sudo -u ${USER} cp ${css} .
@@ -252,7 +252,7 @@ case "$1" in
                     }
                 done
             }
-            # Install MagicMirror 3rd Party modules used by MirrorCommandLine
+            # Install MagicMirror 3rd Party modules used by MirrorCommand
             [ -d "${MMHOME}/modules" ] && cd "${MMHOME}/modules"
             MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
                      MMM-COVID19-SPARKLINE MMM-DarkSkyForecast MMM-DateOnly \
@@ -273,7 +273,7 @@ case "$1" in
               }
             done
 
-            # Copy any installed MirrorCommandLine MMM-Detector resources
+            # Copy any installed MirrorCommand MMM-Detector resources
             # If any resources of the same name already exists, do not overwrite
             RESOURCES_DIR="modules/MMM-Detector/resources"
             [ -d "${MMHOME}/${RESOURCES_DIR}" ] && {
@@ -286,7 +286,7 @@ case "$1" in
               done
             }
 
-            # Copy any installed MirrorCommandLine Google Assistant recipes
+            # Copy any installed MirrorCommand Google Assistant recipes
             # If any recipe of the same name already exists, do not overwrite
             RECIPE_DIR="modules/MMM-GoogleAssistant/recipes"
             [ -d "${MMHOME}/${RECIPE_DIR}" ] && {
@@ -306,7 +306,7 @@ case "$1" in
                 fi
               done
             }
-            # Create a link in the MMM-Videoplayer module for MirrorCommandLine movies
+            # Create a link in the MMM-Videoplayer module for MirrorCommand movies
             VIDEO_DIR="modules/MMM-Videoplayer"
             [ -d "${MMHOME}/${VIDEO_DIR}" ] && {
               cd "${MMHOME}/${VIDEO_DIR}"
@@ -314,7 +314,7 @@ case "$1" in
             }
         else
             echo "Unable to locate MagicMirror installation folder."
-            echo "MirrorCommandLine config and css files in ${MM}"
+            echo "MirrorCommand config and css files in ${MM}"
             echo "have not been linked into the MagicMirror installation folder."
             echo "This must be accomplished manually."
         fi
@@ -414,7 +414,7 @@ case "$1" in
             cd ${MM}
             [ -d movies ] || ln -s ${MNT_PT} movies
         }
-        echo "MirrorCommandLine installation Complete"
+        echo "MirrorCommand installation Complete"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

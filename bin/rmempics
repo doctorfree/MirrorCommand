@@ -14,4 +14,4 @@ cd ${MMDIR}
 while read img
 do
     rm -f $img
-done < /usr/local/MirrorCommandLine/etc/rmlist.txt
+done < /usr/local/MirrorCommand/etc/rmlist.txt

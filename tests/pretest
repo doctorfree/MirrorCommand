@@ -1,5 +1,5 @@
 #!/bin/bash
-# preinst script for mirrorcommandline
+# preinst script for mirrorcommand
 #
 # see: dh_installdeb(1)
 
@@ -24,7 +24,7 @@ case "$1" in
         [ "${MMHOME}" ] || {
             echo ""
             echo "Unable to locate a MagicMirror installation on this system."
-            echo "MagicMirror is required in order to install MirrorCommandLine."
+            echo "MagicMirror is required in order to install MirrorCommand."
             echo ""
             while true
             do
@@ -136,7 +136,7 @@ case "$1" in
             ((screens+=1))
           done < `xrandr --listactivemonitors | grep 0:`
         }
-        echo "Setting ownership of MirrorCommandLine screen mode configuration file"
+        echo "Setting ownership of MirrorCommand screen mode configuration file"
         [ -f ${MSO} ] && {
           [ "${USER}" ] || {
             USER=$(stat -c '%U' ${MMHOME}/config)
@@ -146,7 +146,7 @@ case "$1" in
           }
           chown ${USER}:${GROUP} ${MSO}
         }
-        echo "MirrorCommandLine pre-installation configuration complete"
+        echo "MirrorCommand pre-installation configuration complete"
     ;;
 
     *)

@@ -5,9 +5,9 @@
 # Add the keys you wish to set and leave those you do not wish to set empty
 #
 # After adding your keys, execute the command
-#   '/usr/local/MirrorCommandLine/bin/showkeys'
+#   '/usr/local/MirrorCommand/bin/showkeys'
 # and it will edit the configuration files in
-# /usr/local/MirrorCommandLine containing the placeholder dummy settings
+# /usr/local/MirrorCommand containing the placeholder dummy settings
 #
 # You can add new keys by adding two lines - one with the key value
 # and one with a dummy value that can be used in a distributed version.
@@ -90,7 +90,7 @@ keys[SYSTEM]=
 dumb[SYSTEM]="Solar-System-ID"
 # Each device that accesses the Hue Hub API needs its own user
 # If you have more than one MagicMirror using the mmm-hue-lights
-# module then you will need multiple Hue API users. MirrorCommandLine
+# module then you will need multiple Hue API users. MirrorCommand
 # key management currently supports a maximum of three Hue API users.
 keys[HUE]=
 dumb[HUE]="xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx"

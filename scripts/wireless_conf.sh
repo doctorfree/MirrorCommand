@@ -3,11 +3,11 @@
 PASSFILE="$HOME/.wireless"
 CONFFILE="/etc/wpa_supplicant/wpa_supplicant.conf"
 # Test configuration file
-#CONFFILE="$HOME/src/MirrorCommandLine/etc/wpa_supplicant/wpa_supplicant.conf"
+#CONFFILE="$HOME/src/MirrorCommand/etc/wpa_supplicant/wpa_supplicant.conf"
 
 [ -f ${PASSFILE} ] || {
     echo "${PASSFILE} does not exist or is not a regular file."
-    echo "See $HOME/src/MirrorCommandLine/wireless_dot_sample"
+    echo "See $HOME/src/MirrorCommand/wireless_dot_sample"
     echo "for a sample ${PASSFILE}"
     echo "Exiting"
     exit 1

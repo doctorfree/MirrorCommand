@@ -11,9 +11,9 @@
 # sudo dpkg -i "${DEB}"
 # sudo apt-get install -f
 
-SRC_NAME="MirrorCommandLine"
-PKG_NAMES="MirrorCommandLine"
-APT_NAMES="mirrorcommandline"
+SRC_NAME="MirrorCommand"
+PKG_NAMES="MirrorCommand"
+APT_NAMES="mirrorcommand"
 SRC="${HOME}/src"
 
 PKG_INSTALLED=
@@ -51,8 +51,8 @@ get_installed_packages() {
   do
     dpkg -s ${pkg} | grep Status: | grep 'ok installed' > /dev/null && {
       case "${pkg}" in
-        "mirrorcommandline")
-            PKG_INSTALLED="${PKG_INSTALLED} MirrorCommandLine"
+        "mirrorcommand")
+            PKG_INSTALLED="${PKG_INSTALLED} MirrorCommand"
             ;;
         "mirror-images-portrait")
             PKG_INSTALLED="${PKG_INSTALLED} MirrorImagesPortrait"
@@ -80,10 +80,10 @@ check_package_names() {
       PKG_NAMES=`echo "${PKG_NAMES}" | sed -e "s/${nam}//"`
     }
   done
-  echo "${PKG_NAMES}" | grep MirrorCommandLine > /dev/null && {
-    # Make sure MirrorCommandLine is installed first
-    pkg_names_tmp=`echo "${PKG_NAMES}" | sed -e "s/MirrorCommandLine//"`
-    PKG_NAMES="MirrorCommandLine ${pkg_names_tmp}"
+  echo "${PKG_NAMES}" | grep MirrorCommand > /dev/null && {
+    # Make sure MirrorCommand is installed first
+    pkg_names_tmp=`echo "${PKG_NAMES}" | sed -e "s/MirrorCommand//"`
+    PKG_NAMES="MirrorCommand ${pkg_names_tmp}"
   }
 }
 
@@ -125,7 +125,7 @@ install_selected() {
     check_package_names
     get_installed_packages
     [ "${PKG_INSTALLED}" ] && {
-      echo "Currently installed MirrorCommandLine packages:"
+      echo "Currently installed MirrorCommand packages:"
       echo ""
       for instpkg in ${PKG_INSTALLED}
       do
@@ -134,7 +134,7 @@ install_selected() {
       echo ""
     }
     [ "${PKG_AVAILABLE}" ] && {
-      echo "Currently available MirrorCommandLine packages:"
+      echo "Currently available MirrorCommand packages:"
       echo ""
       for avaipkg in ${PKG_AVAILABLE}
       do

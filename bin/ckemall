@@ -21,4 +21,4 @@ do
         j=`echo $i | sed -e "s/Artists\//Artists-ALL\//" -e "s/Models\//Playboy-ALL\//" -e "s/Photographers\//Photographers-ALL\//"`
         [ -L $j ] && echo $j
     fi
-done < /usr/local/MirrorCommandLine/etc/rmlist.txt
+done < /usr/local/MirrorCommand/etc/rmlist.txt

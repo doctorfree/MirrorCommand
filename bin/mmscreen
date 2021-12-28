@@ -22,7 +22,7 @@ else
     usage
 fi
 
-MCL="/usr/local/MirrorCommandLine"
+MCL="/usr/local/MirrorCommand"
 MM="/home/pi/MagicMirror"
 [ -d ${MM}/config ] || {
     MM=

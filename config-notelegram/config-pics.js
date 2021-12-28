@@ -30,7 +30,7 @@ var config = {
         "::1",
     ],
 
-    customCss: "css/custom-mirrorcommandline.css",
+    customCss: "css/custom-mirrorcommand.css",
     language: "en",
     timeFormat: 12,
     units: "imperial",
@@ -103,11 +103,11 @@ var config = {
             //classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommandLine/pics/Fractals/',
-                    '/usr/local/MirrorCommandLine/pics/Art/',
-                    '/usr/local/MirrorCommandLine/pics/Owls/',
-                    '/usr/local/MirrorCommandLine/pics/Waterfalls/',
-                    '/usr/local/MirrorCommandLine/pics/Gif/',
+                    '/usr/local/MirrorCommand/pics/Fractals/',
+                    '/usr/local/MirrorCommand/pics/Art/',
+                    '/usr/local/MirrorCommand/pics/Owls/',
+                    '/usr/local/MirrorCommand/pics/Waterfalls/',
+                    '/usr/local/MirrorCommand/pics/Gif/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

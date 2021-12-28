@@ -46,8 +46,8 @@ for information on terms &amp; conditions for accessing and
 otherwise using MMSCENE and for a DISCLAIMER OF ALL WARRANTIES.
 
 # BUGS
-Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommandLine/issues&gt;
+Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommand/issues&gt;
 
 # SEE ALSO
-Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommandLine&gt;
+Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommand&gt;
 

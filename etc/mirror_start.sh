@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 MM=${HOME}/MagicMirror
-MCL_HOME="/usr/local/MirrorCommandLine"
+MCL_HOME="/usr/local/MirrorCommand"
 
 [ -d ${MM}/config ] || {
       MM=

@@ -3,7 +3,7 @@
 ARPCOM="__ARP_SCAN_DEVICES__"
 STR="devices: \[\]\,"
 ARPSTR="showDeviceColumns: true"
-INPDIR="/usr/local/MirrorCommandLine/etc"
+INPDIR="/usr/local/MirrorCommand/etc"
 DEFINP="${INPDIR}/arp-devices.js"
 
 [ -f ${DEFINP} ] || {

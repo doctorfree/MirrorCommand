@@ -5,4 +5,4 @@ cd $HOME/Pictures
 while read img
 do
     [ -f $img ] && rm -f $img
-done < /usr/local/MirrorCommandLine/etc/rmlist.txt
+done < /usr/local/MirrorCommand/etc/rmlist.txt
