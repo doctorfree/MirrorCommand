@@ -26,11 +26,16 @@ configure, monitor, and manage a MagicMirror.
 1. [Installation](#installation)
     1. [MagicMirror Installation](#magicmirror-installation)
     1. [MirrorCommand Installation](#mirrorcommand-installation)
+        1. [Pre Installation](#pre-installation)
+        1. [Debian Package installation](#debian-package-installation)
+        1. [RPM Package installation](#rpm-package-installation)
         1. [ALSA audio input and output devices configuration](alsa-audio-input-and-output-devices-configuration)
     1. [Post installation configuration](#post-installation-configuration)
-    1. [Add keys to mirrorkeys](#add-keys-to-mirrorkeys)
-    1. [Configure mirror script](#configure-mirror-script)
-	1. [Removal](#removal)
+        1. [Add keys to mirrorkeys](#add-keys-to-mirrorkeys)
+        1. [Configure mirror script](#configure-mirror-script)
+        1. [Image Archive Installation](#image-archive-installation)
+1. [Custom Package Creation](#custom-package-creation)
+1. [Removal](#removal)
 1. [Supporting utilities and config files](#supporting-utilities-and-config-files)
 1. [Remote access](#remote-access)
     1. [Remote execution of mirror commands](#remote-execution-of-mirror-commands)
@@ -186,23 +191,12 @@ To access the toolbar menu when in mirror mode, press the ALT key.
 
 ### MirrorCommand Installation
 
-MirrorCommand version 2.2 and later includes Debian format packages
-which can be used to install the MirrorCommand utilities and images
-with the Apt package management system.
+MirrorCommand v3.0 and later can be installed on Linux systems using
+either the Debian packaging format or the Red Hat Package Manager (RPM).
 
-**NOTE:** If you plan to install both the
-[RoonCommandLine package](https://gitlab.com/doctorfree/RoonCommandLine)
-and the
-[MirrorCommand package](https://gitlab.com/doctorfree/MirrorCommand)
-on the same system then in order to enable automatic configuration of
-MirrorCommand's Roon configuration files, the RoonCommandLine
-package must be installed before the MirrorCommand package.
+#### Pre Installation
 
-To install:
-
-[Download the latest Debian package format release](https://gitlab.com/doctorfree/MirrorCommand/-/releases)
-
-**NOTE:** The automated configuration requires access to some X11 graphical
+**XHOST:** The automated configuration requires access to some X11 graphical
 utilities. Depending upon your system's X11 configuration, it may be necessary
 to grant the *root* user access to the display. To do so, prior to installation
 issue the command:
@@ -213,30 +207,61 @@ or grant everyone access with
 
 `xhost +`
 
-Install the base MirrorCommand package by executing the command
+**ROON:** If you plan to install both the
+[RoonCommandLine package](https://gitlab.com/doctorfree/RoonCommandLine)
+and the
+[MirrorCommand package](https://gitlab.com/doctorfree/MirrorCommand)
+on the same system then in order to enable automatic configuration of
+MirrorCommand's Roon configuration files, the RoonCommandLine
+package must be installed before the MirrorCommand package.
+
+After granting X11 access with `xhost` and optionally installing
+RoonCommandLine, install MirrorCommand following either the
+[Debian package installation guide](#debian-package-installation)
+or [RPM package installation guide](#rpm-package-installation).
+
+#### Debian Package installation
+
+Many Linux distributions, most notably Ubuntu and its derivatives, use the
+Debian packaging system.
+
+To tell if a Linux system is Debian based it is usually sufficient to
+check for the existence of the file `/etc/debian_version` and/or examine the
+contents of the file `/etc/os-release`.
+
+To install on a Debian based Linux system, download the latest Debian
+format package from the
+[MirrorCommand releases](https://gitlab.com/doctorfree/MirrorCommand/-/releases).
+
+Install the MirrorCommand package by executing the command
 
 ```bash
-sudo apt install MirrorCommand_<version>.deb
+sudo apt install ./MirrorCommand_<version>-<release>.deb
 ```
-Optionally install the image archives used in many of the MirrorCommand config files:
-
-```bash
-sudo apt install MirrorImagesPortrait_<version>.deb
-```
-
-You can create your own custom Debian format package from the repository source.
-To do so, clone the MirrorCommand repository:
-
-<code>git clone ssh://gitlab.com/doctorfree/MirrorCommand.git</code>
-
 or
+```console
+sudo dpkg -i ./MirrorCommand_<version>-<release>.deb
+```
 
-<code>git clone `https://gitlab.com/doctorfree/MirrorCommand.git`</code>
+#### RPM Package installation
 
-Use the `mkpkg` script to create Debian format packages on a system with
-the prerequisite packaging development environment. Once packages have been
-created in the source repository they can be installed by executing the
-`./Install` command. Packages can be removed with `./Uninstall`.
+Red Hat Linux, SUSE Linux, and their derivatives use the RPM packaging
+format. RPM based Linux distributions include Fedora, AlmaLinux, CentOS,
+openSUSE, OpenMandriva, Mandrake Linux, Red Hat Linux, and Oracle Linux.
+
+To install on an RPM based Linux system, download the latest RPM format
+package from the
+[MirrorCommand releases](https://gitlab.com/doctorfree/MirrorCommand/-/releases).
+
+Install the MirrorCommand package by executing the command
+
+```bash
+sudo yum localinstall ./MirrorCommand_<version>-<release>.rpm
+```
+or
+```console
+sudo rpm -i ./MirrorCommand_<version>-<release>.rpm
+```
 
 #### ALSA audio input and output devices configuration
 The MirrorCommand installation attempts to detect and configure ALSA
@@ -320,20 +345,61 @@ file has been configured with the API key.
 If you have not configured an API key for MagicMirror remote control then
 set the apikey to blank ( <code>apikey=</code> ).
 
-#### Removal
+#### Image Archive Installation
 
-To remove/uninstall the MirrorCommand packages execute the commands:
+Optionally install the image archives used in many of the MirrorCommand config files:
 
 ```bash
-sudo apt remove mirror-images-portrait
-sudo apt remove mirrorcommand
+sudo apt install MirrorImagesPortrait_<version>.deb
 ```
 
-**Note:** Removal will issue a warning about removing `/usr/local` and other
+## Custom Package Creation
+
+You can create your own custom Debian and RPM format packages from
+the repository source. To do so, clone the MirrorCommand repository:
+
+<code>git clone ssh://gitlab.com/doctorfree/MirrorCommand.git</code>
+
+or
+
+<code>git clone `https://gitlab.com/doctorfree/MirrorCommand.git`</code>
+
+Use the `mkpkg` script to create Debian and RPM format packages on a system
+with the prerequisite packaging development environment. Once packages have
+been created in the source repository they can be installed by executing the
+`./Install` command. Packages can be removed with `./Uninstall`.
+
+## Removal
+
+On Debian based Linux systems where the MirrorCommand package was installed
+using the MirrorCommand Debian format package, remove the MirrorCommand
+package by executing the command:
+
+```bash
+    sudo apt remove mirrorcommand
+```
+or
+```bash
+    sudo dpkg -r mirrorcommand
+```
+
+**Note:** Removal may issue a warning about removing `/usr/local` and other
 folders within `/usr/local`. This is an artifact of the Debian packaging system.
 If you wish to silence that warning and prevent the Debian packaging system from
 trying to remove `/usr/local` then install the
 [core-custom-local Debian package](https://gitlab.com/doctorfree/core-custom-local/-/releases).
+
+On RPM based Linux systems where the MirrorCommand package was installed
+using the MirrorCommand RPM format package, remove the MirrorCommand
+package by executing the command:
+
+```bash
+    sudo yum remove MirrorCommand
+```
+or
+```bash
+    sudo rpm -e MirrorCommand
+```
 
 ## Supporting utilities and config files
 
