@@ -487,7 +487,8 @@ set_screen() {
           }
           PORTRAIT=${!screen}
         }
-        [ -x /usr/local/bin/mmscreen ] && /usr/local/bin/mmscreen $1
+        ((scn+=1))
+        [ -x /usr/local/bin/mmscreen ] && /usr/local/bin/mmscreen ${scn}
         [ "${switched}" ] && {
           [ -L ${MCL_HOME}/pics ] && {
             rm -f ${MCL_HOME}/pics
@@ -506,7 +507,7 @@ set_screen() {
         }
       }
     else
-      echo "No configured screen number $1"
+      echo "No configured screen number ${scn}"
     fi
   else
     usage
