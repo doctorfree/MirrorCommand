@@ -87,6 +87,11 @@ case "$1" in
             [ -f ${MSI} ] && {
               rm -f ${MSO}
               ln -s ${MSI} ${MSO}
+              . ${MSI}
+              screen=SCREEN_${MM_SCREEN}[mode]
+              [ ${!screen+_} ] && {
+                PORTRAIT=${!screen}
+              }
             }
             USER=$(stat -c '%U' ${MMHOME}/config)
             GROUP=$(stat -c '%G' ${MMHOME}/config)
@@ -386,6 +391,19 @@ case "$1" in
                 [ -d ${PMM}/${orient} ] || continue
                 [ -d pics-${orient} ] || ln -s ${PMM}/${orient} pics-${orient}
             done
+        }
+        [ -L ${MM}/pics ] && rm -f ${MM}/pics
+        [ -d ${MM}/pics ] || {
+          if [ "${PORTRAIT}" ]
+          then
+            [ -d ${MM}/pics-portrait ] && {
+                ln -s ${MM}/pics-portrait ${MM}/pics
+            }
+          else
+            [ -d ${MM}/pics-landscape ] && {
+                ln -s ${MM}/pics-landscape ${MM}/pics
+            }
+          fi
         }
         MNT_PT="/mnt/transcend/Movies"
         [ -d ${MNT_PT} ] || {
