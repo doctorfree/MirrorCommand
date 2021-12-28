@@ -425,6 +425,11 @@ set_screen() {
   scn=$1
   [ "${scn}" == "one" ] && scn=1
   [ "${scn}" == "two" ] && scn=2
+  [ "${scn}" == "switch" ] && {
+    ((MM_SCREEN+=1))
+    [ ${MM_SCREEN} -ge ${NUMSCREENS} ] && MM_SCREEN=0
+    scn=${MM_SCREEN}
+  }
   if [ "${scn}" -eq "${scn}" ] 2> /dev/null
   then
     [ ${scn} -eq 0 ] && scn=1
@@ -2159,6 +2164,11 @@ BU_TG_CONFDIR="config-notelegram"
 
 [ "$1" == "screen" ] && {
     screen_control $2
+    exit 0
+}
+
+[ "$1" == "switch" ] && {
+    set_screen $1
     exit 0
 }
 

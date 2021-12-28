@@ -36,12 +36,16 @@ var recipe = {
       command: "MIRROR_SCREEN_ON"
     },
     "MIRROR_SCREEN_ONE": {
-      pattern: "mirror screen one",
+      pattern: "screen one|screen 1|mirror screen one|mirror screen 1",
       command: "MIRROR_SCREEN_ONE"
     },
     "MIRROR_SCREEN_TWO": {
-      pattern: "mirror screen two",
+      pattern: "screen two|screen 2|mirror screen two|mirror screen 2",
       command: "MIRROR_SCREEN_TWO"
+    },
+    "MIRROR_SCREEN_SWITCH": {
+      pattern: "screen switch|switch screens|mirror screen switch|switch screen",
+      command: "MIRROR_SCREEN_SWITCH"
     },
     "MIRROR_STOP": {
       pattern: "mirror stop",
@@ -256,6 +260,14 @@ var recipe = {
       },
       shellExec: {
         exec: "mirror screen 2"
+      }
+    },
+    "MIRROR_SCREEN_SWITCH": {
+      soundExec: {
+        chime: "close",
+      },
+      shellExec: {
+        exec: "mirror screen switch"
       }
     },
     "MIRROR_STOP": {
