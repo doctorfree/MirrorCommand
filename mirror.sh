@@ -422,9 +422,11 @@ rotate_screen() {
 }
 
 set_screen() {
-  if [ "$1" -eq "$1" ] 2> /dev/null
+  scn=$1
+  [ "${scn}" == "one" ] && scn=1
+  [ "${scn}" == "two" ] && scn=2
+  if [ "${scn}" -eq "${scn}" ] 2> /dev/null
   then
-    scn=$1
     [ ${scn} -eq 0 ] && scn=1
     ((scn-=1))
     switched=
@@ -495,7 +497,7 @@ set_screen() {
               }
             fi
           }
-          mirror restart
+          pm2 restart MagicMirror --update-env
         }
       }
     else
