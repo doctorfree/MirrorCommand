@@ -30,7 +30,7 @@ var config = {
         "::1",
     ],
 
-    customCss: "css/custom-mirrorcommand.css",
+    customCss: "css/custom-ironman.css",
     language: "en",
     timeFormat: 12,
     units: "imperial",
@@ -84,13 +84,33 @@ var config = {
             }
         },
         {
-		    module: "MMM-DateOnly",
-		    position: "upper_third",
-		    config: {
-                showWeek: false,
+            module: "MMM-IronManGIF",
+            position: "middle_center",
+            config: {
+                style: 1,              // Style number
+                maxWidth: "100%",      // Sizes the images.
+                rotate: true,
+                updateInterval: 300000
+            }
+        },
+        {
+            module: "clock",
+            position: "middle_center",
+            config: {
                 dateFormat: "dddd, LLL",
-		    }
-	    },
+                displayType: "analog",
+                analogFace: "face-006",
+                analogSize: "295px",
+                displaySeconds: "true",
+                secondsColor: "#00FFFF",
+                timeFormat: "12",
+                showPeriod: "true",
+                showDate: "true",
+                clockBold: "false",
+                analogPlacement: "top",
+                analogShowDate: "top",
+            }
+        },
         {
             module: "newsfeed",
             position: "top_center",
@@ -104,10 +124,10 @@ var config = {
                         title: "Washington Post",
                         url: "http://feeds.washingtonpost.com/rss/national"
                     },
-                    {
-                        title: "Mercury News",
-                        url: "https://www.mercurynews.com/feed"
-                    },
+                    // {
+                    //     title: "Mercury News",
+                    //     url: "https://www.mercurynews.com/feed"
+                    // },
                 ],
                 showSourceTitle: true,
                 showPublishDate: true,
@@ -201,19 +221,6 @@ var config = {
                 showOffline: true,
                 keepAlive: 900,
                 updateInterval: 60,
-                // residents: ["iPhone 12 Mini"],
-                // occupiedCMD: {
-                //     notification: 'REMOTE_ACTION',
-                //     payload: {
-                //         action: 'MONITORON'
-                //     }
-                // },
-                // vacantCMD  : {
-                //     notification: 'REMOTE_ACTION',
-                //     payload: {
-                //         action: 'MONITOROFF'
-                //     }
-                // },
                 // DO NOT REMOVE __ARP_SCAN_DEVICES__
                 devices: [],
             },

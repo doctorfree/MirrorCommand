@@ -30,7 +30,7 @@ var config = {
         "::1",
     ],
 
-    customCss: "css/custom-mirrorcommand.css",
+    customCss: "css/custom-ironman.css",
     language: "en",
     timeFormat: 12,
     units: "imperial",
@@ -84,13 +84,33 @@ var config = {
             }
         },
         {
-		    module: "MMM-DateOnly",
-		    position: "upper_third",
-		    config: {
-                showWeek: false,
+            module: "MMM-IronManGIF",
+            position: "middle_center",
+            config: {
+                style: 1,              // Style number
+                maxWidth: "100%",      // Sizes the images.
+                rotate: true,
+                updateInterval: 300000
+            }
+        },
+        {
+            module: "clock",
+            position: "middle_center",
+            config: {
                 dateFormat: "dddd, LLL",
-		    }
-	    },
+                displayType: "analog",
+                analogFace: "face-006",
+                analogSize: "295px",
+                displaySeconds: "true",
+                secondsColor: "#00FFFF",
+                timeFormat: "12",
+                showPeriod: "true",
+                showDate: "true",
+                clockBold: "false",
+                analogPlacement: "top",
+                analogShowDate: "top",
+            }
+        },
         {
             module: "newsfeed",
             position: "top_center",
