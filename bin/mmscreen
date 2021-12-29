@@ -51,7 +51,7 @@ if [ ${!check_screen+_} ]
 then
     WID=`wmctrl -l -x | grep MagicMirror | grep -i electron | awk ' { print $1 } '`
     [ "${WID}" ] || {
-        echo "Cannot retrieve MagicMirror window ID."
+        # echo "Cannot retrieve MagicMirror window ID."
         exit 0
     }
     width=SCREEN_${screen}[width]
