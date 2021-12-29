@@ -129,9 +129,10 @@ MagicMirror configuration files on screens with display resolution differing
 significantly from those tested may require changes to the module positions,
 layout, and geometry.
 
-The installation package format is Debian so the automated installation and
-configuration is limited to systems that support the Debian packaging format.
-However, it should deploy on most Debian based Linux environments.
+MirrorCommand installation packages are available in both the Debian packaging
+format and the RPM packaging format so the automated installation is available
+for all systems that support Debian or RPM packaging formats.
+That's most Linux environments.
 
 ## Installation
 
