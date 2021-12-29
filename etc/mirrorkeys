@@ -47,71 +47,158 @@ dumb[IPW8]='HH.H.H.HH'
 dumb[IPW9]='II.I.I.II'
 dumb[IPW0]='JJ.J.J.JJ'
 dumb[IPWA]='KK.K.K.KK'
-
+#
+# Add keys for the others in a similar fashion
+# Leave the value blank for keys you are not using or do not have
+#
+# Lattitude and longitude are used by several modules to provide
+# location specific data. The default values for lattitude and
+# longitude in the MirrorCommand config files is for Santa Cruz, California.
+# Set these keys to your MagicMirror location's lattitude and longitude.
+# Find your lattitude and longitude at https://www.latlong.net/
+keys[LATT]=
+dumb[LATT]="36.970019"
+#
+keys[LONG]=
+dumb[LONG]="-122.042212"
+#
+# The MMM-Remote-Control module is quite useful
+# To provide better security an API key can be configured
+# It's easy to do, see:
+# https://github.com/Jopyth/MMM-Remote-Control/blob/master/API/README.md
+#
+keys[APIKEY]=
+dumb[APIKEY]="xxx_Remote-Control-API-Key_xxxxx"
+#
 # Set your Instagram Auth Code here
 keys[IGA]=
-# Leave the dummy value for the Instagram Auth Code as is
 dumb[IGA]="xxxxxx_Your-Instagram-Auth-Code_xxxxxxxxxxxxxxxxx"
+#
 # Set your Telegram API Key here
 keys[KEY]=
-# Leave the dummy value for the Telegram API Key as is
 dumb[KEY]="xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx"
-# Add keys for the others in a similar fashion
+#
+# Google Maps Platform API key
+# https://developers.google.com/maps/documentation/javascript/overview
+# Used to activate the MMM-GoogleMapsTraffic module
 keys[GKEY]=
 dumb[GKEY]="xxxxxx_Your-GoogleMapsTraffic-Key_xxxxxxxxxxx"
-# Leave the value blank for keys you are not using or do not have
-keys[VPKEY]=
-dumb[VPKEY]="xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx"
-keys[VSKEY]=
-dumb[VSKEY]="xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx"
+#
+# CoinMarketCap API key
+# https://pro.coinmarketcap.com/signup/
+# Used to activate the MMM-CoinMarketCap module
 keys[CRY]=
 dumb[CRY]="xxxxx_CoinMarket-API-Key_xxxxxxxxx"
-keys[RAP]=
-dumb[RAP]="xxxxx_Rapid-API-Key_xxxxxxxxx"
+#
+# Set this key to any fully qualified domain name
+# Preferably one you control
+# Leave the backslashes and quotes in like the dummy value
+# For example, use a keys setting similar to:
+# keys[DOM]='\"http\:\/\/example.com\"'
+# Used by the MMM-YouTubeWebView module
 keys[DOM]=
 dumb[DOM]='\"http\:\/\/your.domain.com\"'
+#
 # Set your Telegram Username here
 keys[NAM]=
 dumb[NAM]="'Your-Telegram-Username'"
-# Set your Telegram Chat ID here
+#
+# Set your Telegram Bot's Chat ID here
 keys[NUM]=
 dumb[NUM]="0000000000"
-keys[APIKEY]=
-dumb[APIKEY]="xxx_Remote-Control-API-Key_xxxxx"
+#
+# Set your OpenWeather App ID here
+# https://openweathermap.org/appid
+# Used to activate the MagicMirror default weather module
 keys[LOC]=
 dumb[LOC]="xx_OpenWeather-App-ID_xxxxxxxxxx"
+#
+# IEX Cloud OpenID service
+# https://github.com/iexcloud/iexcloud-openid-client-example/blob/main/WALKTHROUGH.md
+# Key to activate the MMM-stocks module
 keys[STK]=
 dumb[STK]="xxxxx_Stocks-API-Key_xxxxxxxxxxxxx"
+#
+# The next three keys are used to activate the MMM-Solar module
+# This module can be used to monitor rooftop solar systems
+# that use Enphase inverters
+#
+# Enphase API key
+# https://developer.enphase.com/
 keys[SOLAR]=
 dumb[SOLAR]="xxxxxx_Solar-API-Key_xxxxxxxxxxx"
+#
+# Enlighten user ID of the owner of the Enphase system
+# https://enlighten.enphaseenergy.com/
 keys[USERID]=
 dumb[USERID]="Solar-USER-ID"
+#
+# Enlighten system ID of the Enphase system you wish to monitor
+# https://enlighten.enphaseenergy.com/
 keys[SYSTEM]=
 dumb[SYSTEM]="Solar-System-ID"
+#
+# The mmm-hue-lights module enbles the MagicMirror
+# to monitor Philips Hue lights via the Hue Hub
+# It requires the Hue Hub IP address and a Hue Hub user
+# To get started, see:
+# https://developers.meethue.com/develop/get-started-2/
+#
 # Each device that accesses the Hue Hub API needs its own user
 # If you have more than one MagicMirror using the mmm-hue-lights
 # module then you will need multiple Hue API users. MirrorCommand
 # key management currently supports a maximum of three Hue API users.
 keys[HUE]=
 dumb[HUE]="xxxxxxxxxx_Hue-Hub-User_xxxxxxxxxxxxxxxx"
+#
 keys[HUE2]=
 dumb[HUE2]="xxxxxxxxx_Hue-Hub-User-Two_xxxxxxxxxxxx"
+#
 keys[HUE3]=
 dumb[HUE3]="xxxxxxxxx_Hue-Hub-User-Three_xxxxxxxxxx"
+#
 keys[HIP]=
 dumb[HIP]="xxxxxxxxxx_Hue-Hub-IP_xxxxxxxxxxxxxxxx"
-keys[AVS]=
-dumb[AVS]="xx_AVStock-API_x"
+#
+# Apple bought Dark Sky and they are shutting down the free API service
+# New signups are no longer accepted at https://darksky.net/dev
+# Existing API keys will continue to function until the end of 2021
+# Sheesh!
 keys[DKS]=
 dumb[DKS]="xxx_Dark-Sky-API-Key_xxxxxxxxxxx"
-keys[NEWS]=
-dumb[NEWS]="xxxxxxx_newsapi.org_xxxxxxxxxxx"
-# Nexmo
+#
+# Nexmo was a free way to send and receive SMS messages
+# It got bought by Vonage and they started charging. But not much.
+# If you need automated SMS signup here:
+# https://developer.vonage.com/getting-started/overview?icid=documentation_homepage_gettingstartedoverview_btn
+# The MirrorCommand utilities use this service to alert the owner when
+# the temperature of the Raspberry Pi exceeds some configurable limit.
 keys[NEXF]=
 dumb[NEXF]="xxxxxxx_Nexmo_From_xxxxxxxxxxx"
+#
 keys[NEXT]=
 dumb[NEXT]="xxxxxxx_Nexmo_To_xxxxxxxxxxx"
+#
 keys[NEXK]=
 dumb[NEXK]="xxxxxxx_Nexmo_Key_xxxxxxxxxxx"
+#
 keys[NEXS]=
 dumb[NEXS]="xxxxxxx_Nexmo_Secret_xxxxxxxxxxx"
+#
+# The following keys do not seem to be used any longer
+# They are left here in case another module might use them
+# Safely ignore for now
+keys[VPKEY]=
+dumb[VPKEY]="xxxxxx_Your-GoogleVoice-Pub-Key_xxxxxxxx"
+#
+keys[VSKEY]=
+dumb[VSKEY]="xxxxxx_Your-GoogleVoice-Sub-Key_xxxxxxxx"
+#
+keys[RAP]=
+dumb[RAP]="xxxxx_Rapid-API-Key_xxxxxxxxx"
+#
+keys[AVS]=
+dumb[AVS]="xx_AVStock-API_x"
+#
+keys[NEWS]=
+dumb[NEWS]="xxxxxxx_newsapi.org_xxxxxxxxxxx"
