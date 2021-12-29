@@ -11,10 +11,14 @@ MNT_PT="/mnt/transcend/Pictures"
 PMM="${MNT_PT}/MagicMirror"
 
 portrait=1
+minwid=800
+minhei=1000
 orientation="portrait"
 [ "$1" == "-l" ] && {
     portrait=
     orientation="landscape"
+    minhei=800
+    minwid=1000
     shift
 }
 
@@ -47,14 +51,14 @@ isportrait() {
     #GEO=`identify "$1" | awk ' { print $(NF-6) } '`
     GEO=`identify "$1" | awk ' { print $3 } '`
     W=`echo $GEO | awk -F "x" ' { print $1 } '`
-    # Check if width not greater than 600
-    [ "$W" ] && [ $W -gt 600 ] || {
+    # Check if width not greater than minwid
+    [ "$W" ] && [ $W -gt ${minwid} ] || {
         port=1
         return $port
     }
     H=`echo $GEO | awk -F "x" ' { print $2 } '`
-    # Check if height not greater than 800
-    [ "$H" ] && [ $H -gt 800 ] || {
+    # Check if height not greater than minhei
+    [ "$H" ] && [ $H -gt ${minhei} ] || {
         port=1
         return $port
     }

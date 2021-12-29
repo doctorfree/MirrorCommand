@@ -11,8 +11,12 @@ declare -A top_sites
     MNT_PT="/u/pictures"
     TOP_DIR="${MNT_PT}/MagicMirror"
     [ -d ${TOP_DIR} ] || {
-        echo "$TOP_DIR does not exist or is not a directory. Exiting."
-        exit 1
+        MNT_PT="/v/pictures"
+        TOP_DIR="${MNT_PT}/MagicMirror"
+        [ -d ${TOP_DIR} ] || {
+            echo "$TOP_DIR does not exist or is not a directory. Exiting."
+            exit 1
+        }
     }
 }
 cd ${TOP_DIR}
@@ -32,14 +36,14 @@ isportrait() {
     #GEO=`identify "$1" | awk ' { print $(NF-6) } '`
     GEO=`identify "$1" | awk ' { print $3 } '`
     W=`echo $GEO | awk -F "x" ' { print $1 } '`
-    # Check if width not greater than 600
-    [ "$W" ] && [ $W -gt 600 ] || {
+    # Check if width not greater than minwid
+    [ "$W" ] && [ $W -gt ${minwid} ] || {
         port=1
         return $port
     }
     H=`echo $GEO | awk -F "x" ' { print $2 } '`
-    # Check if height not greater than 800
-    [ "$H" ] && [ $H -gt 800 ] || {
+    # Check if height not greater than minhei
+    [ "$H" ] && [ $H -gt ${minhei} ] || {
         port=1
         return $port
     }
@@ -52,8 +56,14 @@ isportrait() {
 }
 
 portrait=1
+orient="portrait"
+minwid=800
+minhei=1000
 [ "$1" == "-l" ] && {
     portrait=
+    orient="landscape"
+    minhei=800
+    minwid=1000
     shift
 }
 
@@ -64,6 +74,7 @@ portrait=1
     exit 1
 }
 
+cd ${TOP_DIR}/${orient}
 for folder in $*
 do
     [ "$folder" == "*" ] && continue
