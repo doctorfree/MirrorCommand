@@ -3,21 +3,59 @@
 # vcgencmd is a Raspberry Pi utility
 # This script will attempt to provide functional compatibility with vcgencmd
 # for systems other than the Raspberry Pi
+#
+# Author: Ronald Joe Record <ronaldrecord@gmail.com>
 
 HDMI=`xrandr --listactivemonitors | grep 0: | awk ' { print $4 } '`
 
-[ "${HDMI}" ] || {
-    echo "No connected monitors detected. Exiting."
-    exit 1
+[ "$1" == "get_mem" ] && {
+  if [ "$2" ]
+  then
+    if [ "$2" == "arm" ]
+    then
+      cat /proc/meminfo | grep ^Mem
+    else
+      if [ "$2" == "gpu" ]
+      then
+        glxinfo | egrep 'Device|Video'
+      else
+        echo "Unknown memory type query"
+      fi
+    fi
+  else
+    echo "CPU memory info:"
+    cat /proc/meminfo | grep ^Mem
+    echo "GPU memory info:"
+    glxinfo | egrep 'Device|Video'
+  fi
+}
+
+[ "$1" == "measure_temp" ] && {
+  have_sensors=`type -p sensors`
+  if [ "${have_sensors}" ]
+  then
+      sensors
+  else
+      echo "No sensors utility"
+  fi
 }
 
 [ "$1" == "display_power" ] && {
-    if [ "$2" == "1" ]
+  if [ "$2" ]
+  then
+    [ "${HDMI}" ] || {
+      echo "No connected monitors detected. Unable to control monitor power."
+      exit 0
+    }
+    if [ "$2" == "0" ]
     then
-        xrandr --output ${HDMI} --auto
-    else
         xrandr --output ${HDMI} --off
+    else
+        xrandr --output ${HDMI} --auto
     fi
+  else
+    xset -q | grep Monitor
+  fi
 }
 
 exit 0

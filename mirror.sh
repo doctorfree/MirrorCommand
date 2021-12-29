@@ -71,6 +71,10 @@ MCL_HOME="/usr/local/MirrorCommand"
     export PATH=${PATH}:${MCL_HOME}/bin
 }
 
+fake_vcgencmd=
+have_vcgencmd=`type -p vcgencmd`
+[ "${have_vcgencmd}" == "${MCL_HOME}/bin/vcgencmd" ] && fake_vcgencmd=1
+
 # Set this to the X11 DISPLAY you are using. DISPLAY=:0 works for most systems.
 export DISPLAY=:0
 
@@ -232,7 +236,7 @@ check_config() {
 }
 
 display_status() {
-    vcgencmd display_power | grep  -q 'display_power=1' && \
+    vcgencmd display_power | egrep 'display_power=1|On' > /dev/null && \
         echo 'Display ON' || echo 'Display OFF'
 }
 
@@ -1437,13 +1441,23 @@ system_info() {
     printf "\n${BOLD}System information for:${NORMAL}\n"
     uname -a
     [ "$INFO" == "all" ] || [ "$INFO" == "temp" ] && {
-        printf "\nCPU `vcgencmd measure_temp`\n"
+        if [ "${fake_vcgencmd}" ]
+        then
+            printf "\nSystem temperatures:\n`vcgencmd measure_temp`\n"
+        else
+            printf "\nCPU `vcgencmd measure_temp`\n"
+        fi
     }
     [ "$INFO" == "all" ] || [ "$INFO" == "mem" ] && {
-        cpu_mem=`vcgencmd get_mem arm | awk -F "=" ' { print $2 } '`
-        gpu_mem=`vcgencmd get_mem gpu | awk -F "=" ' { print $2 } '`
-        printf "\n${BOLD}Memory Split:${NORMAL}\tCPU=${cpu_mem}\tGPU=${gpu_mem}\n"
-        printf "\n${BOLD}Memory:${NORMAL}\n"
+        if [ "${fake_vcgencmd}" ]
+        then
+            vcgencmd get_mem
+        else
+            cpu_mem=`vcgencmd get_mem arm | awk -F "=" ' { print $2 } '`
+            gpu_mem=`vcgencmd get_mem gpu | awk -F "=" ' { print $2 } '`
+            printf "\n${BOLD}Memory Split:${NORMAL}\tCPU=${cpu_mem}\tGPU=${gpu_mem}\n"
+            printf "\n${BOLD}Memory:${NORMAL}\n"
+        fi
         free -h
     }
     [ "$INFO" == "all" ] || [ "$INFO" == "disk" ] && {

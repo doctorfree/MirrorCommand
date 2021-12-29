@@ -317,11 +317,36 @@ settings.
 
 For more info on the `showkeys` command and the
 `/usr/local/MirrorCommand/etc/mirrorkeys` configuration file, see the
-man pages `showkeys.1` and `mirrorkeys.5` by executing the `man` command:
+man pages
+`[showkeys.1](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/showkeys.1)`
+and
+`[mirrorkeys.5](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/mirrorkeys.5)`
+by executing the `man` command:
 
 `man showkeys`
 
 `man 5 mirrorkeys`
+
+Unfortunately, it is not possible to automate this process any further than is
+done here with the `showkeys` command and `mirrorkeys` configuration file.
+There are nearly 40 preconfigured dummy key values and corresponding empty keys
+settings in the distributed `/usr/local/MirrorCommand/etc/mirrorkeys` file.
+It is a tedious task to acquire all these keys but that is the state of the
+art in 21st Century Internet services at this time. On the plus side, all of
+these services can be obtained without charge. Perhaps in the future some
+enterprising young entrepreneur will create a meta-service that can generate
+keys for the myriad of services available via the web.
+
+It is strongly recommended that you take the time to acquire those keys you
+will need to access the services your MagicMirror will be activating prior to
+or immediate following installation of the MirrorCommand package. It is not
+necessary to obtain keys for all of the services, only those you may use.
+For example, you may intend to deploy a MagicMirror as a News, Weather,
+and Stock tracking display. In that case, the only keys you may need to
+acquire might be an OpenWeather API key, Dark Sky API key, IEX Cloud API key,
+and CoinMarketCap API key. Leaving all other key settings blank in the
+`mirrorkeys` file will not effect display of activated and configured
+services - it simply does not enable access to those services you do not use.
 
 #### Configure mirror script
 
