@@ -70,9 +70,17 @@ dumb[LONG]="-122.042212"
 keys[APIKEY]=
 dumb[APIKEY]="xxx_Remote-Control-API-Key_xxxxx"
 #
+# Set your Instagram Client ID here
+keys[CID]=
+dumb[CID]='xxxxxx_Your-Instagram-Client-ID_xxxxxxxxxxxxxxxxx'
+#
 # Set your Instagram Auth Code here
 keys[IGA]=
 dumb[IGA]="xxxxxx_Your-Instagram-Auth-Code_xxxxxxxxxxxxxxxxx"
+#
+# Set your Instagram Client Secret here
+keys[SEC]=
+dumb[SEC]='xxxxxx_Your-Instagram-Client-Secret_xxxxxxxxxxxxx'
 #
 # Set your Telegram API Key here
 keys[KEY]=

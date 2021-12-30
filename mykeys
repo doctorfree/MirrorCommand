@@ -7,8 +7,11 @@ PICDIR="/mnt/transcend/Pictures/MagicMirror"
 [ -d ${PICDIR} ] || {
   PICDIR="/u/pictures/MagicMirror"
   [ -d ${PICDIR} ] || {
-    echo "Cannot locate Pictures folder ${PICDIR}"
-    echo "Pictures folders in $MAGDIR unlinked"
+    PICDIR="/v/pictures/MagicMirror"
+    [ -d ${PICDIR} ] || {
+      echo "Cannot locate Pictures folder ${PICDIR}"
+      echo "Pictures folders in $MAGDIR unlinked"
+    }
   }
 }
 

@@ -86,34 +86,10 @@ var config = {
             }
         },
         {
-            module: "calendar",
-            header: "Calendar Events",
-            position: "top_left",
-            classes: 'scores solar stocks',
-            config: {
-                colored: true,
-                maximumNumberOfDays: 7,
-                maximumEntries: 10,
-                showLocation: true,
-                tableClass: "medium",
-                timeFormat: "absolute",
-                nextDaysRelative: true,
-                displaySymbol: true,
-                defaultSymbol: "calendar-alt",
-                calendars: [
-                    {
-                        symbol: "calendar",
-                        color: '#73FF33',
-                        url: "http://localhost:8080/modules/default/calendar/calendars/home.ics"
-                    },
-                ]
-            }
-        },
-        {
 		    module: "weather",
 		    position: "top_right",
             header: "Current Weather",
-            classes: 'scores solar stocks',
+            classes: 'scores stocks',
 		    config: {
              type: 'current',
              location: "Santa Cruz,United States",
@@ -126,7 +102,7 @@ var config = {
             module: "weather",
             position: "top_right",
             header: "Weather Forecast",
-            classes: 'scores solar stocks',
+            classes: 'scores stocks',
             config: {
 			    type: 'forecast',
                 location: "Santa Cruz,United States",
@@ -214,8 +190,8 @@ var config = {
         },
         {
             module: 'MMM-Tools',
-            position: 'bottom_left',
-            classes: 'scores solar stocks',
+            position: 'bottom_right',
+            classes: 'scores solar',
             header: "System Info",
             config: {
               refresh: 1000 * 5,
@@ -286,7 +262,7 @@ var config = {
         },
         {
             module: "mmm-hue-lights",
-            position: "middle_center",
+            position: "upper_third",
             header: "Hue Lights",
             classes: 'solar',
             config: {
@@ -301,8 +277,8 @@ var config = {
         },
         {
             module: 'MMM-Solar',
-            position: "bottom_center",
-            classes: 'solar',
+            position: "bottom_left",
+            classes: 'solar stocks',
             config: {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
@@ -353,7 +329,7 @@ var config = {
         },
         {
             module: "MMM-MyScoreboard",
-            position: "middle_center",
+            position: "top_left",
             classes: "scores default everyone",
             header: "Sports Scoreboard",
             config: {
@@ -386,27 +362,6 @@ var config = {
                 }
               ]
             }
-        },
-        {
-            module: 'MMM-MacAddressScan',
-            position: "bottom_right",
-            classes: 'scores solar stocks',
-            header: "ARP Scan - Discovered Devices",
-            config: {
-                showLastSeen: false,
-                showLastSeenWhenOffline: false,
-                sort: false,
-                colored: true,
-                showDeviceColumns: false,
-                coloredState: true,
-                showIP: true,
-                showUnknown: false,
-                showOffline: true,
-                keepAlive: 900,
-                updateInterval: 60,
-                // DO NOT REMOVE __ARP_SCAN_DEVICES__
-                devices: [],
-            },
         },
         {
             module: 'MMM-TelegramCommands',

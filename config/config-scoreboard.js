@@ -22,7 +22,7 @@ var config = {
         "EE.E.E.EE", // Roon Core
         "FF.F.F.FF", // Mac Pro
         "GG.G.G.GG", // Ropieee
-        "MM.M.M.MM", // Raspberry Pi MagicMirror
+        "MM.M.M.MM", // MagicMirror
         "HH.H.H.HH", // Raspberry Pi 400
         "II.I.I.II", // iPad Air
         "JJ.J.J.JJ", // iPhone 12 Mini
@@ -108,7 +108,7 @@ var config = {
         },
         {
             module: "MMM-IronManGIF",
-            position: "upper_third",
+            position: "middle_center",
             config: {
                 style: 1,              // Style number
                 maxWidth: "100%",      // Sizes the images.
@@ -118,7 +118,7 @@ var config = {
         },
         {
             module: "clock",
-            position: "upper_third",
+            position: "middle_center",
             config: {
                 dateFormat: "dddd, LLL",
                 displayType: "analog",
@@ -136,7 +136,7 @@ var config = {
         },
         {
 		    module: "weather",
-		    position: "top_left",
+		    position: "top_right",
             header: "Current Weather",
 		    config: {
              type: 'current',
@@ -245,7 +245,7 @@ var config = {
         },
         {
             module: "MMM-MyScoreboard",
-            position: "middle_center",
+            position: "top_left",
             classes: "default everyone",
             header: "Sports Scoreboard",
             config: {
