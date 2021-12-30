@@ -53,47 +53,49 @@ HAVE_PORT=
 CONFDIR=${MM}/config
 CSSDIR=${MM}/css
 
-# If there is an existing config.js then set the Electron screen offsets
-# Must have both xoff and yoff from mirrorscreen for this screen
-xoff=SCREEN_${MM_SCREEN}[xoff]
-[ ${!xoff+_} ] && {
-  XOFF=${!xoff}
-  yoff=SCREEN_${MM_SCREEN}[yoff]
-  [ ${!yoff+_} ] && {
-    YOFF=${!yoff}
-    [ -f ${CONFDIR}/config.js ] && {
-      [ -x /usr/local/bin/updoffsets ] && {
-        /usr/local/bin/updoffsets -x ${XOFF} -y ${YOFF} ${CONFDIR}/config.js
+[ "${NUMSCREENS}" ] && [ ${NUMSCREENS} -gt 1 ] && {
+  # If there is an existing config.js then set the Electron screen offsets
+  # Must have both xoff and yoff from mirrorscreen for this screen
+  xoff=SCREEN_${MM_SCREEN}[xoff]
+  [ ${!xoff+_} ] && {
+    XOFF=${!xoff}
+    yoff=SCREEN_${MM_SCREEN}[yoff]
+    [ ${!yoff+_} ] && {
+      YOFF=${!yoff}
+      [ -f ${CONFDIR}/config.js ] && {
+        [ -x /usr/local/bin/updoffsets ] && {
+          /usr/local/bin/updoffsets -x ${XOFF} -y ${YOFF} ${CONFDIR}/config.js
+        }
       }
     }
   }
-}
-# Also set the screen width and height config settings
-# Must have both width and height from mirrorscreen for this screen
-width=SCREEN_${MM_SCREEN}[width]
-[ ${!width+_} ] && {
-  WIDTH=${!width}
-  height=SCREEN_${MM_SCREEN}[height]
-  [ ${!height+_} ] && {
-    HEIGHT=${!height}
-    [ -f ${CONFDIR}/config.js ] && {
-      [ -x /usr/local/bin/updwidth ] && {
-        /usr/local/bin/updwidth -x ${WIDTH} -y ${HEIGHT} ${CONFDIR}/config.js
-      }
-    }
-    [ -x /usr/local/bin/updcsswidth ] && {
-      for css in ${CSSDIR}/*.css
-      do
-        [ "${css}" == "${CSSDIR}/*.css" ] && continue
-        [ -f ${css} ] && {
-          if [ "${PORTRAIT}" ]
-          then
-            /usr/local/bin/updcsswidth -x ${HEIGHT} -y ${WIDTH} ${css}
-          else
-            /usr/local/bin/updcsswidth -x ${WIDTH} -y ${HEIGHT} ${css}
-          fi
+  # Also set the screen width and height config settings
+  # Must have both width and height from mirrorscreen for this screen
+  width=SCREEN_${MM_SCREEN}[width]
+  [ ${!width+_} ] && {
+    WIDTH=${!width}
+    height=SCREEN_${MM_SCREEN}[height]
+    [ ${!height+_} ] && {
+      HEIGHT=${!height}
+      [ -f ${CONFDIR}/config.js ] && {
+        [ -x /usr/local/bin/updwidth ] && {
+          /usr/local/bin/updwidth -x ${WIDTH} -y ${HEIGHT} ${CONFDIR}/config.js
         }
-      done
+      }
+      [ -x /usr/local/bin/updcsswidth ] && {
+        for css in ${CSSDIR}/*.css
+        do
+          [ "${css}" == "${CSSDIR}/*.css" ] && continue
+          [ -f ${css} ] && {
+            if [ "${PORTRAIT}" ]
+            then
+              /usr/local/bin/updcsswidth -x ${HEIGHT} -y ${WIDTH} ${css}
+            else
+              /usr/local/bin/updcsswidth -x ${WIDTH} -y ${HEIGHT} ${css}
+            fi
+          }
+        done
+      }
     }
   }
 }

@@ -427,6 +427,7 @@ rotate_screen() {
 
 set_screen() {
   scn=$1
+  curscr=${MM_SCREEN}
   [ "${scn}" == "one" ] && scn=1
   [ "${scn}" == "two" ] && scn=2
   [ "${scn}" == "switch" ] && {
@@ -442,74 +443,79 @@ set_screen() {
     hdmi=SCREEN_${scn}[hdmi]
     if [ ${!hdmi+_} ]
     then
-      HDMI=${!hdmi}
-      [ -f ${MIRRORSCREEN} ] && {
-        cat ${MIRRORSCREEN} | sed -e "s/^MM_SCREEN=.*/MM_SCREEN=${scn}/" > /tmp/mm$$
-        cp /tmp/mm$$ ${MIRRORSCREEN}
-        rm -f /tmp/mm$$
-        MM_SCREEN=${scn}
-        screen=SCREEN_${MM_SCREEN}[mode]
-        [ ${!screen+_} ] && {
-          [ "${PORTRAIT}" == "${!screen}" ] || {
-            # The screen mode is switching between portrait and landscape
-            # Check to see if we need to switch out the config.js
-            cd "${CONFDIR}"
-            if [ "${PORTRAIT}" ]
-            then
-              MM_CONFDIR="config-landscape"
-              TG_CONFDIR="config-landscape-notelegram"
-              [ -L ${CONFDIR}/config.js ] && {
-                CONFLINK=`readlink ${CONFDIR}/config.js`
-                echo ${CONFLINK} | grep landscape > /dev/null || {
-                  NEWLINK=`dirname ${CONFLINK} | sed -e "s/config-/config-landscape/"`
-                  OLDBASE=`basename ${CONFLINK}`
-                  [ -f ${NEWLINK}/${OLDBASE} ] && {
-                    # Relink to landscape mode version of this config file
-                    rm -f config.js
-                    ln -s ${NEWLINK}/${OLDBASE} config.js
-                    switched=1
+      if [ ${curscr} -eq ${scn} ]
+      then
+        echo "Current screen is already set to $1"
+      else
+        HDMI=${!hdmi}
+        [ -f ${MIRRORSCREEN} ] && {
+          cat ${MIRRORSCREEN} | sed -e "s/^MM_SCREEN=.*/MM_SCREEN=${scn}/" > /tmp/mm$$
+          cp /tmp/mm$$ ${MIRRORSCREEN}
+          rm -f /tmp/mm$$
+          MM_SCREEN=${scn}
+          screen=SCREEN_${MM_SCREEN}[mode]
+          [ ${!screen+_} ] && {
+            [ "${PORTRAIT}" == "${!screen}" ] || {
+              # The screen mode is switching between portrait and landscape
+              # Check to see if we need to switch out the config.js
+              cd "${CONFDIR}"
+              if [ "${PORTRAIT}" ]
+              then
+                MM_CONFDIR="config-landscape"
+                TG_CONFDIR="config-landscape-notelegram"
+                [ -L ${CONFDIR}/config.js ] && {
+                  CONFLINK=`readlink ${CONFDIR}/config.js`
+                  echo ${CONFLINK} | grep landscape > /dev/null || {
+                    NEWLINK=`dirname ${CONFLINK} | sed -e "s/config-/config-landscape/"`
+                    OLDBASE=`basename ${CONFLINK}`
+                    [ -f ${NEWLINK}/${OLDBASE} ] && {
+                      # Relink to landscape mode version of this config file
+                      rm -f config.js
+                      ln -s ${NEWLINK}/${OLDBASE} config.js
+                      switched=1
+                    }
                   }
                 }
-              }
-            else
-              MM_CONFDIR="config"
-              TG_CONFDIR="config-notelegram"
-              [ -L ${CONFDIR}/config.js ] && {
-                CONFLINK=`readlink ${CONFDIR}/config.js`
-                echo ${CONFLINK} | grep landscape > /dev/null && {
-                  NEWLINK=`dirname ${CONFLINK} | sed -e "s/config-landscape/config-/"`
-                  OLDBASE=`basename ${CONFLINK}`
-                  [ -f ${NEWLINK}/${OLDBASE} ] && {
-                    # Relink to portrait mode version of this config file
-                    rm -f config.js
-                    ln -s ${NEWLINK}/${OLDBASE} config.js
-                    switched=1
+              else
+                MM_CONFDIR="config"
+                TG_CONFDIR="config-notelegram"
+                [ -L ${CONFDIR}/config.js ] && {
+                  CONFLINK=`readlink ${CONFDIR}/config.js`
+                  echo ${CONFLINK} | grep landscape > /dev/null && {
+                    NEWLINK=`dirname ${CONFLINK} | sed -e "s/config-landscape/config-/"`
+                    OLDBASE=`basename ${CONFLINK}`
+                    [ -f ${NEWLINK}/${OLDBASE} ] && {
+                      # Relink to portrait mode version of this config file
+                      rm -f config.js
+                      ln -s ${NEWLINK}/${OLDBASE} config.js
+                      switched=1
+                    }
                   }
                 }
-              }
-            fi
+              fi
+            }
+            PORTRAIT=${!screen}
           }
-          PORTRAIT=${!screen}
-        }
-        ((scn+=1))
-        [ -x /usr/local/bin/mmscreen ] && /usr/local/bin/mmscreen ${scn}
-        [ "${switched}" ] && {
-          [ -L ${MCL_HOME}/pics ] && {
-            rm -f ${MCL_HOME}/pics
-            if [ "${PORTRAIT}" ]
-            then
-              [ -d ${MCL_HOME}/pics-portrait ] && {
-                ln -s ${MCL_HOME}/pics-portrait ${MCL_HOME}/pics
-              }
-            else
-              [ -d ${MCL_HOME}/pics-landscape ] && {
-                ln -s ${MCL_HOME}/pics-landscape ${MCL_HOME}/pics
-              }
-            fi
+          ((scn+=1))
+          [ -x /usr/local/bin/mmscreen ] && /usr/local/bin/mmscreen ${scn}
+          [ "${switched}" ] && {
+            [ -L ${MCL_HOME}/pics ] && {
+              rm -f ${MCL_HOME}/pics
+              if [ "${PORTRAIT}" ]
+              then
+                [ -d ${MCL_HOME}/pics-portrait ] && {
+                  ln -s ${MCL_HOME}/pics-portrait ${MCL_HOME}/pics
+                }
+              else
+                [ -d ${MCL_HOME}/pics-landscape ] && {
+                  ln -s ${MCL_HOME}/pics-landscape ${MCL_HOME}/pics
+                }
+              fi
+            }
+            pm2 restart MagicMirror --update-env
           }
-          pm2 restart MagicMirror --update-env
         }
-      }
+      fi
     else
       echo "No configured screen number ${scn}"
     fi
@@ -1270,47 +1276,49 @@ setconf() {
             fi
         fi
     fi
-    # If there is an existing config.js then set the Electron screen offsets
-    # Must have both xoff and yoff from mirrorscreen for this screen
-    xoff=SCREEN_${MM_SCREEN}[xoff]
-    [ ${!xoff+_} ] && {
-      XOFF=${!xoff}
-      yoff=SCREEN_${MM_SCREEN}[yoff]
-      [ ${!yoff+_} ] && {
-        YOFF=${!yoff}
-        [ -f ${CONFDIR}/config.js ] && {
-          [ -x /usr/local/bin/updoffsets ] && {
-            /usr/local/bin/updoffsets -x ${XOFF} -y ${YOFF} ${CONFDIR}/config.js
+    [ "${NUMSCREENS}" ] && [ ${NUMSCREENS} -gt 1 ] && {
+      # If there is an existing config.js then set the Electron screen offsets
+      # Must have both xoff and yoff from mirrorscreen for this screen
+      xoff=SCREEN_${MM_SCREEN}[xoff]
+      [ ${!xoff+_} ] && {
+        XOFF=${!xoff}
+        yoff=SCREEN_${MM_SCREEN}[yoff]
+        [ ${!yoff+_} ] && {
+          YOFF=${!yoff}
+          [ -f ${CONFDIR}/config.js ] && {
+            [ -x /usr/local/bin/updoffsets ] && {
+              /usr/local/bin/updoffsets -x ${XOFF} -y ${YOFF} ${CONFDIR}/config.js
+            }
           }
         }
       }
-    }
-    # Also set the screen width and height config settings
-    # Must have both width and height from mirrorscreen for this screen
-    width=SCREEN_${MM_SCREEN}[width]
-    [ ${!width+_} ] && {
-      WIDTH=${!width}
-      height=SCREEN_${MM_SCREEN}[height]
-      [ ${!height+_} ] && {
-        HEIGHT=${!height}
-        [ -f ${CONFDIR}/config.js ] && {
-          [ -x /usr/local/bin/updwidth ] && {
-            /usr/local/bin/updwidth -x ${WIDTH} -y ${HEIGHT} ${CONFDIR}/config.js
-          }
-        }
-        [ -x /usr/local/bin/updcsswidth ] && {
-          for css in ${CSSDIR}/*.css
-          do
-            [ "${css}" == "${CSSDIR}/*.css" ] && continue
-            [ -f ${css} ] && {
-              if [ "${PORTRAIT}" ]
-              then
-                /usr/local/bin/updcsswidth -x ${HEIGHT} -y ${WIDTH} ${css}
-              else
-                /usr/local/bin/updcsswidth -x ${WIDTH} -y ${HEIGHT} ${css}
-              fi
+      # Also set the screen width and height config settings
+      # Must have both width and height from mirrorscreen for this screen
+      width=SCREEN_${MM_SCREEN}[width]
+      [ ${!width+_} ] && {
+        WIDTH=${!width}
+        height=SCREEN_${MM_SCREEN}[height]
+        [ ${!height+_} ] && {
+          HEIGHT=${!height}
+          [ -f ${CONFDIR}/config.js ] && {
+            [ -x /usr/local/bin/updwidth ] && {
+              /usr/local/bin/updwidth -x ${WIDTH} -y ${HEIGHT} ${CONFDIR}/config.js
             }
-          done
+          }
+          [ -x /usr/local/bin/updcsswidth ] && {
+            for css in ${CSSDIR}/*.css
+            do
+              [ "${css}" == "${CSSDIR}/*.css" ] && continue
+              [ -f ${css} ] && {
+                if [ "${PORTRAIT}" ]
+                then
+                  /usr/local/bin/updcsswidth -x ${HEIGHT} -y ${WIDTH} ${css}
+                else
+                  /usr/local/bin/updcsswidth -x ${WIDTH} -y ${HEIGHT} ${css}
+                fi
+              }
+            done
+          }
         }
       }
     }

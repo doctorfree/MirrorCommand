@@ -37,11 +37,13 @@ shift $(( OPTIND - 1 ))
 for css in $*
 do
   [ -f "${css}" ] || continue
-  cat ${css} | sed \
-    -e "s#.*__SET_CSS_WIDTH__.*#        width: ${WIDTH}, /* __SET_CSS_WIDTH__ Do Not Remove */#" \
-    -e "s#.*__SET_CSS_HEIGHT__.*#        height: ${HEIGHT}, /* __SET_CSS_HEIGHT__ Do Not Remove */#" \
-    -e "s#.*__SET_CSS_WIDTH_PX__.*#        width: ${WIDTH}px, /* __SET_CSS_WIDTH_PX__ Do Not Remove */#" \
-    -e "s#.*__SET_CSS_HEIGHT_PX__.*#        height: ${HEIGHT}px, /* __SET_CSS_HEIGHT_PX__ Do Not Remove */#" > /tmp/css$$
-  cp /tmp/css$$ ${css}
-  rm -f /tmp/css$$
+  grep __SET_CSS_ ${css} > /dev/null && {
+    cat ${css} | sed \
+      -e "s#.*__SET_CSS_WIDTH__.*#        width: ${WIDTH}, /* __SET_CSS_WIDTH__ Do Not Remove */#" \
+      -e "s#.*__SET_CSS_HEIGHT__.*#        height: ${HEIGHT}, /* __SET_CSS_HEIGHT__ Do Not Remove */#" \
+      -e "s#.*__SET_CSS_WIDTH_PX__.*#        width: ${WIDTH}px, /* __SET_CSS_WIDTH_PX__ Do Not Remove */#" \
+      -e "s#.*__SET_CSS_HEIGHT_PX__.*#        height: ${HEIGHT}px, /* __SET_CSS_HEIGHT_PX__ Do Not Remove */#" > /tmp/css$$
+    cp /tmp/css$$ ${css}
+    rm -f /tmp/css$$
+  }
 done
