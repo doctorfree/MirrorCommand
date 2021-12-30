@@ -115,7 +115,7 @@ var config = {
         },
         {
             module: 'MMM-Solar',
-            position: "bottom_left",
+            position: "bottom_center",
             config: {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
@@ -242,7 +242,7 @@ var config = {
         },
         {
             module: "MMM-GoogleAssistant",
-            position: "bottom_center",
+            position: "top_left",
             configDeepMerge: true,
             config: {
               debug: false,
@@ -334,7 +334,7 @@ var config = {
         },
         {
             module: "MMM-Detector",
-            position: "bottom_center",
+            position: "top_left",
             configDeepMerge: true,
             config: {
               debug: false,
