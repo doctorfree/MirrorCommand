@@ -110,7 +110,7 @@ EXPORTS="audiotest camsnap chkconfig chktemp gethue getquote \
     screensaveroff get_temps mirror mknewartist mknewjav mknewmodel \
     mknewphotographer mknewplayboy mknewtop mm mmapiactions mmgetb \
     mmscene mmscreen mmsetb mmupdall module_update module_update_all \
-    play rand_back send_sms set_asound_conf showkeys updallartists \
+    play rand_back send_sms set_asound_conf showkeys updallartists updalljav \
     updallmodels updallphotographers updalltop updarpscan updartist \
     updlinks updjav updmodel updphotographer updtop updoffsets \
     updcsswidth updwidth vncview vol websnap wireless_conf zerologs"

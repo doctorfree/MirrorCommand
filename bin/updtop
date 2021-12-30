@@ -83,11 +83,14 @@ do
                     rm -f $subimg
                     continue
                 }
-                [ -f ${TOP}/$folder/$subimg ] && {
+                for MDIR in $TOP $MNT_PT
+                do
+                  [ -f ${MDIR}/$folder/$subimg ] && {
                     rm -f $subimg
-                    cp ${TOP}/$folder/$subimg $subimg
+                    cp ${MDIR}/$folder/$subimg $subimg
                     break
-                }
+                  }
+                done
               done
         else
             [ -L $img ] && rm -f $img
@@ -95,11 +98,14 @@ do
                 rm -f $img
                 continue
             }
-            [ -f ${TOP}/$folder/$img ] && {
+            for MDIR in $TOP $MNT_PT
+            do
+              [ -f ${MDIR}/$folder/$img ] && {
                 rm -f $img
-                cp ${TOP}/$folder/$img .
+                cp ${MDIR}/$folder/$img .
                 break
-            }
+              }
+            done
         fi
     done
     cd ${TOP_DIR}/${orient}
@@ -112,9 +118,11 @@ do
     [ "$folder" == "Unused" ] && continue
     [ -d $folder ] || continue
     chkfolder=$folder
-    [ -d ${TOP}/$chkfolder ] && {
-        echo "Checking ${TOP}/$chkfolder for newly added files"
-        cd ${TOP}/$chkfolder
+    for MDIR in $TOP $MNT_PT
+    do
+      [ -d ${MDIR}/$chkfolder ] && {
+        echo "Checking ${MDIR}/$chkfolder for newly added files"
+        cd ${MDIR}/$chkfolder
         for img in *
         do
             [ "$img" == "*" ] && continue
@@ -135,11 +143,11 @@ do
                     if isportrait $subimg
                     then
                       [ "${portrait}" ] && {
-                        cp ${TOP}/$chkfolder/$subimg ${TOP_DIR}/${orient}/$folder/$subimg
+                        cp ${MDIR}/$chkfolder/$subimg ${TOP_DIR}/${orient}/$folder/$subimg
                       }
                     else
                       [ "${portrait}" ] || {
-                        cp ${TOP}/$chkfolder/$subimg ${TOP_DIR}/${orient}/$folder/$subimg
+                        cp ${MDIR}/$chkfolder/$subimg ${TOP_DIR}/${orient}/$folder/$subimg
                       }
                     fi
                 done
@@ -152,16 +160,17 @@ do
                 if isportrait $img
                 then
                   [ "${portrait}" ] && {
-                    cp ${TOP}/$chkfolder/$img ${TOP_DIR}/${orient}/$folder/$img
+                    cp ${MDIR}/$chkfolder/$img ${TOP_DIR}/${orient}/$folder/$img
                   }
                 else
                   [ "${portrait}" ] || {
-                    cp ${TOP}/$chkfolder/$img ${TOP_DIR}/${orient}/$folder/$img
+                    cp ${MDIR}/$chkfolder/$img ${TOP_DIR}/${orient}/$folder/$img
                   }
                 fi
             fi
         done
         cd ${TOP_DIR}/${orient}
-    }
+      }
+    done
     cd ${TOP_DIR}/${orient}
 done
