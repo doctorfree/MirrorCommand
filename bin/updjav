@@ -25,9 +25,6 @@ minhei=1000
 MOD_DIR="${MNT_PT}/MagicMirror/${orientation}/JAV"
 RMLIST="/usr/local/MirrorCommand/etc/rmlist.txt"
 
-# Use an associative array to map model names across sites
-declare -A model_sites
-
 [ -d ${MOD_DIR} ] || {
     MNT_PT="/v/pictures"
     MOD_DIR="${MNT_PT}/MagicMirror/${orientation}/JAV"
@@ -133,29 +130,9 @@ do
     [ "$folder" == "*" ] && continue
     [ "$folder" == "Unused" ] && continue
     [ -d $folder ] || continue
-    case $folder in
-        Jenya)
-            model_sites[$ELITE]="Eugenia_Diordiychuk"
-            ;;
-        Natalia_Andreeva)
-            model_sites[$ELITE]="Delilah_G"
-            model_sites[$KIND]="Natalia_A"
-            ;;
-        Niemira)
-            model_sites[$ELITE]="Niemira_A"
-            ;;
-        Priscilla_Huggins)
-            model_sites[$ELITE]="Priscilla_Huggins_Ortiz"
-            ;;
-        *)
-            ;;
-    esac
     for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
     do
       chkfolder=$folder
-      [ "${model_sites[$MDIR]}" ] && {
-              chkfolder="${model_sites[$MDIR]}"
-      }
       [ -d $MDIR/$chkfolder ] && {
         echo "Checking $MDIR/$chkfolder for newly added files"
         cd $MDIR/$chkfolder

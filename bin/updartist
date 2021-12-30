@@ -11,9 +11,9 @@ MNT_PT="/mnt/transcend/Pictures"
 PMM="${MNT_PT}/MagicMirror"
 
 portrait=1
+orientation="portrait"
 minwid=800
 minhei=1000
-orientation="portrait"
 [ "$1" == "-l" ] && {
     portrait=
     orientation="landscape"
