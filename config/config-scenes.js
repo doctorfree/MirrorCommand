@@ -273,14 +273,17 @@ var config = {
             }
         },
         {
-		    module: "MMM-DateOnly",
-		    position: "upper_third",
+            module: "clock",
+            position: "top_center",
             classes: 'scores solar stocks',
-		    config: {
-                showWeek: false,
+            config: {
                 dateFormat: "dddd, LLL",
-		    }
-	    },
+                timeFormat: "12",
+                showPeriod: true,
+                showDate: true,
+                showTime: false,
+            }
+        },
         {
             module: "mmm-hue-lights",
             position: "middle_center",

@@ -187,21 +187,15 @@ var config = {
             }
         },
         {
-            module: "MMM-DateOnly",
-            position: "top_bar",
-            classes: 'weather',
-            config: {
-                showWeek: false,
-                dateFormat: "dddd, LLL",
-            }
-        },
-        {
-            module: "MMM-DateOnly",
+            module: "clock",
             position: "top_center",
-            classes: 'radar traffic',
+            classes: 'radar traffic weather',
             config: {
-                showWeek: false,
                 dateFormat: "dddd, LLL",
+                timeFormat: "12",
+                showPeriod: true,
+                showDate: true,
+                showTime: false,
             }
         },
         {

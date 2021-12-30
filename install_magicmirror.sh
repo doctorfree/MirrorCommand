@@ -32,7 +32,7 @@ MM_BASE=${HOME}/MagicMirror
 #         MMM-TelegramBot MMM-Tools MMM-AssistantMk2 MMM-Hotword MMM-YouTube \
 #         MMM-NotificationTrigger MMM-Volume MMM-News MMM-pages"
 MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
-         MMM-COVID19-SPARKLINE MMM-DarkSkyForecast MMM-DateOnly MMM-Detector \
+         MMM-COVID19-SPARKLINE MMM-DarkSkyForecast MMM-Detector \
          MMM-EmbedYoutube MMM-GoogleAssistant MMM-GoogleMapsTraffic \
          mmm-hue-lights MMM-iFrame MMM-InstagramView MMM-IronManGIF \
          MMM-MacAddressScan MMM-ModuleScheduler MMM-MyScoreboard \

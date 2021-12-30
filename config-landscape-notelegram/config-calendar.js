@@ -89,11 +89,14 @@ var config = {
             }
         },
         {
-            module: "MMM-DateOnly",
+            module: "clock",
             position: "top_center",
             config: {
-                showWeek: false,
                 dateFormat: "dddd, LLL",
+                timeFormat: "12",
+                showPeriod: true,
+                showDate: true,
+                showTime: false,
             }
         },
 		{

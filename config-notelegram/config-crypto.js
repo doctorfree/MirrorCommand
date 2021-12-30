@@ -84,13 +84,17 @@ var config = {
             }
         },
         {
-		    module: "MMM-DateOnly",
-		    position: "top_bar",
-		    config: {
-                showWeek: false,
-                dateFormat: "dddd, LLL",
-		    }
-	    },
+            module: "clock",
+            position: "top_center",
+            config: {
+                dateFormat: "dddd, LL",
+                timeFormat: "12",
+                clockBold: true,
+                showPeriod: true,
+                showDate: true,
+                showTime: true,
+            }
+        },
         {
             module: 'MMM-CoinMarketCap',
             position: "middle_center",

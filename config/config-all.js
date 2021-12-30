@@ -109,20 +109,14 @@ var config = {
         },
         {
             module: "clock",
-            position: "upper_third",
+            position: "top_center",
             config: {
-                dateFormat: "dddd, LLL",
-                displayType: "analog",
-                analogFace: "face-009",
-                analogSize: "200px",
-                displaySeconds: "true",
-                secondsColor: "#BAA3DC",
+                dateFormat: "dddd, LL",
                 timeFormat: "12",
-                showPeriod: "true",
-                showDate: "true",
-                clockBold: "false",
-                analogPlacement: "top",
-                analogShowDate: "top",
+                clockBold: true,
+                showPeriod: true,
+                showDate: true,
+                showTime: true,
             }
         },
         {
@@ -277,14 +271,6 @@ var config = {
               }
             }
         },
-        {
-		    module: "MMM-DateOnly",
-		    position: "top_bar",
-		    config: {
-                showWeek: false,
-                dateFormat: "dddd, LLL",
-		    }
-	    },
         {
             module: 'MMM-CoinMarketCap',
             position: "middle_center",
@@ -582,25 +568,22 @@ var config = {
                         ["MMM-iFrame", "MMM-Tools", "MMM-Solar",
                          "mmm-hue-lights", "MMM-MacAddressScan"],
 
-                        ["weather", "clock", "calendar", "newsfeed",
+                        ["weather", "calendar", "newsfeed",
                          "MMM-Tools", "MMM-Solar", "mmm-hue-lights",
                          "MMM-MacAddressScan"],
 
-                        ["clock", "MMM-COVID19-SPARKLINE", "newsfeed",
-                         "MMM-DateOnly", "MMM-Tools"],
+                        ["MMM-COVID19-SPARKLINE", "newsfeed", "MMM-Tools"],
 
-                        ["weather", "clock", "MMM-GoogleMapsTraffic",
-                         "newsfeed", "MMM-DateOnly"],
+                        ["weather", "MMM-GoogleMapsTraffic", "newsfeed"],
 
-                        ["weather", "clock", "MMM-CoinMarketCap",
-                         "MMM-stocks", "MMM-DateOnly", "newsfeed"],
+                        ["weather", "MMM-CoinMarketCap", "MMM-stocks", "newsfeed"],
 
-                        ["weather", "clock", "MMM-RAIN-RADAR",
-                         "MMM-DarkSkyForecast", "MMM-DateOnly"],
+                        ["weather", "MMM-RAIN-RADAR", "MMM-DarkSkyForecast"],
                     ],
                 fixed:
-                    ["alert", "updatenotification", "MMM-Remote-Control", "MMM-Detector",
-                     "MMM-TelegramBot", "MMM-TelegramCommands", "MMM-GoogleAssistant"],
+                    ["alert", "clock", "updatenotification", "MMM-Remote-Control",
+                     "MMM-Detector", "MMM-TelegramBot", "MMM-TelegramCommands",
+                     "MMM-GoogleAssistant"],
                 rotationTime: 300000, // rotate page every 5 minutes = 5 * 60 * 1000
             }
         },

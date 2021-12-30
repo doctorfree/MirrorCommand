@@ -255,7 +255,7 @@ case "$1" in
             # Install MagicMirror 3rd Party modules used by MirrorCommand
             [ -d "${MMHOME}/modules" ] && cd "${MMHOME}/modules"
             MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
-                     MMM-COVID19-SPARKLINE MMM-DarkSkyForecast MMM-DateOnly \
+                     MMM-COVID19-SPARKLINE MMM-DarkSkyForecast \
                      MMM-Detector MMM-GoogleAssistant MMM-GoogleMapsTraffic \
                      mmm-hue-lights MMM-iFrame MMM-InstagramView \
                      MMM-IronManGIF MMM-MacAddressScan MMM-MyScoreboard \

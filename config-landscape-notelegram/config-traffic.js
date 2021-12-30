@@ -116,11 +116,15 @@ var config = {
             },
         },
         {
-            module: "MMM-DateOnly",
+            module: "clock",
             position: "top_left",
             config: {
-                showWeek: false,
-                dateFormat: "dddd, LLL",
+                dateFormat: "dddd, LL",
+                timeFormat: "12",
+                clockBold: true,
+                showPeriod: true,
+                showDate: true,
+                showTime: true,
             }
         },
         {

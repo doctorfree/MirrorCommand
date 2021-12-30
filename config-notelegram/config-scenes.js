@@ -201,10 +201,10 @@ var config = {
                         title: "Washington Post",
                         url: "http://feeds.washingtonpost.com/rss/national"
                     },
-                    {
-                        title: "Mercury News",
-                        url: "https://www.mercurynews.com/feed"
-                    },
+                    // {
+                    //     title: "Mercury News",
+                    //     url: "https://www.mercurynews.com/feed"
+                    // },
                 ],
                 showSourceTitle: true,
                 showPublishDate: true,
@@ -273,14 +273,17 @@ var config = {
             }
         },
         {
-		    module: "MMM-DateOnly",
-		    position: "upper_third",
+            module: "clock",
+            position: "top_center",
             classes: 'scores solar stocks',
-		    config: {
-                showWeek: false,
+            config: {
                 dateFormat: "dddd, LLL",
-		    }
-	    },
+                timeFormat: "12",
+                showPeriod: true,
+                showDate: true,
+                showTime: false,
+            }
+        },
         {
             module: "mmm-hue-lights",
             position: "middle_center",
@@ -401,19 +404,6 @@ var config = {
                 showOffline: true,
                 keepAlive: 900,
                 updateInterval: 60,
-                // residents: ["iPhone 12 Mini"],
-                // occupiedCMD: {
-                //     notification: 'REMOTE_ACTION',
-                //     payload: {
-                //         action: 'MONITORON'
-                //     }
-                // },
-                // vacantCMD  : {
-                //     notification: 'REMOTE_ACTION',
-                //     payload: {
-                //         action: 'MONITOROFF'
-                //     }
-                // },
                 // DO NOT REMOVE __ARP_SCAN_DEVICES__
                 devices: [],
             },
