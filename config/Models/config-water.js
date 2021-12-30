@@ -122,7 +122,10 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommand/pics/Water/',
+                    '/usr/local/MirrorCommand/pics/River/',
+                    '/usr/local/MirrorCommand/pics/Shower/',
+                    '/usr/local/MirrorCommand/pics/Underwater/',
+                    '/usr/local/MirrorCommand/pics/Waterfall/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

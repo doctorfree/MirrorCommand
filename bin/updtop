@@ -4,9 +4,6 @@ MNT_PT="/mnt/transcend/Pictures"
 TOP_DIR="${MNT_PT}/MagicMirror"
 RMLIST="/usr/local/MirrorCommand/etc/rmlist.txt"
 
-# Use an associative array to map names across sites
-declare -A top_sites
-
 [ -d ${TOP_DIR} ] || {
     MNT_PT="/u/pictures"
     TOP_DIR="${MNT_PT}/MagicMirror"
@@ -19,17 +16,9 @@ declare -A top_sites
         }
     }
 }
-cd ${TOP_DIR}
+
 TOP="${MNT_PT}/Wallhaven"
-MOD="${TOP}/Models"
-ART="${TOP}/Artists"
-JAV="${TOP}/JAV_Idol"
-PHO="${TOP}/Photographers"
-PLA="${MOD}/Playboy"
-PEN="${MOD}/Penthouse"
-DRO="${MOD}/Photodromm"
-KIND="${MNT_PT}/KindGirls"
-ELITE="${MNT_PT}/Elite_Babes"
+cd ${TOP_DIR}
 
 isportrait() {
     port=0
@@ -94,14 +83,11 @@ do
                     rm -f $subimg
                     continue
                 }
-                for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
-                do
-                    [ -f $MDIR/$folder/$subimg ] && {
-                        rm -f $subimg
-                        cp $MDIR/$folder/$subimg $subimg
-                        break
-                    }
-                done
+                [ -f ${TOP}/$folder/$subimg ] && {
+                    rm -f $subimg
+                    cp ${TOP}/$folder/$subimg $subimg
+                    break
+                }
               done
         else
             [ -L $img ] && rm -f $img
@@ -109,17 +95,14 @@ do
                 rm -f $img
                 continue
             }
-            for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
-            do
-                [ -f $MDIR/$folder/$img ] && {
-                    rm -f $img
-                    cp $MDIR/$folder/$img .
-                    break
-                }
-            done
+            [ -f ${TOP}/$folder/$img ] && {
+                rm -f $img
+                cp ${TOP}/$folder/$img .
+                break
+            }
         fi
     done
-    cd ${TOP_DIR}
+    cd ${TOP_DIR}/${orient}
 done
 
 # Identify any newly added files and copy them
@@ -128,32 +111,10 @@ do
     [ "$folder" == "*" ] && continue
     [ "$folder" == "Unused" ] && continue
     [ -d $folder ] || continue
-    case $folder in
-        Jenya)
-            top_sites[$ELITE]="Eugenia_Diordiychuk"
-            ;;
-        Natalia_Andreeva)
-            top_sites[$ELITE]="Delilah_G"
-            top_sites[$KIND]="Natalia_A"
-            ;;
-        Niemira)
-            top_sites[$ELITE]="Niemira_A"
-            ;;
-        Priscilla_Huggins)
-            top_sites[$ELITE]="Priscilla_Huggins_Ortiz"
-            ;;
-        *)
-            ;;
-    esac
-    for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
-    do
-      chkfolder=$folder
-      [ "${top_sites[$MDIR]}" ] && {
-              chkfolder="${top_sites[$MDIR]}"
-      }
-      [ -d $MDIR/$chkfolder ] && {
-        echo "Checking $MDIR/$chkfolder for newly added files"
-        cd $MDIR/$chkfolder
+    chkfolder=$folder
+    [ -d ${TOP}/$chkfolder ] && {
+        echo "Checking ${TOP}/$chkfolder for newly added files"
+        cd ${TOP}/$chkfolder
         for img in *
         do
             [ "$img" == "*" ] && continue
@@ -162,11 +123,11 @@ do
             [ "$img" == "Description.txt" ] && continue
             if [ -d "$img" ]
             then
-                [ -d ${TOP_DIR}/$folder/$img ] || mkdir -p ${TOP_DIR}/$folder/$img
+                [ -d ${TOP_DIR}/${orient}/$folder/$img ] || mkdir -p ${TOP_DIR}/${orient}/$folder/$img
                 for subimg in $img/*
                 do
                     [ "$subimg" == "$img/*" ] && continue
-                    [ -L ${TOP_DIR}/$folder/$subimg ] && rm -f ${TOP_DIR}/$folder/$subimg
+                    [ -L ${TOP_DIR}/${orient}/$folder/$subimg ] && rm -f ${TOP_DIR}/${orient}/$folder/$subimg
                     grep $subimg $RMLIST > /dev/null && {
                         rm -f $subimg
                         continue
@@ -174,16 +135,16 @@ do
                     if isportrait $subimg
                     then
                       [ "${portrait}" ] && {
-                        cp $MDIR/$chkfolder/$subimg ${TOP_DIR}/$folder/$subimg
+                        cp ${TOP}/$chkfolder/$subimg ${TOP_DIR}/${orient}/$folder/$subimg
                       }
                     else
                       [ "${portrait}" ] || {
-                        cp $MDIR/$chkfolder/$subimg ${TOP_DIR}/$folder/$subimg
+                        cp ${TOP}/$chkfolder/$subimg ${TOP_DIR}/${orient}/$folder/$subimg
                       }
                     fi
                 done
             else
-                [ -L ${TOP_DIR}/$folder/$img ] && rm -f ${TOP_DIR}/$folder/$img
+                [ -L ${TOP_DIR}/${orient}/$folder/$img ] && rm -f ${TOP_DIR}/${orient}/$folder/$img
                 grep $img $RMLIST > /dev/null && {
                     rm -f $img
                     continue
@@ -191,17 +152,16 @@ do
                 if isportrait $img
                 then
                   [ "${portrait}" ] && {
-                    cp $MDIR/$chkfolder/$img ${TOP_DIR}/$folder/$img
+                    cp ${TOP}/$chkfolder/$img ${TOP_DIR}/${orient}/$folder/$img
                   }
                 else
                   [ "${portrait}" ] || {
-                    cp $MDIR/$chkfolder/$img ${TOP_DIR}/$folder/$img
+                    cp ${TOP}/$chkfolder/$img ${TOP_DIR}/${orient}/$folder/$img
                   }
                 fi
             fi
         done
-        cd ${TOP_DIR}
-      }
-    done
-    cd ${TOP_DIR}
+        cd ${TOP_DIR}/${orient}
+    }
+    cd ${TOP_DIR}/${orient}
 done

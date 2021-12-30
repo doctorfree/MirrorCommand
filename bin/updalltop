@@ -19,16 +19,16 @@ do
   for folder in *
   do
     case $folder in
-        Artists | Artists-ALL | JAV | JAV-ALL | Models | Models-ALL | Photographers | Photographers-ALL | Playboy-ALL)
-            continue
-            ;;
-        *)
+        Moon_Maison|Nuts_Magazine|Tuigirl|River|Shower|Waterfall|Underwater)
             if [ "${orient}" == "landscape" ]
             then
               updtop -l "$folder"
             else
               updtop "$folder"
             fi
+            ;;
+        *)
+            continue
             ;;
     esac
   done

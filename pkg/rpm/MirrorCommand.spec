@@ -412,13 +412,13 @@ MMIP=`hostname -I | awk ' { print $1 } '`
 }
 
 # ALSA audio input/ouput configuration
-[ -x ${MM}/bin/set_asound_conf ] && ${MM}/bin/set_asound_conf -c -q || {
+[ -x ${MM}/bin/set_asound_conf ] && {
   while true
   do
     read -p "Configure ALSA /etc/asound.conf for audio input/output ? ('Y'/'N'): " yn
     case $yn in
       [Yy]*)
-          [ -x ${MM}/bin/set_asound_conf ] && ${MM}/bin/set_asound_conf -e -q
+          ${MM}/bin/set_asound_conf -e -q
           break
           ;;
       [Nn]*)
