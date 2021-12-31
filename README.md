@@ -60,6 +60,7 @@ configure, monitor, and manage a MagicMirror.
     1. [Why would I need or want command line control of MagicMirror](#why-would-i-need-or-want-command-line-control-of-magicmirror)
     1. [History](#history)
 1. [Contents](#contents)
+1. [Known Limitations](#known-limitations)
 1. [License](#license)
 
 ## Overview
@@ -988,6 +989,19 @@ in his [MagicMirror scripts project](https://github.com/sdetweil/MagicMirror_scr
 ## Contents
 
 See the [MirrorCommand Contents](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/MirrorCommand-Contents) wiki page for a full contents listing.
+
+## Known Limitations
+
+The following are known limitations in the current release:
+
+- The installation packages are interactive and cannot be integrated into an unattended install process
+- The MirrorCommand config files are modified by the `showkeys` command in a manner that prevents subsequent key value changes and a rerun of `showkeys`
+    - A key value can be added to an empty key array entry and `showkeys` rerun
+    - Once a key value has been set in `mirrorkeys` and `showkeys` has been run, that value is hard coded in all config files that use it
+- If a secondary monitor is attached but the system does not recognize it as "connected" then it will not be added to the `mirrorscreens` config file and the `mirror` command will not recognize it
+    - In some cases it is necessary to power on the monitor prior to booting the system in order for the X11 graphical system to recognize the monitor
+- Significant effort has been made to adjust the module layouts in all config files to create a MagicMirror display with non-overlapping regions. However, some screen resolutions may need manual adjustment of some config files to arrive at a pleasant display. Testing has been limited to only a few screen resolutions and display modes.
+- The current release does not fully support seamless upgrades nor have upgrades been thoroughly tested. If a future upgrade of the MirrorCommand package fails or does not entirely complete, the recommended procedure is to backup all MagicMirror and MirrorCommand files, remove the MirrorCommand package, and install the newer MirrorCommand package.
 
 ## License
 
