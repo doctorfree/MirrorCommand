@@ -1447,7 +1447,9 @@ set_config() {
 
 system_info() {
     printf "\n${BOLD}System information for:${NORMAL}\n"
-    uname -a
+    HNAM=`uname -n`
+    OSVR=`uname -s -r`
+    printf "${HNAM} running ${OSVR}\n"
     [ "$INFO" == "all" ] || [ "$INFO" == "temp" ] && {
         if [ "${fake_vcgencmd}" ]
         then
@@ -1491,12 +1493,50 @@ system_info() {
         done
     }
     [ "$INFO" == "all" ] || [ "$INFO" == "screen" ] && {
-        printf "${BOLD}Screen dimensions and resolution:${NORMAL}\n"
+        printf "\n${BOLD}Screen dimensions and resolution:${NORMAL}\n"
         xrandr --query --verbose | grep Screen
-        xrandr --query --verbose | grep connected | grep -v disconnected
         xdpyinfo | grep dimensions
         xdpyinfo | grep resolution
         display_status
+        printf "\n${BOLD}Connected monitors:${NORMAL}\n"
+        xrandr --query --verbose | grep connected | grep -v disconnected
+        printf "\n${BOLD}MirrorCommand configured screens:${NORMAL}"
+        printf "\n\tNumber of screens = ${NUMSCREENS}"
+        device=SCREEN_${MM_SCREEN}[hdmi]
+        if [ ${!device+_} ]
+        then
+          hdmi=${!device}
+        else
+          hdmi=`xrandr --listactivemonitors | grep ${MM_SCREEN}: | awk ' { print $4 } '`
+        fi
+        printf "\n\tCurrent display screen device = ${hdmi}"
+        dispnum=${MM_SCREEN}
+        ((dispnum+=1))
+        printf "\n\t\tUse screen number ${dispnum} to address this screen"
+        xoff=SCREEN_${MM_SCREEN}[xoff]
+        yoff=SCREEN_${MM_SCREEN}[yoff]
+        [ ${!xoff+_} ] && [ ${!yoff+_} ] && {
+          printf "\n\t\tX Offset = ${!xoff}, and Y Offset = ${!yoff}"
+        }
+        [ "${NUMSCREENS}" ] && [ ${NUMSCREENS} -gt 1 ] && {
+          [ ${dispnum} -ge ${NUMSCREENS} ] && dispnum=0
+          device=SCREEN_${dispnum}[hdmi]
+          if [ ${!device+_} ]
+          then
+            hdmi=${!device}
+          else
+            hdmi=`xrandr --listactivemonitors | grep ${dispnum}: | awk ' { print $4 } '`
+          fi
+          printf "\n\tAlternate display screen device = ${hdmi}"
+          xoff=SCREEN_${dispnum}[xoff]
+          yoff=SCREEN_${dispnum}[yoff]
+          ((dispnum+=1))
+          printf "\n\t\tUse screen number ${dispnum} to address this screen"
+          [ ${!xoff+_} ] && [ ${!yoff+_} ] && {
+            printf "\n\t\tX Offset = ${!xoff}, and Y Offset = ${!yoff}"
+          }
+        }
+        printf "\n"
     }
 }
 
