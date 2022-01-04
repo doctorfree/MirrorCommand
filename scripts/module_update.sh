@@ -153,14 +153,6 @@ do
               git clone https://github.com/vicmora/MMM-GoogleMapsTraffic.git
             fi
             ;;
-          mmm-hue-lights)
-            if [ "${QUIET}" ]
-            then
-              git clone https://github.com/michael5r/mmm-hue-lights.git > /dev/null 2>&1
-            else
-              git clone https://github.com/michael5r/mmm-hue-lights.git
-            fi
-            ;;
           MMM-iFrame)
             if [ "${QUIET}" ]
             then
@@ -169,7 +161,7 @@ do
               git clone https://github.com/alberttwong/MMM-iFrame.git
             fi
             ;;
-          MMM-InstagramView|MMM-TelegramCommands|MMM-YouTubeWebView)
+          mmm-hue-lights|MMM-InstagramView|MMM-Solar|MMM-TelegramCommands|MMM-YouTubeWebView)
             if [ "${QUIET}" ]
             then
               git clone https://github.com/doctorfree/${module}.git > /dev/null 2>&1
@@ -253,14 +245,6 @@ do
               git clone https://github.com/eouia/MMM-Selfieshot
             fi
             ;;
-          MMM-Solar)
-            if [ "${QUIET}" ]
-            then
-              git clone https://github.com/tkrywit/MMM-Solar.git > /dev/null 2>&1
-            else
-              git clone https://github.com/tkrywit/MMM-Solar.git
-            fi
-            ;;
           MMM-stocks)
             if [ "${QUIET}" ]
             then
@@ -287,10 +271,10 @@ do
         if [ "${QUIET}" ]
         then
           npm install > /dev/null 2>&1
-          [ "${module}" == "MMM-Solar" ] && npm install request > /dev/null 2>&1
+          # [ "${module}" == "MMM-Solar" ] && npm install request > /dev/null 2>&1
         else
           npm install
-          [ "${module}" == "MMM-Solar" ] && npm install request
+          # [ "${module}" == "MMM-Solar" ] && npm install request
         fi
         cd ..
     else
