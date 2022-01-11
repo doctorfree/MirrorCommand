@@ -10,15 +10,17 @@ URL:        https://gitlab.com/doctorfree/MirrorCommand
 Vendor:     Doctorwhen's Bodacious Laboratory
 Packager:   ronaldrecord@gmail.com
 
+%global __os_install_post %{nil}
+
 %description
 Manage your MagicMirror from the command line
 
 %prep
-cp -a %{_sourcedir}/usr %{_sourcedir}/BUILDROOT/usr
 
 %build
 
 %install
+cp -a %{_sourcedir}/usr %{buildroot}/usr
 
 %pre
 MMHOME="/home/pi/MagicMirror"
