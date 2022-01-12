@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-28 December 2021, MirrorCommand version 3.0 release 1:
+12 January 2022, MirrorCommand version 3.0.0 release 1:
 
   This major release of MirrorCommand introduces support for multiple
   monitors, switching MagicMirror screen display between monitors,
@@ -10,6 +10,10 @@ All notable changes to this project will be documented in this file.
   and renames the project from MirrorCommandLine to MirrorCommand.
   Voice commands for screen switching have been added via the
   MMM-GoogleAssistant module recipe file MirrorCommand.js.
+
+  Changes to packaging include the creation and distribution of an RPM
+  format installation package as well as the implementation of release
+  creation during the Gitlab continuous integration process.
 
 21 December 2021, MirrorCommandLine version 2.7 release 2:
 
@@ -47,6 +51,82 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Wed Jan 12 09:10:01 2022 -0800 ab8bc46 :
+   Create release during CI, distribute zip archive and rpm
+Tue Jan 11 14:01:36 2022 -0800 9c6817c :
+   Distribute zip format, name compressed tar with tgz suffix
+Tue Jan 11 13:57:13 2022 -0800 bdabe35 :
+   Rename RPMs if necessary
+Tue Jan 11 13:33:46 2022 -0800 90720a8 :
+   Copy dist files in install in spec file, do not do post install strip
+Fri Jan 7 09:07:59 2022 -0800 c3b88d2 :
+   New model config
+Fri Jan 7 07:52:18 2022 -0800 51075fe :
+   New model config
+Thu Jan 6 11:58:09 2022 -0800 5ac56d5 :
+   Ignore Vim files
+Mon Jan 3 18:43:18 2022 -0800 be23e6d :
+   Added config files for new model
+Mon Jan 3 18:04:46 2022 -0800 813691f :
+   Change repos for MMM-Solar and mmm-hue-lights to get request dependency
+Sat Jan 1 09:44:46 2022 -0800 fa2a6eb :
+   Added fractals filter
+Sat Jan 1 09:01:30 2022 -0800 39d35db :
+   Improved screen info
+Fri Dec 31 18:17:06 2021 -0800 131f82e :
+   More images to filter
+Fri Dec 31 10:52:54 2021 -0800 4b9f0c9 :
+   Add rmlist-mode for images in wrong mode folder, update rmlist
+Fri Dec 31 09:50:07 2021 -0800 c3e6af4 :
+   Merge branch 'master' of ssh://gitlab.com/doctorfree/MirrorCommand
+Fri Dec 31 09:49:53 2021 -0800 294498d :
+   Update rmlist with landscape rejections
+Thu Dec 30 18:32:17 2021 -0800 03fc460 :
+   Add section for Known Limitations
+Thu Dec 30 15:13:13 2021 -0800 d356277 :
+   Fix updtop, add updalljav to exports
+Thu Dec 30 14:04:59 2021 -0800 4faa5c1 :
+   Add updalljav
+Thu Dec 30 13:47:33 2021 -0800 04e8f99 :
+   Use multiple image folders for water config, do not perform asound check prior to setting asound.conf in postinstall
+Thu Dec 30 11:22:02 2021 -0800 4657019 :
+   Adjust positions in scenes and scoreboard configs, add Instagram keys to mirrorkeys
+Thu Dec 30 09:49:46 2021 -0800 b3be4a1 :
+   Check if numscreens is greater than one before setting config screen sizes, check if screen number is already set before changing it
+Wed Dec 29 17:14:16 2021 -0800 f4db465 :
+   Adjust layout for default in landscape
+Wed Dec 29 16:52:18 2021 -0800 dc6b747 :
+   Replace MMM-DateOnly with default clock module
+Wed Dec 29 15:55:29 2021 -0800 ca9a15c :
+   Use digital clock, no IronMan
+Wed Dec 29 15:42:08 2021 -0800 7c07cde :
+   Replace DateOnly with IronManGIF overlayed clock
+Wed Dec 29 15:00:39 2021 -0800 65a9c98 :
+   Added comments to help configure mirrorkeys, some services no longer used, added keys for lattitude and longitude
+Wed Dec 29 12:21:06 2021 -0800 8967862 :
+   Silently exit if no MagicMirror window detected
+Wed Dec 29 12:10:21 2021 -0800 7f70bc8 :
+   Fixup fake vcgencmd, elaborate on mirrorkeys config in README
+Wed Dec 29 09:49:58 2021 -0800 3d369af :
+   Add dependencies to RPM spec file
+Tue Dec 28 18:23:35 2021 -0800 2ece7a2 :
+   Update section on Compatibility to include RPM based systems
+Tue Dec 28 18:16:57 2021 -0800 f97fb72 :
+   update rmlist
+Tue Dec 28 18:02:59 2021 -0800 d7a28ee :
+   Determine minimum width and height based on screen orientation
+Tue Dec 28 15:47:50 2021 -0800 9c534f1 :
+   update get image archive scripts with landscape mode
+Tue Dec 28 14:09:17 2021 -0800 14e608d :
+   Added sections on getting to the command line, switching screens, and using voice commands
+Tue Dec 28 12:40:42 2021 -0800 05fc1c3 :
+   Updated README with RPM installation and removal guides
+Tue Dec 28 12:04:47 2021 -0800 db4b860 :
+   Add rpm to CI artifacts
+Tue Dec 28 11:39:20 2021 -0800 cbb5ac5 :
+   Initial pass at RPM build
+Tue Dec 28 10:54:12 2021 -0800 fe0504f :
+   update changelog
 Tue Dec 28 10:51:45 2021 -0800 db61919 :
    Pass the right number to mmscreen
 Tue Dec 28 10:43:44 2021 -0800 277cdf0 :
