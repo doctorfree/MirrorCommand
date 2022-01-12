@@ -1,6 +1,6 @@
 
-For job ref 1968225793 and job name 'build'
+For job ref 1968394508 and job name 'build'
 
 Browse artifacts
 
-https://gitlab.com/doctorfree/MirrorCommand/-/jobs/1968225793/artifacts/browse?job=build
+https://gitlab.com/doctorfree/MirrorCommand/-/jobs/1968394508/artifacts/browse?job=build
