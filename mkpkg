@@ -66,8 +66,9 @@ Description: MagicMirror Command Line Tools
 
 chmod 644 ${OUT_DIR}/DEBIAN/control
 
-for dir in "${TOP}" "${DESTDIR}" "${MM}" "${TOP}/share" "${TOP}/share/applications" \
-            "${TOP}/share/doc" "${TOP}/share/doc/${PKG}"
+for dir in "${TOP}" "${DESTDIR}" "${MM}" "${DESTDIR}/share" \
+           "${DESTDIR}/share/applications" "${DESTDIR}/share/doc" \
+           "${DESTDIR}/share/doc/${PKG}"
 do
     [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
     ${SUDO} chown root:root ${OUT_DIR}/${dir}
@@ -102,15 +103,15 @@ do
     }
 done
 
-${SUDO} cp *.desktop "${OUT_DIR}/${TOP}/share/applications"
-${SUDO} cp AUTHORS ${OUT_DIR}/${TOP}/share/doc/${PKG}/AUTHORS
-${SUDO} cp LICENSE ${OUT_DIR}/${TOP}/share/doc/${PKG}/copyright
-${SUDO} cp CHANGELOG.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
-${SUDO} cp README.md ${OUT_DIR}/${TOP}/share/doc/${PKG}/README
-${SUDO} gzip -9 ${OUT_DIR}/${TOP}/share/doc/${PKG}/changelog
-${SUDO} cp -a markdown "${OUT_DIR}/${TOP}/share/doc/${PKG}/markdown"
-${SUDO} cp -a man "${OUT_DIR}/${TOP}/share/doc/${PKG}/man"
-${SUDO} cp -a man "${OUT_DIR}/${TOP}/share/man"
+${SUDO} cp *.desktop "${OUT_DIR}/${DESTDIR}/share/applications"
+${SUDO} cp AUTHORS ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}/AUTHORS
+${SUDO} cp LICENSE ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}/copyright
+${SUDO} cp CHANGELOG.md ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}/changelog
+${SUDO} cp README.md ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}/README
+${SUDO} gzip -9 ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}/changelog
+${SUDO} cp -a markdown "${OUT_DIR}/${DESTDIR}/share/doc/${PKG}/markdown"
+${SUDO} cp -a man "${OUT_DIR}/${DESTDIR}/share/doc/${PKG}/man"
+${SUDO} cp -a man "${OUT_DIR}/${DESTDIR}/share/man"
 
 ${SUDO} cp -a config ${OUT_DIR}/${MM}/config
 ${SUDO} cp -a config-notelegram ${OUT_DIR}/${MM}/config-notelegram
@@ -135,10 +136,14 @@ ${SUDO} dpkg --build ${PKG_NAME}_${PKG_VER} ${PKG_NAME}_${PKG_VER}-${PKG_REL}.de
 cd ${PKG_NAME}_${PKG_VER}
 echo "Creating compressed tar archive of ${PKG_NAME} ${PKG_VER}-${PKG_REL} distribution"
 tar cf - usr | gzip -9 > ../${PKG_NAME}_${PKG_VER}-${PKG_REL}.tgz
-[ "${GCI}" ] || {
-    echo "Creating zip archive of ${PKG_NAME} ${PKG_VER}-${PKG_REL} distribution"
-    zip -q -r ../${PKG_NAME}_${PKG_VER}-${PKG_REL}.zip usr
+
+have_zip=`type -p zip`
+[ "${have_zip}" ] || {
+  ${SUDO} apt-get update
+  ${SUDO} apt-get install zip -y
 }
+echo "Creating zip archive of ${PKG_NAME} ${PKG_VER}-${PKG_REL} distribution"
+zip -q -r ../${PKG_NAME}_${PKG_VER}-${PKG_REL}.zip usr
 cd ..
 
 [ "${GCI}" ] || {
@@ -155,7 +160,10 @@ cd "${SRC}/${SRC_NAME}"
 have_rpm=`type -p rpmbuild`
 [ "${have_rpm}" ] || {
   ${SUDO} apt-get update
+  export DEBIAN_FRONTEND=noninteractive
+  ${SUDO} ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
   ${SUDO} apt-get install rpm -y
+  ${SUDO} dpkg-reconfigure --frontend noninteractive tzdata
 }
 
 rpmbuild -ba --build-in-place \
