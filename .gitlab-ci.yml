@@ -48,16 +48,16 @@ release:
     assets:
       links:
         - name: 'Debian format installation package (Ubuntu Linux, etc)'
-          url: 'https://gitlab.com/doctorfree/MirrorCommand/-/jobs/${BUILD_JOB_ID}/artifacts/file/dist/MirrorCommand${VERSION}-${RELEASE}.deb'
+          url: 'https://gitlab.com/doctorfree/MirrorCommand/-/jobs/${BUILD_JOB_ID}/artifacts/file/dist/MirrorCommand_${VERSION}-${RELEASE}.deb'
           link_type: 'package'
         - name: 'RPM format installation package (CentOS/Fedora Linux etc)'
-          url: 'https://gitlab.com/doctorfree/MirrorCommand/-/jobs/${BUILD_JOB_ID}/artifacts/file/dist/MirrorCommand${VERSION}-${RELEASE}.rpm'
+          url: 'https://gitlab.com/doctorfree/MirrorCommand/-/jobs/${BUILD_JOB_ID}/artifacts/file/dist/MirrorCommand_${VERSION}-${RELEASE}.rpm'
           link_type: 'package'
         - name: 'Compressed tar format distribution archive'
-          url: 'https://gitlab.com/doctorfree/MirrorCommand/-/jobs/${BUILD_JOB_ID}/artifacts/file/dist/MirrorCommand${VERSION}-${RELEASE}.tgz'
+          url: 'https://gitlab.com/doctorfree/MirrorCommand/-/jobs/${BUILD_JOB_ID}/artifacts/file/dist/MirrorCommand_${VERSION}-${RELEASE}.tgz'
           link_type: 'other'
         - name: 'Zip format distribution archive'
-          url: 'https://gitlab.com/doctorfree/MirrorCommand/-/jobs/${BUILD_JOB_ID}/artifacts/file/dist/MirrorCommand${VERSION}-${RELEASE}.zip'
+          url: 'https://gitlab.com/doctorfree/MirrorCommand/-/jobs/${BUILD_JOB_ID}/artifacts/file/dist/MirrorCommand_${VERSION}-${RELEASE}.zip'
           link_type: 'other'
   only:
     - tags
