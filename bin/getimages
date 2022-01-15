@@ -1,13 +1,17 @@
 #!/bin/bash
 
-IDS="10Dnj1YiWQeeGryVldRW2tyBGyFNidKFY \
-     10DyV09WNLMcf5PET0gxwTtaaWzZnm7Mv \
+IDS="1WNkq7451G4aETO_IvB6J7KgOLk4LQKWE \
+     1UnfpRUFjxO8-aWBIoadc97JS2VepEPhO \
+     1SoiAmVdwVHx-ltti7kqQHM-R-cCjtJz8 \
      10GDkDVOxZtYKZtaKIn6C-xe4pab4R4cT \
-     10GbIF2-D3GOuWBTikHF0fatxUCqfytch \
-     10Hufi-VPrd2iR3uwUvQV3rCCDZzwekwg"
+     10DyV09WNLMcf5PET0gxwTtaaWzZnm7Mv"
 
 # Placeholder, replace with landscape archive IDs
-LAND_IDS="10cBgGmWCi5uCxpbt9SuLqP16rDZeYtm6"
+LAND_IDS="1NFPJPT965E0kIhnzYW77VywLpockkyR1 \
+          1aL96AZzLNeJ4Lz9ndQFQTpCSum05HzUS \
+          1S_8_hIC6J3Km9QSIP6OleacKu3qUt4G1 \
+          10GDkDVOxZtYKZtaKIn6C-xe4pab4R4cT \
+          10DyV09WNLMcf5PET0gxwTtaaWzZnm7Mv"
 
 PICDIR="pics-portrait"
 SPACE="375M"

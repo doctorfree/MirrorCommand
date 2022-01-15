@@ -1,0 +1,119 @@
+#!/bin/bash
+
+IDS="14bPqzRXk8cTZQcolPN3zq8_MIoJn4NwC \
+     1CzoUcELJFo6pEfc6Ywd5I2tEGBkbcnAk \
+     12TibW63OB-NouiueqkU_ZfOVsFfJbJPr \
+     1WPhvUDjBDog104C0w-i7Wz-auSd3W19Y \
+     1YMqptoXFxTLJXuN3k3sGtAStav516e_I \
+     1hReMOPPyObNTXbvoXY1bxz0IikcwAGrk \
+     19q8byN4Zc9IktZXt16rUXDhUvnDSA9f1 \
+     1FT_pGaJlWYr21tkCozAFlIuzrovUTg5_ \
+     1jipDtxZqR6HlgGAxQn3eKdmQXK17OsGj \
+     1fy6LnWld2q251I36MYhpu9MhZlAFeIez \
+     1hxTW6GYzEs2O-tYs__sa4Hha6ZP7M3pe \
+     1APIheR8cjEH92gNEWHdcFf7ygoSKgPaG \
+     13wD8CeSj3aAUo7q-lQSCiBB7-9D3iEUJ \
+     1Fj1X8WdzPU0gs9D1nuieBNdcjMTavWUu \
+     1yQcGDRsnyNkQ2ZJayOLFzvPbYEIRM0Np \
+     1OR0aZu-tRO3FtifJtoVd-tej7HGCkzcv \
+     1P3bxMf1yhW-un2oESa1HVSsuqCz3lP1c \
+     1k9y0TmUhZwJeXcOB6tTE2ia08k4E3BJY \
+     1k-0puK8435RIzap84wqRvbk9F1-ZSYMq \
+     1hmP1Mj6j0yY3yITEIpyBhx9wZD82cfL7 \
+     1bxcMz3pT-0ZRgemMAT9Grochd1l8h-9j \
+     1UsZ7ghWBeL_H-glxvbSTU7KAFp2fvHGZ \
+     1wHlCPVTeKmeoEqmRAiBTJe-nlU7wv78f"
+
+# Placeholder, replace with landscape archive IDs
+LAND_IDS="1ZtFu6Jrk5Owg3HyVrITTvI8SHwAlYanS \
+          1_gmNjufB553gg1-4sou7Qa_0t2osJlGq \
+          1-osEJZixpk4N5-aqmRbO5vIqEV8IQMPY \
+          10NHMVuahqkz5D0bkPecQJqd-uTEj9KI8 \
+          12G6vpHZZOPB1TrpTq-C0K9SCam6y8ulC \
+          13XMr7sdIzVN2uPpnljpQtK85eda5QL_a \
+          1pWWzxIX3zdWqgQ2MdGpRjJOLXTquFkJK \
+          1jYb3ikJDtri6Bp4PsymZdzoA2mC9A081 \
+          1cnr4Zi4cl5Y6gBgELgHKF3bC6OYp8tuj \
+          1jSdJp4tnir4U2w3eQeTgcpSbLNvXczjH \
+          19FLC0acPLz_KbX6g9ox68fXIoId2PoEv \
+          1luimaf4t3bdZWGXSg5chw5YQkWqbW-1n \
+          1aQjqCNgNn1AFWU1F558WQTpNJhPl41k2 \
+          1jke2KcXXNYsk6yO3WtYM7blh4mzaYJBr \
+          1FXXiXLUWBkuTX4bwTkkTarSFl7-rS_cb \
+          1BlKEzAX1eWIEEnr1KdAQgkvIr9eIxVjc \
+          1SQHquWNn75zpsYgM55-NKHr4_0GSQPGh \
+          1V5omLJKmRx_W_04dIpK0OYXyB6gSYpuv \
+          1xDP2pvizMhDz7w3sL7-zJMWcpZscMDgY \
+          1BUgk58W-iDKQHJHQY3llN4kesmIE0Uzu \
+          13p39l7e1Szv-SqPdVdNSqHJGrMWSaBz0 \
+          1vgaXOxFHePbuN5mIjdEoWQpykV0Xsba3 \
+          1lIIbQ81FTh2DkuW8NXuXoIeYqry6UIMx"
+
+PICDIR="pics-portrait"
+SPACE="500M"
+[ "$1" == "-l" ] && {
+  IDS=${LAND_IDS}
+  PICDIR="pics-landscape"
+  SPACE="500M"
+}
+
+HERE=`pwd`
+NUM_IDS=`echo ${IDS} | wc -w`
+printf "\nDownloading and extracting ${NUM_IDS} JAV archives "
+printf "will consume approximately ${SPACE} of disk space in "
+printf "${HERE}\n\n"
+
+while true
+do
+  read -p "Do you wish to continue ? ('Y'/'N'): " yn
+  case $yn in
+      [Yy]*)
+          DOWNLOAD=1
+          break
+          ;;
+      [Nn]*)
+          DOWNLOAD=
+          break
+          ;;
+      * )
+          echo "Please answer yes or no."
+          ;;
+  esac
+done
+
+[ "${DOWNLOAD}" ] && {
+  gdinst=`type -p gdown`
+
+  [ "${gdinst}" ] || pip install gdown > /dev/null
+
+  i=1
+  for ID in ${IDS}
+  do
+    printf "\nDownloading and extracting ${i}/${NUM_IDS} JAV archives ..."
+    gdown -O - --id ${ID} --quiet | tar xzf -
+    printf " Done."
+    ((i++))
+  done
+  printf "\n"
+  MMHOME=${HOME}/MagicMirror
+  [ -d ${MMHOME}/config ] || {
+      MMHOME=
+      for homedir in /usr/local /home/*
+      do
+          [ "${homedir}" == "/home/*" ] && continue
+          [ -d ${homedir}/MagicMirror/config ] && {
+              MMHOME="${homedir}/MagicMirror"
+              break
+          }
+      done
+  }
+  [ "${MMHOME}" ] && {
+      MM="/usr/local/MirrorCommand"
+      USER=$(stat -c '%U' ${MMHOME}/config)
+      GROUP=$(stat -c '%G' ${MMHOME}/config)
+      sudo chown -R ${USER}:${GROUP} ${MM}/${PICDIR}/JAV
+      find ${MM}/${PICDIR}/JAV -type d -print0 | xargs -0 chmod 755
+      find ${MM}/${PICDIR}/JAV -type f -print0 | xargs -0 chmod 644
+  }
+}
+
