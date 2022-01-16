@@ -24,19 +24,16 @@ orientation="portrait"
 PICDIR="/usr/local/MirrorCommand/pics-${orientation}"
 [ -d ${PICDIR} ] || mkdir -p ${PICDIR}
 
-for orient in ${orientation}
-do
-  TYPEDIR="${PMM}/${orient}/${TYPE}"
-  PICDIR="${PICDIR}/${TYPE}"
-  [ -d ${PICDIR} ] || mkdir -p ${PICDIR}
-  [ -d ${TYPEDIR} ] || {
-    TYPEDIR="/v/pictures/MagicMirror/${orient}/${TYPE}"
+TYPEDIR="${PMM}/${orientation}/${TYPE}"
+PICDIR="${PICDIR}/${TYPE}"
+[ -d ${PICDIR} ] || mkdir -p ${PICDIR}
+[ -d ${TYPEDIR} ] || {
+    TYPEDIR="/v/pictures/MagicMirror/${orientation}/${TYPE}"
     [ -d ${TYPEDIR} ] || {
         echo "$TYPEDIR does not exist or is not a directory. Exiting."
         exit 1
     }
-  }
-done
+}
 
 cd ${TYPEDIR}
 for i in $*

@@ -3,22 +3,36 @@
 TYPE="Photographers"
 UPDSCRIPT="updphotographer"
 
-TYPEDIR="/mnt/transcend/Pictures/MagicMirror/${TYPE}"
-PICDIR="/usr/local/MirrorCommand/pics/${TYPE}"
+MNT_PT="/mnt/transcend/Pictures"
+[ -d ${MNT_PT} ] || {
+    MNT_PT="/u/pictures"
+    [ -d ${MNT_PT} ] || {
+        echo "Cannot locate mount point for images"
+        exit 1
+    }
+}
+PMM="${MNT_PT}/MagicMirror"
 
+portrait=
+orientation="portrait"
+[ "$1" == "-l" ] && {
+    portrait="-l"
+    orientation="landscape"
+    shift
+}
+
+PICDIR="/usr/local/MirrorCommand/pics-${orientation}"
+[ -d ${PICDIR} ] || mkdir -p ${PICDIR}
+
+TYPEDIR="${PMM}/${orientation}/${TYPE}"
+PICDIR="${PICDIR}/${TYPE}"
 [ -d ${PICDIR} ] || mkdir -p ${PICDIR}
 [ -d ${TYPEDIR} ] || {
-    TYPEDIR="/u/pictures/MagicMirror/${TYPE}"
+    TYPEDIR="/v/pictures/MagicMirror/${orientation}/${TYPE}"
     [ -d ${TYPEDIR} ] || {
         echo "$TYPEDIR does not exist or is not a directory. Exiting."
         exit 1
     }
-}
-
-portrait=
-[ "$1" == "-l" ] && {
-    portrait="-l"
-    shift
 }
 
 cd ${TYPEDIR}
