@@ -33,18 +33,37 @@ echo ""
 echo "Portrait mode display screens are taller than wide."
 echo "Landscape mode display screens are wider than tall."
 echo ""
-numscreens=`xrandr --listactivemonitors | grep Monitors: | awk ' { print $2 } '`
+have_x11=
+xrandr > /dev/null 2>&1
+if [ $? -eq 0 ]
+then
+  have_x11=1
+  numscreens=`xrandr --listactivemonitors | grep Monitors: | awk ' { print $2 } '`
+else
+  echo "Unable to open X11 display, using fallback default values for screens"
+  numscreens=1
+fi
 echo "NUMSCREENS=${numscreens}" >> ${MSO}
 
 screens=0
 while [ ${screens} -lt ${numscreens} ]
 do
-  HDMI=`xrandr --listactivemonitors | grep ${screens}: | awk ' { print $4 } '`
-  GEOM=`xrandr --listactivemonitors | grep ${screens}: | awk ' { print $3 } '`
-  WIDTH=`echo ${GEOM} | awk -F 'x' '{ print $1 }' | awk -F '/' '{ print $1 }'`
-  HEIGHT=`echo ${GEOM} | awk -F 'x' '{ print $2 }' | awk -F '/' '{ print $1 }'`
-  XOFF=`echo ${GEOM} | awk -F '+' ' { print $2 } '`
-  YOFF=`echo ${GEOM} | awk -F '+' ' { print $3 } '`
+  if [ "${have_x11}" ]
+  then
+    HDMI=`xrandr --listactivemonitors | grep ${screens}: | awk ' { print $4 } '`
+    GEOM=`xrandr --listactivemonitors | grep ${screens}: | awk ' { print $3 } '`
+    WIDTH=`echo ${GEOM} | awk -F 'x' '{ print $1 }' | awk -F '/' '{ print $1 }'`
+    HEIGHT=`echo ${GEOM} | awk -F 'x' '{ print $2 }' | awk -F '/' '{ print $1 }'`
+    XOFF=`echo ${GEOM} | awk -F '+' ' { print $2 } '`
+    YOFF=`echo ${GEOM} | awk -F '+' ' { print $3 } '`
+  else
+    HDMI=HDMI-1
+    WIDTH=1920
+    HEIGHT=1080
+    XOFF=0
+    YOFF=0
+  fi
+
   # Create a selection dialog to allow user to select screen orientation
   if [ ${numscreens} -gt 1 ]
   then
