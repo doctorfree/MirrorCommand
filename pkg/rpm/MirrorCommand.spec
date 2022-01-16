@@ -4,7 +4,7 @@ Release:    %{_release}
 Summary:    MirrorCommand MagicMirror Command Tools
 License:    MIT
 BuildArch:  noarch
-Requires:   git, npm, nodejs
+Requires:   git, npm, nodejs, libmagic-dev, libatlas-base-dev, sox, libsox-fmt-all, build-essential, scrot, wget, unclutter, vlc, cec-utils, libudev-dev
 Recommends: qterminal, arp-scan, wmctrl, jq, fswebcam
 URL:        https://gitlab.com/doctorfree/MirrorCommand
 Vendor:     Doctorwhen's Bodacious Laboratory
