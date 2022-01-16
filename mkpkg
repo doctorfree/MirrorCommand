@@ -55,7 +55,7 @@ Version: ${PKG_VER}-${PKG_REL}
 Section: misc
 Priority: optional
 Architecture: all
-Depends: npm (>= 6.14.15), git (>= 2.20.1), nodejs (>= 12.0.0), arp-scan (>= 1.9.5), wmctrl (>= 1.07-7), libmagic-dev, libatlas-base-dev, sox, libsox-fmt-all, build-essential, scrot, wget, unclutter, vlc, cec-utils, libudev-dev
+Depends: git (>= 2.20.1), arp-scan (>= 1.9.5), wmctrl (>= 1.07-7), libmagic-dev, libatlas-base-dev, sox, libsox-fmt-all, build-essential, scrot, wget, unclutter, vlc, cec-utils, libudev-dev
 Suggests: jq (>= 1.4), fswebcam (>= 20140113), qterminal (>= 0.14.1)
 Maintainer: ${DEBFULLNAME} <${DEBEMAIL}>
 Build-Depends: debhelper (>= 11)

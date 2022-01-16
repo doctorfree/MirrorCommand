@@ -4,8 +4,8 @@ Release:    %{_release}
 Summary:    MirrorCommand MagicMirror Command Tools
 License:    MIT
 BuildArch:  noarch
-Requires:   git, npm, nodejs, libmagic-dev, libatlas-base-dev, sox, libsox-fmt-all, build-essential, scrot, wget, unclutter, vlc, cec-utils, libudev-dev
-Recommends: qterminal, arp-scan, wmctrl, jq, fswebcam
+Requires:   git, arp-scan, libmagic-dev, libatlas-base-dev, sox, libsox-fmt-all, build-essential, scrot, wget, unclutter, vlc, cec-utils, libudev-dev, wmctrl
+Recommends: qterminal, jq, fswebcam
 URL:        https://gitlab.com/doctorfree/MirrorCommand
 Vendor:     Doctorwhen's Bodacious Laboratory
 Packager:   ronaldrecord@gmail.com
@@ -23,6 +23,7 @@ Manage your MagicMirror from the command line
 cp -a %{_sourcedir}/usr %{buildroot}/usr
 
 %pre
+export PATH=/usr/local/bin:$PATH
 MMHOME="/home/pi/MagicMirror"
 USER=
 GROUP=
@@ -83,14 +84,32 @@ GROUP=
               }
               [ -d /usr/local ] || mkdir /usr/local
               cd /usr/local
+              inst_npm=`type -p npm`
+              [ "${inst_npm}" ] || {
+                  echo "Installing npm in /usr/local/..."
+                  curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o /tmp/n
+                  bash /tmp/n lts
+                  npm install -g n
+              }
               git clone https://github.com/MichMich/MagicMirror > /dev/null
               GROUP=`id -g -n ${USER}`
               chown -R ${USER}:${GROUP} MagicMirror
               cd MagicMirror
               MMHOME="/usr/local/MagicMirror"
-              echo "Installing MagicMirror in /usr/local/MagicMirror"
-              sudo -u ${USER} npm install > /dev/null 2>&1
-              # sudo -u ${USER} cp config/config.js.sample config/config.js
+              inst_npm=`type -p npm`
+              if [ "${inst_npm}" ]
+              then
+                  echo "Installing MagicMirror in /usr/local/MagicMirror"
+                  sudo -u ${USER} npm install > /dev/null 2>&1
+              else
+                  echo "Unable to locate npm in the execution path."
+                  echo "Install npm and run the MagicMirror installation"
+                  echo "by executing the commands:"
+                  echo ""
+                  echo "cd /usr/local/MagicMirror"
+                  echo "sudo -u ${USER} npm install"
+                  echo ""
+              fi
               break
               ;;
           [Nn]*)
