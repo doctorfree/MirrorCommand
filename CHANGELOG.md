@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+16 January 2022, MirrorCommand version 3.0.0 release 2:
+
+  This minor release update of MirrorCommand introduces support for
+  Ubuntu 21.10 along with improved support for npm and nodejs installation.
+  Image download utilities were updated to support downloads using the
+  MirrorImages version 3.0.0 packages.
+
 12 January 2022, MirrorCommand version 3.0.0 release 1:
 
   This major release of MirrorCommand introduces support for multiple
@@ -51,6 +58,30 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Sun Jan 16 09:57:59 2022 -0800 052b69a :
+   Move npm from dependency to preinstall script install with n
+Sun Jan 16 08:36:15 2022 -0800 ab1c7cb :
+   Added new photographer download
+Sun Jan 16 08:04:17 2022 -0800 e27fc50 :
+   Modify mknew scripts to support both orientations
+Sat Jan 15 19:39:04 2022 -0800 a00be0e :
+   Create new asound.conf if none exists
+Sat Jan 15 19:13:46 2022 -0800 fb7887b :
+   Add user to audio group before installing modules
+Sat Jan 15 18:43:42 2022 -0800 59b9b03 :
+   Add dependencies required by modules
+Sat Jan 15 16:04:09 2022 -0800 b6eea4b :
+   Use fallback default values for screens if no X display
+Sat Jan 15 14:42:14 2022 -0800 476ad66 :
+   Add npm dependency
+Sat Jan 15 13:29:15 2022 -0800 f52f337 :
+   Update Google Drive IDs, add getjav
+Wed Jan 12 11:11:13 2022 -0800 a0f9192 :
+   Get the RPM file name right
+Wed Jan 12 10:04:29 2022 -0800 78e21d4 :
+   Fix typo in gitlab ci, sed out noarch from rpm name
+Wed Jan 12 09:16:00 2022 -0800 56cf589 :
+   Update changelog in prep for version 3.0.0 release 1
 Wed Jan 12 09:10:01 2022 -0800 ab8bc46 :
    Create release during CI, distribute zip archive and rpm
 Tue Jan 11 14:01:36 2022 -0800 9c6817c :
