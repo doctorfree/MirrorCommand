@@ -179,8 +179,10 @@ else
     sed -e "s/${INPSTR}/${INPUT}/" -e "s/${OUTSTR}/${OUTPUT}/" > /tmp/asound$$
 
   SAME=
-  diff /tmp/asound$$ ${ASOUND} > /dev/null
-  [ $? -eq 0 ] && SAME=1
+  [ -f ${ASOUND} ] && {
+    diff /tmp/asound$$ ${ASOUND} > /dev/null
+    [ $? -eq 0 ] && SAME=1
+  }
   if [ "${CHK}" ]
   then
     if [ -f ${ASOUND} ]

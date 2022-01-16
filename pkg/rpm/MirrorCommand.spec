@@ -349,6 +349,7 @@ then
              MMM-Scenes MMM-Selfieshot MMM-MoonPhase MMM-Solar \
              MMM-stocks MMM-TelegramBot MMM-TelegramCommands \
              MMM-Tools MMM-Videoplayer MMM-YouTubeWebView"
+    usermod -a -G audio ${USER}
     for module in ${MODULES}
     do
       [ -d "${MMHOME}/modules/${module}" ] || {
