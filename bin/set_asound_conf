@@ -210,7 +210,8 @@ else
   else
     if [ "${UPD}" ]
     then
-      [ -f ${ASOUND} ] && {
+      if [ -f ${ASOUND} ]
+      then
         if [ "${SAME}" ]
         then
           [ "${QUT}" ] || {
@@ -228,7 +229,9 @@ else
           }
           sudo cp /tmp/asound$$ ${ASOUND}
         fi
-      }
+      else
+        sudo cp /tmp/asound$$ ${ASOUND}
+      fi
     else
       if [ "${SAME}" ]
       then
