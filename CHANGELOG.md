@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+17 January 2022, MirrorCommand version 3.0.1 release 1:
+
+  This minor release update of MirrorCommand introduces support for
+  non-interactive RPM installation.
+
 16 January 2022, MirrorCommand version 3.0.0 release 2:
 
   This minor release update of MirrorCommand introduces support for
@@ -58,6 +63,10 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Mon Jan 17 15:44:48 2022 -0800 0ff55bb :
+   Changes to support non-interactive RPM install
+Sun Jan 16 10:24:45 2022 -0800 00476d7 :
+   Updated changelog in preparation for version 3.0.0 release 2
 Sun Jan 16 09:57:59 2022 -0800 052b69a :
    Move npm from dependency to preinstall script install with n
 Sun Jan 16 08:36:15 2022 -0800 ab1c7cb :
