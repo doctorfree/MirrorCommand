@@ -17,12 +17,13 @@ OUTGREP="USB-Audio"
 INGREP="USB-Audio"
 
 usage() {
-    printf "\nUsage: set_asound_conf [-c] [-e] [-o outfile] [-q] [-r] [-t template] [-u]" 
+    printf "\nUsage: set_asound_conf [-c] [-e] [-n] [-o outfile] [-q] [-r] [-t template] [-u]" 
     printf "\nWhere:"
     printf "\n\t-c indicates perform a check and notify if update needed"
     printf "\n\t-e indicates perform an update of /etc/asound.conf"
     printf "\n\t-o 'outfile' specifies an alternate output file for generated asound.conf"
     printf "\n\t-q indicates quiet execution"
+    printf "\n\t-n indicates non-interactive execution (guess at settings)"
     printf "\n\t-r indicates restore original /etc/asound.conf"
     printf "\n\t-t 'template' specifies an alternate asound.conf template to use"
     printf "\n\t-u indicates display this usage message and exit"
@@ -36,13 +37,17 @@ UPD=
 CHK=
 REV=
 QUT=
-while getopts ceo:qrt:u flag; do
+SEL=1
+while getopts ceno:qrt:u flag; do
     case $flag in
         c)
             CHK=1
             ;;
         e)
             UPD=1
+            ;;
+        n)
+            SEL=
             ;;
         o)
             ASOUND="${OPTARG}"
@@ -88,17 +93,19 @@ else
     device=`echo ${device} | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'`
     device_options+=("${device}")
   done < <(cat ${CARDS})
-  device_options+=("Select For Me" "None" "Quit")
-  PS3="${BOLD}Please enter the device you wish to use for AUDIO OUTPUT (numeric or text): ${NORMAL}"
-  select opt in "${device_options[@]}"
-  do
-    case "$opt,$REPLY" in
-      [0-9]*,*|*,[0-9]*)
+  if [ "${SEL}" ]
+  then
+    device_options+=("Select For Me" "None" "Quit")
+    PS3="${BOLD}Please enter the device you wish to use for AUDIO OUTPUT (numeric or text): ${NORMAL}"
+    select opt in "${device_options[@]}"
+    do
+      case "$opt,$REPLY" in
+        [0-9]*,*|*,[0-9]*)
           OUTPUT=${REPLY}
           ((OUTPUT--))
           break
           ;;
-      "Select For Me",*|*,"Select For Me"|"select for me",*|*,"select for me")
+        "Select For Me",*|*,"Select For Me"|"select for me",*|*,"select for me")
           OUTPUT=`grep ${OUTGREP} ${CARDS} | grep "DAC" | awk ' { print $1 } '`
           [ "${OUTPUT}" ] || {
             OUTPUT=`grep '\[Headphones' ${CARDS} | awk ' { print $1 } '`
@@ -111,31 +118,31 @@ else
           }
           [ "${OUTPUT}" ] || OUTPUT=1
           ;;
-      "None",*|*,"None"|"none",*|*,"none")
+        "None",*|*,"None"|"none",*|*,"none")
           OUTPUT=1
           break
           ;;
-      "Quit",*|*,"Quit"|"quit",*|*,"quit")
+        "Quit",*|*,"Quit"|"quit",*|*,"quit")
           exit 0
           ;;
-      *)
+        *)
           printf "\nInvalid entry. Please try again"
           printf "\nEnter either a number or text of one of the menu entries\n"
           ;;
-    esac
-  done
+      esac
+    done
 
-  echo ""
-  PS3="${BOLD}Please enter the device you wish to use for AUDIO INPUT (numeric or text): ${NORMAL}"
-  select opt in "${device_options[@]}"
-  do
-    case "$opt,$REPLY" in
-      [0-9]*,*|*,[0-9]*)
+    echo ""
+    PS3="${BOLD}Please enter the device you wish to use for AUDIO INPUT (numeric or text): ${NORMAL}"
+    select opt in "${device_options[@]}"
+    do
+      case "$opt,$REPLY" in
+        [0-9]*,*|*,[0-9]*)
           INPUT=${REPLY}
           ((INPUT--))
           break
           ;;
-      "Select For Me",*|*,"Select For Me"|"select for me",*|*,"select for me")
+        "Select For Me",*|*,"Select For Me"|"select for me",*|*,"select for me")
           INPUT=`grep ${INGREP} ${CARDS} | grep "Webcam" | awk ' { print $1 } '`
           [ "${INPUT}" ] || {
             INPUT=`grep '\[Microphone' ${CARDS} | awk ' { print $1 } '`
@@ -155,7 +162,7 @@ else
             fi
           }
           ;;
-      "None",*|*,"None"|"none",*|*,"none")
+        "None",*|*,"None"|"none",*|*,"none")
           if [ "${OUTPUT}" == "0" ]
           then
             INPUT=1
@@ -164,15 +171,47 @@ else
           fi
           break
           ;;
-      "Quit",*|*,"Quit"|"quit",*|*,"quit")
+        "Quit",*|*,"Quit"|"quit",*|*,"quit")
           exit 0
           ;;
-      *)
+        *)
           printf "\nInvalid entry. Please try again"
           printf "\nEnter either a number or text of one of the menu entries\n"
           ;;
-    esac
-  done
+      esac
+    done
+  else
+    OUTPUT=`grep ${OUTGREP} ${CARDS} | grep "DAC" | awk ' { print $1 } '`
+    [ "${OUTPUT}" ] || {
+      OUTPUT=`grep '\[Headphones' ${CARDS} | awk ' { print $1 } '`
+    }
+    [ "${OUTPUT}" ] || {
+      OUTPUT=`grep ${OUTGREP} ${CARDS} | grep "Audio Device" | awk ' { print $1 } '`
+    }
+    [ "${OUTPUT}" ] && {
+      OUTPUT=`echo ${OUTPUT} | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'`
+    }
+    [ "${OUTPUT}" ] || OUTPUT=1
+
+    INPUT=`grep ${INGREP} ${CARDS} | grep "Webcam" | awk ' { print $1 } '`
+    [ "${INPUT}" ] || {
+      INPUT=`grep '\[Microphone' ${CARDS} | awk ' { print $1 } '`
+    }
+    [ "${INPUT}" ] || {
+      INPUT=`grep ${INGREP} ${CARDS} | grep "Audio Device" | awk ' { print $1 } '`
+    }
+    [ "${INPUT}" ] && {
+      INPUT=`echo ${INPUT} | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'`
+    }
+    [ "${INPUT}" ] || {
+      if [ "${OUTPUT}" == "0" ]
+      then
+        INPUT=1
+      else
+        INPUT=0
+      fi
+    }
+  fi
 
   # Generate a new asound.conf from the template
   cat ${ASOUND_TMPL} | \

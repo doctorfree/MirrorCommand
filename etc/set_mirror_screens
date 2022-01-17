@@ -1,6 +1,7 @@
 #!/bin/bash
 
 MMHOME="/home/pi/MagicMirror"
+SELECT=1
 [ -d ${MMHOME}/config ] || {
     MMHOME=
     for homedir in /usr/local /home/*
@@ -16,6 +17,8 @@ MMHOME="/home/pi/MagicMirror"
     echo "Cannot locate MagicMirror install folder. Exiting."
     exit 0
 }
+
+[ "$1" == "-q" ] && SELECT=
 
 MSO="${MMHOME}/.mirrorscreen"
 [ -f ${MSO} ] && mv ${MSO} ${MSO}.bak$$
@@ -64,67 +67,81 @@ do
     YOFF=0
   fi
 
-  # Create a selection dialog to allow user to select screen orientation
-  if [ ${numscreens} -gt 1 ]
+  if [ "${SELECT}" ]
   then
-    if [ ${screens} -eq 0 ]
+    # Create a selection dialog to allow user to select screen orientation
+    if [ ${numscreens} -gt 1 ]
     then
-      PS3="${BOLD}Please enter your primary display screen's orientation (numeric or text): ${NORMAL}"
+      if [ ${screens} -eq 0 ]
+      then
+        PS3="${BOLD}Please enter your primary display screen's orientation (numeric or text): ${NORMAL}"
+      else
+        PS3="${BOLD}Please enter your secondary display screen's orientation (numeric or text): ${NORMAL}"
+      fi
     else
-      PS3="${BOLD}Please enter your secondary display screen's orientation (numeric or text): ${NORMAL}"
+      PS3="${BOLD}Please enter your display screen's orientation (numeric or text): ${NORMAL}"
     fi
+    options=(Portrait Landscape Unknown)
+    select opt in "${options[@]}"
+    do
+      case "$opt,$REPLY" in
+        "Portrait",*|*,"Portrait"|"portrait",*|*,"portrait")
+          echo "Using portrait display mode for screen ${screens}"
+          echo "" >> ${MSO}
+          echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
+          echo "declare -A SCREEN_${screens}" >> ${MSO}
+          echo "SCREEN_${screens}[mode]=1" >> ${MSO}
+          echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
+          echo "SCREEN_${screens}[width]=${WIDTH}" >> ${MSO}
+          echo "SCREEN_${screens}[height]=${HEIGHT}" >> ${MSO}
+          echo "SCREEN_${screens}[xoff]=${XOFF}" >> ${MSO}
+          echo "SCREEN_${screens}[yoff]=${YOFF}" >> ${MSO}
+          break
+          ;;
+        "Landscape",*|*,"Landscape"|"landscape",*|*,"landscape")
+          echo "Using landscape display mode for screen ${screens}"
+          echo "" >> ${MSO}
+          echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
+          echo "declare -A SCREEN_${screens}" >> ${MSO}
+          echo "SCREEN_${screens}[mode]=" >> ${MSO}
+          echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
+          echo "SCREEN_${screens}[width]=${WIDTH}" >> ${MSO}
+          echo "SCREEN_${screens}[height]=${HEIGHT}" >> ${MSO}
+          echo "SCREEN_${screens}[xoff]=${XOFF}" >> ${MSO}
+          echo "SCREEN_${screens}[yoff]=${YOFF}" >> ${MSO}
+          break
+          ;;
+        "Unknown",*|*,"Unknown"|"unknown",*|*,"unknown")
+          echo "Using landscape display mode for screen ${screens}"
+          echo "" >> ${MSO}
+          echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
+          echo "declare -A SCREEN_${screens}" >> ${MSO}
+          echo "SCREEN_${screens}[mode]=" >> ${MSO}
+          echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
+          echo "SCREEN_${screens}[width]=${WIDTH}" >> ${MSO}
+          echo "SCREEN_${screens}[height]=${HEIGHT}" >> ${MSO}
+          echo "SCREEN_${screens}[xoff]=${XOFF}" >> ${MSO}
+          echo "SCREEN_${screens}[yoff]=${YOFF}" >> ${MSO}
+          break
+          ;;
+        *)
+          printf "\nInvalid entry. Please try again"
+          printf "\nEnter either a number or text of one of the menu entries\n"
+          ;;
+      esac
+    done
   else
-    PS3="${BOLD}Please enter your display screen's orientation (numeric or text): ${NORMAL}"
+    echo "Using landscape display mode for screen ${screens}"
+    echo "" >> ${MSO}
+    echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
+    echo "declare -A SCREEN_${screens}" >> ${MSO}
+    echo "SCREEN_${screens}[mode]=" >> ${MSO}
+    echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
+    echo "SCREEN_${screens}[width]=${WIDTH}" >> ${MSO}
+    echo "SCREEN_${screens}[height]=${HEIGHT}" >> ${MSO}
+    echo "SCREEN_${screens}[xoff]=${XOFF}" >> ${MSO}
+    echo "SCREEN_${screens}[yoff]=${YOFF}" >> ${MSO}
   fi
-  options=(Portrait Landscape Unknown)
-  select opt in "${options[@]}"
-  do
-    case "$opt,$REPLY" in
-      "Portrait",*|*,"Portrait"|"portrait",*|*,"portrait")
-        echo "Using portrait display mode for screen ${screens}"
-        echo "" >> ${MSO}
-        echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
-        echo "declare -A SCREEN_${screens}" >> ${MSO}
-        echo "SCREEN_${screens}[mode]=1" >> ${MSO}
-        echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
-        echo "SCREEN_${screens}[width]=${WIDTH}" >> ${MSO}
-        echo "SCREEN_${screens}[height]=${HEIGHT}" >> ${MSO}
-        echo "SCREEN_${screens}[xoff]=${XOFF}" >> ${MSO}
-        echo "SCREEN_${screens}[yoff]=${YOFF}" >> ${MSO}
-        break
-        ;;
-      "Landscape",*|*,"Landscape"|"landscape",*|*,"landscape")
-        echo "Using landscape display mode for screen ${screens}"
-        echo "" >> ${MSO}
-        echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
-        echo "declare -A SCREEN_${screens}" >> ${MSO}
-        echo "SCREEN_${screens}[mode]=" >> ${MSO}
-        echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
-        echo "SCREEN_${screens}[width]=${WIDTH}" >> ${MSO}
-        echo "SCREEN_${screens}[height]=${HEIGHT}" >> ${MSO}
-        echo "SCREEN_${screens}[xoff]=${XOFF}" >> ${MSO}
-        echo "SCREEN_${screens}[yoff]=${YOFF}" >> ${MSO}
-        break
-        ;;
-      "Unknown",*|*,"Unknown"|"unknown",*|*,"unknown")
-        echo "Using landscape display mode for screen ${screens}"
-        echo "" >> ${MSO}
-        echo "# SCREEN_${screens} stores the mode and device for screen ${screens}" >> ${MSO}
-        echo "declare -A SCREEN_${screens}" >> ${MSO}
-        echo "SCREEN_${screens}[mode]=" >> ${MSO}
-        echo "SCREEN_${screens}[hdmi]=${HDMI}" >> ${MSO}
-        echo "SCREEN_${screens}[width]=${WIDTH}" >> ${MSO}
-        echo "SCREEN_${screens}[height]=${HEIGHT}" >> ${MSO}
-        echo "SCREEN_${screens}[xoff]=${XOFF}" >> ${MSO}
-        echo "SCREEN_${screens}[yoff]=${YOFF}" >> ${MSO}
-        break
-        ;;
-      *)
-        printf "\nInvalid entry. Please try again"
-        printf "\nEnter either a number or text of one of the menu entries\n"
-        ;;
-    esac
-  done
   ((screens+=1))
 done
 USER=$(stat -c '%U' ${MMHOME}/config)

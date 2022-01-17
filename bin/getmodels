@@ -33,6 +33,7 @@ IDS="1kxHx3DMlEqoyH4elZRRsVLhbmvmCu2hi \
      1nEAPNxqIiFpqz02okcLseG9rxUn1PKRe \
      14a5wEtAFi-uxTPuqQjXzzG3yDd8Y89EK \
      1eVPaT9OS2bLyC-FeXTTyc3EYGKhvq8gi \
+     1w-bPZh85wStgcmK1OxKlcE8cZuFa70uG \
      1nGQ36GTdIwujsy6vUEqZQucx7DAyUNfJ"
 
 # Placeholder, replace with landscape archive IDs
@@ -68,6 +69,7 @@ LAND_IDS="1pI4MSNO8lg_WyIXIvxRYYA9ofLxyp4XX \
           10IYsilgRPuW6h3Rkbh5XJZ6VN8oqClvY \
           1Jw96V2HUpefNHqNsn6JhC98PuH4gut72 \
           1ShxfO3cfi5Ew24g1yrm_eV0Q8husI3FB \
+          177-UvuscFbDMbEipEvqWIryCTAvZRxyv \
           1c1Tl0BO4eIdLIDNPmlcXxU_85cOKBpPY"
 
 PICDIR="pics-portrait"

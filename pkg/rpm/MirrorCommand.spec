@@ -43,83 +43,46 @@ GROUP=
     echo "Unable to locate a MagicMirror installation on this system."
     echo "MagicMirror is required in order to install MirrorCommand."
     echo ""
-    while true
+    for user in /home/*
     do
-      read -p "Install MagicMirror ? ('Y'/'N'): " yn
-      case $yn in
-          [Yy]*)
-              numusers=0
-              users=
-              for user in /home/*
-              do
-                  [ "${user}" == "/home/*" ] && continue
-                  [ -d ${user} ] && {
-                      USER=`basename ${user}`
-                      users="${users} ${USER}"
-                      numusers=`expr ${numusers} + 1`
-                  }
-              done
-              [ $numusers -gt 1 ] && {
-                  echo ""
-                  # Create a selection dialog to allow user to select USER
-                  PS3="${BOLD}Please enter MagicMirror user (numeric or text): ${NORMAL}"
-                  options=(${users})
-                  select opt in "${options[@]}"
-                  do
-                    case "$opt,$REPLY" in
-                      *)
-                          [ -d /home/${opt} ] && {
-                              USER="${opt}"
-                              break
-                          }
-                          printf "\nInvalid entry. Please try again"
-                          printf "\nEnter either a number or text of one of the menu entries\n"
-                          ;;
-                    esac
-                  done
-              }
-              [ "${USER}" ] || {
-                  echo "No MagicMirror user found or selected. Using root."
-                  USER="root"
-              }
-              [ -d /usr/local ] || mkdir /usr/local
-              cd /usr/local
-              inst_npm=`type -p npm`
-              [ "${inst_npm}" ] || {
-                  echo "Installing npm in /usr/local/..."
-                  curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o /tmp/n
-                  bash /tmp/n lts
-                  npm install -g n
-              }
-              git clone https://github.com/MichMich/MagicMirror > /dev/null
-              GROUP=`id -g -n ${USER}`
-              chown -R ${USER}:${GROUP} MagicMirror
-              cd MagicMirror
-              MMHOME="/usr/local/MagicMirror"
-              inst_npm=`type -p npm`
-              if [ "${inst_npm}" ]
-              then
-                  echo "Installing MagicMirror in /usr/local/MagicMirror"
-                  sudo -u ${USER} npm install > /dev/null 2>&1
-              else
-                  echo "Unable to locate npm in the execution path."
-                  echo "Install npm and run the MagicMirror installation"
-                  echo "by executing the commands:"
-                  echo ""
-                  echo "cd /usr/local/MagicMirror"
-                  echo "sudo -u ${USER} npm install"
-                  echo ""
-              fi
-              break
-              ;;
-          [Nn]*)
-              exit 1
-              ;;
-          * )
-              echo "Please answer yes or no."
-              ;;
-      esac
+        [ "${user}" == "/home/*" ] && continue
+        [ -d ${user} ] && {
+            USER=`basename ${user}`
+            break
+        }
     done
+    [ "${USER}" ] || {
+        echo "No MagicMirror user found or selected. Using root."
+        USER="root"
+    }
+    [ -d /usr/local ] || mkdir /usr/local
+    cd /usr/local
+    inst_npm=`type -p npm`
+    [ "${inst_npm}" ] || {
+        echo "Installing npm in /usr/local/..."
+        curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o /tmp/n
+        bash /tmp/n lts
+        npm install -g n
+    }
+    git clone https://github.com/MichMich/MagicMirror > /dev/null
+    GROUP=`id -g -n ${USER}`
+    chown -R ${USER}:${GROUP} MagicMirror
+    cd MagicMirror
+    MMHOME="/usr/local/MagicMirror"
+    inst_npm=`type -p npm`
+    if [ "${inst_npm}" ]
+    then
+        echo "Installing MagicMirror in /usr/local/MagicMirror"
+        sudo -u ${USER} npm install > /dev/null 2>&1
+    else
+        echo "Unable to locate npm in the execution path."
+        echo "Install npm and run the MagicMirror installation"
+        echo "by executing the commands:"
+        echo ""
+        echo "cd /usr/local/MagicMirror"
+        echo "sudo -u ${USER} npm install"
+        echo ""
+    fi
 }
 echo "MirrorCommand pre-installation configuration complete"
 
@@ -145,11 +108,7 @@ cd /usr/local/bin
 [ -f ${MM}/etc/mirror_start.sh ] && {
   [ -f mirror_start ] || ln -s ${MM}/etc/mirror_start.sh mirror_start
 }
-# This fails but why
-# inst_vcgencmd=`type -p vcgencmd`
-# [ "${inst_vcgencmd}" ] || {
-#     [ -f vcgencmd ] || ln -s ${MM}/bin/vcgencmd vcgencmd
-# }
+
 for command in ${EXPORTS}
 do
   [ -f ${MM}/bin/${command} ] && {
@@ -186,7 +145,7 @@ MMHOME=/home/pi/MagicMirror
 }
 if [ "${MMHOME}" ]
 then
-    [ -x ${MM}/etc/set_mirror_screens ] && ${MM}/etc/set_mirror_screens
+    [ -x ${MM}/etc/set_mirror_screens ] && ${MM}/etc/set_mirror_screens -q
     MSI="${MMHOME}/.mirrorscreen"
     MSO="${MM}/etc/mirrorscreen"
     [ -f ${MSI} ] && {
@@ -434,24 +393,7 @@ MMIP=`hostname -I | awk ' { print $1 } '`
 }
 
 # ALSA audio input/ouput configuration
-[ -x ${MM}/bin/set_asound_conf ] && {
-  while true
-  do
-    read -p "Configure ALSA /etc/asound.conf for audio input/output ? ('Y'/'N'): " yn
-    case $yn in
-      [Yy]*)
-          ${MM}/bin/set_asound_conf -e -q
-          break
-          ;;
-      [Nn]*)
-          break
-          ;;
-      * )
-          echo "Please answer yes or no."
-          ;;
-    esac
-  done
-}
+[ -x ${MM}/bin/set_asound_conf ] && ${MM}/bin/set_asound_conf -e -q -n
 
 [ "${MMHOME}" ] && {
     # Setup PM2 if not already configured
@@ -671,5 +613,9 @@ rm -f ${MMHOME}/.mirrorscreen*
 
 %files
 /usr
+%exclude %dir /usr/local/share/man/man5
+%exclude %dir /usr/local/share/man/man1
+%exclude %dir /usr/local/share/man
+%exclude %dir /usr/local/share/applications
 
 %changelog
