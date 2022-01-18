@@ -369,12 +369,28 @@ case "$1" in
                 echo "Generating PM2 startup script"
                 pm2_startup=`sudo -u ${USER} pm2 startup | tail -n 1`
                 # Check to see if we can get the OS package name (Ubuntu)
-                if [ $(which lsb_release| wc -l) >0 ]; then
-                  # On Ubuntu 18.04, pm2 startup gets something wrong
-                  if [ $(lsb_release  -r | grep -m1 18.04 | wc -l) > 0 ]; then
-                    pm2_startup=$(echo ${pm2_startup} | sed 's/\/bin/\/bin:\/bin/')
+                fix_startup=
+                have_lsb=`type -p lsb_release`
+                if [ "${have_lsb}" ]
+                then
+                  if [ $(which lsb_release| wc -l) >0 ]; then
+                    # On Ubuntu 18.04, pm2 startup gets something wrong
+                    if [ $(lsb_release  -r | grep -m1 18.04 | wc -l) > 0 ]; then
+                      fix_startup=1
+                    fi
                   fi
+                else
+                  [ -f /etc/os-release ] && {
+                    grep 'ID=ubuntu' /etc/os-release > /dev/null && {
+                      grep VERSION= /etc/os-release | grep 18.04 > /dev/null && {
+                        fix_startup=1
+                      }
+                    }
+                  }
                 fi
+                [ "${fix_startup}" ] && {
+                  pm2_startup=$(echo ${pm2_startup} | sed 's/\/bin/\/bin:\/bin/')
+                }
                 ${pm2_startup} > /dev/null 2>&1
             }
         }

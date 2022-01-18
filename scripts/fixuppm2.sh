@@ -48,7 +48,20 @@ if [ -d ~/MagicMirror ]; then
 		if [ "$mac"  == "Darwin" ]; then
 		  echo the os is macOS $(sw_vers -productVersion) >> $logfile
 		else
-			echo the os is $(lsb_release -a 2>/dev/null) >> $logfile
+            have_lsb=`type -p lsb_release`
+            if [ "${have_lsb}" ]
+            then
+			  echo the os is $(lsb_release -a 2>/dev/null) >> $logfile
+            else
+              if [ -f /etc/os-release ]
+			  then
+			    OS_NAME=`grep NAME= /etc/os-release | sed -e "s/NAME=//"`
+			    OS_VERS=`grep VERSION= /etc/os-release | sed -e "s/VERSION=//"`
+			    echo the os is ${OS_NAME} ${OS_VERS} >> $logfile
+			  else
+			    echo the os is $(uname -a 2>/dev/null) >> $logfile
+			  fi
+            fi
 		fi
 		node_installed=$(which node)
 		if [ "$node_installed." == "." ]; then
@@ -128,13 +141,26 @@ if [ -d ~/MagicMirror ]; then
 		v=$($pm2cmd startup | tail -n 1)
 		if [ $mac != 'Darwin' ]; then
 			# check to see if we can get the OS package name (Ubuntu)
-			if [ $(which lsb_release| wc -l) >0 ]; then
-				# fix command
-				# if ubuntu 18.04, pm2 startup gets something wrong
-				if [ $(lsb_release  -r | grep -m1 18.04 | wc -l) > 0 ]; then
-					 v=$(echo $v | sed 's/\/bin/\/bin:\/bin/')
-				fi
-			fi
+			fix_startup=
+            have_lsb=`type -p lsb_release`
+            if [ "${have_lsb}" ]
+            then
+                if [ $(which lsb_release| wc -l) >0 ]; then
+                    # On Ubuntu 18.04, pm2 startup gets something wrong
+                    if [ $(lsb_release  -r | grep -m1 18.04 | wc -l) > 0 ]; then
+                      fix_startup=1
+                    fi
+                fi
+            else
+                [ -f /etc/os-release ] && {
+                    grep 'ID=ubuntu' /etc/os-release > /dev/null && {
+                      grep VERSION= /etc/os-release | grep 18.04 > /dev/null && {
+                        fix_startup=1
+                      }
+                    }
+                }
+            fi
+			[ "${fix_startup}" ] && v=$(echo $v | sed 's/\/bin/\/bin:\/bin/')
 		fi
 		echo startup command = $v >>$logfile
 		# execute the command returned

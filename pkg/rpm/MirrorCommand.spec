@@ -416,12 +416,12 @@ MMIP=`hostname -I | awk ' { print $1 } '`
         echo "Generating PM2 startup script"
         pm2_startup=`sudo -u ${USER} pm2 startup | tail -n 1`
         # Check to see if we can get the OS package name (Ubuntu)
-        if [ $(which lsb_release| wc -l) >0 ]; then
+        # if [ $(which lsb_release| wc -l) >0 ]; then
           # On Ubuntu 18.04, pm2 startup gets something wrong
-          if [ $(lsb_release  -r | grep -m1 18.04 | wc -l) > 0 ]; then
-            pm2_startup=$(echo ${pm2_startup} | sed 's/\/bin/\/bin:\/bin/')
-          fi
-        fi
+        #   if [ $(lsb_release  -r | grep -m1 18.04 | wc -l) > 0 ]; then
+        #     pm2_startup=$(echo ${pm2_startup} | sed 's/\/bin/\/bin:\/bin/')
+        #   fi
+        # fi
         ${pm2_startup} > /dev/null 2>&1
     }
 }
