@@ -1,23 +1,39 @@
 #!/bin/bash
 
 MMHOME=${HOME}/MagicMirror
+DEPENDS=1
 INSTALL=
 QUIET=
 REBUILD=
 
 usage() {
-  echo "Usage: module_update [-i] [-qQ] [-r] [module name]"
+  echo "Usage: module_update [-i] [-n] [-qQ] [-r] [module name]"
   echo "Where:"
   echo "-i indicates install module if not already installed"
+  echo "-n indicates no dependency checks (useful on RPM based Linux systems)"
   echo "-r indicates rebuild module"
   echo "-q indicates quiet mode"
   exit 1
 }
 
-while getopts iqru flag; do
+disable_depends() {
+  PRE="$1/installer/preinstall.sh"
+  [ -f ${PRE} ] && {
+    grep ^dependencies= ${PRE} > /dev/null && {
+      cat ${PRE} | sed -e "s/^dependencies=/# dependencies=/" -e "s/^Installer_check_dependencies/# Installer_check_dependencies/" > /tmp/pre$$
+      cp /tmp/pre$$ ${PRE}
+      rm -f /tmp/pre$$
+    }
+  }
+}
+
+while getopts inqru flag; do
     case $flag in
         i)
             INSTALL=1
+            ;;
+        n)
+            DEPENDS=
             ;;
         q)
             QUIET=1
@@ -56,6 +72,9 @@ do
     cd ${MOD_DIR}/${module}
     case ${module} in
       MMM-Detector|MMM-GoogleAssistant)
+        [ "${DEPENDS}" ] || {
+          disable_depends ${module}
+        }
         if [ "${REBUILD}" ]
         then
           if [ "${QUIET}" ]
@@ -144,6 +163,9 @@ do
             else
               git clone https://github.com/bugsounet/${module}.git
             fi
+            [ "${DEPENDS}" ] || {
+              disable_depends ${module}
+            }
             ;;
           MMM-GoogleMapsTraffic)
             if [ "${QUIET}" ]

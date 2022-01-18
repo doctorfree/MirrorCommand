@@ -4,7 +4,7 @@ Release:    %{_release}
 Summary:    MirrorCommand MagicMirror Command Tools
 License:    MIT
 BuildArch:  noarch
-Requires:   git, arp-scan, sox, scrot, wget, wmctrl
+Requires:   git, arp-scan, sox, sox-devel, scrot, wget, wmctrl, autoconf, automake, binutils, bison, flex, gcc, gcc-c++, gdb, glibc-devel, libtool, make, pkgconf, strace, byacc, ccache, cscope, ctags, elfutils, indent, ltrace, perf, valgrind, libmagic-devel, libatlas-base-devel
 Recommends: qterminal, jq, fswebcam
 URL:        https://gitlab.com/doctorfree/MirrorCommand
 Vendor:     Doctorwhen's Bodacious Laboratory
@@ -333,7 +333,7 @@ then
       [ -d "${MMHOME}/modules/${module}" ] || {
         [ -x "${MM}/bin/module_update" ] && {
           echo "Installing MagicMirror module: ${module}"
-          sudo -u ${USER} ${MM}/bin/module_update -q -i ${module}
+          sudo -u ${USER} ${MM}/bin/module_update -n -q -i ${module}
         }
       }
     done
