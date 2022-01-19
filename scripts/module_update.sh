@@ -16,17 +16,6 @@ usage() {
   exit 1
 }
 
-disable_depends() {
-  PRE="$1/installer/preinstall.sh"
-  [ -f ${PRE} ] && {
-    grep ^dependencies= ${PRE} > /dev/null && {
-      cat ${PRE} | sed -e "s/^dependencies=/# dependencies=/" -e "s/^Installer_check_dependencies/# Installer_check_dependencies/" > /tmp/pre$$
-      cp /tmp/pre$$ ${PRE}
-      rm -f /tmp/pre$$
-    }
-  }
-}
-
 while getopts inqru flag; do
     case $flag in
         i)
@@ -72,9 +61,6 @@ do
     cd ${MOD_DIR}/${module}
     case ${module} in
       MMM-Detector|MMM-GoogleAssistant)
-        [ "${DEPENDS}" ] || {
-          disable_depends ${module}
-        }
         if [ "${REBUILD}" ]
         then
           if [ "${QUIET}" ]
@@ -156,16 +142,21 @@ do
               git clone https://github.com/grabenhenrich/MMM-DateOnly.git
             fi
             ;;
-          MMM-Detector|MMM-GoogleAssistant|MMM-TelegramBot|MMM-Tools)
+          MMM-Tools)
             if [ "${QUIET}" ]
             then
               git clone https://github.com/bugsounet/${module}.git > /dev/null 2>&1
             else
               git clone https://github.com/bugsounet/${module}.git
             fi
-            [ "${DEPENDS}" ] || {
-              disable_depends ${module}
-            }
+            ;;
+          MMM-Detector|MMM-GoogleAssistant|MMM-TelegramBot)
+            if [ "${QUIET}" ]
+            then
+              git clone --branch rpmdev https://github.com/doctorfree/${module}.git > /dev/null 2>&1
+            else
+              git clone --branch rpmdev https://github.com/doctorfree/${module}.git
+            fi
             ;;
           MMM-GoogleMapsTraffic)
             if [ "${QUIET}" ]
