@@ -19,6 +19,6 @@ a=( * )
 ((j=RANDOM%${#a[@]}))
 randf="${a[j]}"
 #echo "Using $BACKG_DIR/$randf for background"
-DISPLAY=:0 pcmanfm --set-wallpaper="$BACKG_DIR/$randf"
+DISPLAY=${DISPLAY:=:0} pcmanfm --set-wallpaper="$BACKG_DIR/$randf"
 sleep 10
 pm2 start MagicMirror

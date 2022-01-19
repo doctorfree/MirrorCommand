@@ -170,4 +170,4 @@ else
 fi
 
 cd ${MM}
-DISPLAY=:0 npm start
+DISPLAY=${DISPLAY:=:0} npm start

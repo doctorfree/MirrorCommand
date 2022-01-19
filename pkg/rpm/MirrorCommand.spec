@@ -88,7 +88,7 @@ echo "MirrorCommand pre-installation configuration complete"
 
 %post
 export PATH=/usr/local/bin:$PATH
-export DISPLAY=:0
+export DISPLAY=${DISPLAY:=:0}
 # Scripts for which links will be made in /usr/local/bin
 EXPORTS="audiotest camsnap chkconfig chktemp gethue getquote \
     screensaveroff get_temps mirror mknewartist mknewjav mknewmodel \

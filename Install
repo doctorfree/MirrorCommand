@@ -30,7 +30,7 @@ PKG_SELECTED=
 PKG_VER=${VERSION}
 PKG_REL=${RELEASE}
 
-export DISPLAY=:0
+export DISPLAY=${DISPLAY:=:0}
 
 get_available_packages() {
   for pkgs in ${SRC}/${SRC_NAME}/releases/${PKG_VER}/*.${SUF}

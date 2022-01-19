@@ -191,7 +191,7 @@ Alternatively, MagicMirror can be installed manually following these steps:
 To start the MagicMirror over SSH from a remote terminal, use the commands:
 
 - `cd /path/to/MagicMirror`
-- `DISPLAY=:0 nohup npm start &`
+- `DISPLAY=${DISPLAY:=:0} nohup npm start &`
 
 To access the toolbar menu when in mirror mode, press the ALT key.
 
