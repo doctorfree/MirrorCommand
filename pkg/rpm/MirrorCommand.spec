@@ -4,7 +4,7 @@ Release:    %{_release}
 Summary:    MirrorCommand MagicMirror Command Tools
 License:    MIT
 BuildArch:  noarch
-Requires:   blas-devel, file-libs, git, arp-scan, sox, sox-devel, scrot, wget, wmctrl, autoconf, automake, binutils, bison, flex, gcc, gcc-c++, gdb, glibc-devel, libtool, make, pkgconf, strace, byacc, ccache, cscope, ctags, elfutils, indent, ltrace, perf, valgrind, xrandr, xdpyinfo, xset, jq, fswebcam
+Requires:   systemd-devel, libudev-devel, blas-devel, file-libs, git, arp-scan, sox, sox-devel, scrot, wget, wmctrl, autoconf, automake, binutils, bison, flex, gcc, gcc-c++, gdb, glibc-devel, libtool, make, pkgconf, strace, byacc, ccache, cscope, ctags, elfutils, indent, ltrace, perf, valgrind, xrandr, xdpyinfo, xset, jq, fswebcam
 Recommends: qterminal
 URL:        https://gitlab.com/doctorfree/MirrorCommand
 Vendor:     Doctorwhen's Bodacious Laboratory
