@@ -1,28 +1,23 @@
 #!/bin/bash
 
 MMHOME=${HOME}/MagicMirror
-NOPKGS=
 INSTALL=
 QUIET=
 REBUILD=
 
 usage() {
-  echo "Usage: module_update [-i] [-n] [-qQ] [-r] [module name]"
+  echo "Usage: module_update [-i] [-qQ] [-r] [module name]"
   echo "Where:"
   echo "-i indicates install module if not already installed"
-  echo "-n indicates no apt/yum/dpkg installs should be performed"
   echo "-r indicates rebuild module"
   echo "-q indicates quiet mode"
   exit 1
 }
 
-while getopts inqru flag; do
+while getopts iqru flag; do
     case $flag in
         i)
             INSTALL=1
-            ;;
-        n)
-            NOPKGS=1
             ;;
         q)
             QUIET=1
