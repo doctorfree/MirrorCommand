@@ -8,7 +8,7 @@
 # You should probably be running a more recent version of apt
 # On these early versions, install with the following:
 #
-# sudo dpkg -i "${DEB}"
+# sudo dpkg -i "${PKG}"
 # sudo apt-get install -f
 
 SRC_NAME="MirrorCommand"
@@ -192,8 +192,8 @@ xhost +si:localuser:root
 
 for PKG_NAME in ${PKG_NAMES}
 do
-  DEB="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}-${PKG_REL}.${SUF}"
-  [ -f "${DEB}" ] || {
+  PKG="${SRC}/${SRC_NAME}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}-${PKG_REL}.${SUF}"
+  [ -f "${PKG}" ] || {
     echo "${PKG_NAME}_${PKG_VER}-${PKG_REL}.${SUF} not found."
     for pkgs in ${SRC}/${SRC_NAME}/releases/*/${PKG_NAME}_*.${SUF}
     do
@@ -206,6 +206,31 @@ do
     continue
   }
 
-  echo "Installing ${DEB}"
-  sudo apt install "${DEB}"
+  echo "Installing ${PKG}"
+  if [ "${debian}" ]
+  then
+    if [ "${have_apt}" ]
+    then
+      sudo apt install ${PKG}
+    else
+      if [ "${have_dpkg}" ]
+      then
+        sudo dpkg -i ${PKG}
+      else
+        sudo apt install ${PKG}
+      fi
+    fi
+  else
+    if [ "${have_yum}" ]
+    then
+      sudo yum install ${PKG}
+    else
+      if [ "${have_rpm}" ]
+      then
+        sudo rpm -i ${PKG}
+      else
+        sudo dnf install ${PKG}
+      fi
+    fi
+  fi
 done
