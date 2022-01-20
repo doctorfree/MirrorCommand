@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MMHOME=${HOME}/MagicMirror
-DEPENDS=1
+NOPKGS=
 INSTALL=
 QUIET=
 REBUILD=
@@ -10,7 +10,7 @@ usage() {
   echo "Usage: module_update [-i] [-n] [-qQ] [-r] [module name]"
   echo "Where:"
   echo "-i indicates install module if not already installed"
-  echo "-n indicates no dependency checks (useful on RPM based Linux systems)"
+  echo "-n indicates no apt/yum/dpkg installs should be performed"
   echo "-r indicates rebuild module"
   echo "-q indicates quiet mode"
   exit 1
@@ -22,7 +22,7 @@ while getopts inqru flag; do
             INSTALL=1
             ;;
         n)
-            DEPENDS=
+            NOPKGS=1
             ;;
         q)
             QUIET=1
