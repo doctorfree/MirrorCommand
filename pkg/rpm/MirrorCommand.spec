@@ -23,6 +23,8 @@ Manage your MagicMirror from the command line
 cp -a %{_sourcedir}/usr %{buildroot}/usr
 
 %pre
+exec 1>/proc/${PPID}/fd/1
+exec 2>/proc/${PPID}/fd/2
 export PATH=/usr/local/bin:$PATH
 MMHOME="/home/pi/MagicMirror"
 USER=
@@ -87,6 +89,8 @@ GROUP=
 echo "MirrorCommand pre-installation configuration complete"
 
 %post
+exec 1>/proc/${PPID}/fd/1
+exec 2>/proc/${PPID}/fd/2
 export PATH=/usr/local/bin:$PATH
 export DISPLAY=${DISPLAY:=:0}
 # Scripts for which links will be made in /usr/local/bin
