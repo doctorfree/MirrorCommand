@@ -275,7 +275,7 @@ case "$1" in
               [ -d "${MMHOME}/modules/${module}" ] || {
                 [ -x "${MM}/bin/module_update" ] && {
                   echo "Installing MagicMirror module: ${module}"
-                  sudo -u ${USER} ${MM}/bin/module_update -q -i ${module}
+                  sudo -E -u ${USER} ${MM}/bin/module_update -q -i ${module}
                 }
               }
             done

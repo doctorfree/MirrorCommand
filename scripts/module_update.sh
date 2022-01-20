@@ -188,10 +188,10 @@ do
           MMM-MacAddressScan)
             if [ "${QUIET}" ]
             then
-              sudo apt-get -y install arp-scan > /dev/null 2>&1
+              # sudo apt-get -y install arp-scan > /dev/null 2>&1
               git clone https://github.com/doctorfree/MMM-MacAddressScan.git > /dev/null 2>&1
             else
-              sudo apt-get -y install arp-scan
+              # sudo apt-get -y install arp-scan
               git clone https://github.com/doctorfree/MMM-MacAddressScan.git
             fi
             ;;
@@ -246,10 +246,10 @@ do
           MMM-Selfieshot)
             if [ "${QUIET}" ]
             then
-              sudo apt-get -y install fswebcam > /dev/null 2>&1
+              # sudo apt-get -y install fswebcam > /dev/null 2>&1
               git clone https://github.com/eouia/MMM-Selfieshot > /dev/null 2>&1
             else
-              sudo apt-get -y install fswebcam
+              # sudo apt-get -y install fswebcam
               git clone https://github.com/eouia/MMM-Selfieshot
             fi
             ;;
