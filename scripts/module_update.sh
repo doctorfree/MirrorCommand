@@ -6,18 +6,26 @@ QUIET=
 REBUILD=
 
 usage() {
-  echo "Usage: module_update [-i] [-qQ] [-r] [module name]"
+  echo "Usage: module_update [-i] [-n] [-qQ] [-r] [module name]"
   echo "Where:"
   echo "-i indicates install module if not already installed"
+  echo "-n indicates do not perform package dependency installs"
   echo "-r indicates rebuild module"
   echo "-q indicates quiet mode"
   exit 1
 }
 
-while getopts iqru flag; do
+while getopts inqru flag; do
     case $flag in
         i)
             INSTALL=1
+            ;;
+        n)
+            # Some modules perform apt/yum installs of missing dependencies.
+            # This is not possible if this command is invoked during a package
+            # install. This environment variable can be checked to disable
+            # dependency installs during module initialization.
+            export __NO_DEP_CHECK__=1
             ;;
         q)
             QUIET=1

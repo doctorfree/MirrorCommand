@@ -333,17 +333,12 @@ then
              MMM-Tools MMM-Videoplayer MMM-YouTubeWebView"
     usermod -a -G audio ${USER}
 
-    # Some modules try to perform apt/yum installs of missing dependencies
-    # This is not possible during an rpm install
-    # This environment variable can be checked to disable dependency installs
-    export __NO_DEP_CHECK__=1
-
     for module in ${MODULES}
     do
       [ -d "${MMHOME}/modules/${module}" ] || {
         [ -x "${MM}/bin/module_update" ] && {
           echo "Installing MagicMirror module: ${module}"
-          sudo -E -u ${USER} ${MM}/bin/module_update -q -i ${module}
+          sudo -u ${USER} ${MM}/bin/module_update -n -q -i ${module}
         }
       }
     done
