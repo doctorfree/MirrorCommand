@@ -33,7 +33,8 @@ configure, monitor, and manage a MagicMirror.
     1. [Post installation configuration](#post-installation-configuration)
         1. [Add keys to mirrorkeys](#add-keys-to-mirrorkeys)
         1. [Configure mirror script](#configure-mirror-script)
-        1. [Image Archive Installation](#image-archive-installation)
+        1. [Rerun initialization scripts](#rerun-initialization-scripts)
+        1. [Image archive installation](#image-archive-installation)
 1. [Custom Package Creation](#custom-package-creation)
 1. [Removal](#removal)
 1. [Supporting utilities and config files](#supporting-utilities-and-config-files)
@@ -376,13 +377,52 @@ file has been configured with the API key.
 If you have not configured an API key for MagicMirror remote control then
 set the apikey to blank ( <code>apikey=</code> ).
 
-#### Image Archive Installation
+#### Rerun initialization scripts
 
-Optionally install the image archives used in many of the MirrorCommand config files:
+The MirrorCommand installation process attempts to configure the audio and
+video display settings of the system. These configuration scripts can be
+rerun post-installation if reconfiguration is desired. For example, if the
+installation was performed in the absence of a running X server then the
+video display settings may be incorrect. Or, if the audio settings changed
+due to the addition of a USB audio device after installation then the audio
+settings may need to be re-initialized.
 
-```bash
-sudo apt install MirrorImagesPortrait_<version>.deb
-```
+To perform these adjustments post-installation rerun the initialization scripts.
+
+To adjust the video display settings, execute the command:
+
+`/usr/local/MirrorCommand/etc/set_mirror_screens`
+
+The `set_mirror_screens` command will prompt for the display mode, Portrait
+or Landscape, and configure the file `/usr/local/MirrorCommand/etc/mirrorscreen`.
+This command should be run when the display setup changes. For example, if
+an additional monitor is added to the system or the existing monitor is upgraded
+with a higher resolution or display mode.
+
+To adjust the audio input/output settings, execute the command:
+
+`sudo /usr/local/bin/set_asound_conf -e`
+
+The `set_asound_conf` command will provide a dialog to select the desired audio
+output and input devices and configure the file `/etc/asound.conf`. This
+command should be run when the audio setup changes. For example, if an audio
+USB device is added to the system or you wish to change configured audio
+input/output devices. This command can also be used to check the current
+configuration with `sudo set_asound_conf -c`, restore the original configuration
+with `sudo set_asound_conf -r`, and select a configuration for you with
+`sudo set_asound_conf -e -n`. See `set_asound_conf -u` for a full usage message.
+
+#### Image archive installation
+
+See the [MirrorImages repository](https://gitlab.com/doctorfree/MirrorImages)
+to download several packages that can be used to download image archives
+preconfigured for use with the MirrorCommand config files. This is optional
+and is provided simply as a convenience. Note that none of the MirrorImages
+packages actually contain images. These packages know how to download
+image archives when they are installed on a system and know where to
+extract these archives so the MirrorCommand config files can access them.
+Some MirrorImages archive downloads can consume significant disk space.
+Make sure you have sufficient available disk space before installing.
 
 ## Custom Package Creation
 
