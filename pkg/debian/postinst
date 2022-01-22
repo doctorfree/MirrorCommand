@@ -58,13 +58,7 @@ case "$1" in
               cp ${MM}/bin/${command} /usr/bin/${command}
               chmod 755 /usr/bin/${command}
             }
-            if [ "${command}" == "remountusb" ]
-            then
-              [ -f ${command} ] || ln -s /usr/bin/${command} .
-            else
-              localcomm=`echo ${command} | sed -e "s/my//"`
-              [ -f ${localcomm} ] || ln -s /usr/bin/${command} ${localcomm}
-            fi
+            [ -f ${command} ] || ln -s /usr/bin/${command} .
           }
         done
         MMHOME=/home/pi/MagicMirror

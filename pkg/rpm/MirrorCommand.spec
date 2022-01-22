@@ -126,13 +126,7 @@ do
       cp ${MM}/bin/${command} /usr/bin/${command}
       chmod 755 /usr/bin/${command}
     }
-    if [ "${command}" == "remountusb" ]
-    then
-      [ -f ${command} ] || ln -s /usr/bin/${command} .
-    else
-      localcomm=`echo ${command} | sed -e "s/my//"`
-      [ -f ${localcomm} ] || ln -s /usr/bin/${command} ${localcomm}
-    fi
+    [ -f ${command} ] || ln -s /usr/bin/${command} .
   }
 done
 MMHOME=/home/pi/MagicMirror
@@ -486,14 +480,8 @@ MNTS="myreboot myshutdown remountusb"
 }
 for command in ${MNTS}
 do
+    rm -f /usr/local/bin/${command}
     rm -f /usr/bin/${command}
-    if [ "${command}" == "remountusb" ]
-    then
-      rm -f /usr/local/bin/${command}
-    else
-      localcomm=`echo ${command} | sed -e "s/my//"`
-      rm -f /usr/local/bin/${localcomm}
-    fi
 done
 MMHOME=/home/pi/MagicMirror
 [ -d ${MMHOME}/config ] || {

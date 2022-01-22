@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Set these to the device and mount point of the USB drive you wish to remount
 DEV="/dev/sda1"
 MNT="/mnt/transcend"
 

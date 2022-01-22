@@ -35,14 +35,8 @@ case "$1" in
         }
         for command in ${MNTS}
         do
+            rm -f /usr/local/bin/${command}
             rm -f /usr/bin/${command}
-            if [ "${command}" == "remountusb" ]
-            then
-              rm -f /usr/local/bin/${command}
-            else
-              localcomm=`echo ${command} | sed -e "s/my//"`
-              rm -f /usr/local/bin/${localcomm}
-            fi
         done
         MMHOME=/home/pi/MagicMirror
         [ -d ${MMHOME}/config ] || {
