@@ -68,7 +68,7 @@ configure, monitor, and manage a MagicMirror.
 
 The Mirror Command Line project provides scripts to enable
 command line control of the MagicMirror system over a local network.
-The MirrorCommand Debian format package installation scripts perform
+The MirrorCommand Debian and RPM format package installation scripts perform
 automatic installation and configuration of a MagicMirror including:
 
 - Automated installation of the MagicMirror software if not already installed
@@ -142,7 +142,7 @@ That's most Linux environments.
 MirrorCommand is intended for installation on a system running
 [MagicMirror](https://magicmirror.builders). If MagicMirror is not
 previously installed it can be installed following
-[these instructions](https://docs.magicmirror.builders/getting-started/installation.html#manual-installation). Alternatively, the MirrorCommand Debian package
+[these instructions](https://docs.magicmirror.builders/getting-started/installation.html#manual-installation). Alternatively, the MirrorCommand Debian or RPM package
 format installation will automatically install and configure MagicMirror if no
 existing MagicMirror installation is detected. This automated installation
 of MagicMirror includes installing and configuring PM2 for easy and powerful
@@ -159,7 +159,7 @@ MagicMirror requires Node version 12 or later.
 MirrorCommand assumes that MagicMirror is installed in either
 `/usr/local/MagicMirror` or a user's home directory.
 
-To install MagicMirror simply install MirrorCommand using the Debian
+To install MagicMirror simply install MirrorCommand using the Debian or RPM
 package format available at the
 [MirrorCommand Releases](https://gitlab.com/doctorfree/MirrorCommand/-/releases)
 area of the Git repository.
