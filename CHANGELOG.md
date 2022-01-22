@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+22 January 2022, MirrorCommand version 3.0.1 release 2:
+
+  This minor release update of MirrorCommand enhances support for
+  RPM based Linux installation and fixes an error introduced into
+  the MMM-BackgroundSlideshow module in recent commits. It is
+  recommended that all RPM based systems utilize this release
+  or later and any systems utilizing the MMM-BackgroundSlideshow
+  module delete that module and reinstall with the `module_update`
+  command included in this release.
+
 17 January 2022, MirrorCommand version 3.0.1 release 1:
 
   This minor release update of MirrorCommand introduces support for
@@ -63,6 +73,52 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Fri Jan 21 18:55:14 2022 -0800 837d8f7 :
+   Checkout pre-sharp commit of MMM-BackgroundSlideshow until this issue is resolved
+Fri Jan 21 17:40:48 2022 -0800 1b13765 :
+   Fixup myreboot and myshutdown to look in /media/user/* by default
+Fri Jan 21 08:41:46 2022 -0800 b9b8b20 :
+   Set no dependency install env in module_update rather than package scripts
+Fri Jan 21 07:44:04 2022 -0800 f0c603e :
+   Add section on rerunning initialization scripts
+Thu Jan 20 14:42:15 2022 -0800 70017b0 :
+   Added systemd-devel to rpm requires to get libudev support
+Thu Jan 20 14:09:10 2022 -0800 c469257 :
+   Install/Uninstall scripts handle debian or rpm
+Thu Jan 20 10:52:04 2022 -0800 5560981 :
+   Try trick with redirecting stderr and stdout to parent process in RPM scriptlets
+Thu Jan 20 10:25:04 2022 -0800 15d9afe :
+   Pass env in sudo when invoking module_update in postinstall
+Wed Jan 19 17:23:12 2022 -0800 ffa20b6 :
+   Use env var to disable dependency installs during debian installation
+Wed Jan 19 17:20:46 2022 -0800 ace48fd :
+   Use env var to disable dependency installs during installation
+Wed Jan 19 16:50:52 2022 -0800 e0aaaac :
+   Try reducing dependencies in RPM spec
+Wed Jan 19 15:30:20 2022 -0800 1be419f :
+   Now I'm just flailing, rpm has me by the dependencies
+Wed Jan 19 15:12:34 2022 -0800 3170a10 :
+   Give up, rpm is stupid, make it an x86_64 package
+Wed Jan 19 15:03:41 2022 -0800 e07b4e0 :
+   Workaround for noarch package requiring x86_64 package
+Wed Jan 19 14:46:53 2022 -0800 54334de :
+   Use architecture to identify some package dependencies
+Wed Jan 19 14:28:46 2022 -0800 f63b8a6 :
+   Use forked repositories for RPM based platform support
+Tue Jan 18 17:43:34 2022 -0800 3d4c0d6 :
+   Add xrandr, xdpyinfo, and xset as dependencies in RPM spec
+Tue Jan 18 17:21:28 2022 -0800 cd9409a :
+   Use DISPLAY env var if set
+Tue Jan 18 15:10:02 2022 -0800 d432423 :
+   Remove RPM requires that are not available
+Tue Jan 18 15:01:14 2022 -0800 0b2fb33 :
+   Add development tools to RPM requires, add -n switch to module_update to skip dependency check
+Tue Jan 18 10:18:17 2022 -0800 b65557c :
+   Check OS compatibility with RPM based systems
+Mon Jan 17 16:02:40 2022 -0800 498bad3 :
+   Fix RPM dependencies
+Mon Jan 17 15:47:37 2022 -0800 0731a3e :
+   Update changelog and version in preparation for release
 Mon Jan 17 15:44:48 2022 -0800 0ff55bb :
    Changes to support non-interactive RPM install
 Sun Jan 16 10:24:45 2022 -0800 00476d7 :
