@@ -112,6 +112,9 @@ do
             else
               git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
             fi
+	    cd MMM-BackgroundSlideshow
+	    git checkout 8865158fd251eaca1e90703d3c4c99ffddc75de2 > /dev/null 2>&1
+	    cd ..
             ;;
           MMM-CoinMarketCap)
             if [ "${QUIET}" ]
