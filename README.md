@@ -119,7 +119,7 @@ Interactive menus when invoked with no arguments<br/>
 ## Compatibility
 MirrorCommand has been successfully deployed and tested on a Raspberry Pi 4
 and Raspberry Pi 400 running Raspbian Buster. It has also been deployed and
-tested on Ubuntu Linux 20.04 with generic x86_64 hardware.
+tested on Ubuntu Linux 20.04 and Fedora Linux 35 with generic x86_64 hardware.
 
 It has been tested on systems with a mirror display and systems with a
 standard computer monitor display. MirrorCommand version 2.7 and later
@@ -150,9 +150,9 @@ process management of MagicMirror as well as the installation of several
 MagicMirror 3rd party modules used by MirrorCommand.
 
 **Note:** An actual mirror with display mounted on the rear is not necessary.
-MagicMirror can be installed on a Raspberry Pi with a mirror display as intended
-or it can be installed on a Debian based Linux system (e.g. Ubuntu Linux)
-with standard monitor and desktop environment.
+MagicMirror can be installed on a Raspberry Pi with a mirror display as intended or
+it can be installed on a Debian based Linux system (e.g. Ubuntu Linux) or an RPM
+based Linux system (e.g. Fedora Linux) with standard monitor and desktop environment.
 
 MagicMirror requires Node version 12 or later.
 
