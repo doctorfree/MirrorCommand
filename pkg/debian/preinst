@@ -68,7 +68,12 @@ case "$1" in
                       }
                       [ -d /usr/local ] || mkdir /usr/local
                       cd /usr/local
-                      inst_npm=`type -p npm`
+                      if type -p npm
+                      then
+                        inst_npm=1
+                      else
+                        inst_npm=
+                      fi
                       [ "${inst_npm}" ] || {
                           echo "Installing npm in /usr/local/..."
                           curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o /tmp/n
@@ -80,7 +85,12 @@ case "$1" in
                       chown -R ${USER}:${GROUP} MagicMirror
                       cd MagicMirror
                       MMHOME="/usr/local/MagicMirror"
-                      inst_npm=`type -p npm`
+                      if type -p npm
+                      then
+                        inst_npm=1
+                      else
+                        inst_npm=
+                      fi
                       if [ "${inst_npm}" ]
                       then
                           echo "Installing MagicMirror in /usr/local/MagicMirror"

@@ -59,7 +59,12 @@ GROUP=
     }
     [ -d /usr/local ] || mkdir /usr/local
     cd /usr/local
-    inst_npm=`type -p npm`
+    if type -p npm
+    then
+      inst_npm=1
+    else
+      inst_npm=
+    fi
     [ "${inst_npm}" ] || {
         echo "Installing npm in /usr/local/..."
         curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o /tmp/n
@@ -71,7 +76,12 @@ GROUP=
     chown -R ${USER}:${GROUP} MagicMirror
     cd MagicMirror
     MMHOME="/usr/local/MagicMirror"
-    inst_npm=`type -p npm`
+    if type -p npm
+    then
+      inst_npm=1
+    else
+      inst_npm=
+    fi
     if [ "${inst_npm}" ]
     then
         echo "Installing MagicMirror in /usr/local/MagicMirror"
@@ -194,7 +204,12 @@ then
       ${MM}/bin/set_roon_conf
     }
     # Fixup the ARP Scan devices used by MMM-MacAddressScan module
-    inst_arpscan=`type -p arp-scan`
+    if type -p arp-scan
+    then
+      inst_arpscan=1
+    else
+      inst_arpscan=
+    fi
     [ "${inst_arpscan}" ] && {
       [ -x ${MM}/bin/arps2mm ] && {
         ${MM}/bin/arps2mm > ${MM}/etc/arp-devices.js
@@ -396,9 +411,19 @@ MMIP=`hostname -I | awk ' { print $1 } '`
 
 [ "${MMHOME}" ] && {
     # Setup PM2 if not already configured
-    inst_pm2=`type -p pm2`
+    if type -p pm2
+    then
+      inst_pm2=1
+    else
+      inst_pm2=
+    fi
     [ "${inst_pm2}" ] || npm install pm2@latest -g > /dev/null 2>&1
-    inst_pm2=`type -p pm2`
+    if type -p pm2
+    then
+      inst_pm2=1
+    else
+      inst_pm2=
+    fi
     [ "${inst_pm2}" ] && {
         sudo -u ${USER} pm2 list | grep MagicMirror > /dev/null && {
           sudo -u ${USER} pm2 --silent describe MagicMirror && {
