@@ -180,7 +180,7 @@ do
               git clone https://github.com/alberttwong/MMM-iFrame.git
             fi
             ;;
-          mmm-hue-lights|MMM-InstagramView|MMM-Solar|MMM-TelegramCommands|MMM-YouTubeWebView)
+          mmm-hue-lights|MMM-InstagramView|MMM-Solar|MMM-stocks|MMM-TelegramCommands|MMM-YouTubeWebView)
             if [ "${QUIET}" ]
             then
               git clone https://github.com/doctorfree/${module}.git > /dev/null 2>&1
@@ -262,14 +262,6 @@ do
             else
               # sudo apt-get -y install fswebcam
               git clone https://github.com/eouia/MMM-Selfieshot
-            fi
-            ;;
-          MMM-stocks)
-            if [ "${QUIET}" ]
-            then
-              git clone https://github.com/Elaniobro/MMM-stocks.git > /dev/null 2>&1
-            else
-              git clone https://github.com/Elaniobro/MMM-stocks.git
             fi
             ;;
           MMM-Videoplayer)
