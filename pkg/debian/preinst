@@ -68,7 +68,7 @@ case "$1" in
                       }
                       [ -d /usr/local ] || mkdir /usr/local
                       cd /usr/local
-                      if type -p npm
+                      if type -p npm > /dev/null
                       then
                         inst_npm=1
                       else
@@ -85,7 +85,7 @@ case "$1" in
                       chown -R ${USER}:${GROUP} MagicMirror
                       cd MagicMirror
                       MMHOME="/usr/local/MagicMirror"
-                      if type -p npm
+                      if type -p npm > /dev/null
                       then
                         inst_npm=1
                       else

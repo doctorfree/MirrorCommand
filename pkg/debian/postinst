@@ -40,10 +40,15 @@ case "$1" in
         [ -f ${MM}/etc/mirror_start.sh ] && {
           [ -f mirror_start ] || ln -s ${MM}/etc/mirror_start.sh mirror_start
         }
-        # inst_vcgencmd=`type -p vcgencmd`
-        # [ "${inst_vcgencmd}" ] || {
-        #     [ -f vcgencmd ] || ln -s ${MM}/bin/vcgencmd vcgencmd
-        # }
+        if type -p vcgencmd > /dev/null
+        then
+          inst_vcgencmd=1
+        else
+          inst_vcgencmd=
+        fi
+        [ "${inst_vcgencmd}" ] || {
+          [ -f vcgencmd ] || ln -s ${MM}/bin/vcgencmd vcgencmd
+        }
         for command in ${EXPORTS}
         do
           [ -f ${MM}/bin/${command} ] && {
@@ -125,7 +130,7 @@ case "$1" in
               ${MM}/bin/set_roon_conf
             }
             # Fixup the ARP Scan devices used by MMM-MacAddressScan module
-            if type -p arp-scan
+            if type -p arp-scan > /dev/null
             then
               inst_arpscan=1
             else
@@ -349,14 +354,14 @@ case "$1" in
 
         [ "${MMHOME}" ] && {
             # Setup PM2 if not already configured
-            if type -p pm2
+            if type -p pm2 > /dev/null
             then
               inst_pm2=1
             else
               inst_pm2=
             fi
             [ "${inst_pm2}" ] || npm install pm2@latest -g > /dev/null 2>&1
-            if type -p pm2
+            if type -p pm2 > /dev/null
             then
               inst_pm2=1
             else
@@ -379,7 +384,7 @@ case "$1" in
                 pm2_startup=`sudo -u ${USER} pm2 startup | tail -n 1`
                 # Check to see if we can get the OS package name (Ubuntu)
                 fix_startup=
-                if type -p lsb_release
+                if type -p lsb_release > /dev/null
                 then
                   have_lsb=1
                 else

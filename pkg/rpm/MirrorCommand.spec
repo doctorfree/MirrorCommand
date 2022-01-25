@@ -59,7 +59,7 @@ GROUP=
     }
     [ -d /usr/local ] || mkdir /usr/local
     cd /usr/local
-    if type -p npm
+    if type -p npm > /dev/null
     then
       inst_npm=1
     else
@@ -76,7 +76,7 @@ GROUP=
     chown -R ${USER}:${GROUP} MagicMirror
     cd MagicMirror
     MMHOME="/usr/local/MagicMirror"
-    if type -p npm
+    if type -p npm > /dev/null
     then
       inst_npm=1
     else
@@ -121,6 +121,16 @@ KEYS="${MM}/etc/mirrorkeys"
 cd /usr/local/bin
 [ -f ${MM}/etc/mirror_start.sh ] && {
   [ -f mirror_start ] || ln -s ${MM}/etc/mirror_start.sh mirror_start
+}
+
+if type -p vcgencmd > /dev/null
+then
+  inst_vcgencmd=1
+else
+  inst_vcgencmd=
+fi
+[ "${inst_vcgencmd}" ] || {
+  [ -f vcgencmd ] || ln -s ${MM}/bin/vcgencmd vcgencmd
 }
 
 for command in ${EXPORTS}
@@ -204,7 +214,7 @@ then
       ${MM}/bin/set_roon_conf
     }
     # Fixup the ARP Scan devices used by MMM-MacAddressScan module
-    if type -p arp-scan
+    if type -p arp-scan > /dev/null
     then
       inst_arpscan=1
     else
@@ -411,14 +421,14 @@ MMIP=`hostname -I | awk ' { print $1 } '`
 
 [ "${MMHOME}" ] && {
     # Setup PM2 if not already configured
-    if type -p pm2
+    if type -p pm2 > /dev/null
     then
       inst_pm2=1
     else
       inst_pm2=
     fi
     [ "${inst_pm2}" ] || npm install pm2@latest -g > /dev/null 2>&1
-    if type -p pm2
+    if type -p pm2 > /dev/null
     then
       inst_pm2=1
     else
