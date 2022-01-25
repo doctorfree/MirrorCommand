@@ -66,14 +66,14 @@ else
   echo "Cannot locate tokens folder ${GASRC}/tokens/"
 fi
 
-[ -d ${MAGDIR}/pics ] && {
-  [ -d ${PICDIR} ] && {
-    cd ${MAGDIR}/pics
-
-    for pdir in Art Artists Fractals Gif JAV Models Moon_Maison Owls \
-            Nuts_Magazine Photographers Tuigirl Water Waterfalls
-    do
-      [ -d ${pdir} ] || ln -s ${PICDIR}/${pdir} ${pdir}
-    done
-  }
-}
+# [ -d ${MAGDIR}/pics ] && {
+#   [ -d ${PICDIR} ] && {
+#     cd ${MAGDIR}/pics
+# 
+#     for pdir in Art Artists Fractals Gif JAV Models Moon_Maison Owls \
+#             Nuts_Magazine Photographers Tuigirl Water Waterfalls
+#     do
+#       [ -d ${pdir} ] || ln -s ${PICDIR}/${pdir} ${pdir}
+#     done
+#   }
+# }
