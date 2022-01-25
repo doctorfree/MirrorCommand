@@ -1,9 +1,10 @@
 #!/bin/bash
 
+USER=`id -u -n`
 MAGDIR="/usr/local/MirrorCommand"
 MIRDIR="/usr/local/MagicMirror"
 MCL=$HOME/src/MirrorCommand
-PICDIR="/mnt/transcend/Pictures/MagicMirror"
+PICDIR="/media/${USER}/Transcend/Pictures/MagicMirror"
 [ -d ${PICDIR} ] || {
   PICDIR="/u/pictures/MagicMirror"
   [ -d ${PICDIR} ] || {

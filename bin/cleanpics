@@ -1,6 +1,7 @@
 #!/bin/bash
 
-NEW=/mnt/transcend/Pictures/transfer
+USER=`id -u -n`
+NEW=/media/${USER}/Transcend/Pictures/transfer
 
 cd $HOME/Pictures
 find Artists Fractals Models Photographers -type f | while read i

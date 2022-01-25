@@ -1,9 +1,10 @@
 #!/bin/bash
 
+USER=`id -u -n`
 HST="doctorwhen@CC.C.C.CC"
 WORK="/Users/doctorwhen/Pictures/Work"
 SRCE="${WORK}/MagicMirror"
-DEST="/mnt/transcend/Pictures"
+DEST="/media/${USER}/Transcend/Pictures"
 
 [ -d "${DEST}" ] || {
     echo "$DEST does not exist or is not a directory. Exiting."

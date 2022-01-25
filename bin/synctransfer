@@ -1,7 +1,8 @@
 #!/bin/bash
 #
 
-TOP="/mnt/transcend/Pictures/transfer"
+USER=`id -u -n`
+TOP="/media/${USER}/Transcend/Pictures/transfer"
 HST="doctorwhen@CC.C.C.CC"
 SRC="/Volumes/Seagate_8TB/Pictures/MagicMirror"
 

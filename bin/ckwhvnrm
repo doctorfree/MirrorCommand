@@ -1,6 +1,7 @@
 #!/bin/bash
 
-MMDIR="/mnt/transcend/Pictures/Wallhaven"
+USER=`id -u -n`
+MMDIR="/media/${USER}/Transcend/Pictures/Wallhaven"
 
 [ -d ${MMDIR} ] || {
     MMDIR="/u/pictures/Wallhaven"

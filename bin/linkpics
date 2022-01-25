@@ -1,7 +1,8 @@
 #!/bin/bash
 
+USER=`id -u -n`
 MM="/usr/local/MirrorCommand"
-PICS="/mnt/transcend/Pictures"
+PICS="/media/${USER}/Transcend/Pictures"
 PM="${PICS}/MagicMirror"
 
 [ -d ${MM}/pics ] || {

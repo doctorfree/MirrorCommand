@@ -376,7 +376,7 @@ var config = {
                 music: {
                   useMusic: true,
                   useUSB: false,
-                  musicPath: "/mnt/transcend/Audio/Snow_Crash",
+                  musicPath: "/media/pi/Transcend/Audio/Snow_Crash",
                   checkSubDirectory: true,
                   autoStart: true,
                   minVolume: 30,

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-MNT=/mnt/transcend/Pictures/MagicMirror
+USER=`id -u -n`
+MNT=/media/${USER}/Transcend/Pictures/MagicMirror
 INS=/usr/local/MirrorCommand/pics
 
 cd ${INS}

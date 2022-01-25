@@ -1,8 +1,9 @@
 #!/bin/bash
 
+USER=`id -u -n`
 # Set these to the device and mount point of the USB drive you wish to remount
 DEV="/dev/sda1"
-MNT="/mnt/transcend"
+MNT="/media/${USER}/Transcend"
 
 mirror_inst=`type -p mirror`
 [ "${mirror_inst}" ] && {

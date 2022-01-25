@@ -3,7 +3,8 @@
 TYPE="Photographers"
 UPDSCRIPT="updphotographer"
 
-MNT_PT="/mnt/transcend/Pictures"
+USER=`id -u -n`
+MNT_PT="/media/${USER}/Transcend/Pictures"
 [ -d ${MNT_PT} ] || {
     MNT_PT="/u/pictures"
     [ -d ${MNT_PT} ] || {

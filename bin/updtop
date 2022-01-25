@@ -1,6 +1,7 @@
 #!/bin/bash
 
-MNT_PT="/mnt/transcend/Pictures"
+USER=`id -u -n`
+MNT_PT="/media/${USER}/Transcend/Pictures"
 TOP_DIR="${MNT_PT}/MagicMirror"
 RMLIST="/usr/local/MirrorCommand/etc/rmlist.txt"
 

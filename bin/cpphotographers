@@ -1,6 +1,7 @@
 #!/bin/bash
 
-MNT="/mnt/transcend/Pictures/MagicMirror/Photographers"
+USER=`id -u -n`
+MNT="/media/${USER}/Transcend/Pictures/MagicMirror/Photographers"
 PDIR=$HOME/Pictures/Photographers
 
 cd $PDIR

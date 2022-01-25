@@ -450,7 +450,7 @@ MMIP=`hostname -I | awk ' { print $1 } '`
     }
 }
 # Create links to image and movie folders if they exist
-MNT_PT="/mnt/transcend/Pictures"
+MNT_PT="/media/pi/Transcend/Pictures"
 [ -d ${MNT_PT} ] || {
     MNT_PT="/u/pictures"
     [ -d ${MNT_PT} ] || MNT_PT="/v/pictures"
@@ -477,7 +477,7 @@ MNT_PT="/mnt/transcend/Pictures"
     }
   fi
 }
-MNT_PT="/mnt/transcend/Movies"
+MNT_PT="/media/pi/Transcend/Movies"
 [ -d ${MNT_PT} ] || {
     MNT_PT="/u/movies"
     [ -d ${MNT_PT} ] || MNT_PT="/v/movies"

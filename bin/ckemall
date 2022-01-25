@@ -1,6 +1,7 @@
 #!/bin/bash
 
-MMDIR="/mnt/transcend/Pictures/MagicMirror"
+USER=`id -u -n`
+MMDIR="/media/${USER}/Transcend/Pictures/MagicMirror"
 
 [ -d ${MMDIR} ] || {
     MMDIR="/u/pictures/MagicMirror"
