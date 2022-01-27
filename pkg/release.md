@@ -1,4 +1,4 @@
-This minor release update of MirrorCommand enhances support for RPM based Linux installation and fixes an error introduced into the MMM-BackgroundSlideshow module in recent commits. It is recommended that all RPM based systems utilize this release or later and any systems utilizing the MMM-BackgroundSlideshow module delete that module and reinstall with the `module_update` command included in this release.
+This minor release update of MirrorCommand fixes a bug in the install scripts introduced by recent changes to Bash wrt the return status of the 'type' builtin. MMM-stocks module is now pulled from my fork to provide dependency on 'request' and security fixes.
 
 The version 3.0.x releases of MirrorCommand introduce support for multiple monitors, switching MagicMirror screen display between monitors, full support for both portrait and landscape mode displays, and renames the project from MirrorCommandLine to MirrorCommand.  Voice commands for screen switching have been added via the MMM-GoogleAssistant module recipe file MirrorCommand.js.
 
@@ -18,12 +18,12 @@ or grant everyone access with
 
 Install the package on Debian based systems by executing the command
 ```bash
-sudo apt install ./MirrorCommand_3.0.1-2.deb
+sudo apt install ./MirrorCommand_3.0.1-3.deb
 ```
 
 Install the package on RPM based systems by executing the command
 ```bash
-sudo yum localinstall ./MirrorCommand-3.0.1-2.rpm
+sudo yum localinstall ./MirrorCommand-3.0.1-3.rpm
 ```
 
 Removal of the package on Debian based systems can be accomplished by issuing the command:
