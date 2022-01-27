@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+27 January 2022, MirrorCommand version 3.0.1 release 3:
+
+  This minor release update of MirrorCommand fixes a bug in the install
+  scripts introduced by recent changes to Bash wrt the return status of
+  the 'type' builtin. MMM-stocks module is now pulled from my fork to
+  provide dependency on 'request' and security fixes.
+
 22 January 2022, MirrorCommand version 3.0.1 release 2:
 
   This minor release update of MirrorCommand enhances support for
@@ -73,6 +80,24 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Tue Jan 25 11:22:18 2022 -0800 4a0d07c :
+   Do not symlink image subfolders
+Tue Jan 25 11:07:11 2022 -0800 f989664 :
+   Redirect type -p checks to /dev/null, install fake vcgencmd
+Tue Jan 25 10:40:56 2022 -0800 84ef3a7 :
+   Copy in my custom arp devices
+Mon Jan 24 17:47:39 2022 -0800 a13b034 :
+   Pull MMM-stocks from my fork
+Mon Jan 24 16:49:33 2022 -0800 9bd840d :
+   Change default media location from /mnt/transcend to /media/pi/Transcend
+Mon Jan 24 15:13:30 2022 -0800 48ea48c :
+   Wrap type -p command checks in if-then-else to prevent ERR triggering exit with set -e execution
+Sat Jan 22 10:30:24 2022 -0800 5ce4b11 :
+   Note Debian or RPM where necessary
+Sat Jan 22 10:26:03 2022 -0800 711498e :
+   Update release notes and README with support and testing on Fedora
+Sat Jan 22 10:07:37 2022 -0800 232c4aa :
+   Update changelog for Version 3.0.1 release 2
 Fri Jan 21 18:55:14 2022 -0800 837d8f7 :
    Checkout pre-sharp commit of MMM-BackgroundSlideshow until this issue is resolved
 Fri Jan 21 17:40:48 2022 -0800 1b13765 :
