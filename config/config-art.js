@@ -116,10 +116,7 @@ var config = {
             position: 'fullscreen_below',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommand/pics/Art/Kandinsky/',
-                    '/usr/local/MirrorCommand/pics/Art/Klee/',
-                    '/usr/local/MirrorCommand/pics/Art/Picasso/',
-                    '/usr/local/MirrorCommand/pics/Art/Zdzisław_Beksiński/',
+                    '/usr/local/MirrorCommand/pics/Art/',
                 ],
                 slideshowSpeed: 60000, // 60 seconds
                 transitionImages: true,

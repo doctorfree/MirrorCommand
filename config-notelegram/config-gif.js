@@ -94,10 +94,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/home/pi/Pictures/Gif/Nature',
-                    '/home/pi/Pictures/Gif/Portal',
-                    '/home/pi/Pictures/Gif/Smoke',
-                    '/home/pi/Pictures/Gif/Dream_of_Jeannie',
+                    '/usr/local/MirrorCommand/pics/Gif/',
                 ],
                 slideshowSpeed: 30000, // 30 seconds
                 transitionImages: false,
