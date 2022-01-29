@@ -496,6 +496,7 @@ MNT_PT="/media/pi/Transcend/Movies"
     cd ${MM}
     [ -d movies ] || ln -s ${MNT_PT} movies
 }
+chown -R ${USER}:${GROUP} ${MM}
 echo "MirrorCommand installation Complete"
 
 %preun

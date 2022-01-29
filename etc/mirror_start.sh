@@ -127,7 +127,8 @@ else
   HDMI=`xrandr --listactivemonitors | grep ${MM_SCREEN}: | awk ' { print $4 } '`
 fi
 
-[ -L ${MCL_HOME}/pics ] && {
+if [ -L ${MCL_HOME}/pics ]
+then
   PICS_LINK=`readlink ${MCL_HOME}/pics`
   TARG_LINK=`basename ${PICS_LINK}`
   if [ "${PORTRAIT}" ]
@@ -146,7 +147,22 @@ fi
       }
     }
   fi
-}
+else
+  [ -d ${MCL_HOME}/pics ] || {
+    if [ "${PORTRAIT}" ]
+    then
+      [ -d ${MCL_HOME}/pics-portrait ] && {
+        rm -f ${MCL_HOME}/pics
+        ln -s ${MCL_HOME}/pics-portrait ${MCL_HOME}/pics
+      }
+    else
+      [ -d ${MCL_HOME}/pics-landscape ] && {
+        rm -f ${MCL_HOME}/pics
+        ln -s ${MCL_HOME}/pics-landscape ${MCL_HOME}/pics
+      }
+    fi
+  }
+fi
 
 if [ "${PORTRAIT}" ]
 then
