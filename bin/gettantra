@@ -8,10 +8,21 @@ printf "\nDownloading and extracting ${NUM_IDS} video archives "
 printf "will consume approximately 349M of disk space in "
 printf "${HERE}\n\n"
 
-while true
-do
-  read -p "Do you wish to continue ? ('Y'/'N'): " yn
-  case $yn in
+ASK=1
+while getopts "i" flag; do
+    case $flag in
+        i)
+            ASK=
+            ;;
+    esac
+done
+
+if [ "${ASK}" ]
+then
+  while true
+  do
+    read -p "Do you wish to continue ? ('Y'/'N'): " yn
+    case $yn in
       [Yy]*)
           DOWNLOAD=1
           break
@@ -23,13 +34,14 @@ do
       * )
           echo "Please answer yes or no."
           ;;
-  esac
-done
+    esac
+  done
+else
+  DOWNLOAD=1
+fi
 
 [ "${DOWNLOAD}" ] && {
-  gdinst=`type -p gdown`
-
-  [ "${gdinst}" ] || pip install gdown > /dev/null
+  type -p gdown > /dev/null || pip install gdown > /dev/null
 
   i=1
   for ID in ${IDS}

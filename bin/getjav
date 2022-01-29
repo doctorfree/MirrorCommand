@@ -51,11 +51,20 @@ LAND_IDS="1ZtFu6Jrk5Owg3HyVrITTvI8SHwAlYanS \
 
 PICDIR="pics-portrait"
 SPACE="500M"
-[ "$1" == "-l" ] && {
-  IDS=${LAND_IDS}
-  PICDIR="pics-landscape"
-  SPACE="500M"
-}
+
+ASK=1
+while getopts "il" flag; do
+    case $flag in
+        i)
+            ASK=
+            ;;
+        l)
+            IDS=${LAND_IDS}
+            PICDIR="pics-landscape"
+            SPACE="500M"
+            ;;
+    esac
+done
 
 HERE=`pwd`
 NUM_IDS=`echo ${IDS} | wc -w`
@@ -63,10 +72,12 @@ printf "\nDownloading and extracting ${NUM_IDS} JAV archives "
 printf "will consume approximately ${SPACE} of disk space in "
 printf "${HERE}\n\n"
 
-while true
-do
-  read -p "Do you wish to continue ? ('Y'/'N'): " yn
-  case $yn in
+if [ "${ASK}" ]
+then
+  while true
+  do
+    read -p "Do you wish to continue ? ('Y'/'N'): " yn
+    case $yn in
       [Yy]*)
           DOWNLOAD=1
           break
@@ -78,13 +89,14 @@ do
       * )
           echo "Please answer yes or no."
           ;;
-  esac
-done
+    esac
+  done
+else
+  DOWNLOAD=1
+fi
 
 [ "${DOWNLOAD}" ] && {
-  gdinst=`type -p gdown`
-
-  [ "${gdinst}" ] || pip install gdown > /dev/null
+  type -p gdown > /dev/null || pip install gdown > /dev/null
 
   i=1
   for ID in ${IDS}
