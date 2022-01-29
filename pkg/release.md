@@ -1,4 +1,6 @@
-This minor release update of MirrorCommand fixes a bug in the install scripts introduced by recent changes to Bash wrt the return status of the 'type' builtin. MMM-stocks module is now pulled from my fork to provide dependency on 'request' and security fixes. The scripts that download image archives for the [MirrorImages](https://gitlab.com/doctorfree/MirrorImages) packages have been updated to execute in non-interactive mode when being run during an RPM installation.
+This release update of MirrorCommand incorporates changes to integrate with the MirrorImages RPM installations. Installs of the current MirrorImages packages require this version of MirrorCommand or later.
+
+The previous release update of MirrorCommand fixed a bug in the install scripts introduced by recent changes to Bash wrt the return status of the 'type' builtin. MMM-stocks module is now pulled from my fork to provide dependency on 'request' and security fixes. The scripts that download image archives for the [MirrorImages](https://gitlab.com/doctorfree/MirrorImages) packages have been updated to execute in non-interactive mode when being run during an RPM installation.
 
 The version 3.0.x releases of MirrorCommand introduce support for multiple monitors, switching MagicMirror screen display between monitors, full support for both portrait and landscape mode displays, and renames the project from MirrorCommandLine to MirrorCommand.  Voice commands for screen switching have been added via the MMM-GoogleAssistant module recipe file MirrorCommand.js.
 

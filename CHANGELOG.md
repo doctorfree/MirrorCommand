@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+29 January 2022, MirrorCommand version 3.0.2 release 1:
+
+  This release update of MirrorCommand incorporates changes to integrate with the
+  MirrorImages RPM installations. The scripts that download image archives for the
+  [MirrorImages](https://gitlab.com/doctorfree/MirrorImages) packages have been
+  updated to execute in non-interactive mode when being run during an RPM installation.
+
 27 January 2022, MirrorCommand version 3.0.1 release 3:
 
   This minor release update of MirrorCommand fixes a bug in the install
@@ -80,6 +87,18 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Sat Jan 29 12:33:22 2022 -0800 4ad4452 :
+   Link pics dir if not already set during mirror startup
+Sat Jan 29 08:28:36 2022 -0800 7fcbb42 :
+   Use pkg/release.md for release description in Gitlab release creation
+Fri Jan 28 16:55:05 2022 -0800 e022bf1 :
+   Add -i flag to image archive download scripts for non-interactive RPM installs
+Thu Jan 27 15:00:05 2022 -0800 86d2a18 :
+   Use top folder rather than subfolders for Art and Gif images
+Thu Jan 27 10:30:20 2022 -0800 4fbedd5 :
+   Updated release note template
+Thu Jan 27 10:28:07 2022 -0800 45e63bd :
+   Update Changelog and bump release number in preparation for Version 3.0.1 release 3
 Tue Jan 25 11:22:18 2022 -0800 4a0d07c :
    Do not symlink image subfolders
 Tue Jan 25 11:07:11 2022 -0800 f989664 :
