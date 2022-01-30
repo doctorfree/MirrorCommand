@@ -1,6 +1,6 @@
 #!/bin/bash
 
-UPDSCRIPT="updjav"
+UPDSCRIPT="updtop"
 
 USER=`id -u -n`
 MNT_PT="/media/${USER}/Transcend/Pictures"
