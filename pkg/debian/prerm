@@ -76,7 +76,8 @@ case "$1" in
               b=`basename ${config}`
               d=`dirname ${config}`
               e=`basename ${d}`
-              [ -d ${e}/$b ] && {
+              if [ -d ${e}/$b ]
+              then
                   cd ${e}/$b
                   for subconf in ${MM}/$e/$b/*
                   do
@@ -86,8 +87,9 @@ case "$1" in
                   done
                   cd "${MMHOME}"
                   rmdir --ignore-fail-on-non-empty $e/$b
-              }
-              rm -f $e/$b
+              else
+                  rm -f $e/$b
+              fi
             done
             rmdir --ignore-fail-on-non-empty ${MMHOME}/config-landscape
             rmdir --ignore-fail-on-non-empty ${MMHOME}/config-notelegram
