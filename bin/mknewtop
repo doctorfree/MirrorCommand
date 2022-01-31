@@ -34,17 +34,15 @@ TYPEDIR="${PMM}/${orientation}"
 }
 
 cd ${TYPEDIR}
-for i in $*
-do
-    [ -d $i ] && {
-        echo "$i exists. skipping."
-        continue
-    }
-    mkdir $i
-    ${UPDSCRIPT} ${portrait} $i
-    [ -d ${PICDIR}/$i ] || {
-        cd ${PICDIR}
-        ln -s ${TYPEDIR}/$i .
-        cd ${TYPEDIR}
-    }
-done
+top=`echo $* | sed -e "s/ /_/g"`
+[ -d ${top} ] && {
+    echo "${top} exists. skipping."
+    continue
+}
+mkdir ${top}
+${UPDSCRIPT} ${portrait} ${top}
+[ -d ${PICDIR}/${top} ] || {
+    cd ${PICDIR}
+    ln -s ${TYPEDIR}/${top} .
+    cd ${TYPEDIR}
+}
