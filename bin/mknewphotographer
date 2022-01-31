@@ -38,11 +38,7 @@ PICDIR="${PICDIR}/${TYPE}"
 
 cd ${TYPEDIR}
 photo=`echo $* | sed -e "s/ /_/g"`
-[ -d ${photo} ] && {
-    echo "${photo} exists. skipping."
-    continue
-}
-mkdir ${photo}
+[ -d ${photo} ] || mkdir ${photo}
 ${UPDSCRIPT} ${portrait} ${photo}
 [ -d ${PICDIR}/${photo} ] || {
     cd ${PICDIR}

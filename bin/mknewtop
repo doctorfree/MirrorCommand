@@ -35,11 +35,7 @@ TYPEDIR="${PMM}/${orientation}"
 
 cd ${TYPEDIR}
 top=`echo $* | sed -e "s/ /_/g"`
-[ -d ${top} ] && {
-    echo "${top} exists. skipping."
-    continue
-}
-mkdir ${top}
+[ -d ${top} ] || mkdir ${top}
 ${UPDSCRIPT} ${portrait} ${top}
 [ -d ${PICDIR}/${top} ] || {
     cd ${PICDIR}

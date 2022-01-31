@@ -38,11 +38,7 @@ PICDIR="${PICDIR}/${TYPE}"
 
 cd ${TYPEDIR}
 jav=`echo $* | sed -e "s/ /_/g"`
-[ -d ${jav} ] && {
-    echo "${jav} exists. skipping."
-    continue
-}
-mkdir ${jav}
+[ -d ${jav} ] || mkdir ${jav}
 ${UPDSCRIPT} ${portrait} ${jav}
 [ -d ${PICDIR}/${jav} ] || {
     cd ${PICDIR}

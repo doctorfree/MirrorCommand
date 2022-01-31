@@ -38,11 +38,7 @@ PICDIR="${PICDIR}/${TYPE}"
 
 cd ${TYPEDIR}
 artist=`echo $* | sed -e "s/ /_/g"`
-[ -d ${artist} ] && {
-    echo "${artist} exists. skipping."
-    continue
-}
-mkdir ${artist}
+[ -d ${artist} ] || mkdir ${artist}
 ${UPDSCRIPT} ${portrait} ${artist}
 [ -d ${PICDIR}/${artist} ] || {
     cd ${PICDIR}
