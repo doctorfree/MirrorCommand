@@ -1,0 +1,85 @@
+#!/bin/bash
+
+IN_DIR="/u/pictures/MagicMirror"
+OUT_DIR="/u/gdrive/MagicMirror"
+TOPS="Fractals Gif"
+
+usage() {
+    printf "\nUsage: mkdistarch [-i input_dir] [-o output_dir] [-nu]"
+    printf "\nDefaults:\n\tinput_dir=${IN_DIR}\n\toutput_dir=${OUT_DIR}\n"
+    printf "\nWhere -n indicates tell me what you would do but don't do it\n"
+    exit 1
+}
+
+TELL=
+while getopts "i:o:nu" flag; do
+    case $flag in
+        i)
+            IN_DIR="$OPTARG"
+            ;;
+        o)
+            OUT_DIR="$OPTARG"
+            ;;
+        n)
+            TELL=1
+            ;;
+        u)
+            usage
+            ;;
+    esac
+done
+
+
+[ -d ${IN_DIR} ] || {
+  echo "$IN_DIR does not exist. Exiting."
+  exit 1
+}
+
+[ -d ${OUT_DIR} ] || mkdir -p ${OUT_DIR}
+
+[ -d ${OUT_DIR} ] || {
+  echo "$OUT_DIR does not exist. Exiting."
+  exit 1
+}
+
+cd ${IN_DIR}
+
+echo "Creating Top level archives"
+for top in ${TOPS}
+do
+  echo "Creating ${OUT_DIR}/${top}.tar.gz"
+  [ "${TELL}" ] || tar cf - ${top} | gzip > ${OUT_DIR}/${top}.tar.gz
+done
+
+for mode in landscape portrait
+do
+  echo "Creating ${mode} mode archives"
+  [ -d ${mode} ] || {
+    echo "${IN_DIR}/${mode} does not exist or is not a directory. Skipping"
+    continue
+  }
+  cd ${mode}
+  for topm in *
+  do
+    [ -d ${topm} ] || continue
+    case ${topm} in
+      Artists|JAV|Models|Photographers)
+          cd ${topm}
+          echo "Creating ${OUT_DIR}/${mode}/${topm} archives"
+          for subtop in *
+          do
+            [ -d ${subtop} ] || continue
+            echo "Creating ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz"
+            [ "${TELL}" ] || tar cf - ${subtop} | gzip > ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz
+          done
+          cd ..
+          ;;
+      *)
+          [ -d ${topm} ] || continue
+          echo "Creating ${OUT_DIR}/${mode}/${topm}.tar.gz"
+          [ "${TELL}" ] || tar cf - ${topm} | gzip > ${OUT_DIR}/${mode}/${topm}.tar.gz
+          ;;
+    esac
+  done
+  cd ..
+done
