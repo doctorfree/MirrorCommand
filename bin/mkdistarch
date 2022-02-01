@@ -4,21 +4,34 @@ IN_DIR="/u/pictures/MagicMirror"
 OUT_DIR="/u/gdrive/MagicMirror"
 TOPS="Fractals Gif"
 
+MOV_DIR="/u/movies"
+MOVS="Tantra"
+
 usage() {
-    printf "\nUsage: mkdistarch [-i input_dir] [-o output_dir] [-nu]"
+    printf "\nUsage: mkdistarch [-i input_dir] [-o output_dir] [-NUnu]"
     printf "\nDefaults:\n\tinput_dir=${IN_DIR}\n\toutput_dir=${OUT_DIR}\n"
-    printf "\nWhere -n indicates tell me what you would do but don't do it\n"
+    printf "\nWhere:\n\t-n indicates tell me what you would do but don't do it"
+    printf "\n\t-N indicates report New archives but do not create them"
+    printf "\n\t-U indicates create all new archives"
+    printf "\n\t-u displays this usage message and exits\n"
     exit 1
 }
 
 TELL=
-while getopts "i:o:nu" flag; do
+NEW=
+while getopts "i:o:NUnu" flag; do
     case $flag in
         i)
             IN_DIR="$OPTARG"
             ;;
         o)
             OUT_DIR="$OPTARG"
+            ;;
+        N)
+            NEW=report
+            ;;
+        U)
+            NEW=create
             ;;
         n)
             TELL=1
@@ -44,16 +57,29 @@ done
 
 cd ${IN_DIR}
 
-echo "Creating Top level archives"
+[ "${NEW}" ] || echo "Creating Top level archives"
 for top in ${TOPS}
 do
-  echo "Creating ${OUT_DIR}/${top}.tar.gz"
-  [ "${TELL}" ] || tar cf - ${top} | gzip > ${OUT_DIR}/${top}.tar.gz
+  if [ "${NEW}" ]
+  then
+    [ -f ${OUT_DIR}/${top}.tar.gz ] || {
+      if [ "${NEW}" == "report" ]
+      then
+        echo "NEW: ${top}.tar.gz"
+      else
+        echo "Creating ${OUT_DIR}/${top}.tar.gz"
+        [ "${TELL}" ] || tar cf - ${top} | gzip > ${OUT_DIR}/${top}.tar.gz
+      fi
+    }
+  else
+    echo "Creating ${OUT_DIR}/${top}.tar.gz"
+    [ "${TELL}" ] || tar cf - ${top} | gzip > ${OUT_DIR}/${top}.tar.gz
+  fi
 done
 
 for mode in landscape portrait
 do
-  echo "Creating ${mode} mode archives"
+  [ "${NEW}" ] || echo "Creating ${mode} mode archives"
   [ -d ${mode} ] || {
     echo "${IN_DIR}/${mode} does not exist or is not a directory. Skipping"
     continue
@@ -65,21 +91,69 @@ do
     case ${topm} in
       Artists|JAV|Models|Photographers)
           cd ${topm}
-          echo "Creating ${OUT_DIR}/${mode}/${topm} archives"
+          [ "${NEW}" ] || echo "Creating ${OUT_DIR}/${mode}/${topm} archives"
           for subtop in *
           do
             [ -d ${subtop} ] || continue
-            echo "Creating ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz"
-            [ "${TELL}" ] || tar cf - ${subtop} | gzip > ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz
+            if [ "${NEW}" ]
+            then
+              [ -f ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz ] || {
+                if [ "${NEW}" == "report" ]
+                then
+                  echo "NEW: ${mode}/${topm}/${subtop}.tar.gz"
+                else
+                  echo "Creating ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz"
+                  [ "${TELL}" ] || tar cf - ${subtop} | gzip > ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz
+                fi
+              }
+            else
+              echo "Creating ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz"
+              [ "${TELL}" ] || tar cf - ${subtop} | gzip > ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz
+            fi
           done
           cd ..
           ;;
       *)
           [ -d ${topm} ] || continue
-          echo "Creating ${OUT_DIR}/${mode}/${topm}.tar.gz"
-          [ "${TELL}" ] || tar cf - ${topm} | gzip > ${OUT_DIR}/${mode}/${topm}.tar.gz
+          if [ "${NEW}" ]
+          then
+            [ -f ${OUT_DIR}/${mode}/${topm}.tar.gz ] || {
+              if [ "${NEW}" == "report" ]
+              then
+                echo "NEW: ${mode}/${topm}.tar.gz"
+              else
+                echo "Creating ${OUT_DIR}/${mode}/${topm}.tar.gz"
+                [ "${TELL}" ] || tar cf - ${topm} | gzip > ${OUT_DIR}/${mode}/${topm}.tar.gz
+              fi
+            }
+          else
+            echo "Creating ${OUT_DIR}/${mode}/${topm}.tar.gz"
+            [ "${TELL}" ] || tar cf - ${topm} | gzip > ${OUT_DIR}/${mode}/${topm}.tar.gz
+          fi
           ;;
     esac
   done
   cd ..
+done
+
+cd ${MOV_DIR}
+
+[ "${NEW}" ] || echo "Creating Top level video archives"
+for mov in ${MOVS}
+do
+  if [ "${NEW}" ]
+  then
+    [ -f ${OUT_DIR}/${mov}.tar.gz ] || {
+      if [ "${NEW}" == "report" ]
+      then
+        echo "NEW: ${mov}.tar.gz"
+      else
+        echo "Creating ${OUT_DIR}/${mov}.tar.gz"
+        [ "${TELL}" ] || tar cf - ${mov} | gzip > ${OUT_DIR}/${mov}.tar.gz
+      fi
+    }
+  else
+    echo "Creating ${OUT_DIR}/${mov}.tar.gz"
+    [ "${TELL}" ] || tar cf - ${mov} | gzip > ${OUT_DIR}/${mov}.tar.gz
+  fi
 done
