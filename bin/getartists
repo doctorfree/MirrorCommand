@@ -55,7 +55,7 @@ LIDS="1-94pkYuFzDFFrKJ4Xh8_vS06TqNHExsy \
 # Default to Portrait mode
 IDS=${PIDS}
 PICDIR="pics-portrait"
-SPACE="5.4G"
+SPACE="7.3G"
 
 ASK=1
 while getopts "il" flag; do
@@ -66,7 +66,7 @@ while getopts "il" flag; do
         l)
             IDS=${LIDS}
             PICDIR="pics-landscape"
-            SPACE="5.4G"
+            SPACE="1.7G"
             ;;
     esac
 done

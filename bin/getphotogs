@@ -19,7 +19,7 @@ LIDS="14EapdJZkLzPlWHSkHdfdbod3Yxq-Nt2s \
 
 IDS=${PIDS}
 PICDIR="pics-portrait"
-SPACE="500M"
+SPACE="880M"
 
 ASK=1
 while getopts "il" flag; do
@@ -30,7 +30,7 @@ while getopts "il" flag; do
         l)
             IDS=${LIDS}
             PICDIR="pics-landscape"
-            SPACE="500M"
+            SPACE="1.3G"
             ;;
     esac
 done
