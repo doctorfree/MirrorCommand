@@ -1,34 +1,28 @@
 #!/bin/bash
 
-PIDS="10TDyf1we3_tcuoKDQ7n-5XHULQl1BUx1 \
-      14_poR1ZSA78rTXLDomEAdA7KBe8hs5Y6 \
-      1EWR5y7yzJpZd2-9HuAb7mvEda4vJ1C6H \
-      1JoVH14lIqFcayAaJZG6_jUX2NvF0vu9I \
-      1WazaOoAXxUDEJWuZ_YqDv-TxxDN_pC94 \
-      1YHDkZL0DQCjWNHTbmuRmYYGNIcJ8Jggk \
-      1ZA23cVb2E7HWKPAaWplx9jXfioPd-sXB \
-      1_kASS4QLyxsTrtRWxfmoedqnHIYam2aT \
-      1h8wm0yDhzi3IesZyMzXCKXJMqVge3fs4 \
-      1lK6BbIaOGKugTRquBFLyu2VR6z3uiNVW \
-      1Fc0-QOi5MSt6qAH5da3qfhfGW0kLYaYf \
-      1EP1_-w_cwTjemVSTmI5ZlaAlZS9PI9SX"
+PIDS="13VNlQYxeG1gaUPRam1K2udgG8UgTrUnf \
+      17jTcutoTY2Ky1bwJwkJaXXH1TFG6oUug \
+      1MgqDj0swkyjptcoQ06vIaQYo8ch-RMW7 \
+      1YbU-98DCJCIreOXBd5lkcKNOx_fKB0r3 \
+      1Yrao8exs3qwia6yR5dqXiUiIJ-oHRUoX \
+      1_w8p9yjCOsIu3bTHMxgqM_RR7RKxb-gn \
+      1e_WziJBDNhUhWElJUdoaqpdzrkvNhruF \
+      1lgzxzhCSZHGeulwVF6QafJ470O8lC411 \
+      1vQxZLjkuA4qRrgxy6KZwPzg3WaBzrRXZ"
 
-LIDS="17qmMODvjZEx3t1V_xK_1YnR29DzVhhLI \
-      1Sd0T0iEV71Ui7_C2fvBH8BTtvSLN3GR- \
-      1_Iq1OOm68kbUwwN_yD8wiqEYS2C5KGSp \
-      1cZoMoarEzbgSsy77p_eVbmrP7cLSXHzi \
-      1hgRPXzaqyCU7DN-R8abhdTTQMMwYAeG5 \
-      1knzcDY0hBvdadWq5o_U2V1mh4vxhiijB \
-      1lRuZzrgrHeeoeM9juXkYRFKOYBGu28cd \
-      1r4wLIqP84rPRFXxub-o8lSk5QXkbQVgP \
-      1rBjiLFko7yJ7HAWGlu6TPsWDA0Ohalq_ \
-      1wSaMcehvecriHt5GnZEz349UpNDXKrNY \
-      1Fc0-QOi5MSt6qAH5da3qfhfGW0kLYaYf \
-      1EP1_-w_cwTjemVSTmI5ZlaAlZS9PI9SX"
+LIDS="17eP01mqDGzRWsYO5zdgnFpnqYv_Y_ixP \
+      1OYzfpkdmnhx5G3NfGk5CRFullRw_j2P3 \
+      1OgYuCu22LtemIhpJVJgW74wmx-6TfudF \
+      1YBP67O4LcIJ5JEhtIrA7eWJg13jqqJzo \
+      1abVbMz1veOiOiUWnARdXq0izdV5pTdR- \
+      1d99RVLS-Nm_IED64ByqJ7SXJlTDojqwm \
+      1gzl8s665pNiyYItNnx5QgK4ZNEbAWrRl \
+      1rRNZJYwRxsLPbfeWtHmGDH60p2B-1ye5 \
+      1sMUYBT5ZBgJoWlZEEy149HJgUsXqw7Ny"
 
 IDS=${PIDS}
 PICDIR="pics-portrait"
-SPACE="375M"
+SPACE="500M"
 
 ASK=1
 while getopts "il" flag; do
@@ -39,14 +33,14 @@ while getopts "il" flag; do
         l)
             IDS=${LIDS}
             PICDIR="pics-landscape"
-            SPACE="375M"
+            SPACE="500M"
             ;;
     esac
 done
 
 HERE=`pwd`
 NUM_IDS=`echo ${IDS} | wc -w`
-printf "\nDownloading and extracting ${NUM_IDS} image archives "
+printf "\nDownloading and extracting ${NUM_IDS} Country model archives "
 printf "will consume approximately ${SPACE} of disk space in "
 printf "${HERE}\n\n"
 
@@ -79,7 +73,7 @@ fi
   i=1
   for ID in ${IDS}
   do
-    printf "\nDownloading and extracting ${i}/${NUM_IDS} image archives ..."
+    printf "\nDownloading and extracting ${i}/${NUM_IDS} Country model archives ..."
     gdown -O - --id ${ID} --quiet | tar xzf -
     printf " Done."
     ((i++))
@@ -101,9 +95,9 @@ fi
       MM="/usr/local/MirrorCommand"
       USER=$(stat -c '%U' ${MMHOME}/config)
       GROUP=$(stat -c '%G' ${MMHOME}/config)
-      sudo chown -R ${USER}:${GROUP} ${MM}/${PICDIR}
-      find ${MM}/${PICDIR} -type d -print0 | xargs -0 chmod 755
-      find ${MM}/${PICDIR} -type f -print0 | xargs -0 chmod 644
+      sudo chown -R ${USER}:${GROUP} ${MM}/${PICDIR}/Countries
+      find ${MM}/${PICDIR}/Countries -type d -print0 | xargs -0 chmod 755
+      find ${MM}/${PICDIR}/Countries -type f -print0 | xargs -0 chmod 644
   }
 }
 

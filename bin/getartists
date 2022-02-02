@@ -1,58 +1,59 @@
 #!/bin/bash
 
-IDS="1J3Zg7VBuRz33ilqO8jEkanhl0NrNJYZm \
-     1Rxlz2VfBdBiOlt2j37BIiuj8UQzaB-ix \
-     1rmujl7zZq0FvplXY1KP5bvdfF1XXc6ea \
-     1l55KALTGAYaqeZagnbeCt_FxCCMacROj \
-     101HzzSgzt3-9G0azcVZ55AV4PRo7_51j \
-     13eKQxZ1neilINMQH-zzrn7O8VCGjW8R2 \
-     1Hl4H3_YE1v3K_CULAf7ZytnUmCyvTnXc \
-     1pfWe0e7eGrR1o0pqfHWtDLQ_GksAuwe3 \
-     1kattdWX2jX_yO-6LfyuH5veW10mjdNSW \
-     1e2GB7V_t613FOUj7AHPFDOEIJckE2Unz \
-     1ZWQ69xLJ9EzZsiHTR46emHTqfvhlbGnh \
-     1KnPH4SqRXCrUkkYbZCkl5e_EH3eiFHfe \
-     13Oar5ea6pNZ0ZsYnT7zt0i1Qa3H4NztB \
-     1TqIw4r0ue6x5mlEMMj-_6s-iLie2OR3z \
-     1e_qsA2XgijqWTwR_vZhBy18hW85yge54 \
-     1a8CgkN14ja74TGjRB2xfEhmNb-vLJY89 \
-     1g47842xslB3UAAQWRFDJUh0jvWmAFCUF \
-     1S-CeAZzLFfj8JhiqCxqn2bnxnocDUs9h \
-     1ye3Ib8yejg7x1Kr5vM4r71DxqZDGtppc \
-     1vOADw8JmL6nJ4RAb8bvZABfkUFyCecua \
-     1Sg2q0hk-gNwrkm1CA9FtyzR84Oioof6E \
-     1wncBFe2_4kl4h6myLa1abwkGscNthI5l \
-     1Yur4ANvG6qwdr2Dg2_pMEzfQuN2J10ZZ \
-     1_WM4UmpawXxk1un-7qfBQeSzwLw79nOb \
-     1TfOqdgcveUlZUmVjwtFd2_uiweBopAk3 \
-     1T6vSH3UmQ6eH0x58hpnoHY9Rv0_wbKNl"
+PIDS="10feFbZ8TsACHCrpBfcqgTW3aWRLMoIhg \
+      127mYXVidZ7KiHDJoiIxwbY3SQBc8QA3Q \
+      129GzbbaV5mIQfA6hEfqtHrSIq0DXYuNg \
+      12t_UDY679zMzX4j82yMOl465iLZgMH2v \
+      13FRb0lqdJ0Lo5jTtbEBDM-gl9Ka5kGlZ \
+      14vHjbBoNyWfyGnSvXR9-QwhzqBTOY7iL \
+      1B2UZrD6AbF0N6TmLHEFiTHxlwdqRVGdp \
+      1CNxqib9J5wBRTB6HTao-c7B33trQWJGr \
+      1MZ243-xm3cTj_z0EaWuf3WTKi3I0BhPU \
+      1PLc-HEc5BYfUFLQ8hAQ3MmGjpwq5CZK5 \
+      1Q899sfJ87tRF0Q0RK7oWNNSPM-GspM2i \
+      1QVATyQObDuaiW2LF_rmt5rwxrSdil8m9 \
+      1RAjXhcrHhjcnZKuJ__ehSReW9GM1tUy6 \
+      1RSTzrhQ_9PB-TD6MNucSKK-8KoRzBG1w \
+      1X5_QxdK26pj2T46HMfVM0nCpcM4kk61K \
+      1db38Hir1IMGtVas_dTPqvSjlHUXJ4YBt \
+      1ets-KWx1q5MSoVVWAUpziUhvlwLkVDJR \
+      1gbYn_ayxaLq-e13Lo61T_CugRbhuRsnb \
+      1j81gFE7o0ix4ZYw3JYZOCGR0gHWN8YC- \
+      1lSWuQg9rDp6hF_9b5jkgLB1Qbq6Wg4fI \
+      1nqGFJuqQSwqUBnB5YVWvKaf2tQxiYSb9 \
+      1rnzS885z2MtWslnTmaAoZAhRXPig14VQ \
+      1uRq1_GOGoN2GhbG1G1rZTlb52EkmgdWc \
+      1vBcX--LhQ1bly0-SIjs9gwV_nvvSzKqr \
+      1xTupjoLIe7B7P_O-w-yZsuP_ro64-WBt \
+      1zlAHZPdqePq1vryWwgBKVzTlLHTxklzH"
 
-# Placeholder, replace with landscape archive IDs
-LAND_IDS="1P7gXXXJjmg9Kpqp-rOOEqDpWoUBeLtiK \
-          1U8PWpidugwpW3M5cxlM7hdjnBFlYXSeF \
-          17bGNY-Z55b_yyI71x-aObFqSiIt16Axr \
-          10v6LQx5zZ0nAm-gzz484Jg2rINZ3RQuD \
-          1avJT0Qz0kT_m--Z0VcZzDHY2V5gOWOhb \
-          1N5E6SOr58IkqWzvpX9wlKJPRGJh1Eqvo \
-          1-MRmUzRBMlhYdQ_RgRwj99ymhRz4fbaS \
-          1PgSG94pNPzIdYcoa4bOZzd-WNiM1_FsH \
-          1Fv52ccL1kTgelDzvaLBhUuO46haCF113 \
-          1aZzI7-cWhpXmUe61mYxBt1ry3Nxm1B4A \
-          1EDUE6Lirctw8Ow0n0GHmkeANaddf8jcP \
-          1wZit9TtKliNsC_4oUY8x1jKx0ZrNIecT \
-          10vy_P6YMD3LEY1wnfBwPbVL6nhQZcMXL \
-          1DkPab086Gieod2VUTd6-I6Df1--nsuFH \
-          1VJTMr8jhyYv41QwuiEOwEB9o8Bz7XnOI \
-          1Zs_8izpsgmF4HN-PA7ayOh3GFdSNZTdN \
-          1IGshjPf2FqS_UhdYqaHPruc67CdiqPS2 \
-          1BmDzgdSljBNgT-tB-bjRCv0G7YKOOOpE \
-          1oI6qEBZzJsiYx4iYclHa4kjRzItwXiKA \
-          1UOyWZL13QjqnE85IDIjQ0J9nxe0Jkkgr \
-          1DXcTLAOirqkaQymGR1smXzMemXlK06xc \
-          17KsUqYGZJEefKsB0Ar4hihxTUksE5yNt \
-          1X0ezAf6HOhkhG-iqvSHIN3mQq4exYYb7 \
-          1Y3wFzJlcGle-q6k8iEsc9eSA_doZAVTh"
+LIDS="1-94pkYuFzDFFrKJ4Xh8_vS06TqNHExsy \
+      13S98Xtuf4qaYQD0dWlC3mXfHeb4uejRw \
+      17Aas29mlAjUKzq3We8FvdGsPq3HAxjZL \
+      1A85qWjNllf8Bedid-zOZqNvUgriLMHhk \
+      1AsoIoQgBUCbWTuHbLo_8CJe7HR01e0Zs \
+      1D9mx0M7pd6c3DiIqaG0N7zKtfNScXUF_ \
+      1EqNLLUjJzwzNQLWP-W7GhitCMfZqRIwp \
+      1Fy_Z_d9m1IoRPe3EgIDmLe_XescNK0sk \
+      1HfghxaaTwOwRFCM5KBz07aaow-Sw5VVV \
+      1IpPXOKusnmmvy9tEh0h-87a6EvTgzeNq \
+      1JG9YvWn7sCLcwU7RMFjvH2SPFUgsjcqG \
+      1NsuOiDCK6Eg4yT9Yvy6vqVAYg8BnB0Fx \
+      1O0yLX6kLOPkdAIv-uAPKdEeCf21pKU-R \
+      1QeOI3NX3B-Y1dP0QxRjmTyYHXASA2Mf4 \
+      1VJzdTOlYlHd17B7ENSDNfm2DswA_LyRx \
+      1X9iCk2xBXLUMkWI5m09-HPfaRXAKbnES \
+      1XlrXAu7M7scrI3plYH26k2OEIKes2H7I \
+      1YL86JFAcQIMCjkRWWtOK8P8RYEklxXKI \
+      1_4K-R2C2RuWtAxB0WHofgCF5Ex1KnU8E \
+      1_Lhz1tDADdrYiD9FM_H8j-XxJWU3gkx9 \
+      1bGNsUSsD6gPRlQ8HY5HuyhIEisTeWwps \
+      1fmyAix_M-XbadCa06Ka6By_wp1D_qt28 \
+      1u2Sp7oG22wH6i09V7zKQ3wEjOGFGlWWQ \
+      1zHBLYz66GzyRpM4Uwm4a2Se7EZPSPMTx"
 
+# Default to Portrait mode
+IDS=${PIDS}
 PICDIR="pics-portrait"
 SPACE="5.4G"
 
@@ -63,7 +64,7 @@ while getopts "il" flag; do
             ASK=
             ;;
         l)
-            IDS=${LAND_IDS}
+            IDS=${LIDS}
             PICDIR="pics-landscape"
             SPACE="5.4G"
             ;;

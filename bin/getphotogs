@@ -1,22 +1,23 @@
 #!/bin/bash
 
-IDS="16_xYv1nXTFeybPTFjyQRbrAs5N8A8TBA \
-     1RCYUgVMXt3eg73x5mp1Lr_NNAgR4m0un \
-     1F2eENlQmfGKHu8gt2z0f81fcK4rjl9hU \
-     1nNHpFuRN1z-4rnvRfzec_0UGyFU4mH4- \
-     1RefiBSfuJW7_fbwas-wris4NHptLpTL7 \
-     1C4eBeB2Xlard2aQThcQssjaKfqmhY8c4 \
-     1PzIYcddO8qcExYydI99QtFxItR_2NMkS"
+PIDS="12R_iMNqWaDFfi874q3gTcbKEmudZ5U7i \
+      19uO0I6nzHuUpvYq25ptZAMsxH5lfY1We \
+      1AT8zBehBehm5qQvE-l9Km4d6hgFGbNaq \
+      1DZlkkk1cbOaztQzVwhMvulwNRsMzkr7e \
+      1EPW61c0KwkIqU-Dp8pjP4Lkyg45v2TKz \
+      1Vzs9uT7JTH1hAlDg_7dXuMPZD-V8WjOM \
+      1edRTPOqXQw76F511WgqMfsGjlG50EcHp"
 
-# Placeholder, replace with landscape archive IDs
-LAND_IDS="1DNig6jcdAtTF_k4VjGGJHG0JdCX2RAcE \
-          1p0jCyEHBd-mddlAHHmuJrRYMYlvQ7N8R \
-          14-uLHkSsSt__r677jAiRuWg6978ynrsu \
-          1VpE1zSC5ttZ3YtdsjVEdwQ5UXbkfY30N \
-          13W7morT5eYfpjIaSpjy0Cc_3DcErHwLm \
-          1zAvsWq8rX79wxo01EqQDoj6Xefot_3HD \
-          1r0JfApi8AB9cbkKml5CZeAIxA1uVh2Bv"
+LIDS="14EapdJZkLzPlWHSkHdfdbod3Yxq-Nt2s \
+      1B-PR7wlH-KR86HzjAmy0AcljdxSll03C \
+      1MyUTf3lyioYbKToRnZ-hGIUnb139PIj3 \
+      1PE5C5woOajdJin-mAdOrHACFXfhOsGWA \
+      1YtWe-Gx3RoL7yAc2D90qKZ2LAo8mW0Ew \
+      1_SFLNv0ezkTzAQkapEWfRQcUDe8AAo7L \
+      1bbvMxWzW-Tvxz0e1yzi3i5hrlvgb7zou \
+      1hKR6lzFaxVHcFFCpEAq3kbJ_oCH2GPHT"
 
+IDS=${PIDS}
 PICDIR="pics-portrait"
 SPACE="500M"
 
@@ -27,7 +28,7 @@ while getopts "il" flag; do
             ASK=
             ;;
         l)
-            IDS=${LAND_IDS}
+            IDS=${LIDS}
             PICDIR="pics-landscape"
             SPACE="500M"
             ;;

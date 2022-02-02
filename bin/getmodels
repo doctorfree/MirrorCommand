@@ -1,77 +1,70 @@
 #!/bin/bash
 
-IDS="1kxHx3DMlEqoyH4elZRRsVLhbmvmCu2hi \
-     175HftQLnWyef892bk_eHcDEuPqHAzMct \
-     1JN_3sD4QshRAA76yYUCPr6xX7P__mziG \
-     1wzjsgNNo6U97zXHlnnw3hyTMYANb3OZb \
-     1QVhn_Ew_BqtNfjJtTaCDmty-ZBE9LOB0 \
-     1YPOXjeW4ESeRLIezHFu7Za0V0Cj4n0J2 \
-     17E6_Ls2PyO3sW0I9exdwoQU2WgRA_baG \
-     1PtFobVhyduRjr22NyTMUdQACxlz4OaW4 \
-     1dWio5EnHO4ijswvQdNYxursiA1-DaSCt \
-     1_5OPVw5ZN2_fCv0_grkBe1-N5t8xQROf \
-     18SBwBDnvw2hg4xwVeOQ_t8W2K4ZADOxx \
-     1nZjH1I7OZX7ZSKFCkvW4qzouzpxBhJZy \
-     1m737FY8AcAs069tNXZjPx4LGBpY9nR3F \
-     1cihOcpeMW14dEiBBRh5bwRrJrDc04kq_ \
-     1UES-3bi-N8r3QBbKf7FMg2j8RkOndtWd \
-     1cjgHaXYm_vu8-fiWzSafXAWsm3g-HqpT \
-     1WzEGaIkb6GT_dLP3f8TG-bZKZ0BBIQEo \
-     1FEF3oUg7d2mWWYq0YH6PxSW3yE8opM-v \
-     1zmQ5QnguAK-UREq-FbtT-Soshp_BviQe \
-     1qxnHq4tQJJk4I8-me2gy0lo-v2IlIBy- \
-     1O69Hp99ZkHLIMg1n6H50AvalXHn20Bnb \
-     1yz5WJoT8La1P9_xzGw548r8Sjg0VdzIQ \
-     1hyuhHd-MSPsfzHAPA9v4eXaR6xiITxX4 \
-     1X0I1CddOrOsJIZaZWm_6TEc18WlqTQH0 \
-     1euSFwi0WMx5DISQUh6nztOPlOX9LhZuU \
-     1ga9I_K_zDaGPVx2VLpKGOh-iE5-K_79A \
-     1GErzaBgXUGLLZFqLKQLso6M1xAnVys_0 \
-     1zQAGLptAdBEihJCOVRTKb1wqsbB50FzO \
-     1XmHDbXOx55ABEHqjMcN_qPzWqyeRXvho \
-     1OifTRwANwyMG6wQkxJNjQztOQP-ghFQa \
-     1nEAPNxqIiFpqz02okcLseG9rxUn1PKRe \
-     14a5wEtAFi-uxTPuqQjXzzG3yDd8Y89EK \
-     1eVPaT9OS2bLyC-FeXTTyc3EYGKhvq8gi \
-     1w-bPZh85wStgcmK1OxKlcE8cZuFa70uG \
-     1nGQ36GTdIwujsy6vUEqZQucx7DAyUNfJ"
+PIDS="1-Uf1u3_h9NWttJB-tRRE8X70JsD35rYM \
+      11bJZYz-QJGAbHxwzK7P79wvXfTgRJ8z3 \
+      13VAPMU1nDJJYdjJ4lezTQhzwKVNK2UnM \
+      16MI6TvoRtINfVuxHur9fNfiXhgUTDCUg \
+      17nEk3ZSmlngNdLYxlYxgdqxIirF2a26D \
+      18QnnjxJejXknCK67QkdA0x9llSqvqMhw \
+      18aER823fbBE1Z7CLsGW22Rk1xQd8UFDn \
+      19p4DhJv6BL5iX0hjBfvRrSxbVntPwJcn \
+      1BiyF_zcMSwQ-Zoohw-HlqJGqvCDzY8m2 \
+      1C9fbYIp_sNggW_VVcq0-0N5nzsJoAiwN \
+      1GJ2H_zJc6FOll4kfOs7oykVq9Mi1eunr \
+      1IkoT01dAdxOOZaMmPKCO51AsvCUL11-f \
+      1OREue_xkjMAYLewJ_issmWALGD0aWOSs \
+      1PEpS97ShID0cpca8Qqu71LytP-HDx5LN \
+      1QPOGnKcmVAwe5b6EZaAA0zW4tmVbqwVo \
+      1TxHLx75TAztTvUTyHRdo_PFThbnj0Qzq \
+      1YNgnJWlk-EuGaSSO4YLzhs7QiYsjjt-0 \
+      1ZBMLFLhClsYo-ugb5sOpg431EanmMja5 \
+      1ZHv2xgaqIBjIdPYXrN7mu9PmhteBx302 \
+      1ZLsIn4ywxIktYXvA-2c2GMotmVLPa-dD \
+      1aE57BPvwXU1SMGzfGPIVhzaV5uZPSrCJ \
+      1aoBogoHq3Z2s29VvLFbhncC0z6ZAZ2un \
+      1dVzKVt1Tv4EFwn7GYCCRdRNmIGCd4OHL \
+      1fMgefB_yTXHEbWlHyRHpa14w3qG0l5US \
+      1hFvIwBRoG9dinMwMEIzLfxqZkjywMbV7 \
+      1ivNQcXuQKCUOGbn3a9dQe2423SlrLHU_ \
+      1nk8fob4hHIPdsgkrqs6kvpYmn60PUIDF \
+      1pUHSFd1R1tacPQTpMmypZbsVTrl5dcD- \
+      1rtWrPqaHxi4SHI8ASfock0FEeKFYkdyz \
+      1uhNvwJ-gzHuUH3gqeLB_tLxkd4iecTnQ \
+      1uwnXEhYDLHjmEtnwdQvPQ2n5OZAA-0MF"
 
-# Placeholder, replace with landscape archive IDs
-LAND_IDS="1pI4MSNO8lg_WyIXIvxRYYA9ofLxyp4XX \
-          1GEyTy8KlBZZpHXBtcPOdLk9O4iam_pTH \
-          1dsHAELtlso8a8e0IQKgKs7ncqeMDITBD \
-          118EhOdZUZjN9TkQ4A_uzKjAzYjImdewW \
-          1b9wnDmKKusm_C8sy_SpCCFy7sXMZjp9C \
-          14c8rYsLQQQLuS87fL5a5_jHNOihdzrZa \
-          1zS0vzo9aqF7Lvgah2HOzXsArwOXw9FvL \
-          1xwApPF2h7Vww-Om-qKmClZ3jZ8wocXnl \
-          1p3hwl9wzKiPz0Jl858lIrgdmuYuXMrKp \
-          1rilw8xcH4GWCGQig79ggnnqFx1VUF6ki \
-          1hjm1yuqI1dK9_PBuG18i3ChLGd0p63Eo \
-          14r9JZzZWtgDgWp5RB6-flsCfg_3SfICC \
-          1ptqV8t9vIrvWlriHVQxwZJQEmZ4m_rty \
-          1659b5RW16pxIKfTs2WFxxCXF6VqTAs7a \
-          13i5BEyzPIXDTpqz4hsPezZZgtgTqJ-v6 \
-          1BrPsFke0Lcn6JPCOZdTAyHFdibjG4CZG \
-          16MbFqWengyOhApD0arLvpNhVkH96X7TW \
-          1YxSmq4s5iM26ZXqABgCZOceqodXv-Atp \
-          1OfkXeElPvYB4LMsrB88zKGgy9g-40T-B \
-          18XrtceUIQfxyWX65nCluJEN8aKtKLyZn \
-          1dKVVZ0sMV4u5uhpb1x_lya8STfKmNCqi \
-          1c8kS4-INDJjJBjxUq64EpJt2-ZUuFZVi \
-          1VIulLYwpsIGcppWCkTVyQv-2-RFiYnIe \
-          17IZ8Y4pj4ZPI51QPbY7TTHLjl5XVWzFb \
-          11-gW1SSv8EljACstJm6GYibbDXz8GVJe \
-          1zL0SxQ-HMlgqHrJlT7Vx3fNLGg4g_hrs \
-          1oDx2XApHKzd9_Ryzq68RVnR-00vVfJ7f \
-          1QkPSVdx9zuMpLEiRIdsYA0jf8ALuYYox \
-          1gD4r-mWlyGkNt7oxpZrchPJgeHbubAaG \
-          10IYsilgRPuW6h3Rkbh5XJZ6VN8oqClvY \
-          1Jw96V2HUpefNHqNsn6JhC98PuH4gut72 \
-          1ShxfO3cfi5Ew24g1yrm_eV0Q8husI3FB \
-          177-UvuscFbDMbEipEvqWIryCTAvZRxyv \
-          1c1Tl0BO4eIdLIDNPmlcXxU_85cOKBpPY"
 
+LIDS="10DN4NxCm1HKtRwL3xJJvI6DUEjeSoik4 \
+      1161Ob-ILyVP7qHOFo8bj2RS_9duyIYhk \
+      13M1Znoe-biCHk5Ov1JzHHumJQ23fST-j \
+      13xRCyiNE8EHFRZgi-6Nx3sNycbRlFIPF \
+      152c995UaRmWpVCR1qexLcjltzFdzSaQC \
+      15fq_vT_COC0l2ywrHW8TDmYo69SsrdNs \
+      175VMaTEdm0TcR6ISYHf7WO2rlgV0oPWy \
+      18PYhZIQsB1kk6EZ0tuTlhHXWcpcwKait \
+      1AFLM0PvZboPF32w5-sdURRCkk0w10ZGS \
+      1APxho_cyHjPWTMKI7fSuCE6iB-nYxuEC \
+      1AuiMhjXvHM-obW8orgfc1__IoleiXcA8 \
+      1IKxGBKjrsjZU0X5dHUw2vTyVEuEFheNi \
+      1IZDNdJ7UgEHU15x0BGtUmBPuD3H_rfuh \
+      1K5f7xdBAyQvEiLIXQnXT61sI4_wN3LBp \
+      1OczH7FptWLOg6LVKGJnQ2dO2sJCisckC \
+      1QUFKJ0gpbrAbir23yNV5kC6ak_kZ9NrE \
+      1RLa6lDxLXF42SVM1qFxgTYbD4gRjBDRs \
+      1RyGIf7o5djppmxi84_5CTec93eGEPV3V \
+      1TL-Hfa3G1WZSbZaZ8mKk-RKbIkaGWXbQ \
+      1TOcHQFAmD-ZMKlv_M1YIlrV7h57JpnLm \
+      1Ta-r_Ay9IUEh20rRlanpxyNz_6xu3MPE \
+      1UEotlzQ9uN2ZuCaeJaFW_0KYiymDt34i \
+      1XOS_tC2vG1CtSmZD49ZX2eJ8Ed4cf8-T \
+      1Yw65mv7dmHf-Ypt5vFpPmrSMuEUpaujX \
+      1cnNn4bl7c61IRFwoEZNJpR7gXAjpn28s \
+      1jGWMi2a3lSnfBQ3kcDspIzO3RkmPOEQQ \
+      1kvi-OxTxwq5ODlTkGEZgNmQZJoscIi2h \
+      1oGRu9ybsjr6M16SGNs7Xx1rCKGafOJKI \
+      1pNtgkVu569vBGk3XaJ9HpzDc50Gm8NkA \
+      1sVqk01obaTstm-q8eidh_5UD-NBAr6Os"
+
+IDS=${PIDS}
 PICDIR="pics-portrait"
 SPACE="4.7G"
 
@@ -82,7 +75,7 @@ while getopts "il" flag; do
             ASK=
             ;;
         l)
-            IDS=${LAND_IDS}
+            IDS=${LIDS}
             PICDIR="pics-landscape"
             SPACE="4.7G"
             ;;
