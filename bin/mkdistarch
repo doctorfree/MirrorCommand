@@ -2,24 +2,29 @@
 
 IN_DIR="/u/pictures/MagicMirror"
 OUT_DIR="/u/gdrive/MagicMirror"
+TMP_DIR="${IN_DIR}/tmp"
 TOPS="Fractals Gif"
 
 MOV_DIR="/u/movies"
 MOVS="Tantra"
 
 usage() {
-    printf "\nUsage: mkdistarch [-i input_dir] [-o output_dir] [-NUnu]"
-    printf "\nDefaults:\n\tinput_dir=${IN_DIR}\n\toutput_dir=${OUT_DIR}\n"
+    printf "\nUsage: mkdistarch [-i input_dir] [-o output_dir] [-cCNnu]"
+    printf "\nDefaults:\n\tinput_dir=${IN_DIR}\n\tmovie_dir=${MOV_DIR}"
+    printf "\n\toutput_dir=${OUT_DIR}\n"
     printf "\nWhere:\n\t-n indicates tell me what you would do but don't do it"
+    printf "\n\t-c indicates report archives that have changed but do not create them"
+    printf "\n\t-C indicates update archives that have changed"
     printf "\n\t-N indicates report New archives but do not create them"
-    printf "\n\t-U indicates create all new archives"
     printf "\n\t-u displays this usage message and exits\n"
+    printf "\nDefault action is to create all new archives\n"
     exit 1
 }
 
-TELL=
+CHG=
 NEW=
-while getopts "i:o:NUnu" flag; do
+TELL=
+while getopts "i:o:cCNnu" flag; do
     case $flag in
         i)
             IN_DIR="$OPTARG"
@@ -27,11 +32,14 @@ while getopts "i:o:NUnu" flag; do
         o)
             OUT_DIR="$OPTARG"
             ;;
+        c)
+            CHG=report
+            ;;
+        C)
+            CHG=update
+            ;;
         N)
             NEW=report
-            ;;
-        U)
-            NEW=create
             ;;
         n)
             TELL=1
@@ -42,6 +50,11 @@ while getopts "i:o:NUnu" flag; do
     esac
 done
 
+[ "${NEW}" ] && [ "${CHG}" ] && {
+  echo "The -nN and -cC options are mutually exclusive."
+  echo "Remove either the -nN or -cC options and execute again."
+  usage
+}
 
 [ -d ${IN_DIR} ] || {
   echo "$IN_DIR does not exist. Exiting."
@@ -49,6 +62,10 @@ done
 }
 
 [ -d ${OUT_DIR} ] || mkdir -p ${OUT_DIR}
+
+[ "${CHG}" ] && {
+  [ -d ${TMP_DIR} ] || mkdir -p ${TMP_DIR}
+}
 
 [ -d ${OUT_DIR} ] || {
   echo "$OUT_DIR does not exist. Exiting."
@@ -62,23 +79,54 @@ for top in ${TOPS}
 do
   if [ "${NEW}" ]
   then
-    [ -f ${OUT_DIR}/${top}.tar.gz ] || {
+    [ -f ${OUT_DIR}/common/${top}.tar.gz ] || {
       if [ "${NEW}" == "report" ]
       then
         echo "NEW: ${top}.tar.gz"
       else
-        echo "Creating ${OUT_DIR}/${top}.tar.gz"
-        [ "${TELL}" ] || tar cf - ${top} | gzip > ${OUT_DIR}/${top}.tar.gz
+        echo "Creating ${OUT_DIR}/common/${top}.tar.gz"
+        [ "${TELL}" ] || tar cf - ${top} | gzip > ${OUT_DIR}/common/${top}.tar.gz
       fi
     }
   else
-    echo "Creating ${OUT_DIR}/${top}.tar.gz"
-    [ "${TELL}" ] || tar cf - ${top} | gzip > ${OUT_DIR}/${top}.tar.gz
+    if [ "${CHG}" ]
+    then
+      if [ -f ${OUT_DIR}/common/${top}.tar.gz ]
+      then
+        tar cf - ${top} | gzip > ${TMP_DIR}/common/${top}.tar.gz
+        if [ "${CHG}" == "report" ]
+        then
+          echo "Checking and reporting ${OUT_DIR}/common/${top}.tar.gz"
+          if cmp -s ${OUT_DIR}/common/${top}.tar.gz ${TMP_DIR}/${top}.tar.gz > /dev/null
+          then
+            echo "${OUT_DIR}/common/${top}.tar.gz up to date!"
+          else
+            echo "${OUT_DIR}/common/${top}.tar.gz differs and needs to be updated"
+          fi
+        else
+          echo "Checking ${OUT_DIR}/common/${top}.tar.gz"
+          if cmp -s ${OUT_DIR}/common/${top}.tar.gz ${TMP_DIR}/${top}.tar.gz > /dev/null
+          then
+            echo "${OUT_DIR}/common/${top}.tar.gz up to date!"
+          else
+            echo "${OUT_DIR}/common/${top}.tar.gz differs and will be updated"
+            mv ${TMP_DIR}/${top}.tar.gz ${OUT_DIR}/common/${top}.tar.gz
+          fi
+        fi
+        rm -f ${TMP_DIR}/${top}.tar.gz
+      else
+        echo "${OUT_DIR}/common/${top}.tar.gz does not exist."
+      fi
+    else
+      echo "Creating ${OUT_DIR}/common/${top}.tar.gz"
+      [ "${TELL}" ] || tar cf - ${top} | gzip > ${OUT_DIR}/common/${top}.tar.gz
+    fi
   fi
 done
 
 for mode in landscape portrait
 do
+  cd ${IN_DIR}
   [ "${NEW}" ] || echo "Creating ${mode} mode archives"
   [ -d ${mode} ] || {
     echo "${IN_DIR}/${mode} does not exist or is not a directory. Skipping"
@@ -89,26 +137,58 @@ do
   do
     [ -d ${topm} ] || continue
     case ${topm} in
-      Artists|JAV|Models|Photographers)
-          cd ${topm}
+      Artists|Countries|JAV|Models|Photographers)
           [ "${NEW}" ] || echo "Creating ${OUT_DIR}/${mode}/${topm} archives"
-          for subtop in *
+          for subtop in ${topm}/*
           do
             [ -d ${subtop} ] || continue
+            subnam=`basename ${subtop}`
             if [ "${NEW}" ]
             then
-              [ -f ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz ] || {
+              [ -f ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz ] || {
                 if [ "${NEW}" == "report" ]
                 then
-                  echo "NEW: ${mode}/${topm}/${subtop}.tar.gz"
+                  echo "NEW: ${mode}/${topm}/${subnam}.tar.gz"
                 else
-                  echo "Creating ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz"
-                  [ "${TELL}" ] || tar cf - ${subtop} | gzip > ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz
+                  echo "Creating ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz"
+                  [ "${TELL}" ] || tar cf - ${subtop} | gzip > ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz
                 fi
               }
             else
-              echo "Creating ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz"
-              [ "${TELL}" ] || tar cf - ${subtop} | gzip > ${OUT_DIR}/${mode}/${topm}/${subtop}.tar.gz
+              if [ "${CHG}" ]
+              then
+                if [ -f ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz ]
+                then
+                  tar cf - ${subtop} | gzip > ${TMP_DIR}/${subnam}.tar.gz
+                  if [ "${CHG}" == "report" ]
+                  then
+                    echo "Checking and reporting ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz"
+                    if cmp -s ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz \
+                      ${TMP_DIR}/${subnam}.tar.gz > /dev/null
+                    then
+                      echo "${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz up to date!"
+                    else
+                      echo "${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz differs and needs to be updated"
+                    fi
+                  else
+                    echo "Checking ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz"
+                    if cmp -s ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz \
+                      ${TMP_DIR}/${subnam}.tar.gz > /dev/null
+                    then
+                      echo "${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz up to date!"
+                    else
+                      echo "${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz differs and will be updated"
+                      mv ${TMP_DIR}/${subnam}.tar.gz ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz
+                    fi
+                  fi
+                  rm -f ${TMP_DIR}/${subnam}.tar.gz
+                else
+                  echo "${OUT_DIR}/${top}.tar.gz does not exist."
+                fi
+              else
+                echo "Creating ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz"
+                [ "${TELL}" ] || tar cf - ${subtop} | gzip > ${OUT_DIR}/${mode}/${topm}/${subnam}.tar.gz
+              fi
             fi
           done
           cd ..
@@ -127,8 +207,40 @@ do
               fi
             }
           else
-            echo "Creating ${OUT_DIR}/${mode}/${topm}.tar.gz"
-            [ "${TELL}" ] || tar cf - ${topm} | gzip > ${OUT_DIR}/${mode}/${topm}.tar.gz
+            if [ "${CHG}" ]
+            then
+              if [ -f ${OUT_DIR}/${mode}/${topm}.tar.gz ]
+              then
+                tar cf - ${topm} | gzip > ${TMP_DIR}/${topm}.tar.gz
+                if [ "${CHG}" == "report" ]
+                then
+                  echo "Checking and reporting ${OUT_DIR}/${mode}/${topm}.tar.gz"
+                  if cmp -s ${OUT_DIR}/${mode}/${topm}.tar.gz \
+                    ${TMP_DIR}/${topm}.tar.gz > /dev/null
+                  then
+                    echo "${OUT_DIR}/${mode}/${topm}.tar.gz up to date!"
+                  else
+                    echo "${OUT_DIR}/${mode}/${topm}.tar.gz differs and needs to be updated"
+                  fi
+                else
+                  echo "Checking ${OUT_DIR}/${mode}/${topm}.tar.gz"
+                  if cmp -s ${OUT_DIR}/${mode}/${topm}.tar.gz \
+                    ${TMP_DIR}/${topm}.tar.gz > /dev/null
+                  then
+                    echo "${OUT_DIR}/${mode}/${topm}.tar.gz up to date!"
+                  else
+                    echo "${OUT_DIR}/${mode}/${topm}.tar.gz differs and will be updated"
+                    mv ${TMP_DIR}/${topm}.tar.gz ${OUT_DIR}/${mode}/${topm}.tar.gz
+                  fi
+                fi
+                rm -f ${TMP_DIR}/${topm}.tar.gz
+              else
+                echo "${OUT_DIR}/${top}.tar.gz does not exist."
+              fi
+            else
+              echo "Creating ${OUT_DIR}/${mode}/${topm}.tar.gz"
+              [ "${TELL}" ] || tar cf - ${topm} | gzip > ${OUT_DIR}/${mode}/${topm}.tar.gz
+            fi
           fi
           ;;
     esac
@@ -143,17 +255,47 @@ for mov in ${MOVS}
 do
   if [ "${NEW}" ]
   then
-    [ -f ${OUT_DIR}/${mov}.tar.gz ] || {
+    [ -f ${OUT_DIR}/common/${mov}.tar.gz ] || {
       if [ "${NEW}" == "report" ]
       then
         echo "NEW: ${mov}.tar.gz"
       else
-        echo "Creating ${OUT_DIR}/${mov}.tar.gz"
-        [ "${TELL}" ] || tar cf - ${mov} | gzip > ${OUT_DIR}/${mov}.tar.gz
+        echo "Creating ${OUT_DIR}/common/${mov}.tar.gz"
+        [ "${TELL}" ] || tar cf - ${mov} | gzip > ${OUT_DIR}/common/${mov}.tar.gz
       fi
     }
   else
-    echo "Creating ${OUT_DIR}/${mov}.tar.gz"
-    [ "${TELL}" ] || tar cf - ${mov} | gzip > ${OUT_DIR}/${mov}.tar.gz
+    if [ "${CHG}" ]
+    then
+      if [ -f ${OUT_DIR}/common/${mov}.tar.gz ]
+      then
+        tar cf - ${mov} | gzip > ${TMP_DIR}/${mov}.tar.gz
+        if [ "${CHG}" == "report" ]
+        then
+          echo "Checking and reporting ${OUT_DIR}/common/${mov}.tar.gz"
+          if cmp -s ${OUT_DIR}/common/${mov}.tar.gz ${TMP_DIR}/${mov}.tar.gz > /dev/null
+          then
+            echo "${OUT_DIR}/common/${mov}.tar.gz up to date!"
+          else
+            echo "${OUT_DIR}/common/${mov}.tar.gz differs and needs to be updated"
+          fi
+        else
+          echo "Checking ${OUT_DIR}/common/${mov}.tar.gz"
+          if cmp -s ${OUT_DIR}/common/${mov}.tar.gz ${TMP_DIR}/${mov}.tar.gz > /dev/null
+          then
+            echo "${OUT_DIR}/common/${mov}.tar.gz up to date!"
+          else
+            echo "${OUT_DIR}/common/${mov}.tar.gz differs and will be updated"
+            mv ${TMP_DIR}/${mov}.tar.gz ${OUT_DIR}/common/${mov}.tar.gz
+          fi
+        fi
+        rm -f ${TMP_DIR}/${mov}.tar.gz
+      else
+        echo "${OUT_DIR}/common/${mov}.tar.gz does not exist."
+      fi
+    else
+      echo "Creating ${OUT_DIR}/common/${mov}.tar.gz"
+      [ "${TELL}" ] || tar cf - ${mov} | gzip > ${OUT_DIR}/common/${mov}.tar.gz
+    fi
   fi
 done
