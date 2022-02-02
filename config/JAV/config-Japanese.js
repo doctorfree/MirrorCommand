@@ -100,7 +100,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommand/pics/Japanese/',
+                    '/usr/local/MirrorCommand/pics/Countries/Japanese/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

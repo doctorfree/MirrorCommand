@@ -123,7 +123,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommand/pics/Russian/',
+                    '/usr/local/MirrorCommand/pics/Countries/Russian/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,
