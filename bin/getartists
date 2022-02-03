@@ -114,23 +114,25 @@ fi
   printf "\n"
   MMHOME=${HOME}/MagicMirror
   [ -d ${MMHOME}/config ] || {
-      MMHOME=
-      for homedir in /usr/local /home/*
-      do
-          [ "${homedir}" == "/home/*" ] && continue
-          [ -d ${homedir}/MagicMirror/config ] && {
-              MMHOME="${homedir}/MagicMirror"
-              break
-          }
-      done
+    MMHOME=
+    for homedir in /usr/local /home/*
+    do
+      [ "${homedir}" == "/home/*" ] && continue
+      [ -d ${homedir}/MagicMirror/config ] && {
+        MMHOME="${homedir}/MagicMirror"
+        break
+      }
+    done
   }
   [ "${MMHOME}" ] && {
-      MM="/usr/local/MirrorCommand"
+    MM="/usr/local/MirrorCommand"
+    [ -d ${MM}/${PICDIR}/Artists ] && {
       USER=$(stat -c '%U' ${MMHOME}/config)
       GROUP=$(stat -c '%G' ${MMHOME}/config)
       sudo chown -R ${USER}:${GROUP} ${MM}/${PICDIR}/Artists
       find ${MM}/${PICDIR}/Artists -type d -print0 | xargs -0 chmod 755
       find ${MM}/${PICDIR}/Artists -type f -print0 | xargs -0 chmod 644
+    }
   }
 }
 
