@@ -191,7 +191,6 @@ do
               fi
             fi
           done
-          cd ..
           ;;
       *)
           [ -d ${topm} ] || continue
