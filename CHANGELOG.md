@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+03 February 2022, MirrorCommand version 3.0.2 release 2:
+
+  This minor release update of MirrorCommand incorporates changes to improve
+  integration with the MirrorImages package downloads. In addition, support
+  is added for models by country in the MirrorImages downloads and in the
+  MirrorCommand default config files. New Google Drive file ids have been
+  used in the download scripts to reflect the MirrorImages distribution changes.
+
 29 January 2022, MirrorCommand version 3.0.2 release 1:
 
   This release update of MirrorCommand incorporates changes to integrate with the
@@ -87,6 +95,36 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Thu Feb 3 08:57:49 2022 -0800 97aee5a :
+   Fix bug in mkdistarch
+Thu Feb 3 08:18:02 2022 -0800 f0dade1 :
+   Check for download directory before setting permissions and ownership
+Wed Feb 2 15:46:38 2022 -0800 5fb7dd4 :
+   Fix mkdistarch create archives at mode level
+Wed Feb 2 15:09:29 2022 -0800 12d6f2e :
+   Update sizes of image archive downloads
+Wed Feb 2 12:45:03 2022 -0800 ba7c33d :
+   Models by country images moved into Countries subdirectory
+Wed Feb 2 12:16:49 2022 -0800 d008663 :
+   Update image download scripts with new file ids, add download script for country models
+Tue Feb 1 15:13:58 2022 -0800 bb9f2c2 :
+   Add options to mkdistarch, add video archives
+Tue Feb 1 10:25:07 2022 -0800 e614a5a :
+   Added mkdistarch to create the Gdrive archive downloads
+Mon Jan 31 14:54:14 2022 -0800 99d84cb :
+   pre-removal script check for folder or plain config file
+Mon Jan 31 14:24:36 2022 -0800 1257ef4 :
+   Do not skip folders previously created
+Mon Jan 31 08:57:41 2022 -0800 fcb0c7e :
+   Add configs for models by country, mknew scripts process args replacing spaces with underscores
+Sun Jan 30 15:13:42 2022 -0800 75f0f25 :
+   Add Colombian config
+Sun Jan 30 14:35:31 2022 -0800 0a5661a :
+   Fix typo in mknewtop, add model configs for countries
+Sun Jan 30 13:58:22 2022 -0800 06e52b8 :
+   Add Angelika Wachowska config
+Sat Jan 29 15:27:30 2022 -0800 7d7f22a :
+   Update changelog and release notes in preparation for v3.0.2r1 release
 Sat Jan 29 12:33:22 2022 -0800 4ad4452 :
    Link pics dir if not already set during mirror startup
 Sat Jan 29 08:28:36 2022 -0800 7fcbb42 :

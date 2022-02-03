@@ -1,6 +1,6 @@
-This release update of MirrorCommand incorporates changes to integrate with the MirrorImages RPM installations. Installs of the current MirrorImages packages require this version of MirrorCommand or later.
+This minor release update of MirrorCommand incorporates changes to improve integration with the MirrorImages package downloads. In addition, support is added for models by country in the MirrorImages downloads and in the MirrorCommand default config files. New Google Drive file ids have been used in the download scripts to reflect the MirrorImages distribution changes.
 
-The previous release update of MirrorCommand fixed a bug in the install scripts introduced by recent changes to Bash wrt the return status of the 'type' builtin. MMM-stocks module is now pulled from my fork to provide dependency on 'request' and security fixes. The scripts that download image archives for the [MirrorImages](https://gitlab.com/doctorfree/MirrorImages) packages have been updated to execute in non-interactive mode when being run during an RPM installation.
+The previous release updates of MirrorCommand incorporated changes to integrate with the MirrorImages RPM installations. Installs of the current MirrorImages packages require this version of MirrorCommand or later. The scripts that download image archives for the [MirrorImages](https://gitlab.com/doctorfree/MirrorImages) packages have been updated to execute in non-interactive mode when being run during an RPM installation.
 
 The version 3.0.x releases of MirrorCommand introduce support for multiple monitors, switching MagicMirror screen display between monitors, full support for both portrait and landscape mode displays, and renames the project from MirrorCommandLine to MirrorCommand.  Voice commands for screen switching have been added via the MMM-GoogleAssistant module recipe file MirrorCommand.js.
 
@@ -20,12 +20,12 @@ or grant everyone access with
 
 Install the package on Debian based systems by executing the command
 ```bash
-sudo apt install ./MirrorCommand_3.0.2-1.deb
+sudo apt install ./MirrorCommand_3.0.2-2.deb
 ```
 
 Install the package on RPM based systems by executing the command
 ```bash
-sudo yum localinstall ./MirrorCommand-3.0.2-1.rpm
+sudo yum localinstall ./MirrorCommand-3.0.2-2.rpm
 ```
 
 Removal of the package on Debian based systems can be accomplished by issuing the command:
@@ -45,5 +45,4 @@ Post installation, configure `/usr/local/MagicMirror/etc/mirrorkeys` with any ke
 ```bash
 /usr/local/bin/showkeys
 ```
-
 
