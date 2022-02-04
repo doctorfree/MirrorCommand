@@ -123,7 +123,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommand/pics/Nuts_Magazine/',
+                    '/usr/local/MirrorCommand/pics/Models/Nuts_Magazine/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

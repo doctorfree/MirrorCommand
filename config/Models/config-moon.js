@@ -123,7 +123,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommand/pics/Moon_Maison/',
+                    '/usr/local/MirrorCommand/pics/Models/Moon_Maison/',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 transitionImages: true,

@@ -1,28 +1,14 @@
 #!/bin/bash
 
-PIDS="10TDyf1we3_tcuoKDQ7n-5XHULQl1BUx1 \
-      14_poR1ZSA78rTXLDomEAdA7KBe8hs5Y6 \
-      1EWR5y7yzJpZd2-9HuAb7mvEda4vJ1C6H \
-      1JoVH14lIqFcayAaJZG6_jUX2NvF0vu9I \
+PIDS="14_poR1ZSA78rTXLDomEAdA7KBe8hs5Y6 \
       1WazaOoAXxUDEJWuZ_YqDv-TxxDN_pC94 \
-      1YHDkZL0DQCjWNHTbmuRmYYGNIcJ8Jggk \
-      1ZA23cVb2E7HWKPAaWplx9jXfioPd-sXB \
-      1_kASS4QLyxsTrtRWxfmoedqnHIYam2aT \
-      1h8wm0yDhzi3IesZyMzXCKXJMqVge3fs4 \
       1lK6BbIaOGKugTRquBFLyu2VR6z3uiNVW \
       1Fc0-QOi5MSt6qAH5da3qfhfGW0kLYaYf \
       1EP1_-w_cwTjemVSTmI5ZlaAlZS9PI9SX"
 
 LIDS="17qmMODvjZEx3t1V_xK_1YnR29DzVhhLI \
-      1Sd0T0iEV71Ui7_C2fvBH8BTtvSLN3GR- \
       1_Iq1OOm68kbUwwN_yD8wiqEYS2C5KGSp \
-      1cZoMoarEzbgSsy77p_eVbmrP7cLSXHzi \
-      1hgRPXzaqyCU7DN-R8abhdTTQMMwYAeG5 \
-      1knzcDY0hBvdadWq5o_U2V1mh4vxhiijB \
-      1lRuZzrgrHeeoeM9juXkYRFKOYBGu28cd \
-      1r4wLIqP84rPRFXxub-o8lSk5QXkbQVgP \
       1rBjiLFko7yJ7HAWGlu6TPsWDA0Ohalq_ \
-      1wSaMcehvecriHt5GnZEz349UpNDXKrNY \
       1Fc0-QOi5MSt6qAH5da3qfhfGW0kLYaYf \
       1EP1_-w_cwTjemVSTmI5ZlaAlZS9PI9SX"
 
