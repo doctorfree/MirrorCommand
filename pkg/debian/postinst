@@ -25,10 +25,10 @@ case "$1" in
         EXPORTS="audiotest camsnap chkconfig chktemp gethue getquote \
             screensaveroff get_temps mirror mknewartist mknewjav mknewmodel \
             mknewphotographer mknewplayboy mknewtop mm mmapiactions mmgetb \
-            mmscene mmscreen mmsetb mmupdall module_update module_update_all \
-            play rand_back send_sms set_asound_conf showkeys updallartists updalljav \
-            updallmodels updallphotographers updalltop updarpscan updartist \
-            updlinks updjav updmodel updphotographer updtop updoffsets \
+            mmscene mmscreen mmsetb mmupdall module_update module_update_all play \
+            rand_back send_sms set_asound_conf showkeys updallartists updallcountries \
+            updalljav updallmodels updallphotographers updalltop updarpscan updartist \
+            updlinks updcountry updjav updmodel updphotographer updtop updoffsets \
             updcsswidth updwidth vncview vol websnap wireless_conf zerologs"
         LOCAL="myreboot myshutdown remountusb"
         MM="/usr/local/MirrorCommand"
