@@ -138,6 +138,9 @@ do
         Jenya)
             model_sites[$ELITE]="Eugenia_Diordiychuk"
             ;;
+        Kameliya_A)
+            model_sites[$KIND]="Kameliya"
+            ;;
         Natalia_Andreeva)
             model_sites[$ELITE]="Delilah_G"
             model_sites[$KIND]="Natalia_A"
