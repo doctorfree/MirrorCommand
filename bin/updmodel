@@ -151,15 +151,16 @@ do
         Priscilla_Huggins)
             model_sites[$ELITE]="Priscilla_Huggins_Ortiz"
             ;;
+        Simon)
+            model_sites[$MOD]="Simon_\(GoddessNudes\)"
+            ;;
         *)
             ;;
     esac
     for MDIR in $MOD $ART $JAV $PHO $KIND $PLA $PEN $DRO $TOP $ELITE
     do
       chkfolder=$folder
-      [ "${model_sites[$MDIR]}" ] && {
-              chkfolder="${model_sites[$MDIR]}"
-      }
+      [ "${model_sites[$MDIR]}" ] && chkfolder="${model_sites[$MDIR]}"
       [ -d $MDIR/$chkfolder ] && {
         echo "Checking $MDIR/$chkfolder for newly added files"
         cd $MDIR/$chkfolder
