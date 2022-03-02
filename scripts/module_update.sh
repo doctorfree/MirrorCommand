@@ -148,20 +148,12 @@ do
               git clone https://github.com/grabenhenrich/MMM-DateOnly.git
             fi
             ;;
-          MMM-Tools)
+          MMM-Tools|MMM-Detector|MMM-GoogleAssistant|MMM-TelegramBot)
             if [ "${QUIET}" ]
             then
               git clone https://github.com/bugsounet/${module}.git > /dev/null 2>&1
             else
               git clone https://github.com/bugsounet/${module}.git
-            fi
-            ;;
-          MMM-Detector|MMM-GoogleAssistant|MMM-TelegramBot)
-            if [ "${QUIET}" ]
-            then
-              git clone --branch rpmdev https://github.com/doctorfree/${module}.git > /dev/null 2>&1
-            else
-              git clone --branch rpmdev https://github.com/doctorfree/${module}.git
             fi
             ;;
           MMM-GoogleMapsTraffic)
@@ -180,7 +172,7 @@ do
               git clone https://github.com/alberttwong/MMM-iFrame.git
             fi
             ;;
-          mmm-hue-lights|MMM-InstagramView|MMM-Solar|MMM-stocks|MMM-TelegramCommands|MMM-YouTubeWebView)
+          MMM-MacAddressScan|mmm-hue-lights|MMM-InstagramView|MMM-Solar|MMM-stocks|MMM-TelegramCommands|MMM-YouTubeWebView)
             if [ "${QUIET}" ]
             then
               git clone https://github.com/doctorfree/${module}.git > /dev/null 2>&1
@@ -194,16 +186,6 @@ do
               git clone https://github.com/2hdlockness/MMM-IronManGIF.git > /dev/null 2>&1
             else
               git clone https://github.com/2hdlockness/MMM-IronManGIF.git
-            fi
-            ;;
-          MMM-MacAddressScan)
-            if [ "${QUIET}" ]
-            then
-              # sudo apt-get -y install arp-scan > /dev/null 2>&1
-              git clone https://github.com/doctorfree/MMM-MacAddressScan.git > /dev/null 2>&1
-            else
-              # sudo apt-get -y install arp-scan
-              git clone https://github.com/doctorfree/MMM-MacAddressScan.git
             fi
             ;;
           MMM-MoonPhase)
