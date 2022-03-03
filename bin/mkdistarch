@@ -193,6 +193,7 @@ do
           done
           ;;
       *)
+          echo ${TOPS} | grep -w ${topm} > /dev/null && continue
           [ -d ${topm} ] || continue
           if [ "${NEW}" ]
           then
