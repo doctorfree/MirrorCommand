@@ -1,14 +1,36 @@
 #!/bin/bash
 
-USER=`id -u -n`
+# USER=`id -u -n`
 # Set these to the device and mount point of the USB drive you wish to remount
 DEV="/dev/sda1"
-MNT="/media/${USER}/Transcend"
+# MNT="/media/${USER}/Transcend"
 
 mirror_inst=`type -p mirror`
 [ "${mirror_inst}" ] && {
     mirror stop
 }
-sudo umount ${MNT}
+# sudo umount ${MNT}
+udisksctl unmount --block-device ${DEV}
 sudo fsck -y ${DEV}
-sudo mount -o rw ${DEV} ${MNT}
+# sudo mount -o rw ${DEV} ${MNT}
+udisksctl mount --block-device ${DEV}
+
+# NOTE: On Raspbian to authorize users in group adm to mount disks without
+#       authenticating create the file
+#           /etc/polkit-1/localauthority/50-local.d/10-udisks.pkla
+#       with the following content (remove all comment characters):
+#
+#[udisks1]
+#Identity=unix-group:adm
+#Action=org.freedesktop.udisks.filesystem-mount;org.freedesktop.udisks.luks-unlock;org.freedesktop.udisks.drive-eject;org.freedesktop.udisks.drive-detach
+#ResultAny=yes
+#
+#[udisks2]
+#Identity=unix-group:adm
+#Action=org.freedesktop.udisks2.filesystem-mount;org.freedesktop.udisks2.filesystem-mount-system;org.freedesktop.udisks2.encrypted-unlock;org.freedesktop.udisks2.eject-media;org.freedesktop.udisks2.power-off-drive
+#ResultAny=yes
+#
+#[udisks2-other-seat]
+#Identity=unix-group:adm
+#Action=org.freedesktop.udisks2.filesystem-mount-other-seat;org.freedesktop.udisks2.filesystem-unmount-others;org.freedesktop.udisks2.encrypted-unlock-other-seat;org.freedesktop.udisks2.eject-media-other-seat;org.freedesktop.udisks2.power-off-drive-other-seat
+#ResultAny=yes
