@@ -460,18 +460,29 @@ MMIP=`hostname -I | awk ' { print $1 } '`
     }
 }
 # Create links to image and movie folders if they exist
-MNT_PT="/media/pi/Transcend/Pictures"
+MNT_PT="/media/pi/Transcend/Pictures/MagicMirror"
 [ -d ${MNT_PT} ] || {
-    MNT_PT="/u/pictures"
-    [ -d ${MNT_PT} ] || MNT_PT="/v/pictures"
+    MNT_PT="/u/pictures/MagicMirror"
+    [ -d ${MNT_PT} ] || {
+        MNT_PT="/v/pictures/MagicMirror"
+        [ -d ${MNT_PT} ] || {
+            for picdir in /home/*/Pictures/MagicMirror
+            do
+                [ "${picdir}" == "/home/*/Pictures/MagicMirror" ] && continue
+                [ -d ${picdir} ] && {
+                    MNT_PT="${picdir}"
+                    break
+                }
+            done
+        }
+    }
 }
 [ -d ${MNT_PT} ] && {
     cd ${MM}
-    PMM="${MNT_PT}/MagicMirror"
     for orient in landscape portrait
     do
-        [ -d ${PMM}/${orient} ] || continue
-        [ -d pics-${orient} ] || ln -s ${PMM}/${orient} pics-${orient}
+        [ -d ${MNT_PT}/${orient} ] || continue
+        [ -d pics-${orient} ] || ln -s ${MNT_PT}/${orient} pics-${orient}
     done
 }
 [ -L ${MM}/pics ] && rm -f ${MM}/pics
@@ -487,10 +498,22 @@ MNT_PT="/media/pi/Transcend/Pictures"
     }
   fi
 }
-MNT_PT="/media/pi/Transcend/Movies"
+MNT_PT="/media/pi/Transcend/Movies/MagicMirror"
 [ -d ${MNT_PT} ] || {
-    MNT_PT="/u/movies"
-    [ -d ${MNT_PT} ] || MNT_PT="/v/movies"
+    MNT_PT="/u/movies/MagicMirror"
+    [ -d ${MNT_PT} ] || {
+        MNT_PT="/v/movies/MagicMirror"
+        [ -d ${MNT_PT} ] || {
+            for movdir in /home/*/Videos/MagicMirror
+            do
+                [ "${movdir}" == "/home/*/Videos/MagicMirror" ] && continue
+                [ -d ${movdir} ] && {
+                    MNT_PT="${movdir}"
+                    break
+                }
+            done
+        }
+    }
 }
 [ -d ${MNT_PT} ] && {
     cd ${MM}
