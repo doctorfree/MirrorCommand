@@ -1,0 +1,78 @@
+#!/bin/bash
+
+IDS="1vNcmak2NInjmAWyvJgvyp7sfDq52XIBp"
+
+HERE=`pwd`
+NUM_IDS=`echo ${IDS} | wc -w`
+printf "\nDownloading and extracting ${NUM_IDS} video archives "
+printf "will consume approximately 3.2G of disk space in "
+printf "${HERE}\n\n"
+
+ASK=1
+while getopts "i" flag; do
+    case $flag in
+        i)
+            ASK=
+            ;;
+    esac
+done
+
+if [ "${ASK}" ]
+then
+  while true
+  do
+    read -p "Do you wish to continue ? ('Y'/'N'): " yn
+    case $yn in
+      [Yy]*)
+          DOWNLOAD=1
+          break
+          ;;
+      [Nn]*)
+          DOWNLOAD=
+          break
+          ;;
+      * )
+          echo "Please answer yes or no."
+          ;;
+    esac
+  done
+else
+  DOWNLOAD=1
+fi
+
+[ "${DOWNLOAD}" ] && {
+  type -p gdown > /dev/null || pip install gdown > /dev/null
+
+  i=1
+  for ID in ${IDS}
+  do
+    printf "\nDownloading and extracting ${i}/${NUM_IDS} video archives ..."
+    gdown -O - --id ${ID} --quiet | tar xzf -
+    printf " Done."
+    ((i++))
+  done
+  printf "\n"
+  MMHOME=${HOME}/MagicMirror
+  [ -d ${MMHOME}/config ] || {
+    MMHOME=
+    for homedir in /usr/local /home/*
+    do
+      [ "${homedir}" == "/home/*" ] && continue
+      [ -d ${homedir}/MagicMirror/config ] && {
+        MMHOME="${homedir}/MagicMirror"
+        break
+      }
+    done
+  }
+  [ "${MMHOME}" ] && {
+    MM="/usr/local/MirrorCommand"
+    [ -d ${MM}/movies ] && {
+      USER=$(stat -c '%U' ${MMHOME}/config)
+      GROUP=$(stat -c '%G' ${MMHOME}/config)
+      sudo chown -R ${USER}:${GROUP} ${MM}/movies
+      find ${MM}/movies -type d -print0 | xargs -0 chmod 755
+      find ${MM}/movies -type f -print0 | xargs -0 chmod 644
+    }
+  }
+}
+exit 0

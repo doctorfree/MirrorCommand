@@ -6,7 +6,7 @@ TMP_DIR="${IN_DIR}/tmp"
 TOPS="Fractals Gif"
 
 MOV_DIR="/u/movies"
-MOVS="Tantra"
+MOVS="Tantra Pornhub"
 
 usage() {
     printf "\nUsage: mkdistarch [-i input_dir] [-o output_dir] [-cCNnu]"
