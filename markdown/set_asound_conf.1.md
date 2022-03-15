@@ -6,10 +6,10 @@ footer: set_asound_conf 2.6
 date: December 07, 2021
 ---
 # NAME
-**set_asound_conf** - Take a photo with the camera attached to a MagicMirror
+**set_asound_conf** - Set/get the ALSA sound configuration
 
 # SYNOPSIS
-**set_asound_conf** [-c] [-e] [-o outfile] [-q] [-r] [-t template] [-u]
+**set_asound_conf** [-c] [-e] [-l] [-n] [-o outfile] [-q] [-r] [-t template] [-u]
 
 # DESCRIPTION
 The *set_asound_conf* command can be used to interactively set the ALSA sound configuration in */etc/asound.conf* at the command line.
@@ -23,6 +23,12 @@ The *set_asound_conf* command can be used to interactively set the ALSA sound co
 
 **-e**
 : Indicates perform an update of */etc/asound.conf*
+
+**-l**
+: Indicates list audio input/output configured devices
+
+**-n**
+: Indicates non-interactive execution (guess at settings)
 
 **-o outfile**
 : 'outfile' specifies an alternate output file for generated asound.conf

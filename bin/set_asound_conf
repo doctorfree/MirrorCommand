@@ -17,13 +17,14 @@ OUTGREP="USB-Audio"
 INGREP="USB-Audio"
 
 usage() {
-    printf "\nUsage: set_asound_conf [-c] [-e] [-n] [-o outfile] [-q] [-r] [-t template] [-u]" 
+    printf "\nUsage: set_asound_conf [-c] [-e] [-l] [-n] [-o outfile] [-q] [-r] [-t template] [-u]" 
     printf "\nWhere:"
     printf "\n\t-c indicates perform a check and notify if update needed"
     printf "\n\t-e indicates perform an update of /etc/asound.conf"
+    printf "\n\t-l indicates list audio input/output configured devices"
+    printf "\n\t-n indicates non-interactive execution (guess at settings)"
     printf "\n\t-o 'outfile' specifies an alternate output file for generated asound.conf"
     printf "\n\t-q indicates quiet execution"
-    printf "\n\t-n indicates non-interactive execution (guess at settings)"
     printf "\n\t-r indicates restore original /etc/asound.conf"
     printf "\n\t-t 'template' specifies an alternate asound.conf template to use"
     printf "\n\t-u indicates display this usage message and exit"
@@ -35,16 +36,20 @@ usage() {
 
 UPD=
 CHK=
+LST=
 REV=
 QUT=
 SEL=1
-while getopts ceno:qrt:u flag; do
+while getopts celno:qrt:u flag; do
     case $flag in
         c)
             CHK=1
             ;;
         e)
             UPD=1
+            ;;
+        l)
+            LST=1
             ;;
         n)
             SEL=
@@ -67,6 +72,29 @@ while getopts ceno:qrt:u flag; do
     esac
 done
 shift $(( OPTIND - 1 ))
+
+[ "$LST" ] && {
+  INP=
+  OUT=
+  grep card /etc/asound.conf | while read card
+  do
+    [ "$INP" ] || {
+      echo "Audio Output:"
+      aplay -l | grep "$card"
+      INP=1
+      echo ""
+      continue
+    }
+    [ "$OUT" ] || {
+      echo "Audio Input:"
+      arecord -l | grep "$card"
+      OUT=1
+      echo ""
+      continue
+    }
+  done
+  exit 0
+}
 
 [ -f ${ASOUND_TMPL} ] || {
   [ "${QUT}" ] || {
