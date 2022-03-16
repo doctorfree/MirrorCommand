@@ -58,10 +58,20 @@ then
 else
   echo "Cannot locate credentials file ${GASRC}/credentials.json"
 fi
-if [ -d ${GASRC}/tokens ]
-then
-  [ -d ${GADIR}/tokens ] || mkdir ${GADIR}/tokens
-  cp ${GASRC}/tokens/* ${GADIR}/tokens
-else
-  echo "Cannot locate tokens folder ${GASRC}/tokens/"
-fi
+# if [ -d ${GASRC}/tokens ]
+# then
+#   [ -d ${GADIR}/tokens ] || mkdir ${GADIR}/tokens
+#   cp ${GASRC}/tokens/* ${GADIR}/tokens
+# else
+#   echo "Cannot locate tokens folder ${GASRC}/tokens/"
+# fi
+
+for token in ${GASRC}/token*.json
+do
+  if [ "${token}" == "${GASRC}/token*.json" ]
+  then
+    echo "Cannot locate Google Assistant token ${GASRC}/tokenGA.json"
+  else
+    cp ${token} ${GADIR}
+  fi
+done

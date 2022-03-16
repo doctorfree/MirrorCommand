@@ -17,6 +17,14 @@ for key in "${!keys[@]}"; do
   dum="${dumb[$key]}"
   [ "${val}" ] && {
     echo "s/\\\"${dum}\\\"/\\\"${val}\\\"/" >> ${commands}
+    echo "s/'${dum}'/'${val}'/" >> ${commands}
+  }
+done
+for key in "${!keys[@]}"; do
+  val="${keys[$key]}"
+  dum="${dumb[$key]}"
+  [ "${val}" ] && {
+    echo "s/${dum}/${val}/" >> ${commands}
   }
 done
 
