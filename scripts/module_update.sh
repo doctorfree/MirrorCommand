@@ -63,7 +63,7 @@ do
   then
     cd ${MOD_DIR}/${module}
     case ${module} in
-      MMM-Detector|MMM-GoogleAssistant)
+      EXT-Detector)
         if [ "${REBUILD}" ]
         then
           if [ "${QUIET}" ]
@@ -79,6 +79,14 @@ do
           else
             npm run update
           fi
+        fi
+        ;;
+      Gateway|EXT-Alert|MMM-GoogleAssistant)
+        if [ "${QUIET}" ]
+        then
+          npm run update > /dev/null 2>&1
+        else
+          npm run update
         fi
         ;;
       *)
@@ -148,7 +156,7 @@ do
               git clone https://github.com/grabenhenrich/MMM-DateOnly.git
             fi
             ;;
-          MMM-Tools|MMM-Detector|MMM-GoogleAssistant|MMM-TelegramBot)
+          MMM-Tools|EXT-Detector|MMM-GoogleAssistant|MMM-TelegramBot|Gateway|EXT-Alert)
             if [ "${QUIET}" ]
             then
               git clone https://github.com/bugsounet/${module}.git > /dev/null 2>&1

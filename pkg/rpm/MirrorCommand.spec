@@ -342,9 +342,9 @@ then
     # Install MagicMirror 3rd Party modules used by MirrorCommand
     [ -d "${MMHOME}/modules" ] && cd "${MMHOME}/modules"
     MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
-             MMM-COVID19-SPARKLINE MMM-DarkSkyForecast \
-             MMM-Detector MMM-GoogleAssistant MMM-GoogleMapsTraffic \
-             mmm-hue-lights MMM-iFrame MMM-InstagramView \
+             MMM-COVID19-SPARKLINE MMM-DarkSkyForecast Gateway \
+             EXT-Detector MMM-GoogleAssistant MMM-GoogleMapsTraffic \
+             mmm-hue-lights MMM-iFrame MMM-InstagramView EXT-Alert \
              MMM-IronManGIF MMM-MacAddressScan MMM-MyScoreboard \
              MMM-pages MMM-RAIN-RADAR MMM-Remote-Control \
              MMM-Scenes MMM-Selfieshot MMM-MoonPhase MMM-Solar \
@@ -362,9 +362,9 @@ then
       }
     done
 
-    # Copy any installed MirrorCommand MMM-Detector resources
+    # Copy any installed MirrorCommand EXT-Detector resources
     # If any resources of the same name already exists, do not overwrite
-    RESOURCES_DIR="modules/MMM-Detector/resources"
+    RESOURCES_DIR="modules/EXT-Detector/resources"
     [ -d "${MMHOME}/${RESOURCES_DIR}" ] && {
       cd "${MMHOME}/${RESOURCES_DIR}"
       for resource in ${MM}/${RESOURCES_DIR}/*

@@ -26,19 +26,14 @@
 # the Software.
 #
 MM_BASE=${HOME}/MagicMirror
-#MODULES="MMM-BackgroundSlideshow MMM-DarkSkyForecast MMM-iFrame \
-#         MMM-ModuleScheduler MMM-NetworkScanner MMM-RAIN-RADAR \
-#         MMM-Remote-Control MMM-Solar MMM-stocks MMM-SystemStats \
-#         MMM-TelegramBot MMM-Tools MMM-AssistantMk2 MMM-Hotword MMM-YouTube \
-#         MMM-NotificationTrigger MMM-Volume MMM-News MMM-pages"
 MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
-         MMM-COVID19-SPARKLINE MMM-DarkSkyForecast MMM-Detector \
-         MMM-EmbedYoutube MMM-GoogleAssistant MMM-GoogleMapsTraffic \
+         MMM-COVID19-SPARKLINE MMM-DarkSkyForecast EXT-Detector \
+         MMM-GoogleAssistant MMM-GoogleMapsTraffic Gateway \
          mmm-hue-lights MMM-iFrame MMM-InstagramView MMM-IronManGIF \
-         MMM-MacAddressScan MMM-ModuleScheduler MMM-MyScoreboard \
-         MMM-NotificationTrigger MMM-pages MMM-RAIN-RADAR MMM-Remote-Control \
-         MMM-Scenes MMM-Solar MMM-stocks MMM-TelegramBot MMM-TelegramCommands \
-         MMM-Tools MMM-UpdateNotification MMM-Videoplayer MMM-YouTubeWebView"
+         MMM-MacAddressScan MMM-MoonPhase MMM-MyScoreboard EXT-Alert \
+         MMM-pages MMM-RAIN-RADAR MMM-Remote-Control MMM-Selfieshot \
+         MMM-Scenes MMM-Solar MMM-stocks MMM-TelegramBot MMM-Tools \
+         MMM-TelegramCommands MMM-Videoplayer MMM-YouTubeWebView"
 LXSESSION="${HOME}/.config/lxsession"
 AUTOSTART="${LXSESSION}/LXDE-pi/autostart"
 BOLD=$(tput bold)

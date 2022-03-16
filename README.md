@@ -904,7 +904,7 @@ recipe to the MagicMirror `config.js` to issue MirrorCommand voice commands.
 Among the MirrorCommand voice commands there are the following which control
 screen switching:
 
-Assuming your `MMM-Detector` key phrase ('Model' config value) is "computer",
+Assuming your `MMM-GoogleAssistant` key phrase ('Model' config value) is "computer",
 
 - Move MagicMirror to screen 1
     - Say `computer` and pause

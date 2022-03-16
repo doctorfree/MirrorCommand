@@ -38,13 +38,16 @@ do
   [ "${module}" == "default" ] && continue
   cd "${module}"
   case "${module}" in
-    MMM-Detector|MMM-GoogleAssistant)
+    EXT-Detector)
         if [ "${REBUILD}" ]
         then
             npm run rebuild
         else
             npm run update
         fi
+        ;;
+    Gateway|EXT-Alert|MMM-GoogleAssistant)
+        npm run update
         ;;
     *)
         git pull
