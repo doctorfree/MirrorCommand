@@ -75,3 +75,22 @@ do
     cp ${token} ${GADIR}
   fi
 done
+
+echo "Copying in EXT-Detector resources"
+DASRC="${MCL}/modules/EXT-Detector/resources"
+DADIR="${MIRDIR}/modules/EXT-Detector/resources"
+[ -d ${DADIR} ] || mkdir -p ${DADIR}
+[ -f ${DADIR}/google.png ] && {
+  [ -f ${DADIR}/google-orig.png ] || {
+    cp ${DADIR}/google.png ${DADIR}/google-orig.png 
+  }
+}
+for res in ${DASRC}/*
+do
+  if [ "${res}" == "${DASRC}/*" ]
+  then
+    echo "Cannot locate EXT-Detector resources"
+  else
+    cp ${res} ${DADIR}
+  fi
+done
