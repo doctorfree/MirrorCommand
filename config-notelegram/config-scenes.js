@@ -399,7 +399,7 @@ var config = {
                 inactiveIndicators: ['①', '②', '③', '④'],
                 activeIndicators: ['❶', '❷', '❸', '❹']
             }
-        }
+        },
         {
             module: 'Gateway',
             classes: 'scores solar stocks art',
