@@ -34,6 +34,36 @@ usage() {
     exit 0
 }
 
+set_vol_card() {
+  VOL="/usr/local/bin/vol"
+  if [ "$1" ]
+  then
+    if [ -f ${VOL} ]
+    then
+      OUTCARD=$1
+      VOLCARD=`grep ^CARD= ${VOL} | awk -F '=' ' { print $2 } '`
+      [ ${VOLCARD} -eq ${OUTCARD} ] || {
+        [ "${QUT}" ] || {
+          echo "Updating ${VOL} with audio output card number"
+        }
+        cat ${VOL} | sed -e "s/CARD=${VOLCARD}/CARD=${OUTCARD}/" > /tmp/v$$
+        sudo cp /tmp/v$$ ${VOL}
+        rm -f /tmp/v$$
+      }
+    else
+      [ "${QUT}" ] || {
+        echo "/usr/local/bin/vol does not exist"
+        echo "Skipping vol card default setting"
+      }
+    fi
+  else
+    [ "${QUT}" ] || {
+      echo "No argument supplied to set_vol_card()"
+      echo "Skipping vol card default setting"
+    }
+  fi
+}
+
 UPD=
 CHK=
 LST=
@@ -295,9 +325,11 @@ else
             echo "Installing generated asound.conf as ${ASOUND}"
           }
           sudo cp /tmp/asound$$ ${ASOUND}
+          set_vol_card ${OUTPUT}
         fi
       else
         sudo cp /tmp/asound$$ ${ASOUND}
+        set_vol_card ${OUTPUT}
       fi
     else
       if [ "${SAME}" ]
