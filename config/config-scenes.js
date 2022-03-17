@@ -360,6 +360,47 @@ var config = {
             }
         },
         {
+            module: 'MMM-Scenes',
+            position: 'bottom_bar',
+            classes: 'scores solar stocks art',
+            config: {
+                scenario: [
+                    {
+                        name: 'scores',
+                        duration: 300000,
+                        expelAnimation: 'pageUp',
+                        admitAnimation: 'pageRight'
+                    },
+                    {
+                        name: 'art',
+                        duration: 900000,
+                        expelAnimation: 'pageRight',
+                        admitAnimation: [
+                          { transform: 'rotate(-360deg) scale(0, 0)', opacity: 0 },
+                          { transform: 'rotate(360deg) scale(1, 1)', opacity: 1 }
+                        ]
+                    },
+                    {
+                        name: 'solar',
+                        duration: 300000,
+                        expelAnimation: 'pageLeft',
+                        admitAnimation: 'pageDown'
+                    },
+                    {
+                        name: 'stocks',
+                        duration: 300000,
+                        expelAnimation: 'dismissOut',
+                        admitAnimation: 'pageDown'
+                    },
+                ],
+                autoLoop: 'infinity',
+                // inactiveIndicators: ['①', '②', '③', '④', '⑤'],
+                // activeIndicators: ['❶', '❷', '❸', '❹', '❺']
+                inactiveIndicators: ['①', '②', '③', '④'],
+                activeIndicators: ['❶', '❷', '❸', '❹']
+            }
+        }
+        {
             module: 'MMM-TelegramCommands',
             classes: 'scores solar stocks art',
         },
@@ -378,10 +419,12 @@ var config = {
             }
         },
         {
-            module: 'Gateway'
+            module: 'Gateway',
+            classes: 'scores solar stocks art',
         },
         {
             module: "EXT-Detector",
+            classes: 'scores solar stocks art',
             position: "bottom_left",
             configDeepMerge: true,
             config: {
@@ -409,6 +452,7 @@ var config = {
         },
         {
             module: "MMM-GoogleAssistant",
+            classes: 'scores solar stocks art',
             position: "bottom_left",
             configDeepMerge: true,
             config: {
@@ -429,6 +473,8 @@ var config = {
               },
               recipes: [
                 "myReboot-Restart-Shutdown.js",
+                "with-MMM-Scenes.js",
+                "RoonCommand.js",
                 "ExtRadio.js",
                 "MirrorCommand.js"
               ]

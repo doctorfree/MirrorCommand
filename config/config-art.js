@@ -230,6 +230,7 @@ var config = {
               },
               recipes: [
                 "myReboot-Restart-Shutdown.js",
+                "RoonCommand.js",
                 "ExtRadio.js",
                 "MirrorCommand.js"
               ]

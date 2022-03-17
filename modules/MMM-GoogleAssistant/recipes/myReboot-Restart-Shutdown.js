@@ -25,7 +25,7 @@ var recipe = {
         chime: "close",
       },
       shellExec: {
-        exec: "/usr/local/bin/reboot"
+        exec: "/usr/bin/myreboot"
       }
     },
     "GA_RESTART": {
@@ -41,7 +41,7 @@ var recipe = {
         chime: "close",
       },
       shellExec: {
-        exec: "/usr/local/bin/shutdown"
+        exec: "/usr/bin/myshutdown"
       }
     }
   }

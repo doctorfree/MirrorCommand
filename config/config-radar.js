@@ -321,7 +321,68 @@ var config = {
             inactiveIndicators: ['①', '②', '③'],
             activeIndicators: ['❶', '❷', '❸']
           }
-        }
+        },
+        {
+            module: 'Gateway',
+            classes: 'radar traffic weather',
+        },
+        {
+            module: "EXT-Detector",
+            classes: 'radar traffic weather',
+            position: "bottom_left",
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              useIcon: true,
+              touchOnly: false,
+              detectors: [
+                {
+                  detector: "Porcupine",
+                  Model: "computer",
+                  Sensitivity: null
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "ok google",
+                  Sensitivity: null
+                },
+                {
+                  detector: "Porcupine",
+                  Model: "hey google",
+                  Sensitivity: null
+                }
+              ]
+            }
+        },
+        {
+            module: "MMM-GoogleAssistant",
+            classes: 'radar traffic weather',
+            position: "bottom_left",
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              stopCommand: "stop",
+              assistantConfig: {
+                lang: "en-US",
+                latitude: 36.970019,
+                longitude: -122.042212,
+                deviceRegistred: false
+              },
+              responseConfig: {
+                useFullscreen: false,
+                responseOutputCSS: "response_output.css",
+                screenOutputTimer: 5000,
+                useChime: true,
+                confirmationChime: true
+              },
+              recipes: [
+                "myReboot-Restart-Shutdown.js",
+                "RoonCommand.js",
+                "ExtRadio.js",
+                "MirrorCommand.js"
+              ]
+            }
+        },
     ]
 };
 
