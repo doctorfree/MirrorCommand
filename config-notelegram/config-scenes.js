@@ -457,7 +457,6 @@ var config = {
                 "myReboot-Restart-Shutdown.js",
                 "with-MMM-Scenes.js",
                 "RoonCommand.js",
-                "ExtRadio.js",
                 "MirrorCommand.js"
               ]
             }
