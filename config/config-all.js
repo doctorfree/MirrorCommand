@@ -484,107 +484,60 @@ var config = {
             }
         },
         {
-            module: "MMM-GoogleAssistant",
-            position: "top_center",
+            module: 'Gateway'
+        },
+        {
+            module: "EXT-Detector",
+            position: "bottom_left",
             configDeepMerge: true,
             config: {
               debug: false,
-              assistantConfig: {
-                lang: "en-US",
-                latitude: 36.970019,
-                longitude: -122.042212
-              },
-              responseConfig: {
-                useFullscreen: false,
-                useResponseOutput: true,
-                responseOutputCSS: "response_output.css",
-                screenOutputTimer: 5000,
-                activateDelay: 250,
-                useAudioOutput: true,
-                useChime: true,
-                confirmationChime: true,
-                useInformations: true,
-              },
-              Extented: {
-                useEXT: false,
-                youtube: {
-                  useYoutube: true,
-                  youtubeCommand: "youtube",
-                  displayResponse: true,
-                  useVLC: true,
-                  minVolume: 30,
-                  maxVolume: 100
+              useIcon: true,
+              touchOnly: false,
+              detectors: [
+                {
+                  detector: "Porcupine",
+                  Model: "computer",
+                  Sensitivity: null
                 },
-                links: {
-                  useLinks: false,
-                  displayDelay: 60 * 1000,
-                  scrollActivate: false,
-                  scrollStep: 25,
-                  scrollInterval: 1000,
-                  scrollStart: 5000
+                {
+                  detector: "Porcupine",
+                  Model: "ok google",
+                  Sensitivity: null
                 },
-                photos: {
-                  usePhotos: false,
-                  useGooglePhotosAPI: false,
-                  displayType: "none",
-                  displayDelay: 10 * 1000,
-                  albums: [],
-                  sort: "new",
-                  hiResolution: true,
-                  timeFormat: "DD/MM/YYYY HH:mm",
-                  moduleHeight: 300,
-                  moduleWidth: 300,
-                },
-                volume: {
-                  useVolume: false,
-                  // volumePreset: "ALSA_HEADPHONE",
-                  myScript: "/usr/local/bin/vol"
-                },
-                welcome: {
-                  useWelcome: true,
-                  welcome: "brief Today"
-                },
-                screen: {},
-                touch: {},
-                pir: {},
-                governor: {},
-                internet: {},
-                cast: {},
-                spotify: {
-                  useSpotify: false,
-                  visual: {},
-                  player: {}
-                },
-              },
-              recipes: ["myReboot-Restart-Shutdown.js"],
-              NPMCheck: {}
+                {
+                  detector: "Porcupine",
+                  Model: "hey google",
+                  Sensitivity: null
+                }
+              ]
             }
         },
         {
-            module: 'MMM-pages',
+            module: "MMM-GoogleAssistant",
+            position: "bottom_left",
+            configDeepMerge: true,
             config: {
-                modules:
-                    [
-                        ["MMM-iFrame", "MMM-Tools", "MMM-Solar",
-                         "mmm-hue-lights", "MMM-MacAddressScan"],
-
-                        ["weather", "calendar", "newsfeed",
-                         "MMM-Tools", "MMM-Solar", "mmm-hue-lights",
-                         "MMM-MacAddressScan"],
-
-                        ["MMM-COVID19-SPARKLINE", "newsfeed", "MMM-Tools"],
-
-                        ["weather", "MMM-GoogleMapsTraffic", "newsfeed"],
-
-                        ["weather", "MMM-CoinMarketCap", "MMM-stocks", "newsfeed"],
-
-                        ["weather", "MMM-RAIN-RADAR", "MMM-DarkSkyForecast"],
-                    ],
-                fixed:
-                    ["alert", "clock", "updatenotification", "MMM-Remote-Control",
-                     "MMM-Detector", "MMM-TelegramBot", "MMM-TelegramCommands",
-                     "MMM-GoogleAssistant"],
-                rotationTime: 300000, // rotate page every 5 minutes = 5 * 60 * 1000
+              debug: false,
+              stopCommand: "stop",
+              assistantConfig: {
+                lang: "en-US",
+                latitude: 36.970019,
+                longitude: -122.042212,
+                deviceRegistred: false
+              },
+              responseConfig: {
+                useFullscreen: false,
+                responseOutputCSS: "response_output.css",
+                screenOutputTimer: 5000,
+                useChime: true,
+                confirmationChime: true
+              },
+              recipes: [
+                "myReboot-Restart-Shutdown.js",
+                "ExtRadio.js",
+                "MirrorCommand.js"
+              ]
             }
         },
     ]

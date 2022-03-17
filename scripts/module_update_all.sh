@@ -46,7 +46,7 @@ do
             npm run update
         fi
         ;;
-    Gateway|EXT-Alert|MMM-GoogleAssistant)
+    EXT-GooglePhotos|Gateway|EXT-Alert|MMM-GoogleAssistant)
         npm run update
         ;;
     *)

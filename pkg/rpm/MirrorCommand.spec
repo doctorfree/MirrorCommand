@@ -346,7 +346,7 @@ then
              EXT-Detector MMM-GoogleAssistant MMM-GoogleMapsTraffic \
              mmm-hue-lights MMM-iFrame MMM-InstagramView EXT-Alert \
              MMM-IronManGIF MMM-MacAddressScan MMM-MyScoreboard \
-             MMM-pages MMM-RAIN-RADAR MMM-Remote-Control \
+             EXT-GooglePhotos MMM-pages MMM-RAIN-RADAR MMM-Remote-Control \
              MMM-Scenes MMM-Selfieshot MMM-MoonPhase MMM-Solar \
              MMM-stocks MMM-TelegramBot MMM-TelegramCommands \
              MMM-Tools MMM-Videoplayer MMM-YouTubeWebView"

@@ -81,7 +81,7 @@ do
           fi
         fi
         ;;
-      Gateway|EXT-Alert|MMM-GoogleAssistant)
+      EXT-GooglePhotos|Gateway|EXT-Alert|MMM-GoogleAssistant)
         if [ "${QUIET}" ]
         then
           npm run update > /dev/null 2>&1
@@ -156,7 +156,7 @@ do
               git clone https://github.com/grabenhenrich/MMM-DateOnly.git
             fi
             ;;
-          MMM-Tools|EXT-Detector|MMM-GoogleAssistant|MMM-TelegramBot|Gateway|EXT-Alert)
+          MMM-Tools|EXT-Detector|MMM-GoogleAssistant|MMM-TelegramBot|Gateway|EXT-Alert|EXT-GooglePhotos)
             if [ "${QUIET}" ]
             then
               git clone https://github.com/bugsounet/${module}.git > /dev/null 2>&1

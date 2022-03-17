@@ -241,145 +241,60 @@ var config = {
             },
         },
         {
-            module: "MMM-GoogleAssistant",
-            position: "top_left",
-            configDeepMerge: true,
-            config: {
-              debug: false,
-              assistantConfig: {
-                lang: "en-US",
-                latitude: 36.970019,
-                longitude: -122.042212
-              },
-              responseConfig: {
-                useFullscreen: false,
-                useResponseOutput: true,
-                responseOutputCSS: "response_output.css",
-                screenOutputTimer: 5000,
-                activateDelay: 250,
-                useAudioOutput: true,
-                useChime: true,
-                confirmationChime: true,
-                useInformations: true,
-              },
-              Extented: {
-                useEXT: true,
-                youtube: {
-                  useYoutube: true,
-                  youtubeCommand: "youtube",
-                  displayResponse: true,
-                  useVLC: true,
-                  minVolume: 30,
-                  maxVolume: 100
-                },
-                links: {
-                  useLinks: true,
-                  displayDelay: 60 * 1000,
-                  scrollActivate: false,
-                  scrollStep: 25,
-                  scrollInterval: 1000,
-                  scrollStart: 5000
-                },
-                photos: {
-                  usePhotos: false,
-                  useGooglePhotosAPI: false,
-                  displayType: "Module",
-                  displayDelay: 10 * 1000,
-                  albums: [],
-                  sort: "new",
-                  hiResolution: true,
-                  timeFormat: "DD/MM/YYYY HH:mm",
-                  moduleHeight: 300,
-                  moduleWidth: 300,
-                },
-                volume: {
-                  useVolume: true,
-                  volumePreset: "ALSA_HEADPHONE",
-                  myScript: "amixer sset -M 'Headphone' #VOLUME#%"
-                },
-                welcome: {
-                  useWelcome: true,
-                  welcome: "brief Today"
-                },
-                screen: {},
-                touch: {},
-                pir: {},
-                governor: {},
-                internet: {},
-                cast: {
-                  useCast: true,
-                  port: 8569
-                },
-                spotify: {
-                  useSpotify: false,
-                  visual: {},
-                  player: {}
-                },
-                music: {
-                  useMusic: true,
-                  useUSB: false,
-                  musicPath: "/home/pi/Music",
-                  checkSubDirectory: true,
-                  autoStart: false,
-                  minVolume: 30,
-                  maxVolume: 100
-                },
-              },
-              recipes: [
-                "myReboot-Restart-Shutdown.js", "with-MMM-Selfieshot.js",
-                "ExtRadio.js", "MirrorCommand.js", "RoonCommand.js",
-              ],
-              NPMCheck: {}
-            }
+            module: 'Gateway'
         },
         {
-            module: "MMM-Detector",
-            position: "top_left",
+            module: "EXT-Detector",
+            position: "bottom_left",
             configDeepMerge: true,
             config: {
               debug: false,
-              autoStart: true,
-              useLogos: true,
-              newLogos: {
-                listen: "voice_assistant_head.jpg"
-              },
+              useIcon: true,
+              touchOnly: false,
               detectors: [
                 {
                   detector: "Porcupine",
+                  Model: "computer",
+                  Sensitivity: null
+                },
+                {
+                  detector: "Porcupine",
                   Model: "ok google",
-                  Sensitivity: null,
-                  Logo: "listen",
-                  autoRestart: false,
-                  onDetected: {
-                    notification: "GA_ACTIVATE"
-                  }
+                  Sensitivity: null
                 },
                 {
                   detector: "Porcupine",
                   Model: "hey google",
-                  Sensitivity: null,
-                  Logo: "listen",
-                  autoRestart: false,
-                  onDetected: {
-                    notification: "GA_ACTIVATE"
-                  }
-                },
-                {
-                  detector: "Porcupine",
-                  Model: "computer",
-                  Sensitivity: null,
-                  Logo: "listen",
-                  autoRestart: false,
-                  onDetected: {
-                    notification: "GA_ACTIVATE"
-                  }
+                  Sensitivity: null
                 }
-              ],
-              NPMCheck: {
-                useChecker: true,
-                delay: 10 * 60 * 1000,
-                useAlert: true
-              }
+              ]
+            }
+        },
+        {
+            module: "MMM-GoogleAssistant",
+            position: "bottom_left",
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              stopCommand: "stop",
+              assistantConfig: {
+                lang: "en-US",
+                latitude: 36.970019,
+                longitude: -122.042212,
+                deviceRegistred: false
+              },
+              responseConfig: {
+                useFullscreen: false,
+                responseOutputCSS: "response_output.css",
+                screenOutputTimer: 5000,
+                useChime: true,
+                confirmationChime: true
+              },
+              recipes: [
+                "myReboot-Restart-Shutdown.js",
+                "ExtRadio.js",
+                "MirrorCommand.js"
+              ]
             }
         },
     ]

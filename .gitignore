@@ -23,6 +23,7 @@ modules/MMM-TelegramBot/bot.txt
 modules/MMM-GoogleAssistant/credentials.json
 modules/MMM-GoogleAssistant/tokens/token*.json
 modules/MMM-GoogleAssistant/token*.json
+modules/EXT-GooglePhotos/token*.json
 dist/*
 releases/*
 tests/*

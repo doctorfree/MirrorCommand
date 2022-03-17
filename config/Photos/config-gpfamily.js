@@ -108,149 +108,79 @@ var config = {
             },
         },
         {
-            module: "MMM-GoogleAssistant",
-            position: "top_center",
-            configDeepMerge: true,
-            config: {
-              debug: false,
-              assistantConfig: {
-                lang: "en-US",
-                latitude: 36.970019,
-                longitude: -122.042212
-              },
-              responseConfig: {
-                useFullscreen: false,
-                useResponseOutput: true,
-                responseOutputCSS: "response_output.css",
-                screenOutputTimer: 5000,
-                activateDelay: 250,
-                useAudioOutput: true,
-                useChime: true,
-                confirmationChime: true,
-                useInformations: true,
-              },
-              Extented: {
-                useEXT: true,
-                youtube: {
-                  useYoutube: true,
-                  youtubeCommand: "youtube",
-                  displayResponse: true,
-                  useVLC: true,
-                  minVolume: 30,
-                  maxVolume: 100
-                },
-                links: {
-                  useLinks: true,
-                  displayDelay: 60 * 1000,
-                  scrollActivate: false,
-                  scrollStep: 25,
-                  scrollInterval: 1000,
-                  scrollStart: 5000
-                },
-                photos: {
-                  usePhotos: true,
-                  useGooglePhotosAPI: true,
-                  // displayType: "Recipe",
-                  displayType: "Module",
-                  displayDelay: 30 * 1000,
-                  albums: ["Family and Stuff"],
-                  sort: "new",
-                  hiResolution: true,
-                  timeFormat: "DD/MM/YYYY HH:mm",
-                  moduleHeight: __HEIGHT__,
-                  moduleWidth: __WIDTH__,
-                },
-                volume: {
-                  useVolume: true,
-                  volumePreset: "ALSA_HEADPHONE",
-                  myScript: "amixer sset -M 'Headphone' #VOLUME#%"
-                },
-                welcome: {
-                  useWelcome: true,
-                  welcome: "brief Today"
-                },
-                screen: {},
-                touch: {},
-                pir: {},
-                governor: {},
-                internet: {},
-                cast: {
-                  useCast: true,
-                  port: 8569
-                },
-                spotify: {
-                  useSpotify: false,
-                  visual: {},
-                  player: {}
-                },
-                music: {
-                  useMusic: true,
-                  useUSB: false,
-                  musicPath: "/home/pi/Music",
-                  checkSubDirectory: true,
-                  autoStart: false,
-                  minVolume: 30,
-                  maxVolume: 100
-                },
-              },
-              recipes: [
-                "myReboot-Restart-Shutdown.js",
-                "ExtRadio.js","MirrorCommand.js",
-              ],
-              NPMCheck: {}
-            }
+            module: 'Gateway'
         },
         {
-            module: "MMM-Detector",
-            position: "bottom_center",
+            module: "EXT-Detector",
+            position: "bottom_left",
             configDeepMerge: true,
             config: {
               debug: false,
-              autoStart: true,
-              useLogos: false,
-              newLogos: {
-                listen: "voice_assistant_head.jpg"
-              },
+              useIcon: true,
+              touchOnly: false,
               detectors: [
                 {
                   detector: "Porcupine",
+                  Model: "computer",
+                  Sensitivity: null
+                },
+                {
+                  detector: "Porcupine",
                   Model: "ok google",
-                  Sensitivity: null,
-                  Logo: "listen",
-                  autoRestart: false,
-                  onDetected: {
-                    notification: "GA_ACTIVATE"
-                  }
+                  Sensitivity: null
                 },
                 {
                   detector: "Porcupine",
                   Model: "hey google",
-                  Sensitivity: null,
-                  Logo: "listen",
-                  autoRestart: false,
-                  onDetected: {
-                    notification: "GA_ACTIVATE"
-                  }
-                },
-                {
-                  detector: "Porcupine",
-                  Model: "computer",
-                  Sensitivity: null,
-                  Logo: "listen",
-                  autoRestart: false,
-                  onDetected: {
-                    notification: "GA_ACTIVATE"
-                  }
+                  Sensitivity: null
                 }
-              ],
-              NPMCheck: {
-                useChecker: true,
-                delay: 10 * 60 * 1000,
-                useAlert: true
-              }
+              ]
             }
         },
-  ]
+        {
+          module: 'EXT-GooglePhotos',
+          position: 'top_center',
+          config: {
+            debug: false,
+            displayType: 0, // 0=fullscreen, 1=module position
+            displayDelay: 30 * 1000,
+            displayInfos: true,
+            albums: ["Family and Stuff"],
+            sort: "new", // "old", "random"
+            hiResolution: true,
+            timeFormat: "DD/MM/YYYY HH:mm",
+            moduleHeight: 300,
+            moduleWidth: 300
+          }
+        },
+        {
+            module: "MMM-GoogleAssistant",
+            position: "bottom_left",
+            configDeepMerge: true,
+            config: {
+              debug: false,
+              stopCommand: "stop",
+              assistantConfig: {
+                lang: "en-US",
+                latitude: 36.970019,
+                longitude: -122.042212,
+                deviceRegistred: false
+              },
+              responseConfig: {
+                useFullscreen: false,
+                responseOutputCSS: "response_output.css",
+                screenOutputTimer: 5000,
+                useChime: true,
+                confirmationChime: true
+              },
+              recipes: [
+                "myReboot-Restart-Shutdown.js",
+                "ExtRadio.js",
+                "MirrorCommand.js"
+              ]
+            }
+        },
+    ]
 };
 
 /*************** DO NOT EDIT THE LINE BELOW ***************/
