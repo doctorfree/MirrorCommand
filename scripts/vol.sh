@@ -113,7 +113,7 @@ if [[ $ARG == +([0-9]) ]]; then
 	(( ARG >= LO && ARG <= HI )) || usage
 fi
 
-GET=$($EXE cget numid=$CARD)
+GET=$($EXE cget numid=$CARD | /bin/grep -v dBminmax)
 
 declare -i MIN=$(echo $GET | /bin/grep -E -o -e ',min=[^,]+' | /bin/grep -E -o -e '[0-9-]+')
 declare -i MAX=$(echo $GET | /bin/grep -E -o -e ',max=[^,]+' | /bin/grep -E -o -e '[0-9-]+')

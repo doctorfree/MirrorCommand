@@ -41,6 +41,7 @@ set_vol_card() {
     if [ -f ${VOL} ]
     then
       OUTCARD=$1
+      ((OUTCARD--))
       VOLCARD=`grep ^CARD= ${VOL} | awk -F '=' ' { print $2 } '`
       [ ${VOLCARD} -eq ${OUTCARD} ] || {
         [ "${QUT}" ] || {
