@@ -164,14 +164,6 @@ do
               git clone https://github.com/bugsounet/${module}.git
             fi
             ;;
-          MMM-GoogleMapsTraffic)
-            if [ "${QUIET}" ]
-            then
-              git clone https://github.com/vicmora/MMM-GoogleMapsTraffic.git > /dev/null 2>&1
-            else
-              git clone https://github.com/vicmora/MMM-GoogleMapsTraffic.git
-            fi
-            ;;
           MMM-iFrame)
             if [ "${QUIET}" ]
             then
@@ -180,7 +172,7 @@ do
               git clone https://github.com/alberttwong/MMM-iFrame.git
             fi
             ;;
-          MMM-MacAddressScan|mmm-hue-lights|MMM-InstagramView|MMM-Solar|MMM-stocks|MMM-TelegramCommands|MMM-YouTubeWebView)
+          MMM-MacAddressScan|mmm-hue-lights|MMM-InstagramView|MMM-Solar|MMM-stocks|MMM-TelegramCommands|MMM-YouTubeWebView|MMM-GoogleMapsTraffic)
             if [ "${QUIET}" ]
             then
               git clone https://github.com/doctorfree/${module}.git > /dev/null 2>&1

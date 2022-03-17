@@ -52,7 +52,7 @@ header {
   width: 500px;
 }
 
-#DETECTOR-WRAPPER {
+#EXT_DETECTOR {
   display: flex;
   margin-left: 10px;
   align-items: center;
@@ -62,23 +62,24 @@ header {
   display: none;
 }
 
-#ICON {
+#EXT_DETECTOR-ICON {
     background-size: 100%;
     width: 300px;
     height: 200px;
     background-repeat: no-repeat;
+    display: inline-block;
     margin-right: 10px;
 }
 
-#ICON.busy {
+#EXT_DETECTOR-ICON.busy {
   filter:brightness(50%) grayscale(75%);
 }
 
-#ICON.hidden {
+#EXT_DETECTOR-ICON.hidden {
   display: none
 }
 
-#ICON.flash {
+#EXT_DETECTOR-ICON.flash {
   opacity: 1;
   animation: flash normal 1.5s infinite ease-in-out;
 }

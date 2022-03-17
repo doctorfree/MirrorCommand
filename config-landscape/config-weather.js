@@ -291,12 +291,13 @@ var config = {
                 responseOutputCSS: "response_output.css",
                 screenOutputTimer: 5000,
                 useChime: true,
-                confirmationChime: true,
+                confirmationChime: true
               },
               recipes: [
                 "myReboot-Restart-Shutdown.js",
-                "ExtRadio.js","MirrorCommand.js",
-              ],
+                "ExtRadio.js",
+                "MirrorCommand.js"
+              ]
             }
         },
     ]
