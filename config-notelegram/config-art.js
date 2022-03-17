@@ -164,7 +164,7 @@ var config = {
             configDeepMerge: true,
             config: {
               debug: false,
-              useIcon: true,
+              useIcon: false,
               touchOnly: false,
               detectors: [
                 {
