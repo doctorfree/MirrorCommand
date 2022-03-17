@@ -115,6 +115,22 @@ var config = {
             }
         },
         {
+          module: 'EXT-GooglePhotos',
+          position: 'top_center',
+          config: {
+            debug: false,
+            displayType: 1, // 0=fullscreen, 1=module position
+            displayDelay: 30 * 1000,
+            displayInfos: true,
+            albums: ["Animated Gif"],
+            sort: "new", // "old", "random"
+            hiResolution: true,
+            timeFormat: "DD/MM/YYYY HH:mm",
+            moduleHeight: __HEIGHT__,
+            moduleWidth: __WIDTH__
+          }
+        },
+        {
             module: "MMM-GoogleAssistant",
             position: "bottom_left",
             configDeepMerge: true,
