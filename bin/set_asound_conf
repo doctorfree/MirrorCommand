@@ -315,6 +315,7 @@ else
           [ "${QUT}" ] || {
             echo "${ASOUND} is identical to a generated asound.conf. No need to update."
           }
+          set_vol_card ${OUTPUT}
         else
           [ -f ${ASOUND}.orig ] || {
             [ "${QUT}" ] || {
