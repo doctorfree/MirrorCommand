@@ -240,13 +240,6 @@ var config = {
             module: 'Gateway'
         },
         {
-            module: 'EXT-Alert',
-            config: {
-              debug: false,
-              ignore: []
-            }
-        },
-        {
             module: "EXT-Detector",
             position: "bottom_left",
             configDeepMerge: true,
