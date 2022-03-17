@@ -142,15 +142,15 @@ var config = {
           position: 'top_center',
           config: {
             debug: false,
-            displayType: 0, // 0=fullscreen, 1=module position
+            displayType: 1, // 0=fullscreen, 1=module position
             displayDelay: 30 * 1000,
             displayInfos: true,
             albums: ["Rachel and Ron Party", "Henfling's", "Rachel Anne Mills", "Band Practice"],
             sort: "new", // "old", "random"
             hiResolution: true,
             timeFormat: "DD/MM/YYYY HH:mm",
-            moduleHeight: 300,
-            moduleWidth: 300
+            moduleHeight: __HEIGHT__,
+            moduleWidth: __WIDTH__
           }
         },
         {

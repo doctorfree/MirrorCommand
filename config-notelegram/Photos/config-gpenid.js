@@ -119,15 +119,15 @@ var config = {
           position: 'top_center',
           config: {
             debug: false,
-            displayType: 0, // 0=fullscreen, 1=module position
+            displayType: 1, // 0=fullscreen, 1=module position
             displayDelay: 30 * 1000,
             displayInfos: true,
             albums: ["Enid, Oklahoma in the Eighties", "Oklahoma Christmas"],
             sort: "new", // "old", "random"
             hiResolution: true,
             timeFormat: "DD/MM/YYYY HH:mm",
-            moduleHeight: 300,
-            moduleWidth: 300
+            moduleHeight: __HEIGHT__,
+            moduleWidth: __WIDTH__
           }
         },
         {
