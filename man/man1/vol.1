@@ -26,11 +26,15 @@ Where N is a whole number percentage between 0 and 100, inclusive.
 .SH DESCRIPTION
 .PP
 The \f[I]vol\f[R] command gets, sets, saves, and restores the
-MagicMirror volume level
+MagicMirror volume level.
 .SH COMMAND LINE OPTIONS
 .TP
 \f[B]-u\f[R]
 display usage message
+.TP
+\f[B]-c\f[R] cardnumber
+Specifies the audio card to use when adjusting volume.
+The default card number is set by the \f[I]set_asound_conf\f[R] command
 .TP
 \f[B]-m\f[R]
 toggles volume mute/unmute
@@ -89,7 +93,7 @@ Submit bug reports online at:
 <<https://gitlab.com/doctorfree/MirrorCommand/issues>>
 .SH SEE ALSO
 .PP
-\f[B]mirror\f[R](1)
+\f[B]mirror\f[R](1), \f[B]set_asound_conf\f[R](1)
 .PP
 Full documentation and sources at:
 <<https://gitlab.com/doctorfree/MirrorCommand>>

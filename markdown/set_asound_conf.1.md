@@ -12,7 +12,7 @@ date: December 07, 2021
 **set_asound_conf** [-c] [-e] [-l] [-n] [-o outfile] [-q] [-r] [-t template] [-u]
 
 # DESCRIPTION
-The *set_asound_conf* command can be used to interactively set the ALSA sound configuration in */etc/asound.conf* at the command line.
+The *set_asound_conf* command can be used to interactively set the ALSA sound configuration in */etc/asound.conf* at the command line. In addition, *set_asound_conf* sets the default audio card used by the *vol* command.
 
 # COMMAND LINE OPTIONS
 **-u**
@@ -69,5 +69,7 @@ otherwise using SET_ASOUND_CONF and for a DISCLAIMER OF ALL WARRANTIES.
 Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommand/issues&gt;
 
 # SEE ALSO
+**vol**(1)
+
 Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommand&gt;
 

@@ -13,11 +13,14 @@ date: December 07, 2021
 : Where N is a whole number percentage between 0 and 100, inclusive.
 
 # DESCRIPTION
-The *vol* command gets, sets, saves, and restores the MagicMirror volume level
+The *vol* command gets, sets, saves, and restores the MagicMirror volume level.
 
 # COMMAND LINE OPTIONS
 **-u**
 : display usage message
+
+**-c** cardnumber
+: Specifies the audio card to use when adjusting volume. The default card number is set by the *set_asound_conf* command
 
 **-m**
 : toggles volume mute/unmute
@@ -75,7 +78,7 @@ otherwise using VOL and for a DISCLAIMER OF ALL WARRANTIES.
 Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommand/issues&gt;
 
 # SEE ALSO
-**mirror**(1)
+**mirror**(1), **set_asound_conf**(1)
 
 Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommand&gt;
 
