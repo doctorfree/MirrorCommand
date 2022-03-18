@@ -1,6 +1,8 @@
-This minor release update of MirrorCommand incorporates changes to improve integration with the MirrorImages package downloads. In addition, support is added for models by country in the MirrorImages downloads and in the MirrorCommand default config files. New Google Drive file ids have been used in the download scripts to reflect the MirrorImages distribution changes.
+Version 4.0.0 of MirrorCommand includes modifications to support the MMM-GoogleAssistant v4 module. In addition, the MMM-Detector module has been replaced by the EXT-Detector module. The EXT-GooglePhotos and Gateway modules have been added and no longer used modules removed. Configuration changes necessary to support MMM-GoogleAssistan v4 and these new extension modules have been applied to all relevant config files. All config files are retained in their original non-customized format in `/usr/local/MirrorCommand/...` while those copied into `/usr/local/MagicMirror/...` are customized. In this way, subsequent re-customization can be supported.
 
-The previous release updates of MirrorCommand incorporated changes to integrate with the MirrorImages RPM installations. Installs of the current MirrorImages packages require this version of MirrorCommand or later. The scripts that download image archives for the [MirrorImages](https://gitlab.com/doctorfree/MirrorImages) packages have been updated to execute in non-interactive mode when being run during an RPM installation.
+Note that the above described updates to the *MagicMirror* modules will only be applied during an installation of *MirrorCommand* in which there is no previous *MagicMirror* installed. To apply these changes during installation, remove or move aside your existing *MagicMirror* folder. Install *MirrorCommand*, initialize your keys, then re-apply any customization you have previously made to *MagicMirror* modules. Alternately, you can retain an existing *MagicMirror* installation and upgrade the modules to MMM-GoogleAssistant v4, Gateway, EXT-Detector, and EXT-GooglePhotos manually.
+
+The previous release updates of MirrorCommand incorporated changes to improve integration with the MirrorImages package downloads. In addition, support was added for models by country in the MirrorImages downloads and in the MirrorCommand default config files. New Google Drive file ids have been used in the download scripts to reflect the MirrorImages distribution changes. Installs of the current MirrorImages packages require this version of MirrorCommand or later. The scripts that download image archives for the [MirrorImages](https://gitlab.com/doctorfree/MirrorImages) packages have been updated to execute in non-interactive mode when being run during an RPM installation.
 
 The version 3.0.x releases of MirrorCommand introduce support for multiple monitors, switching MagicMirror screen display between monitors, full support for both portrait and landscape mode displays, and renames the project from MirrorCommandLine to MirrorCommand.  Voice commands for screen switching have been added via the MMM-GoogleAssistant module recipe file MirrorCommand.js.
 
@@ -20,12 +22,12 @@ or grant everyone access with
 
 Install the package on Debian based systems by executing the command
 ```bash
-sudo apt install ./MirrorCommand_3.0.2-2.deb
+sudo apt install ./MirrorCommand_4.0.0-1.deb
 ```
 
 Install the package on RPM based systems by executing the command
 ```bash
-sudo yum localinstall ./MirrorCommand-3.0.2-2.rpm
+sudo yum localinstall ./MirrorCommand-4.0.0-1.rpm
 ```
 
 Removal of the package on Debian based systems can be accomplished by issuing the command:

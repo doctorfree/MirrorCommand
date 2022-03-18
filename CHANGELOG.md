@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+18 March 2022, MirrorCommand version 4.0.0 release 1:
+
+  Version 4.0.0 of MirrorCommand includes modifications to support the
+  MMM-GoogleAssistant v4 module. In addition, the MMM-Detector module has
+  been replaced by the EXT-Detector module. The EXT-GooglePhotos and Gateway
+  modules have been added and no longer used modules removed. Configuration
+  changes necessary to support MMM-GoogleAssistan v4 and these new extension
+  modules have been applied to all relevant config files. All config files are
+  retained in their original non-customized format in `/usr/local/MirrorCommand/...`
+  while those copied into `/usr/local/MagicMirror/...` are customized. In this way,
+  subsequent re-customization can be supported.
+
 03 February 2022, MirrorCommand version 3.0.2 release 2:
 
   This minor release update of MirrorCommand incorporates changes to improve
@@ -95,6 +107,70 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Fri Mar 18 13:44:57 2022 -0700 adc50f7 :
+   Copy in config files prior to customizing, only customize those leaving originals in the MirrorCommand folder
+Thu Mar 17 16:47:37 2022 -0700 ebe3a35 :
+   Cannot use ExtRadio.js recipe yet, no Radio extension module available for v3
+Thu Mar 17 16:03:38 2022 -0700 99f2fb1 :
+   More config files with Detector icon disabled
+Thu Mar 17 15:31:45 2022 -0700 a4b5f54 :
+   Do not display Detector icon when using MMM-Scenes
+Thu Mar 17 15:27:28 2022 -0700 caa830c :
+   Typos and recipes
+Thu Mar 17 15:09:49 2022 -0700 c5bd363 :
+   Adjust which recipes are used in config files
+Thu Mar 17 14:13:29 2022 -0700 0153344 :
+   Set vol card also when newly selected card is same as previously set
+Thu Mar 17 13:48:07 2022 -0700 9c5c147 :
+   Fix vol script for new amixer output, start counting at 1 when updating vol card number
+Thu Mar 17 13:25:38 2022 -0700 1c8bea5 :
+   Update vol script with audio output card number set by set_asound_conf
+Thu Mar 17 12:12:13 2022 -0700 b1eed29 :
+   Do not display EXT-Detector icon when showing Google Photo albums
+Thu Mar 17 12:00:36 2022 -0700 a801204 :
+   Add EXT-GooglePhotos module to animated gif config
+Thu Mar 17 11:42:24 2022 -0700 f1fd228 :
+   Cleanup Google Photos configs
+Thu Mar 17 11:14:41 2022 -0700 4bcdaa7 :
+   First pass at updating all config files with MMM-GoogleAssistant v4 support
+Thu Mar 17 09:38:14 2022 -0700 e14be4f :
+   Delete EXT-Alert from weather config
+Wed Mar 16 18:20:00 2022 -0700 97476c5 :
+   Copy resources to EXT-Detector module
+Wed Mar 16 18:07:12 2022 -0700 b569ead :
+   Use fork of MMM-GoogleMapsTraffic, new css for EXT-Detector
+Wed Mar 16 11:15:07 2022 -0700 59dad94 :
+   Fix sed of config files with single quotes, modify GA token location
+Wed Mar 16 09:56:30 2022 -0700 a8351f6 :
+   First pass at support for MMM-GoogleAssistant v4
+Tue Mar 15 16:30:09 2022 -0700 f3e2872 :
+   Add list option to set_asound_conf, update man page
+Sat Mar 5 08:53:26 2022 -0800 fe4582d :
+   Update artist and model download ids, add getphub, update mkdistarch
+Fri Mar 4 11:35:25 2022 -0800 24ebf31 :
+   Search for preinstalled pics and videos in users home directories
+Thu Mar 3 16:11:55 2022 -0800 b19f22b :
+   Use udisksctl to mount/unmount
+Thu Mar 3 11:23:28 2022 -0800 6e2de5c :
+   Skip common symlinked subdirs
+Wed Mar 2 07:39:41 2022 -0800 05b4db2 :
+   Switch back to main Detector and GoogleAssistant repos
+Thu Feb 24 14:59:30 2022 -0800 c367261 :
+   Add Simon model alias
+Tue Feb 22 09:31:28 2022 -0800 a130dcc :
+   Add Kameliya to model aliases
+Wed Feb 9 07:27:50 2022 -0800 50a1ae5 :
+   Add new artist and model download IDs
+Tue Feb 8 13:31:47 2022 -0800 58b80a9 :
+   Add countries update scripts and new model config
+Fri Feb 4 09:47:28 2022 -0800 741e6f7 :
+   Update Google Drive IDs
+Fri Feb 4 07:28:24 2022 -0800 fa95c65 :
+   Always exit 0 from download scripts
+Thu Feb 3 14:26:51 2022 -0800 0903e29 :
+   Config files for new artist
+Thu Feb 3 12:49:04 2022 -0800 2f3da67 :
+   Update changelog and release notes, bump release number
 Thu Feb 3 08:57:49 2022 -0800 97aee5a :
    Fix bug in mkdistarch
 Thu Feb 3 08:18:02 2022 -0800 f0dade1 :
