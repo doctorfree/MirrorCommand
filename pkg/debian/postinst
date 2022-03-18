@@ -104,29 +104,79 @@ case "$1" in
               rm -f /tmp/${remote}$$
             done
 
+            # Copy in the config files to the MagicMirror home
+            for cfg in config config-landscape config-notelegram config-landscape-notelegram
+            do
+              [ -d "${MMHOME}/${cfg}" ] || {
+                sudo -u ${USER} mkdir "${MMHOME}/${cfg}"
+              }
+              cd "${MMHOME}/${cfg}"
+              for config in ${MM}/${cfg}/*
+              do
+                [ "${config}" == "${MM}/${cfg}/*" ] && continue
+                b=`basename ${config}`
+                [ -d ${config} ] && {
+                  [ -d $b ] || sudo -u ${USER} mkdir $b
+                  cd $b
+                  for subconf in ${config}/*
+                  do
+                    [ "${subconf}" == "${config}/*" ] && continue
+                    c=`basename ${subconf}`
+                    [ -f $c ] || sudo -u ${USER} cp ${subconf} .
+                  done
+                  cd ..
+                  continue
+                }
+                [ -f $b ] || sudo -u ${USER} cp ${config} .
+              done
+            done
+
+            # Copy in the css files to the MagicMirror home
+            [ -d "${MMHOME}/css" ] && {
+              cd "${MMHOME}/css"
+              for css in ${MM}/css/*
+              do
+                [ "${css}" == "${MM}/css/*" ] && continue
+                b=`basename ${css}`
+                if [ "$b" == "custom.css" ]
+                then
+                    if [ -f $b ]
+                    then
+                        [ -f custom-mirrorcommand.css ] || {
+                            sudo -u ${USER} cp ${css} custom-mirrorcommand.css
+                        }
+                    else
+                        sudo -u ${USER} cp ${css} .
+                    fi
+                else
+                    [ -f $b ] || [ -d $b ] || sudo -u ${USER} cp ${css} .
+                fi
+              done
+            }
+
             # Fixup those config files that have hard coded screen dimensions
             printf "\nSetting up MagicMirror config files ..."
             [ -x ${MM}/bin/set_screen_conf ] && {
-              cd "${MM}/config"
+              cd "${MMHOME}/config"
               ${MM}/bin/set_screen_conf
-              cd "${MM}/config-notelegram"
+              cd "${MMHOME}/config-notelegram"
               ${MM}/bin/set_screen_conf
-              cd "${MM}/config-landscape"
+              cd "${MMHOME}/config-landscape"
               ${MM}/bin/set_screen_conf
-              cd "${MM}/config-landscape-notelegram"
+              cd "${MMHOME}/config-landscape-notelegram"
               ${MM}/bin/set_screen_conf
-              cd "${MM}/css"
+              cd "${MMHOME}/css"
               ${MM}/bin/set_screen_conf
             }
             # Fixup those config files that have hard coded Roon Core IP and Port
             [ -x ${MM}/bin/set_roon_conf ] && {
-              cd "${MM}/config"
+              cd "${MMHOME}/config"
               ${MM}/bin/set_roon_conf
-              cd "${MM}/config-notelegram"
+              cd "${MMHOME}/config-notelegram"
               ${MM}/bin/set_roon_conf
-              cd "${MM}/config-landscape"
+              cd "${MMHOME}/config-landscape"
               ${MM}/bin/set_roon_conf
-              cd "${MM}/config-landscape-notelegram"
+              cd "${MMHOME}/config-landscape-notelegram"
               ${MM}/bin/set_roon_conf
             }
             # Fixup the ARP Scan devices used by MMM-MacAddressScan module
@@ -168,66 +218,15 @@ case "$1" in
                 chown ${USER}:${GROUP} ${MM}/etc/*arp-devices*.js
               }
               [ -x ${MM}/bin/arpscanconf ] && {
-                cd "${MM}/config"
+                cd "${MMHOME}/config"
                 ${MM}/bin/arpscanconf
-                cd "${MM}/config-notelegram"
+                cd "${MMHOME}/config-notelegram"
                 ${MM}/bin/arpscanconf
-                cd "${MM}/config-landscape"
+                cd "${MMHOME}/config-landscape"
                 ${MM}/bin/arpscanconf
-                cd "${MM}/config-landscape-notelegram"
+                cd "${MMHOME}/config-landscape-notelegram"
                 ${MM}/bin/arpscanconf
               }
-            }
-
-            # Copy in the config files to the MagicMirror home
-            for cfg in config config-landscape config-notelegram config-landscape-notelegram
-            do
-              [ -d "${MMHOME}/${cfg}" ] || {
-                sudo -u ${USER} mkdir "${MMHOME}/${cfg}"
-              }
-              cd "${MMHOME}/${cfg}"
-              for config in ${MM}/${cfg}/*
-              do
-                [ "${config}" == "${MM}/${cfg}/*" ] && continue
-                b=`basename ${config}`
-                [ -d ${config} ] && {
-                  [ -d $b ] || sudo -u ${USER} mkdir $b
-                  cd $b
-                  for subconf in ${config}/*
-                  do
-                    [ "${subconf}" == "${config}/*" ] && continue
-                    c=`basename ${subconf}`
-                    [ -f $c ] || sudo -u ${USER} cp ${subconf} .
-                  done
-                  cd ..
-                  continue
-                }
-                [ -f $b ] || sudo -u ${USER} cp ${config} .
-              done
-            done
-            printf " Done\n"
-
-            # Copy in the css files to the MagicMirror home
-            [ -d "${MMHOME}/css" ] && {
-              cd "${MMHOME}/css"
-              for css in ${MM}/css/*
-              do
-                [ "${css}" == "${MM}/css/*" ] && continue
-                b=`basename ${css}`
-                if [ "$b" == "custom.css" ]
-                then
-                    if [ -f $b ]
-                    then
-                        [ -f custom-mirrorcommand.css ] || {
-                            sudo -u ${USER} cp ${css} custom-mirrorcommand.css
-                        }
-                    else
-                        sudo -u ${USER} cp ${css} .
-                    fi
-                else
-                    [ -f $b ] || [ -d $b ] || sudo -u ${USER} cp ${css} .
-                fi
-              done
             }
 
             # Copy default keyless config
@@ -239,6 +238,7 @@ case "$1" in
             else
                 sudo -u ${USER} cp config.js.sample config.js
             fi
+            printf " Done\n"
 
             # If MagicMirror is installed in /usr/local then create links in
             # users' home directories to provide compatibility with modules that
