@@ -1052,6 +1052,6 @@ Interactive menus when invoked with no arguments<br/>
 
 ## License
 
-Copyright: 2014-2021 Ronald Joe Record <ronaldrecord@gmail.com>
+Copyright: 2014-2022 Ronald Joe Record <ronaldrecord@gmail.com>
 
 License: MIT

@@ -3,9 +3,9 @@
 ## @file mirror.sh
 ## @brief Convenience script to manage multiple MagicMirror configurations
 ## @author Ronald Joe Record (rr at ronrecord dot com)
-## @copyright Copyright (c) 2020, Ronald Joe Record, all rights reserved.
+## @copyright Copyright (c) 2020-2022, Ronald Joe Record, all rights reserved.
 ## @date Written 1-feb-2020
-## @version 1.0.0
+## @version 4.0.1
 ##
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
