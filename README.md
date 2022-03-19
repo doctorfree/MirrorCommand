@@ -511,12 +511,14 @@ Some of the more useful supporting scripts include:
   Get the MagicMirror screen brightness level
 - [**mmsetb**](scripts/mmsetb.sh)
   Set the MagicMirror screen brightness level
+- [**myreboot**](scripts/myreboot.sh)
+  Perform additional actions before reboot, executed as a normal user using sudo
+- [**myshutdown**](scripts/myshutdown.sh)
+  Perform additional actions before shutdown, executed as a normal user using sudo
 - [**rand_back**](scripts/rand_back.sh)
   Select a random desktop wallpaper
-- [**reboot**](scripts/reboot.sh)
-  Perform additional actions before reboot, executed as a normal user using sudo
-- [**shutdown**](scripts/shutdown.sh)
-  Perform additional actions before shutdown, executed as a normal user using sudo
+- [**set_asound_conf**](bin/set_asound_conf)
+  Set the ALSA sound configuration in `/etc/asound.conf`
 - [**vncview**](scripts/vncview.sh)
   Remote script to start a VNC server on your MagicMirror and a VNC viewer on your desktop
 - [**vol**](scripts/vol.sh)
@@ -679,9 +681,9 @@ one of the config files in this repository then you will have three new
 custom Telegram commands:
 
 - /myReboot
-    - Custom reboot command which executes /usr/local/bin/reboot
+    - Custom reboot command which executes /usr/local/bin/myreboot
 - /myShutdown
-    - Custom shutdown command which executes /usr/local/bin/shutdown
+    - Custom shutdown command which executes /usr/local/bin/myshutdown
 - /mirror
     - General purpose command which executes the /usr/local/bin/mirror command with any arguments supplied in the Telegram command (e.g. `/mirror info` will retrieve your MagicMirror system information)
 

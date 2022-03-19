@@ -30,14 +30,14 @@ if [ "${TEMPC}" ]
 then
     [ $(echo "${TEMPC} > 75.0" | bc -l) ] || {
         sendsms Raspberry Pi temperature of ${TEMPC} exceeds heat threshold. Shutting down.
-        /usr/local/bin/shutdown
+        /usr/local/bin/myshutdown
     }
 else
     if [ "${TEMPF}" ]
     then
         [ $(echo "${TEMPF} > 167.0" | bc -l) ] || {
             sendsms Raspberry Pi temperature of ${TEMPF} exceeds heat threshold. Shutting down.
-            /usr/local/bin/shutdown
+            /usr/local/bin/myshutdown
         }
     else
         [ "${QUIET}" ] || echo "Unable to retrieve non-empty temperature for Raspberry Pi"

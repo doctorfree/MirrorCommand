@@ -2254,12 +2254,12 @@ BU_TG_CONFDIR="config-notelegram"
 }
 
 [ "$1" == "reboot" ] && {
-    [ -x /usr/local/bin/reboot ] && /usr/local/bin/reboot
+    [ -x /usr/local/bin/myreboot ] && /usr/local/bin/myreboot
     exit 0
 }
 
 [ "$1" == "shutdown" ] && {
-    [ -x /usr/local/bin/shutdown ] && /usr/local/bin/shutdown
+    [ -x /usr/local/bin/myshutdown ] && /usr/local/bin/myshutdown
     exit 0
 }
 

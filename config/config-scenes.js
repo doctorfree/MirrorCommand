@@ -64,8 +64,8 @@ var config = {
             config: {
                 apiKey: 'xxx_Remote-Control-API-Key_xxxxx',
                 customCommand: {
-                    shutdownCommand: '/usr/local/bin/shutdown',
-                    rebootCommand: '/usr/local/bin/reboot',
+                    shutdownCommand: '/usr/local/bin/myshutdown',
+                    rebootCommand: '/usr/local/bin/myreboot',
                     monitorOnCommand: 'vcgencmd display_power 1',
                     monitorOffCommand: 'vcgencmd display_power 0',
                     screenshotCommand: '/usr/local/bin/mirror screenshot',

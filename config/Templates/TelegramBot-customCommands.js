@@ -3,7 +3,7 @@
                   command: 'myReboot',
                   description: "Executes custom MagicMirror `reboot` command",
                   callback: (command, handler, self) => {
-                      var exec = "/usr/local/bin/reboot"
+                      var exec = "/usr/local/bin/myreboot"
                       handler.reply("TEXT", "Executing command: " + exec)
                       var sessionId = Date.now() + "_" + self.commonSession.size
                       if (exec) {
@@ -19,7 +19,7 @@
                   command: 'myShutdown',
                   description: "Executes custom MagicMirror `shutdown` command",
                   callback: (command, handler, self) => {
-                      var exec = "/usr/local/bin/shutdown"
+                      var exec = "/usr/local/bin/myshutdown"
                       handler.reply("TEXT", "Executing command: " + exec)
                       var sessionId = Date.now() + "_" + self.commonSession.size
                       if (exec) {
