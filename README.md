@@ -21,7 +21,6 @@ configure, monitor, and manage a MagicMirror.
 ## Table of contents
 
 1. [Overview](#overview)
-1. [Screenshots](#screenshots)
 1. [Compatibility](#compatibility)
 1. [Installation](#installation)
     1. [MagicMirror Installation](#magicmirror-installation)
@@ -62,6 +61,7 @@ configure, monitor, and manage a MagicMirror.
     1. [History](#history)
 1. [Contents](#contents)
 1. [Known Limitations](#known-limitations)
+1. [Screenshots](#screenshots)
 1. [License](#license)
 
 ## Overview
@@ -107,14 +107,6 @@ include support for:
 - Auto generation of new MagicMirror configuration files
 - Interactive mode via menu dialogs
     - Invoked with no arguments the mirror command displays a command menu.
-
-## Screenshots
-
-<p float="left">
-Interactive menus when invoked with no arguments<br/>
-  <img src="screenshots/mirror_command_menu.jpg">
-  <img src="screenshots/mirror_submenu.jpg">
-</p>
 
 ## Compatibility
 MirrorCommand has been successfully deployed and tested on a Raspberry Pi 4
@@ -1044,6 +1036,19 @@ The following are known limitations in the current release:
     - In some cases it is necessary to power on the monitor prior to booting the system in order for the X11 graphical system to recognize the monitor
 - Significant effort has been made to adjust the module layouts in all config files to create a MagicMirror display with non-overlapping regions. However, some screen resolutions may need manual adjustment of some config files to arrive at a pleasant display. Testing has been limited to only a few screen resolutions and display modes.
 - The current release does not fully support seamless upgrades nor have upgrades been thoroughly tested. If a future upgrade of the MirrorCommand package fails or does not entirely complete, the recommended procedure is to backup all MagicMirror and MirrorCommand files, remove the MirrorCommand package, and install the newer MirrorCommand package.
+
+## Screenshots
+
+<p float="left">
+Sample default and weather configs<br/>
+  <img src="screenshots/mirror_default.png">
+  <img src="screenshots/mirror_weather.png">
+</p>
+<p float="left">
+Interactive menus when invoked with no arguments<br/>
+  <img src="screenshots/mirror_command_menu.jpg">
+  <img src="screenshots/mirror_submenu.jpg">
+</p>
 
 ## License
 
