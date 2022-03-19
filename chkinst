@@ -220,7 +220,7 @@ do
         crontab*|files_with_secrets.txt|README*|wireless_dot_sample)
             continue
             ;;
-        reboot.sh|shutdown.sh)
+        myreboot.sh|myshutdown.sh)
             inst="/usr/local/bin/$j"
             ;;
         *)
