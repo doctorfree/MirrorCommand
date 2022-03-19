@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+20 March 2022, MirrorCommand version 4.0.0 release 2:
+
+  Minor release update with changes to `set_asound_conf` to update the
+  default card number in `/usr/local/bin/vol`, add missing config files,
+  and reflect the name changes of `/usr/local/bin/reboot` and
+  `/usr/local/bin/shutdown` to `/usr/local/bin/myreboot` and
+  `/usr/local/bin/myshutdown`. New screenshots in README.
+
 18 March 2022, MirrorCommand version 4.0.0 release 1:
 
   Version 4.0.0 of MirrorCommand includes modifications to support the
@@ -107,6 +115,22 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Sat Mar 19 12:41:47 2022 -0700 ec45e72 :
+   Update license and copyright dates
+Sat Mar 19 12:37:34 2022 -0700 af0e41a :
+   Redo mirror default screenshot
+Sat Mar 19 12:30:32 2022 -0700 863ebdd :
+   Add default and weather config screenshots
+Sat Mar 19 11:42:55 2022 -0700 6e53116 :
+   reboot and shutdown scripts changed names to myreboot and myshutdown
+Sat Mar 19 11:38:28 2022 -0700 5237e27 :
+   reboot and shutdown scripts changed names to myreboot and myshutdown
+Fri Mar 18 17:30:34 2022 -0700 80b0f8a :
+   Added config file for Black Tape Project playlist, added missing YouTube config files for landscape notelegram
+Fri Mar 18 15:37:06 2022 -0700 2d1b38a :
+   Update set_asound_conf and vol man pages and markdown
+Fri Mar 18 14:06:52 2022 -0700 d9c1b98 :
+   Changes to version, changelog, and release notes in preparation for version 4.0.0 release 1
 Fri Mar 18 13:44:57 2022 -0700 adc50f7 :
    Copy in config files prior to customizing, only customize those leaving originals in the MirrorCommand folder
 Thu Mar 17 16:47:37 2022 -0700 ebe3a35 :
