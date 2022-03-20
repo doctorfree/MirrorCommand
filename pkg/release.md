@@ -22,12 +22,12 @@ or grant everyone access with
 
 Install the package on Debian based systems by executing the command
 ```bash
-sudo apt install ./MirrorCommand_4.0.0-1.deb
+sudo apt install ./MirrorCommand_4.0.0-2.deb
 ```
 
 Install the package on RPM based systems by executing the command
 ```bash
-sudo yum localinstall ./MirrorCommand-4.0.0-1.rpm
+sudo yum localinstall ./MirrorCommand-4.0.0-2.rpm
 ```
 
 Removal of the package on Debian based systems can be accomplished by issuing the command:
