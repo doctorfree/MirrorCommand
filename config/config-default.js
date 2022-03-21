@@ -187,7 +187,7 @@ var config = {
         },
         {
             module: 'MMM-Solar',
-            position: "bottom_left",
+            position: "bottom_center",
             config: {
                 apiKey: "xxxxxx_Solar-API-Key_xxxxxxxxxxx",
                 userId: "Solar-USER-ID",
