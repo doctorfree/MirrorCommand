@@ -2,9 +2,13 @@
   font-size: 28px;
 }
 
-.MMM-MacAddressScan header {
-  font-size: 24px;
+.MMM-MacAddressScan .module-header {
+  font-size: 28px;
   color: #B5F5F2;
+}
+
+.MMM-MacAddressScan .deviceCell {
+  font-size: 28px;
 }
 
 .MMM-Tools header {

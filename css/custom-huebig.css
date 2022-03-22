@@ -16,8 +16,17 @@ header {
     height: __HEIGHT__px; /* __SET_CSS_HEIGHT_PX__ Do Not Remove */
 }
 
+.MMM-MacAddressScan .module-header {
+  font-size: 22px;
+  color: #B5F5F2;
+}
+
+.MMM-MacAddressScan .deviceCell {
+  font-size: 22px;
+}
+
 .MMM-MacAddressScan .headerDevCell {
-  font-size: 28px;
+  font-size: 22px;
 }
 
 .Tools {
