@@ -100,3 +100,6 @@ do
     cp ${res} ${DADIR}
   fi
 done
+[ -f ${DADIR}/google-replace.png ] && {
+  cp ${DADIR}/google-replace.png ${DADIR}/google.png 
+}

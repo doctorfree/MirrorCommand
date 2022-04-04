@@ -45,6 +45,12 @@ do
         else
             npm run update
         fi
+        [ -f resources/google-replace.png ] && {
+            [ -f resources/google-orig.png ] || {
+                cp resources/google.png resources/google-orig.png
+            }
+            cp resources/google-replace.png resources/google.png
+        }
         ;;
     EXT-GooglePhotos|Gateway|EXT-Alert|MMM-GoogleAssistant)
         npm run update
