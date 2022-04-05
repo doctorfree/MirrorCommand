@@ -5,7 +5,7 @@ OUT_DIR="/u/gdrive/MagicMirror"
 TMP_DIR="${IN_DIR}/tmp"
 TOPS="Fractals Gif"
 
-MOV_DIR="/u/movies"
+MOV_DIR="/u/movies/MagicMirror"
 MOVS="Tantra Pornhub"
 
 usage() {
