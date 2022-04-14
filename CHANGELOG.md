@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+14 April 2022, MirrorCommand version 4.0.0 release 3:
+
+  Version 4.0.0 Release 3 of MirrorCommand adds the capability of updating
+  the MagicMirror installation with the `mirror` command. The `mirror`
+  command can also be used to update all installed MagicMirror modules.
+  Bug fixes and improved user interface are included in this release.
+
 20 March 2022, MirrorCommand version 4.0.0 release 2:
 
   Minor release update with changes to `set_asound_conf` to update the
@@ -115,6 +122,32 @@ All notable changes to this project will be documented in this file.
   replacing the complex customCommands sections with the
   MMM-TelegramCommands module.
 
+Thu Apr 14 11:46:34 2022 -0700 a4ecd95 :
+   Added ability to update MagicMirror installation with 'mirror' command
+Thu Apr 14 10:14:15 2022 -0700 d777ca8 :
+   Move numeric device choice to end of case statments in set_asound_conf
+Tue Apr 5 20:43:19 2022 -0700 d5509aa :
+   Add photographer to gdrive download
+Tue Apr 5 08:22:28 2022 -0700 5d5751b :
+   Move movies location in mkdistarch
+Mon Apr 4 19:50:03 2022 -0700 0f7ac07 :
+   Add configs for photographer Andrey Popov
+Mon Apr 4 14:36:25 2022 -0700 582a960 :
+   Replace default EXT-Detector module icon
+Sat Apr 2 19:15:26 2022 -0700 b2afd53 :
+   Add 90s bikini video
+Sat Apr 2 17:19:39 2022 -0700 9015e4b :
+   Add bikini config
+Tue Mar 22 12:21:37 2022 -0700 a37d58f :
+   Fix MMM-MacAddressScan css styling
+Mon Mar 21 11:33:52 2022 -0700 294e2c6 :
+   Move MMM-Solar to bottom_center in default portrait configs
+Mon Mar 21 10:32:10 2022 -0700 f574520 :
+   Added config for YouTube concerts playlist
+Sun Mar 20 13:34:44 2022 -0700 9dd117d :
+   Update release number in release notes
+Sat Mar 19 14:03:37 2022 -0700 00e44de :
+   Update release number and changelog in preparation for v4.0.0r2
 Sat Mar 19 12:41:47 2022 -0700 ec45e72 :
    Update license and copyright dates
 Sat Mar 19 12:37:34 2022 -0700 af0e41a :
