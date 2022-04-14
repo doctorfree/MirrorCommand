@@ -159,11 +159,6 @@ else
     select opt in "${device_options[@]}"
     do
       case "$opt,$REPLY" in
-        [0-9]*,*|*,[0-9]*)
-          OUTPUT=${REPLY}
-          ((OUTPUT--))
-          break
-          ;;
         "Select For Me",*|*,"Select For Me"|"select for me",*|*,"select for me")
           OUTPUT=`grep ${OUTGREP} ${CARDS} | grep "DAC" | awk ' { print $1 } '`
           [ "${OUTPUT}" ] || {
@@ -184,6 +179,11 @@ else
         "Quit",*|*,"Quit"|"quit",*|*,"quit")
           exit 0
           ;;
+        [0-9]*,*|*,[0-9]*)
+          OUTPUT=${REPLY}
+          ((OUTPUT--))
+          break
+          ;;
         *)
           printf "\nInvalid entry. Please try again"
           printf "\nEnter either a number or text of one of the menu entries\n"
@@ -196,11 +196,6 @@ else
     select opt in "${device_options[@]}"
     do
       case "$opt,$REPLY" in
-        [0-9]*,*|*,[0-9]*)
-          INPUT=${REPLY}
-          ((INPUT--))
-          break
-          ;;
         "Select For Me",*|*,"Select For Me"|"select for me",*|*,"select for me")
           INPUT=`grep ${INGREP} ${CARDS} | grep "Webcam" | awk ' { print $1 } '`
           [ "${INPUT}" ] || {
@@ -232,6 +227,11 @@ else
           ;;
         "Quit",*|*,"Quit"|"quit",*|*,"quit")
           exit 0
+          ;;
+        [0-9]*,*|*,[0-9]*)
+          INPUT=${REPLY}
+          ((INPUT--))
+          break
           ;;
         *)
           printf "\nInvalid entry. Please try again"
