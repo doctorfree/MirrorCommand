@@ -1,32 +1,37 @@
-
 Usage: mirror <command> [args]
+
 Where <command> can be one of the following:
     info <temp|mem|disk|usb|net|wireless|screen>
     list <active|installed|configs>
-    rotate <right|left|normal|inverted>
+    rotate <right|left|normal|inverted|default>
     scene <next|prev|info|name|number>
     screen <on|off|info|status>
-    stop|start|restart|mute|unmute|screenshot
+    stop|start|restart|mute|unmute|screenshot|reboot|shutdown
     playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo
+    update [modules]
     vol <percent>|mute|unmute|save|restore|get
     dev | getb | setb <num> | select | status <all> | youtube
     artists_dir, models_dir, photogs_dir
     ac|ar <artist>, jc|jr <idol>, mc|mr <model>, pc|pr <photographer>, wh|whrm <dir>
 
 Specify a config file to use by executing a command of the form:
-	mirror <name>
-where <name> is one of:
-	 all Artists art background blank calendar candy covid crypto
-	 darksky default face fractals gif iframe instagram JAV minscenes
-	 mintest Models nature networkcols network news normal owls Photographers
-	 portal radar rooncontrol roon sample scenes scnews scoreboard screencast
-	 server smoke snowcrash stocks tantra test traffic unknown videotest
-	 voice volumio waterfalls weather YouTube
 
-or any other config file you have created in /home/pi/MagicMirror/config of the form:
+	mirror <name>
+
+where <name> is one of:
+	 all Artists art background bikini blank calendar candy covid
+	 crypto darksky default face fractals gif iframe instagram ironman
+	 JAV Models nature networkcols network networktest news nokeys normal
+	 owls Photographers pics portal radar rooncontrol roon scenes scnews
+	 scoreboard screencast server smoke snowcrash stocks swimweek tantra test
+	 traffic videotest voice volumio waterfalls weather YouTube
+
+or any other config file you have created in /usr/local/MagicMirror/config of the form:
+
 	config-<name>.js
 
 A config filename argument will be resolved into a config filename of the form:
+
 	config-$argument.js
 
 A subdirectory in which to locate the config file can be specified as the second argument, e.g. 'mirror foo bar' will attempt to use the config file bar/config-foo.js
@@ -34,13 +39,17 @@ A subdirectory in which to locate the config file can be specified as the second
 The mirror command will attempt to match the specified config file name. For example, 'mirror foo' would match the config file named config-food.js
 
 Arguments can also be specified as follows:
+
 	-a <artist>, -A <artist>, -b <brightness>, -B, -c <config>, -d, -i <info>,
 	-V, -N, -R (toggle video play, play next video, replay video),
 	-H, -h (Hide video, Show video),
+	-L, use landscape display mode and use landscape designed configs/pics,
 	-I, -l <list>, -r <rotate>, -s <screen>, -S, -m <model>, -M <model>,
-	-p <photographer>, -P <photographer>, -w <dir>, -W <dir>, -u
+	-p <photographer>, -P <photographer>, -w <dir>, -W <dir>
+	-X <screen number>, -Z, -u
 
 Examples:
+
 	mirror		# Invoked with no arguments the mirror command displays a command menu
 	mirror list active		# lists active modules
 	mirror list configs		# lists available configuration files
@@ -49,11 +58,14 @@ Examples:
 	mirror info		# Displays all MagicMirror system information
 	mirror info screen		# Displays MagicMirror screen information
 	mirror dev		# Restarts the mirror in developer mode
-	mirror rotate left/right/normal/inverted		# rotates the screen left, right, inverted, or normal
+	mirror rotate left/right/normal/inverted/default		# rotates the screen left, right, inverted, normal, or restores all screens to their default rotation
 	mirror screen on		#  Turns the Display ON
 	mirror screen off		# Turns the Display OFF
 	mirror screenshot		# Takes a screenshot of the MagicMirror
+	mirror screen num		# Switches mirror display to screen num
 	mirror status [all]		# Displays MagicMirror status, checks config syntax
+	mirror update		# Updates MagicMirror installation
+	mirror update modules		# Updates installed MagicMirror modules
 	mirror getb		# Displays current MagicMirror brightness level
 	mirror setb 150		# Sets MagicMirror brightness level to 150
 	mirror vol 50		# Sets MagicMirror volume level to 50

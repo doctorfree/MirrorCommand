@@ -1114,6 +1114,7 @@ usage() {
     printf "\n    stop|start|restart|mute|unmute|reboot|shutdown"
     printf "\n    playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo"
     printf "\n    status <all>|dev|getb|setb <num>|vol <num>"
+    printf "\n    update [modules]"
     printf "\n    vol mute|unmute|save|restore|get"
     printf "\n\n  or specify a config file to use with one of:"
     printf "\n\n  ${CONFS}"
@@ -1133,6 +1134,7 @@ usage() {
     printf "\n    screen <on|off|info|status>"
     printf "\n    stop|start|restart|mute|unmute|screenshot|reboot|shutdown"
     printf "\n    playvideo|pausevideo|nextvideo|replayvideo|hidevideo|showvideo"
+    printf "\n    update [modules]"
     printf "\n    vol <percent>|mute|unmute|save|restore|get"
     printf "\n    dev | getb | setb <num> | select | status <all> | youtube"
     printf "\n    artists_dir, models_dir, photogs_dir"
@@ -1176,6 +1178,8 @@ usage() {
     printf "\n\tmirror screenshot\t\t# Takes a screenshot of the MagicMirror"
     printf "\n\tmirror screen num\t\t# Switches mirror display to screen num"
     printf "\n\tmirror status [all]\t\t# Displays MagicMirror status, checks config syntax"
+    printf "\n\tmirror update\t\t# Updates MagicMirror installation"
+    printf "\n\tmirror update modules\t\t# Updates installed MagicMirror modules"
     printf "\n\tmirror getb\t\t# Displays current MagicMirror brightness level"
     printf "\n\tmirror setb 150\t\t# Sets MagicMirror brightness level to 150"
     printf "\n\tmirror vol 50\t\t# Sets MagicMirror volume level to 50"
@@ -2467,6 +2471,47 @@ BU_TG_CONFDIR="config-notelegram"
 
 [ "$1" == "whrm" ] && {
     wh_remove $2
+    exit 0
+}
+
+[ "$1" == "update" ] && {
+    if [ "$2" == "modules" ]
+    then
+      module_update_all
+    else
+      cd "${MM}"
+      git status -uno | grep "nothing to commit" > /dev/null || {
+          echo "It appears you have local modifications to MagicMirror"
+          echo "installation files other than the config and modules."
+          echo "Updating MagicMirror will overwrite these changes."
+          echo ""
+          echo "The changes to MagicMirror installation files detected:"
+          echo ""
+          git status -uno
+          echo ""
+          while true
+          do
+            read -p "Do you wish to proceed with the MagicMirror update anyway ? ('Y'/'N'): " yn
+            case $yn in
+                [Yy]*)
+                    git reset --hard
+                    break
+                    ;;
+                [Nn]*)
+                    echo "you can reset your changes with 'git reset --hard'."
+                    echo "After that, rerunning 'mirror update' should work."
+                    echo "Exiting."
+                    exit 1
+                    break
+                    ;;
+                * )
+                    echo "Please answer yes or no."
+                    ;;
+            esac
+          done
+      }
+      git pull && npm install --only=prod --omit=dev
+    fi
     exit 0
 }
 

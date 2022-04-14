@@ -2,7 +2,7 @@
 title: MIRROR
 section: 1
 header: User Manual
-footer: mirror 2.6
+footer: mirror 2.7
 date: December 06, 2021
 ---
 # NAME
@@ -33,7 +33,7 @@ Specify a MagicMirror config file to use by executing a command of the form:
 Where *configfile* represents a MagicMirror config filename
 of the form *MagicMirror/config/config-configfile.js*
 
-Any config file you have created in /home/pi/MagicMirror/config of the form:
+Any config file you have created in `/path/to/MagicMirror/config/` of the form:
 : config-&lt;name&gt;js
 
 can be used as the MagicMirror config file by issuing the command:
@@ -86,6 +86,7 @@ Currently the command line MagicMirror control scripts include support for:
 	- Show video playback module
 - Control the MagicMirror audio output volume level
 - Get MagicMirror status
+- Update the MagicMirror installation or update MagicMirror modules
 - Auto generation of new MagicMirror configuration files
 - Interactive mode via menu dialogs
     - Invoked with no arguments the mirror command displays a command menu.
@@ -229,6 +230,9 @@ Currently the command line MagicMirror control scripts include support for:
 **status**
 : reports status of MagicMirror and active config
 
+**update [modules]**
+: update the MagicMirror installation or update MagicMirror modules
+
 # EXAMPLES
 
 **mirror**
@@ -275,6 +279,12 @@ Currently the command line MagicMirror control scripts include support for:
 
 **mirror status [all]**
 : Displays MagicMirror status, checks config syntax
+
+**mirror update**
+: Update the MagicMirror installation
+
+**mirror update modules**
+: Update the installed MagicMirror modules
 
 **mirror getb**
 : Displays current MagicMirror brightness level

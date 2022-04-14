@@ -1,3 +1,5 @@
+Version 4.0.0 Release 2 of MirrorCommand adds the capability of updating the MagicMirror installation with the `mirror` command. The `mirror` command can also be used to update all installed MagicMirror modules. Bug fixes and improved user interface are included in this release.
+
 Version 4.0.0 of MirrorCommand includes modifications to support the MMM-GoogleAssistant v4 module. In addition, the MMM-Detector module has been replaced by the EXT-Detector module. The EXT-GooglePhotos and Gateway modules have been added and no longer used modules removed. Configuration changes necessary to support MMM-GoogleAssistan v4 and these new extension modules have been applied to all relevant config files. All config files are retained in their original non-customized format in `/usr/local/MirrorCommand/...` while those copied into `/usr/local/MagicMirror/...` are customized. In this way, subsequent re-customization can be supported.
 
 Note that the above described updates to the *MagicMirror* modules will only be applied during an installation of *MirrorCommand* in which there is no previous *MagicMirror* installed. To apply these changes during installation, remove or move aside your existing *MagicMirror* folder. Install *MirrorCommand*, initialize your keys, then re-apply any customization you have previously made to *MagicMirror* modules. Alternately, you can retain an existing *MagicMirror* installation and upgrade the modules to MMM-GoogleAssistant v4, Gateway, EXT-Detector, and EXT-GooglePhotos manually.
@@ -22,12 +24,12 @@ or grant everyone access with
 
 Install the package on Debian based systems by executing the command
 ```bash
-sudo apt install ./MirrorCommand_4.0.0-2.deb
+sudo apt install ./MirrorCommand_4.0.0-3.deb
 ```
 
 Install the package on RPM based systems by executing the command
 ```bash
-sudo yum localinstall ./MirrorCommand-4.0.0-2.rpm
+sudo yum localinstall ./MirrorCommand-4.0.0-3.rpm
 ```
 
 Removal of the package on Debian based systems can be accomplished by issuing the command:

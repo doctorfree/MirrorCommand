@@ -14,7 +14,7 @@
 . ftr VB CB
 . ftr VBI CBI
 .\}
-.TH "MIRROR" "1" "December 06, 2021" "mirror 2.6" "User Manual"
+.TH "MIRROR" "1" "December 06, 2021" "mirror 2.7" "User Manual"
 .hy
 .SH NAME
 .PP
@@ -57,7 +57,7 @@ Specify a MagicMirror config file to use by executing a command of the form:
 Where \f[I]configfile\f[R] represents a MagicMirror config filename of
 the form \f[I]MagicMirror/config/config-configfile.js\f[R]
 .TP
-Any config file you have created in /home/pi/MagicMirror/config of the form:
+Any config file you have created in \f[V]/path/to/MagicMirror/config/\f[R] of the form:
 config-<name>js
 .TP
 can be used as the MagicMirror config file by issuing the command:
@@ -141,6 +141,8 @@ Show video playback module
 Control the MagicMirror audio output volume level
 .IP \[bu] 2
 Get MagicMirror status
+.IP \[bu] 2
+Update the MagicMirror installation or update MagicMirror modules
 .IP \[bu] 2
 Auto generation of new MagicMirror configuration files
 .IP \[bu] 2
@@ -325,6 +327,9 @@ stop MagicMirror
 .TP
 \f[B]status\f[R]
 reports status of MagicMirror and active config
+.TP
+\f[B]update [modules]\f[R]
+update the MagicMirror installation or update MagicMirror modules
 .SH EXAMPLES
 .TP
 \f[B]mirror\f[R]
@@ -371,6 +376,12 @@ Takes a screenshot of the MagicMirror
 .TP
 \f[B]mirror status [all]\f[R]
 Displays MagicMirror status, checks config syntax
+.TP
+\f[B]mirror update\f[R]
+Update the MagicMirror installation
+.TP
+\f[B]mirror update modules\f[R]
+Update the installed MagicMirror modules
 .TP
 \f[B]mirror getb\f[R]
 Displays current MagicMirror brightness level

@@ -58,6 +58,7 @@ Architecture: all
 Depends: git (>= 2.20.1), arp-scan (>= 1.9.5), wmctrl (>= 1.07-7), libmagic-dev, libatlas-base-dev, sox, libsox-fmt-all, build-essential, scrot, wget, unclutter, vlc, cec-utils, libudev-dev, jq (>= 1.4), fswebcam (>= 20140113)
 Suggests: qterminal (>= 0.14.1)
 Maintainer: ${DEBFULLNAME} <${DEBEMAIL}>
+Installed-Size: 14000
 Build-Depends: debhelper (>= 11)
 Standards-Version: 4.1.3
 Homepage: https://gitlab.com/doctorfree/MirrorCommand
