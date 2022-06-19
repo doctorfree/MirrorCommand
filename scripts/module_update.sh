@@ -146,12 +146,12 @@ do
               git clone https://github.com/skelliam/MMM-COVID19-SPARKLINE.git
             fi
             ;;
-          MMM-DarkSkyForecast)
+          MMM-OpenWeatherForecast)
             if [ "${QUIET}" ]
             then
-              git clone https://github.com/jclarke0000/MMM-DarkSkyForecast.git > /dev/null 2>&1
+              git clone https://github.com/jclarke0000/MMM-OpenWeatherForecast.git > /dev/null 2>&1
             else
-              git clone https://github.com/jclarke0000/MMM-DarkSkyForecast.git
+              git clone https://github.com/jclarke0000/MMM-OpenWeatherForecast.git
             fi
             ;;
           MMM-DateOnly)

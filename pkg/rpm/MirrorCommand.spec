@@ -342,7 +342,7 @@ then
     # Install MagicMirror 3rd Party modules used by MirrorCommand
     [ -d "${MMHOME}/modules" ] && cd "${MMHOME}/modules"
     MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
-             MMM-COVID19-SPARKLINE MMM-DarkSkyForecast Gateway \
+             MMM-COVID19-SPARKLINE MMM-OpenWeatherForecast Gateway \
              EXT-Detector MMM-GoogleAssistant MMM-GoogleMapsTraffic \
              mmm-hue-lights MMM-iFrame MMM-InstagramView EXT-Alert \
              MMM-IronManGIF MMM-MacAddressScan MMM-MyScoreboard \

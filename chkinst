@@ -295,7 +295,7 @@ do
         config/config-instagram.js)
             check "$i" "$inst" 22
             ;;
-        config/config-darksky.js|config/config-networkcols.js|\
+        config/config-openweather.js|config/config-networkcols.js|\
         config/config-network.js|config/config-scnews.js)
             check "$i" "$inst" 24
             ;;

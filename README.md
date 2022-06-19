@@ -807,7 +807,7 @@ Specify a config file to use by executing a command of the form:
 
 where <name> is one of:
 	 all Artists art background bikini blank calendar candy covid
-	 crypto darksky default face fractals gif iframe instagram ironman
+	 crypto openweather default face fractals gif iframe instagram ironman
 	 JAV Models nature networkcols network networktest news nokeys normal
 	 owls Photographers pics portal radar rooncontrol roon scenes scnews
 	 scoreboard screencast server smoke snowcrash stocks swimweek tantra test

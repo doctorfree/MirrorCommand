@@ -184,13 +184,13 @@ var config = {
             }
         },
         {
-            module: "MMM-DarkSkyForecast",
-            header: "Dark Sky Weather Forecast",
+            module: "MMM-OpenWeatherForecast",
+            header: "Open Weather Forecast",
             position: "top_left",
             classes: "default everyone",
             disabled: false,
             config: {
-              apikey: "xxx_Dark-Sky-API-Key_xxxxxxxxxxx",
+              apikey: "xx_OpenWeather-App-ID_xxxxxxxxxx",
               latitude: "36.970019",
               longitude: "-122.042212",
               iconset: "5c",

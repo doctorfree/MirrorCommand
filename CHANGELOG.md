@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+20 June 2022, MirrorCommand version 4.0.1 release 1:
+
+  Version 4.0.1 Release 1 of MirrorCommand replaces the use of
+  module MMM-DarkSkyForecast with module MMM-OpenWeatherForecast.
+  Apple bought DarkSky and is removing free access to the API.
+
 14 April 2022, MirrorCommand version 4.0.0 release 3:
 
   Version 4.0.0 Release 3 of MirrorCommand adds the capability of updating

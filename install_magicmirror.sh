@@ -27,7 +27,7 @@
 #
 MM_BASE=${HOME}/MagicMirror
 MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
-         MMM-COVID19-SPARKLINE MMM-DarkSkyForecast EXT-Detector \
+         MMM-COVID19-SPARKLINE MMM-OpenWeatherForecast EXT-Detector \
          MMM-GoogleAssistant MMM-GoogleMapsTraffic Gateway EXT-GooglePhotos \
          mmm-hue-lights MMM-iFrame MMM-InstagramView MMM-IronManGIF \
          MMM-MacAddressScan MMM-MoonPhase MMM-MyScoreboard EXT-Alert \
