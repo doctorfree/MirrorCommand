@@ -80,6 +80,7 @@ export DISPLAY=${DISPLAY:=:0}
 
 MIRRORSCREEN="${MCL_HOME}/etc/mirrorscreen"
 HAVE_PORT=
+have_xdpyinfo=`type -p xdpyinfo`
 [ -f ${MIRRORSCREEN} ] || MIRRORSCREEN="${MM}/.mirrorscreen"
 [ -f ${MIRRORSCREEN} ] && {
   . ${MIRRORSCREEN}
@@ -91,17 +92,23 @@ HAVE_PORT=
 }
 [ "${HAVE_PORT}" ] || {
   PORTRAIT=1
-  SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
-  echo ${SCREEN_RES} | grep x > /dev/null && {
-    SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
-    SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
-  }
-  if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
+  if [ "${have_xdpyinfo}" ]
   then
+    SCREEN_RES=`xdpyinfo | awk '/dimensions/ {print $2}'`
+    echo ${SCREEN_RES} | grep x > /dev/null && {
+      SCREEN_WIDTH=`echo ${SCREEN_RES} | awk -F 'x' ' { print $1 } '`
+      SCREEN_HEIGHT=`echo ${SCREEN_RES} | awk -F 'x' ' { print $2 } '`
+    }
+    if ! [[ "$SCREEN_WIDTH" =~ ^[0-9]+$ ]]
+    then
+      SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
+    fi
+    if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
+    then
+      SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
+    fi
+  else
     SCREEN_WIDTH=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $2 } '`
-  fi
-  if ! [[ "$SCREEN_HEIGHT" =~ ^[0-9]+$ ]]
-  then
     SCREEN_HEIGHT=`xrandr | grep current | awk -F ',' ' { print $2 } ' | awk ' { print $4 } '`
   fi
   [ ${SCREEN_WIDTH} -gt ${SCREEN_HEIGHT} ] && PORTRAIT=
@@ -1499,8 +1506,10 @@ system_info() {
     [ "$INFO" == "all" ] || [ "$INFO" == "screen" ] && {
         printf "\n${BOLD}Screen dimensions and resolution:${NORMAL}\n"
         xrandr --query --verbose | grep Screen
-        xdpyinfo | grep dimensions
-        xdpyinfo | grep resolution
+        [ "${have_xdpyinfo}" ] && {
+          xdpyinfo | grep dimensions
+          xdpyinfo | grep resolution
+        }
         display_status
         printf "\n${BOLD}Connected monitors:${NORMAL}\n"
         xrandr --query --verbose | grep connected | grep -v disconnected
@@ -1938,7 +1947,7 @@ select_youtube() {
   while true
   do
     PS3="${BOLD}${PLEASE} command choice (numeric or text): ${NORMAL}"
-    options=("list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "rotate inverted" "rotate default" "restart" "screen off" "screen on" "screenshot" "start" "stop" "status" "status all" "get brightness" "set brightness" "video playback" "system info" "debug mode" "quit")
+    options=("list active modules" "list installed modules" "list configurations" "select configuration" "rotate left" "rotate normal" "rotate right" "rotate inverted" "rotate default" "restart" "screen off" "screen on" "screenshot" "start" "stop" "status" "status all" "get brightness" "set brightness" "video playback" "system info" "debug mode" "kill mirror" "quit")
     select opt in "${options[@]}"
     do
         case "$opt,$REPLY" in
@@ -2043,6 +2052,10 @@ select_youtube() {
                 printf "======================================================\n\n"
                 select_playback
                 [ $? -eq 9 ] && exit 0
+                break
+                ;;
+            "kill mirror",*|*,"kill mirror")
+                mirror kill
                 break
                 ;;
             "Quit",*|*,"Quit"|"quit",*|*,"quit")
@@ -2292,6 +2305,19 @@ BU_TG_CONFDIR="config-notelegram"
         fi
         printf "\n${BOLD}Done${NORMAL}\n"
     fi
+    exit 0
+}
+
+[ "$1" == "kill" ] && {
+    printf "\n${BOLD}Killing MagicMirror${NORMAL}\n"
+    if [ "${usepm2}" ]
+    then
+        pm2 stop MagicMirror
+    else
+        mirror_stop
+    fi
+    ps aux | grep node | grep -v "color" | awk '{print $2}' | xargs sudo kill -9
+    printf "\n${BOLD}Done${NORMAL}\n"
     exit 0
 }
 
