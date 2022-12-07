@@ -100,7 +100,7 @@ var config = {
             // classes: 'scheduler',
             config: {
                 imagePaths: [
-                    '/usr/local/MirrorCommand/pics/Models/Son_Ye-Eun',
+                    '/usr/local/MirrorCommand/pics/JAV/Son_Ye-Eun',
                 ],
                 slideshowSpeed: 15000, // 15 seconds
                 resizeImages: true,

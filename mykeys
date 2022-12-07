@@ -59,9 +59,9 @@ else
   echo "Cannot locate credentials file ${GASRC}/credentials.json"
 fi
 
-for token in ${GASRC}/token*.json
+for token in ${GASRC}/tokens/token*.json
 do
-  if [ "${token}" == "${GASRC}/token*.json" ]
+  if [ "${token}" == "${GASRC}/tokens/token*.json" ]
   then
     echo "Cannot locate Google Assistant token ${GASRC}/tokenGA.json"
   else
