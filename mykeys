@@ -1,11 +1,11 @@
 #!/bin/bash
 
-USER=`id -u -n`
+USER=$(id -u -n)
 MAGDIR="/usr/local/MirrorCommand"
 MIRDIR="/usr/local/MagicMirror"
 MCL=$HOME/src/MirrorCommand
 PICDIR="/media/${USER}/Transcend/Pictures/MagicMirror"
-[ -d ${PICDIR} ] || {
+[ -d "${PICDIR}" ] || {
   PICDIR="/u/pictures/MagicMirror"
   [ -d ${PICDIR} ] || {
     PICDIR="/v/pictures/MagicMirror"
@@ -19,32 +19,31 @@ PICDIR="/media/${USER}/Transcend/Pictures/MagicMirror"
 [ -f ${MAGDIR}/etc/arp-devices.js ] && {
   cp ${MAGDIR}/etc/arp-devices.js ${MAGDIR}/etc/arp-devices-inst.js
 }
-[ -f ${MCL}/etc/arp-devices.js ] && {
-  cp ${MCL}/etc/arp-devices.js ${MAGDIR}/etc/arp-devices.js
+[ -f "${MCL}"/etc/arp-devices.js ] && {
+  cp "${MCL}"/etc/arp-devices.js "${MAGDIR}"/etc/arp-devices.js
 }
-[ -f ${MCL}/etc/arp-devices-cols.js ] && {
-  cp ${MCL}/etc/arp-devices-cols.js ${MAGDIR}/etc/arp-devices-cols.js
+[ -f "${MCL}"/etc/arp-devices-cols.js ] && {
+  cp "${MCL}"/etc/arp-devices-cols.js ${MAGDIR}/etc/arp-devices-cols.js
 }
-[ -f ${MCL}/etc/arp-devices-scenes.js ] && {
-  cp ${MCL}/etc/arp-devices-scenes.js ${MAGDIR}/etc/arp-devices-scenes.js
-}
-
-[ -f ${MCL}/etc/my_mirrorkeys ] || {
-    echo "Cannot locate ${MCL}/etc/my_mirrorkeys"
-    echo "Find it and rerun this script"
-    exit 1
+[ -f "${MCL}"/etc/arp-devices-scenes.js ] && {
+  cp "${MCL}"/etc/arp-devices-scenes.js ${MAGDIR}/etc/arp-devices-scenes.js
 }
 
-cp ${MCL}/etc/my_mirrorkeys ${MAGDIR}/etc/mirrorkeys
+[ -f "${MCL}"/etc/my_mirrorkeys ] || {
+  echo "Cannot locate ${MCL}/etc/my_mirrorkeys"
+  echo "Find it and rerun this script"
+  exit 1
+}
+
+cp "${MCL}"/etc/my_mirrorkeys ${MAGDIR}/etc/mirrorkeys
 showkeys
 
 echo "Copying in my calendars"
 CASRC="${MCL}/modules/default/calendar/calendars"
 CADIR="${MIRDIR}/modules/default/calendar/calendars"
-if [ -d ${CASRC} ]
-then
+if [ -d "${CASRC}" ]; then
   [ -d ${CADIR} ] || mkdir ${CADIR}
-  cp ${CASRC}/* ${CADIR}
+  cp "${CASRC}"/* ${CADIR}
 else
   echo "Cannot locate calendars folder ${CASRC}"
 fi
@@ -52,33 +51,28 @@ fi
 echo "Copying in Google Assistant credentials and tokens"
 GASRC="${MCL}/modules/MMM-GoogleAssistant"
 GADIR="${MIRDIR}/modules/MMM-GoogleAssistant"
-if [ -f ${GASRC}/credentials.json ]
-then
-  cp ${GASRC}/credentials.json ${GADIR}/credentials.json
+if [ -f "${GASRC}"/credentials.json ]; then
+  cp "${GASRC}"/credentials.json ${GADIR}/credentials.json
 else
   echo "Cannot locate credentials file ${GASRC}/credentials.json"
 fi
 
-for token in ${GASRC}/tokens/token*.json
-do
-  if [ "${token}" == "${GASRC}/tokens/token*.json" ]
-  then
+for token in "${GASRC}"/tokens/token*.json; do
+  if [ "${token}" == "${GASRC}/tokens/token*.json" ]; then
     echo "Cannot locate Google Assistant token ${GASRC}/tokenGA.json"
   else
-    cp ${token} ${GADIR}
+    cp "${token}" "${GADIR}"
   fi
 done
 
 echo "Copying in Google Photos tokens"
 GPSRC="${MCL}/modules/EXT-GooglePhotos"
 GPDIR="${MIRDIR}/modules/EXT-GooglePhotos"
-for token in ${GPSRC}/token*.json
-do
-  if [ "${token}" == "${GPSRC}/token*.json" ]
-  then
+for token in "${GPSRC}"/token*.json; do
+  if [ "${token}" == "${GPSRC}/token*.json" ]; then
     echo "Cannot locate Google Photos token ${GPSRC}/tokenGP.json"
   else
-    cp ${token} ${GPDIR}
+    cp "${token}" ${GPDIR}
   fi
 done
 
@@ -88,18 +82,16 @@ DADIR="${MIRDIR}/modules/EXT-Detector/resources"
 [ -d ${DADIR} ] || mkdir -p ${DADIR}
 [ -f ${DADIR}/google.png ] && {
   [ -f ${DADIR}/google-orig.png ] || {
-    cp ${DADIR}/google.png ${DADIR}/google-orig.png 
+    cp ${DADIR}/google.png ${DADIR}/google-orig.png
   }
 }
-for res in ${DASRC}/*
-do
-  if [ "${res}" == "${DASRC}/*" ]
-  then
+for res in "${DASRC}"/*; do
+  if [ "${res}" == "${DASRC}/*" ]; then
     echo "Cannot locate EXT-Detector resources"
   else
-    cp ${res} ${DADIR}
+    cp "${res}" ${DADIR}
   fi
 done
 [ -f ${DADIR}/google-replace.png ] && {
-  cp ${DADIR}/google-replace.png ${DADIR}/google.png 
+  cp ${DADIR}/google-replace.png ${DADIR}/google.png
 }
