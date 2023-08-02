@@ -18,6 +18,13 @@ smart mirror platform (see https://magicmirror.builders/).
 This repository maintains an extensive set of scripts to initialize,
 configure, monitor, and manage a MagicMirror.
 
+MirrorCommand is one of the [Neoman](https://neoman.dev) managed projects:
+
+| **Neoman** | **Managed** | **Projects** |
+| ---------- | ----------- | ------------ |
+| [Asciiville](https://asciiville.dev) | [Lazyman](https://lazyman.dev) | [MirrorCommand](https://mirrorcommand.dev) |
+| [MusicPlayerPlus](https://musicplayerplus.dev) | [Neoman](https://neoman.dev) | [RoonCommandLine](https://rooncommand.dev) |
+
 ## Table of contents
 
 1. [Overview](#overview)
@@ -738,7 +745,7 @@ These include recipes to:
 - [Voice management of MMM-Scenes scenes](modules/MMM-GoogleAssistant/recipes/with-MMM-Scenes.js)
     - Next scene
 	- Previous scene
-	- Scene by number (e.g. `scene 2`) 
+	- Scene by number (e.g. `scene 2`)
 - [Customized reboot/restart/shutdown voice commands](modules/MMM-GoogleAssistant/recipes/myReboot-Restart-Shutdown.js)
 - [Radio station play via voice](modules/MMM-GoogleAssistant/recipes/ExtRadio.js)
 
