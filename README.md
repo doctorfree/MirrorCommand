@@ -1066,13 +1066,13 @@ The following are known limitations in the current release:
 
 <p float="left">
 Sample default and weather configs<br/>
-  <img src="screenshots/mirror_default.png">
-  <img src="screenshots/mirror_weather.png">
+  <img src="https://raw.githubusercontent.com/wiki/doctorfree/MirrorCommand/screenshots/mirror_default.png">
+  <img src="https://raw.githubusercontent.com/wiki/doctorfree/MirrorCommand/screenshots/mirror_weather.png">
 </p>
 <p float="left">
 Interactive menus when invoked with no arguments<br/>
-  <img src="screenshots/mirror_command_menu.jpg">
-  <img src="screenshots/mirror_submenu.jpg">
+  <img src="https://raw.githubusercontent.com/wiki/doctorfree/MirrorCommand/screenshots/mirror_command_menu.jpg">
+  <img src="https://raw.githubusercontent.com/wiki/doctorfree/MirrorCommand/screenshots/mirror_submenu.jpg">
 </p>
 
 ## License
