@@ -85,14 +85,14 @@ GROUP=
     if [ "${inst_npm}" ]
     then
         echo "Installing MagicMirror in /usr/local/MagicMirror"
-        sudo -u ${USER} npm install > /dev/null 2>&1
+        sudo -u ${USER} npm run install-mm > /dev/null 2>&1
     else
         echo "Unable to locate npm in the execution path."
         echo "Install npm and run the MagicMirror installation"
         echo "by executing the commands:"
         echo ""
         echo "cd /usr/local/MagicMirror"
-        echo "sudo -u ${USER} npm install"
+        echo "sudo -u ${USER} npm run install-mm"
         echo ""
     fi
 }
