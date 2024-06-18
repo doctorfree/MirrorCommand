@@ -419,10 +419,6 @@ var config = {
             }
         },
         {
-            module: 'Gateway',
-            classes: 'scores solar stocks art',
-        },
-        {
             module: "EXT-Detector",
             classes: 'scores solar stocks art',
             position: "bottom_left",

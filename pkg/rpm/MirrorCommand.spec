@@ -6,7 +6,7 @@ License:    MIT
 BuildArch:  noarch
 Requires:   systemd-devel, libudev-devel, blas-devel, file-libs, git, arp-scan, sox, sox-devel, scrot, wget, wmctrl, autoconf, automake, binutils, bison, flex, gcc, gcc-c++, gdb, glibc-devel, libtool, make, pkgconf, strace, byacc, ccache, cscope, ctags, elfutils, indent, ltrace, perf, valgrind, xrandr, xdpyinfo, xset, jq, fswebcam
 Recommends: qterminal
-URL:        https://gitlab.com/doctorfree/MirrorCommand
+URL:        https://github.com/doctorfree/MirrorCommand
 Vendor:     Doctorwhen's Bodacious Laboratory
 Packager:   ronaldrecord@gmail.com
 
@@ -342,7 +342,7 @@ then
     # Install MagicMirror 3rd Party modules used by MirrorCommand
     [ -d "${MMHOME}/modules" ] && cd "${MMHOME}/modules"
     MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
-             MMM-COVID19-SPARKLINE MMM-OpenWeatherForecast Gateway \
+             MMM-COVID19-SPARKLINE MMM-OpenWeatherForecast \
              EXT-Detector MMM-GoogleAssistant MMM-GoogleMapsTraffic \
              mmm-hue-lights MMM-iFrame MMM-InstagramView EXT-Alert \
              MMM-IronManGIF MMM-MacAddressScan MMM-MyScoreboard \

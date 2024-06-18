@@ -323,10 +323,6 @@ var config = {
           }
         },
         {
-            module: 'Gateway',
-            classes: 'radar traffic weather',
-        },
-        {
             module: "EXT-Detector",
             classes: 'radar traffic weather',
             position: "bottom_left",

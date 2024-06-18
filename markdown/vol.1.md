@@ -75,10 +75,10 @@ for information on terms &amp; conditions for accessing and
 otherwise using VOL and for a DISCLAIMER OF ALL WARRANTIES.
 
 # BUGS
-Submit bug reports online at: &lt;https://gitlab.com/doctorfree/MirrorCommand/issues&gt;
+Submit bug reports online at: &lt;https://github.com/doctorfree/MirrorCommand/issues&gt;
 
 # SEE ALSO
 **mirror**(1), **set_asound_conf**(1)
 
-Full documentation and sources at: &lt;https://gitlab.com/doctorfree/MirrorCommand&gt;
+Full documentation and sources at: &lt;https://github.com/doctorfree/MirrorCommand&gt;
 

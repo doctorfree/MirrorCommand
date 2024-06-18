@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+18 June 2024, MirrorCommand version 4.0.1 release 2:
+
+  Version 4.0.1 Release 2 of MirrorCommand removes the Gateway module.
+  Move release assets from Gitlab to Github.
+
 01 January 2023, MirrorCommand version 4.0.1 release 1:
 
   Version 4.0.1 Release 1 of MirrorCommand replaces the use of

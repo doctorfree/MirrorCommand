@@ -218,9 +218,6 @@ var config = {
             },
         },
         {
-            module: 'Gateway'
-        },
-        {
             module: "EXT-Detector",
             position: "bottom_left",
             configDeepMerge: true,

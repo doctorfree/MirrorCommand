@@ -61,7 +61,7 @@ Maintainer: ${DEBFULLNAME} <${DEBEMAIL}>
 Installed-Size: 14000
 Build-Depends: debhelper (>= 11)
 Standards-Version: 4.1.3
-Homepage: https://gitlab.com/doctorfree/MirrorCommand
+Homepage: https://github.com/doctorfree/MirrorCommand
 Description: MagicMirror Command Line Tools
  Manage your MagicMirror from the command line" > ${OUT_DIR}/DEBIAN/control
 

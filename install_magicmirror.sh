@@ -28,7 +28,7 @@
 MM_BASE=${HOME}/MagicMirror
 MODULES="internet-monitor MMM-BackgroundSlideshow MMM-CoinMarketCap \
          MMM-COVID19-SPARKLINE MMM-OpenWeatherForecast EXT-Detector \
-         MMM-GoogleAssistant MMM-GoogleMapsTraffic Gateway EXT-GooglePhotos \
+         MMM-GoogleAssistant MMM-GoogleMapsTraffic EXT-GooglePhotos \
          mmm-hue-lights MMM-iFrame MMM-InstagramView MMM-IronManGIF \
          MMM-MacAddressScan MMM-MoonPhase MMM-MyScoreboard EXT-Alert \
          MMM-pages MMM-RAIN-RADAR MMM-Remote-Control MMM-Selfieshot \
@@ -129,7 +129,7 @@ printf "\nDone detecting and repairing vulnerabilities\n"
 cd ${HOME}/src
 [ -d MirrorCommand ] || {
     printf "\nCloning MirrorCommand repository ..."
-    git clone ssh://gitlab.com/doctorfree/MirrorCommand.git > /dev/null 2>&1
+    git clone https://github.com/doctorfree/MirrorCommand.git > /dev/null 2>&1
     printf "\tDone\n"
 }
 

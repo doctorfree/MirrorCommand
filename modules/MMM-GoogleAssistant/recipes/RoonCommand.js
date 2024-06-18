@@ -2,7 +2,7 @@
 /**   Voice commands script                           **/
 /**   set pattern in your language                    **/
 /**   Requires RoonCommandLine:                     **/
-/**   https://gitlab.com/doctorfree/RoonCommandLine **/
+/**   https://github.com/doctorfree/RoonCommandLine **/
 /**   @doctorfree                                     **/
 
 var recipe = {

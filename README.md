@@ -18,13 +18,6 @@ smart mirror platform (see https://magicmirror.builders/).
 This repository maintains an extensive set of scripts to initialize,
 configure, monitor, and manage a MagicMirror.
 
-MirrorCommand is one of the [Neoman](https://neoman.dev) managed projects:
-
-| **Neoman** | **Managed** | **Projects** |
-| ---------- | ----------- | ------------ |
-| [Asciiville](https://asciiville.dev) | [Lazyman](https://lazyman.dev) | [MirrorCommand](https://mirrorcommand.dev) |
-| [MusicPlayerPlus](https://musicplayerplus.dev) | [Neoman](https://neoman.dev) | [RoonCommandLine](https://rooncommand.dev) |
-
 ## Table of contents
 
 1. [Overview](#overview)
@@ -160,8 +153,8 @@ MirrorCommand assumes that MagicMirror is installed in either
 `/usr/local/MagicMirror` or a user's home directory.
 
 To install MagicMirror simply install MirrorCommand using the Debian or RPM
-package format available at the
-[MirrorCommand Releases](https://gitlab.com/doctorfree/MirrorCommand/-/releases)
+package format asset available at the
+[MirrorCommand Releases](https://github.com/doctorfree/MirrorCommand/releases)
 area of the Git repository.
 
 If MagicMirror is not installed in either `/usr/local/MagicMirror` or a non-root
@@ -215,9 +208,9 @@ or grant everyone access with
 `xhost +`
 
 **ROON:** If you plan to install both the
-[RoonCommandLine package](https://gitlab.com/doctorfree/RoonCommandLine)
+[RoonCommandLine package](https://github.com/doctorfree/RoonCommandLine)
 and the
-[MirrorCommand package](https://gitlab.com/doctorfree/MirrorCommand)
+[MirrorCommand package](https://github.com/doctorfree/MirrorCommand)
 on the same system then in order to enable automatic configuration of
 MirrorCommand's Roon configuration files, the RoonCommandLine
 package must be installed before the MirrorCommand package.
@@ -238,7 +231,7 @@ contents of the file `/etc/os-release`.
 
 To install on a Debian based Linux system, download the latest Debian
 format package from the
-[MirrorCommand releases](https://gitlab.com/doctorfree/MirrorCommand/-/releases).
+[MirrorCommand releases](https://github.com/doctorfree/MirrorCommand/releases).
 
 Install the MirrorCommand package by executing the command
 
@@ -258,7 +251,7 @@ openSUSE, OpenMandriva, Mandrake Linux, Red Hat Linux, and Oracle Linux.
 
 To install on an RPM based Linux system, download the latest RPM format
 package from the
-[MirrorCommand releases](https://gitlab.com/doctorfree/MirrorCommand/-/releases).
+[MirrorCommand releases](https://github.com/doctorfree/MirrorCommand/releases).
 
 Install the MirrorCommand package by executing the command
 
@@ -320,9 +313,9 @@ settings.
 For more info on the `showkeys` command and the
 `/usr/local/MirrorCommand/etc/mirrorkeys` configuration file, see the
 man pages
-`[showkeys.1](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/showkeys.1)`
+`[showkeys.1](https://github.com/doctorfree/MirrorCommand/wiki/showkeys.1)`
 and
-`[mirrorkeys.5](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/mirrorkeys.5)`
+`[mirrorkeys.5](https://github.com/doctorfree/MirrorCommand/wiki/mirrorkeys.5)`
 by executing the `man` command:
 
 `man showkeys`
@@ -414,7 +407,7 @@ with `sudo set_asound_conf -r`, and select a configuration for you with
 
 #### Image archive installation
 
-See the [MirrorImages repository](https://gitlab.com/doctorfree/MirrorImages)
+See the [MirrorImages repository](https://github.com/doctorfree/MirrorImages)
 to download several packages that can be used to download image archives
 preconfigured for use with the MirrorCommand config files. This is optional
 and is provided simply as a convenience. Note that none of the MirrorImages
@@ -429,11 +422,11 @@ Make sure you have sufficient available disk space before installing.
 You can create your own custom Debian and RPM format packages from
 the repository source. To do so, clone the MirrorCommand repository:
 
-<code>git clone ssh://gitlab.com/doctorfree/MirrorCommand.git</code>
+<code>git clone ssh://github.com/doctorfree/MirrorCommand.git</code>
 
 or
 
-<code>git clone `https://gitlab.com/doctorfree/MirrorCommand.git`</code>
+<code>git clone `https://github.com/doctorfree/MirrorCommand.git`</code>
 
 Use the `mkpkg` script to create Debian and RPM format packages on a system
 with the prerequisite packaging development environment. Once packages have
@@ -458,7 +451,7 @@ or
 folders within `/usr/local`. This is an artifact of the Debian packaging system.
 If you wish to silence that warning and prevent the Debian packaging system from
 trying to remove `/usr/local` then install the
-[core-custom-local Debian package](https://gitlab.com/doctorfree/core-custom-local/-/releases).
+[core-custom-local Debian package](https://github.com/doctorfree/core-custom-local/releases).
 
 On RPM based Linux systems where the MirrorCommand package was installed
 using the MirrorCommand RPM format package, remove the MirrorCommand
@@ -588,7 +581,7 @@ for taking screenshots.
 The MMM-Remote-Control module provides some documentation on creating
 a custom menu but it is currently incomplete. To add custom commands
 to MMM-Remote-Control using the `mirror` command, see the
-[MMM-Remote-Control Wiki Page](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/Remote-Control-Custom-Menu).
+[MMM-Remote-Control Wiki Page](https://github.com/doctorfree/MirrorCommand/wiki/Remote-Control-Custom-Menu).
 
 #### MMM-TelegramBot integration
 You can control your MagicMirrir with the `mirror` command executed remotely
@@ -646,7 +639,7 @@ section of the MMM-TelegramBot module entry in `config.js` that defines the
 ##### MMM-TelegramCommands module
 
 Configuring MMM-TelegramBot customCommands can be daunting. Use the template at
-[MagicMirror/config/Templates/TelegramBot-customCommands.js](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/config/Templates/TelegramBot-customCommands.js)
+[MagicMirror/config/Templates/TelegramBot-customCommands.js](https://github.com/doctorfree/MirrorCommand/blob/master/config/Templates/TelegramBot-customCommands.js)
 as a guide.
 
 Alternatively, several custom TelegramBot commands have been configured
@@ -874,7 +867,7 @@ Learn how to open a command line terminal window on various systems,
 how to get started using the command line, and see some examples of why
 the command line interface is so powerful by reading the MirrorCommand
 wiki article
-[Introduction to Using the Command Line](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/Introduction-to-Using-the-Command-Line).
+[Introduction to Using the Command Line](https://github.com/doctorfree/MirrorCommand/wiki/Introduction-to-Using-the-Command-Line).
 
 Note that some screen switching operations on systems with multiple monitors
 may move the window focus from the command line terminal window to the
@@ -952,14 +945,14 @@ can be viewed by executing the command:
 Manual pages for these MirrorCommand commands can be viewed by executing
 any of the following commands (click to view the man page online):
 
-- [man mirror](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/mirror.1.md)
-- [man 5 mirrorkeys](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/mirrorkeys.5.md)
-- [man set_asound_conf](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/set_asound_conf.1.md)
-- [man mmscene](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/mmscene.1.md)
-- [man mmscreen](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/mmscreen.1.md)
-- [man showkeys](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/showkeys.1.md)
-- [man vol](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/vol.1.md)
-- [man websnap](https://gitlab.com/doctorfree/MirrorCommand/-/blob/master/markdown/websnap.1.md)
+- [man mirror](https://github.com/doctorfree/MirrorCommand/blob/master/markdown/mirror.1.md)
+- [man 5 mirrorkeys](https://github.com/doctorfree/MirrorCommand/blob/master/markdown/mirrorkeys.5.md)
+- [man set_asound_conf](https://github.com/doctorfree/MirrorCommand/blob/master/markdown/set_asound_conf.1.md)
+- [man mmscene](https://github.com/doctorfree/MirrorCommand/blob/master/markdown/mmscene.1.md)
+- [man mmscreen](https://github.com/doctorfree/MirrorCommand/blob/master/markdown/mmscreen.1.md)
+- [man showkeys](https://github.com/doctorfree/MirrorCommand/blob/master/markdown/showkeys.1.md)
+- [man vol](https://github.com/doctorfree/MirrorCommand/blob/master/markdown/vol.1.md)
+- [man websnap](https://github.com/doctorfree/MirrorCommand/blob/master/markdown/websnap.1.md)
 
 ## Motivation
 
@@ -968,7 +961,7 @@ The command line has a long and storied history in computing. Read some of that
 history, learn how to open a command line terminal window on various systems,
 how to get started using the command line, and see some examples of why the command
 line interface is so powerful by reading the MirrorCommand wiki article
-[Introduction to Using the Command Line](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/Introduction-to-Using-the-Command-Line).
+[Introduction to Using the Command Line](https://github.com/doctorfree/MirrorCommand/wiki/Introduction-to-Using-the-Command-Line).
 
 This introduction to the command line includes an example of how to automate
 display of a specified menu on a MagicMirror at designated times of day.
@@ -1047,7 +1040,7 @@ in his [MagicMirror scripts project](https://github.com/sdetweil/MagicMirror_scr
 
 ## Contents
 
-See the [MirrorCommand Contents](https://gitlab.com/doctorfree/MirrorCommand/-/wikis/MirrorCommand-Contents) wiki page for a full contents listing.
+See the [MirrorCommand Contents](https://github.com/doctorfree/MirrorCommand/wiki/MirrorCommand-Contents) wiki page for a full contents listing.
 
 ## Known Limitations
 

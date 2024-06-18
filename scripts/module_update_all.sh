@@ -52,7 +52,7 @@ do
             cp resources/google-replace.png resources/google.png
         }
         ;;
-    EXT-GooglePhotos|Gateway|EXT-Alert|MMM-GoogleAssistant)
+    EXT-GooglePhotos|EXT-Alert|MMM-GoogleAssistant)
         npm run update
         ;;
     *)

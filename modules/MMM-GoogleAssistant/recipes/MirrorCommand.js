@@ -2,7 +2,7 @@
 /**   Voice commands script                           **/
 /**   set pattern in your language                    **/
 /**   Requires MirrorCommand:                     **/
-/**   https://gitlab.com/doctorfree/MirrorCommand **/
+/**   https://github.com/doctorfree/MirrorCommand **/
 /**   @doctorfree                                     **/
 
 var recipe = {
