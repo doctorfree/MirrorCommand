@@ -7,7 +7,7 @@
  * MIT Licensed.
  *
  * For more information how you can configurate this file
- * See https://github.com/MichMich/MagicMirror#configuration
+ * See https://docs.magicmirror.builders/configuration/introduction.html
  *
  */
 

@@ -71,7 +71,7 @@ GROUP=
         bash /tmp/n lts
         npm install -g n
     }
-    git clone https://github.com/MichMich/MagicMirror > /dev/null
+    git clone https://github.com/MagicMirrorOrg/MagicMirror > /dev/null
     GROUP=`id -g -n ${USER}`
     chown -R ${USER}:${GROUP} MagicMirror
     cd MagicMirror

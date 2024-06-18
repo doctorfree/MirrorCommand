@@ -172,7 +172,7 @@ Alternatively, MagicMirror can be installed manually following these steps:
         - `curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -`
         - `sudo apt install -y nodejs`
     - Clone the repository and check out the master branch
-        - `git clone https://github.com/MichMich/MagicMirror`
+        - `git clone https://github.com/MagicMirrorOrg/MagicMirror`
     - Enter the repository
         - `cd MagicMirror`
     - Install the application

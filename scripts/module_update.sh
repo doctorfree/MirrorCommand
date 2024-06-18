@@ -262,7 +262,7 @@ do
             ;;
           *)
               echo "Unsupported module: ${module}"
-              echo "See https://github.com/MichMich/MagicMirror/wiki/3rd-Party-Modules"
+              echo "See https://github.com/MagicMirrorOrg/MagicMirror/wiki/3rd-Party-Modules"
               exit 0
               ;;
         esac

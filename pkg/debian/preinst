@@ -22,7 +22,11 @@ case "$1" in
                 }
             done
         }
-        [ "${MMHOME}" ] || {
+        if [ "${MMHOME}" ]; then
+            echo ""
+            echo "Located a MagicMirror installation on this system."
+            echo ""
+        else
             echo ""
             echo "Unable to locate a MagicMirror installation on this system."
             echo "MagicMirror is required in order to install MirrorCommand."
@@ -80,7 +84,7 @@ case "$1" in
                           bash /tmp/n lts
                           npm install -g n
                       }
-                      git clone https://github.com/MichMich/MagicMirror > /dev/null
+                      git clone https://github.com/MagicMirrorOrg/MagicMirror > /dev/null
                       GROUP=`id -g -n ${USER}`
                       chown -R ${USER}:${GROUP} MagicMirror
                       cd MagicMirror
@@ -107,14 +111,14 @@ case "$1" in
                       break
                       ;;
                   [Nn]*)
-                      exit 1
+                      exit 0
                       ;;
                   * )
                       echo "Please answer yes or no."
                       ;;
               esac
             done
-        }
+        fi
         echo "MirrorCommand pre-installation configuration complete"
     ;;
 

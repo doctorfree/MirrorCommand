@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Taken from https://github.com/MichMich/MagicMirror/issues/1931
+# Taken from https://github.com/MagicMirrorOrg/MagicMirror/issues/1931
 # Modified to remove dependency on moreutils package 'ifne' command
 
 ps -ef | grep pocket | grep -v "grep"  | awk '{print $2}' | while read pocketpid

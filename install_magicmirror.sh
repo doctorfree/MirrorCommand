@@ -64,7 +64,7 @@ cd ${HOME}
 printf "\nInstalling MagicMirror ..."
 curl -sL https://deb.nodesource.com/setup_10.x 2> /dev/null | sudo -E bash - > /dev/null 2>&1
 sudo apt install -y nodejs > /dev/null 2>&1
-git clone https://github.com/MichMich/MagicMirror > /dev/null 2>&1
+git clone https://github.com/MagicMirrorOrg/MagicMirror > /dev/null 2>&1
 cd MagicMirror
 npm install > /dev/null 2>&1
 npm install electron@6.0.12 > /dev/null 2>&1

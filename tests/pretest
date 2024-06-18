@@ -67,7 +67,7 @@ case "$1" in
                       }
                       [ -d /usr/local ] || mkdir /usr/local
                       cd /usr/local
-                      git clone https://github.com/MichMich/MagicMirror > /dev/null
+                      git clone https://github.com/MagicMirrorOrg/MagicMirror > /dev/null
                       GROUP=`id -g -n ${USER}`
                       chown -R ${USER}:${GROUP} MagicMirror
                       cd MagicMirror
