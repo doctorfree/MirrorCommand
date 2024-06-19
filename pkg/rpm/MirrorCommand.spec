@@ -85,6 +85,7 @@ GROUP=
     if [ "${inst_npm}" ]
     then
         echo "Installing MagicMirror in /usr/local/MagicMirror"
+        rm -f package-lock.json
         sudo -u ${USER} npm run install-mm > /dev/null 2>&1
     else
         echo "Unable to locate npm in the execution path."
@@ -93,6 +94,7 @@ GROUP=
         echo ""
         echo "cd /usr/local/MagicMirror"
         echo "sudo -u ${USER} npm run install-mm"
+        echo "sudo -u ${USER} npm install electron@29.1.6"
         echo ""
     fi
 }

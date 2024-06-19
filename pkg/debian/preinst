@@ -96,6 +96,7 @@ case "$1" in
                       if [ "${inst_npm}" ]
                       then
                           echo "Installing MagicMirror in /usr/local/MagicMirror"
+                          rm -f package-lock.json
                           sudo -u ${USER} npm run install-mm > /dev/null 2>&1
                       else
                           echo "Unable to locate npm in the execution path."

@@ -66,6 +66,7 @@ curl -sL https://deb.nodesource.com/setup_10.x 2> /dev/null | sudo -E bash - > /
 sudo apt install -y nodejs > /dev/null 2>&1
 git clone https://github.com/MagicMirrorOrg/MagicMirror > /dev/null 2>&1
 cd MagicMirror
+rm -f package-lock.json
 npm run install-mm > /dev/null 2>&1
 printf "\t\tDone\n"
 
