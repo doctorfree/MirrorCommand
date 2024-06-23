@@ -1,4 +1,4 @@
-Version 4.0.1 Release 2 of MirrorCommand removes the Gateway module.
+Version 4.0.1 Release 2 of MirrorCommand removes the Gateway module and updates the location of the TelegramBot API key.
 
 Version 4.0.1 Release 1 of MirrorCommand replaces the use of module MMM-DarkSkyForecast with module MMM-OpenWeatherForecast. Apple bought DarkSky and is removing free access to the API.
 
