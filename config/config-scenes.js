@@ -408,7 +408,6 @@ var config = {
             module: 'MMM-TelegramBot',
             classes: 'scores solar stocks art',
             config: {
-              telegramAPIKey : 'xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx',
               allowedUser : ['Your-Telegram-Username'],
               adminChatId : 0000000000,
               useWelcomeMessage: false,

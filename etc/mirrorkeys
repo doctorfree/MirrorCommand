@@ -20,6 +20,9 @@
 declare -A keys
 declare -A dumb
 
+# Telegram API Key is now stored in the MMM-TelegramBot module folder
+telegramApiKey="xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx"
+
 # MagicMirror IP address
 keys[MMIP]=
 # IP addresses in MagicMirror config ipWhitelist
@@ -81,10 +84,6 @@ dumb[IGA]="xxxxxx_Your-Instagram-Auth-Code_xxxxxxxxxxxxxxxxx"
 # Set your Instagram Client Secret here
 keys[SEC]=
 dumb[SEC]='xxxxxx_Your-Instagram-Client-Secret_xxxxxxxxxxxxx'
-#
-# Set your Telegram API Key here
-keys[KEY]=
-dumb[KEY]="xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx"
 #
 # Google Maps Platform API key
 # https://developers.google.com/maps/documentation/javascript/overview

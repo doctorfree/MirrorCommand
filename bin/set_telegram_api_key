@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# Add your TelegramBot API key to /usr/local/MirrorCommand/etc/mirrorkeys
+. /usr/local/MirrorCommand/etc/mirrorkeys
+
+# Exit if no API key has been configured
+[ "${telegramApiKey}" == "xxxxxx_Your-Telegram-API-Key_xxxxxxxxxxxxxxxxx" ] && exit 0
+
+MMHOME="$1"
+[ -d ${MMHOME}/modules/MMM-TelegramBot ] || {
+    MMHOME=
+    for homedir in /usr/local /home/*
+    do
+        [ "${homedir}" == "/home/*" ] && continue
+        [ -d ${homedir}/MagicMirror/modules/MMM-TelegramBot ] && {
+            MMHOME="${homedir}/MagicMirror"
+            break
+        }
+    done
+}
+
+[ -d ${MMHOME}/modules/MMM-TelegramBot ] && {
+  # Exit if an API key environment file exists
+  [ -f ${MMHOME}/modules/MMM-TelegramBot/.env ] && exit 0
+  # Set the TelegramBot API Key
+  echo "TELEGRAM_API_KEY=${telegramApiKey}" > ${MMHOME}/modules/MMM-TelegramBot/.env
+}

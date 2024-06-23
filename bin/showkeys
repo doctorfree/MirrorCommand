@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MMCONFDIR="/usr/local/MirrorCommand"
-BINDIR="/usr/local/MirrorCommand/bin"
+BINDIR="${MMCONFDIR}/bin"
 QUIET=
 [ "$1" == "-q" ] && QUIET=1
 
@@ -43,6 +43,9 @@ MMHOME="$HOME/MagicMirror"
     showconfkeys
     CONFDIR=${MMHOME}/config-landscape-notelegram
     showconfkeys
+    [ -x ${BINDIR}/set_telegram_api_key ] && {
+      ${BINDIR}/set_telegram_api_key "${MMHOME}"
+    }
 }
 
 CONFDIR=${MMCONFDIR}/config
